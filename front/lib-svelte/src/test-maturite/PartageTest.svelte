@@ -9,16 +9,17 @@
   }: { cheminPartagé: string; sujetMail: string; typeDeRetour: TypeDeRetour } = $props();
 
   const clé = $derived.by(() => {
-    switch (typeDeRetour) {
-      case 'test-maturité':
-        return 'resultat-test';
-      case 'vrai-faux':
-        return 'retour-utilisateur:vrai-faux';
-      case 'exposition':
-        return 'retour-utilisateur:exposition';
-      case 'mesure':
-        throw new Error('Ce composant ne doit pas être utilisé pour un retour utilisateur depuis une page mesure');
+    if (typeDeRetour === 'mesure') {
+      throw new Error('Ce composant ne doit pas être utilisé pour un retour utilisateur depuis une page mesure');
     }
+    return (
+      {
+        'test-maturité': 'resultat-test',
+        'vrai-faux': 'retour-utilisateur:vrai-faux',
+        exposition: 'retour-utilisateur:exposition',
+        'reflexes-cyber': 'retour-utilisateur:reflexes-cyber',
+      } satisfies Omit<{ [C in TypeDeRetour]: string }, 'mesure'>
+    )[typeDeRetour];
   });
 </script>
 

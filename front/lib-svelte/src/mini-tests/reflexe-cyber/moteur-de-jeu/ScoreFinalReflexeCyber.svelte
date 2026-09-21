@@ -105,9 +105,9 @@
 </Alternatives>
 <dsfr-container>
   <PartageTest
-    cheminPartagé="/vrai-faux/quiz"
-    sujetMail="Cyber­attaques : saurez-vous démêler le vrai du faux ?"
-    typeDeRetour="vrai-faux"
+    cheminPartagé="/reflexe-cyber/parcours"
+    sujetMail="Comment réagirez-vous en cas de cyberattaque ?"
+    typeDeRetour="reflexes-cyber"
   />
 </dsfr-container>
 
