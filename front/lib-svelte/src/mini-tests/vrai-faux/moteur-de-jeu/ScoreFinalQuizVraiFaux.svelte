@@ -10,7 +10,7 @@
   type Props = {
     réponses: boolean[];
     urlBase?: string;
-    mode?: string;
+    mode?: 'autonome';
   };
 
   const conseils = $derived(
@@ -93,7 +93,7 @@
 <Alternatives affichageAlternatif={afficheParcoursSecurisation}>
   {#snippet défaut()}
     <dsfr-container>
-      <DemandeDiagnosticSimplifiee origine="vrai-faux" />
+      <DemandeDiagnosticSimplifiee origine="vrai-faux" {urlBase} {mode} />
     </dsfr-container>
   {/snippet}
   {#snippet alternatif()}

@@ -38,8 +38,8 @@ export type Statistiques = {
   testsRéalisés: number;
 };
 
-export const récupèreStatistiquesMSC = async (): Promise<Statistiques> => {
-  const réponse = await axios.get<APIStatistiques>(`/api/statistiques`);
+export const récupèreStatistiquesMSC = async (options?: { urlBase: string }): Promise<Statistiques> => {
+  const réponse = await axios.get<APIStatistiques>(`${options?.urlBase ?? ''}/api/statistiques`);
   const { utilisateursInscrits, testsMaturite, diagnosticsCyber, satisfactionUtilisateur, miniTests } = réponse.data;
   const diagnosticsCyberArrondis = Math.floor(diagnosticsCyber / 100) * 100;
   const testsRéalisés = miniTests.vraiFaux + testsMaturite.total + miniTests.exposition;
