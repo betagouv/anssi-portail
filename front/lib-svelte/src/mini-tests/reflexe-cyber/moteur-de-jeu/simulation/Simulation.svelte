@@ -106,6 +106,7 @@
 
       <div class="contenu-evenement">
         <Evenement
+          dernierÉvènement={numéroÉvènementCourant === 6}
           {rôle}
           évènement={évènementCourant}
           réflexe={réflexeCourant}
