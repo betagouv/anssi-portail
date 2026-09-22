@@ -7,7 +7,7 @@
   const { typeDuBouton }: Props = $props();
 
   const { protocol, host } = window.location;
-  const lienPagePartagée = `${protocol}://${host}/partage-badge-cyberdepart`;
+  const lienPagePartagée = `${protocol}://${host}/partage-cyberdepart`;
   const urlLinkedIn = `https://www.linkedin.com/sharing/share-offsite?url=${lienPagePartagée}`;
 
   const partageLinkedIn = () => {

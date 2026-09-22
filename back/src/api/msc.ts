@@ -463,10 +463,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       ])
     );
     enregistreRoute('/api/retour-mini-tests', ressourceRetourMiniTest(configurationServeur));
-    enregistreRoute(
-      `/partage-badge-cyberdepart`,
-      ressourcePagesJekyll(configurationServeur, 'partage-badge-cyberdepart')
-    );
+    enregistreRoute(`/partage-cyberdepart`, ressourcePagesJekyll(configurationServeur, 'partage-badge-cyberdepart'));
   }
   routesStatiques.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
   enregistreRoute('/robots.txt', ressourceRobotsTxt(configurationServeur));
