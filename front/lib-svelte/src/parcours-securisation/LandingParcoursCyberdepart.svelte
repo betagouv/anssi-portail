@@ -10,6 +10,7 @@
   import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';
   import IllustrationTuto from './animation/IllustrationTuto.svelte';
   import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
+  import { afficheBadgeCyberdépart } from '$plateforme/environnement';
 
   let statistiques: Statistiques | undefined = $state();
 
@@ -37,7 +38,7 @@
       illustration: IllustrationTuto,
     },
     {
-      titre: 'Décrochez votre badge Cyberdépart',
+      titre: afficheBadgeCyberdépart ? 'Décrochez votre badge Cyberdépart' : 'Validez votre Cyberdépart',
       description:
         "Valorisez vos efforts et l'engagement de votre organisation dans une première démarche de sécurisation.",
       illustration: IllustrationBadge,
