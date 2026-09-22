@@ -147,7 +147,11 @@
         />
       </div>
       {#if erreurs}
-        <Alerte type="ERREUR" titre="Une erreur est survenue" message={erreurs} />
+        <div class="alerte-erreur">
+          <Alerte type="erreur" taille="md" titre="Une erreur est survenue">
+            {erreurs}
+          </Alerte>
+        </div>
       {/if}
       {#if mode === 'autonome'}
         <EnteteAutonome {urlBase} />
@@ -190,6 +194,10 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+    }
+
+    .alerte-erreur {
+      margin-top: 32px;
     }
 
     h3 + .champ.recherche-organisation {

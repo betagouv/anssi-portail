@@ -247,12 +247,12 @@
     </div>
 
     {#if estEnErreur}
-      <Alerte type="ERREUR" titre="Impossible de finaliser votre inscription">
-        {#snippet message()}
+      <div class="alerte-erreur">
+        <Alerte type="erreur" taille="md" titre="Impossible de finaliser votre inscription">
           Nous n’avons pas pu finaliser votre inscription. Veuillez réessayer ultérieurement. Si le problème persiste,
           <Lien href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert" libelle="contactez le support" />.
-        {/snippet}
-      </Alerte>
+        </Alerte>
+      </div>
     {/if}
   </div>
 </div>
@@ -262,6 +262,10 @@
   @use '../../../assets/styles/grille.scss' as *;
 
   :global(.creation-compte .actions) {
+    margin-top: 32px;
+  }
+
+  .alerte-erreur {
     margin-top: 32px;
   }
 
