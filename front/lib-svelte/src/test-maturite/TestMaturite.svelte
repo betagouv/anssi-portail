@@ -4,6 +4,7 @@
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { calculeIdNiveau } from '../niveaux-maturite/calculeIdNiveau';
   import { profilStore } from '../stores/profil.store';
+  import Alerte from '../ui/Alerte.svelte';
   import Bouton from '../ui/Bouton.svelte';
   import EnteteAutonome from '../ui/EnteteAutonome.svelte';
   import Etapier from '../ui/Etapier.svelte';
@@ -130,11 +131,12 @@
       </div>
     {/if}
     {#if organisateurSessionGroupe}
-      <dsfr-alert
-        type="info"
-        has-description
-        text="En tant qu’organisateur, vos réponses ne seront pas enregistrées ni prises en compte dans les résultats du groupe."
-      ></dsfr-alert>
+      <div class="alerte-organisateur">
+        <Alerte type="information" taille="md" titre="">
+          En tant qu’organisateur, vos réponses ne seront pas enregistrées ni prises en compte dans les résultats du
+          groupe.
+        </Alerte>
+      </div>
     {/if}
     <div class="contenu-test" bind:this={contenuTest}>
       <div class="formulaire">
@@ -235,7 +237,7 @@
     margin-bottom: 48px;
   }
 
-  dsfr-alert {
+  .alerte-organisateur {
     margin-bottom: 2rem;
   }
 

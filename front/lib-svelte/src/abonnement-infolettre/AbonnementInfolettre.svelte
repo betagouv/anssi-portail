@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { clic } from '../directives/actions.svelte';
+  import Alerte from '../ui/Alerte.svelte';
   import CaseACocher from '../ui/CaseACocher.svelte';
   import { fabriqueFilAriane } from '../ui/filAriane';
   import FilAriane from '../ui/FilAriane.svelte';
@@ -52,12 +53,10 @@
 
       {#if formulaireEnvoye}
         <div class="confirmation">
-          <dsfr-alert type="info" size="sm" title="Une dernière étape">
-            <p slot="description">
-              Un e-mail de confirmation vous a été envoyé. Consultez votre boîte de réception pour confirmer votre
-              abonnement à la newsletter.
-            </p>
-          </dsfr-alert>
+          <Alerte type="information" taille="sm" titre="Une dernière étape">
+            Un e-mail de confirmation vous a été envoyé. Consultez votre boîte de réception pour confirmer votre
+            abonnement à la newsletter.
+          </Alerte>
           <img src="/assets/images/dragon-coeur-entier.svg" width="340" height="255" alt="Le dragon vous remercie" />
           <dsfr-button
             markup="a"
@@ -89,9 +88,9 @@
         <dsfr-button label="S'abonner à la newsletter" kind="primary" type="submit" use:clic={soumetsFormulaire}
         ></dsfr-button>
         {#if erreur}
-          <dsfr-alert type="error" size="sm" title="Erreur lors de la demande d’abonnement" dismissible>
-            <p slot="description">{erreur}</p>
-          </dsfr-alert>
+          <Alerte type="erreur" taille="sm" titre="Erreur lors de la demande d’abonnement" estRejetable>
+            {erreur}
+          </Alerte>
         {/if}
       {/if}
     </div>

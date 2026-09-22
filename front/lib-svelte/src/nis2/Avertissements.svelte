@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Alerte from '../ui/Alerte.svelte';
   import Bouton from '../ui/Bouton.svelte';
   import Lien from '../ui/Lien.svelte';
   import Modale from '../ui/Modale.svelte';
@@ -11,13 +12,13 @@
 </script>
 
 {#if !estBureau}
-  <dsfr-alert type="info" size="sm" hasTitle={false}>
-    <p slot="description" class="contenu">Cette page n’est pas optimisée pour un affichage mobile.</p>
-  </dsfr-alert>
+  <div class="alerte">
+    <Alerte type="information" taille="sm">Cette page n’est pas optimisée pour un affichage mobile.</Alerte>
+  </div>
 {/if}
 
-<dsfr-alert type="info" size="sm" hasTitle={false} dismissible>
-  <p slot="description" class="contenu">
+<div class="alerte">
+  <Alerte type="information" taille="sm" estRejetable>
     Le présent outil de comparaison de référentiels est mis à disposition par l’Agence nationale de la sécurité des
     systèmes d'information (ci-après, l’Agence) à titre purement informatif et indicatif, afin de faciliter la
     compréhension par l’écosystème du référentiel NIS 2 qu’elle a élaboré. <Lien
@@ -27,8 +28,8 @@
         detailsReCyFOuvert = true;
       }}
     />
-  </p>
-</dsfr-alert>
+  </Alerte>
+</div>
 {#if detailsReCyFOuvert}
   <Modale bind:estOuverte={detailsReCyFOuvert} titre="Exigences applicables à NIS&nbsp;2">
     <p>
@@ -55,11 +56,7 @@
 {/if}
 
 <style lang="scss">
-  dsfr-alert {
+  .alerte {
     margin-bottom: 1.5rem;
-  }
-
-  .contenu {
-    margin: 0px 0 4px;
   }
 </style>
