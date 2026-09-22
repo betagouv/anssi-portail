@@ -4,6 +4,7 @@
   import { fly } from 'svelte/transition';
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { clic } from '../../../../directives/actions.svelte';
+  import Alerte from '../../../../ui/Alerte.svelte';
   import Bouton from '../../../../ui/Bouton.svelte';
   import CanonAConfetti from '../../../../ui/CanonAConfetti.svelte';
   import { détecteRendu } from '../../../../utils/rendu.svelte';
@@ -205,20 +206,19 @@
   <Minuteur actif={choixEnCours} {surDécompte} surTempsÉcoulé={termineSélection(aLaisséPasserLeTemps)} />
 
   {#if statutRéflexe === 'bon'}
-    <dsfr-alert title="Bon réflexe !" text={réflexe.conséquence.bonRéflexe} type="success" size="md" has-description
-    ></dsfr-alert>
+    <Alerte taille="md" titre="Bon réflexe !" type="succès">
+      {réflexe.conséquence.bonRéflexe}
+    </Alerte>
     <CanonAConfetti lectureAutomatique />
   {:else if statutRéflexe === 'mauvais'}
-    <dsfr-alert title="Mauvais réflexe" text={réflexe.conséquence.mauvaisRéflexe} type="error" size="md" has-description
-    ></dsfr-alert>
+    <Alerte taille="md" titre="Mauvais réflexe" type="erreur">
+      {réflexe.conséquence.mauvaisRéflexe}
+    </Alerte>
   {:else if statutRéflexe === 'temps écoulé'}
-    <dsfr-alert
-      title="Temps écoulé"
-      text="Le temps imparti est écoulé. En situation de crise, l’absence de décision laisse les impacts s’aggraver : ce tour est compté comme un mauvais réflexe."
-      type="error"
-      size="md"
-      has-description
-    ></dsfr-alert>
+    <Alerte taille="md" titre="Temps écoulé" type="erreur">
+      Le temps imparti est écoulé. En situation de crise, l’absence de décision laisse les impacts s’aggraver : ce tour
+      est compté comme un mauvais réflexe.
+    </Alerte>
   {/if}
 
   {#if statutRéflexe !== 'en attente'}
@@ -331,9 +331,5 @@
         accent-color: var(--background-action-high-blue-france);
       }
     }
-  }
-
-  dsfr-alert {
-    width: 100%;
   }
 </style>

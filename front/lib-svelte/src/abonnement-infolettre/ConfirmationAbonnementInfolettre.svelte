@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Alerte from '../ui/Alerte.svelte';
   import { fabriqueFilAriane } from '../ui/filAriane';
   import FilAriane from '../ui/FilAriane.svelte';
 </script>
@@ -12,9 +13,9 @@
         <lab-anssi-icone nom="mail-line" taille="lg"></lab-anssi-icone>Abonnement à la newsletter
       </h2>
     </hgroup>
-    <dsfr-alert type="success" size="sm" title="Merci&nbsp;!">
-      <p slot="description">Votre inscription à la newsletter MesServicesCyber a bien été prise en compte.</p>
-    </dsfr-alert>
+    <Alerte type="succès" taille="sm" titre="Merci&nbsp;!">
+      Votre inscription à la newsletter MesServicesCyber a bien été prise en compte.
+    </Alerte>
     <img src="/assets/images/dragon-coeur-entier.svg" width="340" height="255" alt="Le dragon vous remercie" />
     <dsfr-button markup="a" label="Accéder à la page d’accueil" kind="secondary" href="/"></dsfr-button>
   </div>

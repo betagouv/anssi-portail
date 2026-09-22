@@ -5,6 +5,7 @@
 <script lang="ts">
   import axios from 'axios';
   import type { Snippet } from 'svelte';
+  import Alerte from './Alerte.svelte';
   import Bouton from './Bouton.svelte';
   import {
     ajouteRetour,
@@ -130,9 +131,9 @@
     </div>
   {/if}
   {#if etat === 'Soumis'}
-    <dsfr-alert type="success" size="sm" has-title="false">
-      <p slot="description">Merci&nbsp;! Vos retours sont précieux. ✨</p>
-    </dsfr-alert>
+    <div class="alerte-soumission">
+      <Alerte type="succès" taille="sm">Merci&nbsp;! Vos retours sont précieux. ✨</Alerte>
+    </div>
   {/if}
 </div>
 
@@ -148,13 +149,9 @@
       gap: 0.5rem;
     }
 
-    dsfr-alert,
+    .alerte-soumission,
     .encart-commentaire-avis {
       margin-top: 1.5rem;
-    }
-
-    dsfr-alert > p {
-      margin: var(--text-spacing);
     }
 
     .encart-commentaire-avis {

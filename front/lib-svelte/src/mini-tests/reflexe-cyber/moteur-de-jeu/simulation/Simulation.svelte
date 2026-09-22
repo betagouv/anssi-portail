@@ -4,6 +4,7 @@
   import { prefersReducedMotion, Tween } from 'svelte/motion';
   import { fly } from 'svelte/transition';
   import { v7 as uuidv7 } from 'uuid';
+  import Alerte from '../../../../ui/Alerte.svelte';
   import { rôleParId, type IdRôle, type Rôle } from '../roles';
   import type { Scénario } from '../scenarios';
   import { joueSon, prépareAudio, type Son } from './audio';
@@ -132,11 +133,9 @@
 
 <dsfr-container class="simulation-contenu">
   <div class="alerte-mobile">
-    <dsfr-alert type="info" size="sm" hasTitle={false} dismissible>
-      <p slot="description">
-        Expérimentez une simulation plus immersive sur ordinateur. Messages en directs, effets sonores...
-      </p>
-    </dsfr-alert>
+    <Alerte type="information" taille="sm" estRejetable>
+      Expérimentez une simulation plus immersive sur ordinateur. Messages en directs, effets sonores...
+    </Alerte>
   </div>
 
   <Progression {nombreÉvènementsTotaux} {numéroÉvènementCourant} />
@@ -337,10 +336,6 @@
           }
         }
       }
-    }
-
-    dsfr-alert {
-      width: 100%;
     }
   }
 

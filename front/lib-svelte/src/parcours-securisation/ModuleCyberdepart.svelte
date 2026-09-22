@@ -2,6 +2,7 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { profilStore } from '../stores/profil.store';
+  import Alerte from '../ui/Alerte.svelte';
   import BadgeBeta from '../ui/BadgeBeta.svelte';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
@@ -97,11 +98,10 @@
     {#if parcoursTermine && !parcoursComplet}
       <BasculeParcoursComplet />
     {:else if badgeDebloque && !parcoursTermine}
-      <dsfr-alert
-        type="info"
-        has-description={true}
-        text="Complétez votre progression et accéder à des mesures plus avancées pour renforcer vos pratiques, mieux structurer vos actions et améliorer votre protection dans la durée."
-      ></dsfr-alert>
+      <Alerte type="information" taille="md" titre="⚠️ À DÉFINIR car taille MD">
+        Complétez votre progression et accéder à des mesures plus avancées pour renforcer vos pratiques, mieux
+        structurer vos actions et améliorer votre protection dans la durée.
+      </Alerte>
     {/if}
     {#if module.nom !== ''}
       <Progression actuel={progressionActuelle} max={totalMesures} cible={module.cibleBadge} anime={animeProgression}
