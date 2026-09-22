@@ -8,6 +8,8 @@
   import Messages from './Messages.svelte';
   import Progression from './Progression.svelte';
   import { type Réflexe, réflexesParRôle } from './reflexes';
+  import { cubicOut } from 'svelte/easing';
+  import { Tween } from 'svelte/motion';
 
   type Props = {
     scénario: Scénario;
@@ -28,13 +30,16 @@
 
   let évènementCourant: Évènement = $derived(évènementsDuScénario[numéroÉvènementCourant - 1]);
   let réflexeCourant: Réflexe = $derived(réflexesDuRôle[numéroÉvènementCourant - 1]);
-  let valeurBlocage = $state(0);
+  const valeurBlocage = new Tween(0, {
+    duration: 1000,
+    easing: cubicOut,
+  });
 
   let choixEnCours = $state(false);
 
   const passeÉvènementSuivant = () => {
     if (numéroÉvènementCourant < nombreÉvènementsTotaux) {
-      valeurBlocage = scénario.métrique.bloquage[numéroÉvènementCourant];
+      valeurBlocage.target = scénario.métrique.bloquage[numéroÉvènementCourant];
       numéroÉvènementCourant++;
     } else {
       surSimulationTerminée();
@@ -66,7 +71,7 @@
 
   $effect(() => {
     if (numéroÉvènementCourant === 1 && choixEnCours) {
-      valeurBlocage = scénario.métrique.bloquage[0];
+      valeurBlocage.target = scénario.métrique.bloquage[0];
     }
   });
 </script>
@@ -108,7 +113,7 @@
           {scénario.métrique.label}
         </p>
         <lab-anssi-icone nom="error-warning-line" taille="lg"></lab-anssi-icone>
-        <strong class="fr-h4">{valeurBlocage}</strong>
+        <strong class="fr-h4">{Math.round(valeurBlocage.current)}</strong>
       </div>
       <Messages messagesÀAfficher={notificationsÀAfficher} défilementActif={choixEnCours} />
     </aside>
