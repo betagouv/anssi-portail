@@ -1,15 +1,3 @@
-import { RegleEntiteOSE } from './regles/RegleEntiteOSE.js';
-import { estValeurVide, type Regle, Specifications } from './Specifications.js';
-import { RegleLocalisation } from './regles/RegleLocalisation.js';
-import type { SpecificationTexte } from './FormatDesSpecificationsCSV.js';
-import { RegleTypeDeStructure } from './regles/RegleTypeDeStructure.js';
-import { RegleTaille } from './regles/RegleTaille.js';
-import { ErreurLectureDeRegle } from './regles/ErreurLectureDeRegle.js';
-import { RegleSecteurs } from './regles/RegleSecteurs.js';
-import { RegleSousSecteurs } from './regles/RegleSousSecteurs.js';
-import { RegleActivites } from './regles/RegleActivites.js';
-import { RegleFournitureDeServicesNumerique } from './regles/RegleFournitureDeServicesNumerique.js';
-import { RegleEtablissementPrincipal } from './regles/RegleEtablissementPrincipal.js';
 import {
   CodesPrecisionsPointsAttention,
   CodesResumesPointsAttention,
@@ -17,6 +5,18 @@ import {
   type ResultatEligibilite,
   type ResumesPointsAttention,
 } from '../Regulation.definitions.js';
+import type { SpecificationTexte } from './FormatDesSpecificationsCSV.js';
+import { ErreurLectureDeRegle } from './regles/ErreurLectureDeRegle.js';
+import { RegleActivites } from './regles/RegleActivites.js';
+import { RegleEntiteOSE } from './regles/RegleEntiteOSE.js';
+import { RegleEtablissementPrincipal } from './regles/RegleEtablissementPrincipal.js';
+import { RegleFournitureDeServicesNumerique } from './regles/RegleFournitureDeServicesNumerique.js';
+import { RegleLocalisation } from './regles/RegleLocalisation.js';
+import { RegleSecteurs } from './regles/RegleSecteurs.js';
+import { RegleSousSecteurs } from './regles/RegleSousSecteurs.js';
+import { RegleTaille } from './regles/RegleTaille.js';
+import { RegleTypeDeStructure } from './regles/RegleTypeDeStructure.js';
+import { estValeurVide, Specifications, type Regle } from './Specifications.js';
 
 export class FabriqueDeSpecifications {
   transforme(texte: SpecificationTexte): Specifications {

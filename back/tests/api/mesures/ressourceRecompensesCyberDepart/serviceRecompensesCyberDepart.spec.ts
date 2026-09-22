@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import { ServiceRécompensesCyberDépart } from '../../../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 import { readFile } from 'node:fs/promises';
+import { describe, expect, it } from 'vitest';
+import { ServiceRécompensesCyberDépart } from '../../../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 import { fauxFournisseurDeChemin } from '../../fauxObjets.js';
 
 describe('Le service de récompense Cyberdépart', () => {

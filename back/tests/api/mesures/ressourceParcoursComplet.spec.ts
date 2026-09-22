@@ -1,11 +1,14 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
+import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
 import { Module } from '../../../src/metier/module.js';
+import { Utilisateur } from '../../../src/metier/utilisateur.js';
 import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire.js';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';
 import {
   configurationDeTestDuServeur,
@@ -14,11 +17,8 @@ import {
   fauxAdaptateurRechercheEntreprise,
 } from '../fauxObjets.js';
 import { fabriqueModuleCyberdépart, jeanneDupont } from '../objetsPretsALEmploi.js';
-import { ConstructeurDeModule } from './constructeurDeModule.js';
 import { mesureDeTest } from './constructeurDeMesure.js';
-import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
-import { Utilisateur } from '../../../src/metier/utilisateur.js';
+import { ConstructeurDeModule } from './constructeurDeModule.js';
 
 describe('La ressource du parcours complet', () => {
   describe('sur requête GET', () => {

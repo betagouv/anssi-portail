@@ -1,15 +1,14 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
-  import HeroLandingPage from '../ui/HeroLandingPage.svelte';
+  import { onMount, type Component } from 'svelte';
+  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
   import BlocContenuLanding from '../ui/BlocContenuLanding.svelte';
+  import HeroLandingPage from '../ui/HeroLandingPage.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
   import IllustrationHerosParcoursComplet from './animation/IllustrationHerosParcoursComplet.svelte';
   import IllustrationModules from './animation/IllustrationModules.svelte';
   import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';
   import IllustrationProgression from './animation/IllustrationProgression.svelte';
   import IllustrationRecyf from './animation/IllustrationRecyf.svelte';
-  import { onMount } from 'svelte';
-  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
 
   let statistiques: Statistiques | undefined = $state();
 

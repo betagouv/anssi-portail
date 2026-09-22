@@ -1,12 +1,11 @@
 <script lang="ts">
-  import { enPropriétéWebC } from '$plateforme/webComponent';
   import { onMount, type Snippet } from 'svelte';
-
+  import { afficheBadgeCyberdépart } from '$plateforme/environnement';
+  import { enPropriétéWebC } from '$plateforme/webComponent';
+  import IllustrationBadge from './animation/IllustrationBadge.svelte';
   import IllustrationMesure from './animation/IllustrationMesure.svelte';
   import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';
   import IllustrationTuto from './animation/IllustrationTuto.svelte';
-  import IllustrationBadge from './animation/IllustrationBadge.svelte';
-  import { afficheBadgeCyberdépart } from '$plateforme/environnement';
 
   interface Props {
     titre: string;

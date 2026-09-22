@@ -1,9 +1,9 @@
+import cors from 'cors';
 import { Request, Response, Router } from 'express';
 import { calculeStatistiques } from '../metier/statistiques.js';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';
-import cors from 'cors';
 
 export const ressourceStatistiques = ({
   adaptateurStatistiqueMiniTests: adaptateurStatistique,

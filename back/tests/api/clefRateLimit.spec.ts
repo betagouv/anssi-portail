@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
 import { Request } from 'express';
+import { describe, expect, it } from 'vitest';
 import { fabriqueCleRateLimit } from '../../src/api/clefRateLimit.js';
 
 const requete = (ip: string, forwarded?: string): Request =>

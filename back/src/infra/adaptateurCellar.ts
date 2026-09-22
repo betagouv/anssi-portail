@@ -1,7 +1,7 @@
+import { Readable } from 'node:stream';
+import axios, { AxiosResponse, HttpStatusCode, isAxiosError } from '@anssi-portail/axios';
 import { DeleteObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { fromEnv } from '@aws-sdk/credential-providers';
-import axios, { HttpStatusCode, AxiosResponse, isAxiosError } from '@anssi-portail/axios';
-import { Readable } from 'node:stream';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 
 export type DocumentCellar = {

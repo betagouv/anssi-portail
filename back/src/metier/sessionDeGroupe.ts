@@ -1,5 +1,5 @@
-import { GenerateurCodeSessionDeGroupe } from './generateurCodeSessionDeGroupe.js';
 import { EntrepotResultatTest } from './entrepotResultatTest.js';
+import { GenerateurCodeSessionDeGroupe } from './generateurCodeSessionDeGroupe.js';
 import {
   IdNiveauMaturite,
   IdRubrique,

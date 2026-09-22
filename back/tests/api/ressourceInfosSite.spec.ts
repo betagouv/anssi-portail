@@ -1,10 +1,10 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it, expect } from 'vitest';
 import { Express } from 'express';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from './fauxObjets.js';
-import { creeServeur } from '../../src/api/msc.js';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { creeServeur } from '../../src/api/msc.js';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from './fauxObjets.js';
 
 describe('La ressource Informations du site', () => {
   let serveur: Express;

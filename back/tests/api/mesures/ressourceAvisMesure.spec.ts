@@ -1,7 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { AvisMesureDonne } from '../../../src/bus/evenements/avisMesureDonne.js';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';

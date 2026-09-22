@@ -1,12 +1,13 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT.js';
 import { ConfigurationServeur } from '../../../src/api/configurationServeur.js';
 import { creeServeur } from '../../../src/api/msc.js';
 import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC.js';
 import { UtilisateurConnecte } from '../../../src/bus/evenements/utilisateurConnecte.js';
+import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
 import { MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { decodeSessionDuCookie } from '../cookie.js';
@@ -19,7 +20,6 @@ import {
   ressourceFactice,
 } from '../fauxObjets.js';
 import { utilisateurDeTest } from '../mesures/constructeurDUtilisateur.js';
-import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {

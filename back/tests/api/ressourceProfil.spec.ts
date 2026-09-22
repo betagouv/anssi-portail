@@ -1,8 +1,8 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
-import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/msc.js';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur.js';
@@ -10,8 +10,8 @@ import { Utilisateur } from '../../src/metier/utilisateur.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession, enObjet } from './cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurHachage, fauxAdaptateurJWT } from './fauxObjets.js';
-import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi.js';
 import { ConstructeurDUtilisateur } from './mesures/constructeurDUtilisateur.js';
+import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi.js';
 
 const { JsonWebTokenError } = jsonwebtoken;
 

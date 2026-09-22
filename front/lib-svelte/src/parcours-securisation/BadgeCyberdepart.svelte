@@ -1,6 +1,7 @@
 <script lang="ts">
   import { afficheBadgeCyberdépart } from '$plateforme/environnement';
   import BoutonPartageBadgeCyberdepart from './BoutonPartageBadgeCyberdepart.svelte';
+
   const titre = afficheBadgeCyberdépart ? 'Badge Cyberdépart' : 'Vous avez validé votre Cyberdépart\u00a0!';
   const description = afficheBadgeCyberdépart
     ? `Ce badge témoigne de l’engagement de votre organisation dans une première démarche de sécurisation. Il valorise les

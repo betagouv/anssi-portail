@@ -1,10 +1,10 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it, expect } from 'vitest';
 import { Express } from 'express';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc.js';
-import { configurationDeTestDuServeur } from '../fauxObjets.js';
 import { encodeSession, enObjet } from '../cookie.js';
+import { configurationDeTestDuServeur } from '../fauxObjets.js';
 
 describe('La ressource apres deconnexion OIDC', () => {
   describe('quand on requete GET sur /oidc/apres-deconnexion', () => {

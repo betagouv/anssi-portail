@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
-import { beforeEach, describe, it, expect } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { fabriqueAttributionParcoursMesure } from '../../../src/api/middlewares/attributionParcoursMesure.js';
+import { Parcours } from '../../../src/metier/parcours.js';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
 import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire.js';
 import { ConstructeurDeMesure } from '../mesures/constructeurDeMesure.js';
-import { fabriqueModuleCyberdépart, mesureAuthentA2Etapes } from '../objetsPretsALEmploi.js';
-import { Parcours } from '../../../src/metier/parcours.js';
 import { ConstructeurDeModule } from '../mesures/constructeurDeModule.js';
+import { fabriqueModuleCyberdépart, mesureAuthentA2Etapes } from '../objetsPretsALEmploi.js';
 
 describe("Le middleware d'attribution de parcours par mesure", () => {
   let entrepotMesure: EntrepotMesureMemoire;

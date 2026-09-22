@@ -1,13 +1,13 @@
 <script lang="ts">
+  import { fabriqueFilAriane } from '../../../ui/filAriane';
   import FilAriane from '../../../ui/FilAriane.svelte';
   import ChoixRole from './ChoixRole.svelte';
   import ChoixScenario from './ChoixScenario.svelte';
   import MiseEnSituation from './MiseEnSituation.svelte';
-  import { type IdRôle, rôles } from './roles';
-  import { type IdScénario, scénarios } from './scenarios';
+  import { rôles, type IdRôle } from './roles';
+  import { scénarios, type IdScénario } from './scenarios';
   import ScoreFinalReflexeCyber from './ScoreFinalReflexeCyber.svelte';
   import Simulation from './simulation/Simulation.svelte';
-  import { fabriqueFilAriane } from '../../../ui/filAriane';
 
   type Étape = 'scénario' | 'rôle' | 'mise-en-situation' | 'simulation' | 'score-final';
   let étape: Étape = $state('scénario');

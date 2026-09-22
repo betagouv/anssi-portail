@@ -1,7 +1,9 @@
-import { describe, it, expect } from 'vitest';
-import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications.js';
+import { describe, expect, it } from 'vitest';
+import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
+import { EnsembleDeSpecifications } from '../../../../src/metier/nis2-simulateur/questionnaire/EnsembleDeSpecifications.js';
 import { RegleEntiteOSE } from '../../../../src/metier/nis2-simulateur/questionnaire/regles/RegleEntiteOSE.js';
 import { RegleSecteurs } from '../../../../src/metier/nis2-simulateur/questionnaire/regles/RegleSecteurs.js';
+import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications.js';
 import {
   neSaitPas,
   nonRegulee,
@@ -10,8 +12,6 @@ import {
   reguleEnregistrementSeul,
   reguleSansPrecision,
 } from './aidesAuxTests.js';
-import { EnsembleDeSpecifications } from '../../../../src/metier/nis2-simulateur/questionnaire/EnsembleDeSpecifications.js';
-import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
 
 describe('Un ensemble de spécifications', () => {
   const oseEstReguleeEE = new Specifications([new RegleEntiteOSE(['oui'])], reguleEE(), 'R1000');

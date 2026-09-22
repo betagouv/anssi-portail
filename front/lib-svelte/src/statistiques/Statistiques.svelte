@@ -2,6 +2,7 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
   import GraphiqueAnneau from '../test-maturite/GraphiqueAnneau.svelte';
   import LegendeAnneau from '../test-maturite/LegendeAnneau.svelte';
   import type { RepartitionResultatsTestPourUnNiveau } from '../test-maturite/ResultatsTest.type';
@@ -10,11 +11,10 @@
   import SelectSecteurActivite from '../test-maturite/SelectSecteurActivite.svelte';
   import SelectTailleOrganisation from '../test-maturite/SelectTailleOrganisation.svelte';
   import type { Serie } from '../test-maturite/Serie';
+  import Bouton from '../ui/Bouton.svelte';
   import Heros from '../ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import Tuile from './Tuile.svelte';
-  import Bouton from '../ui/Bouton.svelte';
-  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
 
   let statistiques: Statistiques | undefined = $state();
   let serieNonFiltree: Serie = $state([]);

@@ -1,5 +1,5 @@
 import { get, writable } from 'svelte/store';
-import { type ItemCyber, Source } from '../Catalogue.types';
+import { Source, type ItemCyber } from '../Catalogue.types';
 
 const selectionDeSources = writable<Source[]>([]);
 

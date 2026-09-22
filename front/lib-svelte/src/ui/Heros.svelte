@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { enPropriétéWebC } from '$plateforme/webComponent';
   import type { Snippet } from 'svelte';
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import type { Segment } from './filAriane';
 
   type Props = {

@@ -1,5 +1,5 @@
-import { LecteurDeSpecifications } from './LecteurDeSpecifications.js';
 import type { EtatQuestionnaire } from '../EtatQuestionnaire.js';
+import { LecteurDeSpecifications } from './LecteurDeSpecifications.js';
 import type { ResultatAvecAnalyse } from './ResultatAvecAnalyse.js';
 
 export function evalueEligibilite(reponses: EtatQuestionnaire, contenuDuCsv: string): ResultatAvecAnalyse {

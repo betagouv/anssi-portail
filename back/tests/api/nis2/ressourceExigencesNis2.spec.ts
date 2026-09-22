@@ -1,8 +1,9 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc.js';
+import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
 import {
   Correspondance,
   ExigenceAE,
@@ -12,7 +13,6 @@ import {
 } from '../../../src/metier/nis2/exigence.js';
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire.js';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
-import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
 
 describe('La ressource des Exigences NIS 2', () => {
   let serveur: Express;

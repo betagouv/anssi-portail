@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { enPropriétéWebC } from '$plateforme/webComponent';
   import { onMount, type Snippet } from 'svelte';
-
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import IllustrationModules from './animation/IllustrationModules.svelte';
-  import IllustrationRecyf from './animation/IllustrationRecyf.svelte';
   import IllustrationProgression from './animation/IllustrationProgression.svelte';
+  import IllustrationRecyf from './animation/IllustrationRecyf.svelte';
 
   interface Props {
     titre: string;

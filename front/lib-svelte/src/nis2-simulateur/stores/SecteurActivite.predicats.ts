@@ -1,10 +1,10 @@
+import type { Activite } from '../../../../../back/src/metier/nis2-simulateur/Activite.definitions';
+import { contientUnParmi } from '../../../../../back/src/metier/nis2-simulateur/commun.predicats';
 import type {
   SecteurActivite,
   SecteurComposite,
 } from '../../../../../back/src/metier/nis2-simulateur/SecteurActivite.definitions';
 import { ValeursSecteursComposites } from '../../../../../back/src/metier/nis2-simulateur/SecteurActivite.valeurs';
-import type { Activite } from '../../../../../back/src/metier/nis2-simulateur/Activite.definitions';
-import { contientUnParmi } from '../../../../../back/src/metier/nis2-simulateur/commun.predicats';
 
 export const estUnSecteurAvecDesSousSecteurs = (secteur: string): secteur is SecteurComposite =>
   ValeursSecteursComposites.includes(secteur as SecteurComposite);

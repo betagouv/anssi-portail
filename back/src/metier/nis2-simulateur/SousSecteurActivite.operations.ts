@@ -1,5 +1,5 @@
-import type { SousSecteurActivite } from './SousSecteurActivite.definitions.js';
 import type { SecteurActivite } from './SecteurActivite.definitions.js';
+import type { SousSecteurActivite } from './SousSecteurActivite.definitions.js';
 import { sousSecteursParSecteur } from './SousSecteurActivite.valeurs.js';
 
 export const secteurDe = (recherche: SousSecteurActivite): SecteurActivite => {

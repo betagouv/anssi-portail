@@ -1,8 +1,8 @@
 import axios from '@anssi-portail/axios';
 import { Financement } from '../metier/financement';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
-import { ClientHttp } from './clientHttp';
 import { aseptiseHtml } from './aseptisationDuHtml';
+import { ClientHttp } from './clientHttp';
 
 export type Aide = {
   id_aid: string;

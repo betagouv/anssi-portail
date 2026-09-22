@@ -1,6 +1,6 @@
 import { JSDOM } from 'jsdom';
-import { AdaptateurDom } from './adaptateurDom.js';
 import { RésolveurDePage } from '../résolveurDePage.js';
+import { AdaptateurDom } from './adaptateurDom.js';
 
 export class AdaptateurTitre implements AdaptateurDom {
   constructor(private readonly résolveurDePage: RésolveurDePage) {}

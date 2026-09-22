@@ -1,9 +1,9 @@
 <script lang="ts">
-  import DemandeDiagnosticSimplifiee from '../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
-  import Alternatives from '../ui/Alternatives.svelte';
   import { afficheParcoursSecurisation } from '$plateforme/environnement';
+  import DemandeDiagnosticSimplifiee from '../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
   import EncartPromotionParcoursBasique from '../parcours-securisation/EncartPromotionParcoursBasique.svelte';
   import TagProgrammeGratuit from '../parcours-securisation/TagProgrammeGratuit.svelte';
+  import Alternatives from '../ui/Alternatives.svelte';
   import EncartInvitationARenforcerCybersecurite from './EncartInvitationARenforcerCybersecurite.svelte';
 </script>
 

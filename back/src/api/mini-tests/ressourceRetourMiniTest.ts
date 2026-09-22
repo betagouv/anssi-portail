@@ -2,12 +2,13 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import { Response, Router } from 'express';
 import z from 'zod';
 import { RetourMiniTestDonné } from '../../bus/evenements/retourMiniTestDonne.js';
+import { estMiniTest } from '../../metier/mini-tests/mini-test.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
-import { valideCorpsRequete } from '../zod.js';
 import { schemaRessourceRetourTestMaturite } from '../testMaturite/ressourceRetourTestMaturite.schema.js';
+import { valideCorpsRequete } from '../zod.js';
+
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
-import { estMiniTest } from '../../metier/mini-tests/mini-test.js';
 
 const ressourceRetourMiniTest = ({ busEvenements }: ConfigurationServeur) => {
   const routeur = Router();

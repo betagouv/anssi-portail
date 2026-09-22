@@ -8,10 +8,12 @@ import { AdaptateurChiffrement, fabriqueAdaptateurChiffrement } from '../infra/a
 import { fabriqueAdaptateurEmail } from '../infra/adaptateurEmailBrevo.js';
 import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
 import { AdaptateurHachage, fabriqueAdaptateurHachage } from '../infra/adaptateurHachage.js';
+import { adaptateurHorloge } from '../infra/adaptateurHorloge.js';
 import { adaptateurJournalMemoire } from '../infra/adaptateurJournal.js';
 import { adaptateurJournalPostgres } from '../infra/adaptateurJournalPostgres.js';
 import { AdaptateurProfilAnssi, fabriqueAdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi.js';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise.js';
+import { AdaptateurRechercheEntrepriseGouv } from '../infra/adaptateurRechercheEntrepriseGouv.js';
 import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres.js';
 import { EntrepotMesurePostgres } from '../infra/entrepotMesurePostgres.js';
 import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAPostgres.js';
@@ -28,8 +30,6 @@ import { ReponsesTestMaturite } from '../metier/resultatTestMaturite.js';
 import { Utilisateur } from '../metier/utilisateur.js';
 import { MigrationChiffrement } from './migrationChiffrement.js';
 import { MigrationHash } from './migrationHash.js';
-import { adaptateurHorloge } from '../infra/adaptateurHorloge.js';
-import { AdaptateurRechercheEntrepriseGouv } from '../infra/adaptateurRechercheEntrepriseGouv.js';
 
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;

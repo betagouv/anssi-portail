@@ -1,9 +1,9 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
+import { guidePresentation } from '../../presentation/guides/guidePresentation.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideParametresRequete } from '../zod.js';
-import { guidePresentation } from '../../presentation/guides/guidePresentation.js';
 import { schemaParametersRessourceGuidesMemesCollections } from './ressourceGuidesMemesCollections.schema.js';
 
 export const ressourceGuidesMemesCollections = ({ adaptateurEnvironnement, entrepotGuide }: ConfigurationServeur) => {

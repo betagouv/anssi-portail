@@ -1,7 +1,7 @@
+import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
 import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee.js';
-import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
 
 export const consigneEvenementProprieteTestRevendiqueeDansJournal = ({
   adaptateurJournal,

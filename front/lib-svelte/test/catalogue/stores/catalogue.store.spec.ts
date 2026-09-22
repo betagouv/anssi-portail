@@ -1,8 +1,8 @@
-import { describe, expect, it } from 'vitest';
 import { get } from 'svelte/store';
+import { describe, expect, it } from 'vitest';
+import type { ItemCyber } from '../../../src/catalogue/Catalogue.types';
 import { catalogueStore } from '../../../src/catalogue/stores/catalogue.store';
 import { livretEnJeux, mss } from './objetsExemples';
-import type { ItemCyber } from '../../../src/catalogue/Catalogue.types';
 
 describe('Le store du catalogue', () => {
   it("est une collection d'items", () => {

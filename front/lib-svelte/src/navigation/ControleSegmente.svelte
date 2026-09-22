@@ -1,6 +1,6 @@
 <script lang="ts">
   import { enPropriétéWebC } from '$plateforme/webComponent';
-  import { type FragmentDeNavigation, creeLeFragmentDeNavigation } from './fragmentDeNavigation.svelte';
+  import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from './fragmentDeNavigation.svelte';
 
   type Props = {
     elements: {

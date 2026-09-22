@@ -1,9 +1,9 @@
-import { describe, it, expect } from 'vitest';
-import request from 'supertest';
-import { creeServeur } from '../../src/api/msc.js';
-import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets.js';
 import { join } from 'node:path';
 import { HttpStatusCode } from '@anssi-portail/axios';
+import request from 'supertest';
+import { describe, expect, it } from 'vitest';
+import { creeServeur } from '../../src/api/msc.js';
+import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets.js';
 
 describe('La configuration de notre serveur', () => {
   it('compresse les réponses', async () => {

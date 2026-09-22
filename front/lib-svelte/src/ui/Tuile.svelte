@@ -1,6 +1,5 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte';
-  import { untrack } from 'svelte';
+  import { untrack, type Snippet } from 'svelte';
 
   // ATTENTION: Le `slot` description n'a pas le style "fr-tile_desc" et donc ne s'affiche pas au
   // "bon" endroit : il est au-dessus du titre au lieu d'être en-dessous.

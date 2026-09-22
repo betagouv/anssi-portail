@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { UnionPetitMoyenGrand } from '../../../../../src/metier/nis2-simulateur/ChampsSimulateur.definitions.js';
 import {
   EtatQuestionnaire,

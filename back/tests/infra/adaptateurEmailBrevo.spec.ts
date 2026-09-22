@@ -1,10 +1,11 @@
 import { AxiosError } from '@anssi-portail/axios';
-import { beforeEach, describe, it, expect, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { BadgeCyberdépartDébloqué } from '../../src/bus/evenements/badgeCyberdepartDebloque.js';
 import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
 import { MesurePriseEnCompte } from '../../src/bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../../src/bus/evenements/moduleTermine.js';
 import { ParcoursAllégéTerminé } from '../../src/bus/evenements/parcoursAllegeTermine.js';
+import { ParcoursChangé } from '../../src/bus/evenements/parcoursChange.js';
 import { ParcoursCompletTerminé } from '../../src/bus/evenements/parcoursCompletTermine.js';
 import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
 import { adaptateurEmailBrevo } from '../../src/infra/adaptateurEmailBrevo.js';
@@ -13,7 +14,6 @@ import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
 import { fabriqueClientPost, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
-import { ParcoursChangé } from '../../src/bus/evenements/parcoursChange.js';
 
 describe('L’adaptateur email Brevo', () => {
   let clientHttp: ClientHttp;

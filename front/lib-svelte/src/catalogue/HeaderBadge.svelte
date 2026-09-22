@@ -1,7 +1,7 @@
 <script lang="ts">
-  import BadgesDeCollections from './guides/BadgesDeCollections.svelte';
   import type { ItemCyber } from './Catalogue.types';
   import type { Guide } from './Guide.types';
+  import BadgesDeCollections from './guides/BadgesDeCollections.svelte';
 
   interface Props {
     item: ItemCyber | Guide;

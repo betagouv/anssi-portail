@@ -1,11 +1,11 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
+import cors from 'cors';
 import { Router } from 'express';
 import { TestExpositionRéalisé } from '../../../bus/evenements/TestExpositionRealise.js';
 import { Utilisateur } from '../../../metier/utilisateur.js';
 import { ConfigurationServeur } from '../../configurationServeur.js';
 import { valideCorpsRequete } from '../../zod.js';
 import { schemaPostTestExposition } from './ressourceTestsExposition.schema.js';
-import cors from 'cors';
 
 export const ressourceTestsExposition = ({
   busEvenements,

@@ -1,15 +1,15 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import { profilStore } from '../stores/profil.store';
   import BoutonsPartagePage from '../test-maturite/BoutonsPartagePage.svelte';
   import type { PropriétésFilAriane } from '../ui/filAriane';
   import HerosRiche from '../ui/HerosRiche.svelte';
   import CarteTest from './CarteTest.svelte';
   import IllustrationHeroMiniTest from './IllustrationHeroMiniTest.svelte';
   import PlanteAnimee from './PlanteAnimee.svelte';
-  import TestVraiFauxAnime from './TestVraiFauxAnime.svelte';
-  import { profilStore } from '../stores/profil.store';
   import RadarMenaceAnime from './RadarMenaceAnime.svelte';
+  import TestVraiFauxAnime from './TestVraiFauxAnime.svelte';
 
   const estConnecté = $derived(!!$profilStore);
 

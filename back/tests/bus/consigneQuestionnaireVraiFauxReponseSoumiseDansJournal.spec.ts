@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { consigneQuestionnaireVraiFauxReponseSoumiseDansJournal } from '../../src/bus/consigneQuestionnaireVraiFauxReponseSoumiseDansJournal.js';
 import { QuestionnaireVraiFauxRéponseSoumise } from '../../src/bus/evenements/questionnaireVraiFauxReponseSoumise.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';

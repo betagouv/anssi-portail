@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { AvisMesureDonne } from '../../src/bus/evenements/avisMesureDonne.js';
 import { notifieCommentaireAvisMesureDonneDansMessagerie } from '../../src/bus/notifieCommentaireAvisMesureDonneDansMessagerie.js';
 import { fausseMessagerieInstantanee } from '../api/fauxObjets.js';

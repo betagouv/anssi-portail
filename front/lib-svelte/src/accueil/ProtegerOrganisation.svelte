@@ -1,11 +1,11 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { enPropriétéWebC } from '$plateforme/webComponent';
+  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
   import Bouton from '../ui/Bouton.svelte';
   import Lien from '../ui/Lien.svelte';
-  import IllustrationProtegerOrganisation from './animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
-  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
-  import { onMount } from 'svelte';
+  import IllustrationProtegerOrganisation from './animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
 
   let statistiques: Statistiques | undefined = $state();
   const tags = [{ label: 'TPE' }, { label: 'PME' }, { label: 'ETI' }, { label: 'Collectivités' }];

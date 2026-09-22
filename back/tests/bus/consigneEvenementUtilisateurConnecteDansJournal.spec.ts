@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { consigneEvenementUtilisateurConnecteDansJournal } from '../../src/bus/consigneEvenementUtilisateurConnecteDansJournal.js';
 import { UtilisateurConnecte } from '../../src/bus/evenements/utilisateurConnecte.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
-import { consigneEvenementUtilisateurConnecteDansJournal } from '../../src/bus/consigneEvenementUtilisateurConnecteDansJournal.js';
 
 describe("L'abonnement qui consigne la connexion d'un utilisateur dans le journal", () => {
   it('consigne un évènement UtilisateurConnecte', async () => {

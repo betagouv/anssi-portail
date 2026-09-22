@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { BusEvenements, EvenementDuBus } from '../../src/bus/busEvenements.js';
 
 class EvenementTestA implements EvenementDuBus {

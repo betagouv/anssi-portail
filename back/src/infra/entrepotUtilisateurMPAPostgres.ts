@@ -3,13 +3,13 @@ import pThrottle from 'p-throttle';
 import config from '../../knexfile.js';
 import { EntrepotMesure } from '../metier/entrepotMesure.js';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur.js';
+import { Parcours } from '../metier/parcours.js';
 import { Organisation, Role, Utilisateur } from '../metier/utilisateur.js';
 import { AdaptateurChiffrement } from './adaptateurChiffrement.js';
 import { AdaptateurHachage } from './adaptateurHachage.js';
 import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi.js';
 import { AdaptateurRechercheEntreprise } from './adaptateurRechercheEntreprise.js';
 import { UtilisateurBDD } from './utilisateurBDD.js';
-import { Parcours } from '../metier/parcours.js';
 
 type DonneesUtilisateurEnClair = {
   email: string;

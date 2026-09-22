@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { estServeur } from '$plateforme/environnement';
   import type { Snippet } from 'svelte';
+  import { estServeur } from '$plateforme/environnement';
   import EnteteFiltres from '../catalogue/EnteteFiltres.svelte';
   import { détecteRendu } from '../utils/rendu.svelte';
 

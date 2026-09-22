@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { GuideGrist } from '../../src/infra/entrepotGuideGrist.js';
 import { EntrepotGuideTravailGrist } from '../../src/infra/entrepotGuideTravailGrist.js';

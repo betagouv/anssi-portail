@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { enPropriétéWebC } from '$plateforme/webComponent';
   import { onMount } from 'svelte';
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import IllustrationProtegerOrganisation from '../accueil/animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
   import IllustrationDemandeAide from '../demande-aide-mon-aide-cyber/IllustrationDemandeAide.svelte';
   import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';

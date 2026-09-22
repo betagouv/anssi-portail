@@ -1,11 +1,11 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it, expect } from 'vitest';
 import { Express } from 'express';
 import request from 'supertest';
-import { creeServeur } from '../../src/api/msc.js';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
-import { configurationDeTestDuServeur, fauxFournisseurDeChemin, ressourceFactice } from './fauxObjets.js';
+import { creeServeur } from '../../src/api/msc.js';
 import { encodeSession, enObjet } from './cookie.js';
+import { configurationDeTestDuServeur, fauxFournisseurDeChemin, ressourceFactice } from './fauxObjets.js';
 
 describe('La ressource de la page connexion', () => {
   let serveur: Express;

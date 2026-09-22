@@ -1,19 +1,19 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/msc.js';
 import { AdaptateurMonAideCyber } from '../../src/infra/adaptateurMonAideCyber.js';
 import { AdaptateurStatistiqueMiniTestsMémoire } from '../../src/infra/adaptateurStatistiqueMiniTestsMémoire.js';
 import { AdaptateurStatistiqueMiniTests } from '../../src/metier/adaptateurStatistiqueMiniTests.js';
 import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest.js';
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur.js';
+import { Statistiques } from '../../src/metier/statistiques.js';
 import { ResultatTestMaturiteCreateur } from '../metier/ResultatTestMaturiteCreateur.js';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { configurationDeTestDuServeur } from './fauxObjets.js';
 import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi.js';
-import { Statistiques } from '../../src/metier/statistiques.js';
 
 describe('La ressource Statistiques', () => {
   describe('sur demande GET', () => {

@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { consigneParcoursAllégéTerminéDansJournal } from '../../src/bus/consigneParcoursAllegeTermineDansJournal.js';
 import { ParcoursAllégéTerminé } from '../../src/bus/evenements/parcoursAllegeTermine.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
-import { consigneParcoursAllégéTerminéDansJournal } from '../../src/bus/consigneParcoursAllegeTermineDansJournal.js';
 
 describe("L'abonnement qui consigne l'événement de complétion du parcours allégé", () => {
   it("consigne l'événement ParcoursAllégéTerminé", async () => {

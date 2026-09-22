@@ -1,5 +1,7 @@
 <script lang="ts">
   import { onMount, type Component } from 'svelte';
+  import { afficheBadgeCyberdépart } from '$plateforme/environnement';
+  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
   import BlocContenuLanding from '../ui/BlocContenuLanding.svelte';
   import BlocDiagnostic from '../ui/BlocDiagnostic.svelte';
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
@@ -9,8 +11,6 @@
   import IllustrationMesure from './animation/IllustrationMesure.svelte';
   import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';
   import IllustrationTuto from './animation/IllustrationTuto.svelte';
-  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
-  import { afficheBadgeCyberdépart } from '$plateforme/environnement';
 
   let statistiques: Statistiques | undefined = $state();
 

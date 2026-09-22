@@ -10,6 +10,7 @@ import { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi.js';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise.js';
 import { GenerateurImage } from '../infra/generateurImage.js';
 import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
+import { AdaptateurStatistiqueMiniTests } from '../metier/adaptateurStatistiqueMiniTests.js';
 import { EntrepotFavori } from '../metier/entrepotFavori.js';
 import { EntrepotFinancement } from '../metier/entrepotFinancement.js';
 import { EntrepotGuide } from '../metier/entrepotGuide.js';
@@ -23,6 +24,7 @@ import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur.js';
 import { GenerateurCodeSessionDeGroupe } from '../metier/generateurCodeSessionDeGroupe.js';
 import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
 import { EntrepotReactionMiniTest } from '../metier/mini-tests/entrepotReactionMiniTest.js';
+import { EntrepôtQuestionVraieFausse } from '../metier/mini-tests/vrai-faux/entrepotQuestionVraieFausse.js';
 import { EntrepotExigence } from '../metier/nis2/entrepotExigence.js';
 import { ServiceSanteGuides } from '../metier/serviceSanteGuides.js';
 import { AdaptateurJWT } from './adaptateurJWT.js';
@@ -30,8 +32,6 @@ import { FournisseurChemin } from './fournisseurChemin.js';
 import { ServiceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 import { GestionnaireRequêtesComplémentaires, Middleware } from './middlewares/middleware.js';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
-import { EntrepôtQuestionVraieFausse } from '../metier/mini-tests/vrai-faux/entrepotQuestionVraieFausse.js';
-import { AdaptateurStatistiqueMiniTests } from '../metier/adaptateurStatistiqueMiniTests.js';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;

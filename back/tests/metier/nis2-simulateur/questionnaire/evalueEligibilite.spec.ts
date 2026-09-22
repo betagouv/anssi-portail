@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
-import { leCSV } from './aidesAuxTests.js';
 import { evalueEligibilite } from '../../../../src/metier/nis2-simulateur/questionnaire/evalueEligibilite.js';
+import { leCSV } from './aidesAuxTests.js';
 
 describe("L'évaluation complète de l'égibilité", () => {
   it('soumet un questionnaire à la spécification CSV, et retourne le résultat obtenu', () => {

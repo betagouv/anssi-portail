@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { estServeur } from '$plateforme/environnement';
   import { type Snippet } from 'svelte';
+  import { estServeur } from '$plateforme/environnement';
   import Reactions from '../ui/Reactions.svelte';
 
   type Props = {

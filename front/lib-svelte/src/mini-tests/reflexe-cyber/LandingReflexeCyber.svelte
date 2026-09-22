@@ -1,9 +1,7 @@
 <script lang="ts">
   import type { PropriétésFilAriane } from '../../ui/filAriane';
-
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import Lien from '../../ui/Lien.svelte';
-
   import IllustrationHerosReflexeCyber from './IllustrationHerosReflexeCyber.svelte';
 
   const propriétésFilAriane: PropriétésFilAriane = {

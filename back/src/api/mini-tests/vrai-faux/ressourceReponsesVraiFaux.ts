@@ -1,4 +1,5 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
+import cors from 'cors';
 import { Router } from 'express';
 import z from 'zod';
 import { QuestionnaireVraiFaux } from '../../../metier/mini-tests/vrai-faux/questionnaireVraiFaux.js';
@@ -6,8 +7,8 @@ import { ConfigurationServeur } from '../../configurationServeur.js';
 import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { valideCorpsRequete } from '../../zod.js';
 import { schemaPostRéponsesVraiFaux } from './ressourceReponsesVraiFaux.schemas.js';
+
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
-import cors from 'cors';
 
 export const ressourceRéponsesVraiFaux = ({
   busEvenements,

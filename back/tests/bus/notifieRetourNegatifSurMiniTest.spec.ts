@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
-import { fausseMessagerieInstantanee } from '../api/fauxObjets.js';
-import { notifieUnRetourNégatifSurMiniTest } from '../../src/bus/notifieRetourNegatifSurMiniTest.js';
+import { describe, expect, it } from 'vitest';
 import { RetourMiniTestDonné } from '../../src/bus/evenements/retourMiniTestDonne.js';
+import { notifieUnRetourNégatifSurMiniTest } from '../../src/bus/notifieRetourNegatifSurMiniTest.js';
 import { RetourNégatifSurMiniTest } from '../../src/metier/messagerieInstantanee.js';
+import { fausseMessagerieInstantanee } from '../api/fauxObjets.js';
 
 describe("L'abonnement qui notifie un retour de test de maturité négatif", () => {
   it('consigne un évènement retour test maturité pour un retour négatif', async () => {

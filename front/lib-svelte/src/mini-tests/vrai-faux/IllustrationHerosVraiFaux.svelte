@@ -1,7 +1,6 @@
 <script lang="ts">
   import { untrack, type Component } from 'svelte';
   import IllustrationAnimee from '../../accueil/animation/IllustrationAnimee.svelte';
-
   import SceneHerosVraiFaux from './SceneHerosVraiFaux.svelte';
 
   let { urlBase = '' }: { urlBase?: string } = $props();

@@ -1,19 +1,19 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import AdmZip from 'adm-zip';
 import { Express } from 'express';
-import { beforeEach, describe, it, expect } from 'vitest';
+import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 import sharp from 'sharp';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { ServiceRécompensesCyberDépart } from '../../../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 import { creeServeur } from '../../../../src/api/msc.js';
 import { EntrepotUtilisateur } from '../../../../src/metier/entrepotUtilisateur.js';
-import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { EntrepôtModuleMémoire } from '../../../persistance/EntrepôtModuleMémoire.js';
+import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from '../../fauxObjets.js';
-import { jeanneDupont, fabriqueModuleCyberdépart } from '../../objetsPretsALEmploi.js';
+import { fabriqueModuleCyberdépart, jeanneDupont } from '../../objetsPretsALEmploi.js';
 import { mesureDeTest } from '../constructeurDeMesure.js';
-import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 
 describe('La ressource des récompenses CyberDépart', () => {
   let serveur: Express;

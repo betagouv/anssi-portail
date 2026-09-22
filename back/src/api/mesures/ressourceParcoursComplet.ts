@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { valideCorpsRequete, corpsVide } from '../zod.js';
-import { ConfigurationServeur } from '../configurationServeur.js';
 import { Utilisateur } from '../../metier/utilisateur.js';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { corpsVide, valideCorpsRequete } from '../zod.js';
 
 export const ressourceParcoursComplet = ({
   middleware,

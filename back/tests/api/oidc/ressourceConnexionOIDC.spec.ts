@@ -1,7 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it, expect } from 'vitest';
 import { Express } from 'express';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { AgentConnectInfo, enObjet } from '../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurOIDC } from '../fauxObjets.js';

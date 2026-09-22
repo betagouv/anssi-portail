@@ -5,6 +5,7 @@ import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { schemaAbonnementInfolettre } from './ressourceAbonnementInfolettre.schema.js';
 import { valideCorpsRequete } from './zod.js';
+
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 export const ressourceAbonnementInfolettre = ({ adaptateurEmail }: ConfigurationServeur) => {

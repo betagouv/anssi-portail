@@ -1,9 +1,9 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it, expect } from 'vitest';
 import { Express } from 'express';
-import { configurationDeTestDuServeur } from './fauxObjets.js';
-import { creeServeur } from '../../src/api/msc.js';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { creeServeur } from '../../src/api/msc.js';
+import { configurationDeTestDuServeur } from './fauxObjets.js';
 
 describe('La ressource Annuaire Départements', () => {
   let serveur: Express;

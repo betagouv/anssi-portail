@@ -1,9 +1,9 @@
-import type { Regle } from '../Specifications.js';
-import { ErreurLectureDeRegle } from './ErreurLectureDeRegle.js';
-import type { EtatQuestionnaire } from '../../EtatQuestionnaire.js';
-import type { SpecificationTexte } from '../FormatDesSpecificationsCSV.js';
 import type { DesignationOperateurServicesEssentiels } from '../../ChampsSimulateur.definitions.js';
 import { contientUnParmi } from '../../commun.predicats.js';
+import type { EtatQuestionnaire } from '../../EtatQuestionnaire.js';
+import type { SpecificationTexte } from '../FormatDesSpecificationsCSV.js';
+import type { Regle } from '../Specifications.js';
+import { ErreurLectureDeRegle } from './ErreurLectureDeRegle.js';
 
 export class RegleEntiteOSE implements Regle {
   constructor(private readonly valeursAcceptees: DesignationOperateurServicesEssentiels[]) {}

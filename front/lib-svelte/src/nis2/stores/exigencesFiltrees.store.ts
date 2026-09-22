@@ -1,13 +1,13 @@
 import { derived } from 'svelte/store';
+import type { Exigence } from '../exigence.type';
 import { exigencesStore } from './exigences.store';
 import { rechercheParCorrespondance } from './rechercheParCorrespondance';
 import { rechercheParEntiteNis2 } from './rechercheParEntiteNis2';
-import type { Exigence } from '../exigence.type';
-import { rechercheParObjectifNis2 } from './rechercheParObjectifNis2';
-import { rechercheParThematiqueNis2 } from './rechercheParThematiqueNis2';
-import { rechercheParNormeISO } from './rechercheParNormeISO';
 import { rechercheParFonctionCyFun23 } from './rechercheParFonctionCyFun23';
 import { rechercheParNiveauAssuranceCyFun23 } from './rechercheParNiveauAssuranceCyFun23';
+import { rechercheParNormeISO } from './rechercheParNormeISO';
+import { rechercheParObjectifNis2 } from './rechercheParObjectifNis2';
+import { rechercheParThematiqueNis2 } from './rechercheParThematiqueNis2';
 
 const extraisLesOptions = (exigences: Exigence[]) => {
   const groupeDeFiltre = exigences.reduce(

@@ -1,4 +1,4 @@
-import { beforeEach, describe, it, expect, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { EntrepotFinancementGrist, FinancementGrist } from '../../src/infra/entrepotFinancementGrist.js';
 import { Financement } from '../../src/metier/financement.js';

@@ -3,6 +3,8 @@
   import { onMount } from 'svelte';
   import { couleursDeNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
+  import Bouton from '../ui/Bouton.svelte';
+  import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeAnneau from './LegendeAnneau.svelte';
   import PartageTest from './PartageTest.svelte';
@@ -15,8 +17,6 @@
   import { construisSerie } from './resultatTest';
   import ResumeRadarComparaison from './ResumeRadarComparaison.svelte';
   import type { Serie, SerieRadar } from './Serie';
-  import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
-  import Bouton from '../ui/Bouton.svelte';
 
   const libelleDeNiveau = (idNiveau: IdNiveau) => {
     return niveauxMaturite.find((niveau) => niveau.id === idNiveau)!.label;

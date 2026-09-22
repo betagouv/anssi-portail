@@ -1,6 +1,6 @@
+import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
 import { Typologie } from '../../../src/catalogue/Catalogue.types';
-import { get } from 'svelte/store';
 import { rechercheParTypologie } from '../../../src/catalogue/stores/rechercheParTypologie.store';
 
 describe('La recherche par typologie', () => {

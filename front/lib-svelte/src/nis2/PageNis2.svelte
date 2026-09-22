@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { estServeur } from '$plateforme/environnement';
   import { onMount } from 'svelte';
+  import { estServeur } from '$plateforme/environnement';
+  import { réécritFragmentDepuis } from '../navigation/fragmentDeNavigation.svelte';
   import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
   import { type PropriétésFilAriane } from '../ui/filAriane';
   import HerosRiche from '../ui/HerosRiche.svelte';
@@ -11,7 +12,6 @@
   import ExigencesNis2 from './ExigencesNis2.svelte';
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
-  import { réécritFragmentDepuis } from '../navigation/fragmentDeNavigation.svelte';
 
   const { itemsCyber, featureFlagNis2CyFun23 = false, exigences = undefined, guides = undefined } = $props();
 

@@ -1,5 +1,5 @@
 import type { Profil } from '../stores/profil.store';
-import { type CodeSecteurContact, codesSecteurContact } from './contacts.type';
+import { codesSecteurContact, type CodeSecteurContact } from './contacts.type';
 
 export const estCodeSecteurContact = (codeSecteur: string): codeSecteur is CodeSecteurContact => {
   return (codesSecteurContact as readonly string[]).includes(codeSecteur);

@@ -1,5 +1,5 @@
-import type { Attachment } from 'svelte/attachments';
 import { tick } from 'svelte';
+import type { Attachment } from 'svelte/attachments';
 
 export const quiScroll: Attachment = (element) => {
   tick().then(() =>

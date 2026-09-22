@@ -23,6 +23,7 @@ import { adaptateurHorloge } from './infra/adaptateurHorloge.js';
 import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal.js';
 import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber.js';
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi.js';
+import { AdaptateurRechercheEntrepriseGouv } from './infra/adaptateurRechercheEntrepriseGouv.js';
 import { AdaptateurStatistiqueMiniTestsMémoire } from './infra/adaptateurStatistiqueMiniTestsMémoire.js';
 import { AdaptateurStatistiqueMiniTestsPostgres } from './infra/adaptateurStatistiqueMiniTestsPostgres.js';
 import { fabriqueAdaptateurEnrichissement } from './infra/enrichissement/adaptateurEnrichissement.js';
@@ -48,7 +49,6 @@ import { EntrepotMesure } from './metier/entrepotMesure.js';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe.js';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
-import { AdaptateurRechercheEntrepriseGouv } from './infra/adaptateurRechercheEntrepriseGouv.js';
 
 const adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge);
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);

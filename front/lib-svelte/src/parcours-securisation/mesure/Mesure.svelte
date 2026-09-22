@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import CelluleExigenceNis2 from '../../nis2/tableaux/CelluleExigenceNis2.svelte';
   import { profilStore } from '../../stores/profil.store';
   import Accordeon from '../../ui/Accordeon.svelte';

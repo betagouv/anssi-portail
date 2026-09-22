@@ -1,15 +1,15 @@
 <script lang="ts">
   import axios from 'axios';
-  import { v7 as uuidv7 } from 'uuid';
-  import { type IdRôle, type Rôle, rôleParId } from '../roles';
-  import type { Scénario } from '../scenarios';
-  import Evenement from './Evenement.svelte';
-  import { type Évènement, évènementsParScénario } from './evenements';
-  import Messages from './Messages.svelte';
-  import Progression from './Progression.svelte';
-  import { type Réflexe, réflexesParRôle } from './reflexes';
   import { cubicOut } from 'svelte/easing';
   import { Tween } from 'svelte/motion';
+  import { v7 as uuidv7 } from 'uuid';
+  import { rôleParId, type IdRôle, type Rôle } from '../roles';
+  import type { Scénario } from '../scenarios';
+  import Evenement from './Evenement.svelte';
+  import { évènementsParScénario, type Évènement } from './evenements';
+  import Messages from './Messages.svelte';
+  import Progression from './Progression.svelte';
+  import { réflexesParRôle, type Réflexe } from './reflexes';
 
   type Props = {
     scénario: Scénario;

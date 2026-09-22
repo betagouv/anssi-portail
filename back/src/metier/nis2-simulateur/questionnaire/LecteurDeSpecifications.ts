@@ -1,9 +1,9 @@
 import Papa from 'papaparse';
+import { EnsembleDeSpecifications } from './EnsembleDeSpecifications.js';
+import { FabriqueDeSpecifications } from './FabriqueDeSpecifications.js';
+import { valideColonnesDuCSV, type SpecificationTexte } from './FormatDesSpecificationsCSV.js';
 
 const { parse } = Papa;
-import { FabriqueDeSpecifications } from './FabriqueDeSpecifications.js';
-import { type SpecificationTexte, valideColonnesDuCSV } from './FormatDesSpecificationsCSV.js';
-import { EnsembleDeSpecifications } from './EnsembleDeSpecifications.js';
 
 export class LecteurDeSpecifications {
   private readonly fabrique = new FabriqueDeSpecifications();

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { Cache } from '../../src/infra/cache.js';
 
 const _24_HEURES = 24 * 60 * 60;

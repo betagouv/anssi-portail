@@ -1,7 +1,7 @@
 <script lang="ts">
+  import { onMount, untrack } from 'svelte';
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { enPropriétéWebC } from '$plateforme/webComponent';
-  import { onMount, untrack } from 'svelte';
   import EncartLienVersDemandeDiagnostic from '../../demande-aide-mon-aide-cyber/EncartLienVersDemandeDiagnostic.svelte';
   import { clic } from '../../directives/actions.svelte';
   import BoutonFavori from '../../favoris/BoutonFavori.svelte';

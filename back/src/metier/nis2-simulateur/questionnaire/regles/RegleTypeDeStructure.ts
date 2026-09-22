@@ -1,9 +1,9 @@
-import { estValeurVide, type Regle } from '../Specifications.js';
-import { ErreurLectureDeRegle } from './ErreurLectureDeRegle.js';
-import type { EtatQuestionnaire } from '../../EtatQuestionnaire.js';
-import type { SpecificationTexte } from '../FormatDesSpecificationsCSV.js';
 import type { TypeStructure } from '../../ChampsSimulateur.definitions.js';
 import { contientUnParmi } from '../../commun.predicats.js';
+import type { EtatQuestionnaire } from '../../EtatQuestionnaire.js';
+import type { SpecificationTexte } from '../FormatDesSpecificationsCSV.js';
+import { estValeurVide, type Regle } from '../Specifications.js';
+import { ErreurLectureDeRegle } from './ErreurLectureDeRegle.js';
 
 export class RegleTypeDeStructure implements Regle {
   constructor(private readonly valeursAcceptees: TypeStructure) {}

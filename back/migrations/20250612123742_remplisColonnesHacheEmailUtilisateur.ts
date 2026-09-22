@@ -1,5 +1,5 @@
-import { createHmac } from 'node:crypto';
 import { createHash } from 'crypto';
+import { createHmac } from 'node:crypto';
 import type { Knex } from 'knex';
 
 const hacheAvecHMAC = (valeur: string) => {

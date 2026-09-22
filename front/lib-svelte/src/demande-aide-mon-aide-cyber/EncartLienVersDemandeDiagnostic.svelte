@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import { onMount } from 'svelte';
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import { clic } from '../directives/actions.svelte';
-  import Lien from '../ui/Lien.svelte';
   import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
+  import Lien from '../ui/Lien.svelte';
 
   let statistiques: Statistiques | undefined = $state();
   let encart = $state<HTMLDivElement | undefined>();

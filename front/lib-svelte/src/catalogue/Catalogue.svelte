@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { estServeur } from '$plateforme/environnement';
   import { onMount, untrack } from 'svelte';
+  import { estServeur } from '$plateforme/environnement';
   import { clic } from '../directives/actions.svelte';
   import ControleSegmente from '../navigation/ControleSegmente.svelte';
   import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
@@ -13,18 +13,18 @@
   import IllustrationPasDeResultatDeRecherche from '../ui/IllustrationPasDeResultatDeRecherche.svelte';
   import CarteItem from './CarteItem.svelte';
   import {
-    type BesoinCyber,
     DroitAcces,
-    type ItemCyber,
-    type RepartitionParBesoin,
     Source,
     Typologie,
+    type BesoinCyber,
+    type ItemCyber,
+    type RepartitionParBesoin,
   } from './Catalogue.types';
   import FiltreAccessibilite from './FiltreAccessibilite.svelte';
   import FiltreBesoin from './FiltreBesoin.svelte';
   import FiltreSource from './FiltreSource.svelte';
   import FiltreTypologie from './FiltreTypologie.svelte';
-  import { CollectionGuide, type Guide, Langue } from './Guide.types';
+  import { CollectionGuide, Langue, type Guide } from './Guide.types';
   import FiltreCollection from './guides/FiltreCollection.svelte';
   import FiltreLangue from './guides/FiltreLangue.svelte';
   import { guidePourCarteItem } from './guides/guide';

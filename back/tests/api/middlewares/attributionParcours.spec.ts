@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import { beforeEach, describe, it, expect, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { fabriqueAttributionParcours } from '../../../src/api/middlewares/attributionParcours.js';
+import { ParcoursChangé } from '../../../src/bus/evenements/parcoursChange.js';
 import { ParcoursRejoint } from '../../../src/bus/evenements/parcoursRejoint.js';
-import { MockBusEvenement, fabriqueBusPourLesTests } from '../../bus/busPourLesTests.js';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { ConstructeurDUtilisateur } from '../mesures/constructeurDUtilisateur.js';
-import { ParcoursChangé } from '../../../src/bus/evenements/parcoursChange.js';
 
 describe("Le middleware d'attribution de parcours", () => {
   let busEvenements: MockBusEvenement;

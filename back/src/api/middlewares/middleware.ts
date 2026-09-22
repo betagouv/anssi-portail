@@ -1,9 +1,9 @@
+import { randomBytes } from 'node:crypto';
+import fs from 'node:fs';
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import helmet from 'helmet';
 import jsonwebtoken from 'jsonwebtoken';
-import { randomBytes } from 'node:crypto';
-import fs from 'node:fs';
 import { AdaptateurEnvironnement } from '../../infra/adaptateurEnvironnement.js';
 import { AdaptateurHachage } from '../../infra/adaptateurHachage.js';
 import { AdaptateurEnrichissement } from '../../infra/enrichissement/adaptateurEnrichissement.js';
