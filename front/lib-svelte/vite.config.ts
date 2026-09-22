@@ -44,6 +44,9 @@ export default defineConfig(({ command, mode }) => {
       'import.meta.env.FEATURE_FLAG_PARCOURS_SECURISATION': JSON.stringify(
         env.FEATURE_FLAG_PARCOURS_SECURISATION ?? process.env.FEATURE_FLAG_PARCOURS_SECURISATION ?? 'false'
       ),
+      'import.meta.env.FEATURE_FLAG_BADGE_CYBERDEPART': JSON.stringify(
+        env.FEATURE_FLAG_BADGE_CYBERDEPART ?? process.env.FEATURE_FLAG_BADGE_CYBERDEPART ?? 'false'
+      ),
     },
     plugins: [
       svelte(),
