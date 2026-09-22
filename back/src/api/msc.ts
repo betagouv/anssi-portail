@@ -77,6 +77,7 @@ import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResul
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
 import { ressourceRéponsesRéflexesCyber } from './mini-tests/reflexes-cyber/ressourceReponsesReflexesCyber.js';
+import { ressourceRécompensesCyberDépartSansBadge } from './mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepartSansBadge.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -413,6 +414,11 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreRoute(
     '/api/cyberdepart/attestation_badge_cyberdepart.zip',
     ressourceRécompensesCyberDépart(configurationServeur)
+  );
+
+  enregistreRoute(
+    '/api/cyberdepart/visuels_cyberdepart.zip',
+    ressourceRécompensesCyberDépartSansBadge(configurationServeur)
   );
 
   enregistreRoute('/api/mini-tests/vrai-faux', ressourceVraiFaux(configurationServeur));
