@@ -236,5 +236,8 @@
     pointer-events: none;
     user-select: none;
     z-index: 999999;
+    @media (prefers-reduced-motion: reduce) {
+      display: none;
+    }
   }
 </style>
