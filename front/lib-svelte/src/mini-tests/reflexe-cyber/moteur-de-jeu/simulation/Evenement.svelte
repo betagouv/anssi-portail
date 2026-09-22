@@ -17,6 +17,7 @@
     surBonRéflexe: () => void;
     surMauvaisRéflexe: () => void;
     surTempsÉcoulé: () => void;
+    dernierÉvènement: boolean;
   };
 
   let {
@@ -28,6 +29,7 @@
     surBonRéflexe,
     surMauvaisRéflexe,
     surTempsÉcoulé,
+    dernierÉvènement,
   }: Props = $props();
 
   let actionsMasquées = $state(true);
@@ -120,7 +122,11 @@
   {/if}
 
   {#if statutRéflexe !== 'en attente'}
-    <Bouton libelle="Événement suivant" taille="md" surClic={passeÉvènementSuivant} />
+    <Bouton
+      libelle={dernierÉvènement ? 'Obtenir mon résultat' : 'Événement suivant'}
+      taille="md"
+      surClic={passeÉvènementSuivant}
+    />
   {/if}
 {/if}
 
