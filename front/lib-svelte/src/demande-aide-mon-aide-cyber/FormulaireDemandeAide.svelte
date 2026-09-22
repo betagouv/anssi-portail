@@ -183,7 +183,11 @@
     </div>
 
     {#if erreurs}
-      <Alerte type="ERREUR" titre="Une erreur est survenue" message={erreurs} />
+      <div class="alerte-erreur">
+        <Alerte type="erreur" taille="md" titre="Une erreur est survenue">
+          {erreurs}
+        </Alerte>
+      </div>
     {/if}
   {/if}
 </Formulaire>
@@ -257,5 +261,9 @@
 
   dsfr-checkbox {
     margin-bottom: 32px;
+  }
+
+  .alerte-erreur {
+    margin-top: 32px;
   }
 </style>
