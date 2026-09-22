@@ -5,8 +5,24 @@
 
   let svgEl = $state<SVGSVGElement>();
 
+  let préfèreRéduireLesAnimation = $state(false);
+
   $effect(() => {
-    if (enPause) {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    préfèreRéduireLesAnimation = mediaQuery.matches;
+
+    const surChangement = (évènement: MediaQueryListEvent) => {
+      préfèreRéduireLesAnimation = évènement.matches;
+    };
+
+    mediaQuery.addEventListener('change', surChangement);
+    return () => mediaQuery.removeEventListener('change', surChangement);
+  });
+
+  const estEnPause = $derived(enPause || préfèreRéduireLesAnimation);
+
+  $effect(() => {
+    if (estEnPause) {
       svgEl?.pauseAnimations();
     } else {
       svgEl?.unpauseAnimations();
