@@ -6,6 +6,7 @@
   import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';
   import IllustrationTuto from './animation/IllustrationTuto.svelte';
   import IllustrationBadge from './animation/IllustrationBadge.svelte';
+  import { afficheBadgeCyberdépart } from '$plateforme/environnement';
 
   interface Props {
     titre: string;
@@ -34,7 +35,7 @@
       rich: true,
     },
     {
-      titre: 'Décrochez votre badge Cyberdépart',
+      titre: afficheBadgeCyberdépart ? 'Décrochez votre badge Cyberdépart' : 'Validez votre Cyberdépart',
       description: "Un premier marqueur d'engagement pour votre sécurité.",
       badge: {
         label: 'à la clé',
