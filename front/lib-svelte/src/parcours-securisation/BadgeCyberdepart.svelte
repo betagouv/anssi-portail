@@ -1,24 +1,29 @@
 <script lang="ts">
+  import { afficheBadgeCyberdépart } from '$plateforme/environnement';
   import BoutonPartageBadgeCyberdepart from './BoutonPartageBadgeCyberdepart.svelte';
+  const titre = afficheBadgeCyberdépart ? 'Badge Cyberdépart' : 'Vous avez validé votre Cyberdépart\u00a0!';
+  const description = afficheBadgeCyberdépart
+    ? `Ce badge témoigne de l’engagement de votre organisation dans une première démarche de sécurisation. Il valorise les
+      premières actions mises en place pour réduire les risques cyber les plus fréquents.`
+    : `Cette étape témoigne de l’engagement de votre organisation dans une première démarche de sécurisation. Elle valorise les
+      premières actions mises en place pour réduire les risques cyber les plus fréquents.`;
+  const libelleCta = afficheBadgeCyberdépart ? 'Télécharger mon attestation' : 'Télécharger les visuels';
+  const urlBouton = afficheBadgeCyberdépart
+    ? '/api/cyberdepart/attestation_badge_cyberdepart.zip'
+    : '/api/cyberdepart/visuels_cyberdepart.zip';
 </script>
 
 <div class="badge">
-  <img
-    src="/assets/images/parcours-securisation/badge-cyberdepart.svg"
-    width="391"
-    height="220"
-    alt="Badge Cyberdépart "
-  />
+  <img src="/assets/images/parcours-securisation/visuel-cyberdepart.svg" width="391" height="220" alt={titre} />
   <div class="explications">
-    <h6>Badge Cyberdépart</h6>
+    <h6>{titre}</h6>
     <p class="texte-standard-md">
-      Ce badge témoigne de l’engagement de votre organisation dans une première démarche de sécurisation. Il valorise
-      les 1ères actions mises en place pour réduire les risques cyber les plus fréquents.
+      {description}
     </p>
     <div class="actions">
       <BoutonPartageBadgeCyberdepart typeDuBouton="secondaire" />
       <dsfr-button
-        label="Télécharger mon attestation"
+        label={libelleCta}
         kind="secondary"
         size="md"
         has-icon={true}
@@ -26,7 +31,7 @@
         icon-place="left"
         markup="a"
         type="button"
-        href="/api/cyberdepart/attestation_badge_cyberdepart.zip"
+        href={urlBouton}
         centered
       ></dsfr-button>
     </div>

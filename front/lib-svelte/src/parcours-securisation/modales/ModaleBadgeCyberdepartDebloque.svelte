@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { afficheBadgeCyberdépart } from '$plateforme/environnement';
   import Bouton from '../../ui/Bouton.svelte';
   import CanonAConfetti from '../../ui/CanonAConfetti.svelte';
   import Modale from '../../ui/Modale.svelte';
@@ -9,19 +10,20 @@
   };
 
   let { estOuverte = $bindable() }: Props = $props();
+  const sujet = afficheBadgeCyberdépart ? 'Ce badge' : 'Cette étape';
 </script>
 
 <Modale bind:estOuverte titre="🎉 Bravo, vous avez pris votre Cyberdépart">
   <div class="corps">
     <img
-      src="/assets/images/parcours-securisation/badge-cyberdepart.svg"
+      src="/assets/images/parcours-securisation/visuel-cyberdepart.svg"
       width="560"
       height="320"
-      alt="Badge Cyberdépart"
+      alt="Visuel Cyberdépart"
     />
     <p class="texte-standard-md">
-      Ce badge témoigne de l’engagement de votre organisation dans une démarche de sécurisation, au travers de premières
-      actions mises en place pour réduire les risques cyber les plus fréquents.
+      {sujet} témoigne de l’engagement de votre organisation dans une démarche de sécurisation, au travers de premières actions
+      mises en place pour réduire les risques cyber les plus fréquents.
     </p>
   </div>
   {#snippet actions()}

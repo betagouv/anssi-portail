@@ -1,0 +1,117 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
+import AdmZip from 'adm-zip';
+import { Express } from 'express';
+import sharp from 'sharp';
+import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { ServiceRécompensesCyberDépart } from '../../../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
+import { creeServeur } from '../../../../src/api/msc.js';
+import { EntrepotUtilisateur } from '../../../../src/metier/entrepotUtilisateur.js';
+import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
+import { EntrepôtModuleMémoire } from '../../../persistance/EntrepôtModuleMémoire.js';
+import { encodeSession } from '../../cookie.js';
+import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from '../../fauxObjets.js';
+import { fabriqueModuleCyberdépart, jeanneDupont } from '../../objetsPretsALEmploi.js';
+import { mesureDeTest } from '../constructeurDeMesure.js';
+
+describe('La ressource des récompenses CyberDépart sans le badge', () => {
+  let serveur: Express;
+  let entrepotUtilisateur: EntrepotUtilisateur;
+  let entrepôtModule: EntrepôtModuleMémoire;
+  let serviceRécompensesCyberDépart: ServiceRécompensesCyberDépart;
+  const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
+
+  const ID_MODULE_CYBERDÉPART = 1;
+  const mesures = [1, 2, 3, 4, 5].map((id) =>
+    mesureDeTest().avecIdModule(ID_MODULE_CYBERDÉPART).avecLId(`m${id}`).construis()
+  );
+
+  beforeEach(async () => {
+    entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+    entrepôtModule = new EntrepôtModuleMémoire();
+    serviceRécompensesCyberDépart = new ServiceRécompensesCyberDépart(fauxFournisseurDeChemin);
+    serveur = creeServeur({
+      ...configurationDeTestDuServeur,
+      entrepotUtilisateur,
+      entrepôtModule,
+      serviceRécompensesCyberDépart,
+      fournisseurChemin: fauxFournisseurDeChemin,
+    });
+
+    await entrepotUtilisateur.ajoute(jeanneDupont);
+    const moduleCyberdépart = fabriqueModuleCyberdépart();
+
+    moduleCyberdépart.mesures = mesures;
+    await entrepôtModule.ajoute(moduleCyberdépart);
+  });
+
+  it('renvoie un 401 pour une requête non-connectée', async () => {
+    const reponse = await request(serveur).get('/api/cyberdepart/visuels_cyberdepart.zip');
+
+    expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
+  });
+
+  it("renvoie un 403 si l'utilisateur tente d'obtenir les récompenses sans avoir suffisamment complété le module", async () => {
+    jeanneDupont.mesuresPrisesEnCompte = [];
+
+    const reponse = await request(serveur)
+      .get('/api/cyberdepart/visuels_cyberdepart.zip')
+      .set('Cookie', cookieJeanneDupont);
+
+    expect(reponse.status).toBe(HttpStatusCode.Forbidden);
+  });
+
+  it('renvoie un zip', async () => {
+    jeanneDupont.mesuresPrisesEnCompte = mesures;
+    const reponse = await request(serveur)
+      .get('/api/cyberdepart/visuels_cyberdepart.zip')
+      .set('Cookie', cookieJeanneDupont);
+
+    expect(reponse.status).toBe(HttpStatusCode.Ok);
+    expect(reponse.headers['content-type']).toBe('application/zip');
+    expect(reponse.headers['content-disposition']).toBe('attachment; filename="visuels_cyberdepart.zip"');
+  });
+
+  describe('L\'archive "visuels_cyberdepart.zip"', () => {
+    const requêteEntréeArchive = async (chemin: string, nomFichier: string): Promise<AdmZip.IZipEntry | undefined> => {
+      const reponse = await request(serveur).get(chemin).set('Cookie', cookieJeanneDupont).responseType('blob');
+
+      const archive = new AdmZip(reponse.body);
+      return archive.getEntries().find((entrée) => entrée.name === nomFichier);
+    };
+
+    const extraisMetadonnées = async (entrée: AdmZip.IZipEntry) => await sharp(entrée.getData()).metadata();
+
+    it('contient la bannière au format PNG', async () => {
+      jeanneDupont.mesuresPrisesEnCompte = mesures;
+
+      const bannierePng = await requêteEntréeArchive('/api/cyberdepart/visuels_cyberdepart.zip', 'banniere.png');
+
+      expect(bannierePng).toBeDefined();
+      const metadonnées = await extraisMetadonnées(bannierePng!);
+      expect(metadonnées.format).toBe('png');
+      expect(metadonnées.size).not.toBe(0);
+    });
+
+    it('la taille de la bannière est correcte', async () => {
+      jeanneDupont.mesuresPrisesEnCompte = mesures;
+      const bannierePng = await requêteEntréeArchive('/api/cyberdepart/visuels_cyberdepart.zip', 'banniere.png');
+
+      expect(bannierePng).toBeDefined();
+      const metadonnées = await extraisMetadonnées(bannierePng!);
+      expect(metadonnées.width).toBe(996);
+      expect(metadonnées.height).toBe(420);
+    });
+
+    it('contient le visuel au format PNG', async () => {
+      jeanneDupont.mesuresPrisesEnCompte = mesures;
+
+      const visuelPng = await requêteEntréeArchive('/api/cyberdepart/visuels_cyberdepart.zip', 'visuel.png');
+
+      expect(visuelPng).toBeDefined();
+      const metadonnées = await extraisMetadonnées(visuelPng!);
+      expect(metadonnées.format).toBe('png');
+      expect(metadonnées.size).not.toBe(0);
+    });
+  });
+});
