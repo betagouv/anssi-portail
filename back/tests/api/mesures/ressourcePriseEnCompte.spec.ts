@@ -1,24 +1,24 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { MesurePriseEnCompte } from '../../../src/bus/evenements/mesurePriseEnCompte.js';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
 import { Module } from '../../../src/metier/module.js';
+import { Parcours } from '../../../src/metier/parcours.js';
 import { Utilisateur } from '../../../src/metier/utilisateur.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
+import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire.js';
 import { EntrepotPriseEnCompteMemoire } from '../../persistance/EntrepotPriseEnCompteMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
-import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire.js';
 import { encodeSession } from '../cookie.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
 import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi.js';
-import { ConstructeurDeModule } from './constructeurDeModule.js';
 import { mesureDeTest } from './constructeurDeMesure.js';
+import { ConstructeurDeModule } from './constructeurDeModule.js';
 import { utilisateurDeTest } from './constructeurDUtilisateur.js';
-import { Parcours } from '../../../src/metier/parcours.js';
 
 describe("La ressource de prise en compte d'une mesure", () => {
   let serveur: Express;

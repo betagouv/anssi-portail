@@ -1,9 +1,9 @@
 import fs from 'node:fs';
-import { ConsignateurDeComparaisonDeGuides } from './infrastructure/guides/consignateurDeComparaisonDeGuides';
-import { ComparateurDeGuides } from './metier/guides/comparateurDeGuides';
-import { EntrepotGuideGrist } from './infrastructure/guides/entrepotGuideGrist';
-import { adaptateurEnvironnement } from './infrastructure/adaptateurEnvironnement';
 import axios from '@anssi-portail/axios';
+import { adaptateurEnvironnement } from './infrastructure/adaptateurEnvironnement';
+import { ConsignateurDeComparaisonDeGuides } from './infrastructure/guides/consignateurDeComparaisonDeGuides';
+import { EntrepotGuideGrist } from './infrastructure/guides/entrepotGuideGrist';
+import { ComparateurDeGuides } from './metier/guides/comparateurDeGuides';
 
 const summaryFile = process.env.GITHUB_STEP_SUMMARY ?? 'rapport-guides.md';
 

@@ -1,10 +1,10 @@
+import { contientUnParmi } from '../../commun.predicats.js';
+import type { EtatQuestionnaire } from '../../EtatQuestionnaire.js';
+import { libellesSecteursActivite } from '../../LibellesSecteursActivite.js';
+import type { SecteurActivite } from '../../SecteurActivite.definitions.js';
+import type { SpecificationTexte } from '../FormatDesSpecificationsCSV.js';
 import { estValeurVide, type Regle } from '../Specifications.js';
 import { ErreurLectureDeRegle } from './ErreurLectureDeRegle.js';
-import type { EtatQuestionnaire } from '../../EtatQuestionnaire.js';
-import type { SpecificationTexte } from '../FormatDesSpecificationsCSV.js';
-import type { SecteurActivite } from '../../SecteurActivite.definitions.js';
-import { contientUnParmi } from '../../commun.predicats.js';
-import { libellesSecteursActivite } from '../../LibellesSecteursActivite.js';
 
 export class RegleSecteurs implements Regle {
   constructor(private readonly secteurActivite: SecteurActivite) {}

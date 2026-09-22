@@ -1,12 +1,12 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it, expect } from 'vitest';
-import request from 'supertest';
 import { Express } from 'express';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
+import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc.js';
+import { SimulationNis2Terminee } from '../../../src/bus/evenements/simulationNis2Terminee.js';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
-import { SimulationNis2Terminee } from '../../../src/bus/evenements/simulationNis2Terminee.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
 
 describe('La ressource qui gère le simulateur NIS2', () => {
   let serveur: Express;

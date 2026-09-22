@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { clic } from '../directives/actions.svelte';
   import { afficheParcoursSecurisation } from '$plateforme/environnement';
-  import Alternatives from '../ui/Alternatives.svelte';
+  import { clic } from '../directives/actions.svelte';
   import EncartPromotionParcoursComplet from '../parcours-securisation/EncartPromotionParcoursComplet.svelte';
   import TagProgrammeGratuit from '../parcours-securisation/TagProgrammeGratuit.svelte';
+  import Alternatives from '../ui/Alternatives.svelte';
 
   const connexion = () => {
     sessionStorage.setItem('pagePostConnexion', '/ma-maturite#comparaison');

@@ -1,9 +1,9 @@
-import axios from '@anssi-portail/axios';
 import fs from 'node:fs';
+import axios from '@anssi-portail/axios';
 import { adaptateurEnvironnement } from './infrastructure/adaptateurEnvironnement';
+import { ConsignateurDeComparaisonDeFinancements } from './infrastructure/financements/consignateurDeComparaisonDeFinancements';
 import { EntrepotFinancementGrist } from './infrastructure/financements/entrepotFinancementGrist';
 import { ComparateurDeFinancements } from './metier/financements/comparateurDeFinancements';
-import { ConsignateurDeComparaisonDeFinancements } from './infrastructure/financements/consignateurDeComparaisonDeFinancements';
 
 const summaryFile = process.env.GITHUB_STEP_SUMMARY ?? 'rapport-financements.md';
 

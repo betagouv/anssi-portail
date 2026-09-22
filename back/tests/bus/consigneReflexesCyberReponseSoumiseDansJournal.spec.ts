@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
+import { consigneRéflexesCyberReponseSoumiseDansJournal } from '../../src/bus/consigneReflexesCyberReponseSoumiseDansJournal.js';
 import { SimulationRéflexesCyberRéponseSoumise } from '../../src/bus/evenements/simulationReflexesCyberReponseSoumise.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
-import { consigneRéflexesCyberReponseSoumiseDansJournal } from '../../src/bus/consigneReflexesCyberReponseSoumiseDansJournal.js';
 
 describe('L’abonnement qui consigne une réponse à une question de la simulation réflexes cyber dans le journal', () => {
   it('consigne un évènement SimulationRéflexesCyberRéponseSoumise pour un utilisateur identifié', async () => {

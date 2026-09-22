@@ -1,10 +1,10 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur.js';
-import { detruisSession } from './session.js';
-import { corpsVide, valideCorpsRequete } from './zod.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { estUrlRedirectionApresConnexionAutorisee } from './routesPagesConnectees.js';
+import { detruisSession } from './session.js';
+import { corpsVide, valideCorpsRequete } from './zod.js';
 
 const ressourcePageConnexion = ({ fournisseurChemin }: ConfigurationServeur): Router => {
   const routeur = Router();

@@ -1,8 +1,8 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import * as Sentry from '@sentry/node';
 import { NextFunction, Request, Response } from 'express';
 import expressIpFilter from 'express-ipfilter';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement.js';
-import { HttpStatusCode } from '@anssi-portail/axios';
 
 const { IpDeniedError } = expressIpFilter;
 

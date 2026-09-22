@@ -6,6 +6,7 @@ import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
 import { schemaRessourceFavoris } from './ressourceFavoris.schema.js';
+
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 const ressourceFavoris = ({

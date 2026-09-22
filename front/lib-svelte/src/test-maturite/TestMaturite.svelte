@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { calculeIdNiveau } from '../niveaux-maturite/calculeIdNiveau';
   import { profilStore } from '../stores/profil.store';
   import Bouton from '../ui/Bouton.svelte';

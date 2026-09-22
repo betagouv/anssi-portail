@@ -1,6 +1,5 @@
 import { get, writable } from 'svelte/store';
-import type { Guide } from '../../Guide.types';
-import type { Langue } from '../../Guide.types';
+import type { Guide, Langue } from '../../Guide.types';
 
 const selectionDeLangue = writable<Langue[]>([]);
 

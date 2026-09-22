@@ -1,9 +1,9 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { NextFunction, Request, Response, Router } from 'express';
+import { guidePresentation } from '../../presentation/guides/guidePresentation.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideRequete } from '../zod.js';
-import { guidePresentation } from '../../presentation/guides/guidePresentation.js';
 import { schemaRessourceGuides } from './ressourceGuides.schema.js';
 
 const ressourceGuides = ({ adaptateurEnvironnement, entrepotGuide, entrepotGuideTravail }: ConfigurationServeur) => {

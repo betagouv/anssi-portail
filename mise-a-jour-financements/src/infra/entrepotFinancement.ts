@@ -1,8 +1,8 @@
 import axios from '@anssi-portail/axios';
 import { Financement } from '../metier/financement';
-import { ClientHttp } from './clientHttp';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { aseptiseHtml } from './aseptisationDuHtml';
+import { ClientHttp } from './clientHttp';
 
 export interface EntrepotFinancement {
   tous(): Promise<Financement[]>;

@@ -1,8 +1,8 @@
 <script lang="ts">
   import { untrack } from 'svelte';
+  import { clic } from '../../directives/actions.svelte';
   import type { Mesure } from './../mesure';
   import ModaleTutoriel from './ModaleTutoriel.svelte';
-  import { clic } from '../../directives/actions.svelte';
 
   const { mesure }: { mesure: Mesure } = $props();
   let étatDesModales: boolean[] = $state(untrack(() => Array(mesure.tutoriels.length).fill(false)));

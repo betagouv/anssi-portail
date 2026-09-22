@@ -1,8 +1,8 @@
 <script lang="ts">
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import DemandeDiagnosticSimplifiee from '../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
   import CarrouselDesInterlocuteurs from '../interlocuteurs/CarrouselDesInterlocuteurs.svelte';
   import EquipeBizDev from '../interlocuteurs/EquipeBizDev.svelte';
-  import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import EncartPromotionParcoursBasique from '../parcours-securisation/EncartPromotionParcoursBasique.svelte';
   import TagProgrammeGratuit from '../parcours-securisation/TagProgrammeGratuit.svelte';
 

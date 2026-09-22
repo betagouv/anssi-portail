@@ -1,6 +1,6 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { BesoinCyber, DroitAcces, type ItemCyber, Source, Typologie } from '../../../src/catalogue/Catalogue.types';
+import { BesoinCyber, DroitAcces, Source, Typologie, type ItemCyber } from '../../../src/catalogue/Catalogue.types';
 import { catalogueStore } from '../../../src/catalogue/stores/catalogue.store';
 import { catalogueFiltre } from '../../../src/catalogue/stores/catalogueFiltre.store';
 import { limitationRecherche } from '../../../src/catalogue/stores/limitationRecherche';

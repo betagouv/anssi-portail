@@ -1,4 +1,3 @@
-import type { UnionDe } from './UnionDe.js';
 import type { Activite } from './Activite.definitions.js';
 import {
   ValeursappartenancePaysUnionEuropeenne,
@@ -10,6 +9,7 @@ import {
 } from './ChampsSimulateur.valeurs.js';
 import type { SecteurActivite } from './SecteurActivite.definitions.js';
 import type { SousSecteurActivite } from './SousSecteurActivite.definitions.js';
+import type { UnionDe } from './UnionDe.js';
 
 export type DesignationOperateurServicesEssentiels = UnionDe<typeof ValeursDesignationOperateurServicesEssentiels>;
 export type AppartenancePaysUnionEuropeenne = UnionDe<typeof ValeursappartenancePaysUnionEuropeenne>;

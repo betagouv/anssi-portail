@@ -1,10 +1,10 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
+import { generateurDocument } from '../../../infra/generateurDocument.js';
 import { Utilisateur } from '../../../metier/utilisateur.js';
 import { ConfigurationServeur } from '../../configurationServeur.js';
 import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../../zod.js';
-import { generateurDocument } from '../../../infra/generateurDocument.js';
 
 export const ressourceRécompensesCyberDépart = ({
   serviceRécompensesCyberDépart,

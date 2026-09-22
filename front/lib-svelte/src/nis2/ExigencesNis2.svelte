@@ -5,7 +5,7 @@
   import Lien from '../ui/Lien.svelte';
   import { détecteRendu } from '../utils/rendu.svelte';
   import Avertissements from './Avertissements.svelte';
-  import { type Exigence, fabriqueDExigence, type ReferentielSelectionne } from './exigence.type';
+  import { fabriqueDExigence, type Exigence, type ReferentielSelectionne } from './exigence.type';
   import Panneau from './panneau/Panneau.svelte';
   import { exigencesStore } from './stores/exigences.store';
   import { exigencesFiltrees } from './stores/exigencesFiltrees.store';

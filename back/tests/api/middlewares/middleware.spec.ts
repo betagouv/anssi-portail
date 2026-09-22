@@ -1,15 +1,15 @@
+import { OutgoingHttpHeaders } from 'node:http';
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
 import { createRequest, createResponse } from 'node-mocks-http';
-import { OutgoingHttpHeaders } from 'node:http';
-import { beforeEach, describe, it, expect, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT.js';
 import { FournisseurChemin } from '../../../src/api/fournisseurChemin.js';
 import { fabriqueMiddleware, Middleware } from '../../../src/api/middlewares/middleware.js';
-import { AdaptateurEnrichissement } from '../../../src/infra/enrichissement/adaptateurEnrichissement.js';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
 import { AdaptateurHachage } from '../../../src/infra/adaptateurHachage.js';
+import { AdaptateurEnrichissement } from '../../../src/infra/enrichissement/adaptateurEnrichissement.js';
 import { Utilisateur } from '../../../src/metier/utilisateur.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import {

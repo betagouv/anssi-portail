@@ -1,7 +1,7 @@
 import { CmsCrisp } from '@lab-anssi/lib';
 import { JSDOM } from 'jsdom';
-import { ChargeurDeProps } from './chargeurDeProps.js';
 import { AdaptateurEnvironnement } from '../../adaptateurEnvironnement.js';
+import { ChargeurDeProps } from './chargeurDeProps.js';
 
 export class ChargeurCrisp implements ChargeurDeProps {
   constructor(

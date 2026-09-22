@@ -1,5 +1,5 @@
-import type { IdScénario } from '../scenarios';
 import type { IdRôle } from '../roles';
+import type { IdScénario } from '../scenarios';
 
 export type ÉvènementsParScénario = {
   [idScénario in IdScénario]: {

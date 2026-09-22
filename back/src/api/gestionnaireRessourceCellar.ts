@@ -1,6 +1,6 @@
+import { pipeline } from 'node:stream/promises';
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { NextFunction, Request, Response } from 'express';
-import { pipeline } from 'node:stream/promises';
 import { AdaptateurCellar, CleDuBucket } from '../infra/adaptateurCellar.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 

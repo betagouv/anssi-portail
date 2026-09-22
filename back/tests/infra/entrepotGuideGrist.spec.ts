@@ -1,4 +1,4 @@
-import { beforeEach, describe, it, expect } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { EntrepotGuideGrist, GuideGrist } from '../../src/infra/entrepotGuideGrist.js';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';

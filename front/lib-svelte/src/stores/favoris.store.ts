@@ -1,5 +1,5 @@
-import { derived, writable } from 'svelte/store';
 import axios from 'axios';
+import { derived, writable } from 'svelte/store';
 import { profilStore } from './profil.store';
 
 export type ListeFavoris = string[];

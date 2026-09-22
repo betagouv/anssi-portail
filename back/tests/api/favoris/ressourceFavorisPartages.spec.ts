@@ -1,8 +1,8 @@
+import { randomUUID } from 'node:crypto';
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import { randomUUID } from 'node:crypto';
-import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
 import { EntrepotFavoriMemoire } from '../../persistance/entrepotFavoriMemoire.js';

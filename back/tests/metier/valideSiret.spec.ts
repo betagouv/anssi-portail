@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { valideSiret } from '../../src/metier/valideSiret.js';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
 

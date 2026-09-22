@@ -1,15 +1,15 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc.js';
-import { configurationDeTestDuServeur } from '../fauxObjets.js';
-import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
-import { encodeSession } from '../cookie.js';
-import { fabriqueModuleCyberdépart, jeanneDupont } from '../objetsPretsALEmploi.js';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
+import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
 import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire.js';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
+import { encodeSession } from '../cookie.js';
+import { configurationDeTestDuServeur } from '../fauxObjets.js';
+import { fabriqueModuleCyberdépart, jeanneDupont } from '../objetsPretsALEmploi.js';
 import { mesureDeTest } from './constructeurDeMesure.js';
 
 describe('La ressource des mesures en CSV', () => {

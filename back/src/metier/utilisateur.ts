@@ -13,7 +13,6 @@ import { EntrepotPriseEnCompte } from './entrepotPriseEnCompte.js';
 import { Mesure } from './mesure.js';
 import { Module } from './module.js';
 import { MotifChangementParcours, Parcours } from './parcours.js';
-
 import { PriseEnCompte } from './PriseEnCompte.js';
 import { CodeRegion, estCodeRegion } from './referentielRegions.js';
 import { CodeSecteur, estCodeSecteur } from './referentielSecteurs.js';

@@ -7,9 +7,9 @@ import { SimulationRéflexesCyberRéponseSoumise } from '../../../../src/bus/eve
 import { SimulationRéflexesCyberTerminé } from '../../../../src/bus/evenements/simulationReflexesCyberTermine.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
+import { encodeSession } from '../../cookie.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
 import { jeanneDupont } from '../../objetsPretsALEmploi.js';
-import { encodeSession } from '../../cookie.js';
 
 describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
   let serveur: Express;

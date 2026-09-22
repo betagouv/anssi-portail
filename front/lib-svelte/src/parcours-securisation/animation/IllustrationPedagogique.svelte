@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { type Component, untrack } from 'svelte';
+  import { untrack, type Component } from 'svelte';
   import IllustrationAnimee from '../../accueil/animation/IllustrationAnimee.svelte';
   import SectionPedagogique from './SectionPedagogique.svelte';
 

@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { ChargeurFilAriane } from '../../../../src/infra/enrichissement/chargementProprietes/chargeurFilAriane.js';
 
 describe("Le chargeur de propriétés du fil d'Ariane", () => {

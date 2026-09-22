@@ -1,8 +1,8 @@
-import { EntrepotFinancementGrist } from './infra/entrepotFinancement';
-import { ComparateurFinancement } from './metier/comparateurFinancement';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
 import { AdapateurAidesEntreprisesAPI } from './infra/adaptateurSourceExterne';
+import { EntrepotFinancementGrist } from './infra/entrepotFinancement';
 import { GenerateurDeRapportsFichier } from './infra/generateurDeRapportsFichier';
+import { ComparateurFinancement } from './metier/comparateurFinancement';
 
 const entrepotFinancementGrist = new EntrepotFinancementGrist({
   adaptateurEnvironnement,

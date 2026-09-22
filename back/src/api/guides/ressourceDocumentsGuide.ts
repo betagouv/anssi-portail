@@ -1,7 +1,7 @@
+import { join } from 'path';
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { NextFunction, Request, RequestHandler, Response, Router } from 'express';
 import multer from 'multer';
-import { join } from 'path';
 import z from 'zod';
 import { selectionneConfigCellarDeposePourUnBucket } from '../../infra/adaptateurCellar.js';
 import { EntrepotGuideTravail } from '../../metier/entrepotGuideTravail.js';
@@ -10,6 +10,7 @@ import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete, valideRequete } from '../zod.js';
 import { schemaAjoutDocumentGuide } from './ressourceDocumentsGuide.schema.js';
+
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 const valideAutorisation = (): RequestHandler => {

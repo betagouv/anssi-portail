@@ -17,6 +17,7 @@ import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { adaptateurMonAideCyberVide } from '../../src/infra/adaptateurMonAideCyberVide.js';
 import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi.js';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
+import { AdaptateurStatistiqueMiniTestsMémoire } from '../../src/infra/adaptateurStatistiqueMiniTestsMémoire.js';
 import { AdaptateurEnrichissement } from '../../src/infra/enrichissement/adaptateurEnrichissement.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js';
@@ -29,14 +30,13 @@ import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMe
 import { EntrepotGuideMemoire } from '../persistance/entrepotGuideMemoire.js';
 import { EntrepotGuideTravailMemoire } from '../persistance/entrepotGuideTravailMemoire.js';
 import { EntrepotMesureMemoire } from '../persistance/entrepotMesureMemoire.js';
+import { EntrepôtModuleMémoire } from '../persistance/EntrepôtModuleMémoire.js';
 import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire.js';
+import { EntrepôtQuestionVraieFausseMémoire } from '../persistance/entrepotQuestionVraieFausseMemoire.js';
 import { EntrepotReactionMiniTestMemoire } from '../persistance/entrepotReactionMiniTestMemoire.js';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire.js';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
-import { EntrepôtModuleMémoire } from '../persistance/EntrepôtModuleMémoire.js';
-import { EntrepôtQuestionVraieFausseMémoire } from '../persistance/entrepotQuestionVraieFausseMemoire.js';
-import { AdaptateurStatistiqueMiniTestsMémoire } from '../../src/infra/adaptateurStatistiqueMiniTestsMémoire.js';
 
 export const ressourceFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.html');
 export const typstFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.typ');

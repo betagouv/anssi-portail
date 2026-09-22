@@ -1,10 +1,10 @@
 /// <reference types="vitest/config" />
 
-import { sentryVitePlugin } from '@sentry/vite-plugin';
-import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { networkInterfaces } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { sentryVitePlugin } from '@sentry/vite-plugin';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { createLogger, defineConfig, loadEnv } from 'vite';
 import { plateformePlugin } from './src/plateforme/plateforme.plugin.js';
 import { injecteNonce } from './src/utils/injecteNonce.plugin.js';

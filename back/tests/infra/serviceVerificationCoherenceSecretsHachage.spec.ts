@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { EntrepotSecretHachage } from '../../src/infra/entrepotSecretHachagePostgres.js';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from '../../src/infra/serviceVerificationCoherenceSecretsHachage.js';

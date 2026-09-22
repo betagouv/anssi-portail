@@ -1,9 +1,10 @@
-import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import cssnano from 'cssnano';
 import { readFileSync } from 'node:fs';
 import path, { resolve } from 'node:path';
+import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import cssnano from 'cssnano';
 import { defineConfig } from 'vite';
 import { remplaceVersionsDansPhp } from './plugin/remplaceVersionsDansPhp.js';
+
 const dirname = import.meta.dirname;
 
 const rootPkgPath = resolve(dirname, '..', '..', 'package.json');

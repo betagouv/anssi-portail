@@ -8,9 +8,9 @@
   import Bouton from './Bouton.svelte';
   import {
     ajouteRetour,
-    type RetourUtilisateur,
     récupèreRetour,
     supprimeRetour,
+    type RetourUtilisateur,
   } from './retourUtilisateurSurContenu.store';
 
   type Props = {

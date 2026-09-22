@@ -1,8 +1,8 @@
+import { readFileSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
 import { Canvas, GlobalFonts } from '@napi-rs/canvas';
 import sharp from 'sharp';
 import { FournisseurChemin } from '../../fournisseurChemin.js';
-import { readFileSync } from 'node:fs';
-import { readFile } from 'node:fs/promises';
 
 const LARGEUR_BANNIERE = 996;
 const HAUTEUR_BANNIERE = 420;

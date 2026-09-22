@@ -2,7 +2,6 @@ import axios, { AxiosError } from '@anssi-portail/axios';
 import { regions } from '../metier/referentielRegions.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { AdaptateurRechercheEntreprise, ResultatRechercheEntreprise } from './adaptateurRechercheEntreprise.js';
-
 import { Cache } from './cache.js';
 
 const TRENTE_MINUTES = 60 * 30;

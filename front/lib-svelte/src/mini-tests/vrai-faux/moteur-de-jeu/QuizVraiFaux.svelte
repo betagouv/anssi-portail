@@ -17,12 +17,12 @@
   import { onMount } from 'svelte';
   import { v7 as uuidv7 } from 'uuid';
   import { publieRéponseQuestionnaireVraiFaux } from '../../../passerelles/mini-tests/publicationRéponses';
+  import EnteteAutonome from '../../../ui/EnteteAutonome.svelte';
+  import { fabriqueFilAriane } from '../../../ui/filAriane';
   import FilAriane from '../../../ui/FilAriane.svelte';
-  import ScoreFinalQuizVraiFaux from './ScoreFinalQuizVraiFaux.svelte';
   import Question from './question/Question.svelte';
   import ReponseVraiFaux from './ReponseVraiFaux.svelte';
-  import { fabriqueFilAriane } from '../../../ui/filAriane';
-  import EnteteAutonome from '../../../ui/EnteteAutonome.svelte';
+  import ScoreFinalQuizVraiFaux from './ScoreFinalQuizVraiFaux.svelte';
 
   let { urlBase = '', mode: modeWebc }: { urlBase?: string; mode?: 'autonome' } = $props();
 

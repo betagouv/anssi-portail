@@ -6,6 +6,7 @@ import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { schemaRessourceRetoursExperience } from './ressourceRetoursExperience.schema.js';
 import { valideCorpsRequete } from './zod.js';
+
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 export const ressourceRetoursExperience = ({ messagerieInstantanee, busEvenements }: ConfigurationServeur): Router => {

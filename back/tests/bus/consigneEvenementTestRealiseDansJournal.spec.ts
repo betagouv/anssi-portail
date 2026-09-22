@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { consigneEvenementTestRealiseDansJournal } from '../../src/bus/consigneEvenementTestRealiseDansJournal.js';
 import { TestRealise } from '../../src/bus/evenements/testRealise.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';

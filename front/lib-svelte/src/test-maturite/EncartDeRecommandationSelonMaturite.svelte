@@ -1,12 +1,12 @@
 <script lang="ts">
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import type { NiveauMaturite } from '../niveaux-maturite/NiveauxMaturite.type';
   import { profilStore } from '../stores/profil.store';
+  import Alternatives from '../ui/Alternatives.svelte';
   import Separateur from '../ui/Separateur.svelte';
   import EncartDeRecommandationMaturiteFaible from './EncartDeRecommandationMaturiteFaible.svelte';
   import EncartDeRecommandationMaturiteForte from './EncartDeRecommandationMaturiteForte.svelte';
   import MessageNonResponsabilite from './MessageNonResponsabilite.svelte';
-  import { afficheParcoursSecurisation } from '$plateforme/environnement';
-  import Alternatives from '../ui/Alternatives.svelte';
 
   interface Props {
     niveau: NiveauMaturite;

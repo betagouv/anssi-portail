@@ -1,7 +1,7 @@
 <script lang="ts">
   import { clic } from '../../directives/actions.svelte';
-  import { exigencesFiltrees } from '../stores/exigencesFiltrees.store';
   import IllustrationPasDeResultatDeRecherche from '../../ui/IllustrationPasDeResultatDeRecherche.svelte';
+  import { exigencesFiltrees } from '../stores/exigencesFiltrees.store';
 </script>
 
 <div class="aucun-resultat">

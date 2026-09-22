@@ -1,8 +1,8 @@
+import { Readable } from 'node:stream';
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import { Readable } from 'node:stream';
-import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { ConfigurationServeur } from '../../../src/api/configurationServeur.js';
 import { creeServeur } from '../../../src/api/msc.js';
 import { AdaptateurCellar, CleDuBucket } from '../../../src/infra/adaptateurCellar.js';

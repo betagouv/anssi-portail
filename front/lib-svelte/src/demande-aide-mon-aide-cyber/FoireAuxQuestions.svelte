@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Lien from '../ui/Lien.svelte';
   import Accordeon from '../ui/Accordeon.svelte';
+  import Lien from '../ui/Lien.svelte';
 
   interface Props {
     urlBase?: string;

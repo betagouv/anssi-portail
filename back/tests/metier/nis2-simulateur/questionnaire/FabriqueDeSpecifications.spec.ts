@@ -1,15 +1,21 @@
-import { describe, it, beforeEach, expect } from 'vitest';
-import { FabriqueDeSpecifications } from '../../../../src/metier/nis2-simulateur/questionnaire/FabriqueDeSpecifications.js';
-import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
-import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications.js';
+import { beforeEach, describe, expect, it } from 'vitest';
 import {
   AppartenancePaysUnionEuropeenne,
   UnionPetitMoyenGrand,
 } from '../../../../src/metier/nis2-simulateur/ChampsSimulateur.definitions.js';
-import { SecteurActivite } from '../../../../src/metier/nis2-simulateur/SecteurActivite.definitions.js';
+import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
 import { libellesSecteursActivite } from '../../../../src/metier/nis2-simulateur/LibellesSecteursActivite.js';
-import { SousSecteurActivite } from '../../../../src/metier/nis2-simulateur/SousSecteurActivite.definitions.js';
 import { libellesSousSecteursActivite } from '../../../../src/metier/nis2-simulateur/LibellesSousSecteursActivite.js';
+import { FabriqueDeSpecifications } from '../../../../src/metier/nis2-simulateur/questionnaire/FabriqueDeSpecifications.js';
+import { SpecificationTexte } from '../../../../src/metier/nis2-simulateur/questionnaire/FormatDesSpecificationsCSV.js';
+import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications.js';
+import {
+  PointsAttentionPrecis,
+  ResultatEligibilite,
+  ResumesPointsAttention,
+} from '../../../../src/metier/nis2-simulateur/Regulation.definitions.js';
+import { SecteurActivite } from '../../../../src/metier/nis2-simulateur/SecteurActivite.definitions.js';
+import { SousSecteurActivite } from '../../../../src/metier/nis2-simulateur/SousSecteurActivite.definitions.js';
 import {
   autresActivites,
   CasDeTest,
@@ -19,12 +25,6 @@ import {
   gestionDesServicesTIC,
   infrastructureNumerique,
 } from './casDeTests.activites.js';
-import {
-  PointsAttentionPrecis,
-  ResultatEligibilite,
-  ResumesPointsAttention,
-} from '../../../../src/metier/nis2-simulateur/Regulation.definitions.js';
-import { SpecificationTexte } from '../../../../src/metier/nis2-simulateur/questionnaire/FormatDesSpecificationsCSV.js';
 
 describe('La fabrique de spécifications', () => {
   let fabrique: FabriqueDeSpecifications;

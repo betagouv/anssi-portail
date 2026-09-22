@@ -1,12 +1,12 @@
 <script lang="ts">
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import DemandeDiagnosticSimplifiee from '../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
+  import EncartPromotionParcoursComplet from '../parcours-securisation/EncartPromotionParcoursComplet.svelte';
+  import TagProgrammeGratuit from '../parcours-securisation/TagProgrammeGratuit.svelte';
+  import Alternatives from '../ui/Alternatives.svelte';
   import Lien from '../ui/Lien.svelte';
   import AccordeonNis2 from './AccordeonNis2.svelte';
   import Marelle from './Marelle.svelte';
-  import Alternatives from '../ui/Alternatives.svelte';
-  import { afficheParcoursSecurisation } from '$plateforme/environnement';
-  import EncartPromotionParcoursComplet from '../parcours-securisation/EncartPromotionParcoursComplet.svelte';
-  import TagProgrammeGratuit from '../parcours-securisation/TagProgrammeGratuit.svelte';
 
   const retourEnHautDePage = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

@@ -25,7 +25,9 @@ import { ressourceModule } from './mesures/ressourceModule.js';
 import { ressourceParcoursComplet } from './mesures/ressourceParcoursComplet.js';
 import { ressourcePriseEnCompte } from './mesures/ressourcePriseEnCompte.js';
 import { ressourceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepart.js';
+import { ressourceRécompensesCyberDépartSansBadge } from './mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepartSansBadge.js';
 import { ressourceTestsExposition } from './mini-tests/exposition/ressourceTestsExposition.js';
+import { ressourceRéponsesRéflexesCyber } from './mini-tests/reflexes-cyber/ressourceReponsesReflexesCyber.js';
 import { ressourceInfoMiniTests } from './mini-tests/ressourceInfoMiniTests.js';
 import { ressourceReactionMiniTest } from './mini-tests/ressourceReactionMiniTest.js';
 import { ressourceRetourMiniTest } from './mini-tests/ressourceRetourMiniTest.js';
@@ -76,8 +78,6 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe.js';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
-import { ressourceRéponsesRéflexesCyber } from './mini-tests/reflexes-cyber/ressourceReponsesReflexesCyber.js';
-import { ressourceRécompensesCyberDépartSansBadge } from './mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepartSansBadge.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();

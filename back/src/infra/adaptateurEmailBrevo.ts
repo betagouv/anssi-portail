@@ -4,17 +4,17 @@ import { BadgeCyberdépartDébloqué } from '../bus/evenements/badgeCyberdepartD
 import { MesureConsultee } from '../bus/evenements/mesureConsultee.js';
 import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
+import { ParcoursAllégéTerminé } from '../bus/evenements/parcoursAllegeTermine.js';
 import { ParcoursChangé } from '../bus/evenements/parcoursChange.js';
+import { ParcoursCompletTerminé } from '../bus/evenements/parcoursCompletTermine.js';
 import { ParcoursRejoint } from '../bus/evenements/parcoursRejoint.js';
 import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
+import { Parcours } from '../metier/parcours.js';
 import { Telephone } from '../metier/telephone.js';
 import { adaptateurEmailConsole } from './adaptateurEmailConsole.js';
-import { ClientHttp } from './clientHttp.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { AdaptateurHorloge } from './adaptateurHorloge.js';
-import { ParcoursAllégéTerminé } from '../bus/evenements/parcoursAllegeTermine.js';
-import { ParcoursCompletTerminé } from '../bus/evenements/parcoursCompletTermine.js';
-import { Parcours } from '../metier/parcours.js';
+import { ClientHttp } from './clientHttp.js';
 
 export type DonnéesUtilisateurBrevo = {
   email: string;

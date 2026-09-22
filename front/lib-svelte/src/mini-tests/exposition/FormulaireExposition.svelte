@@ -3,14 +3,14 @@
   import { publieRéponseQuestionnaireExposition } from '../../passerelles/mini-tests/publicationRéponses';
   import Bouton from '../../ui/Bouton.svelte';
   import {
-    type FacteurAggravant,
     FACTEURS_AGGRAVANTS,
-    type ReponsesExposition,
-    type Secteur,
     secteurDisponiblePour,
     SECTEURS,
-    type TypeOrganisation,
     TYPES_ORGANISATION,
+    type FacteurAggravant,
+    type ReponsesExposition,
+    type Secteur,
+    type TypeOrganisation,
   } from './expositionCyberattaques';
 
   interface Props {

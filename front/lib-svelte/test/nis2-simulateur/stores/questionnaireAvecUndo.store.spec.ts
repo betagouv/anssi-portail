@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
 import { get } from 'svelte/store';
+import { describe, expect, it } from 'vitest';
 import { questionnaireAvecUndo } from '../../../src/nis2-simulateur/stores/questionnaireAvecUndo.store';
 
 describe("Le store du questionnaire qui permet de faire de l'UNDO", () => {

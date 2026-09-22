@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { RepartitionResultatsTest } from '../../src/metier/repartitionResultatsTest.js';
 import { ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
 import { ResultatTestMaturiteCreateur } from './ResultatTestMaturiteCreateur.js';

@@ -1,7 +1,7 @@
-import { svelte } from '@sveltejs/vite-plugin-svelte';
-import cssnano from 'cssnano';
 import { readFileSync } from 'node:fs';
 import path, { resolve } from 'node:path';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+import cssnano from 'cssnano';
 import { defineConfig } from 'vite';
 import { remplaceVersionsDansPhp } from './plugin/remplaceVersionsDansPhp';
 

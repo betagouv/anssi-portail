@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { estServeur } from '$plateforme/environnement';
   import { onMount } from 'svelte';
+  import { estServeur } from '$plateforme/environnement';
+  import { réécritFragmentDepuis } from '../../navigation/fragmentDeNavigation.svelte';
   import NavigationTertiaire from '../../navigation/NavigationTertiaire.svelte';
   import { type PropriétésFilAriane } from '../../ui/filAriane';
   import HerosRiche from '../../ui/HerosRiche.svelte';
@@ -8,7 +9,6 @@
   import IllustrationHerosCollectivites from '../animation/IllustrationHerosCollectivites.svelte';
   import Proteger from '../Proteger.svelte';
   import Solutions from './Solutions.svelte';
-  import { réécritFragmentDepuis } from '../../navigation/fragmentDeNavigation.svelte';
 
   let { itemsCyber, guides = [] } = $props();
 

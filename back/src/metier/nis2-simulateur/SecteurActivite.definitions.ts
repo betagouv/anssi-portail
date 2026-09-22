@@ -1,5 +1,5 @@
-import type { UnionDe } from './UnionDe.js';
 import { ValeursSecteursActivites, ValeursSecteursComposites } from './SecteurActivite.valeurs.js';
+import type { UnionDe } from './UnionDe.js';
 
 export type SecteurActivite = UnionDe<typeof ValeursSecteursActivites>;
 

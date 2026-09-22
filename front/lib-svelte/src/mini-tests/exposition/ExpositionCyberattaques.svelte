@@ -5,7 +5,7 @@
   import FilAriane from '../../ui/FilAriane.svelte';
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import EvaluationExposition from './EvaluationExposition.svelte';
-  import { type MenaceEvaluee, menacesPertinentes, type ReponsesExposition } from './expositionCyberattaques';
+  import { menacesPertinentes, type MenaceEvaluee, type ReponsesExposition } from './expositionCyberattaques';
   import FormulaireExposition from './FormulaireExposition.svelte';
   import RadarExpositionAnime from './RadarExpositionAnime.svelte';
 

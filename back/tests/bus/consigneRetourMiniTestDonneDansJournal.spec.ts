@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { describe, expect, it } from 'vitest';
 import { consigneRetourMiniTestDonnéDansJournal } from '../../src/bus/consigneRetourMiniTestDonneDansJournal.js';
 import { RetourMiniTestDonné } from '../../src/bus/evenements/retourMiniTestDonne.js';
+import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { MiniTest } from '../../src/metier/mini-tests/mini-test.js';
 
 describe("L'abonnement qui consigne l'évènement de retour de test de maturité", () => {

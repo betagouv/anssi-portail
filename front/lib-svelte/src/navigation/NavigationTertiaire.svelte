@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { enPropriétéWebC } from '$plateforme/webComponent';
   import { onMount } from 'svelte';
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import { extraisSegmentsDuFragment } from './fragmentDeNavigation.svelte';
 
   type Lien = { emoji?: string; label: string; fragment: string };

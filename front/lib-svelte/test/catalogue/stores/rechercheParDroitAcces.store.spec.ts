@@ -1,6 +1,6 @@
+import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
 import { DroitAcces } from '../../../src/catalogue/Catalogue.types';
-import { get } from 'svelte/store';
 import { rechercheParDroitAcces } from '../../../src/catalogue/stores/rechercheParDroitAcces.store';
 import { mss } from './objetsExemples';
 

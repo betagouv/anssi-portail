@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import { onMount } from 'svelte';
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import { profilStore } from '../stores/profil.store';
 
   let redirectionParDéfaut = $state(false);

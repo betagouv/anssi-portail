@@ -1,8 +1,7 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { BesoinCyber, DroitAcces, Source, Typologie } from '../../../src/catalogue/Catalogue.types';
-import { Langue } from '../../../src/catalogue/Guide.types';
-import { CollectionGuide } from '../../../src/catalogue/Guide.types';
+import { CollectionGuide, Langue } from '../../../src/catalogue/Guide.types';
 import { rechercheParCollection } from '../../../src/catalogue/stores/guides/rechercheParCollection.store';
 import { rechercheParLangue } from '../../../src/catalogue/stores/guides/rechercheParLangue.store';
 import { rechercheParBesoin } from '../../../src/catalogue/stores/rechercheParBesoin.store';

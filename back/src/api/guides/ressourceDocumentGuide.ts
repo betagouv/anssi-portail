@@ -1,8 +1,8 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { fabriqueGestionnaireRessourceCellar, gereDocumentManquantSimplement } from '../gestionnaireRessourceCellar.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
-import { HttpStatusCode } from '@anssi-portail/axios';
 
 export const ressourceDocumentGuide = ({ cellar, entrepotGuide }: ConfigurationServeur) => {
   const routeur = Router();

@@ -2,12 +2,13 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import { Response, Router } from 'express';
 import z from 'zod';
 import { AvisMesureDonne } from '../../bus/evenements/avisMesureDonne.js';
+import { Utilisateur } from '../../metier/utilisateur.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideCorpsRequete } from '../zod.js';
 import { schemaRessourceAvisMesure } from './ressourceAvisMesure.schema.js';
+
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
-import { Utilisateur } from '../../metier/utilisateur.js';
 
 const ressourceAvisMesure = ({
   entrepotMesure,

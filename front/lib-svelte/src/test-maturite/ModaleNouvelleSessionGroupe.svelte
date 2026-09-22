@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { peintUnQRCode } from '$plateforme/qrcode';
   import { tick } from 'svelte';
+  import { peintUnQRCode } from '$plateforme/qrcode';
   import { clic } from '../directives/actions.svelte';
   import Modale from '../ui/Modale.svelte';
   import type { ReponseCreationSessionGroupe } from './SessionGroupe';

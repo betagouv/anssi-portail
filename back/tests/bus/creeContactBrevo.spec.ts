@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
+import { describe, expect, it } from 'vitest';
 import { creeContactBrevo } from '../../src/bus/creeContactBrevo.js';
 import { CompteCree } from '../../src/bus/evenements/compteCree.js';
+import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { fauxAdaptateurEmail } from '../api/fauxObjets.js';
 
 describe("L'abonnement qui crée un contact Brevo", () => {

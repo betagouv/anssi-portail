@@ -1,7 +1,7 @@
 import { JSDOM } from 'jsdom';
 import { EntrepotFinancement } from '../../../metier/entrepotFinancement.js';
-import { ChargeurDeProps } from './chargeurDeProps.js';
 import { RésolveurDePage } from '../résolveurDePage.js';
+import { ChargeurDeProps } from './chargeurDeProps.js';
 
 export class ChargeurFinancements implements ChargeurDeProps {
   constructor(

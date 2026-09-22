@@ -1,12 +1,12 @@
 <script lang="ts">
   import { préfèreMouvementRéduit } from '../../utils/mouvementReduit.svelte';
+  import { suitLaVisibilité } from '../../utils/visibilite.svelte';
   import Confirme from './Confirme.svelte';
   import Decor from './Decor.svelte';
   import Emergent from './Emergent.svelte';
   import Insuffisant from './Insuffisant.svelte';
   import Intermediaire from './Intermediaire.svelte';
   import Optimal from './Optimal.svelte';
-  import { suitLaVisibilité } from '../../utils/visibilite.svelte';
 
   type Props = {
     enPause?: boolean;

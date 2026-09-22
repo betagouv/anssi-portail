@@ -1,6 +1,6 @@
-import { Specifications } from './Specifications.js';
 import type { EtatQuestionnaire } from '../EtatQuestionnaire.js';
 import type { ResultatAvecAnalyse } from './ResultatAvecAnalyse.js';
+import { Specifications } from './Specifications.js';
 
 export class EnsembleDeSpecifications {
   constructor(private readonly specifications: Specifications[]) {}

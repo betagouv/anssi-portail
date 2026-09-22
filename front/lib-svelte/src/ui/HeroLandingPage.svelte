@@ -1,9 +1,8 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import type { ClassValue } from 'svelte/elements';
-
-  import FilAriane from './FilAriane.svelte';
   import { fabriqueFilAriane, type PropriétésFilAriane } from './filAriane';
+  import FilAriane from './FilAriane.svelte';
 
   type Props = {
     titre?: string;

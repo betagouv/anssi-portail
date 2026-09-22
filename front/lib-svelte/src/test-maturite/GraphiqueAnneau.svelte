@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { pourcentagesSerie, type Serie, totalSerie } from './Serie';
+  import { pourcentagesSerie, totalSerie, type Serie } from './Serie';
 
   interface Props {
     serie: Serie;

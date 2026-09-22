@@ -5,7 +5,6 @@ import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { EntrepotFavori } from '../metier/entrepotFavori.js';
 import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
 import { BusEvenements } from './busEvenements.js';
-import { consigneRetourMiniTestDonnéDansJournal } from './consigneRetourMiniTestDonneDansJournal.js';
 import { consigneRetourAvisMesureDonneDansJournal } from './consigneAvisMesureDonneDansJournal.js';
 import { consigneBadgeCyberdépartDébloquéDansJournal } from './consigneBadgeCyberdepartDebloqueDansJournal.js';
 import { consigneEvenementAvisUtilisateurDonneDansJournal } from './consigneEvenementAvisUtilisateurDonneDansJournal.js';
@@ -26,6 +25,9 @@ import { consigneParcoursCompletTerminéDansJournal } from './consigneParcoursCo
 import { consigneParcoursRejointDansJournal } from './consigneParcoursRejointDansJournal.js';
 import { consigneQuestionnaireVraiFauxReponseSoumiseDansJournal } from './consigneQuestionnaireVraiFauxReponseSoumiseDansJournal.js';
 import { consigneQuestionnaireVraiFauxTermineDansJournal } from './consigneQuestionnaireVraiFauxTermineDansJournal.js';
+import { consigneRéflexesCyberReponseSoumiseDansJournal } from './consigneReflexesCyberReponseSoumiseDansJournal.js';
+import { consigneRéflexesCyberTerminéDansJournal } from './consigneReflexesCyberReponseTermineDansJournal.js';
+import { consigneRetourMiniTestDonnéDansJournal } from './consigneRetourMiniTestDonneDansJournal.js';
 import { creeContactBrevo } from './creeContactBrevo.js';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte.js';
 import { AvisMesureDonne } from './evenements/avisMesureDonne.js';
@@ -45,16 +47,14 @@ import { QuestionnaireVraiFauxTerminé } from './evenements/questionnaireVraiFau
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne.js';
 import { RetourMiniTestDonné } from './evenements/retourMiniTestDonne.js';
 import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee.js';
+import { SimulationRéflexesCyberRéponseSoumise } from './evenements/simulationReflexesCyberReponseSoumise.js';
+import { SimulationRéflexesCyberTerminé } from './evenements/simulationReflexesCyberTermine.js';
 import { TestExpositionRéalisé } from './evenements/TestExpositionRealise.js';
 import { TestRealise } from './evenements/testRealise.js';
 import { UtilisateurConnecte } from './evenements/utilisateurConnecte.js';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur.js';
 import { notifieCommentaireAvisMesureDonneDansMessagerie } from './notifieCommentaireAvisMesureDonneDansMessagerie.js';
 import { notifieUnRetourNégatifSurMiniTest } from './notifieRetourNegatifSurMiniTest.js';
-import { SimulationRéflexesCyberRéponseSoumise } from './evenements/simulationReflexesCyberReponseSoumise.js';
-import { consigneRéflexesCyberReponseSoumiseDansJournal } from './consigneReflexesCyberReponseSoumiseDansJournal.js';
-import { consigneRéflexesCyberTerminéDansJournal } from './consigneReflexesCyberReponseTermineDansJournal.js';
-import { SimulationRéflexesCyberTerminé } from './evenements/simulationReflexesCyberTermine.js';
 
 export const cableTousLesAbonnes = ({
   busEvenements,

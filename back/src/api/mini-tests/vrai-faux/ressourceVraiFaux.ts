@@ -1,9 +1,9 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
+import cors from 'cors';
 import { Router } from 'express';
+import { ConfigurationServeur } from '../../configurationServeur.js';
 import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../../zod.js';
-import { ConfigurationServeur } from '../../configurationServeur.js';
-import cors from 'cors';
 
 export const ressourceVraiFaux = ({ entrepôtQuestionVraieFausse }: ConfigurationServeur) => {
   const routeur = Router();

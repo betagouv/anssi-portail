@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { onMount, untrack } from 'svelte';
   import axios from 'axios';
-  import { profilStore } from '../stores/profil.store';
+  import { onMount, untrack } from 'svelte';
   import { enPropriétéWebC } from '$plateforme/webComponent';
+  import { profilStore } from '../stores/profil.store';
 
   type EntreeTableDesMatieres = {
     profondeur: number;

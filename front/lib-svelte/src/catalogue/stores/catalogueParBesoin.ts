@@ -1,7 +1,7 @@
 import { derived } from 'svelte/store';
+import { BesoinCyber } from '../Catalogue.types';
 import { catalogueStore } from './catalogue.store';
 import { rechercheParBesoin } from './rechercheParBesoin.store';
-import { BesoinCyber } from '../Catalogue.types';
 
 export const catalogueParBesoin = derived(
   [catalogueStore, rechercheParBesoin],
