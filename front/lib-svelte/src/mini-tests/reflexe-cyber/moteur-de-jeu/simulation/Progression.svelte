@@ -61,8 +61,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    * {
-      transition-duration: 1ms !important;
+    *::after {
       transition: none !important;
     }
   }
