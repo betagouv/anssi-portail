@@ -70,9 +70,20 @@
   const aLaisséPasserLeTemps = async () => await prendEnCompteRéflexe('aucun');
 
   $effect(() => {
+    let incrémentation: NodeJS.Timeout;
     if (numéroÉvènementCourant === 1 && choixEnCours) {
       valeurBlocage.target = scénario.métrique.bloquage[0];
     }
+    if (choixEnCours) {
+      const borneSupérieure = scénario.métrique.bloquage[numéroÉvènementCourant] ?? Number.POSITIVE_INFINITY;
+
+      incrémentation = setInterval(() => {
+        const incrémentAléatoire = Math.floor(Math.random() * 4) + 1;
+        valeurBlocage.target = Math.min(valeurBlocage.target + incrémentAléatoire, borneSupérieure);
+      }, 2000);
+    }
+
+    return () => clearInterval(incrémentation);
   });
 </script>
 
