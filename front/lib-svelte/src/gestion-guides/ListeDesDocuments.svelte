@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { clic } from '../directives/actions.svelte';
+  import Alerte from '../ui/Alerte.svelte';
   import Lien from '../ui/Lien.svelte';
 
   export type Document = {
@@ -65,13 +66,13 @@
 <div class="documents">
   <h3>Documents associés</h3>
   {#if succes}
-    <dsfr-alert type="success" size="sm" title="Document en cours de suppression" dismissible>
-      <p slot="description">Vous pouvez ajouter un autre document ou continuer votre navigation sur le site.</p>
-    </dsfr-alert>
+    <Alerte type="succès" taille="sm" titre="Document en cours de suppression" estRejetable>
+      Vous pouvez ajouter un autre document ou continuer votre navigation sur le site.
+    </Alerte>
   {:else if erreur}
-    <dsfr-alert type="error" size="sm" title="Erreur lors de la suppression du document" dismissible>
-      <p slot="description">{erreur}</p>
-    </dsfr-alert>
+    <Alerte type="erreur" taille="sm" titre="Erreur lors de la suppression du document" estRejetable>
+      {erreur}
+    </Alerte>
   {/if}
   {#if identifiantGuide}
     {#each documentsDeLApi as { libelle, nomFichier, chemin }, id (id)}
