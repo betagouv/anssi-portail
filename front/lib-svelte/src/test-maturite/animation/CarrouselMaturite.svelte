@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { préfèreMouvementRéduit } from '../../utils/mouvementReduit.svelte';
+  import { prefersReducedMotion } from 'svelte/motion';
   import { suitLaVisibilité } from '../../utils/visibilite.svelte';
   import Confirme from './Confirme.svelte';
   import Decor from './Decor.svelte';
@@ -25,7 +25,7 @@
 
   const CENTRE = Math.floor(cartes.length / 2);
 
-  const mouvement = préfèreMouvementRéduit();
+  const mouvementRéduit = $derived(prefersReducedMotion.current);
   const DURÉE_SORTIE_EN_MS = 320;
 
   let conteneur = $state<HTMLElement>();
@@ -39,7 +39,7 @@
   const positionDe = (i: number) => ((i - actif + CENTRE + cartes.length) % cartes.length) - CENTRE;
 
   $effect(() => {
-    if (mouvement.réduit || figé) {
+    if (mouvementRéduit || figé) {
       return;
     }
 

@@ -1,25 +1,14 @@
 <script lang="ts">
+  import { prefersReducedMotion } from 'svelte/motion';
+
   type Props = { enPause?: boolean };
 
   const { enPause = false }: Props = $props();
 
   let svgEl = $state<SVGSVGElement>();
 
-  let préfèreRéduireLesAnimation = $state(false);
-
-  $effect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    préfèreRéduireLesAnimation = mediaQuery.matches;
-
-    const surChangement = (évènement: MediaQueryListEvent) => {
-      préfèreRéduireLesAnimation = évènement.matches;
-    };
-
-    mediaQuery.addEventListener('change', surChangement);
-    return () => mediaQuery.removeEventListener('change', surChangement);
-  });
-
-  const estEnPause = $derived(enPause || préfèreRéduireLesAnimation);
+  const mouvementRéduit = $derived(prefersReducedMotion.current);
+  const estEnPause = $derived(enPause || mouvementRéduit);
 
   $effect(() => {
     if (estEnPause) {

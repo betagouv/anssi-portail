@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { préfèreMouvementRéduit } from '../utils/mouvementReduit.svelte';
+  import { prefersReducedMotion } from 'svelte/motion';
   import MachineAEcrire from './MachineAEcrire.svelte';
 
   const INTERVAL_EN_MS = 5000;
@@ -12,12 +12,12 @@
 
   const { préfixe, phrasesAnimées, enPause = false }: Props = $props();
 
-  const mouvement = préfèreMouvementRéduit();
+  const mouvementRéduit = $derived(prefersReducedMotion.current);
   let index = $state<number>(0);
   const phraseCourante = $derived(phrasesAnimées[index]);
 
   $effect(() => {
-    if (mouvement.réduit) {
+    if (mouvementRéduit) {
       index = 0;
       return;
     }

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
-  import { préfèreMouvementRéduit } from '../../utils/mouvementReduit.svelte';
+  import { prefersReducedMotion } from 'svelte/motion';
   import { suitLaVisibilité } from '../../utils/visibilite.svelte';
 
   type Scène = Component | [Component, Record<string, unknown>];
@@ -15,7 +15,7 @@
 
   const { scènes, étiquette, décor, enPause = false, duréeScèneEnMs = 5500 }: Props = $props();
 
-  const mouvement = préfèreMouvementRéduit();
+  const mouvementRéduit = $derived(prefersReducedMotion.current);
   let conteneur = $state<HTMLElement>();
   const àLÉcran = suitLaVisibilité(() => conteneur);
   const figée = $derived(enPause || !àLÉcran.visible);
@@ -23,7 +23,7 @@
   let index = $state(0);
 
   $effect(() => {
-    if (mouvement.réduit) {
+    if (mouvementRéduit) {
       index = 0;
       return;
     }
