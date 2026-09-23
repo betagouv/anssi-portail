@@ -240,4 +240,35 @@
     gap: 1rem;
     margin-top: 3rem;
   }
+
+  @keyframes apparition-carte-role {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (min-width: 981px) {
+    .carte-role {
+      animation: apparition-carte-role 300ms ease-out both;
+
+      @for $index from 2 through 6 {
+        &:nth-child(#{$index}) {
+          animation-delay: ($index - 1) * 60ms;
+        }
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carte-role {
+      animation-duration: 0ms;
+      animation-delay: 0ms;
+    }
+  }
 </style>
