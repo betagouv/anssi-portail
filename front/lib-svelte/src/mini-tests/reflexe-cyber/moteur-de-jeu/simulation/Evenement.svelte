@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Action } from 'svelte/action';
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { clic } from '../../../../directives/actions.svelte';
   import Bouton from '../../../../ui/Bouton.svelte';
@@ -33,6 +34,7 @@
   }: Props = $props();
 
   let actionsMasquées = $state(true);
+  let animationTexteEnCours = $state(false);
   let statutRéflexe = $state<'en attente' | 'bon' | 'mauvais' | 'temps écoulé'>('en attente');
 
   $effect(() => {
@@ -52,6 +54,64 @@
 
   const choixBonRéflexeDésactivé = $derived(['mauvais', 'temps écoulé'].includes(statutRéflexe));
   const choixMauvaisRéflexeDésactivé = $derived(['bon', 'temps écoulé'].includes(statutRéflexe));
+
+  const machineÀÉcrire: Action<HTMLElement> = (nœud) => {
+    const mouvementRéduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (mouvementRéduit) return;
+    animationTexteEnCours = true;
+
+    const vitesse = 15;
+
+    const éléments = nœud.querySelectorAll('*');
+    éléments.forEach((élément) => {
+      (élément as HTMLElement).style.visibility = 'hidden';
+    });
+
+    const nœudsDeTexte: { référence: Text; texteComplet: string }[] = [];
+    const parcoureur = document.createTreeWalker(nœud, NodeFilter.SHOW_TEXT);
+    let nœudCourant: Text | null;
+
+    while ((nœudCourant = parcoureur.nextNode() as Text | null)) {
+      nœudsDeTexte.push({
+        référence: nœudCourant,
+        texteComplet: nœudCourant.textContent || '',
+      });
+      nœudCourant.textContent = '';
+    }
+
+    let indexNœud = 0;
+    let indexCaractère = 0;
+
+    const intervalle = setInterval(() => {
+      if (indexNœud >= nœudsDeTexte.length) {
+        clearInterval(intervalle);
+        animationTexteEnCours = false;
+        return;
+      }
+
+      const cible = nœudsDeTexte[indexNœud];
+
+      let parent = cible.référence.parentElement;
+      while (parent && parent !== nœud) {
+        parent.style.visibility = 'visible';
+        parent = parent.parentElement;
+      }
+
+      indexCaractère++;
+      cible.référence.textContent = cible.texteComplet.slice(0, indexCaractère);
+
+      if (indexCaractère >= cible.texteComplet.length) {
+        indexNœud++;
+        indexCaractère = 0;
+      }
+    }, vitesse);
+
+    return {
+      destroy() {
+        clearInterval(intervalle);
+      },
+    };
+  };
 </script>
 
 <div class="contexte">
@@ -59,17 +119,20 @@
     <dsfr-tag label={évènement.heure} type="default" size="md" has-icon icon="time-fill"></dsfr-tag>
     <h2 class="fr-h3" id="titre-evenement">{évènement.titre}</h2>
   </div>
-
-  <div class="texte-evenement fr-text--md">
-    {#each évènement.contexte as élément (élément)}
-      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-      <p>{@html aseptiseHtml(élément)}</p>
-    {/each}
-  </div>
+  {#key évènement}
+    <div class="texte-evenement fr-text--md" use:machineÀÉcrire>
+      {#each évènement.contexte as élément (élément)}
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        <p>{@html aseptiseHtml(élément)}</p>
+      {/each}
+    </div>
+  {/key}
 </div>
 
 {#if actionsMasquées}
-  <Bouton libelle="Afficher les actions" taille="md" surClic={() => (actionsMasquées = false)} />
+  {#if !animationTexteEnCours}
+    <Bouton libelle="Afficher les actions" taille="md" surClic={() => (actionsMasquées = false)} />
+  {/if}
 {:else}
   <div class="choix">
     <div class="entete-choix">
