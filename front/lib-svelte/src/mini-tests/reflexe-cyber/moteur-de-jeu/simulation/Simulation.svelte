@@ -70,7 +70,7 @@
   const aLaisséPasserLeTemps = async () => await prendEnCompteRéflexe('aucun');
 
   $effect(() => {
-    let incrémentation: NodeJS.Timeout;
+    let incrémentation: ReturnType<typeof setInterval> | undefined;
     if (numéroÉvènementCourant === 1 && choixEnCours) {
       valeurBlocage.target = scénario.métrique.bloquage[0];
     }
