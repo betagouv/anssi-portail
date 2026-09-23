@@ -1,5 +1,7 @@
 <script lang="ts">
   import type { Action } from 'svelte/action';
+  import { prefersReducedMotion } from 'svelte/motion';
+  import { fly } from 'svelte/transition';
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { clic } from '../../../../directives/actions.svelte';
   import Bouton from '../../../../ui/Bouton.svelte';
@@ -134,7 +136,7 @@
     <Bouton libelle="Afficher les actions" taille="md" surClic={() => (actionsMasquées = false)} />
   {/if}
 {:else}
-  <div class="choix">
+  <div class="choix" in:fly={{ y: 6, duration: prefersReducedMotion.current ? 0 : 280 }}>
     <div class="entete-choix">
       <img src={rôle.image.src} alt={rôle.image.alt} />
       <h3 class="fr-h6">Sélectionnez le bon réflexe</h3>
