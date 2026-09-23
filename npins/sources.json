@@ -4,8 +4,8 @@
       "type": "Channel",
       "name": "nixpkgs-unstable",
       "artifact": "nixexprs.tar.xz",
-      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1072974.02f5696b0e60/nixexprs.tar.xz",
-      "hash": "sha256-iR1Jj6svMpvLxPWA40qp+WUpg3MStLXJy5TZrP2cPes="
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1078010.b6c98e9e6633/nixexprs.tar.xz",
+      "hash": "sha256-wQZif6Lyrg1IDl8k68Gwa3OK9PermeRsjdKgso4K1VA="
     },
     "playwright-cli": {
       "type": "GitRelease",
