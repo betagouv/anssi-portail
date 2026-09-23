@@ -12,31 +12,34 @@
   const décrémentEnMs = 1000;
 
   let secondesRestantes = new Tween(30, { duration: décrémentEnMs });
+  let secondesEntièresRestantes = $state(30);
+
+  $effect(() => {
+    secondesRestantes.target = secondesEntièresRestantes - 1;
+  });
 
   let palier: 'fini' | 'moins-10-secondes' | 'moins-15-secondes' | 'moins-30-secondes' = $derived.by(() => {
-    if (secondesRestantes.current <= 0) return 'fini';
-    if (secondesRestantes.current <= 10) return 'moins-10-secondes';
-    if (secondesRestantes.current <= 15) return 'moins-15-secondes';
+    if (secondesEntièresRestantes <= 0) return 'fini';
+    if (secondesEntièresRestantes <= 10) return 'moins-10-secondes';
+    if (secondesEntièresRestantes <= 15) return 'moins-15-secondes';
     return 'moins-30-secondes';
   });
 
   $effect(() => {
     if (actif) {
       const intervale = setInterval(() => {
-        if (palier !== 'fini') {
-          secondesRestantes.target = secondesRestantes.current - 1;
-        } else {
+        if (secondesEntièresRestantes <= 1) {
           clearInterval(intervale);
           surTempsÉcoulé();
+          return;
         }
+
+        secondesEntièresRestantes -= 1;
       }, décrémentEnMs);
-      setTimeout(() => {
-        secondesRestantes.target = secondesRestantes.current - 1;
-      }, 0);
+
       return () => clearInterval(intervale);
     }
   });
-  const secondesEntièresRestantes = $derived(Math.max(0, Math.floor(secondesRestantes.current)));
 
   $effect(() => {
     if (actif) surDécompte(secondesEntièresRestantes);
