@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
   import Bouton from '../../../ui/Bouton.svelte';
+  import { détecteRendu } from '../../../utils/rendu.svelte';
   import type { IdRôle, Rôle } from './roles';
 
   type Props = {
@@ -58,6 +59,17 @@
     if (!piste || !carte) return;
     piste.scrollBy({ left: direction * (carte.offsetWidth + 24), behavior: 'smooth' });
   };
+
+  let carrousel: HTMLElement | undefined = $state();
+
+  const rendu = détecteRendu();
+
+  const choisis = (idRôle: IdRôle) => {
+    if (rendu.estMobile) {
+      carrousel?.scrollIntoView({ behavior: 'smooth' });
+    }
+    surChoix(idRôle);
+  };
 </script>
 
 <dsfr-container>
@@ -66,7 +78,7 @@
     <p class="fr-text--lg">Les choix seront adaptés selon le rôle sélectionné.</p>
   </div>
 
-  <div class="carrousel-roles">
+  <div class="carrousel-roles" bind:this={carrousel}>
     <div
       class="piste"
       bind:this={piste}
@@ -89,7 +101,7 @@
               name="role"
               value={rôle.id}
               checked={rôleSélectionné === rôle.id}
-              onchange={() => surChoix(rôle.id)}
+              onchange={() => choisis(rôle.id)}
             />
           </span>
         </label>
