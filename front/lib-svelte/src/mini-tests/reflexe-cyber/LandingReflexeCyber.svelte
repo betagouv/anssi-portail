@@ -30,7 +30,7 @@
   {/snippet}
 
   {#snippet actions()}
-    <Lien apparence="bouton" libelle="Lancer la simulation" taille="lg" href="/reflexe-cyber/parcours" />
+    <Lien apparence="bouton" libelle="Lancer la simulation" taille="lg" href="/reflexes-cyber-en-ligne/parcours" />
   {/snippet}
 </HerosRiche>
 

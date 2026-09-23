@@ -115,7 +115,7 @@
 
 <dsfr-container>
   <PartageTest
-    cheminPartagé="/reflexe-cyber/parcours"
+    cheminPartagé="/reflexes-cyber-en-ligne/parcours"
     sujetMail="Comment réagirez-vous en cas de cyberattaque ?"
     typeDeRetour="reflexes-cyber"
   />
