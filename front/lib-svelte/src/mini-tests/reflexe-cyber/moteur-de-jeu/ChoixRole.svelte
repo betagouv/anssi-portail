@@ -164,8 +164,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    flex: 0 0 17.625rem; // 282px
-    width: 17.625rem;
+    flex: 0 0 16rem;
+    width: 16rem;
     scroll-snap-align: start;
     background-color: var(--background-default-grey);
     cursor: pointer;
