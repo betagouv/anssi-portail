@@ -1,7 +1,8 @@
 <script lang="ts">
   import axios from 'axios';
-  import { cubicOut } from 'svelte/easing';
-  import { Tween } from 'svelte/motion';
+  import { cubicInOut, cubicOut } from 'svelte/easing';
+  import { prefersReducedMotion, Tween } from 'svelte/motion';
+  import { fly } from 'svelte/transition';
   import { v7 as uuidv7 } from 'uuid';
   import { rôleParId, type IdRôle, type Rôle } from '../roles';
   import type { Scénario } from '../scenarios';
@@ -36,9 +37,12 @@
   });
 
   let choixEnCours = $state(false);
+  let contenuÉvènement = $state<HTMLElement>();
+  let distanceDéfilement = $state(0);
 
   const passeÉvènementSuivant = () => {
     if (numéroÉvènementCourant < nombreÉvènementsTotaux) {
+      distanceDéfilement = contenuÉvènement?.offsetHeight ?? 0;
       valeurBlocage.target = scénario.métrique.bloquage[numéroÉvènementCourant];
       numéroÉvènementCourant++;
     } else {
@@ -99,25 +103,45 @@
   <Progression {nombreÉvènementsTotaux} {numéroÉvènementCourant} />
 
   <div class="grille-simulation">
-    <section class="evenement" aria-labelledby="titre-evenement">
-      <div class="media" aria-hidden="true">
-        <img src={`/assets/images/mini-tests/reflexe-cyber/evenement-${numéroÉvènementCourant}.avif`} alt="" />
-      </div>
+    <div class="défilement-évènements">
+      {#key évènementCourant}
+        <section
+          class="evenement"
+          bind:this={contenuÉvènement}
+          aria-labelledby="titre-evenement"
+          in:fly={{
+            y: distanceDéfilement,
+            opacity: 1,
+            duration: prefersReducedMotion.current ? 0 : 750,
+            easing: cubicInOut,
+          }}
+          out:fly={{
+            y: -distanceDéfilement,
+            opacity: 1,
+            duration: prefersReducedMotion.current ? 0 : 750,
+            easing: cubicInOut,
+          }}
+        >
+          <div class="media" aria-hidden="true">
+            <img src={`/assets/images/mini-tests/reflexe-cyber/evenement-${numéroÉvènementCourant}.avif`} alt="" />
+          </div>
 
-      <div class="contenu-evenement">
-        <Evenement
-          dernierÉvènement={numéroÉvènementCourant === 6}
-          {rôle}
-          évènement={évènementCourant}
-          réflexe={réflexeCourant}
-          bind:choixEnCours
-          surBonRéflexe={aEuUnBonRéflexe}
-          surMauvaisRéflexe={aEuUnMauvaisRéflexe}
-          surÉvènementSuivant={passeÉvènementSuivant}
-          surTempsÉcoulé={aLaisséPasserLeTemps}
-        />
-      </div>
-    </section>
+          <div class="contenu-evenement">
+            <Evenement
+              dernierÉvènement={numéroÉvènementCourant === 6}
+              {rôle}
+              évènement={évènementCourant}
+              réflexe={réflexeCourant}
+              bind:choixEnCours
+              surBonRéflexe={aEuUnBonRéflexe}
+              surMauvaisRéflexe={aEuUnMauvaisRéflexe}
+              surÉvènementSuivant={passeÉvènementSuivant}
+              surTempsÉcoulé={aLaisséPasserLeTemps}
+            />
+          </div>
+        </section>
+      {/key}
+    </div>
 
     <aside class="indicateur-crise" aria-label="État de la crise">
       <div class="metriques-bloquees">
@@ -161,37 +185,44 @@
         gap: 1.5rem;
       }
 
-      .evenement {
+      .défilement-évènements {
         display: grid;
         min-width: 0;
+        overflow: hidden;
 
-        @include a-partir-de(xl) {
-          grid-template-columns: 1fr 2fr;
-          gap: 1.5rem;
-        }
-
-        .media {
-          display: none;
-          padding-right: 1rem;
+        .evenement {
+          display: grid;
+          grid-area: 1 / 1;
+          min-width: 0;
 
           @include a-partir-de(xl) {
-            display: block;
+            grid-template-columns: 1fr 2fr;
+            gap: 1.5rem;
           }
 
-          img {
-            display: block;
-            width: 100%;
-            aspect-ratio: 266 / 354;
-            object-fit: contain;
-          }
-        }
+          .media {
+            display: none;
+            padding-right: 1rem;
 
-        .contenu-evenement {
-          display: flex;
-          min-width: 0;
-          flex-direction: column;
-          align-items: center;
-          gap: 1.5rem;
+            @include a-partir-de(xl) {
+              display: block;
+            }
+
+            img {
+              display: block;
+              width: 100%;
+              aspect-ratio: 266 / 354;
+              object-fit: contain;
+            }
+          }
+
+          .contenu-evenement {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+          }
         }
       }
 
