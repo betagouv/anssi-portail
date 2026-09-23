@@ -103,6 +103,25 @@
     </dsfr-container>
   {/snippet}
 </Alternatives>
+
+<dsfr-container class="conteneur-carte-guide">
+  <dsfr-card
+    class="guide-reflexes"
+    title="Organisez une session Réflexes Cyber en équipe !"
+    has-detail-end
+    detail-end=""
+    size="lg"
+    horizontal
+    horizontal-proportion="tier"
+    has-description="true"
+    description="Avec RÉFLEXES CYBER faites vivre à votre CODIR/COMEX ou à vos équipes une première simulation de crise d’origine cyber. Tout au long de la simulation, avec l’aide d’une personne chargée d’animer la séquence, les participant(e)s sont confronté(e)s à des évènements imprévus et doivent prendre des décisions&nbsp;: qui adoptera les bons ou les mauvais réflexes&nbsp;?&nbsp;😉"
+    src="/assets/images/illustrations-services/reflexes-cyber/RC-home.png"
+    href="/ressources/reflexes-cyber"
+    enlarge="true"
+  >
+  </dsfr-card>
+</dsfr-container>
+
 <dsfr-container>
   <PartageTest
     cheminPartagé="/reflexe-cyber/parcours"
@@ -166,5 +185,13 @@
     margin-top: 3rem;
     padding: 6rem 0;
     background-color: var(--yellow-moutarde-925-125);
+  }
+
+  .conteneur-carte-guide {
+    padding-top: 3rem;
+
+    .guide-reflexes {
+      min-height: 0;
+    }
   }
 </style>
