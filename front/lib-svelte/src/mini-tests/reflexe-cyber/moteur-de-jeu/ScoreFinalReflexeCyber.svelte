@@ -10,21 +10,12 @@
     réponses: boolean[];
   };
 
-  const conseils = $derived(
-    afficheParcoursSecurisation
-      ? [
-          "Vous avez répondu juste à toutes les questions. Maintenez cette vigilance et partagez ce quiz à vos pairs. Pour aller plus loin, l'ANSSI met à disposition un parcours de sécurisation, à commencer par le Cyberdépart.",
-          "Vous avez de bonnes intuitions, mais certaines idées reçues persistent. L'ANSSI met à disposition un parcours de sécurisation et notamment des ressources pour prendre votre Cyberdépart — c'est exactement ce qu'il faut pour combler ces écarts.",
-          "Plusieurs idées fausses sur la menace peuvent vous coûter cher. Bonne nouvelle : l'ANSSI met à disposition un parcours de sécurisation avec des mesures concrètes pour prendre votre Cyberdépart.",
-          "Les écarts entre votre perception et la réalité de la menace sont importants. Ce n'est pas une fatalité : l'ANSSI propose un parcours de sécurisation, à commencer par le Cyberdépart — un point d'entrée adapté aux dirigeants de petites structures.",
-        ]
-      : [
-          "Vous avez répondu juste à toutes les questions. Maintenez cette vigilance et partagez ce quiz à vos pairs. Pour aller plus loin, l'ANSSI propose un diagnostic pour prendre votre Cyberdépart.",
-          "Vous avez de bonnes intuitions, mais certaines idées reçues persistent. L'ANSSI met à disposition un diagnostic pour prendre votre Cyberdépart — c'est exactement ce qu'il faut pour combler ces écarts.",
-          "Plusieurs idées fausses sur la menace peuvent vous coûter cher. Bonne nouvelle : l'ANSSI met à disposition un diagnostic pour obtenir les 6 mesures prioritaires pour prendre votre Cyberdépart.",
-          "Les écarts entre votre perception et la réalité de la menace sont importants. Ce n'est pas une fatalité : l'ANSSI propose un diagnostic pour vous aider à prendre votre Cyberdépart.",
-        ]
-  );
+  const conseils = [
+    'Vous avez pris les bonnes décisions à chaque étape de la cyberattaque. Pour aller plus loin et mieux préparer votre organisation en amont, poursuivez avec le parcours de sécurisation de l’ANSSI, à commencer par Cyberdépart.',
+    'Vous avez pris la plupart des bonnes décisions face à cette cyberattaque. Quelques réflexes peuvent encore être renforcés pour mieux limiter les conséquences d’un incident. Le parcours de sécurisation de l’ANSSI peut vous y aider.',
+    'En situation de crise, quelques décisions clés peuvent faire la différence. Le parcours de sécurisation de l’ANSSI vous aide à mieux préparer votre organisation et à adopter les bons réflexes, en commençant par Cyberdépart.',
+    'Face à une cyberattaque, certaines décisions peuvent rapidement aggraver la situation. Le parcours de sécurisation de l’ANSSI, à commencer par Cyberdépart, vous aide à mettre en place les mesures essentielles pour mieux vous préparer et réagir.',
+  ];
 
   const { réponses }: Props = $props();
 
@@ -33,28 +24,28 @@
   const { résumé, conseil, couleur } = $derived.by(() => {
     if (nombreDeBonnesRéponses === nombreDeQuestions) {
       return {
-        résumé: 'Excellent. Vous connaissez la menace.',
+        résumé: 'Excellent. Vous avez adopté les bons réflexes.',
         conseil: conseils[0],
         couleur: 'vert',
       };
     }
     if (nombreDeBonnesRéponses >= nombreDeQuestions - 2) {
       return {
-        résumé: 'Solide, mais quelques angles morts.',
+        résumé: 'De bons réflexes, avec quelques points de vigilance.',
         conseil: conseils[1],
         couleur: 'bleu',
       };
     }
     if (nombreDeBonnesRéponses >= nombreDeQuestions - 3) {
       return {
-        résumé: 'Certains risques sont encore mal connus.',
+        résumé: 'Vous avez certains bons réflexes, mais des points restent à renforcer.',
         conseil: conseils[2],
         couleur: 'bleu',
       };
     }
 
     return {
-      résumé: 'Quelques fondamentaux sont à revoir.',
+      résumé: 'Les bons réflexes restent à acquérir.',
       conseil: conseils[3],
       couleur: 'rouge',
     };
