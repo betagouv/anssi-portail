@@ -6,6 +6,7 @@
   import { clic } from '../../../../directives/actions.svelte';
   import Bouton from '../../../../ui/Bouton.svelte';
   import CanonAConfetti from '../../../../ui/CanonAConfetti.svelte';
+  import { détecteRendu } from '../../../../utils/rendu.svelte';
   import Minuteur from '../Minuteur.svelte';
   import type { Rôle } from '../roles';
   import type { Évènement } from './evenements';
@@ -63,11 +64,6 @@
   const choixBonRéflexeDésactivé = $derived(['mauvais', 'temps écoulé'].includes(statutRéflexe));
   const choixMauvaisRéflexeDésactivé = $derived(['bon', 'temps écoulé'].includes(statutRéflexe));
   const mouvementRéduit = $derived(prefersReducedMotion.current);
-
-  const afficheActions = () => {
-    surAffichageActions();
-    actionsMasquées = false;
-  };
 
   const machineÀÉcrire: Action<HTMLElement> = (nœud) => {
     if (mouvementRéduit) return;
@@ -134,6 +130,25 @@
       },
     };
   };
+
+  let divTexteÉvènement: HTMLElement | undefined = $state(undefined);
+  let divChoix: HTMLElement | undefined = $state(undefined);
+  const rendu = détecteRendu();
+
+  const afficheActions = () => {
+    if (rendu.estMobile) {
+      divTexteÉvènement?.scrollIntoView({ behavior: 'smooth' });
+    }
+    actionsMasquées = false;
+    surAffichageActions();
+  };
+
+  const termineSélection = (sélection: () => void) => () => {
+    if (rendu.estMobile) {
+      divChoix?.scrollIntoView({ behavior: 'smooth' });
+    }
+    sélection();
+  };
 </script>
 
 <div class="contexte">
@@ -142,7 +157,7 @@
     <h2 class="fr-h3" id="titre-evenement">{évènement.titre}</h2>
   </div>
   {#key évènement}
-    <div class="texte-evenement fr-text--md" use:machineÀÉcrire>
+    <div class="texte-evenement fr-text--md" use:machineÀÉcrire bind:this={divTexteÉvènement}>
       {#each évènement.contexte as élément (élément)}
         <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         <p>{@html aseptiseHtml(élément)}</p>
@@ -156,7 +171,7 @@
     <Bouton libelle="Afficher les actions" taille="md" surClic={afficheActions} />
   {/if}
 {:else}
-  <div class="choix" in:fly={{ y: 6, duration: prefersReducedMotion.current ? 0 : 280 }}>
+  <div class="choix" in:fly={{ y: 6, duration: prefersReducedMotion.current ? 0 : 280 }} bind:this={divChoix}>
     <div class="entete-choix">
       <img src={rôle.image.src} alt={rôle.image.alt} />
       <h3 class="fr-h6">Sélectionnez le bon réflexe</h3>
@@ -169,7 +184,7 @@
           value="bon"
           bind:group={statutRéflexe}
           disabled={choixBonRéflexeDésactivé}
-          use:clic={surBonRéflexe}
+          use:clic={termineSélection(surBonRéflexe)}
         />
         <span>{réflexe.proposition.bonRéflexe}</span>
       </label>
@@ -180,14 +195,14 @@
           value="mauvais"
           bind:group={statutRéflexe}
           disabled={choixMauvaisRéflexeDésactivé}
-          use:clic={surMauvaisRéflexe}
+          use:clic={termineSélection(surMauvaisRéflexe)}
         />
         <span>{réflexe.proposition.mauvaisRéflexe}</span>
       </label>
     </div>
   </div>
 
-  <Minuteur actif={choixEnCours} {surDécompte} surTempsÉcoulé={aLaisséPasserLeTemps} />
+  <Minuteur actif={choixEnCours} {surDécompte} surTempsÉcoulé={termineSélection(aLaisséPasserLeTemps)} />
 
   {#if statutRéflexe === 'bon'}
     <dsfr-alert title="Bon réflexe !" text={réflexe.conséquence.bonRéflexe} type="success" size="md" has-description
@@ -238,6 +253,7 @@
 
     .texte-evenement {
       width: 100%;
+      scroll-margin-top: 40px;
 
       p {
         margin: 0 0 1.5rem;
@@ -257,6 +273,7 @@
     gap: 1.5rem;
     padding: 1.5rem;
     background-color: var(--background-alt-blue-france);
+    scroll-margin-top: 40px;
 
     .entete-choix {
       display: flex;
