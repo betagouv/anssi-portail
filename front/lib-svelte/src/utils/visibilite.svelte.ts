@@ -3,10 +3,7 @@ type Options = {
   marge?: string;
 };
 
-export const suitLaVisibilité = (
-  cible: () => HTMLElement | undefined,
-  { seuil = 0.2, marge = '0px' }: Options = {}
-) => {
+export const suitLaVisibilité = (cible: () => Element | undefined, { seuil = 0.2, marge = '0px' }: Options = {}) => {
   let visible = $state(true);
 
   $effect(() => {
