@@ -160,7 +160,7 @@
   @use '../../../../../../assets/styles/responsive' as *;
 
   dsfr-container {
-    padding-bottom: 4.5rem;
+    padding-bottom: 6rem;
 
     .alerte-mobile {
       margin-bottom: 0;
