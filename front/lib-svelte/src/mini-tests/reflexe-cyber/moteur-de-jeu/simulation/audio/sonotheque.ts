@@ -1,0 +1,142 @@
+import type { ParamètresTonalité, Son } from '.';
+
+export type ParamètresTonalitéSansContexte = Omit<ParamètresTonalité, 'contexte'>;
+
+export const sonothèque: { [son in Son]: ParamètresTonalitéSansContexte[] } = {
+  'bon-réflexe': [
+    {
+      fréquence: 660,
+      fréquenceFinale: 660,
+      décalageDébut: 0,
+      durée: 0.12,
+      duréeAttaque: 0.018,
+      délaiArrêt: 0.02,
+      volume: 0.018,
+      type: 'triangle',
+    },
+    {
+      fréquence: 880,
+      fréquenceFinale: 880,
+      décalageDébut: 0.07,
+      durée: 0.15,
+      duréeAttaque: 0.018,
+      délaiArrêt: 0.02,
+      volume: 0.016,
+      type: 'triangle',
+    },
+    {
+      fréquence: 1100,
+      fréquenceFinale: 1100,
+      décalageDébut: 0.15,
+      durée: 0.18,
+      duréeAttaque: 0.018,
+      délaiArrêt: 0.02,
+      volume: 0.013,
+      type: 'sine',
+    },
+  ],
+  'mauvais-réflexe': [
+    {
+      fréquence: 310,
+      fréquenceFinale: 310,
+      décalageDébut: 0,
+      durée: 0.12,
+      duréeAttaque: 0.018,
+      délaiArrêt: 0.02,
+      volume: 0.022,
+      type: 'triangle',
+    },
+    {
+      fréquence: 230,
+      fréquenceFinale: 230,
+      décalageDébut: 0.1,
+      durée: 0.18,
+      duréeAttaque: 0.018,
+      délaiArrêt: 0.02,
+      volume: 0.018,
+      type: 'sine',
+    },
+  ],
+  'palier-20s': [
+    {
+      fréquence: 620,
+      fréquenceFinale: 620,
+      décalageDébut: 0,
+      durée: 0.14,
+      duréeAttaque: 0.018,
+      délaiArrêt: 0.02,
+      volume: 0.045,
+      type: 'triangle',
+    },
+    {
+      fréquence: 620,
+      fréquenceFinale: 620,
+      décalageDébut: 0.22,
+      durée: 0.14,
+      duréeAttaque: 0.018,
+      délaiArrêt: 0.02,
+      volume: 0.045,
+      type: 'triangle',
+    },
+  ],
+  notification: [
+    {
+      fréquence: 780,
+      fréquenceFinale: 780,
+      décalageDébut: 0,
+      durée: 0.16,
+      duréeAttaque: 0.018,
+      délaiArrêt: 0.02,
+      volume: 0.035,
+      type: 'sine',
+    },
+    {
+      fréquence: 1040,
+      fréquenceFinale: 1040,
+      décalageDébut: 0.09,
+      durée: 0.22,
+      duréeAttaque: 0.018,
+      délaiArrêt: 0.02,
+      volume: 0.028,
+      type: 'sine',
+    },
+  ],
+  'saisie-clavier': [
+    {
+      get fréquence() {
+        return 620 + Math.random() * 90;
+      },
+      fréquenceFinale: 460,
+      décalageDébut: 0,
+      durée: 0.026,
+      duréeAttaque: 0.002,
+      délaiArrêt: 0.005,
+      volume: 0.009,
+      type: 'sine',
+    },
+  ],
+  'tic<=10s': [
+    {
+      fréquence: 760,
+      fréquenceFinale: 760,
+      décalageDébut: 0,
+      durée: 0.065,
+      duréeAttaque: 0.018,
+      délaiArrêt: 0.02,
+      volume: 0.032,
+      type: 'square',
+    },
+  ],
+  'tic<=3s': [
+    {
+      fréquence: 920,
+      fréquenceFinale: 920,
+      décalageDébut: 0,
+      durée: 0.065,
+      duréeAttaque: 0.018,
+      délaiArrêt: 0.02,
+      volume: 0.045,
+      type: 'square',
+    },
+  ],
+};

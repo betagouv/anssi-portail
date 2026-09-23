@@ -5,9 +5,11 @@
   let {
     défilementActif,
     messagesÀAfficher,
+    surMessageAffiché,
   }: {
     défilementActif: boolean;
     messagesÀAfficher: { rôle: Rôle; message: string }[];
+    surMessageAffiché: () => void;
   } = $props();
 
   let nombreMessagesAffichés = $state(0);
@@ -31,6 +33,7 @@
           sors = true;
           setTimeout(() => {
             numéroMessageAffiché++;
+            surMessageAffiché();
             entre = true;
             sors = false;
             setTimeout(() => (entre = false), 500);
@@ -39,6 +42,7 @@
       }, 5000);
       setTimeout(() => {
         nombreMessagesAffichés++;
+        surMessageAffiché();
         entre = true;
         sors = false;
         setTimeout(() => (entre = false), 500);

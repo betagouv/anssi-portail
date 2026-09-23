@@ -7,6 +7,7 @@
   import { rôles, type IdRôle } from './roles';
   import { scénarios, type IdScénario } from './scenarios';
   import ScoreFinalReflexeCyber from './ScoreFinalReflexeCyber.svelte';
+  import { prépareAudio } from './simulation/audio';
   import Simulation from './simulation/Simulation.svelte';
 
   type Étape = 'scénario' | 'rôle' | 'mise-en-situation' | 'simulation' | 'score-final';
@@ -41,6 +42,7 @@
   };
 
   const lanceSimulation = () => {
+    prépareAudio();
     étape = 'simulation';
   };
 

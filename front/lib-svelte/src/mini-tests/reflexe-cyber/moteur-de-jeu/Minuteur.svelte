@@ -1,7 +1,13 @@
 <script lang="ts">
   import { Tween } from 'svelte/motion';
 
-  const { actif, surTempsÉcoulé } = $props();
+  type Props = {
+    actif: boolean;
+    surDécompte: (secondesRestantes: number) => void;
+    surTempsÉcoulé: () => void;
+  };
+
+  const { actif, surDécompte, surTempsÉcoulé }: Props = $props();
 
   const décrémentEnMs = 1000;
 
@@ -31,6 +37,10 @@
     }
   });
   const secondesEntièresRestantes = $derived(Math.max(0, Math.floor(secondesRestantes.current)));
+
+  $effect(() => {
+    if (actif) surDécompte(secondesEntièresRestantes);
+  });
 </script>
 
 {#if actif}
