@@ -95,7 +95,7 @@
   <div class="alerte-mobile">
     <dsfr-alert type="info" size="sm" hasTitle={false} dismissible>
       <p slot="description">
-        Expérimentez une simulation plus immersive sur desktop. Messages en directs, effets sonores...
+        Expérimentez une simulation plus immersive sur ordinateur. Messages en directs, effets sonores...
       </p>
     </dsfr-alert>
   </div>
