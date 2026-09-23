@@ -1,11 +1,13 @@
 <script lang="ts">
   import axios from 'axios';
+  import { onMount } from 'svelte';
   import { cubicInOut, cubicOut } from 'svelte/easing';
   import { prefersReducedMotion, Tween } from 'svelte/motion';
   import { fly } from 'svelte/transition';
   import { v7 as uuidv7 } from 'uuid';
   import { rôleParId, type IdRôle, type Rôle } from '../roles';
   import type { Scénario } from '../scenarios';
+  import { joueSon, prépareAudio, type Son } from './audio';
   import Evenement from './Evenement.svelte';
   import { évènementsParScénario, type Évènement } from './evenements';
   import Messages from './Messages.svelte';
@@ -37,6 +39,7 @@
   });
 
   let choixEnCours = $state(false);
+  let sonsDésactivés = $state(false);
   let contenuÉvènement = $state<HTMLElement>();
   let distanceDéfilement = $state(0);
 
@@ -69,9 +72,48 @@
     });
   };
 
-  const aEuUnBonRéflexe = async () => await prendEnCompteRéflexe('bon');
-  const aEuUnMauvaisRéflexe = async () => await prendEnCompteRéflexe('mauvais');
+  const joueSonSiActivé = (son: Son) => {
+    if (!sonsDésactivés) joueSon(son);
+  };
+
+  const prépareAudioSiActivé = () => {
+    if (!sonsDésactivés) prépareAudio();
+  };
+
+  const gèreChangementSons = (évènement: CustomEvent<boolean>) => {
+    sonsDésactivés = évènement.detail;
+    joueSonSiActivé('notification');
+  };
+
+  const joueSonDuDécompte = (secondesRestantes: number) => {
+    if (secondesRestantes <= 0 || secondesRestantes > 20) return;
+    if (secondesRestantes <= 3) {
+      joueSonSiActivé('tic<=3s');
+      return;
+    }
+    if (secondesRestantes <= 10) {
+      joueSonSiActivé('tic<=10s');
+      return;
+    }
+    if (secondesRestantes === 20) {
+      joueSonSiActivé('palier-20s');
+      return;
+    }
+  };
+
+  const aEuUnBonRéflexe = async () => {
+    joueSonSiActivé('bon-réflexe');
+    await prendEnCompteRéflexe('bon');
+  };
+  const aEuUnMauvaisRéflexe = async () => {
+    joueSonSiActivé('mauvais-réflexe');
+    await prendEnCompteRéflexe('mauvais');
+  };
   const aLaisséPasserLeTemps = async () => await prendEnCompteRéflexe('aucun');
+
+  onMount(() => {
+    prépareAudioSiActivé();
+  });
 
   $effect(() => {
     let incrémentation: ReturnType<typeof setInterval> | undefined;
@@ -137,6 +179,9 @@
               surMauvaisRéflexe={aEuUnMauvaisRéflexe}
               surÉvènementSuivant={passeÉvènementSuivant}
               surTempsÉcoulé={aLaisséPasserLeTemps}
+              surDécompte={joueSonDuDécompte}
+              surCaractèreAffiché={() => joueSonSiActivé('saisie-clavier')}
+              surAffichageActions={prépareAudioSiActivé}
             />
           </div>
         </section>
@@ -144,6 +189,15 @@
     </div>
 
     <aside class="indicateur-crise" aria-label="État de la crise">
+      <div class="controle-sons">
+        <dsfr-checkbox
+          id="sons-desactives"
+          label="Désactiver les sons"
+          size="sm"
+          checked={sonsDésactivés}
+          onvaluechanged={gèreChangementSons}
+        ></dsfr-checkbox>
+      </div>
       <div class="metriques-bloquees">
         <p class="texte-mention-xs">
           {scénario.métrique.label}
@@ -151,7 +205,11 @@
         <lab-anssi-icone nom="error-warning-line" taille="lg"></lab-anssi-icone>
         <strong class="fr-h4">{Math.round(valeurBlocage.current)}</strong>
       </div>
-      <Messages messagesÀAfficher={notificationsÀAfficher} défilementActif={choixEnCours} />
+      <Messages
+        messagesÀAfficher={notificationsÀAfficher}
+        défilementActif={choixEnCours}
+        surMessageAffiché={() => joueSonSiActivé('notification')}
+      />
     </aside>
   </div>
 </dsfr-container>
@@ -238,6 +296,11 @@
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
+        }
+
+        .controle-sons {
+          display: flex;
+          align-items: center;
         }
 
         .metriques-bloquees {

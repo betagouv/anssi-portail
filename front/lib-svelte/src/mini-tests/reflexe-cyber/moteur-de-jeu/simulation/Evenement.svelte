@@ -20,6 +20,9 @@
     surBonRéflexe: () => void;
     surMauvaisRéflexe: () => void;
     surTempsÉcoulé: () => void;
+    surDécompte: (secondesRestantes: number) => void;
+    surCaractèreAffiché: () => void;
+    surAffichageActions: () => void;
     dernierÉvènement: boolean;
   };
 
@@ -32,6 +35,9 @@
     surBonRéflexe,
     surMauvaisRéflexe,
     surTempsÉcoulé,
+    surDécompte,
+    surCaractèreAffiché,
+    surAffichageActions,
     dernierÉvènement,
   }: Props = $props();
 
@@ -58,6 +64,11 @@
   const choixMauvaisRéflexeDésactivé = $derived(['bon', 'temps écoulé'].includes(statutRéflexe));
   const mouvementRéduit = $derived(prefersReducedMotion.current);
 
+  const afficheActions = () => {
+    surAffichageActions();
+    actionsMasquées = false;
+  };
+
   const machineÀÉcrire: Action<HTMLElement> = (nœud) => {
     if (mouvementRéduit) return;
     animationTexteEnCours = true;
@@ -83,6 +94,7 @@
 
     let indexNœud = 0;
     let indexCaractère = 0;
+    let dernièreSaisieSonoreÀ = 0;
 
     const intervalle = setInterval(() => {
       if (indexNœud >= nœudsDeTexte.length) {
@@ -101,6 +113,14 @@
 
       indexCaractère++;
       cible.référence.textContent = cible.texteComplet.slice(0, indexCaractère);
+
+      const caractère = cible.texteComplet.at(indexCaractère - 1) ?? '';
+      const délaiMinimalEntreSons = 85;
+      const maintenant = performance.now();
+      if (/\S/.test(caractère) && maintenant - dernièreSaisieSonoreÀ >= délaiMinimalEntreSons) {
+        surCaractèreAffiché();
+        dernièreSaisieSonoreÀ = maintenant;
+      }
 
       if (indexCaractère >= cible.texteComplet.length) {
         indexNœud++;
@@ -133,7 +153,7 @@
 
 {#if actionsMasquées}
   {#if !animationTexteEnCours}
-    <Bouton libelle="Afficher les actions" taille="md" surClic={() => (actionsMasquées = false)} />
+    <Bouton libelle="Afficher les actions" taille="md" surClic={afficheActions} />
   {/if}
 {:else}
   <div class="choix" in:fly={{ y: 6, duration: prefersReducedMotion.current ? 0 : 280 }}>
@@ -167,7 +187,7 @@
     </div>
   </div>
 
-  <Minuteur actif={choixEnCours} surTempsÉcoulé={aLaisséPasserLeTemps} />
+  <Minuteur actif={choixEnCours} {surDécompte} surTempsÉcoulé={aLaisséPasserLeTemps} />
 
   {#if statutRéflexe === 'bon'}
     <dsfr-alert title="Bon réflexe !" text={réflexe.conséquence.bonRéflexe} type="success" size="md" has-description
