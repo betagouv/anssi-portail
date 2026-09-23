@@ -101,7 +101,7 @@
   <div class="grille-simulation">
     <section class="evenement" aria-labelledby="titre-evenement">
       <div class="media" aria-hidden="true">
-        <img src="/assets/images/mini-tests/reflexe-cyber/evenement-1.avif" alt="" />
+        <img src={`/assets/images/mini-tests/reflexe-cyber/evenement-${numéroÉvènementCourant}.avif`} alt="" />
       </div>
 
       <div class="contenu-evenement">
