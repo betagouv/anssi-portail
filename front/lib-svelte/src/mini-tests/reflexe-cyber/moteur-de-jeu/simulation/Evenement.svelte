@@ -56,9 +56,9 @@
 
   const choixBonRéflexeDésactivé = $derived(['mauvais', 'temps écoulé'].includes(statutRéflexe));
   const choixMauvaisRéflexeDésactivé = $derived(['bon', 'temps écoulé'].includes(statutRéflexe));
+  const mouvementRéduit = $derived(prefersReducedMotion.current);
 
   const machineÀÉcrire: Action<HTMLElement> = (nœud) => {
-    const mouvementRéduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (mouvementRéduit) return;
     animationTexteEnCours = true;
 
