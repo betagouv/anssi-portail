@@ -1,11 +1,11 @@
-name: Déploiement WebComponent demande de diag
+name: Déploiement WebComponents
 permissions: {}
 
 on:
   workflow_dispatch: # Pour activer le déclenchement manuel
 
 jobs:
-  deploiement:
+  deploiement-webc-demande-diag:
     runs-on: ubuntu-latest
     name: WebComponent Demande de diag
     environment: WEB_COMPONENTS
