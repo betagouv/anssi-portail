@@ -42,6 +42,7 @@
   let sonsDésactivés = $state(false);
   let contenuÉvènement = $state<HTMLElement>();
   let distanceDéfilement = $state(0);
+  let nombreActualisationsBlocage = $state(0);
 
   const passeÉvènementSuivant = () => {
     if (numéroÉvènementCourant < nombreÉvènementsTotaux) {
@@ -126,6 +127,7 @@
       incrémentation = setInterval(() => {
         const incrémentAléatoire = Math.floor(Math.random() * 4) + 1;
         valeurBlocage.target = Math.min(valeurBlocage.target + incrémentAléatoire, borneSupérieure);
+        nombreActualisationsBlocage += 1;
       }, 2000);
     }
 
@@ -203,7 +205,14 @@
           {scénario.métrique.label}
         </p>
         <lab-anssi-icone nom="error-warning-line" taille="lg"></lab-anssi-icone>
-        <strong class="fr-h4">{Math.round(valeurBlocage.current)}</strong>
+        {#key nombreActualisationsBlocage}
+          <strong
+            class="fr-h4"
+            class:valeur-actualisee={nombreActualisationsBlocage > 0 && !prefersReducedMotion.current}
+          >
+            {Math.round(valeurBlocage.current)}
+          </strong>
+        {/key}
       </div>
       <Messages
         messagesÀAfficher={notificationsÀAfficher}
@@ -321,6 +330,10 @@
           strong {
             margin: 0;
             color: inherit;
+
+            &.valeur-actualisee {
+              animation: pulsation-metrique 0.5s ease;
+            }
           }
 
           lab-anssi-icone {
@@ -333,6 +346,13 @@
 
     dsfr-alert {
       width: 100%;
+    }
+  }
+
+  @keyframes pulsation-metrique {
+    50% {
+      color: #1212ff;
+      transform: translateY(-1px);
     }
   }
 </style>
