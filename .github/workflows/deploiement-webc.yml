@@ -5,19 +5,19 @@ on:
   workflow_dispatch: # Pour activer le déclenchement manuel
     inputs:
       demande_diag:
-        description: "Demande de diagnostic"
+        description: 'Demande de diagnostic'
         type: boolean
         required: true
         default: false
 
       mini_test_vrai_faux:
-        description: "Mini-test vrai/faux"
+        description: 'Mini-test vrai/faux'
         type: boolean
         required: true
         default: false
 
       mini_test_exposition:
-        description: "Mini-test exposition"
+        description: 'Mini-test exposition'
         type: boolean
         required: true
         default: false
@@ -25,153 +25,36 @@ on:
 jobs:
   mini-test-vrai-faux:
     if: ${{ inputs.mini_test_vrai_faux }}
-    runs-on: ubuntu-latest
-    name: WebComponent Vrai/Faux
-    environment: WEB_COMPONENTS
-    steps:
-      - name: Cloner le dépôt Git
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: Configurer Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: (TOUS) Installe les dépendances
-        uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
-        with:
-          require-lockfile: true
-
-      - name: Récupérer la version
-        run: echo release_version=$(pnpm -F mini-test-vrai-faux exec node -p "require('./package.json').version") >> $GITHUB_ENV
-
-      - name: Construis la lib
-        env:
-          VERSION: ${{ env.release_version }}
-        run: |
-          pnpm --filter mini-test-vrai-faux build:demo
-          pnpm --filter mini-test-vrai-faux build:prod
-
-      - name: Installer et configurer la CLI de S3cmd
-        uses: s3-actions/s3cmd@f6b9af96d329795d7ba6199c21ef84bf1211c940 # v3.0.0
-        with:
-          provider: clevercloud
-          access_key: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
-          secret_key: ${{ secrets.CLEVER_S3_SECRET_KEY }}
-
-      - name: Envoyer les fichiers en démo
-        run: |
-          s3cmd put --acl-public --mime-type='application/javascript' ./webc-externes/mini-test-vrai-faux/dist-demo/mini-test-vrai-faux.iife.js "s3://messervicescyber-web-components/${release_version}/demo/"
-          s3cmd put --acl-public --mime-type='text/css' ./webc-externes/mini-test-vrai-faux/dist-demo/mini-test-vrai-faux.css "s3://messervicescyber-web-components/${release_version}/demo/"
-          s3cmd put --acl-public --mime-type='text/plain' ./webc-externes/mini-test-vrai-faux/dist-demo/mini-test-vrai-faux.php "s3://messervicescyber-web-components/${release_version}/demo/"
-
-      - name: Envoyer les fichiers en prod
-        run: |
-          s3cmd put --acl-public --mime-type='application/javascript' ./webc-externes/mini-test-vrai-faux/dist-prod/mini-test-vrai-faux.iife.js "s3://messervicescyber-web-components/${release_version}/prod/"
-          s3cmd put --acl-public --mime-type='text/css' ./webc-externes/mini-test-vrai-faux/dist-prod/mini-test-vrai-faux.css "s3://messervicescyber-web-components/${release_version}/prod/"
-          s3cmd put --acl-public --mime-type='text/plain' ./webc-externes/mini-test-vrai-faux/dist-prod/mini-test-vrai-faux.php "s3://messervicescyber-web-components/${release_version}/prod/"
+    uses: $/.github/workflows/deploiement-webc-unique.yml
+    with:
+      package: mini-test-vrai-faux
+      repertoire: webc-externes/mini-test-vrai-faux
+      environnement: WEB_COMPONENTS
+      nom: WebComponent Vrai/Faux
+    secrets:
+      CLEVER_S3_ACCESS_KEY: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
+      CLEVER_S3_SECRET_KEY: ${{ secrets.CLEVER_S3_SECRET_KEY }}
 
   mini-test-exposition:
     if: ${{ inputs.mini_test_exposition }}
-    runs-on: ubuntu-latest
-    name: WebComponent Exposition
-    environment: WEB_COMPONENTS
-    steps:
-      - name: Cloner le dépôt Git
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 0
-          persist-credentials: false
+    uses: $/.github/workflows/deploiement-webc-unique.yml
+    with:
+      package: mini-test-exposition
+      repertoire: webc-externes/mini-test-exposition
+      environnement: WEB_COMPONENTS
+      nom: WebComponent Exposition
+    secrets:
+      CLEVER_S3_ACCESS_KEY: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
+      CLEVER_S3_SECRET_KEY: ${{ secrets.CLEVER_S3_SECRET_KEY }}
 
-      - name: Configurer Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: (TOUS) Installe les dépendances
-        uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
-        with:
-          require-lockfile: true
-
-      - name: Récupérer la version
-        run: echo release_version=$(pnpm -F mini-test-exposition exec node -p "require('./package.json').version") >> $GITHUB_ENV
-
-      - name: Construis la lib
-        env:
-          VERSION: ${{ env.release_version }}
-        run: |
-          pnpm --filter mini-test-exposition build:demo
-          pnpm --filter mini-test-exposition build:prod
-
-      - name: Installer et configurer la CLI de S3cmd
-        uses: s3-actions/s3cmd@f6b9af96d329795d7ba6199c21ef84bf1211c940 # v3.0.0
-        with:
-          provider: clevercloud
-          access_key: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
-          secret_key: ${{ secrets.CLEVER_S3_SECRET_KEY }}
-
-      - name: Envoyer les fichiers en démo
-        run: |
-          s3cmd put --acl-public --mime-type='application/javascript' ./webc-externes/mini-test-exposition/dist-demo/mini-test-exposition.iife.js "s3://messervicescyber-web-components/${release_version}/demo/"
-          s3cmd put --acl-public --mime-type='text/css' ./webc-externes/mini-test-exposition/dist-demo/mini-test-exposition.css "s3://messervicescyber-web-components/${release_version}/demo/"
-          s3cmd put --acl-public --mime-type='text/plain' ./webc-externes/mini-test-exposition/dist-demo/mini-test-exposition.php "s3://messervicescyber-web-components/${release_version}/demo/"
-
-      - name: Envoyer les fichiers en prod
-        run: |
-          s3cmd put --acl-public --mime-type='application/javascript' ./webc-externes/mini-test-exposition/dist-prod/mini-test-exposition.iife.js "s3://messervicescyber-web-components/${release_version}/prod/"
-          s3cmd put --acl-public --mime-type='text/css' ./webc-externes/mini-test-exposition/dist-prod/mini-test-exposition.css "s3://messervicescyber-web-components/${release_version}/prod/"
-          s3cmd put --acl-public --mime-type='text/plain' ./webc-externes/mini-test-exposition/dist-prod/mini-test-exposition.php "s3://messervicescyber-web-components/${release_version}/prod/"
-
-  deploiement-webc-demande-diag:
+  demande-diag:
     if: ${{ inputs.demande_diag }}
-    runs-on: ubuntu-latest
-    name: WebComponent Demande de diag
-    environment: WEB_COMPONENTS
-    steps:
-      - name: Cloner le dépôt Git
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: Configurer Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: (TOUS) Installe les dépendances
-        uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
-        with:
-          require-lockfile: true
-
-      - name: Récupérer la version
-        run: echo release_version=$(pnpm -F demande-diag exec node -p "require('./package.json').version") >> $GITHUB_ENV
-
-      - name: Construis la lib
-        env:
-          VERSION: ${{ env.release_version }}
-        run: |
-          pnpm --filter demande-diag build:demo
-          pnpm --filter demande-diag build:prod
-
-      - name: Installer et configurer la CLI de S3cmd
-        uses: s3-actions/s3cmd@f6b9af96d329795d7ba6199c21ef84bf1211c940 # v3.0.0
-        with:
-          provider: clevercloud
-          access_key: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
-          secret_key: ${{ secrets.CLEVER_S3_SECRET_KEY }}
-
-      - name: Envoyer les fichiers en démo
-        run: |
-          s3cmd put --acl-public --mime-type='application/javascript' ./demande-diag/dist-demo/demande-diag.iife.js "s3://messervicescyber-web-components/${release_version}/demo/"
-          s3cmd put --acl-public --mime-type='text/css' ./demande-diag/dist-demo/demande-diag.css "s3://messervicescyber-web-components/${release_version}/demo/"
-          s3cmd put --acl-public --mime-type='text/plain' ./demande-diag/dist-demo/demande-diag.php "s3://messervicescyber-web-components/${release_version}/demo/"
-
-      - name: Envoyer les fichiers en prod
-        run: |
-          s3cmd put --acl-public --mime-type='application/javascript' ./demande-diag/dist-prod/demande-diag.iife.js "s3://messervicescyber-web-components/${release_version}/prod/"
-          s3cmd put --acl-public --mime-type='text/css' ./demande-diag/dist-prod/demande-diag.css "s3://messervicescyber-web-components/${release_version}/prod/"
-          s3cmd put --acl-public --mime-type='text/plain' ./demande-diag/dist-prod/demande-diag.php "s3://messervicescyber-web-components/${release_version}/prod/"
+    uses: $/.github/workflows/deploiement-webc-unique.yml
+    with:
+      package: demande-diag
+      repertoire: demande-diag
+      environnement: WEB_COMPONENTS
+      nom: WebComponent Demande de diag
+    secrets:
+      CLEVER_S3_ACCESS_KEY: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
+      CLEVER_S3_SECRET_KEY: ${{ secrets.CLEVER_S3_SECRET_KEY }}

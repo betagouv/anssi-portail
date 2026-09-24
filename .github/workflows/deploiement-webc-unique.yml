@@ -1,0 +1,113 @@
+name: Déploiement WebComponent
+permissions: {}
+
+on:
+  workflow_call:
+    inputs:
+      package:
+        description: 'Nom du package pnpm'
+        type: string
+        required: true
+      repertoire:
+        description: 'Répertoire du WebComponent'
+        type: string
+        required: true
+      nom:
+        description: 'Nom affiché du WebComponent'
+        type: string
+        required: true
+      environnement:
+        required: true
+        type: string
+    secrets:
+      CLEVER_S3_ACCESS_KEY:
+        required: true
+      CLEVER_S3_SECRET_KEY:
+        required: true
+
+jobs:
+  deploiement:
+    name: ${{ inputs.nom }}
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environnement }}
+
+    steps:
+      - name: Cloner le dépôt Git
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Configurer Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Installer les dépendances
+        uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
+        with:
+          require-lockfile: true
+
+      - name: Récupérer la version
+        run: |
+          echo "release_version=$(pnpm -F '${{ inputs.package }}' exec node -p "require('./package.json').version")" >> "$GITHUB_ENV"
+
+      - name: Construire la lib
+        env:
+          VERSION: ${{ env.release_version }}
+        run: |
+          pnpm --filter '${{ inputs.package }}' build:demo
+          pnpm --filter '${{ inputs.package }}' build:prod
+
+      - name: Installer et configurer la CLI de S3cmd
+        uses: s3-actions/s3cmd@f6b9af96d329795d7ba6199c21ef84bf1211c940 # v3.0.0
+        with:
+          provider: clevercloud
+          access_key: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
+          secret_key: ${{ secrets.CLEVER_S3_SECRET_KEY }}
+
+      - name: Envoyer les fichiers en démo
+        env:
+          REPERTOIRE_COMPOSANT: ${{ inputs.repertoire }}
+          NOM_COMPOSANT: ${{ inputs.package }}
+        run: |
+          s3cmd put \
+            --acl-public \
+            --mime-type='application/javascript' \
+            "./${REPERTOIRE_COMPOSANT}/dist-demo/${NOM_COMPOSANT}.iife.js" \
+            "s3://messervicescyber-web-components/${release_version}/demo/"
+
+          s3cmd put \
+            --acl-public \
+            --mime-type='text/css' \
+            "./${REPERTOIRE_COMPOSANT}/dist-demo/${NOM_COMPOSANT}.css" \
+            "s3://messervicescyber-web-components/${release_version}/demo/"
+
+          s3cmd put \
+            --acl-public \
+            --mime-type='text/plain' \
+            "./${REPERTOIRE_COMPOSANT}/dist-demo/${NOM_COMPOSANT}.php" \
+            "s3://messervicescyber-web-components/${release_version}/demo/"
+
+      - name: Envoyer les fichiers en prod
+        env:
+          REPERTOIRE_COMPOSANT: ${{ inputs.repertoire }}
+          NOM_COMPOSANT: ${{ inputs.package }}
+        run: |
+          s3cmd put \
+            --acl-public \
+            --mime-type='application/javascript' \
+            "./${REPERTOIRE_COMPOSANT}/dist-prod/${NOM_COMPOSANT}.iife.js" \
+            "s3://messervicescyber-web-components/${release_version}/prod/"
+
+          s3cmd put \
+            --acl-public \
+            --mime-type='text/css' \
+            "./${REPERTOIRE_COMPOSANT}/dist-prod/${NOM_COMPOSANT}.css" \
+            "s3://messervicescyber-web-components/${release_version}/prod/"
+
+          s3cmd put \
+            --acl-public \
+            --mime-type='text/plain' \
+            "./${REPERTOIRE_COMPOSANT}/dist-prod/${NOM_COMPOSANT}.php" \
+            "s3://messervicescyber-web-components/${release_version}/prod/"
