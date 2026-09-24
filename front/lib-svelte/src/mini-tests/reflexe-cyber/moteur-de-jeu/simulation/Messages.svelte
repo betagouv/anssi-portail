@@ -32,7 +32,7 @@
       délais.push(délai);
     };
 
-    const intervale = setInterval(() => {
+    const intervalle = setInterval(() => {
       if (numéroMessageAffiché < messagesÀAfficher.length - 1) {
         nombreMessagesAffichés++;
         entre = false;
@@ -55,7 +55,7 @@
     });
 
     return () => {
-      clearInterval(intervale);
+      clearInterval(intervalle);
       délais.forEach(clearTimeout);
     };
   });
