@@ -1,10 +1,7 @@
 <script lang="ts">
-  import { afficheParcoursSecurisation } from '$plateforme/environnement';
-  import DemandeDiagnosticSimplifiee from '../../../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
   import EncartPromotionParcoursBasique from '../../../parcours-securisation/EncartPromotionParcoursBasique.svelte';
   import TagProgrammeGratuit from '../../../parcours-securisation/TagProgrammeGratuit.svelte';
   import PartageTest from '../../../test-maturite/PartageTest.svelte';
-  import Alternatives from '../../../ui/Alternatives.svelte';
   import EnteteAutonome from '../../../ui/EnteteAutonome.svelte';
 
   type Props = {
@@ -13,21 +10,12 @@
     mode?: 'autonome';
   };
 
-  const conseils = $derived(
-    afficheParcoursSecurisation
-      ? [
-          "Vous avez répondu juste à toutes les questions. Maintenez cette vigilance et partagez ce quiz à vos pairs. Pour aller plus loin, l'ANSSI met à disposition un parcours de sécurisation, à commencer par le Cyberdépart.",
-          "Vous avez de bonnes intuitions, mais certaines idées reçues persistent. L'ANSSI met à disposition un parcours de sécurisation et notamment des ressources pour prendre votre Cyberdépart — c'est exactement ce qu'il faut pour combler ces écarts.",
-          "Plusieurs idées fausses sur la menace peuvent vous coûter cher. Bonne nouvelle : l'ANSSI met à disposition un parcours de sécurisation avec des mesures concrètes pour prendre votre Cyberdépart.",
-          "Les écarts entre votre perception et la réalité de la menace sont importants. Ce n'est pas une fatalité : l'ANSSI propose un parcours de sécurisation, à commencer par le Cyberdépart — un point d'entrée adapté aux dirigeants de petites structures.",
-        ]
-      : [
-          "Vous avez répondu juste à toutes les questions. Maintenez cette vigilance et partagez ce quiz à vos pairs. Pour aller plus loin, l'ANSSI propose un diagnostic pour prendre votre Cyberdépart.",
-          "Vous avez de bonnes intuitions, mais certaines idées reçues persistent. L'ANSSI met à disposition un diagnostic pour prendre votre Cyberdépart — c'est exactement ce qu'il faut pour combler ces écarts.",
-          "Plusieurs idées fausses sur la menace peuvent vous coûter cher. Bonne nouvelle : l'ANSSI met à disposition un diagnostic pour obtenir les 6 mesures prioritaires pour prendre votre Cyberdépart.",
-          "Les écarts entre votre perception et la réalité de la menace sont importants. Ce n'est pas une fatalité : l'ANSSI propose un diagnostic pour vous aider à prendre votre Cyberdépart.",
-        ]
-  );
+  const conseils = [
+    "Vous avez répondu juste à toutes les questions. Maintenez cette vigilance et partagez ce quiz à vos pairs. Pour aller plus loin, l'ANSSI met à disposition un parcours de sécurisation, à commencer par le Cyberdépart.",
+    "Vous avez de bonnes intuitions, mais certaines idées reçues persistent. L'ANSSI met à disposition un parcours de sécurisation et notamment des ressources pour prendre votre Cyberdépart — c'est exactement ce qu'il faut pour combler ces écarts.",
+    "Plusieurs idées fausses sur la menace peuvent vous coûter cher. Bonne nouvelle : l'ANSSI met à disposition un parcours de sécurisation avec des mesures concrètes pour prendre votre Cyberdépart.",
+    "Les écarts entre votre perception et la réalité de la menace sont importants. Ce n'est pas une fatalité : l'ANSSI propose un parcours de sécurisation, à commencer par le Cyberdépart — un point d'entrée adapté aux dirigeants de petites structures.",
+  ];
 
   const { réponses, urlBase = '', mode }: Props = $props();
 
@@ -90,26 +78,17 @@
     <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>
   </div>
 </dsfr-container>
-<Alternatives affichageAlternatif={afficheParcoursSecurisation}>
-  {#snippet défaut()}
-    <dsfr-container>
-      <DemandeDiagnosticSimplifiee origine="vrai-faux" {urlBase} {mode} />
-    </dsfr-container>
-  {/snippet}
-  {#snippet alternatif()}
-    <dsfr-container class="contenu-encart-parcours-securisation">
-      <EncartPromotionParcoursBasique
-        titre="12 mesures simples pour protéger votre organisation contre les cyberattaques"
-        description="Un programme d'accompagnement gratuit, pensé pour les non-experts."
-        {urlBase}
-      >
-        {#snippet tags()}
-          <TagProgrammeGratuit />
-        {/snippet}
-      </EncartPromotionParcoursBasique>
-    </dsfr-container>
-  {/snippet}
-</Alternatives>
+<dsfr-container class="contenu-encart-parcours-securisation">
+  <EncartPromotionParcoursBasique
+    titre="12 mesures simples pour protéger votre organisation contre les cyberattaques"
+    description="Un programme d'accompagnement gratuit, pensé pour les non-experts."
+    {urlBase}
+  >
+    {#snippet tags()}
+      <TagProgrammeGratuit />
+    {/snippet}
+  </EncartPromotionParcoursBasique>
+</dsfr-container>
 {#if mode !== 'autonome'}
   <dsfr-container>
     <PartageTest
