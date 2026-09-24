@@ -1,10 +1,12 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import DemandeDiagnosticSimplifiee from '../../../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
   import EncartPromotionParcoursBasique from '../../../parcours-securisation/EncartPromotionParcoursBasique.svelte';
   import TagProgrammeGratuit from '../../../parcours-securisation/TagProgrammeGratuit.svelte';
   import PartageTest from '../../../test-maturite/PartageTest.svelte';
   import Alternatives from '../../../ui/Alternatives.svelte';
+  import { détecteRendu } from '../../../utils/rendu.svelte';
 
   type Props = {
     réponses: boolean[];
@@ -54,6 +56,13 @@
     réponseCorrecte ? '/assets/icones/coche-verte.svg' : '/assets/icones/croix-rouge.svg';
   const commentaireIllustration = (réponseCorrecte: boolean, positionQuestion: number) =>
     `${réponseCorrecte ? 'bonne' : 'mauvaise'} réponse donnée à la question ${positionQuestion} sur ${nombreDeQuestions}`;
+
+  const rendu = détecteRendu();
+  onMount(() => {
+    if (rendu.estMobile) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
 </script>
 
 <dsfr-container>
