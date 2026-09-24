@@ -140,8 +140,10 @@
   };
 
   const termineSélection = (sélection: () => void) => () => {
-    divChoix?.scrollIntoView({ behavior: 'smooth' });
-    sélection();
+    if (statutRéflexe === 'en attente') {
+      divChoix?.scrollIntoView({ behavior: 'smooth' });
+      sélection();
+    }
   };
 </script>
 
