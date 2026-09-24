@@ -87,7 +87,7 @@
 <Alternatives affichageAlternatif={afficheParcoursSecurisation}>
   {#snippet défaut()}
     <dsfr-container>
-      <DemandeDiagnosticSimplifiee origine="vrai-faux" />
+      <DemandeDiagnosticSimplifiee origine="réflexes-cyber-en-ligne" />
     </dsfr-container>
   {/snippet}
   {#snippet alternatif()}
