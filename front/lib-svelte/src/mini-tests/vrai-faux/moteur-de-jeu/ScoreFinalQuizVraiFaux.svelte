@@ -175,4 +175,9 @@
     padding: 6rem 0;
     background-color: var(--yellow-moutarde-925-125);
   }
+
+  .alternatif-xs {
+    font-weight: bold;
+    color: var(--text-title-grey);
+  }
 </style>
