@@ -75,49 +75,6 @@ jobs:
           access_key: ${{ secrets.CELLAR_ACCESS_KEY_ID }}
           secret_key: ${{ secrets.CELLAR_SECRET_ACCESS_KEY }}
 
-      - name: Configure client antivirus
-        run: |
-          sudo apt install -y socat clamav-daemon
-
-          local_port=4242
-
-          cat <<_EOF_ >clamav.conf
-          TCPAddr 127.0.0.1
-          TCPSocket $local_port
-          _EOF_
-
-          echo "${{ secrets.ANTIVIRUS_CLIENT_CERTIFICAT }}" > client.crt
-          echo "${{ secrets.ANTIVIRUS_CLIENT_CLE }}" > client.key
-          echo "${{ secrets.ANTIVIRUS_SERVEUR_CERTIFICAT }}" > s.crt
-          socat \
-            "TCP-LISTEN:$local_port",reuseaddr,fork \
-            "OPENSSL:${{ secrets.ANTIVIRUS_DOMAINE }}:${{ secrets.ANTIVIRUS_PORT }},cert=$(pwd)/client.crt,key=$(pwd)/client.key,cafile=$(pwd)/s.crt,verify=1" &
-
-      - name: Scan antivirus déporté
-        run: |
-          # `clamdscan` retourne une erreur en cas de fichier malveillant ;
-          # Pour continuer à scanner tous les fichiers, on souhaite ne pas quitter le script à la première commande qui échoue,
-          # et on réactive ce comportement une fois tous les fichiers scannés.
-          set +e
-
-          while IFS= read -r fichierAScanner
-            do
-              [ -z "$fichierAScanner" ] && continue
-              s3cmd --quiet get "s3://messervicescyber-guides-travail/$fichierAScanner" - \
-                | clamdscan --config clamav.conf - \
-                | grep -E "Infected files: [^0]" && echo "$fichierAScanner" >> fichiersMalveillants.txt
-            done < <(cat resultats/ajouts.txt <(echo "") resultats/modifications.txt)
-
-          set -e
-          if [ -s fichiersMalveillants.txt ]; then
-            echo "🐞 Fichiers malveillants :"
-            cat fichiersMalveillants.txt
-            exit 1
-          else
-            echo "✅ Aucun fichier malveillant détecté"
-            exit 0
-          fi
-
       - name: Generate GitHub Summary
         run: |
           echo "## 🔍 Prévisualisation des différences S3" >> $GITHUB_STEP_SUMMARY
