@@ -22,4 +22,4 @@
   {/snippet}
 </HerosRiche>
 
-<Proteger origine="landing-associations" />
+<Proteger />

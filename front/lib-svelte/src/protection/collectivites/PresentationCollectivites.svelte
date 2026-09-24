@@ -47,10 +47,10 @@
 <NavigationTertiaire {liens} centré bind:lienActif />
 
 {#if estServeur}
-  <Proteger origine="landing-collectivites" />
+  <Proteger />
   <Solutions {itemsCyber} {guides} />
 {:else if lienActif === '#proteger'}
-  <Proteger origine="landing-collectivites" />
+  <Proteger />
 {:else}
   <Solutions {itemsCyber} />
 {/if}

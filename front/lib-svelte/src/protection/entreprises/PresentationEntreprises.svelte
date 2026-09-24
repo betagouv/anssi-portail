@@ -25,4 +25,4 @@
   {/snippet}
 </HerosRiche>
 
-<Proteger origine="landing-entreprises" />
+<Proteger />
