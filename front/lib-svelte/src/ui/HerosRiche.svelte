@@ -18,6 +18,7 @@
     mentionAdditionnelle?: Snippet;
     class?: ClassValue;
     urlBase?: string;
+    tailleBadges?: 'sm' | 'md';
   };
 
   const {
@@ -32,6 +33,7 @@
     mentionAdditionnelle,
     class: className,
     urlBase = '',
+    tailleBadges,
   }: Props = $props();
 
   const urlImageDeFond = $derived(`url('${urlBase}/assets/images/motif-fond-heros-${variante}.avif')`);
@@ -54,7 +56,7 @@
   {/if}
   <div class="contenu-heros">
     <div class="contenu">
-      <GroupeDeBadges {badges} />
+      <GroupeDeBadges {badges} taille={tailleBadges} />
       <h1 class="titre alternatif-md">
         {#if titreHtml}
           {@render titreHtml()}

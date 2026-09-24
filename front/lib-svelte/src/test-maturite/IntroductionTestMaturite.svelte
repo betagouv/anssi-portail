@@ -50,13 +50,14 @@
   {propriétésFilAriane}
   variante="cafe-creme"
   badges={[
-    { label: '⏱️ 5 min.', accent: 'purple-glycine' },
+    { label: '⏱️ 5 min.', accent: 'green-bourgeon' },
     {
       label: `🔥 +${Math.round(nombreOrganisation.current / 100) * 100} organisations ont fait le test`,
-      accent: 'purple-glycine',
+      accent: 'green-bourgeon',
     },
   ]}
   class="avec-image-fond"
+  tailleBadges="md"
 >
   {#snippet titreHtml()}
     Quelle est la <MotEnExergue motif="vague" couleur="macaron">matu&shy;rité</MotEnExergue>
