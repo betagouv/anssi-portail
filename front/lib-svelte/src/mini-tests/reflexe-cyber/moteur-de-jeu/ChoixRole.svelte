@@ -233,10 +233,16 @@
     }
 
     .radio-natif {
-      accent-color: var(--text-title-blue-france);
+      appearance: none;
       width: 1.5rem;
       height: 1.5rem;
       margin: auto 0 0;
+      border: 1px solid var(--border-active-blue-france);
+      border-radius: 50%;
+
+      &:checked {
+        background: radial-gradient(circle, var(--background-active-blue-france) 0 0.3125rem, transparent 0.375rem);
+      }
     }
   }
 
