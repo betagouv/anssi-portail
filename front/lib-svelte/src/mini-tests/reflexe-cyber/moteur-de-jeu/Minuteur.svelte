@@ -27,9 +27,9 @@
 
   $effect(() => {
     if (actif) {
-      const intervale = setInterval(() => {
+      const intervalle = setInterval(() => {
         if (secondesEntièresRestantes <= 1) {
-          clearInterval(intervale);
+          clearInterval(intervalle);
           surTempsÉcoulé();
           return;
         }
@@ -37,7 +37,7 @@
         secondesEntièresRestantes -= 1;
       }, décrémentEnMs);
 
-      return () => clearInterval(intervale);
+      return () => clearInterval(intervalle);
     }
   });
 
