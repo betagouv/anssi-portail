@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import { profilStore } from '../stores/profil.store';
 
   let redirectionParDéfaut = $state(false);
@@ -34,11 +33,6 @@
 
   $effect(() => {
     if (!redirectionParDéfaut) return;
-
-    if (!afficheParcoursSecurisation) {
-      window.location.href = '/catalogue';
-      return;
-    }
 
     const profil = $profilStore;
     if (!profil) return;
