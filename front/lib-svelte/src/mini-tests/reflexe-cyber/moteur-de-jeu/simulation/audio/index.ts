@@ -13,7 +13,7 @@ let contexteAudio: AudioContext | undefined;
 const breakpointMd = '48em';
 const audioActivéSurÉcran = () => window.matchMedia(`(min-width: ${breakpointMd})`).matches;
 
-export const prépareAudio = (): AudioContext | undefined => {
+export const prépareAudio = async (): Promise<AudioContext | undefined> => {
   if (!audioActivéSurÉcran()) return;
 
   const ConstructeurAudioContext = window.AudioContext || (window as FenêtreAvecWebkitAudioContext).webkitAudioContext;
@@ -21,7 +21,11 @@ export const prépareAudio = (): AudioContext | undefined => {
 
   contexteAudio ??= new ConstructeurAudioContext();
   if (contexteAudio.state === 'suspended') {
-    void contexteAudio.resume().catch(() => undefined);
+    try {
+      await contexteAudio.resume();
+    } catch {
+      return;
+    }
   }
   return contexteAudio;
 };
@@ -64,8 +68,8 @@ const joueTonalité = ({
   oscillateur.stop(début + durée + délaiArrêt);
 };
 
-export const joueSon = (son: Son) => {
-  const contexte = prépareAudio();
+export const joueSon = async (son: Son): Promise<void> => {
+  const contexte = await prépareAudio();
   if (!contexte || contexte.state !== 'running') return;
 
   sonothèque[son].forEach((paramètres) => joueTonalité({ contexte, ...paramètres }));

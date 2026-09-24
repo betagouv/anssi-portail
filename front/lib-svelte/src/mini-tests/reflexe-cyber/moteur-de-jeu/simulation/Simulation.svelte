@@ -74,11 +74,11 @@
   };
 
   const joueSonSiActivé = (son: Son) => {
-    if (!sonsDésactivés) joueSon(son);
+    if (!sonsDésactivés) void joueSon(son);
   };
 
   const prépareAudioSiActivé = () => {
-    if (!sonsDésactivés) prépareAudio();
+    if (!sonsDésactivés) void prépareAudio();
   };
 
   const gèreChangementSons = (évènement: CustomEvent<boolean>) => {
