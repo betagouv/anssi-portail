@@ -111,9 +111,9 @@
       cible.référence.textContent = cible.texteComplet.slice(0, indexCaractère);
 
       const caractère = cible.texteComplet.at(indexCaractère - 1) ?? '';
-      const délaiMinimalEntreSons = 85;
+      const délaiMinimalEntreSonsEnMs = 85;
       const maintenant = performance.now();
-      if (/\S/.test(caractère) && maintenant - dernièreSaisieSonoreÀ >= délaiMinimalEntreSons) {
+      if (/\S/.test(caractère) && maintenant - dernièreSaisieSonoreÀ >= délaiMinimalEntreSonsEnMs) {
         surCaractèreAffiché();
         dernièreSaisieSonoreÀ = maintenant;
       }
