@@ -128,6 +128,13 @@
 
     return () => clearInterval(incrémentation);
   });
+
+  let divGrilleSimulation: HTMLElement | undefined = $state();
+
+  $effect(() => {
+    évènementCourant;
+    divGrilleSimulation?.scrollIntoView({ behavior: 'smooth' });
+  });
 </script>
 
 <dsfr-container class="simulation-contenu">
@@ -141,7 +148,7 @@
 
   <Progression {nombreÉvènementsTotaux} {numéroÉvènementCourant} />
 
-  <div class="grille-simulation">
+  <div class="grille-simulation" bind:this={divGrilleSimulation}>
     <div class="défilement-évènements">
       {#key évènementCourant}
         <section
@@ -236,6 +243,7 @@
       display: grid;
       gap: 1.5rem;
       padding-top: 1.5rem;
+      scroll-margin-top: 24px;
 
       @include a-partir-de(md) {
         grid-template-columns: 8fr 4fr;

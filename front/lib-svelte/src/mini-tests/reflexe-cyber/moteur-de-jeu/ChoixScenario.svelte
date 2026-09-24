@@ -97,7 +97,7 @@
   $largeur-minimale-sans-carrousel: $nombre-cartes * $largeur-carte + ($nombre-cartes - 1) * $espacement-cartes;
 
   dsfr-container {
-    padding-block: 3rem 4.5rem;
+    padding-block: 1.5rem 4.5rem;
   }
 
   .entete {

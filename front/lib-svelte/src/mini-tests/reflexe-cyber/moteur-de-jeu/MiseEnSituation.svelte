@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { clic } from '../../../directives/actions.svelte';
   import Bouton from '../../../ui/Bouton.svelte';
   import type { Rôle } from './roles';
@@ -23,6 +24,10 @@
     événement.preventDefault();
     surModificationRôle();
   };
+
+  onMount(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 </script>
 
 <dsfr-container>
@@ -75,7 +80,7 @@
 
 <style lang="scss">
   dsfr-container {
-    padding-block: 3rem 6rem;
+    padding-block: 1.5rem 6rem;
   }
 
   .mise-en-situation {

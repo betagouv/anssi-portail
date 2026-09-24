@@ -6,7 +6,6 @@
   import TagProgrammeGratuit from '../../../parcours-securisation/TagProgrammeGratuit.svelte';
   import PartageTest from '../../../test-maturite/PartageTest.svelte';
   import Alternatives from '../../../ui/Alternatives.svelte';
-  import { détecteRendu } from '../../../utils/rendu.svelte';
 
   type Props = {
     réponses: boolean[];
@@ -57,11 +56,8 @@
   const commentaireIllustration = (réponseCorrecte: boolean, positionQuestion: number) =>
     `${réponseCorrecte ? 'bonne' : 'mauvaise'} réponse donnée à la question ${positionQuestion} sur ${nombreDeQuestions}`;
 
-  const rendu = détecteRendu();
   onMount(() => {
-    if (rendu.estMobile) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 </script>
 
