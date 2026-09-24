@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import { profilStore } from '../stores/profil.store';
   import Bouton from '../ui/Bouton.svelte';
   import Lien from '../ui/Lien.svelte';
@@ -31,7 +30,6 @@
         : '/parcours-complet'
   );
   const lienParcoursSécurisation = $derived($profilStore ? lienParcoursUtilisateur : '/parcours-securisation');
-  const lienCTAProtection = $derived(afficheParcoursSecurisation ? lienParcoursSécurisation : '/cyberdepart');
 </script>
 
 <dsfr-container>
@@ -46,7 +44,7 @@
       <div class="action">
         <Lien
           apparence="bouton"
-          href={lienCTAProtection}
+          href={lienParcoursSécurisation}
           libelle="Protéger mon organisation"
           iconeADroite
           icone="arrow-right-circle-fill"
