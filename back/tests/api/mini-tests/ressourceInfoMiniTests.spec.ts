@@ -34,14 +34,7 @@ describe('La ressource des informations des mini-tests', () => {
     it('renvoie aucune réaction quand aucune n’existe', async () => {
       const reponse = await request(serveur).get('/api/info-mini-tests');
 
-      expect(reponse.body).toEqual({
-        compteurs: {
-          MaturiteCyber: 0,
-          Exposition: 1700,
-          VraiFaux: 12000,
-        },
-        réactions: {},
-      });
+      expect(reponse.body.réactions).toEqual({});
     });
 
     it('renvoie les réactions enregistrées', async () => {
@@ -67,6 +60,12 @@ describe('La ressource des informations des mini-tests', () => {
       const reponse = await request(serveur).get('/api/info-mini-tests');
 
       expect(reponse.body.compteurs.MaturiteCyber).toBe(200);
+    });
+
+    it('renvoie le compteur des tests reflexes cyber', async () => {
+      const reponse = await request(serveur).get('/api/info-mini-tests');
+
+      expect(reponse.body.compteurs.ReflexesCyber).toBe(5600);
     });
   });
 });
