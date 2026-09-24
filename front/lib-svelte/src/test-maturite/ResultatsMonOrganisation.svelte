@@ -55,7 +55,7 @@
   </div>
 </dsfr-container>
 
-<EncartDeRecommandationSelonMaturite {niveau} {mode} {urlBase} />
+<EncartDeRecommandationSelonMaturite {niveau} {urlBase} />
 
 {#if mode !== 'autonome'}
   <PartageTest cheminPartagé="/test-maturite" sujetMail="Test de maturité Cyber" typeDeRetour="test-maturité" />

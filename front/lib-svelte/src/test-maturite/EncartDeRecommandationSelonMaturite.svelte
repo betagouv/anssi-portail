@@ -10,11 +10,10 @@
 
   interface Props {
     niveau: NiveauMaturite;
-    mode?: 'autonome';
     urlBase?: string;
   }
 
-  let { niveau, mode, urlBase = '' }: Props = $props();
+  let { niveau, urlBase = '' }: Props = $props();
 
   const niveauFaible = $derived(
     niveau.id === 'insuffisant' || niveau.id === 'emergent' || niveau.id === 'intermediaire'
@@ -25,7 +24,7 @@
   {#snippet défaut()}
     {#if niveauFaible}
       <Separateur />
-      <EncartDeRecommandationMaturiteFaible {mode} {urlBase} />
+      <EncartDeRecommandationMaturiteFaible {urlBase} />
       <MessageNonResponsabilite />
     {:else if $profilStore}
       <MessageNonResponsabilite />
@@ -38,7 +37,7 @@
   {#snippet alternatif()}
     <Separateur />
     {#if niveauFaible}
-      <EncartDeRecommandationMaturiteFaible {mode} {urlBase} />
+      <EncartDeRecommandationMaturiteFaible {urlBase} />
     {:else}
       <EncartDeRecommandationMaturiteForte />
     {/if}
