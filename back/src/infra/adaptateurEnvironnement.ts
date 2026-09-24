@@ -83,9 +83,6 @@ type AdaptateurEnvironnement = {
       afficheCyFun23: () => boolean;
       afficheSimulateur: () => boolean;
     };
-    parcoursDeSecurisation: () => {
-      estActif: () => boolean;
-    };
   };
   rechercheEntreprise: () => {
     apiUrl: () => string;
@@ -280,9 +277,6 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       afficheObservations: () => process.env.FEATURE_FLAG_NIS2_OBSERVATIONS === 'true',
       afficheCyFun23: () => process.env.FEATURE_FLAG_NIS2_CYFUN23 === 'true',
       afficheSimulateur: () => process.env.FEATURE_FLAG_NIS2_SIMULATEUR === 'true',
-    }),
-    parcoursDeSecurisation: () => ({
-      estActif: () => process.env.FEATURE_FLAG_PARCOURS_SECURISATION === 'true',
     }),
   }),
   rechercheEntreprise: () => ({

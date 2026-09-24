@@ -85,29 +85,6 @@ describe('La ressource d’un module', () => {
       expect(body.mesures[1].id).toBe('MES1');
     });
 
-    it('réponds 404 si la fonctionnalité est désactivée', async () => {
-      const adaptateurEnvironnement: AdaptateurEnvironnement = {
-        ...fauxAdaptateurEnvironnement,
-        fonctionnalites: () => ({
-          ...fauxAdaptateurEnvironnement.fonctionnalites(),
-          parcoursDeSecurisation: () => ({
-            estActif: () => false,
-          }),
-        }),
-      };
-
-      await ajouteMesure(module, mesureAuthentA2Etapes());
-
-      const serveurSansLaRessource = creeServeur({
-        ...configurationDeTestDuServeur,
-        entrepotMesure,
-        adaptateurEnvironnement,
-      });
-      const reponse = await request(serveurSansLaRessource).get('/api/modules/1');
-
-      expect(reponse.status).toBe(HttpStatusCode.NotFound);
-    });
-
     it('indique si les mesures ont été prises en compte', async () => {
       const mesureAuth5 = mesureAuthentA2Etapes();
       await ajouteMesure(module, mesureAuth5);

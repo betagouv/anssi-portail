@@ -104,27 +104,6 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
       expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
-    it('réponds 404 si la fonctionnalité est désactivée', async () => {
-      const adaptateurEnvironnement: AdaptateurEnvironnement = {
-        ...fauxAdaptateurEnvironnement,
-        fonctionnalites: () => ({
-          ...fauxAdaptateurEnvironnement.fonctionnalites(),
-          parcoursDeSecurisation: () => ({
-            estActif: () => false,
-          }),
-        }),
-      };
-
-      const serveurSansLaRessource = creeServeur({
-        ...configurationDeTestDuServeur,
-        entrepotMesure,
-        adaptateurEnvironnement,
-      });
-      const reponse = await request(serveurSansLaRessource).get('/api/mesures/AUTH.5');
-
-      expect(reponse.status).toBe(HttpStatusCode.NotFound);
-    });
-
     it('indique que la mesure a été prise en compte', async () => {
       const unUtilisateurAvecUnePriseEnCompte = utilisateurDeTest()
         .avecUneMesurePriseEnCompte(authentA2Etapes)

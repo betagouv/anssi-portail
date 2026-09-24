@@ -426,45 +426,36 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreRoute('/api/mini-tests/reflexes-cyber/reponses', ressourceRéponsesRéflexesCyber(configurationServeur));
   enregistreRoute('/api/mini-tests/exposition/tests', ressourceTestsExposition(configurationServeur));
 
-  const parcoursActivé = configurationServeur.adaptateurEnvironnement
-    .fonctionnalites()
-    .parcoursDeSecurisation()
-    .estActif();
-  if (parcoursActivé) {
-    enregistreRoute(
-      '/api/mesures',
-      ressourceMesure(configurationServeur),
-      ressourceAvisMesure(configurationServeur),
-      ressourcePriseEnCompte(configurationServeur)
-    );
-    const landingPages = ['parcours-securisation', 'parcours-cyberdepart', 'parcours-securisation-complet'];
-    routesStatiques.push(...landingPages);
-    enregistreRoute('/api/mesures.csv', ressourceMesureCsv(configurationServeur));
-    enregistreRoute('/api/modules', ressourceModule(configurationServeur));
-    enregistreRoute('/module-cyberdepart', (_, reponse) => reponse.redirect(HttpStatusCode.SeeOther, '/modules/1'));
-    enregistreRoute(
-      '/modules/1',
-      ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart', [attributionParcours('allégé')])
-    );
-    enregistreRoute(
-      '/modules/:id',
-      ressourcePagesJekyllConnectees(configurationServeur, 'modules', [attributionParcours('complet')])
-    );
-    enregistreRoute(
-      '/parcours-complet',
-      ressourcePagesJekyllConnectees(configurationServeur, 'parcours-complet', [attributionParcours('complet')])
-    );
-    enregistreRoute('/api/parcours/complet', ressourceParcoursComplet(configurationServeur));
-    enregistreRoute(
-      '/mesures/:id',
-      ressourcePagesJekyllConnectees(configurationServeur, 'mesures', [
-        publieMesureConsultée,
-        attributionParcoursMesure,
-      ])
-    );
-    enregistreRoute('/api/retour-mini-tests', ressourceRetourMiniTest(configurationServeur));
-    enregistreRoute(`/partage-cyberdepart`, ressourcePagesJekyll(configurationServeur, 'partage-badge-cyberdepart'));
-  }
+  enregistreRoute(
+    '/api/mesures',
+    ressourceMesure(configurationServeur),
+    ressourceAvisMesure(configurationServeur),
+    ressourcePriseEnCompte(configurationServeur)
+  );
+  const landingPages = ['parcours-securisation', 'parcours-cyberdepart', 'parcours-securisation-complet'];
+  routesStatiques.push(...landingPages);
+  enregistreRoute('/api/mesures.csv', ressourceMesureCsv(configurationServeur));
+  enregistreRoute('/api/modules', ressourceModule(configurationServeur));
+  enregistreRoute('/module-cyberdepart', (_, reponse) => reponse.redirect(HttpStatusCode.SeeOther, '/modules/1'));
+  enregistreRoute(
+    '/modules/1',
+    ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart', [attributionParcours('allégé')])
+  );
+  enregistreRoute(
+    '/modules/:id',
+    ressourcePagesJekyllConnectees(configurationServeur, 'modules', [attributionParcours('complet')])
+  );
+  enregistreRoute(
+    '/parcours-complet',
+    ressourcePagesJekyllConnectees(configurationServeur, 'parcours-complet', [attributionParcours('complet')])
+  );
+  enregistreRoute('/api/parcours/complet', ressourceParcoursComplet(configurationServeur));
+  enregistreRoute(
+    '/mesures/:id',
+    ressourcePagesJekyllConnectees(configurationServeur, 'mesures', [publieMesureConsultée, attributionParcoursMesure])
+  );
+  enregistreRoute('/api/retour-mini-tests', ressourceRetourMiniTest(configurationServeur));
+  enregistreRoute(`/partage-cyberdepart`, ressourcePagesJekyll(configurationServeur, 'partage-badge-cyberdepart'));
   routesStatiques.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
   enregistreRoute('/robots.txt', ressourceRobotsTxt(configurationServeur));
   enregistreRoute('/llms.txt', ressourceLlmsTxt(configurationServeur));
