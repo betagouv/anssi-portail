@@ -17,11 +17,37 @@ on:
         default: false
 
 jobs:
-  mini-test-1:
+  mini-test-vrai-faux:
     if: ${{ inputs.mini_test_vrai_faux }}
     runs-on: ubuntu-latest
+    name: WebComponent Vrai/Faux
+    environment: WEB_COMPONENTS
     steps:
-      - run: echo "Déploiement du mini test vrai/faux"
+      - name: Cloner le dépôt Git
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Configurer Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: (TOUS) Installe les dépendances
+        uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
+        with:
+          require-lockfile: true
+
+      - name: Récupérer la version
+        run: echo release_version=$(pnpm -F mini-test-vrai-faux exec node -p "require('./package.json').version") >> $GITHUB_ENV
+
+      - name: Construis la lib
+        env:
+          VERSION: ${{ env.release_version }}
+        run: |
+          pnpm --filter mini-test-vrai-faux build:demo
+          pnpm --filter mini-test-vrai-faux build:prod
 
 
   deploiement-webc-demande-diag:
