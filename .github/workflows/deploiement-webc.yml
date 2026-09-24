@@ -3,28 +3,9 @@ permissions: {}
 
 on:
   workflow_dispatch: # Pour activer le déclenchement manuel
-    inputs:
-      demande_diag:
-        description: 'Demande de diagnostic'
-        type: boolean
-        required: true
-        default: false
-
-      mini_test_vrai_faux:
-        description: 'Mini-test vrai/faux'
-        type: boolean
-        required: true
-        default: false
-
-      mini_test_exposition:
-        description: 'Mini-test exposition'
-        type: boolean
-        required: true
-        default: false
 
 jobs:
   mini-test-vrai-faux:
-    if: ${{ inputs.mini_test_vrai_faux }}
     uses: $/.github/workflows/deploiement-webc-unique.yml
     with:
       package: mini-test-vrai-faux
@@ -36,7 +17,6 @@ jobs:
       CLEVER_S3_SECRET_KEY: ${{ secrets.CLEVER_S3_SECRET_KEY }}
 
   mini-test-exposition:
-    if: ${{ inputs.mini_test_exposition }}
     uses: $/.github/workflows/deploiement-webc-unique.yml
     with:
       package: mini-test-exposition
@@ -48,7 +28,6 @@ jobs:
       CLEVER_S3_SECRET_KEY: ${{ secrets.CLEVER_S3_SECRET_KEY }}
 
   demande-diag:
-    if: ${{ inputs.demande_diag }}
     uses: $/.github/workflows/deploiement-webc-unique.yml
     with:
       package: demande-diag
