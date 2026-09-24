@@ -42,7 +42,7 @@
   };
 
   const lanceSimulation = () => {
-    prépareAudio();
+    void prépareAudio();
     étape = 'simulation';
   };
 
