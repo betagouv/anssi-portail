@@ -19,6 +19,7 @@
   variante="cafe-creme"
   class="avec-image-fond"
   badges={[{ label: '⏱️ 8 minutes', accent: 'green-bourgeon' }]}
+  tailleBadges="md"
 >
   {#snippet titreHtml()}
     Comment réagirez-vous en cas de cyber&shy;attaque&nbsp;?

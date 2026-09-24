@@ -28,6 +28,7 @@
     variante="cafe-creme"
     class="avec-image-fond"
     badges={[{ label: '⏱️ 3 minutes', accent: 'green-bourgeon' }]}
+    tailleBadges="md"
     {urlBase}
   >
     {#snippet titreHtml()}
