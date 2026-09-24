@@ -1,11 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { afficheParcoursSecurisation } from '$plateforme/environnement';
-  import DemandeDiagnosticSimplifiee from '../../../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
   import EncartPromotionParcoursBasique from '../../../parcours-securisation/EncartPromotionParcoursBasique.svelte';
   import TagProgrammeGratuit from '../../../parcours-securisation/TagProgrammeGratuit.svelte';
   import PartageTest from '../../../test-maturite/PartageTest.svelte';
-  import Alternatives from '../../../ui/Alternatives.svelte';
 
   type Props = {
     réponses: boolean[];
@@ -80,25 +77,16 @@
     <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>
   </div>
 </dsfr-container>
-<Alternatives affichageAlternatif={afficheParcoursSecurisation}>
-  {#snippet défaut()}
-    <dsfr-container>
-      <DemandeDiagnosticSimplifiee origine="réflexes-cyber-en-ligne" />
-    </dsfr-container>
-  {/snippet}
-  {#snippet alternatif()}
-    <dsfr-container class="contenu-encart-parcours-securisation">
-      <EncartPromotionParcoursBasique
-        titre="12 mesures simples pour protéger votre organisation contre les cyberattaques"
-        description="Un programme d'accompagnement gratuit, pensé pour les non-experts."
-      >
-        {#snippet tags()}
-          <TagProgrammeGratuit />
-        {/snippet}
-      </EncartPromotionParcoursBasique>
-    </dsfr-container>
-  {/snippet}
-</Alternatives>
+<dsfr-container class="contenu-encart-parcours-securisation">
+  <EncartPromotionParcoursBasique
+    titre="12 mesures simples pour protéger votre organisation contre les cyberattaques"
+    description="Un programme d'accompagnement gratuit, pensé pour les non-experts."
+  >
+    {#snippet tags()}
+      <TagProgrammeGratuit />
+    {/snippet}
+  </EncartPromotionParcoursBasique>
+</dsfr-container>
 
 <dsfr-container class="conteneur-carte-guide">
   <dsfr-card
