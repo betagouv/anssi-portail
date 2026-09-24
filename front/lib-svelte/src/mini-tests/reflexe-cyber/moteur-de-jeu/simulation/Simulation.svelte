@@ -1,6 +1,5 @@
 <script lang="ts">
   import axios from 'axios';
-  import { onMount } from 'svelte';
   import { cubicInOut, cubicOut } from 'svelte/easing';
   import { prefersReducedMotion, Tween } from 'svelte/motion';
   import { fly } from 'svelte/transition';
@@ -111,10 +110,6 @@
     await prendEnCompteRéflexe('mauvais');
   };
   const aLaisséPasserLeTemps = async () => await prendEnCompteRéflexe('aucun');
-
-  onMount(() => {
-    prépareAudioSiActivé();
-  });
 
   $effect(() => {
     let incrémentation: ReturnType<typeof setInterval> | undefined;
