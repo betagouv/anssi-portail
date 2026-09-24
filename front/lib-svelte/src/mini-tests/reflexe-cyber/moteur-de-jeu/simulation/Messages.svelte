@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { type Rôle } from '../roles';
 
   let {
@@ -22,38 +21,43 @@
     numéroMessageAffiché = 0;
   });
 
-  let intervale: NodeJS.Timeout | undefined = undefined;
-
   $effect(() => {
-    if (défilementActif) {
-      intervale = setInterval(() => {
-        if (défilementActif && numéroMessageAffiché < messagesÀAfficher.length - 1) {
-          nombreMessagesAffichés++;
-          entre = false;
-          sors = true;
-          setTimeout(() => {
-            numéroMessageAffiché++;
-            surMessageAffiché();
-            entre = true;
-            sors = false;
-            setTimeout(() => (entre = false), 500);
-          }, 400);
-        }
-      }, 5000);
-      setTimeout(() => {
-        nombreMessagesAffichés++;
-        surMessageAffiché();
-        entre = true;
-        sors = false;
-        setTimeout(() => (entre = false), 500);
-      }, 0);
-    } else {
-      clearInterval(intervale);
-    }
-  });
+    if (!défilementActif) return;
 
-  onMount(() => {
-    return () => clearInterval(intervale);
+    const délais: ReturnType<typeof setTimeout>[] = [];
+    const après = (durée: number, action: () => void) => {
+      const délai = setTimeout(() => {
+        action();
+      }, durée);
+      délais.push(délai);
+    };
+
+    const intervale = setInterval(() => {
+      if (numéroMessageAffiché < messagesÀAfficher.length - 1) {
+        nombreMessagesAffichés++;
+        entre = false;
+        sors = true;
+        après(400, () => {
+          numéroMessageAffiché++;
+          surMessageAffiché();
+          entre = true;
+          sors = false;
+          après(500, () => (entre = false));
+        });
+      }
+    }, 5000);
+    après(0, () => {
+      nombreMessagesAffichés++;
+      surMessageAffiché();
+      entre = true;
+      sors = false;
+      après(500, () => (entre = false));
+    });
+
+    return () => {
+      clearInterval(intervale);
+      délais.forEach(clearTimeout);
+    };
   });
 
   let entre = $state(false);
