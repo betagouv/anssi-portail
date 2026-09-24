@@ -127,7 +127,7 @@
           libellé: compteursArrondis.ReflexesCyber ? `+${compteursArrondis.ReflexesCyber} tests réalisés` : undefined,
           accent: 'yellow-moutarde',
         }}
-        estimationEnMinutes={10}
+        estimationEnMinutes={8}
       >
         {#snippet image(survol)}
           <LaptopAnime {survol} />
