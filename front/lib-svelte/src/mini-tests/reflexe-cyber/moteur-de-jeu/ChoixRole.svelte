@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
   import Bouton from '../../../ui/Bouton.svelte';
-  import { détecteRendu } from '../../../utils/rendu.svelte';
   import type { IdRôle, Rôle } from './roles';
 
   type Props = {
@@ -62,12 +61,8 @@
 
   let carrousel: HTMLElement | undefined = $state();
 
-  const rendu = détecteRendu();
-
   const choisis = (idRôle: IdRôle) => {
-    if (rendu.estMobile) {
-      carrousel?.scrollIntoView({ behavior: 'smooth' });
-    }
+    carrousel?.scrollIntoView({ behavior: 'smooth' });
     surChoix(idRôle);
   };
 </script>
@@ -139,7 +134,7 @@
   @use '../../../../../assets/styles/responsive' as *;
 
   dsfr-container {
-    padding-block: 3rem 4.5rem;
+    padding-block: 1.5rem 4.5rem;
   }
 
   .entete {

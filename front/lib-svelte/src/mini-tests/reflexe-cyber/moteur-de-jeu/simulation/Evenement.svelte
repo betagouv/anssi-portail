@@ -6,7 +6,6 @@
   import { clic } from '../../../../directives/actions.svelte';
   import Bouton from '../../../../ui/Bouton.svelte';
   import CanonAConfetti from '../../../../ui/CanonAConfetti.svelte';
-  import { détecteRendu } from '../../../../utils/rendu.svelte';
   import Minuteur from '../Minuteur.svelte';
   import type { Rôle } from '../roles';
   import type { Évènement } from './evenements';
@@ -133,20 +132,15 @@
 
   let divTexteÉvènement: HTMLElement | undefined = $state(undefined);
   let divChoix: HTMLElement | undefined = $state(undefined);
-  const rendu = détecteRendu();
 
   const afficheActions = () => {
-    if (rendu.estMobile) {
-      divTexteÉvènement?.scrollIntoView({ behavior: 'smooth' });
-    }
+    divTexteÉvènement?.scrollIntoView({ behavior: 'smooth' });
     actionsMasquées = false;
     surAffichageActions();
   };
 
   const termineSélection = (sélection: () => void) => () => {
-    if (rendu.estMobile) {
-      divChoix?.scrollIntoView({ behavior: 'smooth' });
-    }
+    divChoix?.scrollIntoView({ behavior: 'smooth' });
     sélection();
   };
 </script>
