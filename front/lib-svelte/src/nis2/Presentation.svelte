@@ -1,9 +1,6 @@
 <script lang="ts">
-  import { afficheParcoursSecurisation } from '$plateforme/environnement';
-  import DemandeDiagnosticSimplifiee from '../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
   import EncartPromotionParcoursComplet from '../parcours-securisation/EncartPromotionParcoursComplet.svelte';
   import TagProgrammeGratuit from '../parcours-securisation/TagProgrammeGratuit.svelte';
-  import Alternatives from '../ui/Alternatives.svelte';
   import Lien from '../ui/Lien.svelte';
   import AccordeonNis2 from './AccordeonNis2.svelte';
   import Marelle from './Marelle.svelte';
@@ -43,29 +40,17 @@
   <Marelle />
 </dsfr-container>
 
-<Alternatives affichageAlternatif={afficheParcoursSecurisation}>
-  {#snippet défaut()}
-    <dsfr-container class="diagnostic">
-      <DemandeDiagnosticSimplifiee
-        origine="nis2"
-        titre="Commencez à agir pour protéger votre organisation des cyberattaques"
-      />
-    </dsfr-container>
-  {/snippet}
-  {#snippet alternatif()}
-    <div class="contenu-encart-parcours-securisation">
-      <EncartPromotionParcoursComplet
-        titre="6 modules pour vous protéger contre les risques les plus courants"
-        description="Un programme d'accompagnement gratuit, pensé pour les PME/ETI et les organisations concernées par la directive NIS 2."
-        orientation="droite"
-      >
-        {#snippet tags()}
-          <TagProgrammeGratuit />
-        {/snippet}
-      </EncartPromotionParcoursComplet>
-    </div>
-  {/snippet}
-</Alternatives>
+<div class="contenu-encart-parcours-securisation">
+  <EncartPromotionParcoursComplet
+    titre="6 modules pour vous protéger contre les risques les plus courants"
+    description="Un programme d'accompagnement gratuit, pensé pour les PME/ETI et les organisations concernées par la directive NIS 2."
+    orientation="droite"
+  >
+    {#snippet tags()}
+      <TagProgrammeGratuit />
+    {/snippet}
+  </EncartPromotionParcoursComplet>
+</div>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
@@ -86,10 +71,6 @@
     margin-top: 48px;
     padding: 96px 0;
     background-color: var(--background-default-grey, white);
-  }
-
-  .diagnostic {
-    padding: 4.5rem 0;
   }
 
   .lien-nis2 {

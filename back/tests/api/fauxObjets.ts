@@ -217,9 +217,6 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
       afficheCyFun23: () => true,
       afficheSimulateur: () => false,
     }),
-    parcoursDeSecurisation: () => ({
-      estActif: () => true,
-    }),
   }),
   nodeEnv: () => 'developpement',
   rechercheEntreprise: () => ({

@@ -1,11 +1,8 @@
 <script lang="ts">
-  import { afficheParcoursSecurisation } from '$plateforme/environnement';
-  import DemandeDiagnosticSimplifiee from '../../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
   import EncartPromotionParcoursBasique from '../../parcours-securisation/EncartPromotionParcoursBasique.svelte';
   import TagProgrammeGratuit from '../../parcours-securisation/TagProgrammeGratuit.svelte';
   import EncartInvitationARenforcerCybersecurite from '../../test-maturite/EncartInvitationARenforcerCybersecurite.svelte';
   import PartageTest from '../../test-maturite/PartageTest.svelte';
-  import Alternatives from '../../ui/Alternatives.svelte';
   import EnteteAutonome from '../../ui/EnteteAutonome.svelte';
   import Notice from '../../ui/Notice.svelte';
   import CarteRisqueExposition from './CarteRisqueExposition.svelte';
@@ -45,26 +42,17 @@
   </dsfr-container>
 {/snippet}
 
-<Alternatives affichageAlternatif={afficheParcoursSecurisation}>
-  {#snippet défaut()}
-    <dsfr-container class="conteneur">
-      <DemandeDiagnosticSimplifiee origine="exposition" {urlBase} {mode} />
-    </dsfr-container>
-  {/snippet}
-  {#snippet alternatif()}
-    <EncartInvitationARenforcerCybersecurite />
-    <section class="section-parcours-basique">
-      <EncartPromotionParcoursBasique
-        titre="12 mesures simples pour protéger votre organisation contre les cyberattaques"
-        description="Accédez à 12 mesures simples pour protéger dès maintenant votre organisation contre les cyberattaques et prendre votre Cyberdépart ! 🚀"
-      >
-        {#snippet tags()}
-          <TagProgrammeGratuit />
-        {/snippet}
-      </EncartPromotionParcoursBasique>
-    </section>
-  {/snippet}
-</Alternatives>
+<EncartInvitationARenforcerCybersecurite />
+<section class="section-parcours-basique">
+  <EncartPromotionParcoursBasique
+    titre="12 mesures simples pour protéger votre organisation contre les cyberattaques"
+    description="Accédez à 12 mesures simples pour protéger dès maintenant votre organisation contre les cyberattaques et prendre votre Cyberdépart ! 🚀"
+  >
+    {#snippet tags()}
+      <TagProgrammeGratuit />
+    {/snippet}
+  </EncartPromotionParcoursBasique>
+</section>
 
 {#if mode !== 'autonome'}
   <PartageTest

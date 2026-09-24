@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import { clic } from '../directives/actions.svelte';
   import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
   import Lien from '../ui/Lien.svelte';
@@ -8,8 +7,7 @@
   let statistiques: Statistiques | undefined = $state();
   let encart = $state<HTMLDivElement | undefined>();
   let repliVisible = $state(false);
-  let hrefCTA = $state('/cyberdepart?origine=guide-dhygiene-informatique');
-  let libelleCTA = $state('Demander un diagnostic gratuit');
+  let hrefCTA = $state('/modules/1');
 
   onMount(async () => {
     setTimeout(() => {
@@ -20,11 +18,8 @@
         repliVisible = true;
       }
     }, 500);
-    if (afficheParcoursSecurisation) {
-      const pageSource = `${window.location.pathname}-encart-lien-vers-demande-diagnostic`;
-      hrefCTA = `/modules/1?pageSource=${pageSource}`;
-      libelleCTA = 'Je commence à sécuriser';
-    }
+    const pageSource = `${window.location.pathname}-encart-lien-vers-demande-diagnostic`;
+    hrefCTA = `/modules/1?pageSource=${pageSource}`;
     statistiques = await récupèreStatistiquesMSC();
   });
 
@@ -54,54 +49,35 @@
       ></dsfr-button>
     </div>
     <div class="contenu">
-      {#if afficheParcoursSecurisation}
-        <dsfr-badge
-          type="accent"
-          accent="green-bourgeon"
-          label={`+${statistiques?.diagnosticsCyberArrondis ?? 0} organisations accompagnées 🚀`}
-          size="sm"
-        ></dsfr-badge>
+      <dsfr-badge
+        type="accent"
+        accent="green-bourgeon"
+        label={`+${statistiques?.diagnosticsCyberArrondis ?? 0} organisations accompagnées 🚀`}
+        size="sm"
+      ></dsfr-badge>
 
-        <h3>12 mesures simples pour protéger votre organisation contre les cyberattaques</h3>
+      <h3>12 mesures simples pour protéger votre organisation contre les cyberattaques</h3>
 
-        <ul>
-          <li><strong>Rapide</strong> à mettre en place</li>
-          <li><strong>Pédagogique :</strong> on vulgarise la cyber pour vous</li>
-          <li><strong>Pratico-pratique :</strong> des outils pour vous aider</li>
-        </ul>
+      <ul>
+        <li><strong>Rapide</strong> à mettre en place</li>
+        <li><strong>Pédagogique :</strong> on vulgarise la cyber pour vous</li>
+        <li><strong>Pratico-pratique :</strong> des outils pour vous aider</li>
+      </ul>
 
-        <div class="appât fond-bleu-france-950"><strong>🏆 Décrochez votre badge Cyberdépart</strong></div>
-      {:else}
-        <dsfr-badge type="accent" accent="yellow-tournesol" label="Diagnostic cyber gratuit" size="sm"></dsfr-badge>
-
-        <h5>Obtenez 6 recommandations pour protéger votre organisation</h5>
-
-        <p class="texte-standard-md">
-          Bénéficiez d’un <strong>premier diagnostic gratuit</strong> accompagné d’un Aidant cyber et recevez
-          <strong>6 recommandations prioritaires</strong>
-          à mettre en place pour améliorer la cybersécurité de votre organisation.
-        </p>
-      {/if}
+      <div class="appât fond-bleu-france-950"><strong>🏆 Décrochez votre badge Cyberdépart</strong></div>
       <div class="conteneur-bouton">
         <Lien
           apparence="bouton"
           etire
           type="primaire"
-          libelle={libelleCTA}
+          libelle="Je commence à sécuriser"
           icone="arrow-right-circle-line"
           iconeADroite
           href={hrefCTA}
         ></Lien>
-        {#if afficheParcoursSecurisation}
-          <Lien apparence="bouton" etire type="tertiaire-sans-bordure" libelle="En savoir plus" href="/entreprises"
-          ></Lien>
-        {/if}
+        <Lien apparence="bouton" etire type="tertiaire-sans-bordure" libelle="En savoir plus" href="/entreprises"
+        ></Lien>
       </div>
-      {#if !afficheParcoursSecurisation}
-        <p class="texte-mention-xs">
-          Ce diagnostic gratuit proposé par l'État n'est pas adapté aux particuliers ni aux entreprises mono-salariées.
-        </p>
-      {/if}
     </div>
   </div>
 </div>
@@ -216,14 +192,6 @@
 
         @include a-partir-de(lg) {
           margin: 0 2rem 2rem 2rem;
-        }
-
-        h5 {
-          margin: 0.5rem 0 1rem;
-        }
-
-        .texte-mention-xs {
-          margin-top: 0.5rem;
         }
 
         .conteneur-bouton {
