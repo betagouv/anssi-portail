@@ -3,9 +3,29 @@ permissions: {}
 
 on:
   workflow_dispatch: # Pour activer le déclenchement manuel
+    inputs:
+      demande_diag:
+        description: "Demande de diagnostic"
+        type: boolean
+        required: true
+        default: false
+
+      mini_test_vrai_faux:
+        description: "Mini-test vrai/faux"
+        type: boolean
+        required: true
+        default: false
 
 jobs:
+  mini-test-1:
+    if: ${{ inputs.mini_test_vrai_faux }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Déploiement du mini test vrai/faux"
+
+
   deploiement-webc-demande-diag:
+    if: ${{ inputs.demande_diag }}
     runs-on: ubuntu-latest
     name: WebComponent Demande de diag
     environment: WEB_COMPONENTS
