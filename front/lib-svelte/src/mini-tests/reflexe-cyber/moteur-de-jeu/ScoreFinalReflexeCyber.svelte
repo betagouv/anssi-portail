@@ -190,4 +190,9 @@
       min-height: 0;
     }
   }
+
+  .alternatif-xs {
+    font-weight: bold;
+    color: var(--text-title-grey);
+  }
 </style>
