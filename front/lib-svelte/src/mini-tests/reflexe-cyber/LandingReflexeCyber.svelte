@@ -18,7 +18,7 @@
   description="Un rançongiciel frappe votre organisation. Vivez six événements clés et choisissez, à chaque étape, le réflexe qui permettra de contenir la crise et de préparer la reprise d'activité."
   variante="cafe-creme"
   class="avec-image-fond"
-  badges={[{ label: '⏱️ 15 minutes', accent: 'green-bourgeon' }]}
+  badges={[{ label: '⏱️ 8 minutes', accent: 'green-bourgeon' }]}
 >
   {#snippet titreHtml()}
     Comment réagirez-vous en cas de cyber&shy;attaque&nbsp;?
