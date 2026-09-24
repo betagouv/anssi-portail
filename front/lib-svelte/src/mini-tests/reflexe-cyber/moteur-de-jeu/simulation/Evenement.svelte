@@ -45,6 +45,7 @@
   let actionsMasquées = $state(true);
   let animationTexteEnCours = $state(false);
   let statutRéflexe = $state<'en attente' | 'bon' | 'mauvais' | 'temps écoulé'>('en attente');
+  const délaiMinimalEntreSonsEnMs = 85;
 
   $effect(() => {
     choixEnCours = !actionsMasquées && statutRéflexe === 'en attente';
@@ -111,7 +112,6 @@
       cible.référence.textContent = cible.texteComplet.slice(0, indexCaractère);
 
       const caractère = cible.texteComplet.at(indexCaractère - 1) ?? '';
-      const délaiMinimalEntreSonsEnMs = 85;
       const maintenant = performance.now();
       if (/\S/.test(caractère) && maintenant - dernièreSaisieSonoreÀ >= délaiMinimalEntreSonsEnMs) {
         surCaractèreAffiché();
