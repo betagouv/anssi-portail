@@ -8,62 +8,6 @@
   padding: var(--padding-section, 6rem 0);
 }
 
-.organisations-concernees {
-  --padding-section: 3.5rem 0 4.5rem;
-
-  .contenu-section {
-    display: flex;
-    flex-direction: column;
-    gap: 72px;
-
-    .toutes-organisations {
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-
-      @include a-partir-de(md) {
-        align-self: center;
-        max-width: taille-pour-colonnes(10);
-      }
-
-      @include a-partir-de(lg) {
-        max-width: taille-pour-colonnes(7);
-      }
-
-      hgroup {
-        h2 {
-          margin-bottom: 16px;
-        }
-      }
-      img {
-        margin-bottom: 24px;
-        @include a-partir-de(md) {
-          align-self: center;
-          max-width: taille-pour-colonnes(10);
-        }
-      }
-      msc-lien {
-        margin-bottom: 0;
-      }
-    }
-
-    .demande-diag {
-      background-color: var(--jaune-clair-msc);
-      border-radius: 8px;
-      height: 420px;
-    }
-  }
-
-  .illustration {
-    max-width: 100%;
-  }
-
-  .lien-panorama {
-    color: var(--text-mention-grey);
-    font-size: 0.75rem;
-  }
-}
-
 .section-deux-colonnes {
   .conteneur {
     display: flex;
