@@ -109,7 +109,7 @@
       icon="arrow-right-circle-line"
       icon-place="right"
       slot="cta"
-      href={`/modules/1?pageSource=${pageSource}`}
+      href={`${urlBase}/modules/1?pageSource=${pageSource}`}
       markup="a"
     ></dsfr-button>
   </lab-anssi-fonctionnalites>
