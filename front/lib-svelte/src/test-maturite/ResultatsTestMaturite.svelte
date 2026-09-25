@@ -19,9 +19,18 @@
     dateRealisation?: Date;
     defilementAutomatique?: boolean;
     idNiveau: IdNiveau;
+    mode?: 'autonome';
+    urlBase?: string;
   }
 
-  let { animeTuiles = true, dateRealisation, defilementAutomatique = true, idNiveau }: Props = $props();
+  let {
+    animeTuiles = true,
+    dateRealisation,
+    defilementAutomatique = true,
+    idNiveau,
+    mode,
+    urlBase = '',
+  }: Props = $props();
 
   let lienActif: CleOnglet | undefined = $state();
   let idRésultatTest: string | undefined = $state();
@@ -56,6 +65,7 @@
 </script>
 
 <Heros
+  cacheFilAriane={mode === 'autonome'}
   description="Votre résultat vous permet de situer votre niveau de maturité cyber actuel et de suivre son évolution au fil de vos actions."
   format="banniere"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
@@ -63,16 +73,18 @@
   titre="Maturité cyber de votre organisation"
 ></Heros>
 
-<PropositionRefaireTest />
+{#if mode !== 'autonome'}
+  <PropositionRefaireTest />
+{/if}
 
-{#if $profilStore && lienActif}
+{#if mode !== 'autonome' && $profilStore && lienActif}
   <dsfr-container>
     <NavigationTertiaire {liens} bind:lienActif />
   </dsfr-container>
 {/if}
 
-{#if lienActif === '#votre-organisation'}
-  <ResultatsMonOrganisation {animeTuiles} {dateRealisation} {defilementAutomatique} {idNiveau} />
+{#if mode === 'autonome' || lienActif === '#votre-organisation'}
+  <ResultatsMonOrganisation {animeTuiles} {dateRealisation} {defilementAutomatique} {idNiveau} {urlBase} />
 {:else if lienActif === '#historique' && $profilStore}
   <HistoriqueTests {idRésultatTest} />
 {:else if $profilStore}
