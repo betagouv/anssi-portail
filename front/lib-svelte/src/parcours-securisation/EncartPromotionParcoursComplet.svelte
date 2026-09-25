@@ -31,7 +31,7 @@
     {
       titre: 'Basé sur ReCyf',
       description:
-        "Simplifiée et accompagnée d'explications pédagogiques, chaque mesure prend racine dans le référentiel cyber français (ReCyF)",
+        "Simplifiée et accompagnée d'explications pédagogiques, chaque mesure prend racine dans le référentiel cyber français (ReCyF).",
       id: 'recyf',
       rich: true,
     },
