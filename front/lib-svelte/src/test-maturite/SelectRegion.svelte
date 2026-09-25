@@ -10,6 +10,7 @@
     region: string;
     optionDefautIntitule?: string;
     optionDefautSelectionnable?: boolean;
+    urlBase?: string;
   };
 
   let {
@@ -18,6 +19,7 @@
     region = $bindable(),
     optionDefautIntitule = 'Sélectionner une région / un territoire',
     optionDefautSelectionnable = false,
+    urlBase = '',
   }: Props = $props();
 
   type Region = {
@@ -28,7 +30,7 @@
   let options = $state<Option[]>([]);
 
   onMount(async () => {
-    const reponse = await axios.get<Region[]>('/api/annuaire/regions');
+    const reponse = await axios.get<Region[]>(`${urlBase}/api/annuaire/regions`);
     options = reponse.data.map((region) => ({
       valeur: region.codeIso,
       libelle: region.nom,

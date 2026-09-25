@@ -15,6 +15,7 @@
     secteur: string;
     optionDefautIntitule?: string;
     optionDefautSelectionnable?: boolean;
+    urlBase?: string;
   };
 
   let {
@@ -23,12 +24,13 @@
     secteur = $bindable(),
     optionDefautIntitule = "Sélectionner un secteur d'activité",
     optionDefautSelectionnable = false,
+    urlBase = '',
   }: Props = $props();
 
   let options = $state<Option[]>([]);
 
   onMount(async () => {
-    const reponse = await axios.get<SecteurActivite[]>('/api/annuaire/secteurs-activite');
+    const reponse = await axios.get<SecteurActivite[]>(`${urlBase}/api/annuaire/secteurs-activite`);
     options = reponse.data.map((secteur) => ({
       valeur: secteur.code,
       libelle: secteur.libelle,

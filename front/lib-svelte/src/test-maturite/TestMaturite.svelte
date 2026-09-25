@@ -5,6 +5,7 @@
   import { calculeIdNiveau } from '../niveaux-maturite/calculeIdNiveau';
   import { profilStore } from '../stores/profil.store';
   import Bouton from '../ui/Bouton.svelte';
+  import EnteteAutonome from '../ui/EnteteAutonome.svelte';
   import Etapier from '../ui/Etapier.svelte';
   import Lien from '../ui/Lien.svelte';
   import IntroductionTestMaturite from './IntroductionTestMaturite.svelte';
@@ -15,6 +16,13 @@
   import SelectTailleOrganisation from './SelectTailleOrganisation.svelte';
   import { questionnaireStore, resultatsQuestionnaire } from './stores/questionnaire.store';
   import { etapesTestMaturite } from './TestMaturite.donnees';
+
+  interface Props {
+    mode?: 'autonome';
+    urlBase?: string;
+  }
+
+  let { mode, urlBase = '' }: Props = $props();
 
   let afficheResultats = $state(false);
   let introFaite = $state(false);
@@ -60,7 +68,7 @@
   const utilisateurEstConnecte = () => profilStore.utilisateurEstConnecte();
 
   async function obtiensResultat() {
-    const reponse = await axios.post<CreationTest>('/api/resultats-test', {
+    const reponse = await axios.post<CreationTest>(`${urlBase}/api/resultats-test`, {
       reponses: $resultatsQuestionnaire,
       secteur: secteur ? secteur : null,
       region: region ? region : null,
@@ -68,7 +76,7 @@
       codeSessionGroupe,
     });
     const { id } = reponse.data;
-    const estConnecte = utilisateurEstConnecte();
+    const estConnecte = mode !== 'autonome' && utilisateurEstConnecte();
     if (estConnecte) {
       window.location.href = '/ma-maturite';
     } else {
@@ -114,9 +122,13 @@
   <ResultatsTestMaturite {idNiveau} />
 {:else if introFaite}
   <dsfr-container class="test-maturite">
-    <div class="lien-retour">
-      <Lien href="/" libelle="Retour à l'accueil" icone="arrow-go-back-line"></Lien>
-    </div>
+    {#if mode === 'autonome'}
+      <EnteteAutonome {urlBase} />
+    {:else}
+      <div class="lien-retour">
+        <Lien href="/" libelle="Retour à l'accueil" icone="arrow-go-back-line"></Lien>
+      </div>
+    {/if}
     {#if organisateurSessionGroupe}
       <dsfr-alert
         type="info"
@@ -171,9 +183,21 @@
           </div>
         {:else}
           <div class="informations-complementaires">
-            <SelectSecteurActivite libelle="Quel est le secteur d’activité de votre organisation&nbsp;?" bind:secteur />
-            <SelectRegion libelle="Dans quelle région / territoire se trouve votre organisation ?" bind:region />
-            <SelectTailleOrganisation libelle="Quelle est la taille de votre organisation ?" bind:tailleOrganisation />
+            <SelectSecteurActivite
+              libelle="Quel est le secteur d’activité de votre organisation&nbsp;?"
+              bind:secteur
+              {urlBase}
+            />
+            <SelectRegion
+              libelle="Dans quelle région / territoire se trouve votre organisation ?"
+              bind:region
+              {urlBase}
+            />
+            <SelectTailleOrganisation
+              libelle="Quelle est la taille de votre organisation ?"
+              bind:tailleOrganisation
+              {urlBase}
+            />
 
             <div class="commandes">
               <Bouton type="secondaire" libelle="Précédent" surClic={questionnaireStore.reviensEnArriere} />
@@ -187,12 +211,17 @@
         {/if}
       </div>
       <div class="illustration">
-        <img src="/assets/images/test-maturite/illustration-{idQuestionCourante}.svg" width="432" height="324" alt="" />
+        <img
+          src="{urlBase}/assets/images/test-maturite/illustration-{idQuestionCourante}.svg"
+          width="432"
+          height="324"
+          alt=""
+        />
       </div>
     </div>
   </dsfr-container>
 {:else}
-  <IntroductionTestMaturite bind:introFaite />
+  <IntroductionTestMaturite bind:introFaite {mode} {urlBase} />
 {/if}
 
 <style lang="scss">
