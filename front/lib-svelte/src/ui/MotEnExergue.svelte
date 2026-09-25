@@ -6,12 +6,31 @@
     motif?: 'cercle' | 'gribouillis' | 'vague';
     couleur?: 'cafe-creme' | 'macaron';
     petit?: boolean;
+    urlBase?: string;
   }
 
-  let { children, motif, couleur, petit }: Props = $props();
+  let { children, motif, couleur, petit, urlBase = '' }: Props = $props();
+
+  const nomMotif = $derived.by(() => {
+    if (motif === 'vague') {
+      if (petit) return 'motif-mot-souligne-petite-vague-macaron';
+      return couleur === 'macaron' ? 'motif-mot-souligne-vague-macaron' : 'motif-mot-souligne-vague-moutarde';
+    }
+    if (motif === 'cercle') return 'motif-mot-entoure-moutarde';
+    if (motif === 'gribouillis') return 'motif-mot-souligne-gribouillis-macaron';
+    return undefined;
+  });
+
+  const urlMotif = $derived(nomMotif ? `url('${urlBase}/assets/images/${nomMotif}.svg')` : 'none');
+
+  let conteneur: HTMLElement | undefined;
+
+  $effect(() => {
+    conteneur?.style.setProperty('--url-motif', urlMotif);
+  });
 </script>
 
-<span class={['mot-en-exergue', motif, couleur, petit ? 'petit' : '']}>
+<span bind:this={conteneur} class={['mot-en-exergue', motif, couleur, petit ? 'petit' : '']}>
   {@render children()}
 </span>
 
@@ -32,6 +51,7 @@
         height: var(--height);
         pointer-events: none;
         background: {
+          image: var(--url-motif);
           repeat: no-repeat;
           position: center;
           size: contain;
@@ -44,21 +64,8 @@
       --height: 31px;
 
       &::after {
-        background-image: url('/assets/images/motif-mot-souligne-vague-moutarde.svg');
         background-position: left center;
         bottom: 0;
-      }
-
-      &.macaron {
-        &::after {
-          background-image: url('/assets/images/motif-mot-souligne-vague-macaron.svg');
-        }
-      }
-
-      &.petit {
-        &::after {
-          background-image: url('/assets/images/motif-mot-souligne-petite-vague-macaron.svg');
-        }
       }
     }
 
@@ -68,7 +75,6 @@
       --width: 120%;
 
       &::after {
-        background-image: url('/assets/images/motif-mot-entoure-moutarde.svg');
         top: 50%;
         transform: translate(-50%, -50%);
       }
@@ -78,7 +84,6 @@
       --height: 42px;
 
       &::after {
-        background-image: url('/assets/images/motif-mot-souligne-gribouillis-macaron.svg');
         bottom: 0;
         transform: translateY(33%);
       }
