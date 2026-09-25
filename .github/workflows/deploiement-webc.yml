@@ -27,6 +27,17 @@ jobs:
       CLEVER_S3_ACCESS_KEY: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
       CLEVER_S3_SECRET_KEY: ${{ secrets.CLEVER_S3_SECRET_KEY }}
 
+  mini-test-maturite:
+    uses: $/.github/workflows/deploiement-webc-unique.yml
+    with:
+      package: mini-test-maturite
+      repertoire: webc-externes/mini-test-maturite
+      environnement: WEB_COMPONENTS
+      nom: WebComponent Maturité
+    secrets:
+      CLEVER_S3_ACCESS_KEY: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
+      CLEVER_S3_SECRET_KEY: ${{ secrets.CLEVER_S3_SECRET_KEY }}
+
   demande-diag:
     uses: $/.github/workflows/deploiement-webc-unique.yml
     with:
