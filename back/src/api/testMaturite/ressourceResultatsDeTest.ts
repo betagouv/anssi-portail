@@ -1,4 +1,5 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
+import cors from 'cors';
 import { Request, Response, Router } from 'express';
 import z from 'zod';
 import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestRevendiquee.js';
@@ -20,8 +21,10 @@ const ressourceResultatsDeTest = ({
   adaptateurRechercheEntreprise,
 }: ConfigurationServeur) => {
   const routeur = Router();
+  routeur.options('/', cors());
   routeur.post(
     '/',
+    cors(),
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideCorpsRequete(schemaRessourceResultatsDeTest),
     filetRouteAsynchrone(

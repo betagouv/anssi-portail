@@ -57,6 +57,7 @@
       <EncartPromotionParcoursBasique
         titre="12 mesures simples pour protéger votre organisation contre les cyberattaques"
         description="Accédez à 12 mesures simples pour protéger dès maintenant votre organisation contre les cyberattaques et prendre votre Cyberdépart ! 🚀"
+        {urlBase}
       >
         {#snippet tags()}
           <TagProgrammeGratuit />

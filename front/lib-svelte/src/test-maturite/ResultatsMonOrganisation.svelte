@@ -11,9 +11,18 @@
     dateRealisation?: Date;
     defilementAutomatique?: boolean;
     idNiveau: IdNiveau;
+    mode?: 'autonome';
+    urlBase?: string;
   }
 
-  let { animeTuiles = true, dateRealisation, defilementAutomatique = true, idNiveau }: Props = $props();
+  let {
+    animeTuiles = true,
+    dateRealisation,
+    defilementAutomatique = true,
+    idNiveau,
+    mode,
+    urlBase = '',
+  }: Props = $props();
 
   const trouveNiveauMaturiteParId = (id: string) =>
     niveauxMaturite.find((niveau) => niveau.id === id) || niveauxMaturite[0];
@@ -35,20 +44,22 @@
       <div class="date-realisation">Test réalisé le {dateFormatee}</div>
     {/if}
     <h2>Niveau de maturité le plus proche : {niveau.label}</h2>
-    <TuilesMaturite niveauCourant={niveau} {animeTuiles} {defilementAutomatique} />
+    <TuilesMaturite niveauCourant={niveau} {animeTuiles} {defilementAutomatique} {urlBase} />
     <div class="description-niveau">
       <h5>{niveau.label}</h5>
       <p>
         {niveau.description}
-        <Lien href="/niveaux-maturite" neutre blank libelle="En savoir plus sur les niveaux"></Lien>
+        <Lien href={`${urlBase}/niveaux-maturite`} neutre blank libelle="En savoir plus sur les niveaux"></Lien>
       </p>
     </div>
   </div>
 </dsfr-container>
 
-<EncartDeRecommandationSelonMaturite {niveau} />
+<EncartDeRecommandationSelonMaturite {niveau} {mode} {urlBase} />
 
-<PartageTest cheminPartagé="/test-maturite" sujetMail="Test de maturité Cyber" typeDeRetour="test-maturité" />
+{#if mode !== 'autonome'}
+  <PartageTest cheminPartagé="/test-maturite" sujetMail="Test de maturité Cyber" typeDeRetour="test-maturité" />
+{/if}
 
 <style lang="scss">
   .date-realisation {

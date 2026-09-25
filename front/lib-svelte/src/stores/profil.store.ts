@@ -20,7 +20,11 @@ export type Profil = {
 
 const { subscribe, set } = writable<Profil | undefined>(undefined);
 
-if (typeof window !== 'undefined') {
+// import.meta.env.VITE_API_URL n'est défini que pour les builds webc-externes (voir leurs
+// scripts build:*) : dans ce contexte, l'utilisateur est toujours anonyme, donc pas de profil à
+// récupérer, et l'appel relatif /api/profil ciblerait de toute façon le mauvais serveur une fois
+// le composant embarqué sur un site tiers.
+if (typeof window !== 'undefined' && !import.meta.env.VITE_API_URL) {
   axios
     .get<Profil>('/api/profil')
     .then(async ({ data: profil }) => {
