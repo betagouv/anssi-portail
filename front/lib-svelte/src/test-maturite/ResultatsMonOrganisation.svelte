@@ -11,10 +11,18 @@
     dateRealisation?: Date;
     defilementAutomatique?: boolean;
     idNiveau: IdNiveau;
+    mode?: 'autonome';
     urlBase?: string;
   }
 
-  let { animeTuiles = true, dateRealisation, defilementAutomatique = true, idNiveau, urlBase = '' }: Props = $props();
+  let {
+    animeTuiles = true,
+    dateRealisation,
+    defilementAutomatique = true,
+    idNiveau,
+    mode,
+    urlBase = '',
+  }: Props = $props();
 
   const trouveNiveauMaturiteParId = (id: string) =>
     niveauxMaturite.find((niveau) => niveau.id === id) || niveauxMaturite[0];
@@ -47,9 +55,11 @@
   </div>
 </dsfr-container>
 
-<EncartDeRecommandationSelonMaturite {niveau} />
+<EncartDeRecommandationSelonMaturite {niveau} {mode} {urlBase} />
 
-<PartageTest cheminPartagé="/test-maturite" sujetMail="Test de maturité Cyber" typeDeRetour="test-maturité" />
+{#if mode !== 'autonome'}
+  <PartageTest cheminPartagé="/test-maturite" sujetMail="Test de maturité Cyber" typeDeRetour="test-maturité" />
+{/if}
 
 <style lang="scss">
   .date-realisation {

@@ -84,7 +84,7 @@
 {/if}
 
 {#if mode === 'autonome' || lienActif === '#votre-organisation'}
-  <ResultatsMonOrganisation {animeTuiles} {dateRealisation} {defilementAutomatique} {idNiveau} {urlBase} />
+  <ResultatsMonOrganisation {animeTuiles} {dateRealisation} {defilementAutomatique} {idNiveau} {mode} {urlBase} />
 {:else if lienActif === '#historique' && $profilStore}
   <HistoriqueTests {idRésultatTest} />
 {:else if $profilStore}
