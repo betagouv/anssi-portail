@@ -7,9 +7,10 @@
     niveauCourant: NiveauMaturite;
     animeTuiles?: boolean;
     defilementAutomatique?: boolean;
+    urlBase?: string;
   }
 
-  let { niveauCourant, animeTuiles = true, defilementAutomatique = true }: Props = $props();
+  let { niveauCourant, animeTuiles = true, defilementAutomatique = true, urlBase = '' }: Props = $props();
   let conteneur: HTMLDivElement | undefined = $state();
   let estPetitEcran = $state(false);
 
@@ -40,11 +41,15 @@
       class:courant={index === indexNiveauCourant}
       class:inactif={index > indexNiveauCourant}
     >
-      <img class="plante" src="/assets/images/test-maturite/niveaux/{niveau.id}.svg" alt="Niveau de maturité" />
+      <img
+        class="plante"
+        src="{urlBase}/assets/images/test-maturite/niveaux/{niveau.id}.svg"
+        alt="Niveau de maturité"
+      />
       <img
         class="coche"
         alt=""
-        src="/assets/images/coche-ronde{index > indexNiveauCourant ? '-inactive' : `-active`}.svg"
+        src="{urlBase}/assets/images/coche-ronde{index > indexNiveauCourant ? '-inactive' : `-active`}.svg"
       />
       <span>{niveau.label}</span>
     </div>

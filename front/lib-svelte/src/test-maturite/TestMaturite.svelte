@@ -119,7 +119,7 @@
 </script>
 
 {#if afficheResultats}
-  <ResultatsTestMaturite {idNiveau} />
+  <ResultatsTestMaturite {idNiveau} {mode} {urlBase} />
 {:else if introFaite}
   <dsfr-container class="test-maturite">
     {#if mode === 'autonome'}
