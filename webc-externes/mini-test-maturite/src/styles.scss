@@ -1,4 +1,5 @@
 @use '../../../front/assets/styles/commun.scss' as commun;
+@use '../../../front/assets/styles/responsive.scss' as *;
 
 .lab-anssi-mini-test-maturite {
   @include commun.polices-marianne('../../../front/assets/fonts/');
@@ -6,5 +7,211 @@
   .texte-standard-md {
     margin: 0;
     font-size: 1rem;
+  }
+
+  // Les règles ci-dessous sont copiées depuis front/assets/styles/test-maturite.scss, chargé sur
+  // le site via le layout Jekyll test-maturite mais absent du bundle du composant Svelte. On ne
+  // peut pas réutiliser ce fichier tel quel : il porte un front matter Jekyll (invalide en SCSS
+  // pur) et contient des règles non scopées (p, h1…h5) qui déborderaient sur la page hôte une
+  // fois le composant embarqué ailleurs. Elles sont donc recopiées et scopées ici sous
+  // .lab-anssi-mini-test-maturite.
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin: 0;
+  }
+
+  .test-maturite {
+    @include a-partir-de(lg) {
+      padding: 24px 0;
+    }
+
+    @include a-partir-de(xl) {
+      padding: 48px 0;
+    }
+
+    .contenu-section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .contenu-test {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 48px;
+
+      @include a-partir-de(lg) {
+        flex-direction: row;
+      }
+
+      @include a-partir-de(xl) {
+        gap: 48px;
+      }
+    }
+
+    .formulaire {
+      width: 100%;
+    }
+
+    .illustration {
+      display: none;
+      padding: 0;
+      background-color: var(--brown-cafe-creme-975-75);
+      border-radius: 8px;
+
+      img {
+        padding: 0 27px;
+      }
+
+      @include a-partir-de(lg) {
+        display: flex;
+        align-items: center;
+        flex: 0 0;
+        img {
+          width: 261px;
+
+          @include a-partir-de(xl) {
+            width: 432px;
+          }
+        }
+      }
+    }
+
+    .etape {
+      color: #3a3a3a;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+    }
+
+    h5 {
+      margin-top: 4px;
+      font-size: 1.125rem;
+      font-weight: bold;
+      line-height: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.375rem;
+      font-weight: bold;
+      line-height: 1.75rem;
+    }
+
+    .propositions {
+      padding: 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    label {
+      display: flex;
+      cursor: pointer;
+      gap: 8px;
+      align-items: flex-start;
+
+      input {
+        margin-top: 8px;
+      }
+    }
+
+    .commandes {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 16px;
+      text-align: center;
+
+      @include a-partir-de(sm) {
+        flex-direction: row;
+        align-items: center;
+        dsfr-button:first-of-type {
+          margin-left: auto;
+        }
+      }
+
+      a {
+        margin-top: 16px;
+        color: var(--noir);
+        text-underline-offset: 4px;
+        @include a-partir-de(sm) {
+          margin-top: 0;
+        }
+      }
+    }
+
+    .informations-complementaires {
+      margin-top: 8px;
+
+      label {
+        display: flex;
+        flex-direction: column;
+        margin: 40px 0 8px;
+      }
+    }
+  }
+
+  .resultats-test {
+    padding: 24px 0 48px;
+
+    .contenu-section {
+      padding: 0 0 16px;
+      overflow: hidden;
+
+      h2 {
+        margin: 0 0 40px;
+        font-size: 2rem;
+        line-height: 2.5rem;
+        @include a-partir-de(sm) {
+          font-size: 2.5rem;
+          line-height: 3rem;
+        }
+      }
+
+      a {
+        margin: 16px 0;
+      }
+    }
+
+    .description-niveau {
+      margin: 32px 0;
+      padding-left: 22px;
+      position: relative;
+
+      @include a-partir-de(sm) {
+        margin-left: 32px;
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 6px;
+        left: 0;
+        height: calc(100% - 6px);
+        background-color: var(--artwork-minor-blue-france);
+        min-width: 4px;
+        border-radius: unset;
+      }
+
+      h5 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        margin-bottom: 8px;
+      }
+
+      p {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+      }
+    }
+  }
+
+  .note {
+    font-style: italic;
+    margin: 24px 0 16px;
   }
 }
