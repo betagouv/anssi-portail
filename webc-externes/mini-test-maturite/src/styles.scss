@@ -1,0 +1,10 @@
+@use '../../../front/assets/styles/commun.scss' as commun;
+
+.lab-anssi-mini-test-maturite {
+  @include commun.polices-marianne('../../../front/assets/fonts/');
+  @include commun.titres-dsfr();
+  .texte-standard-md {
+    margin: 0;
+    font-size: 1rem;
+  }
+}
