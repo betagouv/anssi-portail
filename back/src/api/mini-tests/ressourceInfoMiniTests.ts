@@ -1,3 +1,4 @@
+import cors from 'cors';
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
@@ -12,6 +13,7 @@ export const ressourceInfoMiniTests = ({
 
   routeur.get(
     '/',
+    cors(),
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
       const compteurMaturitéCyber = await entrepotResultatTest.taille();
