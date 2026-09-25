@@ -4,6 +4,7 @@
   import { cubicOut } from 'svelte/easing';
   import { Tween } from 'svelte/motion';
   import Bouton from '../ui/Bouton.svelte';
+  import EnteteAutonome from '../ui/EnteteAutonome.svelte';
   import type { PropriétésFilAriane } from '../ui/filAriane';
   import HerosRiche from '../ui/HerosRiche.svelte';
   import Lien from '../ui/Lien.svelte';
@@ -12,9 +13,11 @@
 
   interface Props {
     introFaite?: boolean;
+    mode?: 'autonome';
+    urlBase?: string;
   }
 
-  let { introFaite = $bindable(false) }: Props = $props();
+  let { introFaite = $bindable(false), mode, urlBase = '' }: Props = $props();
   let enPause = $state(false);
   let nombreOrganisation = new Tween(0, {
     duration: 2000,
@@ -31,68 +34,93 @@
   }
 
   onMount(async () => {
-    const réponse = await axios.get<{ compteurs: { MaturiteCyber: number } }>('/api/info-mini-tests');
+    const réponse = await axios.get<{ compteurs: { MaturiteCyber: number } }>(`${urlBase}/api/info-mini-tests`);
     nombreOrganisation.target = réponse.data.compteurs.MaturiteCyber;
   });
 
-  const propriétésFilAriane: PropriétésFilAriane = {
-    branche: {
-      nom: 'Faire le test !',
-      lien: '/faire-le-test',
-    },
-    feuille: 'Test de maturité cyber',
-    fondSombre: false,
-  };
+  const propriétésFilAriane: PropriétésFilAriane | undefined = $derived(
+    mode === 'autonome'
+      ? undefined
+      : {
+          branche: {
+            nom: 'Faire le test !',
+            lien: '/faire-le-test',
+          },
+          feuille: 'Test de maturité cyber',
+          fondSombre: false,
+        }
+  );
 </script>
 
-<HerosRiche
-  description="Obtenez en 6 questions une évaluation indicative de la maturité cyber de votre organisation."
-  {propriétésFilAriane}
-  variante="cafe-creme"
-  badges={[
-    { label: '⏱️ 5 min.', accent: 'green-bourgeon' },
-    {
-      label: `🔥 +${Math.round(nombreOrganisation.current / 100) * 100} organisations ont fait le test`,
-      accent: 'green-bourgeon',
-    },
-  ]}
-  class="avec-image-fond"
-  tailleBadges="md"
->
-  {#snippet titreHtml()}
-    Quelle est la <MotEnExergue motif="vague" couleur="macaron">matu&shy;rité</MotEnExergue>
-    <MotEnExergue motif="vague" couleur="macaron" petit>cyber</MotEnExergue> de votre organisa&shy;tion ?
-  {/snippet}
-  {#snippet illustration()}
-    <div class="illustration-du-bandeau">
-      <CarrouselMaturite {enPause} />
-      <div class="controle-animation">
-        <Bouton
-          type="secondaire"
-          icone={enPause ? 'play-circle-line' : 'pause-circle-line'}
-          iconeSeule
-          libelle={libelléPause}
-          titre={libelléPause}
-          surClic={basculePause}
-        />
+{#snippet herosRiche()}
+  <HerosRiche
+    description="Obtenez en 6 questions une évaluation indicative de la maturité cyber de votre organisation."
+    {propriétésFilAriane}
+    variante="cafe-creme"
+    badges={[
+      { label: '⏱️ 5 min.', accent: 'green-bourgeon' },
+      {
+        label: `🔥 +${Math.round(nombreOrganisation.current / 100) * 100} organisations ont fait le test`,
+        accent: 'green-bourgeon',
+      },
+    ]}
+    class="avec-image-fond"
+    tailleBadges="md"
+    {urlBase}
+  >
+    {#snippet titreHtml()}
+      Quelle est la <MotEnExergue motif="vague" couleur="macaron" {urlBase}>matu&shy;rité</MotEnExergue>
+      <MotEnExergue motif="vague" couleur="macaron" petit {urlBase}>cyber</MotEnExergue> de votre organisa&shy;tion ?
+    {/snippet}
+    {#snippet illustration()}
+      <div class="illustration-du-bandeau">
+        <CarrouselMaturite {enPause} />
+        <div class="controle-animation">
+          <Bouton
+            type="secondaire"
+            icone={enPause ? 'play-circle-line' : 'pause-circle-line'}
+            iconeSeule
+            libelle={libelléPause}
+            titre={libelléPause}
+            surClic={basculePause}
+          />
+        </div>
       </div>
-    </div>
-  {/snippet}
-  {#snippet actions()}
-    <div class="conteneur-actions">
-      <Bouton libelle="Débuter le test" type="primaire" surClic={debuteTeste} taille="lg" />
-      <Lien href="/session-groupe" icone="team-fill" libelle="Accéder à l’espace session en groupe" />
-    </div>
-  {/snippet}
-  {#snippet mentionAdditionnelle()}
-    Le résultat obtenu est une évaluation indicative basée sur un modèle élaboré par l’ANSSI.<br />
-    La maturité cyber n’est pas une évaluation du niveau de sécurité des systèmes d’information d’une organisation mais de
-    sa posture à l’égard des enjeux cyber.
-  {/snippet}
-</HerosRiche>
+    {/snippet}
+    {#snippet actions()}
+      <div class="conteneur-actions">
+        <Bouton libelle="Débuter le test" type="primaire" surClic={debuteTeste} taille="lg" />
+        <Lien href={`${urlBase}/session-groupe`} icone="team-fill" libelle="Accéder à l’espace session en groupe" />
+      </div>
+    {/snippet}
+    {#snippet mentionAdditionnelle()}
+      Le résultat obtenu est une évaluation indicative basée sur un modèle élaboré par l’ANSSI.<br />
+      La maturité cyber n’est pas une évaluation du niveau de sécurité des systèmes d’information d’une organisation mais
+      de sa posture à l’égard des enjeux cyber.
+    {/snippet}
+  </HerosRiche>
+{/snippet}
+
+{#if mode === 'autonome'}
+  <div class="entete">
+    <dsfr-container>
+      <EnteteAutonome {urlBase} />
+    </dsfr-container>
+    {@render herosRiche()}
+  </div>
+{:else}
+  {@render herosRiche()}
+{/if}
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
+
+  .entete {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background-color: var(--brown-cafe-creme-975-75);
+  }
 
   .illustration-du-bandeau {
     width: 100%;
