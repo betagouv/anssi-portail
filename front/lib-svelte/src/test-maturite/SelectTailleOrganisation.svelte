@@ -15,6 +15,7 @@
     tailleOrganisation: string;
     optionDefautIntitule?: string;
     optionDefautSelectionnable?: boolean;
+    urlBase?: string;
   };
   let {
     id = undefined,
@@ -22,12 +23,13 @@
     tailleOrganisation = $bindable(),
     optionDefautIntitule = "Sélectionner une taille d'organisation",
     optionDefautSelectionnable = false,
+    urlBase = '',
   }: Props = $props();
 
   let options = $state<Option[]>([]);
 
   onMount(async () => {
-    const reponse = await axios.get<TrancheEffectif[]>('/api/annuaire/tranches-effectif');
+    const reponse = await axios.get<TrancheEffectif[]>(`${urlBase}/api/annuaire/tranches-effectif`);
     options = reponse.data
       .filter((trancheEffectif) => trancheEffectif.code !== 'NN')
       .map((trancheEffectif) => ({
