@@ -215,8 +215,8 @@ catalogs:
       specifier: ^4.0.0
       version: 4.2.0
     prettier:
-      specifier: 3.9.7
-      version: 3.9.7
+      specifier: 3.9.8
+      version: 3.9.8
     svelte:
       specifier: 5.57.0
       version: 5.57.0
@@ -252,7 +252,7 @@ importers:
         version: 10.0.1(eslint@10.10.0(supports-color@10.2.2))
       '@ianvs/prettier-plugin-sort-imports':
         specifier: ^4.7.1
-        version: 4.7.1(prettier@3.9.7)(supports-color@10.2.2)
+        version: 4.7.1(prettier@3.9.8)(supports-color@10.2.2)
       concurrently:
         specifier: ^10.0.0
         version: 10.0.5
@@ -261,10 +261,10 @@ importers:
         version: 10.10.0(supports-color@10.2.2)
       prettier:
         specifier: 'catalog:'
-        version: 3.9.7
+        version: 3.9.8
       prettier-plugin-svelte:
         specifier: ^4.0.0
-        version: 4.1.1(prettier@3.9.7)(svelte@5.57.0(@typescript-eslint/types@8.70.0))
+        version: 4.1.1(prettier@3.9.8)(svelte@5.57.0(@typescript-eslint/types@8.70.0))
       tsx:
         specifier: 'catalog:'
         version: 4.23.13
@@ -449,7 +449,7 @@ importers:
         version: 9.0.3
       prettier:
         specifier: 'catalog:'
-        version: 3.9.7
+        version: 3.9.8
       regles-eslint:
         specifier: workspace:^
         version: link:../regles-eslint
@@ -569,10 +569,10 @@ importers:
         version: 9.0.3
       prettier:
         specifier: 'catalog:'
-        version: 3.9.7
+        version: 3.9.8
       prettier-plugin-svelte:
         specifier: ^4.0.0
-        version: 4.1.1(prettier@3.9.7)(svelte@5.57.0(@typescript-eslint/types@8.70.0))
+        version: 4.1.1(prettier@3.9.8)(svelte@5.57.0(@typescript-eslint/types@8.70.0))
       sass:
         specifier: ^1.102.0
         version: 1.104.1
@@ -3866,8 +3866,8 @@ packages:
       prettier: ^3.0.0
       svelte: '>=5.55.9'
 
-  prettier@3.9.7:
-    resolution: {integrity: sha512-T3mF5P7HFzZVLDQuCUNtJj6WK1pcpLMweMNUVwGb01bLNkH9AkKxtZvmInw8K6bnn2O3d6/5RHl6zSHiBAD0Og==}
+  prettier@3.9.8:
+    resolution: {integrity: sha512-WRFq3Wn3WId7LLROfMLdH7xaFr2jR62wU8nLO6rQUOLOxNZUviyJQs1M0iIhLexSFy+L+w0ch66wtoO2jRjG0A==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -5008,13 +5008,13 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.9.7)(supports-color@10.2.2)':
+  '@ianvs/prettier-plugin-sort-imports@4.7.1(prettier@3.9.8)(supports-color@10.2.2)':
     dependencies:
       '@babel/generator': 7.29.8
       '@babel/parser': 7.29.8
       '@babel/traverse': 7.29.8(supports-color@10.2.2)
       '@babel/types': 7.29.8
-      prettier: 3.9.7
+      prettier: 3.9.8
       semver: 7.8.5
     transitivePeerDependencies:
       - supports-color
@@ -7500,12 +7500,12 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-svelte@4.1.1(prettier@3.9.7)(svelte@5.57.0(@typescript-eslint/types@8.70.0)):
+  prettier-plugin-svelte@4.1.1(prettier@3.9.8)(svelte@5.57.0(@typescript-eslint/types@8.70.0)):
     dependencies:
-      prettier: 3.9.7
+      prettier: 3.9.8
       svelte: 5.57.0(@typescript-eslint/types@8.70.0)
 
-  prettier@3.9.7: {}
+  prettier@3.9.8: {}
 
   process-nextick-args@2.0.1: {}
 
