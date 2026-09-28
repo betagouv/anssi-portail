@@ -4,6 +4,10 @@ import { NextFunction, Request, Response } from 'express';
 import { AdaptateurCellar, CleDuBucket } from '../infra/adaptateurCellar.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 
+const UNE_HEURE = Temporal.Duration.from({ hours: 1 });
+const DUREE_CACHE_EN_SECONDES = UNE_HEURE.total('seconds');
+const DIRECTIVES_CACHE = `public, max-age=${DUREE_CACHE_EN_SECONDES}, s-maxage=${DUREE_CACHE_EN_SECONDES}, must-revalidate, proxy-revalidate`;
+
 export type FonctionDocumentManquant = (reponse: Response, nomDuDocument: string) => Promise<void>;
 export const gereDocumentManquantSimplement = async (reponse: Response) => {
   reponse.sendStatus(HttpStatusCode.NotFound);
@@ -35,10 +39,10 @@ export const fabriqueGestionnaireRessourceCellar = (
       reponse.contentType(fluxCellar.typeDeContenu);
       reponse.setHeader('content-length', fluxCellar.tailleDuContenu);
       reponse.set({
-        'cache-control': 'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate',
+        'cache-control': DIRECTIVES_CACHE,
         pragma: '',
-        expires: '3600',
-        'surrogate-control': 'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate',
+        expires: DUREE_CACHE_EN_SECONDES.toString(),
+        'surrogate-control': DIRECTIVES_CACHE,
       });
 
       // On écoute la déconnexion client pour détruire le flux source

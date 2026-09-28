@@ -81,6 +81,8 @@ import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResul
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
 
+const UNE_MINUTE = Temporal.Duration.from({ minutes: 1 });
+
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
 
@@ -99,12 +101,12 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(configurationServeur.middleware.interdisLaMiseEnCache);
 
   const limiteRequetesParMinuteGlobal = rateLimit({
-    windowMs: 60 * 1000,
+    windowMs: UNE_MINUTE.total('milliseconds'),
     limit: configurationServeur.reseau.maxRequetesParMinutes,
     keyGenerator: fabriqueCleRateLimit(configurationServeur.reseau.trustProxy),
   });
   const limiteRequetesParMinuteAPI = rateLimit({
-    windowMs: 60 * 1000,
+    windowMs: UNE_MINUTE.total('milliseconds'),
     limit: configurationServeur.reseau.maxRequetesParMinuteAPI,
     keyGenerator: fabriqueCleRateLimit(configurationServeur.reseau.trustProxy),
   });
