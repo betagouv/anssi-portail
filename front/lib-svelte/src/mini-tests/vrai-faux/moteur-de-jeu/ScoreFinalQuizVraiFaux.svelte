@@ -36,7 +36,7 @@
   const { résumé, conseil, couleur } = $derived.by(() => {
     if (nombreDeBonnesRéponses === nombreDeQuestions) {
       return {
-        résumé: 'Excellent. Vous connaissez la menace.',
+        résumé: 'Bravo, bien joué\u00a0!',
         conseil: conseils[0],
         couleur: 'vert',
       };
