@@ -44,19 +44,15 @@ jobs:
           bundler-cache: true
           cache-version: 0
 
-      - name: Installer la CLI Clever Cloud
-        shell: bash
-        run: pnpm add -g clever-tools@4.4.0
-
       - name: Connecter à Clever
         env:
           CLEVER_SECRET: ${{ secrets.CLEVER_CLOUD_SECRET }}
           CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
           ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
         run: |
-          clever link "$ID_APP"
+          pnpm exec clever link "$ID_APP"
 
-          clever env |
+          pnpm exec clever env |
             grep -E \
               -e '^SENTRY_AUTH_TOKEN=' \
               -e '^SENTRY_PROJET=' \
@@ -97,5 +93,5 @@ jobs:
           git add --force front/_site
           git commit -m "Ajoute le site généré"
           NODE_VERSION="$(./scripts/get-node-version.sh)"
-          clever env set CC_NODE_VERSION "$NODE_VERSION"
-          clever deploy --force --same-commit-policy=rebuild
+          pnpm exec clever env set CC_NODE_VERSION "$NODE_VERSION"
+          pnpm exec clever deploy --force --same-commit-policy=rebuild
