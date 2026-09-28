@@ -44,10 +44,6 @@ jobs:
           bundler-cache: true
           cache-version: 0
 
-      - name: Installer la CLI Clever Cloud
-        shell: bash
-        run: pnpm add -g clever-tools@4.4.0
-
       - name: Connecter à Clever
         env:
           CLEVER_SECRET: ${{ secrets.CLEVER_CLOUD_SECRET }}
