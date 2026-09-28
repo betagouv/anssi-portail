@@ -45,6 +45,7 @@
   let animationTexteEnCours = $state(false);
   let statutRéflexe = $state<'en attente' | 'bon' | 'mauvais' | 'temps écoulé'>('en attente');
   const délaiMinimalEntreSonsEnMs = 85;
+  let vitesseDÉcriture = $state(15);
 
   $effect(() => {
     choixEnCours = !actionsMasquées && statutRéflexe === 'en attente';
@@ -69,8 +70,6 @@
     if (mouvementRéduit) return;
     animationTexteEnCours = true;
 
-    const vitesse = 15;
-
     const éléments = nœud.querySelectorAll('*');
     éléments.forEach((élément) => {
       (élément as HTMLElement).style.visibility = 'hidden';
@@ -91,10 +90,9 @@
     let indexNœud = 0;
     let indexCaractère = 0;
     let dernièreSaisieSonoreÀ = 0;
-
-    const intervalle = setInterval(() => {
+    const tic = () => {
       if (indexNœud >= nœudsDeTexte.length) {
-        clearInterval(intervalle);
+        clearTimeout(tempsÉcoulé);
         animationTexteEnCours = false;
         return;
       }
@@ -121,15 +119,19 @@
         indexNœud++;
         indexCaractère = 0;
       }
-    }, vitesse);
+      setTimeout(tic, vitesseDÉcriture);
+    };
+
+    const tempsÉcoulé = setTimeout(tic, vitesseDÉcriture);
 
     return {
       destroy() {
-        clearInterval(intervalle);
+        clearTimeout(tempsÉcoulé);
       },
     };
   };
 
+  const accélèreMachineÀÉcrire = () => (vitesseDÉcriture = 0);
   let divTexteÉvènement: HTMLElement | undefined = $state(undefined);
   let divChoix: HTMLElement | undefined = $state(undefined);
 
@@ -153,7 +155,12 @@
     <h2 class="fr-h3" id="titre-evenement">{évènement.titre}</h2>
   </div>
   {#key évènement}
-    <div class="texte-evenement fr-text--md" use:machineÀÉcrire bind:this={divTexteÉvènement}>
+    <div
+      class="texte-evenement fr-text--md"
+      use:machineÀÉcrire
+      use:clic={accélèreMachineÀÉcrire}
+      bind:this={divTexteÉvènement}
+    >
       {#each évènement.contexte as élément (élément)}
         <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         <p>{@html aseptiseHtml(élément)}</p>
