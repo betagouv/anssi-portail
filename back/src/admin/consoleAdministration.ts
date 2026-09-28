@@ -31,6 +31,9 @@ import { Utilisateur } from '../metier/utilisateur.js';
 import { MigrationChiffrement } from './migrationChiffrement.js';
 import { MigrationHash } from './migrationHash.js';
 
+const CENT_MILLISECONDES = Temporal.Duration.from({ milliseconds: 100 });
+const CENT_CINQUANTE_MILLISECONDES = Temporal.Duration.from({ milliseconds: 150 });
+
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;
   private adaptateurEmail: AdaptateurEmail;
@@ -174,7 +177,7 @@ export class ConsoleAdministration {
       const profilsAnssi = await this.adaptateurProfilAnssi.recherche({
         emails: Array.from(correspondanceEmailsInfolettre.keys()),
       });
-      const enCadence = pThrottle({ limit: 1, interval: 100 });
+      const enCadence = pThrottle({ limit: 1, interval: CENT_MILLISECONDES.total('milliseconds') });
 
       for (const { email, nom, prenom, telephone } of profilsAnssi) {
         try {
@@ -407,7 +410,10 @@ export class ConsoleAdministration {
 
       process.stdout.write(`...${resultatsAvecUneInfoManquante.length} résultats à rattraper...\n`);
 
-      const enCadence = pThrottle({ limit: 1, interval: 150 }); // rate limit à 7 requetes/s
+      const enCadence = pThrottle({
+        limit: 1,
+        interval: CENT_CINQUANTE_MILLISECONDES.total('milliseconds'),
+      }); // rate limit à 7 requetes/s
       const promesses = resultatsAvecUneInfoManquante.map(
         enCadence(async ({ id, region, secteur, taille_organisation, email_utilisateur_hache }) => {
           const utilisateur = await this.entrepotUtilisateur.parEmailHache(email_utilisateur_hache);
