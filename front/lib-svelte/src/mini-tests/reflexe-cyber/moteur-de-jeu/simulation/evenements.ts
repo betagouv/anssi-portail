@@ -63,7 +63,7 @@ export const évènementsParScénario: ÉvènementsParScénario = {
         si: 'La chaîne logistique est bloquée et je suis seul. J’ai besoin d’un renfort technique maintenant.',
         communication: 'Des journalistes sollicitent les collaborateurs. Qui prend officiellement la parole ?',
         juridique: 'Dois-je déposer plainte et déclarer l’incident à notre assureur aujourd’hui ?',
-        rh: 'Les représentants du personnel menacent un droit de retrait. Quelle réponse validons-nous ?',
+        rh: "Les représentants du personnel envisagent d'exercer leur droit de retrait. Quelle réponse validons-nous ?",
         relations: 'Un client craint une propagation vers son SI. Quelle garantie pouvons-nous lui donner ?',
       },
     },
@@ -161,7 +161,7 @@ export const évènementsParScénario: ÉvènementsParScénario = {
       contexte: [
         'C’est un rançongiciel. Paie, cantine, périscolaire, crèche, rendez-vous, contrats — tout est chiffré.',
         'Le technicien réclame des renforts.',
-        'Les représentants du personnel menacent un droit de retrait. Des journalistes appellent directement des agents.',
+        "Les représentants du personnel envisagent d'exercer leur droit de retrait. Des journalistes appellent directement des agents.",
       ],
       notifications: {
         direction: 'L’attaque est confirmée. Pouvez-vous fixer les trois priorités immédiates ?',
