@@ -11,6 +11,8 @@ import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi.js';
 import { AdaptateurRechercheEntreprise } from './adaptateurRechercheEntreprise.js';
 import { UtilisateurBDD } from './utilisateurBDD.js';
 
+const SEPT_CENTS_MILLISECONDES = Temporal.Duration.from({ milliseconds: 700 });
+
 type DonneesUtilisateurEnClair = {
   email: string;
   cguAcceptees: boolean;
@@ -168,7 +170,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   async tous() {
     const utilisateursBDD = await this.knex<UtilisateurBDD>('utilisateurs');
     const result: Utilisateur[] = [];
-    const enCadence = pThrottle({ limit: 1, interval: 700 });
+    const enCadence = pThrottle({ limit: 1, interval: SEPT_CENTS_MILLISECONDES.total('milliseconds') });
 
     for (const utilisateurBDD of utilisateursBDD) {
       const utilisateur = await enCadence(() => this.hydrateUtilisateur(utilisateurBDD))();
