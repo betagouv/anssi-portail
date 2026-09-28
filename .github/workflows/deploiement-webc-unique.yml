@@ -28,7 +28,7 @@ on:
 jobs:
   deploiement:
     name: ${{ inputs.nom }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     environment: ${{ inputs.environnement }}
 
     steps:
