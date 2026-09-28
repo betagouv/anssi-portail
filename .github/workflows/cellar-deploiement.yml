@@ -68,13 +68,6 @@ jobs:
           cat resultats/rclone.log
           echo "rc=${RC:-0}" >> $GITHUB_OUTPUT
 
-      - name: Installer et configurer la CLI de S3cmd
-        uses: s3-actions/s3cmd@f6b9af96d329795d7ba6199c21ef84bf1211c940 # v3.0.0
-        with:
-          provider: clevercloud
-          access_key: ${{ secrets.CELLAR_ACCESS_KEY_ID }}
-          secret_key: ${{ secrets.CELLAR_SECRET_ACCESS_KEY }}
-
       - name: Generate GitHub Summary
         run: |
           echo "## 🔍 Prévisualisation des différences S3" >> $GITHUB_STEP_SUMMARY
