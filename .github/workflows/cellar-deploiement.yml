@@ -30,7 +30,7 @@ on:
 
 jobs:
   compare-les-buckets:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     environment: DEPLOIEMENT_GUIDES
     steps:
       - name: Prépare rclone
@@ -135,7 +135,7 @@ jobs:
           exit 1
 
   recopie-source-vers-destination:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: compare-les-buckets
     environment: DEPLOIEMENT_GUIDES
     steps:
@@ -184,7 +184,7 @@ jobs:
             cellar:${{ secrets.GUIDES_BUCKET_CIBLE }} \
 
   notifie-changement:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: recopie-source-vers-destination
     environment: DEPLOIEMENT_GUIDES
     steps:

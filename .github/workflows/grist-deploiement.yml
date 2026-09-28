@@ -30,7 +30,7 @@ on:
 jobs:
   genere-tableau-comparatif:
     name: Comparaison
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     environment: ${{ inputs.environnement }}
     steps:
       - name: Cloner le dépôt Git
@@ -63,7 +63,7 @@ jobs:
 
   deploie-ressources-grist:
     name: Déploiement
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: genere-tableau-comparatif
     environment: ${{ inputs.environnement }}
     steps:

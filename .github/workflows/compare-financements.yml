@@ -10,7 +10,7 @@ on:
 jobs:
   genere-rapport:
     name: 'Génère rapport'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     environment: FINANCEMENTS
     steps:
       - name: Cloner le dépôt Git
