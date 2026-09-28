@@ -4,6 +4,8 @@ import { DeleteObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client
 import { fromEnv } from '@aws-sdk/credential-providers';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 
+const TRENTE_SECONDES = Temporal.Duration.from({ seconds: 30 });
+
 export type DocumentCellar = {
   contenu: Buffer;
   typeDeContenu: string;
@@ -38,7 +40,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
     try {
       const reponse = await axios.get(
         `${selectionneURLCellarLecturePourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`,
-        { responseType: 'arraybuffer', timeout: 30_000 }
+        { responseType: 'arraybuffer', timeout: TRENTE_SECONDES.total('milliseconds') }
       );
       const typeDeContenu = (reponse.headers['content-type'] as string) ?? 'application/octet-stream';
       return {
@@ -58,7 +60,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
     try {
       const reponse: AxiosResponse<Readable> = await axios.get(
         `${selectionneURLCellarLecturePourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`,
-        { responseType: 'stream', timeout: 30_000 }
+        { responseType: 'stream', timeout: TRENTE_SECONDES.total('milliseconds') }
       );
       return {
         flux: reponse.data,
