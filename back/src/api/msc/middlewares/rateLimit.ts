@@ -4,19 +4,21 @@ import rateLimit from 'express-rate-limit';
 import { fabriqueCleRateLimit } from '../../clefRateLimit.js';
 import { ConfigurationServeur } from '../../configurationServeur.js';
 
+const UNE_MINUTE = Temporal.Duration.from({ minutes: 1 });
+
 export const configureLeRateLimit = (app: Express, configurationServeur: ConfigurationServeur) => {
   const limiteRequêtesParMinuteGlobal = rateLimit({
-    windowMs: 60 * 1000,
+    windowMs: UNE_MINUTE.total('milliseconds'),
     limit: configurationServeur.reseau.maxRequetesParMinutes,
     keyGenerator: fabriqueCleRateLimit(configurationServeur.reseau.trustProxy),
   });
   const limiteRequêtesParMinuteAPI = rateLimit({
-    windowMs: 60 * 1000,
+    windowMs: UNE_MINUTE.total('milliseconds'),
     limit: configurationServeur.reseau.maxRequetesParMinuteAPI,
     keyGenerator: fabriqueCleRateLimit(configurationServeur.reseau.trustProxy),
   });
   const limiteRequêtesParMinuteRetoursUtilisateurs = rateLimit({
-    windowMs: 60 * 1000,
+    windowMs: UNE_MINUTE.total('milliseconds'),
     limit: configurationServeur.reseau.maxRequetesParMinuteRetoursUtilisateurs,
     keyGenerator: fabriqueCleRateLimit(configurationServeur.reseau.trustProxy),
   });

@@ -2,6 +2,8 @@ import { Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
 
+const TRENTE_SECONDES = Temporal.Duration.from({ seconds: 30 });
+
 export const ressourceDeconnexionOIDC = (configurationServeur: ConfigurationServeur) => {
   const routes = Router();
 
@@ -14,7 +16,7 @@ export const ressourceDeconnexionOIDC = (configurationServeur: ConfigurationServ
       'AgentConnectInfo',
       { state },
       {
-        maxAge: 30_000,
+        maxAge: TRENTE_SECONDES.total('milliseconds'),
         httpOnly: true,
         sameSite: 'none',
         secure: true,

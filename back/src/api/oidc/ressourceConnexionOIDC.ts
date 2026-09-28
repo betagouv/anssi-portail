@@ -3,6 +3,8 @@ import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
 
+const DEUX_MINUTES = Temporal.Duration.from({ minutes: 2 });
+
 const ressourceConnexionOIDC = (configurationServeur: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
@@ -15,7 +17,7 @@ const ressourceConnexionOIDC = (configurationServeur: ConfigurationServeur) => {
       reponse.cookie(
         'AgentConnectInfo',
         { state, nonce },
-        { httpOnly: true, secure: true, maxAge: 120000, sameSite: 'none' }
+        { httpOnly: true, secure: true, maxAge: DEUX_MINUTES.total('milliseconds'), sameSite: 'none' }
       );
 
       reponse.redirect(url);
