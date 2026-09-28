@@ -55,55 +55,70 @@ jobs:
           pnpm --filter '${{ inputs.package }}' build:demo
           pnpm --filter '${{ inputs.package }}' build:prod
 
-      - name: Installer et configurer la CLI de S3cmd
-        uses: s3-actions/s3cmd@f6b9af96d329795d7ba6199c21ef84bf1211c940 # v3.0.0
-        with:
-          provider: clevercloud
-          access_key: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
-          secret_key: ${{ secrets.CLEVER_S3_SECRET_KEY }}
-
       - name: Envoyer les fichiers en démo
         env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
+          # La CLI AWS exige une région, mais Cellar n'en utilise pas la valeur.
+          AWS_DEFAULT_REGION: default
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CLEVER_S3_SECRET_KEY }}
+          CELLAR_ENDPOINT: https://cellar-c2.services.clever-cloud.com
           REPERTOIRE_COMPOSANT: ${{ inputs.repertoire }}
           NOM_COMPOSANT: ${{ inputs.package }}
         run: |
-          s3cmd put \
-            --acl-public \
-            --mime-type='application/javascript' \
+          upload() {
+            aws s3 cp "$1" "$2" \
+              --endpoint-url "$CELLAR_ENDPOINT" \
+              --acl public-read \
+              --content-type "$3" \
+              --only-show-errors
+          }
+
+          upload \
             "./${REPERTOIRE_COMPOSANT}/dist-demo/${NOM_COMPOSANT}.iife.js" \
-            "s3://messervicescyber-web-components/${release_version}/demo/"
+            "s3://messervicescyber-web-components/${release_version}/demo/" \
+            'application/javascript'
 
-          s3cmd put \
-            --acl-public \
-            --mime-type='text/css' \
+          upload \
             "./${REPERTOIRE_COMPOSANT}/dist-demo/${NOM_COMPOSANT}.css" \
-            "s3://messervicescyber-web-components/${release_version}/demo/"
+            "s3://messervicescyber-web-components/${release_version}/demo/" \
+            'text/css'
 
-          s3cmd put \
-            --acl-public \
-            --mime-type='text/plain' \
+          upload \
             "./${REPERTOIRE_COMPOSANT}/dist-demo/${NOM_COMPOSANT}.php" \
-            "s3://messervicescyber-web-components/${release_version}/demo/"
+            "s3://messervicescyber-web-components/${release_version}/demo/" \
+            'text/plain'
 
       - name: Envoyer les fichiers en prod
         env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
+          # La CLI AWS exige une région, mais Cellar n'en utilise pas la valeur.
+          AWS_DEFAULT_REGION: default
+          AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CLEVER_S3_SECRET_KEY }}
+          CELLAR_ENDPOINT: https://cellar-c2.services.clever-cloud.com
           REPERTOIRE_COMPOSANT: ${{ inputs.repertoire }}
           NOM_COMPOSANT: ${{ inputs.package }}
         run: |
-          s3cmd put \
-            --acl-public \
-            --mime-type='application/javascript' \
+          upload() {
+            aws s3 cp "$1" "$2" \
+              --endpoint-url "$CELLAR_ENDPOINT" \
+              --acl public-read \
+              --content-type "$3" \
+              --only-show-errors
+          }
+
+          upload \
             "./${REPERTOIRE_COMPOSANT}/dist-prod/${NOM_COMPOSANT}.iife.js" \
-            "s3://messervicescyber-web-components/${release_version}/prod/"
+            "s3://messervicescyber-web-components/${release_version}/prod/" \
+            'application/javascript'
 
-          s3cmd put \
-            --acl-public \
-            --mime-type='text/css' \
+          upload \
             "./${REPERTOIRE_COMPOSANT}/dist-prod/${NOM_COMPOSANT}.css" \
-            "s3://messervicescyber-web-components/${release_version}/prod/"
+            "s3://messervicescyber-web-components/${release_version}/prod/" \
+            'text/css'
 
-          s3cmd put \
-            --acl-public \
-            --mime-type='text/plain' \
+          upload \
             "./${REPERTOIRE_COMPOSANT}/dist-prod/${NOM_COMPOSANT}.php" \
-            "s3://messervicescyber-web-components/${release_version}/prod/"
+            "s3://messervicescyber-web-components/${release_version}/prod/" \
+            'text/plain'
