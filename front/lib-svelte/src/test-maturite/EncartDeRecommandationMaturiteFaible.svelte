@@ -38,6 +38,7 @@
       <EncartPromotionParcoursBasique
         titre="12 mesures simples pour protéger votre organisation contre les cyberattaques"
         description="Un programme d'accompagnement gratuit, pensé pour les non-experts."
+        {mode}
         {urlBase}
       >
         {#snippet tags()}

@@ -12,6 +12,7 @@
     description: string;
     tags: Snippet;
     urlBase?: string;
+    mode?: 'autonome';
   }
 
   const fonctionnalites = [
@@ -46,11 +47,11 @@
       rich: true,
     },
   ];
-  let { titre, description, tags, urlBase }: Props = $props();
+  let { titre, description, tags, urlBase, mode }: Props = $props();
   let pageSource = $state('');
 
   onMount(() => {
-    pageSource = `${window.location.pathname}-encart-promotion-parcours-basique`;
+    pageSource = `${mode === 'autonome' ? window.location.origin : ''}${window.location.pathname}-encart-promotion-parcours-basique`;
   });
 </script>
 
