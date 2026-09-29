@@ -23,9 +23,9 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
     private readonly clientHttp: ClientHttp,
     private readonly urlDeBase: string,
     private readonly cleApi: string,
-    dureeCacheEnSecondes: number
+    dureeCache: Temporal.Duration
   ) {
-    this.cache = new Cache({ ttl: dureeCacheEnSecondes });
+    this.cache = new Cache({ ttl: dureeCache });
   }
 
   protected appelleGrist(options: OptionsAppelGrist = {}, urlPreConstruite?: string) {

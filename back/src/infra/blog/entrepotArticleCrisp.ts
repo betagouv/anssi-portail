@@ -18,8 +18,8 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
     private readonly cmsCrisp: CmsCrisp,
     private readonly adaptateurEnvironnement: AdaptateurEnvironnement
   ) {
-    this.cacheDesRésumés = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
-    this.cacheDesArticles = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
+    this.cacheDesRésumés = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCache() });
+    this.cacheDesArticles = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCache() });
   }
 
   async tousLesArticlesDeBlog(): Promise<RésuméArticle[]> {
