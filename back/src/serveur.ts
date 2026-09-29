@@ -26,6 +26,7 @@ import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi.js'
 import { AdaptateurRechercheEntrepriseGouv } from './infra/adaptateurRechercheEntrepriseGouv.js';
 import { AdaptateurStatistiqueMiniTestsMémoire } from './infra/adaptateurStatistiqueMiniTestsMémoire.js';
 import { AdaptateurStatistiqueMiniTestsPostgres } from './infra/adaptateurStatistiqueMiniTestsPostgres.js';
+import { AdaptateurStatistiqueParcoursMémoire } from './infra/adaptateurStatistiqueParcoursMémoire.js';
 import { fabriqueAdaptateurEnrichissement } from './infra/enrichissement/adaptateurEnrichissement.js';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres.js';
 import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist.js';
@@ -62,6 +63,8 @@ const adaptateurHachage = fabriqueAdaptateurHachage({
 const adaptateurStatistiqueMiniTests = adaptateurEnvironnement.journal().baseDeDonnéesActive()
   ? new AdaptateurStatistiqueMiniTestsPostgres()
   : new AdaptateurStatistiqueMiniTestsMémoire();
+
+const adaptateurStatistiqueParcours = new AdaptateurStatistiqueParcoursMémoire();
 
 const entrepotFavori = new EntrepotFavoriPostgres({ adaptateurHachage });
 const entrepotFinancement = new EntrepotFinancementGrist({
@@ -221,6 +224,7 @@ const host = process.env.HOST;
       publieMesureConsultée,
     },
     adaptateurStatistiqueMiniTests,
+    adaptateurStatistiqueParcours,
   });
 
   const annonceEcoute = () => {
