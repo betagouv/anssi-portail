@@ -3,6 +3,9 @@ import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { EntrepotGristGenerique } from './EntrepotGristGenerique.js';
 import { fabriqueClientGet, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
 
+const UNE_MINUTE = Temporal.Duration.from({ minutes: 1 });
+const DEUX_HEURES = Temporal.Duration.from({ hours: 2 });
+
 describe("L'entrepôt Grist générique", () => {
   beforeEach(() => {
     vi.useFakeTimers({ toFake: ['Date'] });
@@ -20,7 +23,7 @@ describe("L'entrepôt Grist générique", () => {
         return { data: { records: [{ test: 'une chaine' }] } };
       }),
     };
-    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'urlDeBase', 'cleApi', 60);
+    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'urlDeBase', 'cleApi', UNE_MINUTE);
 
     vi.spyOn(clientHttp, 'get');
 
@@ -38,7 +41,7 @@ describe("L'entrepôt Grist générique", () => {
         return { data: { records: [{ test: 'une chaine de ' + url }] } };
       }),
     };
-    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'urlDeBase', 'cleApi', 60);
+    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'urlDeBase', 'cleApi', UNE_MINUTE);
 
     const premier = await entrepotRessourcesCyberGrist.avecFiltre(1);
     const second = await entrepotRessourcesCyberGrist.avecFiltre(2);
@@ -46,12 +49,8 @@ describe("L'entrepôt Grist générique", () => {
     expect(premier).not.toStrictEqual(second);
   });
 
-  const add = (date: Date, duration: { hours: number }) => {
-    return new Date(date.getTime() + duration.hours * 3600000);
-  };
-
   const ilSePasse2Heures = (): void => {
-    vi.setSystemTime(add(new Date(), { hours: 2 }));
+    vi.advanceTimersByTime(DEUX_HEURES.total('milliseconds'));
   };
 
   it("retourne la valeur précédente en cas d'erreur Grist", async () => {
@@ -66,7 +65,7 @@ describe("L'entrepôt Grist générique", () => {
         return Promise.reject(new Error('Erreur 404'));
       }),
     };
-    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'urlDeBase', 'cleApi', 60);
+    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'urlDeBase', 'cleApi', UNE_MINUTE);
     await entrepotRessourcesCyberGrist.tous();
     ilSePasse2Heures();
 

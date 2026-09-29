@@ -4,7 +4,7 @@ import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { AdaptateurRechercheEntreprise, ResultatRechercheEntreprise } from './adaptateurRechercheEntreprise.js';
 import { Cache } from './cache.js';
 
-const TRENTE_MINUTES = 60 * 30;
+const TRENTE_MINUTES = Temporal.Duration.from({ minutes: 30 });
 
 export class AdaptateurRechercheEntrepriseGouv implements AdaptateurRechercheEntreprise {
   cache: Cache<ResultatRechercheEntreprise[]>;
