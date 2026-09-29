@@ -121,5 +121,11 @@ describe('La ressource Statistiques', () => {
 
       expect(reponse.body.miniTests.exposition).toEqual(20);
     });
+
+    it('renvoie le nombres de parcours de sécurisation démarrés', async () => {
+      const reponse = await request(serveur).get('/api/statistiques');
+
+      expect(reponse.body.parcoursSécurisation.nombreDémarrés).toEqual(0);
+    });
   });
 });
