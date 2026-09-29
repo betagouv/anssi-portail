@@ -1,4 +1,5 @@
 import { AdaptateurStatistiqueMiniTests } from './adaptateurStatistiqueMiniTests.js';
+import { AdaptateurStatistiqueParcours } from './adaptateurStatistiqueParcours.js';
 import { EntrepotResultatTest } from './entrepotResultatTest.js';
 import { EntrepotUtilisateur } from './entrepotUtilisateur.js';
 import { IdNiveauMaturite } from './resultatTestMaturite.js';
@@ -31,11 +32,13 @@ export type Statistiques = {
 };
 
 export const calculeStatistiques = async ({
-  adaptateurStatistique,
+  adaptateurStatistiqueMiniTests,
+  adaptateurStatistiqueParcours,
   entrepotResultatTest,
   entrepotUtilisateur,
 }: {
-  adaptateurStatistique: AdaptateurStatistiqueMiniTests;
+  adaptateurStatistiqueMiniTests: AdaptateurStatistiqueMiniTests;
+  adaptateurStatistiqueParcours: AdaptateurStatistiqueParcours;
   entrepotResultatTest: EntrepotResultatTest;
   entrepotUtilisateur: EntrepotUtilisateur;
 }): Promise<Statistiques> => {
@@ -68,7 +71,8 @@ export const calculeStatistiques = async ({
       optimal: 0,
     } as Statistiques['testsMaturite']['parNiveau']
   );
-  const miniTests = await adaptateurStatistique.nombreDeMiniTestsRéalisés();
+  const miniTests = await adaptateurStatistiqueMiniTests.nombreDeMiniTestsRéalisés();
+  const nombreDeParcoursDémarrés = await adaptateurStatistiqueParcours.nombreDeParcoursDémarrés();
   return {
     utilisateursInscrits: await entrepotUtilisateur.taille(),
     testsMaturite: {
@@ -79,7 +83,7 @@ export const calculeStatistiques = async ({
     satisfactionUtilisateur: SATISFACTION_UTILISATEUR,
     miniTests,
     parcoursSécurisation: {
-      nombreDémarrés: 0,
+      nombreDémarrés: nombreDeParcoursDémarrés,
     },
   };
 };

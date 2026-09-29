@@ -6,7 +6,8 @@ import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';
 
 export const ressourceStatistiques = ({
-  adaptateurStatistiqueMiniTests: adaptateurStatistique,
+  adaptateurStatistiqueMiniTests,
+  adaptateurStatistiqueParcours,
   entrepotUtilisateur,
   entrepotResultatTest,
 }: ConfigurationServeur) => {
@@ -19,7 +20,8 @@ export const ressourceStatistiques = ({
       const statistiques = await calculeStatistiques({
         entrepotResultatTest,
         entrepotUtilisateur,
-        adaptateurStatistique,
+        adaptateurStatistiqueMiniTests,
+        adaptateurStatistiqueParcours,
       });
 
       reponse.send(statistiques);

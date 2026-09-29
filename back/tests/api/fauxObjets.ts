@@ -18,6 +18,7 @@ import { adaptateurMonAideCyberVide } from '../../src/infra/adaptateurMonAideCyb
 import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi.js';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
 import { AdaptateurStatistiqueMiniTestsMémoire } from '../../src/infra/adaptateurStatistiqueMiniTestsMémoire.js';
+import { AdaptateurStatistiqueParcoursMémoire } from '../../src/infra/adaptateurStatistiqueParcoursMémoire.js';
 import { AdaptateurEnrichissement } from '../../src/infra/enrichissement/adaptateurEnrichissement.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js';
@@ -329,6 +330,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurProfilAnssi: fauxAdaptateurProfilAnssi,
   adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
   adaptateurStatistiqueMiniTests: new AdaptateurStatistiqueMiniTestsMémoire(),
+  adaptateurStatistiqueParcours: new AdaptateurStatistiqueParcoursMémoire(),
   busEvenements: fabriqueBusPourLesTests(),
   cmsCrisp: new MockCmsCrisp(),
   entrepotFavori: new EntrepotFavoriMemoire(),

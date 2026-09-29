@@ -5,7 +5,9 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/msc.js';
 import { AdaptateurMonAideCyber } from '../../src/infra/adaptateurMonAideCyber.js';
 import { AdaptateurStatistiqueMiniTestsMémoire } from '../../src/infra/adaptateurStatistiqueMiniTestsMémoire.js';
+import { AdaptateurStatistiqueParcoursMémoire } from '../../src/infra/adaptateurStatistiqueParcoursMémoire.js';
 import { AdaptateurStatistiqueMiniTests } from '../../src/metier/adaptateurStatistiqueMiniTests.js';
+import { AdaptateurStatistiqueParcours } from '../../src/metier/adaptateurStatistiqueParcours.js';
 import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest.js';
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur.js';
 import { Statistiques } from '../../src/metier/statistiques.js';
@@ -21,6 +23,7 @@ describe('La ressource Statistiques', () => {
     let entrepotUtilisateur: EntrepotUtilisateur;
     let entrepotResultatTest: EntrepotResultatTest;
     let adaptateurStatistiqueMiniTests: AdaptateurStatistiqueMiniTests;
+    let adaptateurStatistiqueParcours: AdaptateurStatistiqueParcours;
     let monAideCyber: AdaptateurMonAideCyber;
     let statistiquesParDéfaut: Statistiques['miniTests'];
 
@@ -28,6 +31,7 @@ describe('La ressource Statistiques', () => {
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
       entrepotResultatTest = new EntrepotResultatTestMemoire();
       adaptateurStatistiqueMiniTests = new AdaptateurStatistiqueMiniTestsMémoire();
+      adaptateurStatistiqueParcours = new AdaptateurStatistiqueParcoursMémoire();
       monAideCyber = {
         creeDemandeAide: async () => {},
       };
@@ -36,6 +40,7 @@ describe('La ressource Statistiques', () => {
         entrepotUtilisateur,
         entrepotResultatTest,
         adaptateurStatistiqueMiniTests,
+        adaptateurStatistiqueParcours,
         adaptateurMonAideCyber: monAideCyber,
       });
 
@@ -123,9 +128,11 @@ describe('La ressource Statistiques', () => {
     });
 
     it('renvoie le nombres de parcours de sécurisation démarrés', async () => {
+      adaptateurStatistiqueParcours.nombreDeParcoursDémarrés = async () => 12;
+
       const reponse = await request(serveur).get('/api/statistiques');
 
-      expect(reponse.body.parcoursSécurisation.nombreDémarrés).toEqual(0);
+      expect(reponse.body.parcoursSécurisation.nombreDémarrés).toEqual(12);
     });
   });
 });
