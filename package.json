@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "serveur.ts",
+  "engines": {
+    "node": ">=26.0.0"
+  },
   "scripts": {
     "preadmin": "pnpm --filter @anssi-portail/axios build",
     "admin": "node -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
