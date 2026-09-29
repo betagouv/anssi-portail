@@ -34,6 +34,7 @@ const rolldownOptions: NonNullable<UserConfig['build']>['rolldownOptions'] = {
     'mini-test-reflexe-cyber': 'src/mini-tests/reflexe-cyber/LandingReflexeCyber.svelte',
     'mini-test-reflexe-cyber-parcours': 'src/mini-tests/reflexe-cyber/moteur-de-jeu/ParcoursReflexeCyber.svelte',
     exposition: 'src/mini-tests/exposition/ExpositionCyberattaques.svelte',
+    'conseils-cyber': 'src/conseils-cyber/ConseilsCyber.svelte',
   },
   output: {
     entryFileNames: `assets/[name].js`,

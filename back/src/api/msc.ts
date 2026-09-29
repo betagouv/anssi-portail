@@ -293,6 +293,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'reflexes-cyber-en-ligne',
     'reflexes-cyber-en-ligne/parcours',
     'exposition',
+    'conseils-cyber',
   ];
 
   if (configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()) {
