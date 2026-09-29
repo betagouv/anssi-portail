@@ -18,6 +18,9 @@ type APIStatistiques = {
     vraiFaux: number;
     exposition: number;
   };
+  parcoursSécurisation: {
+    nombreDémarrés: number;
+  };
 };
 
 export type Statistiques = {
@@ -32,23 +35,30 @@ export type Statistiques = {
       optimal: number;
     };
   };
-  diagnosticsCyber: number;
   diagnosticsCyberArrondis: number;
   satisfactionUtilisateur: number;
   testsRéalisés: number;
+  démarchesDeSécurisation: number;
 };
 
 export const récupèreStatistiquesMSC = async (options?: { urlBase: string }): Promise<Statistiques> => {
   const réponse = await axios.get<APIStatistiques>(`${options?.urlBase ?? ''}/api/statistiques`);
-  const { utilisateursInscrits, testsMaturite, diagnosticsCyber, satisfactionUtilisateur, miniTests } = réponse.data;
+  const {
+    utilisateursInscrits,
+    testsMaturite,
+    diagnosticsCyber,
+    satisfactionUtilisateur,
+    miniTests,
+    parcoursSécurisation,
+  } = réponse.data;
   const diagnosticsCyberArrondis = Math.floor(diagnosticsCyber / 100) * 100;
   const testsRéalisés = miniTests.vraiFaux + testsMaturite.total + miniTests.exposition;
   return {
-    diagnosticsCyber,
     diagnosticsCyberArrondis,
     satisfactionUtilisateur,
     testsRéalisés,
     testsMaturite,
     utilisateursInscrits,
+    démarchesDeSécurisation: diagnosticsCyber + parcoursSécurisation.nombreDémarrés,
   };
 };
