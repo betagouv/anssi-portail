@@ -25,6 +25,9 @@ export type Statistiques = {
     exposition: number;
     reflexesCyber: number;
   };
+  parcoursSécurisation: {
+    nombreDémarrés: number;
+  };
 };
 
 export const calculeStatistiques = async ({
@@ -75,5 +78,8 @@ export const calculeStatistiques = async ({
     diagnosticsCyber: NOMBRES_DE_DIAGNOSTIC_CYBER,
     satisfactionUtilisateur: SATISFACTION_UTILISATEUR,
     miniTests,
+    parcoursSécurisation: {
+      nombreDémarrés: 0,
+    },
   };
 };
