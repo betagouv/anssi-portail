@@ -120,6 +120,7 @@ export default defineConfig(({ command, mode }) => {
           'mini-test-reflexe-cyber': 'src/main-mini-test-reflexe-cyber.ts',
           'mini-test-reflexe-cyber-parcours': 'src/main-mini-test-reflexe-cyber-parcours.ts',
           exposition: 'src/main-exposition.ts',
+          'conseils-cyber': 'src/main-conseils-cyber.ts',
         },
         output: {
           entryFileNames: `assets/[name].js`,
