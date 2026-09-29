@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "type": "module",
   "engines": {
-    "node": ">=24.0.0"
+    "node": ">=26.0.0"
   },
   "scripts": {
     "dev:financements:compare": "node --conditions=anssi-portail:source --import tsx --env-file .env src/financements.ts",

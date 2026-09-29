@@ -21,7 +21,7 @@
     "typecheck": "tsc --noEmit"
   },
   "engines": {
-    "node": ">=23"
+    "node": ">=26.0.0"
   },
   "private": true,
   "devDependencies": {
