@@ -37,7 +37,7 @@ export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements Ent
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
     const grist = adaptateurEnvironnement.grist();
-    super(clientHttp, grist.guides().urlTable(), grist.guides().cleApi(), grist.dureeCacheEnSecondes());
+    super(clientHttp, grist.guides().urlTable(), grist.guides().cleApi(), grist.dureeCache());
   }
 
   private readonly convertiBesoin = (besoin: string): BesoinCyber | undefined => {

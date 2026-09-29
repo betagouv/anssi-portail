@@ -1,14 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { Cache } from '../../src/infra/cache.js';
 
-const _24_HEURES = 24 * 60 * 60;
-
-const add = (date: Date, duration: { hours: number }) => {
-  return new Date(date.getTime() + duration.hours * 3600000);
-};
+const VINGT_QUATRE_HEURES = Temporal.Duration.from({ hours: 24 });
+const VINGT_CINQ_HEURES = Temporal.Duration.from({ hours: 25 });
 
 const ilSePasse25Heures = (): void => {
-  vi.setSystemTime(add(new Date(), { hours: 25 }));
+  vi.advanceTimersByTime(VINGT_CINQ_HEURES.total('milliseconds'));
 };
 
 describe('Le système de mise en cache', () => {
@@ -64,7 +61,7 @@ describe('Le système de mise en cache', () => {
   });
 
   it('effectue une mise en cache limitée dans le temps', async () => {
-    const cache = new Cache<string>({ ttl: _24_HEURES });
+    const cache = new Cache<string>({ ttl: VINGT_QUATRE_HEURES });
     const laFonction = vi
       .fn<() => Promise<string>>()
       .mockResolvedValueOnce('une valeur_0')
@@ -79,7 +76,7 @@ describe('Le système de mise en cache', () => {
   });
 
   it('la nouvelle valeur après expiration est mise en cache', async () => {
-    const cache = new Cache<string>({ ttl: _24_HEURES });
+    const cache = new Cache<string>({ ttl: VINGT_QUATRE_HEURES });
     const laFonction = vi
       .fn<() => Promise<string>>()
       .mockResolvedValueOnce('une valeur_0')
@@ -96,7 +93,7 @@ describe('Le système de mise en cache', () => {
 
   describe('en cas d’erreur d’exécution de la fonction', () => {
     it('retourne le cache en cas d’erreur sur un appel suivant', async () => {
-      const cache = new Cache<string>({ ttl: _24_HEURES });
+      const cache = new Cache<string>({ ttl: VINGT_QUATRE_HEURES });
       const laFonction = vi
         .fn<() => Promise<string>>()
         .mockResolvedValueOnce('une valeur_0')
@@ -113,7 +110,7 @@ describe('Le système de mise en cache', () => {
     });
 
     it('remonte l’erreur lors du premier appel', async () => {
-      const cache = new Cache<string>({ ttl: 1440 });
+      const cache = new Cache<string>({ ttl: Temporal.Duration.from({ minutes: 24 }) });
       const laFonction = vi.fn<() => Promise<string>>().mockRejectedValue(new Error('Une erreur est survenue'));
 
       await expect(cache.get('une-clef', laFonction)).rejects.toMatchObject({ message: 'Une erreur est survenue' });

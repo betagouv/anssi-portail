@@ -20,7 +20,7 @@ type AdaptateurEnvironnement = {
   };
   crisp: () => {
     catégorieDuBlog: () => string;
-    duréeDuCacheEnSecondes: () => number;
+    duréeDuCache: () => Temporal.Duration;
   };
   hachage: () => {
     tousLesSecretsDeHachage: () => { version: number; secret: string }[];
@@ -58,7 +58,7 @@ type AdaptateurEnvironnement = {
       idDocument: () => string;
       cleApi: () => string;
     };
-    dureeCacheEnSecondes: () => number;
+    dureeCache: () => Temporal.Duration;
   };
   urlCellar: () => {
     ressourcesCyber: () => string;
@@ -77,7 +77,7 @@ type AdaptateurEnvironnement = {
   };
   monAideCyber: () => {
     url: () => string;
-    dureeCacheStatistiquesEnSecondes: () => number;
+    dureeCacheStatistiques: () => Temporal.Duration;
   };
   fonctionnalites: () => {
     nis2: () => {
@@ -110,7 +110,12 @@ const ajouteBarreObliqueFinale = (url: string): string => {
   return url.endsWith('/') ? url : `${url}/`;
 };
 
-const CINQ_MINUTES = 300;
+const CINQ_MINUTES = Temporal.Duration.from({ minutes: 5 });
+
+const dureeEnSecondes = (valeur: string | undefined, dureeParDefaut: Temporal.Duration): Temporal.Duration => {
+  const secondes = Number(valeur);
+  return Number.isNaN(secondes) ? dureeParDefaut : Temporal.Duration.from({ seconds: secondes });
+};
 
 const adaptateurEnvironnement: AdaptateurEnvironnement = {
   urlBaseMSC: () => process.env.URL_BASE_MSC || '',
@@ -158,11 +163,7 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
   }),
   crisp: () => ({
     catégorieDuBlog: () => process.env.CRISP_ID_CATEGORIE_DU_BLOG || '',
-    duréeDuCacheEnSecondes: () => {
-      const dureeEnChaine = process.env.CRISP_DUREE_CACHE_EN_SECONDES;
-      const dureeEnNombre = Number(dureeEnChaine);
-      return isNaN(dureeEnNombre) ? CINQ_MINUTES : dureeEnNombre;
-    },
+    duréeDuCache: () => dureeEnSecondes(process.env.CRISP_DUREE_CACHE_EN_SECONDES, CINQ_MINUTES),
   }),
   hachage: () => ({
     tousLesSecretsDeHachage: () => {
@@ -235,11 +236,7 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       idDocument: () => process.env.NIS2_GRIST_ID_DOCUMENT || '',
       cleApi: () => process.env.NIS2_GRIST_API_KEY || process.env.GRIST_API_KEY || '',
     }),
-    dureeCacheEnSecondes: () => {
-      const dureeEnChaine = process.env.GUIDES_GRIST_DUREE_CACHE_EN_SECONDES;
-      const dureeEnNombre = Number(dureeEnChaine);
-      return isNaN(dureeEnNombre) ? CINQ_MINUTES : dureeEnNombre;
-    },
+    dureeCache: () => dureeEnSecondes(process.env.GUIDES_GRIST_DUREE_CACHE_EN_SECONDES, CINQ_MINUTES),
   }),
   urlCellar: () => {
     const pattternURLDeBase = process.env.CELLAR_URL ?? '';
@@ -270,11 +267,8 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
   }),
   monAideCyber: () => ({
     url: () => process.env.MON_AIDE_CYBER_URL_BASE ?? '',
-    dureeCacheStatistiquesEnSecondes: () => {
-      const dureeEnChaine = process.env.MON_AIDE_CYBER_DUREE_CACHE_STATISTIQUES_EN_SECONDES;
-      const dureeEnNombre = Number(dureeEnChaine);
-      return Number.isNaN(dureeEnNombre) ? CINQ_MINUTES : dureeEnNombre;
-    },
+    dureeCacheStatistiques: () =>
+      dureeEnSecondes(process.env.MON_AIDE_CYBER_DUREE_CACHE_STATISTIQUES_EN_SECONDES, CINQ_MINUTES),
   }),
   fonctionnalites: () => ({
     nis2: () => ({

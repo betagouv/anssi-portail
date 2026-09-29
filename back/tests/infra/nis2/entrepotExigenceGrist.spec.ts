@@ -4,6 +4,8 @@ import { EntrepotExigenceGrist, ExigenceGrist } from '../../../src/infra/nis2/en
 import { fauxAdaptateurEnvironnement } from '../../api/fauxObjets.js';
 import { fabriqueClientGet, fabriqueFauxClientHttp } from '../fournisseurClientHttp.js';
 
+const VINGT_SECONDES = Temporal.Duration.from({ seconds: 20 });
+
 describe("L'entrepot d'exigence Grist", () => {
   beforeEach(() => {
     vi.useFakeTimers({ toFake: ['Date'] });
@@ -29,7 +31,7 @@ describe("L'entrepot d'exigence Grist", () => {
   });
 
   const ilSePasse20Secondes = (): void => {
-    vi.setSystemTime(new Date(Date.now() + 20000));
+    vi.advanceTimersByTime(VINGT_SECONDES.total('milliseconds'));
   };
 
   it('sait récupérer des exigences en appelant Grist', async () => {
@@ -67,7 +69,7 @@ describe("L'entrepot d'exigence Grist", () => {
         ...fauxAdaptateurEnvironnement,
         grist: () => ({
           ...fauxAdaptateurEnvironnement.grist(),
-          dureeCacheEnSecondes: () => 0,
+          dureeCache: () => Temporal.Duration.from({ seconds: 0 }),
         }),
       },
     });

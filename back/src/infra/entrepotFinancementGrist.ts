@@ -38,7 +38,7 @@ export class EntrepotFinancementGrist extends EntrepotGrist<FinancementGrist> im
       clientHttp,
       configGrist.financement().urlTable(),
       configGrist.financement().cleApi(),
-      configGrist.dureeCacheEnSecondes()
+      configGrist.dureeCache()
     );
   }
 
