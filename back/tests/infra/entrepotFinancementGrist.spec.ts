@@ -24,7 +24,7 @@ describe("L'entrepot de financement Grist", () => {
         ...fauxAdaptateurEnvironnement,
         grist: {
           ...fauxAdaptateurEnvironnement.grist,
-          dureeCacheEnSecondes: () => 0,
+          duréeCache: () => Temporal.Duration.from({ seconds: 0 }),
         },
       },
     });
