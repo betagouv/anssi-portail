@@ -47,7 +47,7 @@
       rich: true,
     },
   ];
-  let { titre, description, tags, urlBase, mode }: Props = $props();
+  let { titre, description, tags, urlBase = '', mode }: Props = $props();
   let pageSource = $state('');
 
   onMount(() => {

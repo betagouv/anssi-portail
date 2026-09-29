@@ -3,7 +3,7 @@
     urlBase: string;
   }
 
-  let { urlBase }: Props = $props();
+  let { urlBase = '' }: Props = $props();
 </script>
 
 <div class="entete-principale">
