@@ -20,8 +20,8 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
     private readonly adaptateurEnvironnement: AdaptateurEnvironnement,
     private readonly rapporteur: Rapporteur
   ) {
-    this.cacheDesRésumés = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
-    this.cacheDesArticles = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
+    this.cacheDesRésumés = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCache() });
+    this.cacheDesArticles = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCache() });
   }
 
   async tousLesArticlesDeBlog(): Promise<RésuméArticle[]> {
