@@ -4,6 +4,9 @@
   "description": "",
   "main": "src/index.ts",
   "type": "module",
+  "engines": {
+    "node": ">=26.0.0"
+  },
   "scripts": {
     "start": "node --conditions=anssi-portail:source --import tsx src/index.ts",
     "dev": "node --conditions=anssi-portail:source --env-file ../.env --env-file .env --import tsx src/index.ts",
