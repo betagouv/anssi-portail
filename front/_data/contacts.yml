@@ -174,8 +174,8 @@ fr-pdl:
   services:
     - titre: Pays de la Loire Cyber Assistance
       telephone: 0 800 100 200
-      site: https://www.paysdelaloire.fr/economie-et-innovation/entreprise/mon-organisation-subit-une-cyberattaque
-      adresse: "1000 L’Occitane\n31670 Labège"
+      site: https://cyberassistance.fr/
+      adresse: 'Immeuble Le Cabestan, 1 Boulevard de Berlin, 44000 Nantes'
 
 fr-pac:
   region:
