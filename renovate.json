@@ -12,9 +12,9 @@
       "allowedVersions": "<11.0.0"
     },
     {
-      "description": "@types/node reste aligné sur la version majeure 24 définie dans .nvmrc",
+      "description": "@types/node reste aligné sur la version majeure 26 définie dans .nvmrc",
       "matchPackageNames": ["@types/node"],
-      "allowedVersions": "<25.0.0"
+      "allowedVersions": "<27.0.0"
     },
     {
       "description": "Regroupe les mises à jour des dépendances AWS SDK utilisées pour S3",
