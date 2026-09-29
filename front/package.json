@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
+  "engines": {
+    "node": ">=26.0.0"
+  },
   "scripts": {
     "test": "vitest --run"
   },

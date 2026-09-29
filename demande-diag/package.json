@@ -3,6 +3,9 @@
   "version": "1.1.2",
   "description": "",
   "type": "module",
+  "engines": {
+    "node": ">=26.0.0"
+  },
   "main": "index.ts",
   "scripts": {
     "build:local": "VITE_API_URL=http://localhost:3000 ENV=local vite build",

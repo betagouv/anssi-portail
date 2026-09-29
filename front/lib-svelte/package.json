@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "description": "Partie svelte pour le catalogue du portail de l’ANSSI",
   "type": "module",
+  "engines": {
+    "node": ">=26.0.0"
+  },
   "scripts": {
     "build": "npm-run-all --parallel build:client build:serveur",
     "build:client": "vite build",
