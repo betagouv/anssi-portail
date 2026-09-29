@@ -167,7 +167,7 @@ export const fauxAdaptateurProfilAnssi: AdaptateurProfilAnssi = {
 
 const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 
-const CINQ_MINUTES = 300;
+const CINQ_MINUTES = Temporal.Duration.from({ minutes: 5 });
 
 export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   versionDeConstruction: () => '',
@@ -199,7 +199,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   },
   crisp: {
     catégorieDuBlog: () => 'fauxIdCatégorieBlog',
-    duréeDuCacheEnSecondes: () => CINQ_MINUTES,
+    duréeDuCache: () => CINQ_MINUTES,
   },
   maintenance: {
     actif: () => false,
@@ -232,7 +232,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
       idDocument: () => 'idDeDocumentSocle',
       cleApi: () => 'FAUSSE_CLE_API_SOCLE',
     },
-    dureeCacheEnSecondes: () => CINQ_MINUTES,
+    dureeCache: () => CINQ_MINUTES,
   },
   urlCellar: {
     guides: () => 'https://guides.notre-cellar/',
@@ -251,7 +251,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   },
   monAideCyber: {
     url: () => 'https://demo.monaidecyber.fr',
-    dureeCacheStatistiquesEnSecondes: () => 300,
+    dureeCacheStatistiques: () => CINQ_MINUTES,
   },
   fonctionnalites: {
     nis2: {

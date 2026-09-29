@@ -69,7 +69,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
     const configGrist = adaptateurEnvironnement.grist;
-    super(clientHttp, '', configGrist.nis2.cleApi(), configGrist.dureeCacheEnSecondes());
+    super(clientHttp, '', configGrist.nis2.cleApi(), configGrist.dureeCache());
     this.rapporteur = rapporteur;
     this.croisements = {
       AE: {

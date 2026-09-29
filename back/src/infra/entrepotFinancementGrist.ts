@@ -34,12 +34,7 @@ export class EntrepotFinancementGrist extends EntrepotGrist<FinancementGrist> im
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
     const configGrist = adaptateurEnvironnement.grist;
-    super(
-      clientHttp,
-      configGrist.financement.urlTable(),
-      configGrist.financement.cleApi(),
-      configGrist.dureeCacheEnSecondes()
-    );
+    super(clientHttp, configGrist.financement.urlTable(), configGrist.financement.cleApi(), configGrist.dureeCache());
   }
 
   async parId(id: number): Promise<Financement | undefined> {
