@@ -1,25 +1,17 @@
 import { FournisseurHorloge } from './fournisseurHorloge.js';
 
-const add = (date: Date, duration: { seconds: number }) => {
-  return new Date(date.getTime() + duration.seconds * 1000);
-};
-
-const isAfter = (dateA: Date, dateB: Date): boolean => {
-  return dateA.getTime() > dateB.getTime();
-};
+const maintenant = () => Temporal.Instant.fromEpochMilliseconds(FournisseurHorloge.maintenant().getTime());
 
 type EntreeDeCache<T> = {
-  dateExpiration?: Date;
+  expiration?: Temporal.Instant;
   valeur: T;
 };
-
-type Secondes = number;
 
 export class Cache<T> {
   private readonly cache: Map<string, EntreeDeCache<T>> = new Map();
   private readonly requetesEnVol: Map<string, Promise<T>> = new Map();
 
-  constructor(private readonly configuration?: { ttl: Secondes }) {}
+  constructor(private readonly configuration?: { ttl: Temporal.Duration }) {}
 
   supprimeTout() {
     this.cache.clear();
@@ -28,8 +20,8 @@ export class Cache<T> {
 
   async get(clefCache: string, fonction: () => Promise<T>): Promise<T> {
     if (this.cache.has(clefCache)) {
-      const { valeur, dateExpiration } = this.cache.get(clefCache)!;
-      if (dateExpiration && isAfter(FournisseurHorloge.maintenant(), dateExpiration)) {
+      const { valeur, expiration } = this.cache.get(clefCache)!;
+      if (expiration && Temporal.Instant.compare(maintenant(), expiration) > 0) {
         return await this.metsEnCache(fonction, clefCache);
       }
       return valeur;
@@ -49,9 +41,7 @@ export class Cache<T> {
         this.cache.set(clefCache, {
           valeur: resultat,
           ...(this.configuration && {
-            dateExpiration: add(FournisseurHorloge.maintenant(), {
-              seconds: this.configuration.ttl,
-            }),
+            expiration: maintenant().add(this.configuration.ttl),
           }),
         });
         return resultat;
