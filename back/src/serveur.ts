@@ -27,6 +27,7 @@ import { AdaptateurRechercheEntrepriseGouv } from './infra/adaptateurRechercheEn
 import { AdaptateurStatistiqueMiniTestsMémoire } from './infra/adaptateurStatistiqueMiniTestsMémoire.js';
 import { AdaptateurStatistiqueMiniTestsPostgres } from './infra/adaptateurStatistiqueMiniTestsPostgres.js';
 import { AdaptateurStatistiqueParcoursMémoire } from './infra/adaptateurStatistiqueParcoursMémoire.js';
+import { AdaptateurStatistiqueParcoursPostgres } from './infra/adaptateurStatistiqueParcoursPostgres.js';
 import { fabriqueAdaptateurEnrichissement } from './infra/enrichissement/adaptateurEnrichissement.js';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres.js';
 import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist.js';
@@ -64,7 +65,9 @@ const adaptateurStatistiqueMiniTests = adaptateurEnvironnement.journal().baseDeD
   ? new AdaptateurStatistiqueMiniTestsPostgres()
   : new AdaptateurStatistiqueMiniTestsMémoire();
 
-const adaptateurStatistiqueParcours = new AdaptateurStatistiqueParcoursMémoire();
+const adaptateurStatistiqueParcours = adaptateurEnvironnement.journal().baseDeDonnéesActive()
+  ? new AdaptateurStatistiqueParcoursPostgres()
+  : new AdaptateurStatistiqueParcoursMémoire();
 
 const entrepotFavori = new EntrepotFavoriPostgres({ adaptateurHachage });
 const entrepotFinancement = new EntrepotFinancementGrist({
