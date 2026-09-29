@@ -164,8 +164,8 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
   'FR-PDL': {
     CSIRT: {
       nom: 'Pays de la Loire Cyber Assistance',
-      siteWeb: 'https://www.paysdelaloire.fr/economie-et-innovation/entreprise/mon-organisation-subit-une-cyberattaque',
-      adresse: '1000 L’Occitane\n31670 Labège',
+      siteWeb: 'https://cyberassistance.fr/',
+      adresse: 'Immeuble Le Cabestan, 1 Boulevard de Berlin, 44000 Nantes',
       telephone: '0 800 100 200',
     },
     COT: { nom: 'Régis DUBRULLE', email: 'pays-de-la-loire@ssi.gouv.fr' },
