@@ -1,32 +1,38 @@
 import { CmsCrisp } from '@lab-anssi/lib';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { EntrepôtArticleCrisp } from '../../src/infra/blog/entrepotArticleCrisp.js';
 import { EntrepôtArticle } from '../../src/metier/blog/entrepotArticle.js';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
 import { MockCmsCrisp } from '../mockCmsCrisp.js';
 
 describe("L'entrepôt d'article Crisp", () => {
+  const articlesCrisp = [
+    {
+      id: 'id1',
+      section: {},
+      slug: 'slug-1',
+      titre: 'titre 1',
+      url: 'url-1',
+    },
+    {
+      id: 'id2',
+      section: {},
+      slug: 'slug-2',
+      titre: 'titre 2',
+      url: 'url-2',
+    },
+  ];
+
   let entrepôtArticle: EntrepôtArticle;
+  let cmsCrisp: CmsCrisp;
+
+  beforeEach(() => {
+    cmsCrisp = new MockCmsCrisp();
+    entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, fauxAdaptateurEnvironnement);
+  });
 
   it("sait récupérer les résumés d'article de Crisp", async () => {
-    const cmsCrisp: CmsCrisp = new MockCmsCrisp();
-    cmsCrisp.recupereArticlesCategorie = vi.fn().mockResolvedValue([
-      {
-        id: 'id1',
-        section: {},
-        slug: 'slug-1',
-        titre: 'titre 1',
-        url: 'url-1',
-      },
-      {
-        id: 'id2',
-        section: {},
-        slug: 'slug-2',
-        titre: 'titre 2',
-        url: 'url-2',
-      },
-    ]);
-    entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, fauxAdaptateurEnvironnement);
+    cmsCrisp.recupereArticlesCategorie = vi.fn().mockResolvedValue(articlesCrisp);
 
     const résumés = await entrepôtArticle.tous();
 
@@ -38,24 +44,9 @@ describe("L'entrepôt d'article Crisp", () => {
   });
 
   it('initialise le cache après la récupération des résumés lors du premier appel', async () => {
-    const cmsCrisp: CmsCrisp = new MockCmsCrisp();
-    const recupereArticlesCategorieEspion = vi.spyOn(cmsCrisp, 'recupereArticlesCategorie').mockResolvedValue([
-      {
-        id: 'id1',
-        section: {},
-        slug: 'slug-1',
-        titre: 'titre 1',
-        url: 'url-1',
-      },
-      {
-        id: 'id2',
-        section: {},
-        slug: 'slug-2',
-        titre: 'titre 2',
-        url: 'url-2',
-      },
-    ]);
-    entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, fauxAdaptateurEnvironnement);
+    const recupereArticlesCategorieEspion = vi
+      .spyOn(cmsCrisp, 'recupereArticlesCategorie')
+      .mockResolvedValue(articlesCrisp);
 
     const résumésInitial = await entrepôtArticle.tous();
     const résumésMisEnCache = await entrepôtArticle.tous();
