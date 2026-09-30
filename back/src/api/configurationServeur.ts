@@ -12,6 +12,7 @@ import { GenerateurImage } from '../infra/generateurImage.js';
 import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { AdaptateurStatistiqueMiniTests } from '../metier/adaptateurStatistiqueMiniTests.js';
 import { AdaptateurStatistiqueParcours } from '../metier/adaptateurStatistiqueParcours.js';
+import { EntrepôtArticle } from '../metier/blog/entrepotArticle.js';
 import { EntrepotFavori } from '../metier/entrepotFavori.js';
 import { EntrepotFinancement } from '../metier/entrepotFinancement.js';
 import { EntrepotGuide } from '../metier/entrepotGuide.js';
@@ -47,6 +48,7 @@ export type ConfigurationServeur = {
   adaptateurStatistiqueParcours: AdaptateurStatistiqueParcours;
   busEvenements: BusEvenements;
   cmsCrisp: CmsCrisp;
+  entrepôtArticle: EntrepôtArticle;
   entrepotFavori: EntrepotFavori;
   entrepotFinancement: EntrepotFinancement;
   entrepotGuide: EntrepotGuide;

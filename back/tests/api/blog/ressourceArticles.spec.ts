@@ -3,13 +3,16 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc.js';
+import { EntrepôtArticleMémoire } from '../../persistance/entrepotArticleMemoire.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
 
 describe('La ressource des articles de blog', () => {
   let serveur: Express;
+  let entrepôtArticle: EntrepôtArticleMémoire;
 
   beforeEach(async () => {
-    serveur = creeServeur(configurationDeTestDuServeur);
+    entrepôtArticle = new EntrepôtArticleMémoire();
+    serveur = creeServeur({ ...configurationDeTestDuServeur, entrepôtArticle });
   });
 
   describe('sur une requête GET', () => {
@@ -17,6 +20,17 @@ describe('La ressource des articles de blog', () => {
       const reponse = await request(serveur).get('/api/articles');
 
       expect(reponse.status).toBe(HttpStatusCode.Ok);
+    });
+
+    it('renvoie la liste des articles du blog', async () => {
+      await entrepôtArticle.ajoute({ slug: 'article-un' });
+      await entrepôtArticle.ajoute({ slug: 'article-deux' });
+
+      const { body } = await request(serveur).get('/api/articles');
+
+      expect(body).toHaveLength(2);
+      expect(body[0].slug).toBe('article-un');
+      expect(body[1].slug).toBe('article-deux');
     });
   });
 });

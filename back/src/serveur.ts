@@ -206,6 +206,9 @@ const host = process.env.HOST;
     generateurCodeSessionDeGroupe: new GenerateurAleatoireCodeSessionDeGroupe(entrepotSessionDeGroupe),
     adaptateurHachage,
     messagerieInstantanee,
+    entrepôtArticle: {
+      tous: async () => [],
+    },
     entrepotFinancement,
     entrepotGuide,
     entrepotGuideTravail: entrepotGuideTravail,
