@@ -11,7 +11,7 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
     private readonly cmsCrisp: CmsCrisp,
     private readonly adaptateurEnvironnement: AdaptateurEnvironnement
   ) {
-    this.cache = new Cache();
+    this.cache = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
   }
   async tous(): Promise<RésuméArticle[]> {
     const récupèreDepuisCrisp = async () => {
