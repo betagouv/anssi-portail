@@ -19,7 +19,7 @@ type AdaptateurEnvironnement = {
     environnement: () => string | undefined;
   };
   crisp: () => {
-    idArticle: (id: string) => string | undefined;
+    catégorieDuBlog: () => string;
   };
   hachage: () => {
     tousLesSecretsDeHachage: () => { version: number; secret: string }[];
@@ -159,9 +159,7 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     environnement: () => process.env.SENTRY_ENVIRONNEMENT,
   }),
   crisp: () => ({
-    idArticle: (id: string) => {
-      return process.env[`ARTICLE_${id}_ID`];
-    },
+    catégorieDuBlog: () => process.env.CRISP_ID_CATEGORIE_DU_BLOG || '',
   }),
   hachage: () => ({
     tousLesSecretsDeHachage: () => {

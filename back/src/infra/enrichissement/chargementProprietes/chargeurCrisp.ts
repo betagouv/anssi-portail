@@ -1,13 +1,9 @@
 import { CmsCrisp } from '@lab-anssi/lib';
 import { JSDOM } from 'jsdom';
-import { AdaptateurEnvironnement } from '../../adaptateurEnvironnement.js';
 import { ChargeurDeProps } from './chargeurDeProps.js';
 
 export class ChargeurCrisp implements ChargeurDeProps {
-  constructor(
-    private readonly cmsCrisp: CmsCrisp,
-    private readonly adaptateurEnvironnement: AdaptateurEnvironnement
-  ) {}
+  constructor(private readonly cmsCrisp: CmsCrisp) {}
 
   async charge(dom: JSDOM) {
     const données = dom.window.document.getElementById('donnees-page-crisp')?.textContent;
@@ -20,7 +16,7 @@ export class ChargeurCrisp implements ChargeurDeProps {
       return;
     }
 
-    const idArticle = this.adaptateurEnvironnement.crisp().idArticle(clePageCrisp.toUpperCase());
+    const idArticle = clePageCrisp;
     if (!idArticle) {
       return;
     }

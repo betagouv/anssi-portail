@@ -160,7 +160,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     environnement: () => '',
   }),
   crisp: () => ({
-    idArticle: (_: string) => '',
+    catégorieDuBlog: () => 'fauxIdCatégorieBlog',
   }),
   maintenance: () => ({
     actif: () => false,
