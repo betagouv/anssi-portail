@@ -398,7 +398,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreRoute('/documents-guides', ressourceDocumentGuide(configurationServeur));
   enregistreRoute('/documents-ressources', ressourceDocumentRessource(configurationServeur));
 
-  enregistreRoute('/visas/tl-fr.sha2', ressourceControleContenuListeConfiance());
+  enregistreRoute('/visas/tl-fr.sha2', ressourceControleContenuListeConfiance({ version: 'v5' }));
+  enregistreRoute('/visas/tl-fr_v6.sha2', ressourceControleContenuListeConfiance({ version: 'v6' }));
   enregistreRoute('/visas', ressourceVisa(configurationServeur));
 
   enregistreRoute('/api/exigences-nis2', ressourceExigencesNis2(configurationServeur));
