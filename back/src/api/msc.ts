@@ -6,6 +6,7 @@ import cors from 'cors';
 import express, { json, NextFunction, Request, RequestHandler, Response } from 'express';
 import { IpFilter } from 'express-ipfilter';
 import rateLimit from 'express-rate-limit';
+import { ressourceArticles } from './blog/ressourceArticles.js';
 import { fabriqueCleRateLimit } from './clefRateLimit.js';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { erreurPageInterdite, erreurPageNonTrouvée, ErreurTraverséeDeChemin } from './erreurs.js';
@@ -306,6 +307,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute('/guides/:slug', ressourcePagesJekyll(configurationServeur, 'guides'));
 
+  enregistreRoute(`/partage-cyberdepart`, ressourcePagesJekyll(configurationServeur, 'partage-badge-cyberdepart'));
+
   routesPagesConnecteesStatiques.forEach((page) =>
     enregistreRoute(`/${page}`, ressourcePagesJekyllConnectees(configurationServeur, page))
   );
@@ -427,6 +430,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreRoute('/api/mini-tests/vrai-faux/reponses', ressourceRéponsesVraiFaux(configurationServeur));
   enregistreRoute('/api/mini-tests/reflexes-cyber/reponses', ressourceRéponsesRéflexesCyber(configurationServeur));
   enregistreRoute('/api/mini-tests/exposition/tests', ressourceTestsExposition(configurationServeur));
+  enregistreRoute('/api/articles', ressourceArticles(configurationServeur));
 
   const parcoursActivé = configurationServeur.adaptateurEnvironnement
     .fonctionnalites()
@@ -465,8 +469,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       ])
     );
     enregistreRoute('/api/retour-mini-tests', ressourceRetourMiniTest(configurationServeur));
-    enregistreRoute(`/partage-cyberdepart`, ressourcePagesJekyll(configurationServeur, 'partage-badge-cyberdepart'));
   }
+
   routesStatiques.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
   enregistreRoute('/robots.txt', ressourceRobotsTxt(configurationServeur));
   enregistreRoute('/llms.txt', ressourceLlmsTxt(configurationServeur));
