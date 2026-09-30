@@ -37,7 +37,7 @@
     "vitest-localstorage-mock": "^0.1.2"
   },
   "dependencies": {
-    "@sentry/browser": "^10.70.0",
+    "@sentry/browser": "^11.0.0",
     "axios": "catalog:",
     "dompurify": "^3.4.11",
     "entities": "catalog:",
