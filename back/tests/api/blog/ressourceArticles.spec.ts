@@ -5,6 +5,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { EntrepôtArticleMémoire } from '../../persistance/entrepotArticleMemoire.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
+import { ConstructeurDeRésuméDArticle } from './constructeurDeResumeDArticle.js';
 
 describe('La ressource des articles de blog', () => {
   let serveur: Express;
@@ -23,14 +24,21 @@ describe('La ressource des articles de blog', () => {
     });
 
     it('renvoie la liste des articles du blog', async () => {
-      await entrepôtArticle.ajoute({ slug: 'article-un' });
-      await entrepôtArticle.ajoute({ slug: 'article-deux' });
+      const article1 = new ConstructeurDeRésuméDArticle().avecLeSlug('article-un').avecLeTitre('Article 1').construis();
+      const article2 = new ConstructeurDeRésuméDArticle()
+        .avecLeSlug('article-deux')
+        .avecLeTitre('Article 2')
+        .construis();
+      await entrepôtArticle.ajoute(article1);
+      await entrepôtArticle.ajoute(article2);
 
       const { body } = await request(serveur).get('/api/articles');
 
       expect(body).toHaveLength(2);
       expect(body[0].slug).toBe('article-un');
+      expect(body[0].titre).toBe('Article 1');
       expect(body[1].slug).toBe('article-deux');
+      expect(body[1].titre).toBe('Article 2');
     });
   });
 });
