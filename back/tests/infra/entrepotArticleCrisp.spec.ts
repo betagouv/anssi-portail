@@ -1,6 +1,7 @@
 import { AxiosError, AxiosResponse, HttpStatusCode } from '@anssi-portail/axios';
 import { CmsCrisp } from '@lab-anssi/lib';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
 import { EntrepôtArticleCrisp } from '../../src/infra/blog/entrepotArticleCrisp.js';
 import { EntrepôtArticle } from '../../src/metier/blog/entrepotArticle.js';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
@@ -26,12 +27,14 @@ describe("L'entrepôt d'article Crisp", () => {
 
   let entrepôtArticle: EntrepôtArticle;
   let cmsCrisp: CmsCrisp;
+  let adaptateurEnvironnement: AdaptateurEnvironnement;
 
   beforeEach(() => {
     vi.useFakeTimers({ toFake: ['Date'] });
     vi.setSystemTime(new Date('2025-01-01T00:00:00Z'));
+    adaptateurEnvironnement = { ...fauxAdaptateurEnvironnement };
     cmsCrisp = new MockCmsCrisp();
-    entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, fauxAdaptateurEnvironnement);
+    entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, adaptateurEnvironnement);
   });
 
   afterEach(() => {
@@ -76,6 +79,18 @@ describe("L'entrepôt d'article Crisp", () => {
         url: 'url-1',
       },
     ]);
+
+    const résumés = await entrepôtArticle.tous();
+
+    expect(résumés).toHaveLength(0);
+  });
+
+  it("retourne une liste de résumés d'article vide si la catégorie n'est pas fournie", async () => {
+    cmsCrisp.recupereArticlesCategorie = vi.fn().mockResolvedValue(articlesCrisp);
+    adaptateurEnvironnement.crisp = () => ({
+      ...fauxAdaptateurEnvironnement.crisp(),
+      catégorieDuBlog: () => '',
+    });
 
     const résumés = await entrepôtArticle.tous();
 
