@@ -32,22 +32,20 @@ export const adaptateurGestionErreurSentry: AdaptateurGestionErreur = {
         queues: false,
         graphQL: { document: false, variables: false },
       },
-      integrations: [...Sentry.getAutoPerformanceIntegrations()],
+      integrations: [
+        ...Sentry.getAutoPerformanceIntegrations(),
+        Sentry.expressIntegration({ shouldHandleError: false }),
+      ],
     });
     Sentry.setTag('msc-source', 'backend');
   },
-  controleurErreurs: (erreur: Error, requete: Request, reponse: Response, suite: NextFunction) => {
+  controleurErreurs: (erreur: Error, _requete: Request, reponse: Response, suite: NextFunction) => {
     if (erreur instanceof IpDeniedError) {
       reponse.status(HttpStatusCode.Unauthorized);
       reponse.end();
     } else {
-      const gestionnaireErreurSentry = Sentry.expressErrorHandler();
-      gestionnaireErreurSentry(
-        erreur,
-        requete as Parameters<typeof gestionnaireErreurSentry>[1],
-        reponse as unknown as Parameters<typeof gestionnaireErreurSentry>[2],
-        suite
-      );
+      Sentry.captureException(erreur);
+      suite(erreur);
     }
   },
 };
