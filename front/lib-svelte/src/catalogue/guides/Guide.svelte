@@ -2,7 +2,7 @@
   import { onMount, untrack } from 'svelte';
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { enPropriétéWebC } from '$plateforme/webComponent';
-  import EncartLienVersDemandeDiagnostic from '../../demande-aide-mon-aide-cyber/EncartLienVersDemandeDiagnostic.svelte';
+  import EncartLienVersParcoursCyberdepart from '../../demande-aide-mon-aide-cyber/EncartLienVersParcoursCyberdepart.svelte';
   import { clic } from '../../directives/actions.svelte';
   import BoutonFavori from '../../favoris/BoutonFavori.svelte';
   import { profilStore } from '../../stores/profil.store';
@@ -199,7 +199,7 @@
     </div>
   </dsfr-container>
   {#if guide.id === '/guides/guide-dhygiene-informatique'}
-    <EncartLienVersDemandeDiagnostic />
+    <EncartLienVersParcoursCyberdepart />
   {/if}
 {:else if !chargementEnCours}
   <dsfr-container>
