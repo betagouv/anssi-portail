@@ -54,7 +54,7 @@
     "@lab-anssi/lib": "^2.3.0",
     "@myriaddreamin/typst-ts-node-compiler": "^0.7.0",
     "@napi-rs/canvas": "^1.0.5",
-    "@sentry/node": "^10.0.0",
+    "@sentry/node": "^11.0.0",
     "bcrypt": "^6.0.0",
     "compression": "^1.8.1",
     "cookie-parser": "^1.4.7",
