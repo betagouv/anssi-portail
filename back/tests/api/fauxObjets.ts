@@ -162,6 +162,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   }),
   crisp: () => ({
     catégorieDuBlog: () => 'fauxIdCatégorieBlog',
+    duréeDuCacheEnSecondes: () => CINQ_MINUTES,
   }),
   maintenance: () => ({
     actif: () => false,

@@ -20,6 +20,7 @@ type AdaptateurEnvironnement = {
   };
   crisp: () => {
     catégorieDuBlog: () => string;
+    duréeDuCacheEnSecondes: () => number;
   };
   hachage: () => {
     tousLesSecretsDeHachage: () => { version: number; secret: string }[];
@@ -160,6 +161,11 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
   }),
   crisp: () => ({
     catégorieDuBlog: () => process.env.CRISP_ID_CATEGORIE_DU_BLOG || '',
+    duréeDuCacheEnSecondes: () => {
+      const dureeEnChaine = process.env.CRISP_DUREE_CACHE_EN_SECONDES;
+      const dureeEnNombre = Number(dureeEnChaine);
+      return isNaN(dureeEnNombre) ? CINQ_MINUTES : dureeEnNombre;
+    },
   }),
   hachage: () => ({
     tousLesSecretsDeHachage: () => {

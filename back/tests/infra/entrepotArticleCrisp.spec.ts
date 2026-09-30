@@ -1,5 +1,6 @@
+import { AxiosError, AxiosResponse, HttpStatusCode } from '@anssi-portail/axios';
 import { CmsCrisp } from '@lab-anssi/lib';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { EntrepôtArticleCrisp } from '../../src/infra/blog/entrepotArticleCrisp.js';
 import { EntrepôtArticle } from '../../src/metier/blog/entrepotArticle.js';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
@@ -27,8 +28,14 @@ describe("L'entrepôt d'article Crisp", () => {
   let cmsCrisp: CmsCrisp;
 
   beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2025-01-01T00:00:00Z'));
     cmsCrisp = new MockCmsCrisp();
     entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, fauxAdaptateurEnvironnement);
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it("sait récupérer les résumés d'article de Crisp", async () => {
@@ -57,5 +64,41 @@ describe("L'entrepôt d'article Crisp", () => {
     expect(résumésInitial[1].titre).toBe('titre 2');
     expect(résumésInitial).toEqual(résumésMisEnCache);
     expect(recupereArticlesCategorieEspion).toHaveBeenCalledExactlyOnceWith('fauxIdCatégorieBlog');
+  });
+
+  it('ignore les articles sans slug', async () => {
+    cmsCrisp.recupereArticlesCategorie = vi.fn().mockResolvedValue([
+      {
+        id: 'id1',
+        section: {},
+        slug: null,
+        titre: 'titre 1',
+        url: 'url-1',
+      },
+    ]);
+
+    const résumés = await entrepôtArticle.tous();
+
+    expect(résumés).toHaveLength(0);
+  });
+
+  describe("En cas d'erreur de limite de débit Crisp", () => {
+    it('fournit les données du cache', async () => {
+      const response: AxiosResponse = {
+        data: 'erreur',
+        status: HttpStatusCode.TooManyRequests,
+      } as AxiosResponse;
+
+      cmsCrisp.recupereArticlesCategorie = vi
+        .fn()
+        .mockResolvedValueOnce(articlesCrisp)
+        .mockThrowOnce(new AxiosError('Message', '429', undefined, undefined, response));
+
+      await entrepôtArticle.tous();
+      const résumésMisEnCache = await entrepôtArticle.tous();
+      vi.advanceTimersByTime(300 * 1000 + 1); // 5 minutes et 1 ms
+
+      expect(résumésMisEnCache).toHaveLength(2);
+    });
   });
 });
