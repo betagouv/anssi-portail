@@ -292,6 +292,24 @@ export class ConsoleAdministration {
     });
   }
 
+  async corrigeEvenementsAvecMauvaisePageSource() {
+    process.stdout.write(
+      'Migration des événements qui ont des données -> suivi -> source à /guides/guide-dhygiene-informatique-encart-lien-vers-demande-diagnostic \n'
+    );
+    await this.knexJournal.transaction(async (trx) => {
+      const ancienneSource = '/guides/guide-dhygiene-informatique-encart-lien-vers-demande-diagnostic';
+      const nouvelleSource = '/guides/guide-dhygiene-informatique-encart-lien-vers-parcours-cyberdepart';
+
+      return trx('evenements')
+        .withSchema('journal_msc')
+        .whereIn('type', ['PARCOURS_REJOINT', 'NOUVEL_UTILISATEUR_INSCRIT'])
+        .whereRaw("donnees->'suivi'->>'source' = ?", [ancienneSource])
+        .update({
+          donnees: trx.raw("jsonb_set(donnees, '{suivi,source}', to_jsonb(?::text))", [nouvelleSource]),
+        });
+    });
+  }
+
   async migreLesHashSha256DuJournal() {
     const leHashHMACCorrespondantA = async (leHash256: string) => {
       const ligne = await this.knexMSC('utilisateurs').where({ email_hache_256: leHash256 }).first();
