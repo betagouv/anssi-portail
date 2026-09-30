@@ -22,7 +22,7 @@ export const initialiseSentry = (environnement: AdaptateurEnvironnement) => {
       queues: false,
       graphQL: { document: false, variables: false },
     },
-    integrations: [...Sentry.getAutoPerformanceIntegrations()],
+    integrations: [...Sentry.getAutoPerformanceIntegrations(), Sentry.expressIntegration({ shouldHandleError: false })],
   });
   Sentry.setTag('msc-source', 'backend');
 };
@@ -33,12 +33,7 @@ export const rapporteurSentry: Rapporteur = {
   },
 };
 
-export const controleurErreursSentry: ErrorRequestHandler = (erreur, requete, reponse, suite) => {
-  const gestionnaire = Sentry.expressErrorHandler();
-  gestionnaire(
-    erreur,
-    requete as Parameters<typeof gestionnaire>[1],
-    reponse as unknown as Parameters<typeof gestionnaire>[2],
-    suite
-  );
+export const controleurErreursSentry: ErrorRequestHandler = (erreur, _requete, _reponse, suite) => {
+  Sentry.captureException(erreur);
+  suite(erreur);
 };
