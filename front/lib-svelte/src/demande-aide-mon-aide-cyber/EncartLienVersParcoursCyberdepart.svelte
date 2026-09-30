@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { afficheParcoursSecurisation } from '$plateforme/environnement';
+  import { afficheBadgeCyberdépart, afficheParcoursSecurisation } from '$plateforme/environnement';
   import { clic } from '../directives/actions.svelte';
   import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
   import Lien from '../ui/Lien.svelte';
@@ -21,7 +21,7 @@
       }
     }, 500);
     if (afficheParcoursSecurisation) {
-      const pageSource = `${window.location.pathname}-encart-lien-vers-demande-diagnostic`;
+      const pageSource = `${window.location.pathname}-encart-lien-vers-parcours-cyberdepart`;
       hrefCTA = `/modules/1?pageSource=${pageSource}`;
       libelleCTA = 'Je commence à sécuriser';
     }
@@ -32,6 +32,10 @@
     repliVisible = false;
     encart?.hidePopover?.();
   };
+
+  const libelléParcours = afficheBadgeCyberdépart
+    ? '🏆 Décrochez votre badge Cyberdépart'
+    : '🏆 Validez votre Cyberdépart';
 </script>
 
 <div
@@ -70,7 +74,7 @@
           <li><strong>Pratico-pratique :</strong> des outils pour vous aider</li>
         </ul>
 
-        <div class="appât fond-bleu-france-950"><strong>🏆 Décrochez votre badge Cyberdépart</strong></div>
+        <div class="appât fond-bleu-france-950"><strong>{libelléParcours}</strong></div>
       {:else}
         <dsfr-badge type="accent" accent="yellow-tournesol" label="Diagnostic cyber gratuit" size="sm"></dsfr-badge>
 
