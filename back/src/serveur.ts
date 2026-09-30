@@ -28,6 +28,7 @@ import { AdaptateurStatistiqueMiniTestsMémoire } from './infra/adaptateurStatis
 import { AdaptateurStatistiqueMiniTestsPostgres } from './infra/adaptateurStatistiqueMiniTestsPostgres.js';
 import { AdaptateurStatistiqueParcoursMémoire } from './infra/adaptateurStatistiqueParcoursMémoire.js';
 import { AdaptateurStatistiqueParcoursPostgres } from './infra/adaptateurStatistiqueParcoursPostgres.js';
+import { EntrepôtArticleCrisp } from './infra/blog/entrepotArticleCrisp.js';
 import { fabriqueAdaptateurEnrichissement } from './infra/enrichissement/adaptateurEnrichissement.js';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres.js';
 import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist.js';
@@ -153,6 +154,8 @@ const adaptateurEnrichissement = await fabriqueAdaptateurEnrichissement(
   cmsCrisp
 );
 
+const entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, adaptateurEnvironnement);
+
 const attributionParcours = fabriqueAttributionParcours({ entrepotUtilisateur, busEvenements });
 const attributionParcoursMesure = fabriqueAttributionParcoursMesure({
   entrepotMesure,
@@ -206,9 +209,7 @@ const host = process.env.HOST;
     generateurCodeSessionDeGroupe: new GenerateurAleatoireCodeSessionDeGroupe(entrepotSessionDeGroupe),
     adaptateurHachage,
     messagerieInstantanee,
-    entrepôtArticle: {
-      tous: async () => [],
-    },
+    entrepôtArticle,
     entrepotFinancement,
     entrepotGuide,
     entrepotGuideTravail: entrepotGuideTravail,
