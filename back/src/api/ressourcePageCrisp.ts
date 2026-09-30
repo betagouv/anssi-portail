@@ -1,23 +1,37 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
+import { HttpStatusCode, isAxiosError } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
+import z from 'zod';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';
 
-const ressourcePageCrisp = ({ cmsCrisp, adaptateurEnvironnement }: ConfigurationServeur) => {
+const ressourcePageCrisp = ({ cmsCrisp }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
     '/:id',
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
-      const idArticle = adaptateurEnvironnement.crisp().idArticle((requete.params.id as string).toUpperCase());
+      const idArticle = requete.params.id as string;
+
       if (!idArticle) {
         reponse.sendStatus(HttpStatusCode.NotFound);
         return;
       }
-      const pageHtmlCrisp = await cmsCrisp.recupereArticle(idArticle);
-      const { titre, tableDesMatieres, description, contenu } = pageHtmlCrisp;
-      reponse.send({ titre, description, contenu, tableDesMatieres });
+
+      if (!z.uuid().safeParse(idArticle).success) {
+        return reponse.sendStatus(HttpStatusCode.BadRequest);
+      }
+
+      try {
+        const pageHtmlCrisp = await cmsCrisp.recupereArticle(idArticle);
+        const { titre, tableDesMatieres, description, contenu } = pageHtmlCrisp;
+        reponse.send({ titre, description, contenu, tableDesMatieres });
+      } catch (e) {
+        if (isAxiosError(e) && e.response?.status === HttpStatusCode.NotFound) {
+          return reponse.sendStatus(HttpStatusCode.NotFound);
+        }
+        throw e;
+      }
     })
   );
   return routeur;

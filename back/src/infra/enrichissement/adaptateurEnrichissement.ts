@@ -99,7 +99,7 @@ export const fabriqueAdaptateurEnrichissement = async (
     new ChargeurGuide(résolveurDePage, adaptateurEnvironnement),
     new ChargeurExigences(entrepôtExigence),
     new ChargeurFinancements(résolveurDePage, entrepôtFinancement),
-    new ChargeurCrisp(cmsCrisp, adaptateurEnvironnement),
+    new ChargeurCrisp(cmsCrisp),
     new ChargeurFilAriane(),
   ];
 
