@@ -25,6 +25,7 @@ import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js
 import { Parcours } from '../../src/metier/parcours.js';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests.js';
 import { MockCmsCrisp } from '../mockCmsCrisp.js';
+import { EntrepôtArticleMémoire } from '../persistance/entrepotArticleMemoire.js';
 import { EntrepotExigenceMemoire } from '../persistance/entrepotExigenceMemoire.js';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire.js';
 import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire.js';
@@ -333,6 +334,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurStatistiqueParcours: new AdaptateurStatistiqueParcoursMémoire(),
   busEvenements: fabriqueBusPourLesTests(),
   cmsCrisp: new MockCmsCrisp(),
+  entrepôtArticle: new EntrepôtArticleMémoire(),
   entrepotFavori: new EntrepotFavoriMemoire(),
   entrepotFinancement: new EntrepotFinancementMemoire(),
   entrepotGuide: new EntrepotGuideMemoire(),
