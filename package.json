@@ -4,7 +4,7 @@
   "description": "",
   "main": "serveur.ts",
   "scripts": {
-    "preadmin": "pnpm --filter @anssi-portail/axios build && pnpm --filter @anssi-portail/back build",
+    "preadmin": "pnpm --filter @anssi-portail/axios build",
     "admin": "node -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
     "admin:dev": "node --conditions=anssi-portail:source --import tsx --env-file .env -e \"const admin = new (require('./back/src/admin/consoleAdministration.ts').ConsoleAdministration)()\" -i",
     "bootstrap": "(bundler check --gemfile=front/Gemfile || bundler install --gemfile=front/Gemfile) && pnpm install --frozen-lockfile",
