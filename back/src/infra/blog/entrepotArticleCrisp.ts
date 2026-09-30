@@ -1,4 +1,4 @@
-import { CmsCrisp } from '@lab-anssi/lib';
+import { CmsCrisp, ResumeArticleCrispAvecSlug } from '@lab-anssi/lib';
 import { EntrepôtArticle } from '../../metier/blog/entrepotArticle.js';
 import { RésuméArticle } from '../../metier/blog/RésuméArticle.js';
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
@@ -18,10 +18,12 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
       const articlesCrisp = await this.cmsCrisp.recupereArticlesCategorie(
         this.adaptateurEnvironnement.crisp().catégorieDuBlog()
       );
-      return articlesCrisp.map((ac) => ({
-        slug: ac.slug!,
-        titre: ac.titre,
-      }));
+      return articlesCrisp
+        .filter((ac): ac is ResumeArticleCrispAvecSlug & { slug: string } => !!ac.slug)
+        .map((ac) => ({
+          slug: ac.slug,
+          titre: ac.titre,
+        }));
     };
     return this.cache.get(EntrepôtArticleCrisp.CLÉ_LISTE_RÉSUMÉS_ARTICLE, récupèreDepuisCrisp);
   }
