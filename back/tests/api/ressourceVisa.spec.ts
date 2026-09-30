@@ -96,7 +96,7 @@ describe('La ressource de visa', () => {
       });
     });
 
-    describe('concernant le fichier de contrôle', () => {
+    describe('concernant le fichier de contrôle en v5', () => {
       it('n’appelle pas l’adaptateur cellar', async () => {
         let estAppelle: boolean = false;
         adaptateurCellar.getStream = async () => {
@@ -119,6 +119,31 @@ describe('La ressource de visa', () => {
         const reponse = await request(serveur).get('/visas/tl-fr.sha2');
 
         expect(reponse.body).toEqual(Buffer.from('49daa29a23ab75a58009dce5e2cda4bdd1912e47b07015b2980023f26d581e8b'));
+      });
+    });
+    describe('concernant le fichier de contrôle en v6', () => {
+      it('n’appelle pas l’adaptateur cellar', async () => {
+        let estAppelle: boolean = false;
+        adaptateurCellar.getStream = async () => {
+          estAppelle = true;
+          return undefined;
+        };
+
+        await request(serveur).get('/visas/tl-fr_v6.sha2');
+
+        expect(estAppelle).toBe(false);
+      });
+
+      it('retourne un statut OK', async () => {
+        const reponse = await request(serveur).get('/visas/tl-fr_v6.sha2');
+
+        expect(reponse.status).toBe(HttpStatusCode.Ok);
+      });
+
+      it('retourne le haché de la liste de confiance', async () => {
+        const reponse = await request(serveur).get('/visas/tl-fr_v6.sha2');
+
+        expect(reponse.body).toEqual(Buffer.from('07578f8f158efcd070c67f47d198f54c94c79a268cbdde567287d7c9701bba16'));
       });
     });
   });
