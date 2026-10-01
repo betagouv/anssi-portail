@@ -25,6 +25,7 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
       return articlesCrisp
         .filter((ac): ac is ResumeArticleCrispAvecSlug & { slug: string } => !!ac.slug)
         .map((ac) => ({
+          id: ac.id,
           slug: ac.slug,
           titre: ac.titre,
         }));
@@ -33,9 +34,16 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
   }
 
   async parSlug(slug: string): Promise<Article | undefined> {
+    const tousLesRésumésDArticles = await this.tous();
+    const résuméTrouvé = tousLesRésumésDArticles.find((r) => r.slug === slug);
+    if (!résuméTrouvé) {
+      return undefined;
+    }
+    const article = await this.cmsCrisp.recupereArticle(résuméTrouvé.id);
     return {
+      id: résuméTrouvé.id,
       slug,
-      titre: 'Article en dur',
+      titre: article.titre,
     };
   }
 }
