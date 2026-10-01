@@ -6,6 +6,7 @@ import cors from 'cors';
 import express, { json, NextFunction, Request, RequestHandler, Response } from 'express';
 import { IpFilter } from 'express-ipfilter';
 import rateLimit from 'express-rate-limit';
+import { ressourceArticle } from './blog/ressourceArticle.js';
 import { ressourceArticles } from './blog/ressourceArticles.js';
 import { fabriqueCleRateLimit } from './clefRateLimit.js';
 import { ConfigurationServeur } from './configurationServeur.js';
@@ -432,7 +433,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreRoute('/api/mini-tests/vrai-faux/reponses', ressourceRéponsesVraiFaux(configurationServeur));
   enregistreRoute('/api/mini-tests/reflexes-cyber/reponses', ressourceRéponsesRéflexesCyber(configurationServeur));
   enregistreRoute('/api/mini-tests/exposition/tests', ressourceTestsExposition(configurationServeur));
-  enregistreRoute('/api/articles', ressourceArticles(configurationServeur));
+  enregistreRoute('/api/articles', ressourceArticles(configurationServeur), ressourceArticle(configurationServeur));
 
   enregistreRoute(
     '/api/mesures',
