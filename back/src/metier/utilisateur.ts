@@ -26,7 +26,7 @@ export class Organisation {
   siret: string;
   departement: string | null;
   region: string | undefined;
-  codeActivite: string;
+  codeActivite: string | undefined;
   codeSecteur: string | undefined;
   codeTrancheEffectif: string | undefined;
 
@@ -43,7 +43,7 @@ export class Organisation {
     siret: string;
     departement: string | null;
     codeRegion?: string;
-    codeActivite: string;
+    codeActivite?: string;
     codeSecteur: string | undefined;
     codeTrancheEffectif: string | undefined;
   }) {
@@ -137,7 +137,16 @@ export class Utilisateur {
   async organisation(): Promise<Organisation> {
     if (!this._organisation) {
       const organisations = await this.adaptateurRechercheEntreprise.rechercheOrganisations(this.siretEntite, null);
-      this._organisation = new Organisation(organisations[0]);
+      this._organisation = new Organisation(
+        organisations[0] ?? {
+          nom: '',
+          siret: this.siretEntite,
+          departement: null,
+          codeActivite: undefined,
+          codeSecteur: undefined,
+          codeTrancheEffectif: undefined,
+        }
+      );
     }
     return this._organisation;
   }
