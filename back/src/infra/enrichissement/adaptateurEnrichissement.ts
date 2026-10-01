@@ -18,7 +18,7 @@ import { ChargeurFinancements } from './chargementProprietes/chargeurFinancement
 import { ChargeurGuide } from './chargementProprietes/chargeurGuides.js';
 import { ChargeurRessourcesCyber } from './chargementProprietes/chargeurRessourcesCyber.js';
 import { composantsAutorisés } from './composantsAutorises.genere.js';
-import { RésolveurDePage } from './résolveurDePage.js';
+import { RésolveurDePage } from './resolveurDePage.js';
 
 export interface AdaptateurEnrichissement {
   enrichisAvecComposants: (contenuPage: string, routeDemandée: string) => Promise<string>;

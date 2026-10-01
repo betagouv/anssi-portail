@@ -1,7 +1,7 @@
 import { JSDOM } from 'jsdom';
 import { guidePresentation } from '../../../presentation/guides/guidePresentation.js';
 import { AdaptateurEnvironnement } from '../../adaptateurEnvironnement.js';
-import { RésolveurDePage } from '../résolveurDePage.js';
+import { RésolveurDePage } from '../resolveurDePage.js';
 import { ChargeurDeProps } from './chargeurDeProps.js';
 
 export class ChargeurGuide implements ChargeurDeProps {

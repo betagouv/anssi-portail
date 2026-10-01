@@ -1,4 +1,4 @@
-import { RésuméArticle } from '../../../src/metier/blog/RésuméArticle.js';
+import { RésuméArticle } from '../../../src/metier/blog/resumeArticle.js';
 
 export class ConstructeurDeRésuméDArticle {
   private slug: string = 'slug';
