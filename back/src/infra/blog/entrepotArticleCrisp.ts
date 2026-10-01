@@ -3,6 +3,7 @@ import { Article } from '../../metier/blog/article.js';
 import { EntrepôtArticle } from '../../metier/blog/entrepotArticle.js';
 import { RésuméArticle } from '../../metier/blog/resumeArticle.js';
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
+import { aseptiseHtml } from '../aseptisationDuHtml.js';
 import { Cache } from '../cache.js';
 
 export class EntrepôtArticleCrisp implements EntrepôtArticle {
@@ -42,7 +43,7 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
     const article = await this.cmsCrisp.recupereArticle(résuméTrouvé.id);
 
     return {
-      contenu: article.contenu ?? '',
+      contenu: aseptiseHtml(article.contenu ?? ''),
       dateDeMiseÀJour: article.dateMiseAJour ? new Date(article.dateMiseAJour) : undefined,
       dateDePublication: article.datePublication ? new Date(article.datePublication) : undefined,
       description: article.description,
