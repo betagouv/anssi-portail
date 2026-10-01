@@ -18,22 +18,34 @@ export const adaptateurGestionErreurSentry: AdaptateurGestionErreur = {
     Sentry.init({
       dsn: config.dsn(),
       environment: config.environnement(),
-      integrations: [...Sentry.getAutoPerformanceIntegrations()],
+      dataCollection: {
+        userInfo: false,
+        cookies: false,
+        httpHeaders: {
+          request: { deny: ['forwarded', '-ip', 'remote-', 'via', '-user'] },
+          response: { deny: ['forwarded', '-ip', 'remote-', 'via', '-user'] },
+        },
+        httpBodies: [],
+        urlQueryParams: { deny: ['forwarded', '-ip', 'remote-', 'via', '-user'] },
+        genAI: { inputs: false, outputs: false },
+        databaseQueryData: false,
+        queues: false,
+        graphQL: { document: false, variables: false },
+      },
+      integrations: [
+        ...Sentry.getAutoPerformanceIntegrations(),
+        Sentry.expressIntegration({ shouldHandleError: false }),
+      ],
     });
     Sentry.setTag('msc-source', 'backend');
   },
-  controleurErreurs: (erreur: Error, requete: Request, reponse: Response, suite: NextFunction) => {
+  controleurErreurs: (erreur: Error, _requete: Request, reponse: Response, suite: NextFunction) => {
     if (erreur instanceof IpDeniedError) {
       reponse.status(HttpStatusCode.Unauthorized);
       reponse.end();
     } else {
-      const gestionnaireErreurSentry = Sentry.expressErrorHandler();
-      gestionnaireErreurSentry(
-        erreur,
-        requete as Parameters<typeof gestionnaireErreurSentry>[1],
-        reponse as unknown as Parameters<typeof gestionnaireErreurSentry>[2],
-        suite
-      );
+      Sentry.captureException(erreur);
+      suite(erreur);
     }
   },
 };
