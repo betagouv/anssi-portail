@@ -28,4 +28,5 @@ export const composantsAutorisés: string[] = [
   'mini-test-reflexe-cyber',
   'mini-test-reflexe-cyber-parcours',
   'exposition',
+  'conseils-cyber',
 ];

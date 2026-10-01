@@ -1,27 +1,14 @@
-import { CmsCrisp } from '@lab-anssi/lib';
 import { JSDOM } from 'jsdom';
+import { EntrepôtArticle } from '../../../metier/blog/entrepotArticle.js';
 import { ChargeurDeProps } from './chargeurDeProps.js';
 
 export class ChargeurCrisp implements ChargeurDeProps {
-  constructor(private readonly cmsCrisp: CmsCrisp) {}
+  constructor(private readonly entrepôtArticle: EntrepôtArticle) {}
 
-  async charge(dom: JSDOM) {
-    const données = dom.window.document.getElementById('donnees-page-crisp')?.textContent;
-    if (!données) {
-      return;
+  async charge(_dom: JSDOM, routeDemandée: string) {
+    if (routeDemandée.match(/conseils-cyber$/)) {
+      const résumésPréchargés = await this.entrepôtArticle.tous();
+      return { résumésPréchargés };
     }
-
-    const { clePageCrisp } = JSON.parse(données);
-    if (!clePageCrisp) {
-      return;
-    }
-
-    const idArticle = clePageCrisp;
-    if (!idArticle) {
-      return;
-    }
-
-    const pageCrispInitiale = await this.cmsCrisp.recupereArticle(idArticle);
-    return { pageCrispInitiale };
   }
 }

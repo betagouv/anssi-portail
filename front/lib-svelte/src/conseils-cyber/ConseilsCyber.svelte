@@ -1,13 +1,18 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, untrack } from 'svelte';
   import { récupèreRésumésDArticle, type RésuméArticleAPI } from '../passerelles/blog/articles';
   import { profilStore } from '../stores/profil.store';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
 
-  let résumés: RésuméArticleAPI[] = $state([]);
+  type Props = {
+    résumésPréchargés?: RésuméArticleAPI[];
+  };
 
+  const { résumésPréchargés = [] }: Props = $props();
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Conseils cyber' };
+
+  let résumés: RésuméArticleAPI[] = $state(untrack(() => résumésPréchargés));
 
   onMount(async () => {
     résumés = await récupèreRésumésDArticle();
@@ -31,7 +36,13 @@
         markup="h3"
         title={résumé.titre}
         size="sm"
-      ></dsfr-card>
+      >
+        <div slot="seo">
+          <h3>
+            <a href={`/conseils-cyber/${résumé.slug}`}>{résumé.titre}</a>
+          </h3>
+        </div>
+      </dsfr-card>
     {/each}
   </div>
 </dsfr-container>
