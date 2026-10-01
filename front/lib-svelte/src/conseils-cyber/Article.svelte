@@ -1,18 +1,18 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
-  import { récupèreArticle, type RésuméArticleAPI } from '../passerelles/blog/articles';
+  import { récupèreArticle, type ArticleAPI } from '../passerelles/blog/articles';
   import { profilStore } from '../stores/profil.store';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
 
   type Props = {
-    articlePréchargé?: RésuméArticleAPI;
+    articlePréchargé?: ArticleAPI;
     slugArticle?: string;
   };
 
   const { articlePréchargé, slugArticle }: Props = $props();
 
-  let article: RésuméArticleAPI | undefined = $state(untrack(() => articlePréchargé));
+  let article: ArticleAPI | undefined = $state(untrack(() => articlePréchargé));
 
   const propriétésFilAriane: PropriétésFilAriane = $derived([
     { nom: 'Conseils cyber', lien: '/conseils-cyber' },

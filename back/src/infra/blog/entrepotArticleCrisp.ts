@@ -40,9 +40,12 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
       return undefined;
     }
     const article = await this.cmsCrisp.recupereArticle(résuméTrouvé.id);
+
     return {
-      id: résuméTrouvé.id,
-      slug,
+      contenu: article.contenu ?? '',
+      dateDeMiseÀJour: article.dateMiseAJour ? new Date(article.dateMiseAJour) : undefined,
+      dateDePublication: article.datePublication ? new Date(article.datePublication) : undefined,
+      description: article.description,
       titre: article.titre,
     };
   }
