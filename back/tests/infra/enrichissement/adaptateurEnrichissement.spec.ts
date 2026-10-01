@@ -97,7 +97,11 @@ describe("L'adaptateur qui enrichie le html servi", () => {
     });
 
     it("lorsqu'on sert un article Crisp", async () => {
-      await entrepôtArticle.ajoute({ slug: 'slug-article-1', titre: "Le titre de l'article 1" });
+      await entrepôtArticle.ajoute({
+        id: '01a0f7a4-d912-725a-a090-b92bdf8c8c8b',
+        slug: 'slug-article-1',
+        titre: "Le titre de l'article 1",
+      });
       const htmlFactice = fabriqueHtmlFactice('http://localhost:3000/conseils-cyber');
 
       const rendu = await adaptateurEnrichissement.enrichisAvecComposants(

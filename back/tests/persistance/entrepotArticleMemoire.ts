@@ -9,7 +9,8 @@ export class EntrepôtArticleMémoire implements EntrepôtArticle {
     this.articles.push(entite);
   }
 
-  tous = async () => [...this.articles].map((a) => ({ slug: a.slug, titre: a.titre }) satisfies RésuméArticle);
+  tous = async () =>
+    [...this.articles].map((a) => ({ id: a.id, slug: a.slug, titre: a.titre }) satisfies RésuméArticle);
 
   parSlug = async (slug: string) => this.articles.find((a) => a.slug === slug);
 
