@@ -1,4 +1,5 @@
 import { CmsCrisp, ResumeArticleCrispAvecSlug } from '@lab-anssi/lib';
+import { Article } from '../../metier/blog/article.js';
 import { EntrepôtArticle } from '../../metier/blog/entrepotArticle.js';
 import { RésuméArticle } from '../../metier/blog/resumeArticle.js';
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
@@ -29,5 +30,12 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
         }));
     };
     return this.cache.get(EntrepôtArticleCrisp.CLÉ_LISTE_RÉSUMÉS_ARTICLE, récupèreDepuisCrisp);
+  }
+
+  async parSlug(slug: string): Promise<Article | undefined> {
+    return {
+      slug,
+      titre: 'Article en dur',
+    };
   }
 }

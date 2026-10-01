@@ -8,10 +8,13 @@ export class AdaptateurTitre implements AdaptateurDom {
   async adapte(dom: JSDOM, routeDemandée: string) {
     const promesseGuide = this.résolveurDePage.guide(routeDemandée);
     const promesseFinancement = this.résolveurDePage.financement(routeDemandée);
+    const promesseArticle = this.résolveurDePage.articleCrisp(routeDemandée);
 
-    await Promise.all([promesseGuide, promesseFinancement]);
-    const guideTrouvé = await promesseGuide;
-    const financementTrouvé = await promesseFinancement;
+    const [guideTrouvé, financementTrouvé, articleTrouvé] = await Promise.all([
+      promesseGuide,
+      promesseFinancement,
+      promesseArticle,
+    ]);
 
     let nouveauTitre: string | undefined = undefined;
 
@@ -19,6 +22,8 @@ export class AdaptateurTitre implements AdaptateurDom {
       nouveauTitre = guideTrouvé.langue === 'EN' ? `${guideTrouvé.nom} (EN)` : guideTrouvé.nom;
     } else if (financementTrouvé) {
       nouveauTitre = `${financementTrouvé.nom} (${financementTrouvé.perimetresGeographiques})`;
+    } else if (articleTrouvé) {
+      nouveauTitre = articleTrouvé.titre;
     }
 
     const titre = dom.window.document.getElementsByTagName('title').item(0);

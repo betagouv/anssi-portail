@@ -3,9 +3,9 @@ import {
   AdaptateurEnrichissement,
   fabriqueAdaptateurEnrichissement,
 } from '../../../src/infra/enrichissement/adaptateurEnrichissement.js';
-import { EntrepôtArticle } from '../../../src/metier/blog/entrepotArticle.js';
 import { fauxAdaptateurEnvironnement, fauxFournisseurDeChemin } from '../../api/fauxObjets.js';
 import { financementCyberPME, guideDevsecops } from '../../api/objetsPretsALEmploi.js';
+import { EntrepôtArticleMémoire } from '../../persistance/entrepotArticleMemoire.js';
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire.js';
 import { EntrepotFinancementMemoire } from '../../persistance/entrepotFinancementMemoire.js';
 import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire.js';
@@ -14,14 +14,12 @@ describe("L'adaptateur qui enrichie le html servi", () => {
   let adaptateurEnrichissement: AdaptateurEnrichissement;
   let entrepôtGuide: EntrepotGuideMemoire;
   let entrepôtFinancement: EntrepotFinancementMemoire;
-  let entrepôtArticle: EntrepôtArticle;
+  let entrepôtArticle: EntrepôtArticleMémoire;
 
   beforeEach(async () => {
     entrepôtGuide = new EntrepotGuideMemoire();
     entrepôtFinancement = new EntrepotFinancementMemoire();
-    entrepôtArticle = {
-      tous: async () => [],
-    };
+    entrepôtArticle = new EntrepôtArticleMémoire();
     adaptateurEnrichissement = await fabriqueAdaptateurEnrichissement(
       fauxAdaptateurEnvironnement,
       fauxFournisseurDeChemin,
@@ -66,6 +64,17 @@ describe("L'adaptateur qui enrichie le html servi", () => {
 
       expect(rendu).toMatch(/<link rel="canonical" href="http:\/\/localhost:3000\/guides\/identifiant-dun-guide">/);
     });
+
+    it("lorsqu'on sert un article Crisp", async () => {
+      const htmlFactice = fabriqueHtmlFactice('http://localhost:3000/conseils-cyber');
+
+      const rendu = await adaptateurEnrichissement.enrichisAvecComposants(
+        htmlFactice,
+        '/conseils-cyber/slug-article-1'
+      );
+
+      expect(rendu).toMatch(/<link rel="canonical" href="http:\/\/localhost:3000\/conseils-cyber\/slug-article-1">/);
+    });
   });
 
   describe('sait modifier le titre', () => {
@@ -85,6 +94,18 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/financements/1');
 
       expect(rendu).toMatch(/<title>Cyber PME | MesServicesCyber<\/title>/);
+    });
+
+    it("lorsqu'on sert un article Crisp", async () => {
+      await entrepôtArticle.ajoute({ slug: 'slug-article-1', titre: "Le titre de l'article 1" });
+      const htmlFactice = fabriqueHtmlFactice('http://localhost:3000/conseils-cyber');
+
+      const rendu = await adaptateurEnrichissement.enrichisAvecComposants(
+        htmlFactice,
+        '/conseils-cyber/slug-article-1'
+      );
+
+      expect(rendu).toMatch(/<title>Le titre de l'article 1 | MesServicesCyber<\/title>/);
     });
   });
 });

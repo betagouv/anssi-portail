@@ -309,6 +309,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute(`/partage-cyberdepart`, ressourcePagesJekyll(configurationServeur, 'partage-badge-cyberdepart'));
 
+  enregistreRoute('/conseils-cyber/:slug', ressourcePagesJekyll(configurationServeur, 'conseils-cyber'));
+
   routesPagesConnecteesStatiques.forEach((page) =>
     enregistreRoute(`/${page}`, ressourcePagesJekyllConnectees(configurationServeur, page))
   );

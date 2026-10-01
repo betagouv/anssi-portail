@@ -92,20 +92,20 @@ export const fabriqueAdaptateurEnrichissement = async (
   entrepôtFinancement: EntrepotFinancement,
   entrepôtArticle: EntrepôtArticle
 ): Promise<AdaptateurEnrichissement> => {
-  const résolveurDePage = new RésolveurDePage(entrepotGuide, entrepôtFinancement);
+  const résolveurDePage = new RésolveurDePage(entrepotGuide, entrepôtFinancement, entrepôtArticle);
 
   const chargeursDeProps: ChargeurDeProps[] = [
     new ChargeurRessourcesCyber(entrepotGuide, adaptateurEnvironnement),
     new ChargeurGuide(résolveurDePage, adaptateurEnvironnement),
     new ChargeurExigences(entrepôtExigence),
     new ChargeurFinancements(résolveurDePage, entrepôtFinancement),
-    new ChargeurCrisp(entrepôtArticle),
+    new ChargeurCrisp(résolveurDePage, entrepôtArticle),
     new ChargeurFilAriane(),
   ];
 
   const adaptateursDom: AdaptateurDom[] = [
     new AdaptateurLiensSeo(),
-    new AdaptateurLienCanonique(['/financements', '/guides']),
+    new AdaptateurLienCanonique(['/financements', '/guides', '/conseils-cyber']),
     new AdaptateurTitre(résolveurDePage),
   ];
 
