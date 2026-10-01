@@ -1,4 +1,4 @@
-import { RésuméArticle } from './RésuméArticle.js';
+import { RésuméArticle } from './resumeArticle.js';
 
 export interface EntrepôtArticle {
   tous: () => Promise<RésuméArticle[]>;

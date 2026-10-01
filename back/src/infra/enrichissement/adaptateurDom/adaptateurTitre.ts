@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import { RésolveurDePage } from '../résolveurDePage.js';
+import { RésolveurDePage } from '../resolveurDePage.js';
 import { AdaptateurDom } from './adaptateurDom.js';
 
 export class AdaptateurTitre implements AdaptateurDom {

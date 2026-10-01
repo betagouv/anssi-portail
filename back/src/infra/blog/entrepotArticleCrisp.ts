@@ -1,6 +1,6 @@
 import { CmsCrisp, ResumeArticleCrispAvecSlug } from '@lab-anssi/lib';
 import { EntrepôtArticle } from '../../metier/blog/entrepotArticle.js';
-import { RésuméArticle } from '../../metier/blog/RésuméArticle.js';
+import { RésuméArticle } from '../../metier/blog/resumeArticle.js';
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
 import { Cache } from '../cache.js';
 
