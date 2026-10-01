@@ -3,9 +3,9 @@ import {
   AdaptateurEnrichissement,
   fabriqueAdaptateurEnrichissement,
 } from '../../../src/infra/enrichissement/adaptateurEnrichissement.js';
+import { EntrepôtArticle } from '../../../src/metier/blog/entrepotArticle.js';
 import { fauxAdaptateurEnvironnement, fauxFournisseurDeChemin } from '../../api/fauxObjets.js';
 import { financementCyberPME, guideDevsecops } from '../../api/objetsPretsALEmploi.js';
-import { MockCmsCrisp } from '../../mockCmsCrisp.js';
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire.js';
 import { EntrepotFinancementMemoire } from '../../persistance/entrepotFinancementMemoire.js';
 import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire.js';
@@ -14,17 +14,21 @@ describe("L'adaptateur qui enrichie le html servi", () => {
   let adaptateurEnrichissement: AdaptateurEnrichissement;
   let entrepôtGuide: EntrepotGuideMemoire;
   let entrepôtFinancement: EntrepotFinancementMemoire;
+  let entrepôtArticle: EntrepôtArticle;
 
   beforeEach(async () => {
     entrepôtGuide = new EntrepotGuideMemoire();
     entrepôtFinancement = new EntrepotFinancementMemoire();
+    entrepôtArticle = {
+      tous: async () => [],
+    };
     adaptateurEnrichissement = await fabriqueAdaptateurEnrichissement(
       fauxAdaptateurEnvironnement,
       fauxFournisseurDeChemin,
       entrepôtGuide,
       new EntrepotExigenceMemoire(),
       entrepôtFinancement,
-      new MockCmsCrisp()
+      entrepôtArticle
     );
   });
 

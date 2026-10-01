@@ -145,16 +145,15 @@ const cellar = adaptateurCellar(adaptateurEnvironnement);
 
 const serviceSanteGuides = fabriqueServiceSanteGuides(cellar);
 
+const entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, adaptateurEnvironnement);
 const adaptateurEnrichissement = await fabriqueAdaptateurEnrichissement(
   adaptateurEnvironnement,
   fournisseurChemin,
   entrepotGuide,
   entrepotExigence,
   entrepotFinancement,
-  cmsCrisp
+  entrepôtArticle
 );
-
-const entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, adaptateurEnvironnement);
 
 const attributionParcours = fabriqueAttributionParcours({ entrepotUtilisateur, busEvenements });
 const attributionParcoursMesure = fabriqueAttributionParcoursMesure({

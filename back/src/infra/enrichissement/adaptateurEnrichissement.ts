@@ -1,7 +1,7 @@
-import { CmsCrisp } from '@lab-anssi/lib';
 import { JSDOM } from 'jsdom';
 import { render } from 'svelte/server';
 import { FournisseurChemin } from '../../api/fournisseurChemin.js';
+import { EntrepôtArticle } from '../../metier/blog/entrepotArticle.js';
 import { EntrepotFinancement } from '../../metier/entrepotFinancement.js';
 import { EntrepotGuide } from '../../metier/entrepotGuide.js';
 import { EntrepotExigence } from '../../metier/nis2/entrepotExigence.js';
@@ -90,7 +90,7 @@ export const fabriqueAdaptateurEnrichissement = async (
   entrepotGuide: EntrepotGuide,
   entrepôtExigence: EntrepotExigence,
   entrepôtFinancement: EntrepotFinancement,
-  cmsCrisp: CmsCrisp
+  entrepôtArticle: EntrepôtArticle
 ): Promise<AdaptateurEnrichissement> => {
   const résolveurDePage = new RésolveurDePage(entrepotGuide, entrepôtFinancement);
 
@@ -99,7 +99,7 @@ export const fabriqueAdaptateurEnrichissement = async (
     new ChargeurGuide(résolveurDePage, adaptateurEnvironnement),
     new ChargeurExigences(entrepôtExigence),
     new ChargeurFinancements(résolveurDePage, entrepôtFinancement),
-    new ChargeurCrisp(cmsCrisp),
+    new ChargeurCrisp(entrepôtArticle),
     new ChargeurFilAriane(),
   ];
 
