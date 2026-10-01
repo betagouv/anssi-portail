@@ -8,6 +8,6 @@ export const récupèreRésumésDArticle = async () => {
 };
 
 export const récupèreArticle = async (slug: string): Promise<RésuméArticleAPI | undefined> => {
-  const { data } = await axios.get<RésuméArticleAPI[]>('/api/articles');
-  return data.find((ra) => ra.slug === slug);
+  const { data } = await axios.get<RésuméArticleAPI>(`/api/articles/${slug}`);
+  return data;
 };
