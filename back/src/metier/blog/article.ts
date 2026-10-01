@@ -1,3 +1,7 @@
-import { RésuméArticle } from './resumeArticle.js';
-
-export type Article = RésuméArticle;
+export type Article = {
+  contenu: string;
+  dateDeMiseÀJour?: Date;
+  dateDePublication?: Date;
+  description: string;
+  titre: string;
+};

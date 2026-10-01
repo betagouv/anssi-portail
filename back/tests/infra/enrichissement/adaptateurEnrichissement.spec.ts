@@ -3,6 +3,7 @@ import {
   AdaptateurEnrichissement,
   fabriqueAdaptateurEnrichissement,
 } from '../../../src/infra/enrichissement/adaptateurEnrichissement.js';
+import { ConstructeurDArticleAvecToutesLesMétadonnées } from '../../api/blog/constructeurDeResumeDArticle.js';
 import { fauxAdaptateurEnvironnement, fauxFournisseurDeChemin } from '../../api/fauxObjets.js';
 import { financementCyberPME, guideDevsecops } from '../../api/objetsPretsALEmploi.js';
 import { EntrepôtArticleMémoire } from '../../persistance/entrepotArticleMemoire.js';
@@ -97,11 +98,8 @@ describe("L'adaptateur qui enrichie le html servi", () => {
     });
 
     it("lorsqu'on sert un article Crisp", async () => {
-      await entrepôtArticle.ajoute({
-        id: '01a0f7a4-d912-725a-a090-b92bdf8c8c8b',
-        slug: 'slug-article-1',
-        titre: "Le titre de l'article 1",
-      });
+      const article = new ConstructeurDArticleAvecToutesLesMétadonnées().avecLeSlug('slug-article-1').construis();
+      await entrepôtArticle.ajoute(article);
       const htmlFactice = fabriqueHtmlFactice('http://localhost:3000/conseils-cyber');
 
       const rendu = await adaptateurEnrichissement.enrichisAvecComposants(

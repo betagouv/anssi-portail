@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { EntrepôtArticleMémoire } from '../../persistance/entrepotArticleMemoire.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
-import { ConstructeurDeRésuméDArticle } from './constructeurDeResumeDArticle.js';
+import { ConstructeurDArticleAvecToutesLesMétadonnées } from './constructeurDeResumeDArticle.js';
 
 describe('La ressource des articles de blog', () => {
   let serveur: Express;
@@ -24,8 +24,11 @@ describe('La ressource des articles de blog', () => {
     });
 
     it('renvoie la liste des articles du blog', async () => {
-      const article1 = new ConstructeurDeRésuméDArticle().avecLeSlug('article-un').avecLeTitre('Article 1').construis();
-      const article2 = new ConstructeurDeRésuméDArticle()
+      const article1 = new ConstructeurDArticleAvecToutesLesMétadonnées()
+        .avecLeSlug('article-un')
+        .avecLeTitre('Article 1')
+        .construis();
+      const article2 = new ConstructeurDArticleAvecToutesLesMétadonnées()
         .avecLeSlug('article-deux')
         .avecLeTitre('Article 2')
         .construis();

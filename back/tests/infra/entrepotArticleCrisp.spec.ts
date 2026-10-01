@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse, HttpStatusCode } from '@anssi-portail/axios';
-import { CmsCrisp } from '@lab-anssi/lib';
+import { CmsCrisp, PageHtmlCrisp } from '@lab-anssi/lib';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
 import { EntrepôtArticleCrisp } from '../../src/infra/blog/entrepotArticleCrisp.js';
@@ -118,6 +118,39 @@ describe("L'entrepôt d'article Crisp", () => {
 
         expect(résumésMisEnCache).toHaveLength(2);
       });
+    });
+  });
+
+  describe("lors de la récupération d'un article par son slug", () => {
+    const articleCrisp = {
+      contenu: '<div>contenu</div>',
+      description: 'Description',
+      tableDesMatieres: [],
+      titre: 'titre 1',
+      dateMiseAJour: '2026-10-01T14:43:00.000Z',
+      datePublication: '2026-10-01T17:43:00.000Z',
+    } satisfies PageHtmlCrisp;
+
+    beforeEach(() => {
+      cmsCrisp.recupereArticlesCategorie = vi.fn().mockResolvedValue(articlesCrisp);
+      cmsCrisp.recupereArticle = vi.fn().mockResolvedValue(articleCrisp);
+    });
+
+    it("retourne la représentation html de l'article", async () => {
+      const article = await entrepôtArticle.parSlug('slug-1');
+
+      expect(article?.contenu).toBe('<div>contenu</div>');
+      expect(article?.description).toBe('Description');
+      expect(article?.titre).toBe('titre 1');
+      expect(article?.dateDeMiseÀJour?.toISOString()).toEqual('2026-10-01T14:43:00.000Z');
+      expect(article?.dateDePublication?.toISOString()).toEqual('2026-10-01T17:43:00.000Z');
+      expect(cmsCrisp.recupereArticle).toHaveBeenCalledExactlyOnceWith('id1');
+    });
+
+    it('ne retourne rien si on demande un slug inconnu', async () => {
+      const article = await entrepôtArticle.parSlug('slug-inconnu');
+
+      expect(article).toBeUndefined();
     });
   });
 });

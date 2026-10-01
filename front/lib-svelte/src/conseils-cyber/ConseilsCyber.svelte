@@ -1,11 +1,11 @@
 <script lang="ts">
   import { estServeur } from '$plateforme/environnement';
-  import type { RésuméArticleAPI } from '../passerelles/blog/articles';
+  import type { ArticleAPI, RésuméArticleAPI } from '../passerelles/blog/articles';
   import Article from './Article.svelte';
   import ListeArticles from './ListeArticles.svelte';
 
   type Props = {
-    articlePréchargé?: RésuméArticleAPI;
+    articlePréchargé?: ArticleAPI;
     résumésPréchargés?: RésuméArticleAPI[];
   };
 
