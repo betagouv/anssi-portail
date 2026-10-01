@@ -4,6 +4,7 @@
   import { profilStore } from '../stores/profil.store';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
+  import { Article } from './article.type';
 
   type Props = {
     articlePréchargé?: ArticleAPI;
@@ -12,7 +13,9 @@
 
   const { articlePréchargé, slugArticle }: Props = $props();
 
-  let article: ArticleAPI | undefined = $state(untrack(() => articlePréchargé));
+  let article: Article | undefined = $state(
+    untrack(() => (articlePréchargé ? new Article(articlePréchargé) : undefined))
+  );
 
   const propriétésFilAriane: PropriétésFilAriane = $derived([
     { nom: 'Conseils cyber', lien: '/conseils-cyber' },
@@ -21,26 +24,32 @@
 
   onMount(async () => {
     if (slugArticle) {
-      article = await récupèreArticle(slugArticle);
+      const articleApi = await récupèreArticle(slugArticle);
+      article = articleApi ? new Article(articleApi) : undefined;
     }
   });
 </script>
 
 {#if article}
   <Heros
-    description=""
+    description={article.description}
     format="banniere"
     segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
     theme="clair"
     titre={article.titre}
   />
+  <dsfr-container>
+    <p class="texte-mention-xs">{article.publicationOuMiseÀJourFormattée()}</p>
 
-  <lab-anssi-page-crisp tableDesMatieres={[]} contenu={article.titre}>
-    <article slot="seo">
-      <div class="contenu">
-        <!-- eslint-disable-next-line svelte/no-at-html-tags-->
-        {@html article.titre}
-      </div>
+    <article>
+      <!-- eslint-disable-next-line svelte/no-at-html-tags-->
+      {@html article.contenu}
     </article>
-  </lab-anssi-page-crisp>
+  </dsfr-container>
 {/if}
+
+<style lang="scss">
+  dsfr-container {
+    padding-block: 4rem;
+  }
+</style>
