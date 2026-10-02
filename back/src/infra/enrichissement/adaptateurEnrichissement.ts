@@ -10,6 +10,12 @@ import { AdaptateurDom } from './adaptateurDom/adaptateurDom.js';
 import { AdaptateurLienCanonique } from './adaptateurDom/adaptateurLienCanonique.js';
 import { AdaptateurLiensSeo } from './adaptateurDom/adaptateurLiensSeo.js';
 import {
+  AdaptateurMétadonnées,
+  MétadonnéesDArticleCrisp,
+  MétadonnéesDeFinancement,
+  MétadonnéesDeGuide,
+} from './adaptateurDom/adaptateurMetadonnees.js';
+import {
   AdaptateurTitre,
   TitreDArticleCrisp,
   TitreDeFinancement,
@@ -115,6 +121,11 @@ export const fabriqueAdaptateurEnrichissement = async (
       new TitreDeGuide(résolveurDePage),
       new TitreDeFinancement(résolveurDePage),
       new TitreDArticleCrisp(résolveurDePage),
+    ]),
+    new AdaptateurMétadonnées([
+      new MétadonnéesDeGuide(résolveurDePage),
+      new MétadonnéesDeFinancement(résolveurDePage),
+      new MétadonnéesDArticleCrisp(résolveurDePage),
     ]),
   ];
 
