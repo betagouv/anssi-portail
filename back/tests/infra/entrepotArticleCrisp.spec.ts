@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse, HttpStatusCode } from '@anssi-portail/axios';
-import { CmsCrisp, PageHtmlCrisp } from '@lab-anssi/lib';
+import { CmsCrisp, PageHtmlCrisp, ResumeArticleCrispAvecSlug } from '@lab-anssi/lib';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
 import { EntrepôtArticleCrisp } from '../../src/infra/blog/entrepotArticleCrisp.js';
@@ -8,15 +8,18 @@ import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
 import { MockCmsCrisp } from '../mockCmsCrisp.js';
 
 describe("L'entrepôt d'article Crisp", () => {
-  const articlesCrisp = [
+  const articlesCrisp: ResumeArticleCrispAvecSlug[] = [
     {
+      estPublie: true,
       id: 'id1',
       section: {},
       slug: 'slug-1',
       titre: 'titre 1',
       url: 'url-1',
+      dateMiseAJour: '2024-10-01T14:43:00.000Z',
     },
     {
+      estPublie: false,
       id: 'id2',
       section: {},
       slug: 'slug-2',
@@ -48,9 +51,13 @@ describe("L'entrepôt d'article Crisp", () => {
       const résumés = await entrepôtArticle.tous();
 
       expect(résumés).toHaveLength(2);
+      expect(résumés[0].dateDeMiseÀJour?.toISOString()).toEqual('2024-10-01T14:43:00.000Z');
+      expect(résumés[0].estPublie).toBeTruthy();
       expect(résumés[0].id).toBe('id1');
       expect(résumés[0].slug).toBe('slug-1');
       expect(résumés[0].titre).toBe('titre 1');
+      expect(résumés[1].dateDeMiseÀJour).toBeUndefined();
+      expect(résumés[1].estPublie).toBeFalsy();
       expect(résumés[1].id).toBe('id2');
       expect(résumés[1].slug).toBe('slug-2');
       expect(résumés[1].titre).toBe('titre 2');

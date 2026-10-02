@@ -27,7 +27,9 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
       );
       return articlesCrisp
         .filter((ac): ac is ResumeArticleCrispAvecSlug & { slug: string } => !!ac.slug)
-        .map((ac) => ({
+        .map((ac): RésuméArticle => ({
+          dateDeMiseÀJour: ac.dateMiseAJour ? new Date(ac.dateMiseAJour) : undefined,
+          estPublie: ac.estPublie,
           id: ac.id,
           slug: ac.slug,
           titre: ac.titre,
