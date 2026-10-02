@@ -40,6 +40,7 @@ describe("L'adaptateur qui enrichie le html servi", () => {
     <title>titre</title>
     <link nonce="%%NONCE%%" />
     <meta property="og:title" content="titre">
+    <meta property="og:url" content="${lienCanonique}">
     <meta name="twitter:title" content="titre">
   </head>
   <body>
@@ -58,6 +59,7 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/financements/1');
 
       expect(rendu).toMatch(/<link rel="canonical" href="http:\/\/localhost:3000\/financements\/1">/);
+      expect(rendu).toMatch(/<meta property="og:url" content="http:\/\/localhost:3000\/financements\/1">/);
     });
 
     it("lorsqu'on sert une page de guide", async () => {
@@ -66,6 +68,9 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/guides/identifiant-dun-guide');
 
       expect(rendu).toMatch(/<link rel="canonical" href="http:\/\/localhost:3000\/guides\/identifiant-dun-guide">/);
+      expect(rendu).toMatch(
+        /<meta property="og:url" content="http:\/\/localhost:3000\/guides\/identifiant-dun-guide">/
+      );
     });
 
     it("lorsqu'on sert un article Crisp", async () => {
@@ -77,6 +82,9 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       );
 
       expect(rendu).toMatch(/<link rel="canonical" href="http:\/\/localhost:3000\/conseils-cyber\/slug-article-1">/);
+      expect(rendu).toMatch(
+        /<meta property="og:url" content="http:\/\/localhost:3000\/conseils-cyber\/slug-article-1">/
+      );
     });
   });
 
