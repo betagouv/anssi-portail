@@ -9,7 +9,12 @@ import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
 import { AdaptateurDom } from './adaptateurDom/adaptateurDom.js';
 import { AdaptateurLienCanonique } from './adaptateurDom/adaptateurLienCanonique.js';
 import { AdaptateurLiensSeo } from './adaptateurDom/adaptateurLiensSeo.js';
-import { AdaptateurTitre } from './adaptateurDom/adaptateurTitre.js';
+import {
+  AdaptateurTitre,
+  TitreDArticleCrisp,
+  TitreDeFinancement,
+  TitreDeGuide,
+} from './adaptateurDom/adaptateurTitre.js';
 import { ChargeurCrisp } from './chargementProprietes/chargeurCrisp.js';
 import { ChargeurDeProps } from './chargementProprietes/chargeurDeProps.js';
 import { ChargeurExigences } from './chargementProprietes/chargeurExigences.js';
@@ -106,7 +111,11 @@ export const fabriqueAdaptateurEnrichissement = async (
   const adaptateursDom: AdaptateurDom[] = [
     new AdaptateurLiensSeo(),
     new AdaptateurLienCanonique(['/financements', '/guides', '/conseils-cyber']),
-    new AdaptateurTitre(résolveurDePage),
+    new AdaptateurTitre([
+      new TitreDeGuide(résolveurDePage),
+      new TitreDeFinancement(résolveurDePage),
+      new TitreDArticleCrisp(résolveurDePage),
+    ]),
   ];
 
   return new AdaptateurEnrichissementSvelte(
