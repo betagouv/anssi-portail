@@ -91,6 +91,7 @@ export const ressourceSitemapXml = (pagesStatiques: string[], configurationServe
 const construitRoutesDynamiques = async ({
   entrepotFinancement,
   entrepotGuide,
+  entrepôtArticle,
 }: ConfigurationServeur): Promise<LienSitemap[]> => {
   const liensFinancement = (await entrepotFinancement.tous()).map((financement) => ({
     url: `/financement/${financement.id}`,
@@ -99,6 +100,11 @@ const construitRoutesDynamiques = async ({
   const liensGuides = (await entrepotGuide.tous()).map((guide): LienSitemap => ({
     url: `/guides/${guide.id}`,
     modifiéLe: guide.dateMiseAJour,
+  }));
+
+  const liensArticlesBlog = (await entrepôtArticle.tous()).map((résuméDArticle) => ({
+    url: `/conseils-cyber/${résuméDArticle.slug}`,
+    modifiéLe: résuméDArticle.dateDeMiseÀJour,
   }));
 
   const contientFicheDétaillée = (chemin: string) => {
@@ -141,5 +147,12 @@ const construitRoutesDynamiques = async ({
       return { url: `/contacts/${basename(f, '.html')}`, modifiéLe: new Date(données.modifiéLe) };
     });
 
-  return [...liensFinancement, ...liensGuides, ...liensRessources, ...liensServices, ...liensContactsRégionaux];
+  return [
+    ...liensFinancement,
+    ...liensGuides,
+    ...liensArticlesBlog,
+    ...liensRessources,
+    ...liensServices,
+    ...liensContactsRégionaux,
+  ];
 };
