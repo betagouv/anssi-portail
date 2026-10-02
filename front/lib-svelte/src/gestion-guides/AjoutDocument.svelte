@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios, { AxiosError } from 'axios';
   import { clic } from '../directives/actions.svelte';
+  import Alerte from '../ui/Alerte.svelte';
   import CaseACocher from '../ui/CaseACocher.svelte';
 
   type Props = {
@@ -72,16 +73,14 @@
 <div class="formulaire-ajout">
   <h3>Ajout d'un nouveau document</h3>
   {#if succes}
-    <dsfr-alert type="success" size="sm" title="Document en cours d'ajout" dismissible>
-      <p slot="description">
-        L'opération peut prendre quelques secondes, vous pouvez rafraichir la page pour vous assurer que le document ait
-        bien été ajouté.
-      </p>
-    </dsfr-alert>
+    <Alerte type="succès" taille="sm" titre="Document en cours d'ajout" estRejetable>
+      L'opération peut prendre quelques secondes, vous pouvez rafraichir la page pour vous assurer que le document ait
+      bien été ajouté.
+    </Alerte>
   {:else if erreur}
-    <dsfr-alert type="error" size="sm" title="Erreur lors de l'ajout du document" dismissible>
-      <p slot="description">{erreur}</p>
-    </dsfr-alert>
+    <Alerte type="erreur" taille="sm" titre="Erreur lors de l'ajout du document" estRejetable>
+      {erreur}
+    </Alerte>
   {/if}
   <input bind:this={fichier} type="file" id="document-guide" name="document-guide" oninput={surAjoutDocument} />
   <dsfr-input
@@ -116,8 +115,7 @@
     padding: 16px 0 72px;
   }
 
-  h3,
-  p {
+  h3 {
     margin: 0;
   }
 </style>
