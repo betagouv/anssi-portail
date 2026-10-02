@@ -152,5 +152,17 @@ describe("L'entrepôt d'article Crisp", () => {
 
       expect(article).toBeUndefined();
     });
+
+    it("mets l'article en cache", async () => {
+      await entrepôtArticle.parSlug('slug-1');
+      const article = await entrepôtArticle.parSlug('slug-1');
+
+      expect(article?.contenu).toBe('<div>contenu</div>');
+      expect(article?.description).toBe('Description');
+      expect(article?.titre).toBe('titre 1');
+      expect(article?.dateDeMiseÀJour?.toISOString()).toEqual('2026-10-01T14:43:00.000Z');
+      expect(article?.dateDePublication?.toISOString()).toEqual('2026-10-01T17:43:00.000Z');
+      expect(cmsCrisp.recupereArticle).toHaveBeenCalledExactlyOnceWith('id1');
+    });
   });
 });
