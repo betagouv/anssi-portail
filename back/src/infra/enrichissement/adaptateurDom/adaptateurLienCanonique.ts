@@ -18,5 +18,6 @@ export class AdaptateurLienCanonique implements AdaptateurDom {
     const href = lienCanonique.getAttribute('href') ?? '';
     const nouveauHref = href.replace(this.motifRoutes, routeDemandée);
     lienCanonique.setAttribute('href', nouveauHref);
+    dom.window.document.querySelector('meta[property="og:url"]')?.setAttribute('content', nouveauHref);
   }
 }
