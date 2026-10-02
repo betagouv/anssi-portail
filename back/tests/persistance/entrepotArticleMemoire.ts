@@ -12,7 +12,7 @@ export class EntrepôtArticleMémoire implements EntrepôtArticle {
   }
 
   tous = async (): Promise<RésuméArticle[]> =>
-    [...this.articles].map((a) => ({ id: a.id, slug: a.slug, titre: a.titre }));
+    [...this.articles].map((a) => ({ estPublie: a.estPublie, id: a.id, slug: a.slug, titre: a.titre }));
 
   parSlug = async (slug: string) => this.articles.find((a) => a.slug === slug);
 
