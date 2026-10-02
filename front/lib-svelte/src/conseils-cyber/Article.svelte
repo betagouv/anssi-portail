@@ -49,7 +49,49 @@
 {/if}
 
 <style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
   dsfr-container {
     padding-block: 4rem;
+
+    article {
+      :global(section) {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      :global(img),
+      :global(video) {
+        width: 100%;
+      }
+
+      :global(video) {
+        border-radius: 10px;
+      }
+
+      :global(.conteneur-video .legende) {
+        font-style: italic;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      :global(a) {
+        display: inline;
+        color: currentColor;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        text-decoration-thickness: 1px;
+        color: var(--text-action-high-blue-france);
+
+        &:hover {
+          text-decoration-thickness: 2px;
+        }
+      }
+
+      :global(ul li) {
+        padding-bottom: 8px;
+      }
+    }
   }
 </style>
