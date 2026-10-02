@@ -16,9 +16,13 @@ export class AdaptateurRechercheEntrepriseGouv implements AdaptateurRechercheEnt
   }
 
   async rechercheOrganisations(terme: string, département: string | null): Promise<ResultatRechercheEntreprise[]> {
-    return this.cache.get(`${terme}-${département}`, () => {
-      return this.#rechercheOrganisations(terme, département);
-    });
+    try {
+      return await this.cache.get(`${terme}-${département}`, () => {
+        return this.#rechercheOrganisations(terme, département);
+      });
+    } catch {
+      return [];
+    }
   }
 
   async #rechercheOrganisations(terme: string, département: string | null): Promise<ResultatRechercheEntreprise[]> {
@@ -46,7 +50,7 @@ export class AdaptateurRechercheEntrepriseGouv implements AdaptateurRechercheEnt
         console.error(e);
       }
 
-      return [];
+      throw e;
     }
   }
 }

@@ -93,6 +93,29 @@ describe("L'utilisateur", () => {
     expect(1).toBe(nombreRecherchesEntreprise);
   });
 
+  it("conserve le SIRET de l'utilisateur si l’API entreprise ne trouve pas d'organisation", async () => {
+    const utilisateur = new Utilisateur(
+      {
+        ...infosUtilisateur,
+        organisation: undefined,
+      },
+      { rechercheOrganisations: async () => [] },
+      fauxAdaptateurHachage
+    );
+
+    const organisation = await utilisateur.organisation();
+
+    expect(organisation).toMatchObject({
+      nom: '',
+      siret: infosUtilisateur.siretEntite,
+      departement: null,
+      region: undefined,
+      codeActivite: undefined,
+      codeSecteur: undefined,
+      codeTrancheEffectif: undefined,
+    });
+  });
+
   it("se décrit comme un agent ANSSI si son organisation est le siège social de l'ANSSI", async () => {
     const utilisateur = new Utilisateur(
       {

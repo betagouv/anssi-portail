@@ -58,6 +58,22 @@ describe('La recherche entreprise', () => {
 
       expect(get).toHaveBeenCalledTimes(3);
     });
+
+    it("ne met pas en cache l'absence de résultat produite par une erreur", async () => {
+      const get = vi
+        .spyOn(axios, 'get')
+        .mockRejectedValueOnce(new Error('API indisponible'))
+        .mockResolvedValueOnce({ data: { results: [resultatSirene()] } });
+      vi.spyOn(console, 'error').mockImplementation(() => undefined);
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+
+      const resultatPendantErreur = await adaptateur.rechercheOrganisations('Organisation', '92');
+      const resultatApresErreur = await adaptateur.rechercheOrganisations('Organisation', '92');
+
+      expect(resultatPendantErreur).toEqual([]);
+      expect(resultatApresErreur).toHaveLength(1);
+      expect(get).toHaveBeenCalledTimes(2);
+    });
   });
 
   it('exclut les dossiers INPI sans siège et conserve les organisations identifiées', async () => {
