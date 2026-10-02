@@ -8,7 +8,6 @@ export const composantsAutorisés: string[] = [
   'page-directive-nis2',
   'guide',
   'financements',
-  'page-crisp',
   'fil-ariane',
   'test-maturite',
   'session-groupe',
