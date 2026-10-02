@@ -8,12 +8,14 @@ import { Cache } from '../cache.js';
 
 export class EntrepôtArticleCrisp implements EntrepôtArticle {
   private static CLÉ_LISTE_RÉSUMÉS_ARTICLE = 'CLE_LISTE_RÉSUMÉS_ARTICLE';
-  private cache: Cache<RésuméArticle[]>;
+  private cacheDesRésumés: Cache<RésuméArticle[]>;
+  private cacheDesArticles: Cache<Article>;
   constructor(
     private readonly cmsCrisp: CmsCrisp,
     private readonly adaptateurEnvironnement: AdaptateurEnvironnement
   ) {
-    this.cache = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
+    this.cacheDesRésumés = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
+    this.cacheDesArticles = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
   }
   async tous(): Promise<RésuméArticle[]> {
     if (!this.adaptateurEnvironnement.crisp().catégorieDuBlog()) {
@@ -31,7 +33,7 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
           titre: ac.titre,
         }));
     };
-    return this.cache.get(EntrepôtArticleCrisp.CLÉ_LISTE_RÉSUMÉS_ARTICLE, récupèreDepuisCrisp);
+    return this.cacheDesRésumés.get(EntrepôtArticleCrisp.CLÉ_LISTE_RÉSUMÉS_ARTICLE, récupèreDepuisCrisp);
   }
 
   async parSlug(slug: string): Promise<Article | undefined> {
@@ -40,14 +42,17 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
     if (!résuméTrouvé) {
       return undefined;
     }
-    const article = await this.cmsCrisp.recupereArticle(résuméTrouvé.id);
-
-    return {
-      contenu: aseptiseHtml(article.contenu ?? ''),
-      dateDeMiseÀJour: article.dateMiseAJour ? new Date(article.dateMiseAJour) : undefined,
-      dateDePublication: article.datePublication ? new Date(article.datePublication) : undefined,
-      description: article.description,
-      titre: article.titre,
+    const récupèreDepuisCrisp = async (): Promise<Article> => {
+      const article = await this.cmsCrisp.recupereArticle(résuméTrouvé.id);
+      return {
+        contenu: aseptiseHtml(article.contenu ?? ''),
+        dateDeMiseÀJour: article.dateMiseAJour ? new Date(article.dateMiseAJour) : undefined,
+        dateDePublication: article.datePublication ? new Date(article.datePublication) : undefined,
+        description: article.description,
+        titre: article.titre,
+      };
     };
+
+    return this.cacheDesArticles.get(slug, récupèreDepuisCrisp);
   }
 }
