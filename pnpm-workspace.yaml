@@ -41,6 +41,7 @@ catalog:
 
 minimumReleaseAgeExclude:
   - '@lab-anssi/ui-kit'
+  - '@lab-anssi/lib'
   # Renovate security update: axios@1.18.0
   - axios@1.18.0
   # Renovate security update: dompurify@3.4.12 || 3.4.13
