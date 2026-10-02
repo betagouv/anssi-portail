@@ -39,11 +39,18 @@ export class AdaptateurTitre implements AdaptateurDom {
 
   async adapte(dom: JSDOM, routeDemandée: string) {
     const titres = await Promise.all(this.fournisseurs.map((f) => f.titre(routeDemandée)));
-    const nouveauTitre = titres.find((t) => t !== undefined);
+    const titre = titres.find((t) => t !== undefined);
 
-    const titre = dom.window.document.getElementsByTagName('title').item(0);
-    if (titre && nouveauTitre) {
-      titre.innerHTML = `${nouveauTitre} | MesServicesCyber`;
+    if (!titre) {
+      return;
     }
+    const nouveauTitre = `${titre} | MesServicesCyber`;
+
+    const titreHtml = dom.window.document.getElementsByTagName('title').item(0);
+    if (titreHtml) {
+      titreHtml.innerHTML = nouveauTitre;
+    }
+    dom.window.document.querySelector('meta[property="og:title"]')?.setAttribute('content', nouveauTitre);
+    dom.window.document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', nouveauTitre);
   }
 }

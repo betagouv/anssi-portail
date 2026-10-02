@@ -39,6 +39,8 @@ describe("L'adaptateur qui enrichie le html servi", () => {
     <link rel="canonical" href="${lienCanonique}">
     <title>titre</title>
     <link nonce="%%NONCE%%" />
+    <meta property="og:title" content="titre">
+    <meta name="twitter:title" content="titre">
   </head>
   <body>
     Ce fichier est utilisé pour renvoyer un contenu HTML factice pour les tests.
@@ -86,6 +88,8 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/guides/devsecops');
 
       expect(rendu).toMatch(/<title>DevSecOps | MesServicesCyber<\/title>/);
+      expect(rendu).toMatch(/<meta property="og:title" content="DevSecOps | MesServicesCyber">/);
+      expect(rendu).toMatch(/<meta name="twitter:title" content="DevSecOps | MesServicesCyber">/);
     });
 
     it("lorsqu'on sert une page de financement", async () => {
@@ -95,6 +99,8 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/financements/1');
 
       expect(rendu).toMatch(/<title>Cyber PME | MesServicesCyber<\/title>/);
+      expect(rendu).toMatch(/<meta property="og:title" content="Cyber PME | MesServicesCyber">/);
+      expect(rendu).toMatch(/<meta name="twitter:title" content="Cyber PME | MesServicesCyber">/);
     });
 
     it("lorsqu'on sert un article Crisp", async () => {
@@ -108,6 +114,8 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       );
 
       expect(rendu).toMatch(/<title>Le titre de l'article 1 | MesServicesCyber<\/title>/);
+      expect(rendu).toMatch(/<meta property="og:title" content="Le titre de l'article 1 | MesServicesCyber">/);
+      expect(rendu).toMatch(/<meta name="twitter:title" content="Le titre de l'article 1 | MesServicesCyber">/);
     });
   });
 });
