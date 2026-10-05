@@ -231,7 +231,6 @@ catalogs:
       version: 5.0.2
 
 overrides:
-  shell-quote@>=1.1.0 <=1.8.3: '>=1.8.4'
   svelte@<=5.55.6: '>=5.55.9'
   vite@<=6.4.2: 8.3.0
   vitest@<4.1.0: '>=4.1.0'
