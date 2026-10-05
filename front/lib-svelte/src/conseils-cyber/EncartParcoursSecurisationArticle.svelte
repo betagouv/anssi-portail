@@ -151,6 +151,7 @@
     transform: translate(100%, -50%);
 
     &[popover]:popover-open {
+      display: flex;
       transform: translate(0, -50%);
     }
 
