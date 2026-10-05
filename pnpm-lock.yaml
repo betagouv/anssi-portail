@@ -241,7 +241,6 @@ overrides:
   svelte@<=5.55.6: '>=5.55.9'
   vite@<=6.4.2: 8.3.0
   vitest@<4.1.0: '>=4.1.0'
-  yaml@>=2.0.0 <2.8.3: '>=2.8.3'
 
 importers:
 
@@ -4896,7 +4895,7 @@ packages:
       sugarss: ^5.0.0
       terser: ^5.16.0
       tsx: ^4.8.1
-      yaml: '>=2.8.3'
+      yaml: ^2.4.2
     peerDependenciesMeta:
       '@types/node':
         optional: true
@@ -4939,7 +4938,7 @@ packages:
       sugarss: ^5.0.0
       terser: ^5.16.0
       tsx: ^4.8.1
-      yaml: '>=2.8.3'
+      yaml: ^2.4.2
     peerDependenciesMeta:
       '@types/node':
         optional: true
