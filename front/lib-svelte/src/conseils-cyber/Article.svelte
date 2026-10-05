@@ -39,7 +39,7 @@
     titre={article.titre}
   />
   <dsfr-container>
-    <p class="texte-mention-xs">{article.publicationOuMiseÀJourFormattée()}</p>
+    <p class="date-article texte-mention-xs">{article.publicationOuMiseÀJourFormattée()}</p>
 
     <article>
       <!-- eslint-disable-next-line svelte/no-at-html-tags-->
@@ -50,10 +50,25 @@
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
+  @use '../../../assets/styles/grille.scss' as *;
   dsfr-container {
     padding-block: 4rem;
 
+    .date-article {
+      margin-inline: auto;
+
+      @include a-partir-de(xl) {
+        max-width: taille-pour-colonnes(8);
+      }
+    }
+
     article {
+      margin-inline: auto;
+
+      @include a-partir-de(xl) {
+        max-width: taille-pour-colonnes(8);
+      }
+
       :global(section) {
         display: flex;
         flex-direction: column;
