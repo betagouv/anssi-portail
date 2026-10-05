@@ -41,6 +41,8 @@
 </div>
 
 <style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
+  @use '../../../assets/styles/grille.scss' as *;
   .encart {
     display: grid;
     grid-template-columns: 1fr;
@@ -56,6 +58,13 @@
       flex-direction: column;
       align-items: center;
       gap: 1rem;
+    }
+
+    .illustration {
+      @include a-partir-de(md) {
+        margin-inline: auto;
+        width: taille-pour-colonnes(8);
+      }
     }
   }
 </style>
