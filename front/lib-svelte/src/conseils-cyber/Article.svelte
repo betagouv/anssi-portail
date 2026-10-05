@@ -5,6 +5,7 @@
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
   import { Article } from './article.type';
+  import EncartParcoursSecurisationArticle from './EncartParcoursSecurisationArticle.svelte';
 
   type Props = {
     articlePréchargé?: ArticleAPI;
@@ -45,6 +46,7 @@
       <!-- eslint-disable-next-line svelte/no-at-html-tags-->
       {@html article.contenu}
     </article>
+    <EncartParcoursSecurisationArticle />
   </dsfr-container>
 {/if}
 
