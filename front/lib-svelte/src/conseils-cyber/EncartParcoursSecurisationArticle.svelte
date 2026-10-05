@@ -144,11 +144,21 @@
     padding: 0;
     box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
     gap: 0;
-    margin: 1rem;
-    left: anchor(right);
-    top: anchor(top);
+    margin: 0;
+    inset: 50% 1rem auto auto;
     z-index: 9;
     width: 282px;
+    transform: translate(100%, -50%);
+
+    &[popover]:popover-open {
+      transform: translate(0, -50%);
+    }
+
+    @starting-style {
+      &[popover]:popover-open {
+        transform: translate(100%, -50%);
+      }
+    }
 
     &[popover] {
       display: none;
@@ -156,18 +166,7 @@
         display 0.5s allow-discrete,
         transform 0.5s ease;
 
-      transform: translateX(100%);
-    }
-
-    &[popover]:popover-open {
-      display: flex;
-      transform: translateY(0);
-    }
-
-    @starting-style {
-      &[popover]:popover-open {
-        transform: translateX(100%);
-      }
+      transform: translate(100%, -50%);
     }
 
     .entete {
