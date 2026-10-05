@@ -45,25 +45,48 @@
   @use '../../../assets/styles/grille.scss' as *;
   .encart {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-areas:
+      'titre-et-contenu'
+      'actions'
+      'illustration';
     padding: 2.5rem 1rem;
     gap: 1.5rem;
 
-    h3 {
-      margin-top: 0.75rem;
+    @include a-partir-de(lg) {
+      grid-template-areas:
+        'titre-et-contenu illustration'
+        'actions illustration';
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .titre-et-contenu {
+      grid-area: titre-et-contenu;
+      h3 {
+        margin-top: 0.75rem;
+      }
     }
 
     .actions {
+      grid-area: actions;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 1rem;
+      @include a-partir-de(lg) {
+        flex-direction: row;
+      }
     }
 
     .illustration {
+      grid-area: illustration;
+      display: flex;
+      align-items: center;
       @include a-partir-de(md) {
         margin-inline: auto;
         width: taille-pour-colonnes(8);
+      }
+      @include a-partir-de(lg) {
+        width: 100%;
       }
     }
   }
