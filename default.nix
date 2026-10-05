@@ -10,7 +10,7 @@ let
   nodejs-slim =
     pkgs."nodejs-slim_${nodeVersion}"
       or (throw "Unsupported Node.js version in .nvmrc: ${nodeVersion}");
-  pnpm = pkgs.pnpm_11.override { inherit nodejs-slim; };
+  pnpm = pkgs.pnpm_12.override { inherit nodejs-slim; };
 
   # Utilise .ruby-version comme source de vérité pour la version majeure et mineure de Ruby.
   rubyVersion = pkgs.lib.strings.trim (builtins.readFile ./.ruby-version);
