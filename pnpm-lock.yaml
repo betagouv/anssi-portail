@@ -230,9 +230,6 @@ catalogs:
       specifier: ^5.0.0
       version: 5.0.2
 
-overrides:
-  vitest@<4.1.0: '>=4.1.0'
-
 importers:
 
   .:
@@ -4924,7 +4921,7 @@ packages:
   vitest-localstorage-mock@0.1.2:
     resolution: {integrity: sha512-1oee6iDWhhquzVogssbpwQi6a2F3L+nCKF2+qqyCs5tH0sOYRyTqnsfj2dtmEQiL4xtJkHLn42hEjHGESlsJHw==}
     peerDependencies:
-      vitest: '>=4.1.0'
+      vitest: '*'
 
   vitest@5.0.2:
     resolution: {integrity: sha512-7MQrx9pDv5aHiUcovIb/70Ys3tgtkUVgCtledvKdCmEO+/1Dicq5ZqoSxOW034m03oqC+oHOKui2dM6qtMLoJg==}
