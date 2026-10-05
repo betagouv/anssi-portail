@@ -213,7 +213,7 @@ catalogs:
       version: 8.1.0
     isomorphic-dompurify:
       specifier: ^4.0.0
-      version: 4.3.0
+      version: 4.4.0
     prettier:
       specifier: 3.9.9
       version: 3.9.9
@@ -358,7 +358,7 @@ importers:
         version: 2.6.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 4.3.0(@noble/hashes@1.8.0)
+        version: 4.4.0(@noble/hashes@1.8.0)
       jsdom:
         specifier: ^30.0.0
         version: 30.1.1(@noble/hashes@1.8.0)
@@ -476,7 +476,7 @@ importers:
         version: 9.0.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 4.3.0(@noble/hashes@1.8.0)
+        version: 4.4.0(@noble/hashes@1.8.0)
     devDependencies:
       '@types/node':
         specifier: ^26.0.0
@@ -520,7 +520,7 @@ importers:
         version: 8.1.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 4.3.0(@noble/hashes@1.8.0)
+        version: 4.4.0(@noble/hashes@1.8.0)
       svelte:
         specifier: 'catalog:'
         version: 5.57.1(@typescript-eslint/types@8.70.1)
@@ -544,7 +544,7 @@ importers:
         version: 8.1.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 4.3.0(@noble/hashes@1.8.0)
+        version: 4.4.0(@noble/hashes@1.8.0)
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
@@ -605,7 +605,7 @@ importers:
         version: 9.0.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 4.3.0(@noble/hashes@1.8.0)
+        version: 4.4.0(@noble/hashes@1.8.0)
     devDependencies:
       '@types/node':
         specifier: ^26.0.0
@@ -3502,8 +3502,8 @@ packages:
   iso8601-duration@2.1.4:
     resolution: {integrity: sha512-2TuWcuR6W0OhFZQDAY+jDUp9FC2fVTDgxTtbN0nFBfwmUA6HTqXc0wx2tIBVd/FhRp4CnJbDgCv3sCeTPMQbew==}
 
-  isomorphic-dompurify@4.3.0:
-    resolution: {integrity: sha512-prq6x6sxb/da0HP4S81hiK2Hc444CIvNeZ+gj7A9oDE0r6tqUmQ90ylb9BwhP44ZSCxwUAcTPNoQY0mmjpRHcA==}
+  isomorphic-dompurify@4.4.0:
+    resolution: {integrity: sha512-8F6m5CqcxtY3TLBOKibiPMmSIDa6bMAiiLKZ0ksQad1liA8ZtOnBhjoLFGkBB3noVwj5NeCR9p8vD3uXuudF+Q==}
     engines: {node: ^22.22.2 || ^24.15.0 || >=26.0.0}
 
   isomorphic-git@1.41.9:
@@ -7864,7 +7864,7 @@ snapshots:
 
   iso8601-duration@2.1.4: {}
 
-  isomorphic-dompurify@4.3.0(@noble/hashes@1.8.0):
+  isomorphic-dompurify@4.4.0(@noble/hashes@1.8.0):
     dependencies:
       dompurify: 3.4.16
       jsdom: 30.1.1(@noble/hashes@1.8.0)
