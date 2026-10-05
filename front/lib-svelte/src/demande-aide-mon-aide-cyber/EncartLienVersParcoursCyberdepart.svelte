@@ -2,10 +2,9 @@
   import { onMount } from 'svelte';
   import { afficheBadgeCyberdépart } from '$plateforme/environnement';
   import { clic } from '../directives/actions.svelte';
-  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
   import Lien from '../ui/Lien.svelte';
+  import BadgeOrganisationsAccompagnes from './BadgeOrganisationsAccompagnées.svelte';
 
-  let statistiques: Statistiques | undefined = $state();
   let encart = $state<HTMLDivElement | undefined>();
   let repliVisible = $state(false);
   let hrefCTA = $state('/modules/1');
@@ -21,7 +20,6 @@
     }, 500);
     const pageSource = `${window.location.pathname}-encart-lien-vers-parcours-cyberdepart`;
     hrefCTA = `/modules/1?pageSource=${pageSource}`;
-    statistiques = await récupèreStatistiquesMSC();
   });
 
   const fermeDialogue = () => {
@@ -54,13 +52,7 @@
       ></dsfr-button>
     </div>
     <div class="contenu">
-      <dsfr-badge
-        type="accent"
-        accent="green-bourgeon"
-        label={`+${statistiques?.diagnosticsCyberArrondis ?? 0} organisations accompagnées 🚀`}
-        size="sm"
-      ></dsfr-badge>
-
+      <BadgeOrganisationsAccompagnes />
       <h3>12 mesures simples pour protéger votre organisation contre les cyberattaques</h3>
 
       <ul>
