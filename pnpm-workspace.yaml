@@ -9,7 +9,6 @@ preferFrozenLockfile: true
 strictDepBuilds: false
 
 overrides:
-  'brace-expansion@<1.1.13': '5.0.12'
   'esbuild@>=0.27.3 <0.28.1': '>=0.28.1'
   'lodash@>=4.0.0 <=4.17.22': '>=4.17.23'
   'picomatch@>=4.0.0 <4.0.4': '>=4.0.4'
