@@ -9,19 +9,20 @@ import { schemaRessourceRetourArticle } from './ressourceRetourArticle.schema.js
 
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
-const ressourceRetourArticle = ({ entrepôtArticle, busEvenements }: ConfigurationServeur) => {
+const ressourceAvisArticle = ({ entrepôtArticle, busEvenements }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.post(
-    '/',
+    '/:slugArticle/avis',
     valideCorpsRequete(schemaRessourceRetourArticle),
     filetRouteAsynchrone(
       async (requête: CorpsDeRequeteTypee<z.output<typeof schemaRessourceRetourArticle>>, réponse: Response) => {
-        const { slug, retour, commentaire } = requête.body;
+        const { retour, commentaire } = requête.body;
+        const slug = requête.params.slugArticle as string;
 
         const articleExistant = (await entrepôtArticle.tous()).some((article) => article.slug === slug);
 
-        if (!articleExistant) return réponse.sendStatus(HttpStatusCode.BadRequest);
+        if (!articleExistant) return réponse.sendStatus(HttpStatusCode.NotFound);
 
         await busEvenements.publie(
           new RetourArticleDonné({
@@ -39,4 +40,4 @@ const ressourceRetourArticle = ({ entrepôtArticle, busEvenements }: Configurati
   return routeur;
 };
 
-export { ressourceRetourArticle };
+export { ressourceAvisArticle };

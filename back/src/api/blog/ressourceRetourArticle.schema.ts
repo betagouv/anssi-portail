@@ -3,5 +3,4 @@ import z from 'zod';
 export const schemaRessourceRetourArticle = z.strictObject({
   retour: z.enum(['POSITIF', 'NEGATIF'], 'Le retour doit être "POSITIF" ou "NEGATIF"'),
   commentaire: z.string().max(1000, 'Le commentaire doit contenir au plus 1000 caractères').optional(),
-  slug: z.string('Le slug doit être défini').max(2048, 'Le slug doit contenir au plus 2048 caractères'),
 });

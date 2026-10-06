@@ -31,7 +31,7 @@
   const urlDePost = $derived(
     (
       {
-        article: `/api/retour-article`,
+        article: `/api/articles/${identifiantCible}/avis`,
         mesure: `/api/mesures/${identifiantCible}/avis`,
 
         exposition: '/api/retour-mini-tests/exposition',
