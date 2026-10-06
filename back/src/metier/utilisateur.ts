@@ -21,6 +21,8 @@ import { Suivi } from './suivi.js';
 
 export type Role = 'GESTION_GUIDES';
 
+export class ErreurChargementOrganisation extends Error {}
+
 export class Organisation {
   nom: string;
   siret: string;
@@ -137,6 +139,9 @@ export class Utilisateur {
   async organisation(): Promise<Organisation> {
     if (!this._organisation) {
       const organisations = await this.adaptateurRechercheEntreprise.rechercheOrganisations(this.siretEntite, null);
+      if (!organisations.length) {
+        throw new ErreurChargementOrganisation();
+      }
       this._organisation = new Organisation(organisations[0]);
     }
     return this._organisation;

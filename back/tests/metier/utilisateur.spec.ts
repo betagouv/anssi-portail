@@ -9,7 +9,7 @@ import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
 import { EntrepotPriseEnCompte } from '../../src/metier/entrepotPriseEnCompte.js';
 import { Module } from '../../src/metier/module.js';
-import { Organisation, Utilisateur } from '../../src/metier/utilisateur.js';
+import { ErreurChargementOrganisation, Organisation, Utilisateur } from '../../src/metier/utilisateur.js';
 import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets.js';
 import { mesureDeTest } from '../api/mesures/constructeurDeMesure.js';
 import { ConstructeurDeModule } from '../api/mesures/constructeurDeModule.js';
@@ -92,6 +92,15 @@ describe("L'utilisateur", () => {
       expect(organisation.departement).toBe('01');
       expect(organisation.siret).toBe('98');
       expect(1).toBe(nombreRecherchesEntreprise);
+    });
+    it("jette une erreur si aucune organisation n'est trouvée", async () => {
+      const rechercheEntreprise: AdaptateurRechercheEntreprise = {
+        rechercheOrganisations: async () => [],
+      };
+
+      const utilisateur = new Utilisateur(infosUtilisateur, rechercheEntreprise, fauxAdaptateurHachage);
+
+      await expect(utilisateur.organisation()).rejects.toThrow(ErreurChargementOrganisation);
     });
   });
 
