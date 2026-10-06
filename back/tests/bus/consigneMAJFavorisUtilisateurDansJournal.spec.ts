@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { consigneEvenementMAJFavorisUtilisateurDansJournal } from '../../src/bus/consigneEvenementMAJFavorisUtilisateurDansJournal.js';
+import { consigneMAJFavorisUtilisateurDansJournal } from '../../src/bus/consigneMAJFavorisUtilisateurDansJournal.js';
 import { MiseAJourFavorisUtilisateur } from '../../src/bus/miseAJourFavorisUtilisateur.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
@@ -35,7 +35,7 @@ describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur
       idItemCyber: 'groupe/id-2',
     });
 
-    await consigneEvenementMAJFavorisUtilisateurDansJournal({
+    await consigneMAJFavorisUtilisateurDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,

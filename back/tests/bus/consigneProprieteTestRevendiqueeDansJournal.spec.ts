@@ -1,18 +1,19 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { consigneEvenementRetourExperienceDonneDansJournal } from '../../src/bus/consigneEvenementRetourExperienceDonneDansJournal.js';
-import { RetourExperienceDonne } from '../../src/bus/evenements/retourExperienceDonne.js';
+import { consigneProprieteTestRevendiqueeDansJournal } from '../../src/bus/consigneProprieteTestRevendiqueeDansJournal.js';
+import { ProprieteTestRevendiquee } from '../../src/bus/evenements/proprieteTestRevendiquee.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
+import { jeanneDupont } from '../api/objetsPretsALEmploi.js';
 
-describe("L'abonnement qui consigne le don d'un retour d’expérience dans le journal", () => {
+describe("L'abonnement qui consigne la revendication de la propriété d'un test dans le journal", () => {
   let adaptateurHorloge: AdaptateurHorloge;
   let adaptateurJournal: AdaptateurJournal;
   let adaptateurHachage: AdaptateurHachage;
 
   const consigneEvenementDansJournal = () => {
-    return consigneEvenementRetourExperienceDonneDansJournal({
+    return consigneProprieteTestRevendiqueeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
@@ -27,7 +28,7 @@ describe("L'abonnement qui consigne le don d'un retour d’expérience dans le j
     };
   });
 
-  it('consigne un évènement de RetourExperienceDonne', async () => {
+  it('consigne un évènement de ProprieteTestRevendiquee', async () => {
     let evenementRecu;
     adaptateurJournal = {
       consigneEvenement: async (donneesEvenement: unknown) => {
@@ -39,15 +40,15 @@ describe("L'abonnement qui consigne le don d'un retour d’expérience dans le j
     };
 
     await consigneEvenementDansJournal()(
-      new RetourExperienceDonne({
-        raison: 'pas-besoin',
-        emailDeContact: 'jean@dupont.fr',
+      new ProprieteTestRevendiquee({
+        utilisateur: jeanneDupont,
+        idResultatTest: '12345',
       })
     );
 
     expect(evenementRecu).toBeDefined();
-    expect(evenementRecu!.type).toBe('RETOUR_EXPERIENCE_DONNE');
-    expect(evenementRecu!.donnees.raison).toBe('pas-besoin');
+    expect(evenementRecu!.type).toBe('PROPRIETE_TEST_REVENDIQUEE');
+    expect(evenementRecu!.donnees.idResultatTest).toBe('12345');
     expect(evenementRecu!.date).toEqual(new Date('2025-03-10'));
   });
 
@@ -60,25 +61,13 @@ describe("L'abonnement qui consigne le don d'un retour d’expérience dans le j
     };
 
     await consigneEvenementDansJournal()(
-      new RetourExperienceDonne({
-        raison: 'x',
-        emailDeContact: 'jean@dupont.fr',
+      new ProprieteTestRevendiquee({
+        idResultatTest: '1',
+        utilisateur: jeanneDupont,
       })
     );
 
-    expect(evenementRecu!.donnees.idUtilisateur).toBe(`jean@dupont.fr-hacheHMAC`);
-  });
-
-  it("ne consigne pas d'email si celui-ci est absent", async () => {
-    let evenementRecu;
-    adaptateurJournal = {
-      consigneEvenement: async (donneesEvenement: unknown) => {
-        evenementRecu = donneesEvenement;
-      },
-    };
-
-    await consigneEvenementDansJournal()(new RetourExperienceDonne({ raison: 'x' }));
-
-    expect(evenementRecu!.donnees.idUtilisateur).toBeUndefined();
+    expect(evenementRecu!.donnees.idUtilisateur).toBe(`${jeanneDupont.email}-hacheHMAC`);
+    expect(evenementRecu!.donnees.emailUtilisateur).toBeUndefined();
   });
 });

@@ -1,9 +1,9 @@
 import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
-import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee.js';
+import { CompteCree } from './evenements/compteCree.js';
 
-export const consigneEvenementProprieteTestRevendiqueeDansJournal = ({
+export const consigneCompteCreeDansJournal = ({
   adaptateurJournal,
   adaptateurHorloge,
   adaptateurHachage,
@@ -12,13 +12,13 @@ export const consigneEvenementProprieteTestRevendiqueeDansJournal = ({
   adaptateurHorloge: AdaptateurHorloge;
   adaptateurHachage: AdaptateurHachage;
 }) => {
-  return async function (evenement: ProprieteTestRevendiquee) {
+  return async function (évènement: CompteCree) {
     await adaptateurJournal.consigneEvenement({
       donnees: {
-        idUtilisateur: adaptateurHachage.hache(evenement.utilisateur.email),
-        idResultatTest: evenement.idResultatTest,
+        idUtilisateur: adaptateurHachage.hache(évènement.email),
+        suivi: évènement.suivi,
       },
-      type: 'PROPRIETE_TEST_REVENDIQUEE',
+      type: 'NOUVEL_UTILISATEUR_INSCRIT',
       date: adaptateurHorloge.maintenant(),
     });
   };

@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { consigneEvenementModuleTerminéDansJournal } from '../../src/bus/consigneEvenementModuleTerminéDansJournal.js';
-import { ModuleTermine } from '../../src/bus/evenements/moduleTermine.js';
+import { consigneMesureConsulteeDansJournal } from '../../src/bus/consigneMesureConsulteeDansJournal.js';
+import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 
-describe("L'abonnement qui consigne la complétion d'un module par un utilisateur dans le journal", () => {
-  it('consigne un évènement ModuleTermine', async () => {
+describe("L'abonnement qui consigne la consultation d'une mesure par un utilisateur dans le journal", () => {
+  it('consigne un évènement MesureConsultee', async () => {
     let evenementRecu;
     const adaptateurJournal: AdaptateurJournal = {
       consigneEvenement: async (donneesEvenement: unknown) => {
@@ -23,19 +23,17 @@ describe("L'abonnement qui consigne la complétion d'un module par un utilisateu
       hache: (valeur) => `${valeur}-hacheHMAC`,
     };
 
-    await consigneEvenementModuleTerminéDansJournal({
+    await consigneMesureConsulteeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
-    })(new ModuleTermine('u1@example.com', 1, 'Cyberdépart', 'allégé'));
+    })(new MesureConsultee('u1@example.com', 'AUTH.5'));
 
     expect(evenementRecu).toEqual({
-      type: 'MODULE_TERMINE',
+      type: 'MESURE_CONSULTEE',
       donnees: {
         idUtilisateur: 'u1@example.com-hacheHMAC',
-        idModule: 1,
-        nomModule: 'Cyberdépart',
-        parcours: 'allégé',
+        idMesure: 'AUTH.5',
       },
       date: new Date('2025-03-10'),
     });

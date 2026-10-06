@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { consigneEvenementTestExpositionRealiseDansJournal } from '../../src/bus/consigneEvenementTestExpositionRealiseDansJournal.js';
+import { consigneTestExpositionRealiseDansJournal } from '../../src/bus/consigneTestExpositionRealiseDansJournal.js';
 import { TestExpositionRéalisé } from '../../src/bus/evenements/TestExpositionRealise.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
@@ -22,7 +22,7 @@ describe("L'abonnement qui consigne la réalisation d'un test d'exposition dans 
       hache: (valeur) => `${valeur}-hacheHMAC`,
     };
 
-    await consigneEvenementTestExpositionRealiseDansJournal({
+    await consigneTestExpositionRealiseDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
@@ -68,7 +68,7 @@ describe("L'abonnement qui consigne la réalisation d'un test d'exposition dans 
       hache: (valeur) => `${valeur}-hacheHMAC`,
     };
 
-    await consigneEvenementTestExpositionRealiseDansJournal({
+    await consigneTestExpositionRealiseDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,

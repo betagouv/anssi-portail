@@ -1,18 +1,18 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { consigneEvenementAvisUtilisateurDonneDansJournal } from '../../src/bus/consigneEvenementAvisUtilisateurDonneDansJournal.js';
-import { AvisUtilisateurDonne } from '../../src/bus/evenements/avisUtilisateurDonne.js';
+import { consigneRetourExperienceDonneDansJournal } from '../../src/bus/consigneRetourExperienceDonneDansJournal.js';
+import { RetourExperienceDonne } from '../../src/bus/evenements/retourExperienceDonne.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 
-describe("L'abonnement qui consigne le don d'un avis utilisateur dans le journal", () => {
+describe("L'abonnement qui consigne le don d'un retour d’expérience dans le journal", () => {
   let adaptateurHorloge: AdaptateurHorloge;
   let adaptateurJournal: AdaptateurJournal;
   let adaptateurHachage: AdaptateurHachage;
 
   const consigneEvenementDansJournal = () => {
-    return consigneEvenementAvisUtilisateurDonneDansJournal({
+    return consigneRetourExperienceDonneDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
@@ -27,7 +27,7 @@ describe("L'abonnement qui consigne le don d'un avis utilisateur dans le journal
     };
   });
 
-  it('consigne un évènement de AvisUtilisateurDonne', async () => {
+  it('consigne un évènement de RetourExperienceDonne', async () => {
     let evenementRecu;
     adaptateurJournal = {
       consigneEvenement: async (donneesEvenement: unknown) => {
@@ -39,15 +39,15 @@ describe("L'abonnement qui consigne le don d'un avis utilisateur dans le journal
     };
 
     await consigneEvenementDansJournal()(
-      new AvisUtilisateurDonne({
-        niveauDeSatisfaction: 2,
+      new RetourExperienceDonne({
+        raison: 'pas-besoin',
         emailDeContact: 'jean@dupont.fr',
       })
     );
 
     expect(evenementRecu).toBeDefined();
-    expect(evenementRecu!.type).toBe('AVIS_UTILISATEUR_DONNE');
-    expect(evenementRecu!.donnees.niveauDeSatisfaction).toBe(2);
+    expect(evenementRecu!.type).toBe('RETOUR_EXPERIENCE_DONNE');
+    expect(evenementRecu!.donnees.raison).toBe('pas-besoin');
     expect(evenementRecu!.date).toEqual(new Date('2025-03-10'));
   });
 
@@ -60,8 +60,8 @@ describe("L'abonnement qui consigne le don d'un avis utilisateur dans le journal
     };
 
     await consigneEvenementDansJournal()(
-      new AvisUtilisateurDonne({
-        niveauDeSatisfaction: 2,
+      new RetourExperienceDonne({
+        raison: 'x',
         emailDeContact: 'jean@dupont.fr',
       })
     );
@@ -77,11 +77,7 @@ describe("L'abonnement qui consigne le don d'un avis utilisateur dans le journal
       },
     };
 
-    await consigneEvenementDansJournal()(
-      new AvisUtilisateurDonne({
-        niveauDeSatisfaction: 2,
-      })
-    );
+    await consigneEvenementDansJournal()(new RetourExperienceDonne({ raison: 'x' }));
 
     expect(evenementRecu!.donnees.idUtilisateur).toBeUndefined();
   });

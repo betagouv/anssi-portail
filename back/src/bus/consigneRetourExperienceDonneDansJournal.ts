@@ -1,9 +1,9 @@
 import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
-import { CompteCree } from './evenements/compteCree.js';
+import { RetourExperienceDonne } from './evenements/retourExperienceDonne.js';
 
-export const consigneEvenementCompteCreeDansJournal = ({
+export const consigneRetourExperienceDonneDansJournal = ({
   adaptateurJournal,
   adaptateurHorloge,
   adaptateurHachage,
@@ -12,13 +12,14 @@ export const consigneEvenementCompteCreeDansJournal = ({
   adaptateurHorloge: AdaptateurHorloge;
   adaptateurHachage: AdaptateurHachage;
 }) => {
-  return async function (évènement: CompteCree) {
+  return async (evenement: RetourExperienceDonne) => {
+    const idUtilisateur = evenement.emailDeContact ? adaptateurHachage.hache(evenement.emailDeContact) : undefined;
     await adaptateurJournal.consigneEvenement({
       donnees: {
-        idUtilisateur: adaptateurHachage.hache(évènement.email),
-        suivi: évènement.suivi,
+        idUtilisateur,
+        raison: evenement.raison,
       },
-      type: 'NOUVEL_UTILISATEUR_INSCRIT',
+      type: 'RETOUR_EXPERIENCE_DONNE',
       date: adaptateurHorloge.maintenant(),
     });
   };

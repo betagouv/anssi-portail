@@ -3,7 +3,7 @@ import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
 import { TestExpositionRéalisé } from './evenements/TestExpositionRealise.js';
 
-export const consigneEvenementTestExpositionRealiseDansJournal = ({
+export const consigneTestExpositionRealiseDansJournal = ({
   adaptateurJournal,
   adaptateurHorloge,
   adaptateurHachage,

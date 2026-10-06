@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { consigneEvenementMesurePriseEnCompteDansJournal } from '../../src/bus/consigneEvenementMesurePriseEnCompteDansJournal.js';
-import { MesurePriseEnCompte } from '../../src/bus/evenements/mesurePriseEnCompte.js';
+import { consigneModuleTerminéDansJournal } from '../../src/bus/consigneModuleTerminéDansJournal.js';
+import { ModuleTermine } from '../../src/bus/evenements/moduleTermine.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 
-describe("L'abonnement qui consigne la prise en compte d'une mesure par un utilisateur dans le journal", () => {
-  it('consigne un évènement MesurePriseEnCompte', async () => {
+describe("L'abonnement qui consigne la complétion d'un module par un utilisateur dans le journal", () => {
+  it('consigne un évènement ModuleTermine', async () => {
     let evenementRecu;
     const adaptateurJournal: AdaptateurJournal = {
       consigneEvenement: async (donneesEvenement: unknown) => {
@@ -23,20 +23,19 @@ describe("L'abonnement qui consigne la prise en compte d'une mesure par un utili
       hache: (valeur) => `${valeur}-hacheHMAC`,
     };
 
-    await consigneEvenementMesurePriseEnCompteDansJournal({
+    await consigneModuleTerminéDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
-    })(new MesurePriseEnCompte('u1@example.com', 'AUTH.5', 10, 2, 'allégé'));
+    })(new ModuleTermine('u1@example.com', 1, 'Cyberdépart', 'allégé'));
 
     expect(evenementRecu).toEqual({
-      type: 'MESURE_PRISE_EN_COMPTE',
+      type: 'MODULE_TERMINE',
       donnees: {
-        idMesure: 'AUTH.5',
         idUtilisateur: 'u1@example.com-hacheHMAC',
-        nombreDeMesures: 10,
+        idModule: 1,
+        nomModule: 'Cyberdépart',
         parcours: 'allégé',
-        position: 2,
       },
       date: new Date('2025-03-10'),
     });

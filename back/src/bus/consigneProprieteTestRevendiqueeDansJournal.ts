@@ -1,30 +1,24 @@
 import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
-import { EntrepotFavori } from '../metier/entrepotFavori.js';
-import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur.js';
+import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee.js';
 
-export const consigneEvenementMAJFavorisUtilisateurDansJournal = ({
+export const consigneProprieteTestRevendiqueeDansJournal = ({
   adaptateurJournal,
   adaptateurHorloge,
   adaptateurHachage,
-  entrepotFavori,
 }: {
   adaptateurJournal: AdaptateurJournal;
   adaptateurHorloge: AdaptateurHorloge;
   adaptateurHachage: AdaptateurHachage;
-  entrepotFavori: EntrepotFavori;
 }) => {
-  return async function (evenement: MiseAJourFavorisUtilisateur) {
-    const listeIdFavoris = (await entrepotFavori.tousCeuxDeUtilisateur(evenement?.utilisateur)).map(
-      ({ idItemCyber }) => idItemCyber
-    );
+  return async function (evenement: ProprieteTestRevendiquee) {
     await adaptateurJournal.consigneEvenement({
       donnees: {
         idUtilisateur: adaptateurHachage.hache(evenement.utilisateur.email),
-        listeIdFavoris,
+        idResultatTest: evenement.idResultatTest,
       },
-      type: 'MISE_A_JOUR_FAVORIS_UTILISATEUR',
+      type: 'PROPRIETE_TEST_REVENDIQUEE',
       date: adaptateurHorloge.maintenant(),
     });
   };

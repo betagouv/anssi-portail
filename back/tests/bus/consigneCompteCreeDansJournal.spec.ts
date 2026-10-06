@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { consigneEvenementCompteCreeDansJournal } from '../../src/bus/consigneEvenementCompteCreeDansJournal.js';
+import { consigneCompteCreeDansJournal } from '../../src/bus/consigneCompteCreeDansJournal.js';
 import { CompteCree } from '../../src/bus/evenements/compteCree.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
@@ -23,7 +23,7 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
       hache: (valeur) => `${valeur}-hacheHMAC`,
     };
 
-    await consigneEvenementCompteCreeDansJournal({
+    await consigneCompteCreeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
@@ -59,7 +59,7 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
       hache: (valeur) => `${valeur}-hacheHMAC`,
     };
 
-    await consigneEvenementCompteCreeDansJournal({
+    await consigneCompteCreeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
