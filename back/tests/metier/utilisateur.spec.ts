@@ -55,42 +55,44 @@ describe("L'utilisateur", () => {
     expect(organisation.siret).toBe('1234');
   });
 
-  it("ne recherche qu'une seule fois dans l’API entreprise", async () => {
-    let nombreRecherchesEntreprise = 0;
-    const rechercheEntreprise: AdaptateurRechercheEntreprise = {
-      rechercheOrganisations: async (_: string, __: string | null) => {
-        nombreRecherchesEntreprise++;
-        return [
-          {
-            nom: 'tif',
-            departement: '01',
-            siret: '98',
-            codeTrancheEffectif: '01',
-            codeRegion: 'FR-ARA',
-            codeSecteur: 'D',
-            estAssociation: false,
-            estCollectivite: false,
-            codeActivite: '62.01Z',
-          },
-        ];
-      },
-    };
-    const utilisateur = new Utilisateur(
-      {
-        ...infosUtilisateur,
-        organisation: undefined,
-      },
-      rechercheEntreprise,
-      fauxAdaptateurHachage
-    );
+  describe("Concernant la recherche d'organisation", () => {
+    it("ne recherche qu'une seule fois dans l’API entreprise", async () => {
+      let nombreRecherchesEntreprise = 0;
+      const rechercheEntreprise: AdaptateurRechercheEntreprise = {
+        rechercheOrganisations: async (_: string, __: string | null) => {
+          nombreRecherchesEntreprise++;
+          return [
+            {
+              nom: 'tif',
+              departement: '01',
+              siret: '98',
+              codeTrancheEffectif: '01',
+              codeRegion: 'FR-ARA',
+              codeSecteur: 'D',
+              estAssociation: false,
+              estCollectivite: false,
+              codeActivite: '62.01Z',
+            },
+          ];
+        },
+      };
+      const utilisateur = new Utilisateur(
+        {
+          ...infosUtilisateur,
+          organisation: undefined,
+        },
+        rechercheEntreprise,
+        fauxAdaptateurHachage
+      );
 
-    const organisation = await utilisateur.organisation();
-    await utilisateur.organisation();
+      const organisation = await utilisateur.organisation();
+      await utilisateur.organisation();
 
-    expect(organisation.nom).toBe('tif');
-    expect(organisation.departement).toBe('01');
-    expect(organisation.siret).toBe('98');
-    expect(1).toBe(nombreRecherchesEntreprise);
+      expect(organisation.nom).toBe('tif');
+      expect(organisation.departement).toBe('01');
+      expect(organisation.siret).toBe('98');
+      expect(1).toBe(nombreRecherchesEntreprise);
+    });
   });
 
   it("se décrit comme un agent ANSSI si son organisation est le siège social de l'ANSSI", async () => {
