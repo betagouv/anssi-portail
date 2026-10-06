@@ -2,8 +2,10 @@
   import { onMount, untrack } from 'svelte';
   import { récupèreArticle, type ArticleAPI } from '../passerelles/blog/articles';
   import { profilStore } from '../stores/profil.store';
+  import BoutonsPartagePage from '../test-maturite/BoutonsPartagePage.svelte';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
+  import RetourUtilisateurSurContenu from '../ui/RetourUtilisateurSurContenu.svelte';
   import { Article } from './article.type';
   import EncartParcoursSecurisationArticle from './EncartParcoursSecurisationArticle.svelte';
 
@@ -39,7 +41,7 @@
     theme="clair"
     titre={article.titre}
   />
-  <dsfr-container>
+  <dsfr-container class="contenu">
     <p class="date-article texte-mention-xs">{article.publicationOuMiseÀJourFormattée()}</p>
 
     <article>
@@ -48,13 +50,25 @@
     </article>
     <EncartParcoursSecurisationArticle />
   </dsfr-container>
+  {#if slugArticle}
+    <dsfr-container class="partage">
+      <div class="contenu-partage">
+        <div class="retour">
+          <RetourUtilisateurSurContenu identifiantCible={slugArticle} typeDeRetour="article">
+            <p class="texte-article-lg">Cet article vous a-t-il aidé&nbsp;?</p>
+          </RetourUtilisateurSurContenu>
+        </div>
+        <BoutonsPartagePage cheminPartagé={`/conseils-cyber/${slugArticle}`} sujetMail={article.titre} />
+      </div>
+    </dsfr-container>
+  {/if}
 {/if}
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
   @use '../../../assets/styles/grille.scss' as *;
-  dsfr-container {
-    padding-block: 4rem;
+  .contenu {
+    padding-block: 3rem;
 
     .date-article {
       margin-inline: auto;
@@ -102,6 +116,30 @@
 
       :global(ul li) {
         padding-bottom: 8px;
+      }
+    }
+  }
+
+  .partage {
+    background-color: var(--background-alt-blue-france);
+    padding: 2rem 0;
+
+    .contenu-partage {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      @include a-partir-de(md) {
+        flex-direction: row;
+      }
+
+      .retour {
+        flex: 1;
+
+        .texte-article-lg {
+          font-weight: bold;
+          margin-bottom: 1rem;
+        }
       }
     }
   }
