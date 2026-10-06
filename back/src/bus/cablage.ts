@@ -56,6 +56,7 @@ import { TestRealise } from './evenements/testRealise.js';
 import { UtilisateurConnecte } from './evenements/utilisateurConnecte.js';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur.js';
 import { notifieCommentaireAvisMesureDonneDansMessagerie } from './notifieCommentaireAvisMesureDonneDansMessagerie.js';
+import { notifieUnRetourNégatifSurArticle } from './notifieRetourNegatifSurArticle.js';
 import { notifieUnRetourNégatifSurMiniTest } from './notifieRetourNegatifSurMiniTest.js';
 
 export const cableTousLesAbonnes = ({
@@ -205,6 +206,7 @@ export const cableTousLesAbonnes = ({
 
   busEvenements.abonnePlusieurs(RetourArticleDonné, [
     consigneRetourArticleDonnéDansJournal({ adaptateurJournal, adaptateurHorloge }),
+    notifieUnRetourNégatifSurArticle({ messagerieInstantanee }),
   ]);
 
   busEvenements.abonne(
