@@ -200,18 +200,14 @@ describe('Le middleware', () => {
     });
 
     it("renvoi un 404 si la fichier n'existe pas", async () => {
-      let estAppelé = false;
-      fournisseurChemin.jekyll.page404 = () => {
-        estAppelé = true;
-        return ressourceFactice();
-      };
+      const page404 = vi.spyOn(fournisseurChemin.jekyll, 'page404').mockReturnValue(ressourceFactice());
 
       await middleware.ajouteMethodeEnrichissement(requete, reponse, () => {
         expect(reponse.envoieFichierEnrichi).toBeDefined();
         reponse.envoieFichierEnrichi('/services/inexistant.html');
       });
 
-      expect(estAppelé).toBe(true);
+      expect(page404).toHaveBeenCalledOnce();
     });
   });
 
@@ -340,16 +336,12 @@ describe('Le middleware', () => {
         detailsPreparation: () => undefined,
       });
 
-      let estAppelé = false;
-      fournisseurChemin.jekyll.pageMaintenance = () => {
-        estAppelé = true;
-        return ressourceFactice();
-      };
+      const pageMaintenance = vi.spyOn(fournisseurChemin.jekyll, 'pageMaintenance').mockReturnValue(ressourceFactice());
 
       await middleware.verifieModeMaintenance(requete, reponse, () => {});
 
       expect(reponse.statusCode).toBe(HttpStatusCode.ServiceUnavailable);
-      expect(estAppelé).toBe(true);
+      expect(pageMaintenance).toHaveBeenCalledOnce();
     });
 
     it('appelle la suite lorsque le mode est inactif', async () => {

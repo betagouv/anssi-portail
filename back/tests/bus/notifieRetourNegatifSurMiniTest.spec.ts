@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { RetourMiniTestDonné } from '../../src/bus/evenements/retourMiniTestDonne.js';
 import { notifieUnRetourNégatifSurMiniTest } from '../../src/bus/notifieRetourNegatifSurMiniTest.js';
 import { RetourNégatifSurMiniTest } from '../../src/metier/messagerieInstantanee.js';
@@ -26,14 +26,10 @@ describe("L'abonnement qui notifie un retour de test de maturité négatif", () 
   });
 
   it('ne consigne un évènement pour un retour positif', async () => {
-    let estAppelé = false;
-
     const messagerieInstantanee = {
       ...fausseMessagerieInstantanee,
-      notifieUnRetourNégatifSurMiniTest: async () => {
-        estAppelé = true;
-      },
     };
+    const notifieUnRetourNégatif = vi.spyOn(messagerieInstantanee, 'notifieUnRetourNégatifSurMiniTest');
     await notifieUnRetourNégatifSurMiniTest({ messagerieInstantanee })(
       new RetourMiniTestDonné({
         miniTest: 'test-maturité',
@@ -42,6 +38,6 @@ describe("L'abonnement qui notifie un retour de test de maturité négatif", () 
       })
     );
 
-    expect(estAppelé).toBe(false);
+    expect(notifieUnRetourNégatif).not.toHaveBeenCalled();
   });
 });
