@@ -1,5 +1,7 @@
 <script module lang="ts">
-  export type TypeDeRetour = 'test-maturité' | 'vrai-faux' | 'mesure' | 'exposition' | 'reflexes-cyber' | 'article';
+  export type TypeDeRetour = TypeDeRetourMiniTests | TypeDeRetourRessourcesIdentifiées;
+  export type TypeDeRetourMiniTests = 'test-maturité' | 'vrai-faux' | 'exposition' | 'reflexes-cyber';
+  export type TypeDeRetourRessourcesIdentifiées = 'article' | 'mesure';
 </script>
 
 <script lang="ts">
@@ -14,28 +16,42 @@
   } from './retourUtilisateurSurContenu.store';
 
   type Props = {
-    clé: string;
     children?: Snippet;
   } & (
     | {
-        typeDeRetour: Extract<TypeDeRetour, 'mesure' | 'article'>;
+        typeDeRetour: TypeDeRetourRessourcesIdentifiées;
         identifiantCible: string;
       }
     | {
-        typeDeRetour: Exclude<TypeDeRetour, 'mesure' | 'article'>;
+        typeDeRetour: TypeDeRetourMiniTests;
         identifiantCible?: never;
       }
   );
-  const { clé, typeDeRetour, children, identifiantCible }: Props = $props();
+  const { typeDeRetour, children, identifiantCible }: Props = $props();
   const urlDePost = $derived(
     (
       {
-        'vrai-faux': '/api/retour-mini-tests/vrai-faux',
+        article: `/api/retour-article`,
         mesure: `/api/mesures/${identifiantCible}/avis`,
+
         exposition: '/api/retour-mini-tests/exposition',
         'reflexes-cyber': '/api/retour-mini-tests/reflexes-cyber',
         'test-maturité': '/api/retour-mini-tests/test-maturité',
-        article: 'api/retour-article',
+        'vrai-faux': '/api/retour-mini-tests/vrai-faux',
+      } satisfies { [C in TypeDeRetour]: string }
+    )[typeDeRetour]
+  );
+
+  const clé = $derived(
+    (
+      {
+        article: `article:${identifiantCible}`,
+        mesure: `mesure:${identifiantCible}`,
+
+        exposition: 'retour-utilisateur:exposition',
+        'reflexes-cyber': 'retour-utilisateur:reflexes-cyber',
+        'test-maturité': 'resultat-test',
+        'vrai-faux': 'retour-utilisateur:vrai-faux',
       } satisfies { [C in TypeDeRetour]: string }
     )[typeDeRetour]
   );

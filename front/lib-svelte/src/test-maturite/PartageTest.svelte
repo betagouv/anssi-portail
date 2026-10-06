@@ -1,31 +1,18 @@
 <script lang="ts">
-  import RetourUtilisateurSurContenu, { type TypeDeRetour } from '../ui/RetourUtilisateurSurContenu.svelte';
+  import RetourUtilisateurSurContenu, { type TypeDeRetourMiniTests } from '../ui/RetourUtilisateurSurContenu.svelte';
   import BoutonsPartagePage from './BoutonsPartagePage.svelte';
-
-  type TypeDeRetourValide = Exclude<TypeDeRetour, 'mesure' | 'article'>;
 
   const {
     cheminPartagé,
     sujetMail,
     typeDeRetour,
-  }: { cheminPartagé: string; sujetMail: string; typeDeRetour: TypeDeRetourValide } = $props();
-
-  const clé = $derived.by(() => {
-    return (
-      {
-        'test-maturité': 'resultat-test',
-        'vrai-faux': 'retour-utilisateur:vrai-faux',
-        exposition: 'retour-utilisateur:exposition',
-        'reflexes-cyber': 'retour-utilisateur:reflexes-cyber',
-      } satisfies { [C in TypeDeRetourValide]: string }
-    )[typeDeRetour];
-  });
+  }: { cheminPartagé: string; sujetMail: string; typeDeRetour: TypeDeRetourMiniTests } = $props();
 </script>
 
 <dsfr-container class="partage-test">
   <div class="contenu-section">
     <div class="retour">
-      <RetourUtilisateurSurContenu {clé} {typeDeRetour}>
+      <RetourUtilisateurSurContenu {typeDeRetour}>
         <p class="texte-article-lg">Ce test vous a-t-il aidé&nbsp;?</p>
       </RetourUtilisateurSurContenu>
     </div>
