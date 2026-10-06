@@ -2,23 +2,22 @@
   import RetourUtilisateurSurContenu, { type TypeDeRetour } from '../ui/RetourUtilisateurSurContenu.svelte';
   import BoutonsPartagePage from './BoutonsPartagePage.svelte';
 
+  type TypeDeRetourValide = Exclude<TypeDeRetour, 'mesure' | 'article'>;
+
   const {
     cheminPartagé,
     sujetMail,
     typeDeRetour,
-  }: { cheminPartagé: string; sujetMail: string; typeDeRetour: TypeDeRetour } = $props();
+  }: { cheminPartagé: string; sujetMail: string; typeDeRetour: TypeDeRetourValide } = $props();
 
   const clé = $derived.by(() => {
-    if (typeDeRetour === 'mesure') {
-      throw new Error('Ce composant ne doit pas être utilisé pour un retour utilisateur depuis une page mesure');
-    }
     return (
       {
         'test-maturité': 'resultat-test',
         'vrai-faux': 'retour-utilisateur:vrai-faux',
         exposition: 'retour-utilisateur:exposition',
         'reflexes-cyber': 'retour-utilisateur:reflexes-cyber',
-      } satisfies Omit<{ [C in TypeDeRetour]: string }, 'mesure'>
+      } satisfies { [C in TypeDeRetourValide]: string }
     )[typeDeRetour];
   });
 </script>
