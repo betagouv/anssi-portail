@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { consigneEvenementSimulationNis2TermineeDansJournal } from '../../src/bus/consigneEvenementSimulationNis2TermineeDansJournal.js';
+import { consigneSimulationNis2TermineeDansJournal } from '../../src/bus/consigneSimulationNis2TermineeDansJournal.js';
 import { SimulationNis2Terminee } from '../../src/bus/evenements/simulationNis2Terminee.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
@@ -35,7 +35,7 @@ describe("L'abonnement qui consigne une simulation NIS2 terminée dans le journa
       maintenant: () => new Date('2026-03-24'),
     };
 
-    await consigneEvenementSimulationNis2TermineeDansJournal({
+    await consigneSimulationNis2TermineeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
     })(

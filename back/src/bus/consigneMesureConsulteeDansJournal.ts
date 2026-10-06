@@ -1,9 +1,9 @@
 import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
-import { ModuleTermine } from './evenements/moduleTermine.js';
+import { MesureConsultee } from './evenements/mesureConsultee.js';
 
-export const consigneEvenementModuleTerminéDansJournal = ({
+export const consigneMesureConsulteeDansJournal = ({
   adaptateurJournal,
   adaptateurHorloge,
   adaptateurHachage,
@@ -12,15 +12,13 @@ export const consigneEvenementModuleTerminéDansJournal = ({
   adaptateurHorloge: AdaptateurHorloge;
   adaptateurHachage: AdaptateurHachage;
 }) => {
-  return async function (evenement: ModuleTermine) {
+  return async function (evenement: MesureConsultee) {
     await adaptateurJournal.consigneEvenement({
       donnees: {
         idUtilisateur: adaptateurHachage.hache(evenement.email),
-        idModule: evenement.idModule,
-        nomModule: evenement.nomModule,
-        parcours: evenement.parcours,
+        idMesure: evenement.idMesure,
       },
-      type: 'MODULE_TERMINE',
+      type: 'MESURE_CONSULTEE',
       date: adaptateurHorloge.maintenant(),
     });
   };

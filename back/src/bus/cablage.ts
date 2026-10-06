@@ -6,28 +6,28 @@ import { EntrepotFavori } from '../metier/entrepotFavori.js';
 import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
 import { BusEvenements } from './busEvenements.js';
 import { consigneRetourAvisMesureDonneDansJournal } from './consigneAvisMesureDonneDansJournal.js';
+import { consigneAvisUtilisateurDonneDansJournal } from './consigneAvisUtilisateurDonneDansJournal.js';
 import { consigneBadgeCyberdépartDébloquéDansJournal } from './consigneBadgeCyberdepartDebloqueDansJournal.js';
-import { consigneEvenementAvisUtilisateurDonneDansJournal } from './consigneEvenementAvisUtilisateurDonneDansJournal.js';
-import { consigneEvenementCompteCreeDansJournal } from './consigneEvenementCompteCreeDansJournal.js';
-import { consigneEvenementMAJFavorisUtilisateurDansJournal } from './consigneEvenementMAJFavorisUtilisateurDansJournal.js';
-import { consigneEvenementMesureConsulteeDansJournal } from './consigneEvenementMesureConsulteeDansJournal.js';
-import { consigneEvenementMesurePriseEnCompteDansJournal } from './consigneEvenementMesurePriseEnCompteDansJournal.js';
-import { consigneEvenementModuleTerminéDansJournal } from './consigneEvenementModuleTerminéDansJournal.js';
-import { consigneEvenementProprieteTestRevendiqueeDansJournal } from './consigneEvenementProprieteTestRevendiqueeDansJournal.js';
-import { consigneEvenementRetourExperienceDonneDansJournal } from './consigneEvenementRetourExperienceDonneDansJournal.js';
-import { consigneEvenementSimulationNis2TermineeDansJournal } from './consigneEvenementSimulationNis2TermineeDansJournal.js';
-import { consigneEvenementTestExpositionRealiseDansJournal } from './consigneEvenementTestExpositionRealiseDansJournal.js';
-import { consigneEvenementTestRealiseDansJournal } from './consigneEvenementTestRealiseDansJournal.js';
-import { consigneEvenementUtilisateurConnecteDansJournal } from './consigneEvenementUtilisateurConnecteDansJournal.js';
+import { consigneCompteCreeDansJournal } from './consigneCompteCreeDansJournal.js';
+import { consigneMAJFavorisUtilisateurDansJournal } from './consigneMAJFavorisUtilisateurDansJournal.js';
+import { consigneMesureConsulteeDansJournal } from './consigneMesureConsulteeDansJournal.js';
+import { consigneMesurePriseEnCompteDansJournal } from './consigneMesurePriseEnCompteDansJournal.js';
+import { consigneModuleTerminéDansJournal } from './consigneModuleTerminéDansJournal.js';
 import { consigneParcoursAllégéTerminéDansJournal } from './consigneParcoursAllegeTermineDansJournal.js';
 import { consigneParcoursChangéDansJournal } from './consigneParcoursChangeDansJournal.js';
 import { consigneParcoursCompletTerminéDansJournal } from './consigneParcoursCompletTermineDansJournal.js';
 import { consigneParcoursRejointDansJournal } from './consigneParcoursRejointDansJournal.js';
+import { consigneProprieteTestRevendiqueeDansJournal } from './consigneProprieteTestRevendiqueeDansJournal.js';
 import { consigneQuestionnaireVraiFauxReponseSoumiseDansJournal } from './consigneQuestionnaireVraiFauxReponseSoumiseDansJournal.js';
 import { consigneQuestionnaireVraiFauxTermineDansJournal } from './consigneQuestionnaireVraiFauxTermineDansJournal.js';
 import { consigneRéflexesCyberReponseSoumiseDansJournal } from './consigneReflexesCyberReponseSoumiseDansJournal.js';
 import { consigneRéflexesCyberTerminéDansJournal } from './consigneReflexesCyberReponseTermineDansJournal.js';
+import { consigneRetourExperienceDonneDansJournal } from './consigneRetourExperienceDonneDansJournal.js';
 import { consigneRetourMiniTestDonnéDansJournal } from './consigneRetourMiniTestDonneDansJournal.js';
+import { consigneSimulationNis2TermineeDansJournal } from './consigneSimulationNis2TermineeDansJournal.js';
+import { consigneTestExpositionRealiseDansJournal } from './consigneTestExpositionRealiseDansJournal.js';
+import { consigneTestRealiseDansJournal } from './consigneTestRealiseDansJournal.js';
+import { consigneUtilisateurConnecteDansJournal } from './consigneUtilisateurConnecteDansJournal.js';
 import { creeContactBrevo } from './creeContactBrevo.js';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte.js';
 import { AvisMesureDonne } from './evenements/avisMesureDonne.js';
@@ -75,14 +75,14 @@ export const cableTousLesAbonnes = ({
 }) => {
   busEvenements.abonne(
     TestRealise,
-    consigneEvenementTestRealiseDansJournal({
+    consigneTestRealiseDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
     })
   );
   busEvenements.abonne(
     TestExpositionRéalisé,
-    consigneEvenementTestExpositionRealiseDansJournal({
+    consigneTestExpositionRealiseDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
@@ -90,7 +90,7 @@ export const cableTousLesAbonnes = ({
   );
   busEvenements.abonne(
     ProprieteTestRevendiquee,
-    consigneEvenementProprieteTestRevendiqueeDansJournal({
+    consigneProprieteTestRevendiqueeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
@@ -103,7 +103,7 @@ export const cableTousLesAbonnes = ({
     creeContactBrevo({
       adaptateurEmail,
     }),
-    consigneEvenementCompteCreeDansJournal({
+    consigneCompteCreeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
@@ -111,7 +111,7 @@ export const cableTousLesAbonnes = ({
   ]);
   busEvenements.abonne(
     MiseAJourFavorisUtilisateur,
-    consigneEvenementMAJFavorisUtilisateurDansJournal({
+    consigneMAJFavorisUtilisateurDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
@@ -120,7 +120,7 @@ export const cableTousLesAbonnes = ({
   );
   busEvenements.abonne(
     RetourExperienceDonne,
-    consigneEvenementRetourExperienceDonneDansJournal({
+    consigneRetourExperienceDonneDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
@@ -128,7 +128,7 @@ export const cableTousLesAbonnes = ({
   );
   busEvenements.abonne(
     AvisUtilisateurDonne,
-    consigneEvenementAvisUtilisateurDonneDansJournal({
+    consigneAvisUtilisateurDonneDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
@@ -137,7 +137,7 @@ export const cableTousLesAbonnes = ({
 
   busEvenements.abonne(
     UtilisateurConnecte,
-    consigneEvenementUtilisateurConnecteDansJournal({
+    consigneUtilisateurConnecteDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
     })
@@ -145,14 +145,14 @@ export const cableTousLesAbonnes = ({
 
   busEvenements.abonne(
     SimulationNis2Terminee,
-    consigneEvenementSimulationNis2TermineeDansJournal({
+    consigneSimulationNis2TermineeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
     })
   );
 
   busEvenements.abonnePlusieurs(MesureConsultee, [
-    consigneEvenementMesureConsulteeDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
+    consigneMesureConsulteeDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
     adaptateurEmail.metsÀJourMesureConsultée,
   ]);
 
@@ -162,12 +162,12 @@ export const cableTousLesAbonnes = ({
   ]);
 
   busEvenements.abonnePlusieurs(MesurePriseEnCompte, [
-    consigneEvenementMesurePriseEnCompteDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
+    consigneMesurePriseEnCompteDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
     adaptateurEmail.metsÀJourMesurePriseEnCompte,
   ]);
 
   busEvenements.abonnePlusieurs(ModuleTermine, [
-    consigneEvenementModuleTerminéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
+    consigneModuleTerminéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
     adaptateurEmail.metsÀJourModuleTerminé,
   ]);
 

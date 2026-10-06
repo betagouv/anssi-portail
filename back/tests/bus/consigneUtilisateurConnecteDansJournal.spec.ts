@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { consigneEvenementUtilisateurConnecteDansJournal } from '../../src/bus/consigneEvenementUtilisateurConnecteDansJournal.js';
+import { consigneUtilisateurConnecteDansJournal } from '../../src/bus/consigneUtilisateurConnecteDansJournal.js';
 import { UtilisateurConnecte } from '../../src/bus/evenements/utilisateurConnecte.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
@@ -16,7 +16,7 @@ describe("L'abonnement qui consigne la connexion d'un utilisateur dans le journa
       maintenant: () => new Date('2025-03-10'),
     };
 
-    await consigneEvenementUtilisateurConnecteDansJournal({
+    await consigneUtilisateurConnecteDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
     })(new UtilisateurConnecte('u1@example.com-hache', true));

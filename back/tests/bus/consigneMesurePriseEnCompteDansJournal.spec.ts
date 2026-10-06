@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { consigneEvenementMesureConsulteeDansJournal } from '../../src/bus/consigneEvenementMesureConsulteeDansJournal.js';
-import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
+import { consigneMesurePriseEnCompteDansJournal } from '../../src/bus/consigneMesurePriseEnCompteDansJournal.js';
+import { MesurePriseEnCompte } from '../../src/bus/evenements/mesurePriseEnCompte.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 
-describe("L'abonnement qui consigne la consultation d'une mesure par un utilisateur dans le journal", () => {
-  it('consigne un évènement MesureConsultee', async () => {
+describe("L'abonnement qui consigne la prise en compte d'une mesure par un utilisateur dans le journal", () => {
+  it('consigne un évènement MesurePriseEnCompte', async () => {
     let evenementRecu;
     const adaptateurJournal: AdaptateurJournal = {
       consigneEvenement: async (donneesEvenement: unknown) => {
@@ -23,17 +23,20 @@ describe("L'abonnement qui consigne la consultation d'une mesure par un utilisat
       hache: (valeur) => `${valeur}-hacheHMAC`,
     };
 
-    await consigneEvenementMesureConsulteeDansJournal({
+    await consigneMesurePriseEnCompteDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
-    })(new MesureConsultee('u1@example.com', 'AUTH.5'));
+    })(new MesurePriseEnCompte('u1@example.com', 'AUTH.5', 10, 2, 'allégé'));
 
     expect(evenementRecu).toEqual({
-      type: 'MESURE_CONSULTEE',
+      type: 'MESURE_PRISE_EN_COMPTE',
       donnees: {
-        idUtilisateur: 'u1@example.com-hacheHMAC',
         idMesure: 'AUTH.5',
+        idUtilisateur: 'u1@example.com-hacheHMAC',
+        nombreDeMesures: 10,
+        parcours: 'allégé',
+        position: 2,
       },
       date: new Date('2025-03-10'),
     });

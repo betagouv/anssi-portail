@@ -1,18 +1,18 @@
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
-import { TestRealise } from './evenements/testRealise.js';
+import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee.js';
 
-export const consigneEvenementTestRealiseDansJournal = ({
+export const consigneSimulationNis2TermineeDansJournal = ({
   adaptateurJournal,
   adaptateurHorloge,
 }: {
   adaptateurJournal: AdaptateurJournal;
   adaptateurHorloge: AdaptateurHorloge;
 }) => {
-  return async function (evenement: TestRealise) {
+  return async function (evenement: SimulationNis2Terminee) {
     await adaptateurJournal.consigneEvenement({
-      donnees: evenement,
-      type: 'TEST_REALISE',
+      donnees: evenement.reponses,
+      type: 'SIMULATION_NIS2_TERMINEE',
       date: adaptateurHorloge.maintenant(),
     });
   };

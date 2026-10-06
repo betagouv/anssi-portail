@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { consigneEvenementTestRealiseDansJournal } from '../../src/bus/consigneEvenementTestRealiseDansJournal.js';
+import { consigneTestRealiseDansJournal } from '../../src/bus/consigneTestRealiseDansJournal.js';
 import { TestRealise } from '../../src/bus/evenements/testRealise.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
@@ -16,7 +16,7 @@ describe("L'abonnement qui consigne la réalisation d'un test dans le journal", 
       maintenant: () => new Date('2025-03-10'),
     };
 
-    consigneEvenementTestRealiseDansJournal({
+    consigneTestRealiseDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
     })(
