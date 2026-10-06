@@ -2,6 +2,7 @@ import { AvisMesureDonne } from '../bus/evenements/avisMesureDonne.js';
 import { MesureConsultee } from '../bus/evenements/mesureConsultee.js';
 import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
+import { RetourArticleDonné } from '../bus/evenements/retourArticleDonne.js';
 import { SimulationRéflexesCyberRéponseSoumise } from '../bus/evenements/simulationReflexesCyberReponseSoumise.js';
 import { SimulationRéflexesCyberTerminé } from '../bus/evenements/simulationReflexesCyberTermine.js';
 import { FacteurAggravant, Secteur, TypeOrganisation } from '../metier/mini-tests/exposition/exposition.js';
@@ -40,7 +41,8 @@ export type DonneesEvenement =
   | DonneesQuestionnaireVraiFauxTerminé
   | DonneesSimulationRéflexesCyberReponseSoumise
   | DonneesSimulationRéflexesCyberTermine
-  | DonnéesRetourTestReflexesCyber;
+  | DonnéesRetourTestReflexesCyber
+  | DonnéesRetourArticle;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -158,6 +160,7 @@ type DonnéesRetourTestReflexesCyber = Evenement<
   'RETOUR_TEST_REFLEXES_CYBER_DONNÉ',
   { retour: string; commentaire?: string }
 >;
+type DonnéesRetourArticle = Evenement<'RETOUR_ARTICLE_DONNE', RetourArticleDonné>;
 
 type DonneesQuestionnaireVraiFauxReponseSoumise = Evenement<
   'QUESTIONNAIRE_VRAI_FAUX_REPONSE_SOUMISE',

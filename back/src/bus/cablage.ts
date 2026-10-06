@@ -22,6 +22,7 @@ import { consigneQuestionnaireVraiFauxReponseSoumiseDansJournal } from './consig
 import { consigneQuestionnaireVraiFauxTermineDansJournal } from './consigneQuestionnaireVraiFauxTermineDansJournal.js';
 import { consigneRéflexesCyberReponseSoumiseDansJournal } from './consigneReflexesCyberReponseSoumiseDansJournal.js';
 import { consigneRéflexesCyberTerminéDansJournal } from './consigneReflexesCyberReponseTermineDansJournal.js';
+import { consigneRetourArticleDonnéDansJournal } from './consigneRetourArticleDonneDansJournal.js';
 import { consigneRetourExperienceDonneDansJournal } from './consigneRetourExperienceDonneDansJournal.js';
 import { consigneRetourMiniTestDonnéDansJournal } from './consigneRetourMiniTestDonneDansJournal.js';
 import { consigneSimulationNis2TermineeDansJournal } from './consigneSimulationNis2TermineeDansJournal.js';
@@ -44,6 +45,7 @@ import { ParcoursRejoint } from './evenements/parcoursRejoint.js';
 import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee.js';
 import { QuestionnaireVraiFauxRéponseSoumise } from './evenements/questionnaireVraiFauxReponseSoumise.js';
 import { QuestionnaireVraiFauxTerminé } from './evenements/questionnaireVraiFauxTermine.js';
+import { RetourArticleDonné } from './evenements/retourArticleDonne.js';
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne.js';
 import { RetourMiniTestDonné } from './evenements/retourMiniTestDonne.js';
 import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee.js';
@@ -199,6 +201,10 @@ export const cableTousLesAbonnes = ({
   busEvenements.abonnePlusieurs(RetourMiniTestDonné, [
     consigneRetourMiniTestDonnéDansJournal({ adaptateurJournal, adaptateurHorloge }),
     notifieUnRetourNégatifSurMiniTest({ messagerieInstantanee }),
+  ]);
+
+  busEvenements.abonnePlusieurs(RetourArticleDonné, [
+    consigneRetourArticleDonnéDansJournal({ adaptateurJournal, adaptateurHorloge }),
   ]);
 
   busEvenements.abonne(
