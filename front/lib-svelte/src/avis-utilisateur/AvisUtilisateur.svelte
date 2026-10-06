@@ -10,6 +10,12 @@
   import ZoneTexte from '../ui/ZoneTexte.svelte';
   import { entrepotNavigateurAvisUtilisateur } from './ControleAvisUtilisateur';
 
+  const ROUTES_À_EXCLURE: RegExp[] = [
+    /^\/cyberdepart$/,
+    /^\/test-maturite$/, //TODO: Vérifier si cette route est toujours à exclure
+    /^\/conseils-cyber/,
+  ];
+
   let encartOuvert = $state(false);
   let afficheDialogue = $state(false);
   let étape: 'formulaire' | 'merci' = $state('formulaire');
@@ -83,7 +89,7 @@
   };
 
   onMount(() => {
-    encartOuvert = !RegExp(/(\/?)(cyberdepart|test-maturite)(\/?)$/).exec(window.location.pathname);
+    encartOuvert = !ROUTES_À_EXCLURE.some((route) => route.exec(window.location.pathname));
   });
 </script>
 
