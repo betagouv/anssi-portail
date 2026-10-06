@@ -8,7 +8,7 @@ import { IpFilter } from 'express-ipfilter';
 import rateLimit from 'express-rate-limit';
 import { ressourceArticle } from './blog/ressourceArticle.js';
 import { ressourceArticles } from './blog/ressourceArticles.js';
-import { ressourceRetourArticle } from './blog/ressourceRetourArticle.js';
+import { ressourceAvisArticle } from './blog/ressourceAvisArticle.js';
 import { fabriqueCleRateLimit } from './clefRateLimit.js';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { erreurPageInterdite, erreurPageNonTrouvée, ErreurTraverséeDeChemin } from './erreurs.js';
@@ -431,7 +431,12 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreRoute('/api/mini-tests/vrai-faux/reponses', ressourceRéponsesVraiFaux(configurationServeur));
   enregistreRoute('/api/mini-tests/reflexes-cyber/reponses', ressourceRéponsesRéflexesCyber(configurationServeur));
   enregistreRoute('/api/mini-tests/exposition/tests', ressourceTestsExposition(configurationServeur));
-  enregistreRoute('/api/articles', ressourceArticles(configurationServeur), ressourceArticle(configurationServeur));
+  enregistreRoute(
+    '/api/articles',
+    ressourceArticles(configurationServeur),
+    ressourceArticle(configurationServeur),
+    ressourceAvisArticle(configurationServeur)
+  );
 
   enregistreRoute(
     '/api/mesures',
@@ -462,7 +467,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourcePagesJekyllConnectees(configurationServeur, 'mesures', [publieMesureConsultée, attributionParcoursMesure])
   );
   enregistreRoute('/api/retour-mini-tests', ressourceRetourMiniTest(configurationServeur));
-  enregistreRoute('/api/retour-article', ressourceRetourArticle(configurationServeur));
   enregistreRoute(`/partage-cyberdepart`, ressourcePagesJekyll(configurationServeur, 'partage-badge-cyberdepart'));
   routesStatiques.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
   enregistreRoute('/robots.txt', ressourceRobotsTxt(configurationServeur));
