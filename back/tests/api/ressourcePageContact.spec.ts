@@ -1,7 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { FichierInconnu, FournisseurChemin } from '../../src/api/fournisseurChemin.js';
 import { creeServeur } from '../../src/api/msc.js';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin, ressourceFactice } from './fauxObjets.js';
@@ -89,16 +89,12 @@ describe('La ressource page Contact', () => {
       throw new FichierInconnu('');
     };
 
-    let estAppelé = false;
-    fournisseurChemin.jekyll.page404 = () => {
-      estAppelé = true;
-      return ressourceFactice();
-    };
+    const page404 = vi.spyOn(fournisseurChemin.jekyll, 'page404').mockReturnValue(ressourceFactice());
 
     const réponse = await request(serveur).get('/contacts/inconnu').accept('text/html');
 
     expect(réponse.status).toBe(HttpStatusCode.NotFound);
     expect(réponse.headers['content-type']).toBe('text/html; charset=utf-8');
-    expect(estAppelé).toBe(true);
+    expect(page404).toHaveBeenCalledOnce();
   });
 });
