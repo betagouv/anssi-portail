@@ -70,12 +70,10 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   }
 
   async ajoute(utilisateur: Utilisateur) {
-    // Enregistrement dans la BDD
-    await this.knex('utilisateurs').insert(this.chiffreDonneesUtilisateur(utilisateur));
-
     // Enregistrement dans MPA
     const organisation = await utilisateur.organisation();
     const { prenom, nom, telephone, email, domainesSpecialite } = utilisateur;
+
     await this.adaptateurProfilAnssi.metsAJour({
       prenom,
       nom,
@@ -84,6 +82,8 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
       domainesSpecialite,
       organisation,
     });
+    // Enregistrement dans la BDD
+    await this.knex('utilisateurs').insert(this.chiffreDonneesUtilisateur(utilisateur));
   }
 
   private async recupereMesuresPrisesEnCompte(utilisateurBDD: UtilisateurBDD) {
