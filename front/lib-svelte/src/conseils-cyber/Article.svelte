@@ -71,12 +71,6 @@
         max-width: taille-pour-colonnes(8);
       }
 
-      :global(section) {
-        display: flex;
-        flex-direction: column;
-        gap: 32px;
-      }
-
       :global(img),
       :global(video) {
         width: 100%;
