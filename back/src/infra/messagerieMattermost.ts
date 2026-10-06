@@ -4,6 +4,7 @@ import {
   AvisUtilisateur,
   MessagerieInstantanee,
   RetourExperience,
+  RetourNégatifSurArticle,
   RetourNégatifSurMiniTest,
 } from '../metier/messagerieInstantanee.js';
 import { type MiniTest } from '../metier/mini-tests/mini-test.js';
@@ -68,6 +69,17 @@ ${aseptiseMarkdown(avis.commentaire ?? '')}`;
     if (urlWebhook) {
       const message = `### Retour utilisateur ${nomMiniTest}
 Un utilisateur a laissé un retour négatif
+${aseptiseMarkdown(retour.commentaire ? `Commentaire: ${retour.commentaire}` : 'Aucun commentaire laissé')}`;
+      await axios.post(urlWebhook, { text: message });
+    }
+  },
+
+  notifieUnRetourNégatifSurArticle: async (retour: RetourNégatifSurArticle) => {
+    const urlWebhook = adaptateurEnvironnement.mattermost().webhookAvisUtilisateur();
+
+    if (urlWebhook) {
+      const message = `### Retour utilisateur Article
+Un utilisateur a laissé un retour négatif sur l'article \`${retour.slug}\`
 ${aseptiseMarkdown(retour.commentaire ? `Commentaire: ${retour.commentaire}` : 'Aucun commentaire laissé')}`;
       await axios.post(urlWebhook, { text: message });
     }

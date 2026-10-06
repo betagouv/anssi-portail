@@ -24,9 +24,15 @@ export type RetourNégatifSurMiniTest = {
   commentaire?: string;
 };
 
+export type RetourNégatifSurArticle = {
+  slug: string;
+  commentaire?: string;
+};
+
 export interface MessagerieInstantanee {
   notifieUnAvisUtilisateur(avisUtilisateur: AvisUtilisateur): Promise<void>;
   notifieUnRetourExperience(retourExperience: RetourExperience): Promise<void>;
   notifieUnAvisNegatifSurUneMesure(avis: AvisNegatifSurUneMesure): Promise<void>;
   notifieUnRetourNégatifSurMiniTest(retour: RetourNégatifSurMiniTest): Promise<void>;
+  notifieUnRetourNégatifSurArticle(retour: RetourNégatifSurArticle): Promise<void>;
 }
