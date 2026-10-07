@@ -14,6 +14,7 @@ export const aseptiseHtml = (html: string) =>
       'h4',
       'h5',
       'i',
+      'img',
       'li',
       'ol',
       'p',
