@@ -12,7 +12,8 @@ import { ConstructeurDArticleAvecToutesLesMétadonnées } from './constructeurDe
 
 describe('La ressource retour sur les articles', () => {
   describe('sur requête POST', () => {
-    const URL = (slug: string) => `/api/articles/${slug}/avis`;
+    const slugArticle = 'un-article-de-blog';
+    const URL = `/api/articles/${slugArticle}/avis`;
     let serveur: Express;
     let adaptateurEnvironnement: AdaptateurEnvironnement;
     let busEvenements: MockBusEvenement;
@@ -37,23 +38,21 @@ describe('La ressource retour sur les articles', () => {
     });
 
     it('doit répondre 201', async () => {
-      entrepôtArticle.ajoute(
-        new ConstructeurDArticleAvecToutesLesMétadonnées().avecLeSlug('un-article-de-blog').construis()
-      );
-      const reponse = await request(serveur).post(URL('un-article-de-blog')).send(retourPositif);
+      entrepôtArticle.ajoute(new ConstructeurDArticleAvecToutesLesMétadonnées().avecLeSlug(slugArticle).construis());
+      const reponse = await request(serveur).post(URL).send(retourPositif);
 
       expect(reponse.status).toBe(HttpStatusCode.Created);
     });
 
     it('doit répondre 400 si le corps de la requête est vide', async () => {
-      const reponse = await request(serveur).post(URL('un-article')).send({});
+      const reponse = await request(serveur).post(URL).send({});
 
       expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       expect(reponse.body.fieldErrors.retour[0]).toBe('Le retour doit être "POSITIF" ou "NEGATIF"');
     });
 
     it("doit répondre 400 si le retour n'est pas valide", async () => {
-      const reponse = await request(serveur).post(URL('un-article')).send({ retour: 'INVALIDE' });
+      const reponse = await request(serveur).post(URL).send({ retour: 'INVALIDE' });
 
       expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       expect(reponse.body.fieldErrors.retour[0]).toBe('Le retour doit être "POSITIF" ou "NEGATIF"');
@@ -61,7 +60,7 @@ describe('La ressource retour sur les articles', () => {
 
     it('doit répondre 400 si le commentaire est trop long', async () => {
       const reponse = await request(serveur)
-        .post(URL('un-article'))
+        .post(URL)
         .send({ retour: 'NEGATIF', commentaire: 'x'.repeat(1001) });
 
       expect(reponse.status).toBe(HttpStatusCode.BadRequest);
@@ -69,20 +68,18 @@ describe('La ressource retour sur les articles', () => {
     });
 
     it("doit répondre 404 si l'article correspondant au slug n'existe pas", async () => {
-      const reponse = await request(serveur).post(URL('un-article-inconnu')).send(retourPositif);
+      const reponse = await request(serveur).post(URL).send(retourPositif);
 
       expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
     describe('concernant les retours positifs', () => {
       beforeEach(async () => {
-        entrepôtArticle.ajoute(
-          new ConstructeurDArticleAvecToutesLesMétadonnées().avecLeSlug('un-article-de-blog').construis()
-        );
+        entrepôtArticle.ajoute(new ConstructeurDArticleAvecToutesLesMétadonnées().avecLeSlug(slugArticle).construis());
       });
 
       it('publie un événement', async () => {
-        await request(serveur).post(URL('un-article-de-blog')).send(retourPositif);
+        await request(serveur).post(URL).send(retourPositif);
 
         busEvenements.aRecuUnEvenement(RetourArticleDonné);
         const evenement = busEvenements.recupereEvenement(RetourArticleDonné);
@@ -91,7 +88,7 @@ describe('La ressource retour sur les articles', () => {
 
       it('publie un événement sans commentaire', async () => {
         await request(serveur)
-          .post(URL('un-article-de-blog'))
+          .post(URL)
           .send({ ...retourPositif, commentaire: 'Cet article est sympa !' });
 
         busEvenements.aRecuUnEvenement(RetourArticleDonné);
@@ -107,13 +104,11 @@ describe('La ressource retour sur les articles', () => {
       };
 
       beforeEach(async () => {
-        entrepôtArticle.ajoute(
-          new ConstructeurDArticleAvecToutesLesMétadonnées().avecLeSlug('un-article-de-blog').construis()
-        );
+        entrepôtArticle.ajoute(new ConstructeurDArticleAvecToutesLesMétadonnées().avecLeSlug(slugArticle).construis());
       });
 
       it('publie un événement', async () => {
-        await request(serveur).post(URL('un-article-de-blog')).send(retourNégatif);
+        await request(serveur).post(URL).send(retourNégatif);
 
         busEvenements.aRecuUnEvenement(RetourArticleDonné);
         const evenement = busEvenements.recupereEvenement(RetourArticleDonné);
@@ -123,7 +118,7 @@ describe('La ressource retour sur les articles', () => {
 
       it('publie un événement avec commentaire', async () => {
         await request(serveur)
-          .post(URL('un-article-de-blog'))
+          .post(URL)
           .send({ ...retourNégatif, commentaire: 'Cet article est nul !' });
 
         busEvenements.aRecuUnEvenement(RetourArticleDonné);
