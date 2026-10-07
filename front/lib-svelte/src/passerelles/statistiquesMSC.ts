@@ -40,6 +40,7 @@ export type Statistiques = {
   satisfactionUtilisateur: number;
   testsRéalisés: number;
   démarchesDeSécurisation: number;
+  démarchesDeSécurisationArrondies: number;
 };
 
 export const récupèreStatistiquesMSC = async (options?: { urlBase: string }): Promise<Statistiques> => {
@@ -54,12 +55,14 @@ export const récupèreStatistiquesMSC = async (options?: { urlBase: string }): 
   } = réponse.data;
   const diagnosticsCyberArrondis = Math.floor(diagnosticsCyber / 100) * 100;
   const testsRéalisés = miniTests.vraiFaux + testsMaturite.total + miniTests.exposition + miniTests.reflexesCyber;
+  const démarchesDeSécurisation = diagnosticsCyber + parcoursSécurisation.nombreDémarrés;
   return {
     diagnosticsCyberArrondis,
     satisfactionUtilisateur,
     testsRéalisés,
     testsMaturite,
     utilisateursInscrits,
-    démarchesDeSécurisation: diagnosticsCyber + parcoursSécurisation.nombreDémarrés,
+    démarchesDeSécurisation,
+    démarchesDeSécurisationArrondies: Math.floor(démarchesDeSécurisation / 100) * 100,
   };
 };

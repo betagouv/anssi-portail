@@ -3,7 +3,7 @@
   import { enPropriétéWebC } from '$plateforme/webComponent';
   import IllustrationProtegerOrganisation from '../accueil/animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
   import IllustrationDemandeAide from '../demande-aide-mon-aide-cyber/IllustrationDemandeAide.svelte';
-  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
+  import { récupèreStatistiquesMSC } from '../passerelles/statistiquesMSC';
   import BlocDiagnostic from '../ui/BlocDiagnostic.svelte';
   import Bouton from '../ui/Bouton.svelte';
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
@@ -12,7 +12,7 @@
   import EncartPromotionParcoursBasique from './EncartPromotionParcoursBasique.svelte';
   import EncartPromotionParcoursComplet from './EncartPromotionParcoursComplet.svelte';
 
-  let statistiques: Statistiques | undefined = $state();
+  let organisationsAccompagnées = $state(0);
 
   const tagsParcoursBasique = [
     {
@@ -61,7 +61,8 @@
 
   onMount(async () => {
     pageSource = `${window.location.pathname}-hero`;
-    statistiques = await récupèreStatistiquesMSC();
+    const { démarchesDeSécurisationArrondies } = await récupèreStatistiquesMSC();
+    organisationsAccompagnées = démarchesDeSécurisationArrondies;
   });
 </script>
 
@@ -69,7 +70,7 @@
   <HeroLandingPage
     description="Rejoignez notre programme d'accompagnement gratuit."
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
-    tag={`+${statistiques?.diagnosticsCyberArrondis ?? 0} organisations déjà accompagnées 🚀`}
+    tag={`+${organisationsAccompagnées} organisations déjà accompagnées 🚀`}
     class="hero-landing-page"
   >
     {#snippet titreHtml()}

@@ -1,16 +1,16 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { enPropriétéWebC } from '$plateforme/webComponent';
-  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
+  import { récupèreStatistiquesMSC } from '../passerelles/statistiquesMSC';
   import Bouton from '../ui/Bouton.svelte';
   import Lien from '../ui/Lien.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
   import IllustrationProtegerOrganisation from './animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
 
-  let statistiques: Statistiques | undefined = $state();
-  const tags = [{ label: 'TPE' }, { label: 'PME' }, { label: 'ETI' }, { label: 'Collectivités' }];
-
   let enPause = $state(false);
+  let organisationsAccompagnées = $state(0);
+
+  const tags = [{ label: 'TPE' }, { label: 'PME' }, { label: 'ETI' }, { label: 'Collectivités' }];
   const libelléPause = $derived(enPause ? 'Lancer les animations' : 'Mettre les animations en pause');
 
   const basculePause = () => {
@@ -18,16 +18,15 @@
   };
 
   onMount(async () => {
-    statistiques = await récupèreStatistiquesMSC();
+    const { démarchesDeSécurisationArrondies } = await récupèreStatistiquesMSC();
+    organisationsAccompagnées = démarchesDeSécurisationArrondies;
   });
 </script>
 
 <dsfr-container class="proteger-organisation fond-macaron">
   <div class="conteneur">
     <div class="en-tete">
-      <span class="badge-accompagnement"
-        >+{statistiques?.diagnosticsCyberArrondis ?? 0} organisations déjà accompagnées 🚀</span
-      >
+      <span class="badge-accompagnement">+{organisationsAccompagnées} organisations déjà accompagnées 🚀</span>
       <h2 class="titre fr-h1">
         Chaque organisation a son point de <MotEnExergue motif="cercle">départ.</MotEnExergue>
         <br />Trouvez le vôtre.

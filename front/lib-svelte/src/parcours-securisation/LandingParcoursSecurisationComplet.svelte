@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, type Component } from 'svelte';
-  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
+  import { récupèreStatistiquesMSC } from '../passerelles/statistiquesMSC';
   import BlocContenuLanding from '../ui/BlocContenuLanding.svelte';
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
@@ -10,7 +10,7 @@
   import IllustrationProgression from './animation/IllustrationProgression.svelte';
   import IllustrationRecyf from './animation/IllustrationRecyf.svelte';
 
-  let statistiques: Statistiques | undefined = $state();
+  let organisationsAccompagnées = $state(0);
 
   type Contenu = {
     titre: string;
@@ -50,7 +50,8 @@
   onMount(async () => {
     pageSourceHero = `${window.location.pathname}-hero`;
     pageSourceCTACentral = `${window.location.pathname}-cta-central`;
-    statistiques = await récupèreStatistiquesMSC();
+    const { démarchesDeSécurisationArrondies } = await récupèreStatistiquesMSC();
+    organisationsAccompagnées = démarchesDeSécurisationArrondies;
   });
 </script>
 
@@ -58,7 +59,7 @@
   <HeroLandingPage
     description="Accédez à 6 modules élaborés pour protéger votre organisation contre les risques cyber les plus courants et pour vous accompagner dans la mise en œuvre des mesures du ReCyF."
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
-    tag={`+${statistiques?.diagnosticsCyberArrondis ?? 0} organisations déjà accompagnées 🚀`}
+    tag={`+${organisationsAccompagnées} organisations déjà accompagnées 🚀`}
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
