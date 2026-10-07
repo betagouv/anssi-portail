@@ -19,7 +19,7 @@
     "isomorphic-dompurify": "catalog:"
   },
   "devDependencies": {
-    "@types/node": "^26.0.0",
+    "@types/node": "catalog:",
     "npm-run-all2": "^9.0.0",
     "tsx": "catalog:",
     "vitest": "catalog:"
