@@ -157,6 +157,7 @@
     z-index: 9;
     width: 291px;
     transform: translate(100%, -50%);
+    right: 0;
 
     &[popover]:popover-open {
       display: flex;
