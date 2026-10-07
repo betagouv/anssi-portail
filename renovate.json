@@ -17,6 +17,12 @@
       "allowedVersions": "<25.0.0"
     },
     {
+      "description": "Regroupe les mises à jour des dépendances AWS SDK utilisées pour S3",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["@aws-sdk/client-s3", "@aws-sdk/credential-providers"],
+      "groupName": "AWS SDK S3"
+    },
+    {
       "description": "lockFileMaintenance",
       "matchUpdateTypes": ["pin", "digest", "patch", "minor", "major", "lockFileMaintenance"],
       "minimumReleaseAge": "7 days"
