@@ -12,6 +12,11 @@
       "allowedVersions": "<11.0.0"
     },
     {
+      "description": "@types/node reste aligné sur la version majeure 24 définie dans .nvmrc",
+      "matchPackageNames": ["@types/node"],
+      "allowedVersions": "<25.0.0"
+    },
+    {
       "description": "lockFileMaintenance",
       "matchUpdateTypes": ["pin", "digest", "patch", "minor", "major", "lockFileMaintenance"],
       "minimumReleaseAge": "7 days"
