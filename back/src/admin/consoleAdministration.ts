@@ -33,6 +33,7 @@ import { MigrationHash } from './migrationHash.js';
 
 type DonnéesUtilisateurDéchiffrées = {
   email: string;
+  emailHaché: string;
   infolettreAcceptee: boolean;
   pixelDeSuiviAccepte?: boolean;
 };
@@ -152,7 +153,10 @@ export class ConsoleAdministration {
       const donneesDechiffrees = lotUtilisateurs
         .map((u) => {
           try {
-            return this.adaptateurChiffrement.dechiffre(u.donnees) as DonnéesUtilisateurDéchiffrées;
+            return {
+              ...this.adaptateurChiffrement.dechiffre(u.donnees),
+              emailHaché: u.email_hache,
+            } as DonnéesUtilisateurDéchiffrées;
           } catch {
             console.error('Erreur déchiffrement : ', u.email_hache);
             return null;
@@ -547,5 +551,34 @@ export class ConsoleAdministration {
         }
       });
     }, tailleLot);
+  }
+
+  async supprimeUtilisateursSansProfilAnssi(persiste: boolean = false, tailleLot: number = 500) {
+    const emailUtilisateursÀSupprimer: Pick<DonnéesUtilisateurDéchiffrées, 'email' | 'emailHaché'>[] = [];
+    await this.traiteUtilisateursEnLot(async (donneesDechiffrees) => {
+      const emails = donneesDechiffrees.map((d) => d.email);
+
+      const profilsAnssi = await this.adaptateurProfilAnssi.recherche({ emails });
+
+      const emailsAvecProfilsAnssi = new Set(profilsAnssi.map((p) => p.email));
+
+      donneesDechiffrees.forEach(({ email, emailHaché }) => {
+        if (!emailsAvecProfilsAnssi.has(email)) {
+          emailUtilisateursÀSupprimer.push({ email, emailHaché });
+        }
+      });
+    }, tailleLot);
+    const emailsSupprimés = emailUtilisateursÀSupprimer.map(({ email }) => email);
+    if (persiste) {
+      await this.knexMSC('utilisateurs')
+        .delete()
+        .whereIn(
+          'email_hache',
+          emailUtilisateursÀSupprimer.map((e) => e.emailHaché)
+        );
+      console.info(`Suppression des comptes utilisateurs sans profil ANSSI suivant: ${emailsSupprimés}`);
+    } else {
+      console.info(`${emailsSupprimés} seront supprimés`);
+    }
   }
 }
