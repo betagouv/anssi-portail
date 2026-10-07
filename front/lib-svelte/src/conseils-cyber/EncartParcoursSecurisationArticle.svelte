@@ -105,6 +105,7 @@
       'illustration';
     padding: 2.5rem 1rem;
     gap: 1.5rem;
+    margin-top: 3rem;
 
     @include a-partir-de(lg) {
       grid-template-areas:
