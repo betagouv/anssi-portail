@@ -4,7 +4,7 @@
 
   type Props = {
     titre: string;
-    description: string;
+    description: string | Snippet;
     labelBouton?: string;
     lienBouton?: string;
     illustration?: Snippet;
@@ -16,7 +16,11 @@
 <div class="bloc-diagnostic">
   <div class="contenu">
     <h2 class="titre fr-h4">{titre}</h2>
-    <p class="description">{description}</p>
+    {#if typeof description === 'string'}
+      <p class="description">{description}</p>
+    {:else}
+      {@render description()}
+    {/if}
     {#if labelBouton}
       <dsfr-button label={labelBouton} kind="secondary" size="lg" markup="a" href={lienBouton}></dsfr-button>
     {/if}
