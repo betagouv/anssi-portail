@@ -164,6 +164,9 @@ settings:
 
 catalogs:
   default:
+    '@types/node':
+      specifier: ^26.0.0
+      version: 26.6.3
     axios:
       specifier: ^1.18.0
       version: 1.20.0
@@ -234,7 +237,7 @@ importers:
         version: 1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
     devDependencies:
       '@types/node':
-        specifier: ^26.0.0
+        specifier: 'catalog:'
         version: 26.6.3
       vitest:
         specifier: 'catalog:'
@@ -379,7 +382,7 @@ importers:
         specifier: ^2.1.0
         version: 2.3.0
       '@types/node':
-        specifier: ^26.0.0
+        specifier: 'catalog:'
         version: 26.6.3
       '@types/papaparse':
         specifier: ^5.5.2
@@ -425,7 +428,7 @@ importers:
         version: 4.4.0(@noble/hashes@1.8.0)
     devDependencies:
       '@types/node':
-        specifier: ^26.0.0
+        specifier: 'catalog:'
         version: 26.6.3
       tsx:
         specifier: 'catalog:'
@@ -554,7 +557,7 @@ importers:
         version: 4.4.0(@noble/hashes@1.8.0)
     devDependencies:
       '@types/node':
-        specifier: ^26.0.0
+        specifier: 'catalog:'
         version: 26.6.3
       npm-run-all2:
         specifier: ^9.0.0

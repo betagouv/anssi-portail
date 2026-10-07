@@ -23,7 +23,7 @@
     "isomorphic-dompurify": "catalog:"
   },
   "devDependencies": {
-    "@types/node": "^26.0.0",
+    "@types/node": "catalog:",
     "tsx": "catalog:"
   }
 }
