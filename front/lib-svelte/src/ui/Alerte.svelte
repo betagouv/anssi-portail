@@ -1,9 +1,11 @@
 <script lang="ts">
-  interface Props {
+  import type { Snippet } from 'svelte';
+
+  type Props = {
     type: 'ERREUR';
     titre: string;
-    message: string;
-  }
+    message: string | Snippet;
+  };
 
   let { type, titre, message }: Props = $props();
 </script>
@@ -15,7 +17,13 @@
     </div>
     <div class="contenu">
       <b>{titre}</b>
-      <p>{message}</p>
+      <p>
+        {#if typeof message === 'string'}
+          {message}
+        {:else}
+          {@render message()}
+        {/if}
+      </p>
     </div>
   </div>
 {/if}

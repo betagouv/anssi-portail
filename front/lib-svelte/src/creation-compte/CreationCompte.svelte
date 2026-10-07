@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import Alerte from '../ui/Alerte.svelte';
   import Bouton from '../ui/Bouton.svelte';
   import CaseACocher from '../ui/CaseACocher.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
@@ -66,6 +67,7 @@
   };
 
   let enCoursEnvoi = $state(false);
+  let estEnErreur = $state(false);
 
   const valide = async () => {
     if (formulaireCourant?.estValide()) {
@@ -81,6 +83,7 @@
         );
         window.location.href = '/oidc/connexion';
       } catch {
+        estEnErreur = true;
         enCoursEnvoi = false;
       }
     }
@@ -242,6 +245,15 @@
         <Bouton type="primaire" libelle="Suivant" surClic={etapeSuivante} />
       {/if}
     </div>
+
+    {#if estEnErreur}
+      <Alerte type="ERREUR" titre="Impossible de finaliser votre inscription">
+        {#snippet message()}
+          Nous n’avons pas pu finaliser votre inscription. Veuillez réessayer ultérieurement. Si le problème persiste,
+          <Lien href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert" libelle="contactez le support" />.
+        {/snippet}
+      </Alerte>
+    {/if}
   </div>
 </div>
 
