@@ -62,11 +62,12 @@
   <div class="actions">
     <Lien
       apparence="bouton"
-      type="primaire"
-      libelle="Je commence à sécuriser"
+      blank
+      href={hrefCTA}
       icone="arrow-right-circle-line"
       iconeADroite
-      href={hrefCTA}
+      libelle="Je commence à sécuriser"
+      type="primaire"
     />
     <Lien apparence="bouton" type="tertiaire-sans-bordure" libelle="En savoir plus" href="/parcours-cyberdepart" />
   </div>
@@ -82,7 +83,14 @@
   <div class="corps">
     <BadgeOrganisationsAccompagnes />
     <p class="fr-h5">12 mesures simples pour protéger votre organisation contre les cyberattaques</p>
-    <Lien apparence="bouton" type="primaire" libelle="Découvrir le programme" href="/parcours-cyberdepart" etire />
+    <Lien
+      apparence="bouton"
+      blank
+      etire
+      href="/parcours-cyberdepart"
+      libelle="Découvrir le programme"
+      type="primaire"
+    />
   </div>
 </div>
 
@@ -147,7 +155,7 @@
     margin: 0;
     inset: 50% 1rem auto auto;
     z-index: 9;
-    width: 282px;
+    width: 291px;
     transform: translate(100%, -50%);
 
     &[popover]:popover-open {
