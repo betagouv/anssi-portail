@@ -111,6 +111,7 @@
         'titre-et-contenu illustration'
         'actions illustration';
       grid-template-columns: repeat(2, 1fr);
+      padding: 2.5rem;
     }
 
     .titre-et-contenu {
