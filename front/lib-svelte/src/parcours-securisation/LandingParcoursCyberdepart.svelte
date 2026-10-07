@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, type Component } from 'svelte';
   import { afficheBadgeCyberdépart } from '$plateforme/environnement';
-  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
+  import { récupèreStatistiquesMSC } from '../passerelles/statistiquesMSC';
   import BlocContenuLanding from '../ui/BlocContenuLanding.svelte';
   import BlocDiagnostic from '../ui/BlocDiagnostic.svelte';
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
@@ -12,7 +12,7 @@
   import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';
   import IllustrationTuto from './animation/IllustrationTuto.svelte';
 
-  let statistiques: Statistiques | undefined = $state();
+  let organisationsAccompagnées = $state(0);
 
   type Contenu = {
     titre: string;
@@ -51,7 +51,8 @@
   onMount(async () => {
     pageSourceHero = `${window.location.pathname}-hero`;
     pageSourceCTACentral = `${window.location.pathname}-cta-central`;
-    statistiques = await récupèreStatistiquesMSC();
+    const { démarchesDeSécurisationArrondies } = await récupèreStatistiquesMSC();
+    organisationsAccompagnées = démarchesDeSécurisationArrondies;
   });
 </script>
 
@@ -59,7 +60,7 @@
   <HeroLandingPage
     description="12 mesures pensées pour les non-spécialistes, applicables en quelques minutes pour commencer à renforcer votre cybersécurité et prendre votre Cyberdépart&nbsp;!"
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
-    tag={`+${statistiques?.diagnosticsCyberArrondis ?? 0} organisations déjà accompagnées 🚀`}
+    tag={`+${organisationsAccompagnées} organisations déjà accompagnées 🚀`}
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
