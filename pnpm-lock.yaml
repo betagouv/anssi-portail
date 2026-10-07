@@ -253,7 +253,7 @@ importers:
         version: 3.1143.0
       '@aws-sdk/credential-providers':
         specifier: ^3.1112.0
-        version: 3.1142.0
+        version: 3.1143.0
       '@lab-anssi/lib':
         specifier: ^2.3.0
         version: 2.3.0(debug@4.4.3(supports-color@10.2.2))(express@5.2.1(supports-color@10.2.2))(supports-color@10.2.2)
@@ -709,8 +709,8 @@ packages:
     resolution: {integrity: sha512-/y9WvNtlcPBGLR0qc1a+9J/xtYZfVczvLUOuXaVWylzttH7ewsxwHtjmiJSolNrVSDorIxHGHMU61CbonRkmwA==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/credential-providers@3.1142.0':
-    resolution: {integrity: sha512-3FA/yoY+lcMhnky6LQNY5FTWsFOz/KeJYbHhnC/Ls14SN1W/7nf2YxcnZJ3Lx65+qHxnaE7J4z8UH59Gpsc3sg==}
+  '@aws-sdk/credential-providers@3.1143.0':
+    resolution: {integrity: sha512-1Tifq2jFMJy4JN6buq7fY8qlN8+3yZvD7aG9ZWRneRlwjvjurS56aftzMXTmBWSOa2eJHlLx4eNuFu6pLc6K5g==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/middleware-sdk-s3@3.972.77':
@@ -5205,7 +5205,7 @@ snapshots:
       '@smithy/types': 4.19.0
       tslib: 2.8.1
 
-  '@aws-sdk/credential-providers@3.1142.0':
+  '@aws-sdk/credential-providers@3.1143.0':
     dependencies:
       '@aws-sdk/core': 3.978.1
       '@aws-sdk/credential-provider-cognito-identity': 3.972.71
