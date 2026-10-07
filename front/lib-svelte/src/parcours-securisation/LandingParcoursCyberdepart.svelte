@@ -136,11 +136,7 @@
       description="Le diagnostic Cyberdépart vous permet de bénéficier d'un accompagnement gratuit d'1 heure avec un Aidant cyber bénévole. Retrouvez ensuite votre plan d'action sur MesServicesCyber."
       labelBouton="Demander un accompagnement gratuit"
       lienBouton="/cyberdepart?origine=landing-parcours-cyberdepart"
-    >
-      {#snippet illustration()}
-        <img src="/assets/images/parcours-securisation/illustration-diagnostic.png" alt="" />
-      {/snippet}
-    </BlocDiagnostic>
+    />
   </dsfr-container>
 </section>
 
