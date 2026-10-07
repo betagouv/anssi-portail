@@ -10,11 +10,7 @@
   import ZoneTexte from '../ui/ZoneTexte.svelte';
   import { entrepotNavigateurAvisUtilisateur } from './ControleAvisUtilisateur';
 
-  const ROUTES_À_EXCLURE: RegExp[] = [
-    /^\/cyberdepart$/,
-    /^\/test-maturite$/, //TODO: Vérifier si cette route est toujours à exclure
-    /^\/conseils-cyber/,
-  ];
+  const ROUTES_À_EXCLURE: RegExp[] = [/^\/cyberdepart$/, /^\/conseils-cyber/];
 
   let encartOuvert = $state(false);
   let afficheDialogue = $state(false);
