@@ -521,4 +521,45 @@ export class ConsoleAdministration {
       });
     console.log('Lignes mises à jour  :', nombreMiseAJour);
   }
+
+  async chercheUtilisateursSansProfilAnssi(tailleLot: number = 500) {
+    let lotCourant = 0;
+    let lotUtilisateurs: UtilisateurBDD[];
+    do {
+      lotUtilisateurs = await this.knexMSC('utilisateurs')
+        .offset(lotCourant * tailleLot)
+        .limit(tailleLot);
+      console.info(`Traitement du lot ${lotCourant + 1} : ${lotUtilisateurs.length} utilisateurs ...`);
+
+      const donneesDechiffrees = lotUtilisateurs
+        .map((u) => {
+          try {
+            return this.adaptateurChiffrement.dechiffre(u.donnees) as {
+              email: string;
+              infolettreAcceptee: boolean;
+              pixelDeSuiviAccepte?: boolean;
+            };
+          } catch {
+            console.error('Erreur déchiffrement : ', u.email_hache);
+            return null;
+          }
+        })
+        .filter((d) => !!d);
+
+      const emails = donneesDechiffrees.map((d) => d.email);
+
+      const profilsAnssi = await this.adaptateurProfilAnssi.recherche({ emails });
+
+      const emailsAvecProfilsAnssi = profilsAnssi.map((p) => p.email);
+
+      emails.forEach((email) => {
+        if (emailsAvecProfilsAnssi.indexOf(email) === -1) {
+          console.log('Utilisateur trouvé sans profil ANSSI', email);
+        }
+      });
+
+      lotCourant++;
+    } while (lotUtilisateurs.length === tailleLot);
+    console.info('Traitement terminé');
+  }
 }
