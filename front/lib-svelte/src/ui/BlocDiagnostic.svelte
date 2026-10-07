@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import IllustrationDemandeAide from '../demande-aide-mon-aide-cyber/IllustrationDemandeAide.svelte';
 
   type Props = {
     titre: string;
@@ -21,11 +22,13 @@
     {/if}
   </div>
 
-  {#if illustration}
-    <div class="illustration">
+  <div class="illustration">
+    {#if illustration}
       {@render illustration()}
-    </div>
-  {/if}
+    {:else}
+      <IllustrationDemandeAide large />
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">

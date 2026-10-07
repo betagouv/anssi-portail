@@ -2,7 +2,6 @@
   import { onMount } from 'svelte';
   import { enPropriétéWebC } from '$plateforme/webComponent';
   import IllustrationProtegerOrganisation from '../accueil/animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
-  import IllustrationDemandeAide from '../demande-aide-mon-aide-cyber/IllustrationDemandeAide.svelte';
   import { récupèreStatistiquesMSC } from '../passerelles/statistiquesMSC';
   import BlocDiagnostic from '../ui/BlocDiagnostic.svelte';
   import Bouton from '../ui/Bouton.svelte';
@@ -135,11 +134,7 @@
           bénévole. Retrouvez ensuite votre plan d'action sur MesServicesCyber."
       labelBouton="Demander un accompagnement gratuit"
       lienBouton="/cyberdepart?origine=landing-parcours-securisation"
-    >
-      {#snippet illustration()}
-        <IllustrationDemandeAide large />
-      {/snippet}
-    </BlocDiagnostic>
+    />
   </dsfr-container>
 </section>
 
