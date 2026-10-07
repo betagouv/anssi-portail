@@ -7,6 +7,11 @@
   "prConcurrentLimit": 4,
   "packageRules": [
     {
+      "description": "@sentry/node et @sentry/browser restent en version majeure 10",
+      "matchPackageNames": ["@sentry/node", "@sentry/browser"],
+      "allowedVersions": "<11.0.0"
+    },
+    {
       "description": "lockFileMaintenance",
       "matchUpdateTypes": ["pin", "digest", "patch", "minor", "major", "lockFileMaintenance"],
       "minimumReleaseAge": "7 days"
