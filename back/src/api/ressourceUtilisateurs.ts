@@ -1,13 +1,16 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Response, Router } from 'express';
 import { encode } from 'html-entities';
+import jsonwebtoken from 'jsonwebtoken';
 import z from 'zod';
 import { CompteCree, payloadDeCréationDeCompte } from '../bus/evenements/compteCree.js';
-import { Utilisateur } from '../metier/utilisateur.js';
+import { ErreurChargementOrganisation, Utilisateur } from '../metier/utilisateur.js';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { schemaRessourceUtilisateurs } from './ressourceUtilisateurs.schema.js';
 import { valideCorpsRequete } from './zod.js';
+
+const { JsonWebTokenError } = jsonwebtoken;
 
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
@@ -95,8 +98,17 @@ const ressourceUtilisateurs = ({
           await busEvenements.publie(new CompteCree(payloadDeCréationdeCompte));
 
           reponse.sendStatus(HttpStatusCode.Created);
-        } catch {
-          reponse.status(HttpStatusCode.BadRequest).send({ erreur: 'Le token est invalide' });
+        } catch (error) {
+          if (error instanceof JsonWebTokenError) {
+            reponse.status(HttpStatusCode.BadRequest).send({ erreur: 'Le token est invalide' });
+            return;
+          }
+          if (error instanceof ErreurChargementOrganisation) {
+            console.error("[AJOUT UTILISATEUR] Erreur de chargement de l'organisation");
+          } else {
+            console.error("[AJOUT UTILISATEUR] Erreur pendant l'ajout", (error as Error).message);
+          }
+          reponse.sendStatus(HttpStatusCode.InternalServerError);
         }
       }
     )

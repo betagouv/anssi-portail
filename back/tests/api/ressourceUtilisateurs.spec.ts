@@ -1,14 +1,18 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
+import jsonwebtoken from 'jsonwebtoken';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT.js';
 import { creeServeur } from '../../src/api/msc.js';
 import { CompteCree } from '../../src/bus/evenements/compteCree.js';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
+import { ErreurChargementOrganisation } from '../../src/metier/utilisateur.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { configurationDeTestDuServeur } from './fauxObjets.js';
+
+const { JsonWebTokenError } = jsonwebtoken;
 
 describe('La ressource utilisateur', () => {
   let serveur: Express;
@@ -86,6 +90,26 @@ describe('La ressource utilisateur', () => {
       expect(jeanne?.cguAcceptees).toBe(true);
       expect(jeanne?.infolettreAcceptee).toBe(true);
       expect(jeanne?.pixelDeSuiviAccepté).toBe(true);
+    });
+
+    it("renvoi une erreur en cas d'échec de la recherche d'organisation", async () => {
+      entrepotUtilisateur.ajoute = async () => {
+        throw new ErreurChargementOrganisation();
+      };
+
+      const réponse = await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
+
+      expect(réponse.statusCode).toEqual(HttpStatusCode.InternalServerError);
+    });
+
+    it("renvoi une erreur en cas d'échec d'ajout", async () => {
+      entrepotUtilisateur.ajoute = async () => {
+        throw new Error();
+      };
+
+      const réponse = await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
+
+      expect(réponse.statusCode).toEqual(HttpStatusCode.InternalServerError);
     });
 
     it('utilise le SIRET du token en priorité', async () => {
@@ -247,7 +271,7 @@ describe('La ressource utilisateur', () => {
 
         it("lorsqu'il est mal signé", async () => {
           adaptateurJWT.decode = () => {
-            throw new Error('Le token est invalide');
+            throw new JsonWebTokenError('Le token est invalide');
           };
           const reponse = await request(serveur)
             .post('/api/utilisateurs')
