@@ -172,4 +172,22 @@ describe("L'entrepôt d'article Crisp", () => {
       expect(cmsCrisp.recupereArticle).toHaveBeenCalledExactlyOnceWith('id1');
     });
   });
+
+  describe("lors du test d'existence d'un article", () => {
+    beforeEach(() => {
+      cmsCrisp.recupereArticlesCategorie = vi.fn().mockResolvedValue(articlesCrisp);
+    });
+
+    it("retourne la non-présence d'un article", async () => {
+      const articleExistant = await entrepôtArticle.existe('slug-inconnu');
+
+      expect(articleExistant).toBeFalsy();
+    });
+
+    it("retourne la présence d'un article", async () => {
+      const articleExistant = await entrepôtArticle.existe('slug-1');
+
+      expect(articleExistant).toBeTruthy();
+    });
+  });
 });

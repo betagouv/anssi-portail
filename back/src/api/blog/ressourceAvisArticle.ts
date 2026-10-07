@@ -20,7 +20,7 @@ const ressourceAvisArticle = ({ entrepôtArticle, busEvenements }: Configuration
         const { retour, commentaire } = requête.body;
         const slug = requête.params.slugArticle as string;
 
-        const articleExistant = (await entrepôtArticle.tous()).some((article) => article.slug === slug);
+        const articleExistant = await entrepôtArticle.existe(slug);
 
         if (!articleExistant) return réponse.sendStatus(HttpStatusCode.NotFound);
 

@@ -16,5 +16,7 @@ export class EntrepôtArticleMémoire implements EntrepôtArticle {
 
   parSlug = async (slug: string) => this.articles.find((a) => a.slug === slug);
 
+  existe = async (slug: string) => this.articles.some((article) => article.slug === slug);
+
   taille = async () => this.articles.length;
 }

@@ -57,4 +57,8 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
 
     return this.cacheDesArticles.get(slug, récupèreDepuisCrisp);
   }
+
+  async existe(slug: string): Promise<boolean> {
+    return (await this.tous()).some((article) => article.slug === slug);
+  }
 }
