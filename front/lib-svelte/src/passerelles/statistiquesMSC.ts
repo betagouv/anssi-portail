@@ -17,6 +17,7 @@ type APIStatistiques = {
   miniTests: {
     vraiFaux: number;
     exposition: number;
+    reflexesCyber: number;
   };
   parcoursSécurisation: {
     nombreDémarrés: number;
@@ -52,7 +53,7 @@ export const récupèreStatistiquesMSC = async (options?: { urlBase: string }): 
     parcoursSécurisation,
   } = réponse.data;
   const diagnosticsCyberArrondis = Math.floor(diagnosticsCyber / 100) * 100;
-  const testsRéalisés = miniTests.vraiFaux + testsMaturite.total + miniTests.exposition;
+  const testsRéalisés = miniTests.vraiFaux + testsMaturite.total + miniTests.exposition + miniTests.reflexesCyber;
   return {
     diagnosticsCyberArrondis,
     satisfactionUtilisateur,
