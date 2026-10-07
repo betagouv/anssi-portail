@@ -31,6 +31,12 @@ import { Utilisateur } from '../metier/utilisateur.js';
 import { MigrationChiffrement } from './migrationChiffrement.js';
 import { MigrationHash } from './migrationHash.js';
 
+type DonnéesUtilisateurDéchiffrées = {
+  email: string;
+  infolettreAcceptee: boolean;
+  pixelDeSuiviAccepte?: boolean;
+};
+
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;
   private adaptateurEmail: AdaptateurEmail;
@@ -131,7 +137,10 @@ export class ConsoleAdministration {
     return ConsoleAdministration.rattrapage([unUtilisateur], afficheErreur, rattrapeUtilisateur);
   }
 
-  async rattrapageDeTousLesProfilsContactBrevo(tailleLot: number = 500) {
+  async traiteUtilisateursEnLot(
+    fonctionRetour: (donnéesUtilisateurs: DonnéesUtilisateurDéchiffrées[]) => Promise<void>,
+    tailleLot: number = 500
+  ) {
     let lotCourant = 0;
     let lotUtilisateurs: UtilisateurBDD[];
     do {
@@ -143,11 +152,7 @@ export class ConsoleAdministration {
       const donneesDechiffrees = lotUtilisateurs
         .map((u) => {
           try {
-            return this.adaptateurChiffrement.dechiffre(u.donnees) as {
-              email: string;
-              infolettreAcceptee: boolean;
-              pixelDeSuiviAccepte?: boolean;
-            };
+            return this.adaptateurChiffrement.dechiffre(u.donnees) as DonnéesUtilisateurDéchiffrées;
           } catch {
             console.error('Erreur déchiffrement : ', u.email_hache);
             return null;
@@ -155,6 +160,15 @@ export class ConsoleAdministration {
         })
         .filter((d) => !!d);
 
+      await fonctionRetour(donneesDechiffrees);
+
+      lotCourant++;
+    } while (lotUtilisateurs.length === tailleLot);
+    console.info('Traitement terminé');
+  }
+
+  async rattrapageDeTousLesProfilsContactBrevo(tailleLot: number = 500) {
+    await this.traiteUtilisateursEnLot(async (donneesDechiffrees) => {
       const correspondanceEmailsInfolettre = donneesDechiffrees.reduce(
         (map, donnee) => {
           map.set(donnee.email, donnee.infolettreAcceptee);
@@ -192,10 +206,7 @@ export class ConsoleAdministration {
           console.error('Erreur mise à jour brevo : ', e);
         }
       }
-
-      lotCourant++;
-    } while (lotUtilisateurs.length === tailleLot);
-    console.info('Traitement terminé');
+    }, tailleLot);
   }
 
   async rattrapageMAJFavorisUtilisateurs(persiste: boolean = false) {
@@ -523,29 +534,7 @@ export class ConsoleAdministration {
   }
 
   async chercheUtilisateursSansProfilAnssi(tailleLot: number = 500) {
-    let lotCourant = 0;
-    let lotUtilisateurs: UtilisateurBDD[];
-    do {
-      lotUtilisateurs = await this.knexMSC('utilisateurs')
-        .offset(lotCourant * tailleLot)
-        .limit(tailleLot);
-      console.info(`Traitement du lot ${lotCourant + 1} : ${lotUtilisateurs.length} utilisateurs ...`);
-
-      const donneesDechiffrees = lotUtilisateurs
-        .map((u) => {
-          try {
-            return this.adaptateurChiffrement.dechiffre(u.donnees) as {
-              email: string;
-              infolettreAcceptee: boolean;
-              pixelDeSuiviAccepte?: boolean;
-            };
-          } catch {
-            console.error('Erreur déchiffrement : ', u.email_hache);
-            return null;
-          }
-        })
-        .filter((d) => !!d);
-
+    await this.traiteUtilisateursEnLot(async (donneesDechiffrees) => {
       const emails = donneesDechiffrees.map((d) => d.email);
 
       const profilsAnssi = await this.adaptateurProfilAnssi.recherche({ emails });
@@ -557,9 +546,6 @@ export class ConsoleAdministration {
           console.log('Utilisateur trouvé sans profil ANSSI', email);
         }
       });
-
-      lotCourant++;
-    } while (lotUtilisateurs.length === tailleLot);
-    console.info('Traitement terminé');
+    }, tailleLot);
   }
 }
