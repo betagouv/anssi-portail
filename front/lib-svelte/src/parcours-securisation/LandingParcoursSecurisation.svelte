@@ -130,11 +130,20 @@
   <dsfr-container>
     <BlocDiagnostic
       titre="Vous préférez échanger avec un Aidant cyber ?"
-      description="Le diagnostic cyberdépart vous permet de bénéficier d'un accompagnement gratuit d'1 heure avec un Aidant cyber
-          bénévole. Retrouvez ensuite votre plan d'action sur MesServicesCyber."
       labelBouton="Demander un accompagnement gratuit"
       lienBouton="/cyberdepart?origine=landing-parcours-securisation"
-    />
+    >
+      {#snippet description()}
+        <p class="texte-standard-md">
+          Demandez à bénéficier du diagnostic cyberdépart&nbsp;: un accompagnement d’une heure gratuit avec un Aidant
+          cyber bénévole.
+        </p>
+        <ul class="texte-standard-md">
+          <li>Réunissez votre direction, les services compétents et votre prestataire informatique.</li>
+          <li>Échangez et impulsez une dynamique interne&nbsp;!</li>
+        </ul>
+      {/snippet}
+    </BlocDiagnostic>
   </dsfr-container>
 </section>
 
