@@ -197,6 +197,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ['/promouvoir-messervicescyber', '/'],
     ['/promouvoir-diagnostic-cyber', '/'],
     ['/parcours-debuter', '/parcours-cyberdepart'],
+    ['/parcours-approfondir', '/parcours-securisation-complet'],
   ].forEach(([precedent, nouveau]: string[]) => {
     app.use(precedent, (requete: Request, reponse: Response, suite: NextFunction) => {
       if (requete.originalUrl === precedent || requete.originalUrl === `${precedent}/`) {
@@ -264,7 +265,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const routesStatiques = [
     '',
     'catalogue',
-    'parcours-approfondir',
     'test-maturite',
     'niveaux-maturite',
     'apres-authentification',
