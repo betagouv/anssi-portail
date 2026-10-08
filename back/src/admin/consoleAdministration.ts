@@ -539,11 +539,11 @@ export class ConsoleAdministration {
 
   async chercheUtilisateursSansProfilAnssi(tailleLot: number = 500) {
     await this.traiteUtilisateursEnLot(async (donneesDechiffrees) => {
-      const emails = donneesDechiffrees.map((d) => d.email);
+      const emails = donneesDechiffrees.map((d) => d.email.toLowerCase());
 
       const profilsAnssi = await this.adaptateurProfilAnssi.recherche({ emails });
 
-      const emailsAvecProfilsAnssi = profilsAnssi.map((p) => p.email);
+      const emailsAvecProfilsAnssi = profilsAnssi.map((p) => p.email.toLowerCase());
 
       emails.forEach((email) => {
         if (emailsAvecProfilsAnssi.indexOf(email) === -1) {
@@ -556,14 +556,14 @@ export class ConsoleAdministration {
   async supprimeUtilisateursSansProfilAnssi(persiste: boolean = false, tailleLot: number = 500) {
     const emailUtilisateursÀSupprimer: Pick<DonnéesUtilisateurDéchiffrées, 'email' | 'emailHaché'>[] = [];
     await this.traiteUtilisateursEnLot(async (donneesDechiffrees) => {
-      const emails = donneesDechiffrees.map((d) => d.email);
+      const emails = donneesDechiffrees.map((d) => d.email.toLowerCase());
 
       const profilsAnssi = await this.adaptateurProfilAnssi.recherche({ emails });
 
-      const emailsAvecProfilsAnssi = new Set(profilsAnssi.map((p) => p.email));
+      const emailsAvecProfilsAnssi = new Set(profilsAnssi.map((p) => p.email.toLowerCase()));
 
       donneesDechiffrees.forEach(({ email, emailHaché }) => {
-        if (!emailsAvecProfilsAnssi.has(email)) {
+        if (!emailsAvecProfilsAnssi.has(email.toLowerCase())) {
           emailUtilisateursÀSupprimer.push({ email, emailHaché });
         }
       });
