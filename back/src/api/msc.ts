@@ -196,6 +196,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ['/contacts/fr-wf.html', '/contacts/fr-wf'],
     ['/promouvoir-messervicescyber', '/'],
     ['/promouvoir-diagnostic-cyber', '/'],
+    ['/parcours-debuter', '/parcours-cyberdepart'],
   ].forEach(([precedent, nouveau]: string[]) => {
     app.use(precedent, (requete: Request, reponse: Response, suite: NextFunction) => {
       if (requete.originalUrl === precedent || requete.originalUrl === `${precedent}/`) {
@@ -263,7 +264,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const routesStatiques = [
     '',
     'catalogue',
-    'parcours-debuter',
     'parcours-approfondir',
     'test-maturite',
     'niveaux-maturite',
