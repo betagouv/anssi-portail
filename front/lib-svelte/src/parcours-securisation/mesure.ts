@@ -5,7 +5,7 @@ export type Risque = {
   description: string;
 };
 
-export type Tutoriel = {
+export type Procédure = {
   titre: string;
   description?: string;
   étapes: string[];
@@ -25,7 +25,7 @@ export type Mesure = {
   actionFacileAFaire: string;
   ordre: number;
   risques: Risque[];
-  tutoriels: Tutoriel[];
+  procédures: Procédure[];
   liens: {
     libelle: string;
     url: string;

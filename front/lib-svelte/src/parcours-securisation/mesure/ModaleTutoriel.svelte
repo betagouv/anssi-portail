@@ -3,9 +3,9 @@
   import Bouton from '../../ui/Bouton.svelte';
   import Lien from '../../ui/Lien.svelte';
   import Modale from '../../ui/Modale.svelte';
-  import type { Tutoriel } from './../mesure';
+  import type { Procédure } from './../mesure';
 
-  let { tutoriel, estOuverte = $bindable() }: { tutoriel: Tutoriel; estOuverte: boolean } = $props();
+  let { tutoriel, estOuverte = $bindable() }: { tutoriel: Procédure; estOuverte: boolean } = $props();
 </script>
 
 <Modale bind:estOuverte titre={tutoriel.titre} icone="arrow-right-line">
