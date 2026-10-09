@@ -64,6 +64,7 @@
         ]
       : []
   );
+  const aDesLiens: boolean = $derived((mesure?.liens?.length ?? 0) > 0);
 </script>
 
 {#if mesure}
@@ -126,9 +127,16 @@
                   <p slot="text">{mesure.actionFacileAFaire}</p>
                 </dsfr-highlight>
               {/if}
+              <TutorielMesure {mesure} />
             </div>
-
-            <TutorielMesure {mesure} />
+            {#if aDesLiens}
+              <div class="liens">
+                <p class="texte-article-lg">Pour aller plus loin</p>
+                {#each mesure.liens as lien (lien.libelle)}
+                  <msc-lien href={lien.url} libelle={lien.libelle}></msc-lien>
+                {/each}
+              </div>
+            {/if}
           </div>
           <div slot="panel-2"></div>
         </dsfr-tabs>
@@ -212,7 +220,7 @@
       padding: 2rem;
       background-color: var(--background-alt-blue-cumulus);
       border-radius: 6px;
-
+      margin-bottom: 0;
       h2 {
         margin: 0;
 
@@ -255,5 +263,13 @@
 
   dsfr-tabs {
     margin-bottom: 1rem;
+  }
+
+  .liens {
+    padding-top: 1.5rem;
+    .texte-article-lg {
+      font-weight: bold;
+      color: var(--text-title-grey);
+    }
   }
 </style>
