@@ -12,6 +12,7 @@
   import InterlocuteursParcoursSecurisation from './../InterlocuteursParcoursSecurisation.svelte';
   import type { Mesure } from './../mesure';
   import PriseEnCompteMesure from './../PriseEnCompteMesure.svelte';
+  import Procedure from './Procedure.svelte';
   import TutorielMesure from './TutorielMesure.svelte';
 
   let mesure: Mesure | undefined = $state();
@@ -138,7 +139,11 @@
               </div>
             {/if}
           </div>
-          <div slot="panel-2"></div>
+          <div class="boite-a-outils" slot="panel-2">
+            {#each mesure.procédures as procédure, index (index)}
+              <Procedure {procédure} />
+            {/each}
+          </div>
         </dsfr-tabs>
 
         <div class="contenu-section avis-utilisateur">
@@ -271,5 +276,12 @@
       font-weight: bold;
       color: var(--text-title-grey);
     }
+  }
+
+  .boite-a-outils {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-block: 1rem;
   }
 </style>
