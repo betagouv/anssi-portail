@@ -93,8 +93,10 @@
       position: sticky;
       width: auto;
       top: 0;
-      margin-left: 16px;
+      margin-left: 1rem;
+      margin-top: 2.5rem;
     }
+
     .aide {
       align-self: flex-end;
     }
@@ -121,8 +123,8 @@
 
     @include a-partir-de(md) {
       flex-direction: column;
-      margin-left: 16px;
-
+      margin-left: 1rem;
+      margin-top: 2.5rem;
       .texte-article-lg {
         text-align: center;
       }
