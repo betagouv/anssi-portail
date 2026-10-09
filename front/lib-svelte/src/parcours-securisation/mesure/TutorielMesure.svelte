@@ -5,13 +5,13 @@
   import ModaleTutoriel from './ModaleTutoriel.svelte';
 
   const { mesure }: { mesure: Mesure } = $props();
-  let étatDesModales: boolean[] = $state(untrack(() => Array(mesure.tutoriels.length).fill(false)));
-  const aDesTutoriels: boolean = $derived(mesure.tutoriels.length > 0);
+  let étatDesModales: boolean[] = $state(untrack(() => Array(mesure.procédures.length).fill(false)));
+  const aDesTutoriels: boolean = $derived(mesure.procédures.length > 0);
   const aDesLiens: boolean = $derived(mesure.liens?.length > 0);
 
   const selectionneLeTutoriel = (index: number) => {
     étatDesModales[index] = true;
-    const tutoriel = mesure.tutoriels.at(index);
+    const tutoriel = mesure.procédures.at(index);
     window._paq?.push([
       'trackEvent',
       'Parcours sécurisation',
@@ -26,7 +26,7 @@
     {#if aDesTutoriels}
       <h2>Comment faire concrètement</h2>
     {/if}
-    {#each mesure.tutoriels as tutoriel, index (index)}
+    {#each mesure.procédures as tutoriel, index (index)}
       <dsfr-card
         hasBadge
         title={tutoriel.titre}

@@ -2,7 +2,7 @@ import Knex from 'knex';
 import config from '../../knexfile.js';
 import { ModulePersisté } from '../entrepotModulePostgres.js';
 import { EntrepotMesure } from '../metier/entrepotMesure.js';
-import { LienPourAllerPlusLoin, Mesure, Tutoriel, type Risque } from '../metier/mesure.js';
+import { LienPourAllerPlusLoin, Mesure, Procédure, type Risque } from '../metier/mesure.js';
 import { EntrepotExigence } from '../metier/nis2/entrepotExigence.js';
 
 export type MesurePersistee = {
@@ -61,7 +61,7 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
 
   private async convertisEnMesure(mesurePersistee: MesurePersistee, modules: ModulePersisté[]): Promise<Mesure> {
     const toutesLesExigencesNIS2 = await this.entrepotExigence.parReferentiel('NIS2');
-    const tousLesTutoriels = await this.knex('procedures').where({ id_mesure: mesurePersistee.id });
+    const toutesLesProcédures = await this.knex('procedures').where({ id_mesure: mesurePersistee.id });
 
     const exigences = mesurePersistee.references_nis2
       .map((ref) => {
@@ -81,12 +81,12 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
       })
       .filter((e) => !!e);
 
-    const tutoriels: Tutoriel[] = tousLesTutoriels.map((tuto) => ({
-      titre: tuto.titre,
-      description: tuto.description,
-      note: tuto.note,
-      étapes: tuto.etapes,
-      lienPourAllerPlusLoin: tuto.aller_plus_loin,
+    const procédures: Procédure[] = toutesLesProcédures.map((procédure) => ({
+      titre: procédure.titre,
+      description: procédure.description,
+      note: procédure.note,
+      étapes: procédure.etapes,
+      lienPourAllerPlusLoin: procédure.aller_plus_loin,
     }));
 
     return new Mesure(
@@ -102,7 +102,7 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
       exigences,
       mesurePersistee.id_module,
       modules.find((m) => m.id === mesurePersistee.id_module)?.nom ?? '',
-      tutoriels
+      procédures
     );
   }
 }

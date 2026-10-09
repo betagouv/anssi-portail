@@ -1,4 +1,4 @@
-import { LienPourAllerPlusLoin, Mesure, Risque, Tutoriel } from '../../../src/metier/mesure.js';
+import { LienPourAllerPlusLoin, Mesure, Procédure, Risque } from '../../../src/metier/mesure.js';
 import { ExigenceNIS2 } from '../../../src/metier/nis2/exigence.js';
 
 export class ConstructeurDeMesure {
@@ -14,7 +14,7 @@ export class ConstructeurDeMesure {
   private readonly risques: Risque[] = [];
   private readonly liens: LienPourAllerPlusLoin[] = [];
   private readonly exigences: ExigenceNIS2[] = [];
-  private tutoriels: Tutoriel[] = [];
+  private procédures: Procédure[] = [];
 
   avecLId(id: string) {
     this.id = id;
@@ -90,7 +90,7 @@ export class ConstructeurDeMesure {
       this.exigences,
       this.idModule,
       this.nomModule,
-      this.tutoriels
+      this.procédures
     );
   }
 }

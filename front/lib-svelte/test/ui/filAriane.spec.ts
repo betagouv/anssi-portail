@@ -217,7 +217,7 @@ describe('La fabrique du fil d’Ariane', () => {
           exigences: [],
           idModule: 1,
           nomModule: 'Prendre son cyberdépart',
-          tutoriels: [],
+          procédures: [],
           estPriseEnCompte: true,
         };
 
