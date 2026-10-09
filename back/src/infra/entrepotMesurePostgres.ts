@@ -61,7 +61,7 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
 
   private async convertisEnMesure(mesurePersistee: MesurePersistee, modules: ModulePersisté[]): Promise<Mesure> {
     const toutesLesExigencesNIS2 = await this.entrepotExigence.parReferentiel('NIS2');
-    const tousLesTutoriels = await this.knex('tutoriels').where({ id_mesure: mesurePersistee.id });
+    const tousLesTutoriels = await this.knex('procedures').where({ id_mesure: mesurePersistee.id });
 
     const exigences = mesurePersistee.references_nis2
       .map((ref) => {
