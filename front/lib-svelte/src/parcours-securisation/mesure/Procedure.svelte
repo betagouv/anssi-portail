@@ -1,46 +1,41 @@
 <script lang="ts">
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
-  import Bouton from '../../ui/Bouton.svelte';
   import Lien from '../../ui/Lien.svelte';
-  import Modale from '../../ui/Modale.svelte';
   import type { Procédure } from './../mesure';
 
-  let { tutoriel, estOuverte = $bindable() }: { tutoriel: Procédure; estOuverte: boolean } = $props();
+  let { procédure }: { procédure: Procédure } = $props();
 </script>
 
-<Modale bind:estOuverte titre={tutoriel.titre} icone="arrow-right-line">
-  {#if tutoriel.description}
-    <p class="texte-standard-md">{tutoriel.description}</p>
+<div>
+  <h2>{procédure.titre}</h2>
+  {#if procédure.description}
+    <p class="texte-standard-md">{procédure.description}</p>
   {/if}
 
   <h5 class="fr-h6">Étapes générales</h5>
 
   <ol>
-    {#each tutoriel.étapes as étape, index (index)}
+    {#each procédure.étapes as étape, index (index)}
       <!-- eslint-disable-next-line svelte/no-at-html-tags-->
       <li>{@html aseptiseHtml(étape)}</li>
     {/each}
   </ol>
 
-  {#if tutoriel.note}
+  {#if procédure.note}
     <div class="bloc-note">
       <h5 class="fr-h6 petit-titre">Remarque</h5>
       <!-- eslint-disable-next-line svelte/no-at-html-tags-->
-      <div class="texte-standard-md">{@html aseptiseHtml(tutoriel.note)}</div>
+      <div class="texte-standard-md">{@html aseptiseHtml(procédure.note)}</div>
     </div>
   {/if}
 
-  {#if tutoriel.lienPourAllerPlusLoin}
+  {#if procédure.lienPourAllerPlusLoin}
     <div class="bloc-pour-aller-plus-loin">
       <h5 class="fr-h6 petit-titre">Pour aller plus loin</h5>
-      <Lien href={tutoriel.lienPourAllerPlusLoin.url} libelle={tutoriel.lienPourAllerPlusLoin.libelle}></Lien>
+      <Lien href={procédure.lienPourAllerPlusLoin.url} libelle={procédure.lienPourAllerPlusLoin.libelle}></Lien>
     </div>
   {/if}
-
-  {#snippet actions()}
-    <Bouton etire libelle="Terminer" surClic={() => (estOuverte = false)} />
-  {/snippet}
-</Modale>
+</div>
 
 <style lang="scss">
   .bloc-note {

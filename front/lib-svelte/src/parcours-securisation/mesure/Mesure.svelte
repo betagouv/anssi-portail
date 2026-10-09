@@ -2,6 +2,7 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import CelluleExigenceNis2 from '../../nis2/tableaux/CelluleExigenceNis2.svelte';
   import { profilStore } from '../../stores/profil.store';
   import Accordeon from '../../ui/Accordeon.svelte';
@@ -11,6 +12,7 @@
   import InterlocuteursParcoursSecurisation from './../InterlocuteursParcoursSecurisation.svelte';
   import type { Mesure } from './../mesure';
   import PriseEnCompteMesure from './../PriseEnCompteMesure.svelte';
+  import Procedure from './Procedure.svelte';
   import TutorielMesure from './TutorielMesure.svelte';
 
   let mesure: Mesure | undefined = $state();
@@ -63,6 +65,7 @@
         ]
       : []
   );
+  const aDesLiens: boolean = $derived((mesure?.liens?.length ?? 0) > 0);
 </script>
 
 {#if mesure}
@@ -82,39 +85,67 @@
         <PriseEnCompteMesure {mesure} />
       </div>
       <div class="contenu-principal">
-        <div class="contenu-section">
-          <h2>Présentation</h2>
-          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-          {@html explications}
-        </div>
+        <dsfr-tabs
+          tabs={enPropriétéWebC([
+            {
+              id: 'presentation-mesure',
+              label: 'Présentation mesure',
+            },
+            {
+              id: 'boite-à-outils',
+              label: 'Boite à outils',
+            },
+          ])}
+        >
+          <div slot="panel-1">
+            <div class="contenu-section">
+              <h2>Présentation</h2>
+              <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+              {@html explications}
+            </div>
 
-        <div class="contenu-section">
-          <h2>Les risques évités</h2>
-          <ul class="risques-list">
-            {#each mesure.risques as risque (risque.libelle)}
-              <li>
-                <strong>{risque.libelle}&nbsp;:</strong>
-                {risque.description}
-              </li>
-            {/each}
-          </ul>
-        </div>
+            <div class="contenu-section">
+              <h2>Les risques évités</h2>
+              <ul class="risques-list">
+                {#each mesure.risques as risque (risque.libelle)}
+                  <li>
+                    <strong>{risque.libelle}&nbsp;:</strong>
+                    {risque.description}
+                  </li>
+                {/each}
+              </ul>
+            </div>
 
-        <div class="contenu-section priorites">
-          <h2><lab-anssi-icone nom="arrow-right-line"></lab-anssi-icone>À faire en priorité</h2>
-          <div>
-            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-            <p>{@html actionPrioritaire}</p>
+            <div class="contenu-section priorites">
+              <h2><lab-anssi-icone nom="arrow-right-line"></lab-anssi-icone>À faire en priorité</h2>
+              <div>
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                <p>{@html actionPrioritaire}</p>
+              </div>
+              {#if mesure.actionFacileAFaire}
+                <dsfr-highlight size="md" text="slot">
+                  <h3 class="fr-h5" slot="title">Bonne nouvelle&nbsp;!</h3>
+                  <p slot="text">{mesure.actionFacileAFaire}</p>
+                </dsfr-highlight>
+              {/if}
+              <TutorielMesure {mesure} />
+            </div>
+            {#if aDesLiens}
+              <div class="liens">
+                <p class="texte-article-lg">Pour aller plus loin</p>
+                {#each mesure.liens as lien (lien.libelle)}
+                  <msc-lien href={lien.url} libelle={lien.libelle}></msc-lien>
+                {/each}
+              </div>
+            {/if}
           </div>
-          {#if mesure.actionFacileAFaire}
-            <dsfr-highlight size="md" text="slot">
-              <h3 class="fr-h5" slot="title">Bonne nouvelle&nbsp;!</h3>
-              <p slot="text">{mesure.actionFacileAFaire}</p>
-            </dsfr-highlight>
-          {/if}
-        </div>
+          <div class="boite-a-outils" slot="panel-2">
+            {#each mesure.procédures as procédure, index (index)}
+              <Procedure {procédure} />
+            {/each}
+          </div>
+        </dsfr-tabs>
 
-        <TutorielMesure {mesure} />
         <div class="contenu-section avis-utilisateur">
           {#if idMesure}
             <div class="retour-utilisateur">
@@ -158,7 +189,11 @@
     padding-block: 2rem 3.5rem;
 
     @include a-partir-de(md) {
-      padding-top: 2.5rem;
+      padding-top: 1rem;
+    }
+
+    @include a-partir-de(lg) {
+      padding-top: 1.5rem;
     }
   }
 
@@ -190,7 +225,7 @@
       padding: 2rem;
       background-color: var(--background-alt-blue-cumulus);
       border-radius: 6px;
-
+      margin-bottom: 0;
       h2 {
         margin: 0;
 
@@ -229,5 +264,24 @@
     .recyf > p {
       margin-bottom: 1.5rem;
     }
+  }
+
+  dsfr-tabs {
+    margin-bottom: 1rem;
+  }
+
+  .liens {
+    padding-top: 1.5rem;
+    .texte-article-lg {
+      font-weight: bold;
+      color: var(--text-title-grey);
+    }
+  }
+
+  .boite-a-outils {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-block: 1rem;
   }
 </style>

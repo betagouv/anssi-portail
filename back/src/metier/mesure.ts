@@ -18,7 +18,7 @@ export type LienPourAllerPlusLoin = {
   url: string;
 };
 
-export type Tutoriel = {
+export type Procédure = {
   titre: string;
   description?: string;
   étapes: string[];
@@ -40,6 +40,6 @@ export class Mesure {
     readonly exigences: ExigenceNIS2[],
     readonly idModule: number,
     readonly nomModule: string,
-    readonly tutoriels: Tutoriel[]
+    readonly procédures: Procédure[]
   ) {}
 }
