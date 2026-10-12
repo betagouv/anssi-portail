@@ -14,6 +14,7 @@ const rolldownOptions: NonNullable<UserConfig['build']>['rolldownOptions'] = {
     'page-directive-nis2': '/src/nis2/PageNis2.svelte',
     guide: 'src/catalogue/guides/Guide.svelte',
     financements: 'src/financements/Financements.svelte',
+    'page-crisp': 'src/page-crisp/PageCrisp.svelte',
     'fil-ariane': 'src/ui/FilAriane.svelte',
     'test-maturite': 'src/test-maturite/TestMaturite.svelte',
     'session-groupe': 'src/test-maturite/SessionGroupe.svelte',

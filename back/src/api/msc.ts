@@ -60,6 +60,7 @@ import { ressourceInfosSite } from './ressourceInfosSite.js';
 import { ressourceLlmsTxt } from './ressourceLlmsTxt.js';
 import { ressourcePageConnexion } from './ressourcePageConnexion.js';
 import { ressourcePageContact } from './ressourcePageContact.js';
+import { ressourcePageCrisp } from './ressourcePageCrisp.js';
 import { ressourcePageRessource } from './ressourcePageRessource.js';
 import { ressourcePageService } from './ressourcePageService.js';
 import { ressourcePagesJekyll } from './ressourcePagesJekyll.js';
@@ -296,6 +297,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'reflexes-cyber-en-ligne/parcours',
     'exposition',
     'conseils-cyber',
+    'kit-relais',
   ];
 
   if (configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()) {
@@ -371,6 +373,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreRoute('/api/annuaire/secteurs-activite', ressourceAnnuaireSecteursActivite(configurationServeur));
 
   enregistreRoute('/api/annuaire/tranches-effectif', ressourceAnnuaireTranchesEffectif(configurationServeur));
+
+  enregistreRoute('/api/pages-crisp', ressourcePageCrisp(configurationServeur));
 
   enregistreRoute('/api/infos-site', ressourceInfosSite(configurationServeur));
 
