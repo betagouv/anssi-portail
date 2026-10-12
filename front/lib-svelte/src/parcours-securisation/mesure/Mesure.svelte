@@ -12,8 +12,8 @@
   import InterlocuteursParcoursSecurisation from './../InterlocuteursParcoursSecurisation.svelte';
   import type { Mesure } from './../mesure';
   import PriseEnCompteMesure from './../PriseEnCompteMesure.svelte';
+  import CartesLiensProcédures from './CartesLiensProcédures.svelte';
   import Procedure from './Procedure.svelte';
-  import TutorielMesure from './TutorielMesure.svelte';
 
   let mesure: Mesure | undefined = $state();
 
@@ -128,7 +128,7 @@
                   <p slot="text">{mesure.actionFacileAFaire}</p>
                 </dsfr-highlight>
               {/if}
-              <TutorielMesure {mesure} />
+              <CartesLiensProcédures {mesure} />
             </div>
             {#if aDesLiens}
               <div class="liens">
