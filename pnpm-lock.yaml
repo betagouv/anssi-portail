@@ -204,7 +204,7 @@ importers:
         version: 4.7.1(prettier@3.9.9)(supports-color@10.2.2)
       clever-tools:
         specifier: ^5.0.2
-        version: 5.0.2(@types/node@26.6.3)(supports-color@10.2.2)
+        version: 5.1.0(@types/node@26.6.3)(supports-color@10.2.2)
       concurrently:
         specifier: ^10.0.0
         version: 10.0.5
@@ -2602,8 +2602,8 @@ packages:
   clean-git-ref@2.0.1:
     resolution: {integrity: sha512-bLSptAy2P0s6hU4PzuIMKmMJJSE6gLXGH1cntDu7bWJUksvuM+7ReOK61mozULErYvP6a15rnYl0zFDef+pyPw==}
 
-  clever-tools@5.0.2:
-    resolution: {integrity: sha512-oGLvERvXJ8tqYAmPI2S+yosrWjo2c21/QNP6DomRO1uDjgpkTfV+QdtbtPiVpvLyZcaAvtPxHq0BpcNvsm/ccQ==}
+  clever-tools@5.1.0:
+    resolution: {integrity: sha512-ozS2VDIdiqcTF0z0I7U2BkkRPCwW0VrC1N+4o3Ckzc0B8pdnLB+CP1vnqCwp74D7v1bU8UMazF+r2yQhvsNCow==}
     engines: {node: '>=24'}
     hasBin: true
 
@@ -6902,7 +6902,7 @@ snapshots:
 
   clean-git-ref@2.0.1: {}
 
-  clever-tools@5.0.2(@types/node@26.6.3)(supports-color@10.2.2):
+  clever-tools@5.1.0(@types/node@26.6.3)(supports-color@10.2.2):
     dependencies:
       '@clevercloud/client': 12.6.3(eventsource@4.1.0)
       '@inquirer/prompts': 8.7.2(@types/node@26.6.3)
