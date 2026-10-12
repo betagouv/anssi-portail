@@ -1,4 +1,4 @@
-import { CmsCrisp, ResumeArticleCrispAvecSlug } from '@lab-anssi/lib';
+import { CmsCrisp, PageHtmlCrisp, ResumeArticleCrispAvecSlug } from '@lab-anssi/lib';
 import { Article } from '../../metier/blog/article.js';
 import { EntrepôtArticle } from '../../metier/blog/entrepotArticle.js';
 import { RésuméArticle } from '../../metier/blog/resumeArticle.js';
@@ -8,8 +8,12 @@ import { Cache } from '../cache.js';
 
 export class EntrepôtArticleCrisp implements EntrepôtArticle {
   private static CLÉ_LISTE_RÉSUMÉS_ARTICLE = 'CLE_LISTE_RÉSUMÉS_ARTICLE';
+  private static CLÉ_KIT_RELAIS = 'kit-relais';
+  private static ID_CRISP_KIT_RELAIS = '9d295bcd-88ba-4f8a-99d5-61fdc788032d';
+
   private cacheDesRésumés: Cache<RésuméArticle[]>;
   private cacheDesArticles: Cache<Article>;
+
   constructor(
     private readonly cmsCrisp: CmsCrisp,
     private readonly adaptateurEnvironnement: AdaptateurEnvironnement
@@ -17,6 +21,7 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
     this.cacheDesRésumés = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
     this.cacheDesArticles = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
   }
+
   async tousLesArticlesDeBlog(): Promise<RésuméArticle[]> {
     if (!this.adaptateurEnvironnement.crisp().catégorieDuBlog()) {
       return [];
@@ -44,15 +49,10 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
     if (!résuméTrouvé) {
       return undefined;
     }
+
     const récupèreDepuisCrisp = async (): Promise<Article> => {
       const article = await this.cmsCrisp.recupereArticle(résuméTrouvé.id);
-      return {
-        contenu: aseptiseHtml(article.contenu ?? ''),
-        dateDeMiseÀJour: article.dateMiseAJour ? new Date(article.dateMiseAJour) : undefined,
-        dateDePublication: article.datePublication ? new Date(article.datePublication) : undefined,
-        description: article.description,
-        titre: article.titre,
-      };
+      return this.depuis(article);
     };
 
     return this.cacheDesArticles.get(slug, récupèreDepuisCrisp);
@@ -60,5 +60,25 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
 
   async articleDeBlogExiste(slug: string): Promise<boolean> {
     return (await this.tousLesArticlesDeBlog()).some((article) => article.slug === slug);
+  }
+
+  async kitRelais(): Promise<Article> {
+    const récupèreDepuisCrisp = async (): Promise<Article> => {
+      const article = await this.cmsCrisp.recupereArticle(EntrepôtArticleCrisp.ID_CRISP_KIT_RELAIS);
+      return this.depuis(article);
+    };
+
+    return this.cacheDesArticles.get(EntrepôtArticleCrisp.CLÉ_KIT_RELAIS, récupèreDepuisCrisp);
+  }
+
+  private depuis(articleCrisp: PageHtmlCrisp): Article {
+    return {
+      contenu: aseptiseHtml(articleCrisp.contenu ?? ''),
+      dateDeMiseÀJour: articleCrisp.dateMiseAJour ? new Date(articleCrisp.dateMiseAJour) : undefined,
+      dateDePublication: articleCrisp.datePublication ? new Date(articleCrisp.datePublication) : undefined,
+      description: articleCrisp.description,
+      titre: articleCrisp.titre,
+      tableDesMatières: articleCrisp.tableDesMatieres,
+    };
   }
 }

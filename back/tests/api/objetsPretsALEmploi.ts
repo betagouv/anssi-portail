@@ -1,3 +1,4 @@
+import { Article } from '../../src/metier/blog/article.js';
 import { Financement } from '../../src/metier/financement.js';
 import { Guide } from '../../src/metier/guide.js';
 import { QuestionVraieFausse } from '../../src/metier/mini-tests/vrai-faux/questionVraieFausse.js';
@@ -194,4 +195,87 @@ export const questionVraieFaussePME: QuestionVraieFausse = {
   ],
   source: 'ANSSI, Panorama de la cybermenace 2025, section 1.A — pages 10-11.',
   idéeReçueEstVraie: false,
+};
+
+export const kitRelais: Article = {
+  contenu: `<section><h2 id="-un-mail-cl-en-main-adresser-votre-communaut-">💡 Un mail clé-en-main à adresser à votre communauté !</h2><p>➡️ Les visuels à intégrer dans le mail sont accessibles <a href="https://fichiers.numerique.gouv.fr/explorer/items/9f08d261-a909-4645-8012-c4cd11930035" target="_blank" rel="nofollow">ici</a>.</p>
+<h4 id="objet-cybers-curit-passez-l-39-action-">Objet : Cybersécurité : passez à l'action !</h4><p>Bonjour,</p>
+<p>Les TPE/PME/ETI sont les premières victimes de cyberattaque en France. Toutes les entreprises, de toute taille, dans tous les secteurs sont exposées aux cybermenaces, y compris celui du [nom du secteur / domaine].</p>
+<p>Pour vous aider à passer à l’action, <strong>la [nom de l'organisation] vous invite à découvrir</strong> <a href="https://messervices.cyber.gouv.fr/parcours-securisation?mtm_campaign=23-09-Kit-Parcours&amp;mtm_source=Kit&amp;mtm_medium=Multiple" target="_blank" rel="nofollow"><strong>MesServices.cyber.gouv.fr</strong></a>, <strong>une plateforme publique pour aider les entreprises à se protéger contre les cyberattaques</strong>, proposée par l’Agence nationale de la sécurité des systèmes d’information (ANSSI). Déjà +7 000 organisations accompagnées !</p>
+<p>🚀 Sur MesServicesCyber, <strong>découvrez le programme de cybersécurité gratuit, en ligne et adaptée à votre niveau :</strong></p>
+<ul>
+<li><strong>🤔 La cybersécurité est étrangère à votre organisation ? Prenez votre cyberdépart avec 12 premières mesures simples et rapides</strong> à mettre en œuvre pour commencer à protéger votre organisation contre les cyberattaques :<ul>
+<li>Des mesures pédagogiques, sans jargon, pratico-pratiques.</li>
+<li>Des tutos, des outils pour vous aider à mettre en œuvre chaque mesure.</li>
+<li>A la clé : décrochez votre badge cyberdépart !
+<strong>→</strong> <a href="https://messervices.cyber.gouv.fr/parcours-cyberdepart" target="_blank" rel="nofollow">Prendre mon cyberdépart</a></li>
+</ul>
+</li>
+<li><strong>💪 Votre organisation agit déjà pour sa cybersécurité ?</strong> Découvrez le parcours complet pour renforcer votre cybersécurité. 55 mesures pour vous protéger contre les principaux risques cyber, basées sur le Référentiel Cyber France (ReCyF) et faciliter la mise en conformité des entreprises concernées par NIS 2.
+<strong>→</strong> <a href="https://messervices.cyber.gouv.fr/parcours-securisation-complet" target="_blank" rel="nofollow">Découvrir le parcours complet</a></li>
+</ul>
+<p>📲 Découvrez également sur <a href="messervices.cyber.gouv.fr" target="_blank" rel="nofollow">MesServicesCyber</a> les <strong>financements</strong> cyber disponibles pour soutenir vos efforts, les <strong>prestataires</strong> pour vous accompagner, tous les <strong>contacts</strong> de proximité pour vos orienter ou en cas d’incident ainsi que plusieurs <a href="https://messervices.cyber.gouv.fr/faire-le-test" target="_blank" rel="nofollow">tests cyber</a> pédagogiques pour mieux comprendre les risques cyber.</p>
+<p>L'équipe [nom de l'organisation]</p>
+</section>`,
+  description:
+    'Tous les éléments pour relayer MesServicesCyber et le parcours de sécurisation pour aider les entités à protéger leur organisation.',
+  titre: '👋 Le kit relais MesServicesCyber',
+  tableDesMatières: [
+    {
+      profondeur: 2,
+      texte: '💡 Un mail clé-en-main à adresser à votre communauté !',
+      id: '-un-mail-cl-en-main-adresser-votre-communaut-',
+    },
+    {
+      profondeur: 4,
+      texte: 'Objet : Cybersécurité : passez à l&#39;action !',
+      id: 'objet-cybers-curit-passez-l-39-action-',
+    },
+    {
+      profondeur: 2,
+      texte: '💡 Des posts pour vos réseaux sociaux',
+      id: '-des-posts-pour-vos-r-seaux-sociaux',
+    },
+    {
+      profondeur: 3,
+      texte: 'LinkedIn',
+      id: 'linkedin',
+    },
+    {
+      profondeur: 3,
+      texte: 'Facebook',
+      id: 'facebook',
+    },
+    {
+      profondeur: 3,
+      texte: 'X/Twitter',
+      id: 'x-twitter',
+    },
+    {
+      profondeur: 2,
+      texte: '📕 Une plaquette A5 à imprimer',
+      id: '-une-plaquette-a5-imprimer',
+    },
+    {
+      profondeur: 2,
+      texte: '🔊 Une présentation clé-en-main sur les risques cyber et les moyens de s&#39;en prémunir',
+      id: '-une-pr-sentation-cl-en-main-sur-les-risques-cyber-et-les-moyens-de-s-39-en-pr-munir',
+    },
+    {
+      profondeur: 2,
+      texte: '✉️ Une campagne de prévention par mail à adresser à votre communauté',
+      id: '-une-campagne-de-pr-vention-par-mail-adresser-votre-communaut-',
+    },
+
+    {
+      profondeur: 2,
+      texte: '✏️ Un article sur la cybermenace pour votre site ?',
+      id: '-un-article-sur-la-cybermenace-pour-votre-site-',
+    },
+    {
+      profondeur: 2,
+      texte: '🖍️ Des articles sur des tests cyber ludiques',
+      id: '-des-articles-sur-des-tests-cyber-ludiques',
+    },
+  ],
 };

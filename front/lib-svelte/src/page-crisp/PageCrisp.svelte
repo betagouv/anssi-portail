@@ -11,7 +11,7 @@
 
   const { pageCrisp }: Props = $props();
 
-  let tableDesMatières = $derived(pageCrisp ? pageCrisp.tableDesMatieres.filter((e) => e.profondeur === 2) : []);
+  let tableDesMatières = $derived(pageCrisp ? pageCrisp.tableDesMatières.filter((e) => e.profondeur === 2) : []);
 
   const propriétésFilAriane: PropriétésFilAriane = $derived(
     pageCrisp
