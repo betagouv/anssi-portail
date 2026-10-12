@@ -1,3 +1,4 @@
+import { CmsCrisp } from '@lab-anssi/lib';
 import { JSDOM } from 'jsdom';
 import { render } from 'svelte/server';
 import { FournisseurChemin } from '../../api/fournisseurChemin.js';
@@ -27,6 +28,7 @@ import { ChargeurExigences } from './chargementProprietes/chargeurExigences.js';
 import { ChargeurFilAriane } from './chargementProprietes/chargeurFilAriane.js';
 import { ChargeurFinancements } from './chargementProprietes/chargeurFinancements.js';
 import { ChargeurGuide } from './chargementProprietes/chargeurGuides.js';
+import { ChargeurPageCrisp } from './chargementProprietes/chargeurPageCrisp.js';
 import { ChargeurRessourcesCyber } from './chargementProprietes/chargeurRessourcesCyber.js';
 import { composantsAutorisés } from './composantsAutorises.genere.js';
 import { RésolveurDePage } from './resolveurDePage.js';
@@ -101,7 +103,8 @@ export const fabriqueAdaptateurEnrichissement = async (
   entrepotGuide: EntrepotGuide,
   entrepôtExigence: EntrepotExigence,
   entrepôtFinancement: EntrepotFinancement,
-  entrepôtArticle: EntrepôtArticle
+  entrepôtArticle: EntrepôtArticle,
+  cmsCrisp: CmsCrisp
 ): Promise<AdaptateurEnrichissement> => {
   const résolveurDePage = new RésolveurDePage(entrepotGuide, entrepôtFinancement, entrepôtArticle);
 
@@ -111,6 +114,7 @@ export const fabriqueAdaptateurEnrichissement = async (
     new ChargeurExigences(entrepôtExigence),
     new ChargeurFinancements(résolveurDePage, entrepôtFinancement),
     new ChargeurCrisp(résolveurDePage, entrepôtArticle),
+    new ChargeurPageCrisp(cmsCrisp),
     new ChargeurFilAriane(),
   ];
 

@@ -6,6 +6,7 @@ import {
 import { ConstructeurDArticleAvecToutesLesMétadonnées } from '../../api/blog/constructeurDeResumeDArticle.js';
 import { fauxAdaptateurEnvironnement, fauxFournisseurDeChemin } from '../../api/fauxObjets.js';
 import { financementCyberPME, guideDevsecops } from '../../api/objetsPretsALEmploi.js';
+import { MockCmsCrisp } from '../../mockCmsCrisp.js';
 import { EntrepôtArticleMémoire } from '../../persistance/entrepotArticleMemoire.js';
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire.js';
 import { EntrepotFinancementMemoire } from '../../persistance/entrepotFinancementMemoire.js';
@@ -27,7 +28,8 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       entrepôtGuide,
       new EntrepotExigenceMemoire(),
       entrepôtFinancement,
-      entrepôtArticle
+      entrepôtArticle,
+      new MockCmsCrisp()
     );
   });
 
