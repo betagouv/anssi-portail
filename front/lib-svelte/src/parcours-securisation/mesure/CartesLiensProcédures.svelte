@@ -6,22 +6,22 @@
 
   const { mesure }: { mesure: Mesure } = $props();
   let étatDesModales: boolean[] = $state(untrack(() => Array(mesure.procédures.length).fill(false)));
-  const aDesTutoriels: boolean = $derived(mesure.procédures.length > 0);
+  const aDesProcédures: boolean = $derived(mesure.procédures.length > 0);
   const aDesLiens: boolean = $derived(mesure.liens?.length > 0);
 
-  const selectionneLeTutoriel = (index: number) => {
+  const selectionneLaProcédure = (index: number) => {
     étatDesModales[index] = true;
-    const tutoriel = mesure.procédures.at(index);
+    const procédure = mesure.procédures.at(index);
     window._paq?.push([
       'trackEvent',
       'Parcours sécurisation',
-      `Ouverture tutoriel ${mesure.id}`,
-      tutoriel?.titre ?? '',
+      `Ouverture procédure ${mesure.id}`,
+      procédure?.titre ?? '',
     ]);
   };
 </script>
 
-{#if aDesTutoriels || aDesLiens}
+{#if aDesProcédures || aDesLiens}
   <div class="contenu-section">
     {#each mesure.procédures as tutoriel, index (index)}
       <dsfr-card
@@ -32,7 +32,7 @@
         size="sm"
         actionMarkup="button"
         role="button"
-        use:clic={() => selectionneLeTutoriel(index)}
+        use:clic={() => selectionneLaProcédure(index)}
       >
         <dsfr-badge slot="badgesgroup" label="Boite à outils" type="accent" accent="purple-glycine"></dsfr-badge>
       </dsfr-card>
