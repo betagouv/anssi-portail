@@ -11,7 +11,7 @@ export class ChargeurCrisp implements ChargeurDeProps {
 
   async charge(_dom: JSDOM, routeDemandée: string) {
     if (routeDemandée.match(/conseils-cyber$/)) {
-      const résumésPréchargés = await this.entrepôtArticle.tous();
+      const résumésPréchargés = await this.entrepôtArticle.tousLesArticlesDeBlog();
       return { résumésPréchargés };
     }
 

@@ -10,7 +10,7 @@ export const ressourceArticles = ({ entrepôtArticle }: ConfigurationServeur) =>
     '/',
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
-      const articles = await entrepôtArticle.tous();
+      const articles = await entrepôtArticle.tousLesArticlesDeBlog();
       reponse.status(HttpStatusCode.Ok).send(articles);
     })
   );

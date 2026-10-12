@@ -11,12 +11,12 @@ export class EntrepôtArticleMémoire implements EntrepôtArticle {
     this.articles.push(entite);
   }
 
-  tous = async (): Promise<RésuméArticle[]> =>
+  tousLesArticlesDeBlog = async (): Promise<RésuméArticle[]> =>
     [...this.articles].map((a) => ({ estPublie: a.estPublie, id: a.id, slug: a.slug, titre: a.titre }));
 
-  parSlug = async (slug: string) => this.articles.find((a) => a.slug === slug);
+  articleDeBlogParSlug = async (slug: string) => this.articles.find((a) => a.slug === slug);
 
-  existe = async (slug: string) => this.articles.some((article) => article.slug === slug);
+  articleDeBlogExiste = async (slug: string) => this.articles.some((article) => article.slug === slug);
 
   taille = async () => this.articles.length;
 }

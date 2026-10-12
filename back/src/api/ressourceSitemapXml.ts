@@ -102,7 +102,7 @@ const construitRoutesDynamiques = async ({
     modifiéLe: guide.dateMiseAJour,
   }));
 
-  const liensArticlesBlog = (await entrepôtArticle.tous()).map((résuméDArticle) => ({
+  const liensArticlesBlog = (await entrepôtArticle.tousLesArticlesDeBlog()).map((résuméDArticle) => ({
     url: `/conseils-cyber/${résuméDArticle.slug}`,
     modifiéLe: résuméDArticle.dateDeMiseÀJour,
   }));

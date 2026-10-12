@@ -10,7 +10,7 @@ export const ressourceArticle = ({ entrepôtArticle }: ConfigurationServeur) => 
     '/:slug',
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
-      const article = await entrepôtArticle.parSlug(requete.params.slug as string);
+      const article = await entrepôtArticle.articleDeBlogParSlug(requete.params.slug as string);
       if (!article) {
         reponse.sendStatus(HttpStatusCode.NotFound);
       }

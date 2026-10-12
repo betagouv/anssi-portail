@@ -48,7 +48,7 @@ describe("L'entrepôt d'article Crisp", () => {
     it("retourne les détails des résumes d'article", async () => {
       cmsCrisp.recupereArticlesCategorie = vi.fn().mockResolvedValue(articlesCrisp);
 
-      const résumés = await entrepôtArticle.tous();
+      const résumés = await entrepôtArticle.tousLesArticlesDeBlog();
 
       expect(résumés).toHaveLength(2);
       expect(résumés[0].dateDeMiseÀJour?.toISOString()).toEqual('2024-10-01T14:43:00.000Z');
@@ -68,8 +68,8 @@ describe("L'entrepôt d'article Crisp", () => {
         .spyOn(cmsCrisp, 'recupereArticlesCategorie')
         .mockResolvedValue(articlesCrisp);
 
-      const résumésInitial = await entrepôtArticle.tous();
-      const résumésMisEnCache = await entrepôtArticle.tous();
+      const résumésInitial = await entrepôtArticle.tousLesArticlesDeBlog();
+      const résumésMisEnCache = await entrepôtArticle.tousLesArticlesDeBlog();
 
       expect(résumésInitial[0].slug).toBe('slug-1');
       expect(résumésInitial[0].titre).toBe('titre 1');
@@ -90,7 +90,7 @@ describe("L'entrepôt d'article Crisp", () => {
         },
       ]);
 
-      const résumés = await entrepôtArticle.tous();
+      const résumés = await entrepôtArticle.tousLesArticlesDeBlog();
 
       expect(résumés).toHaveLength(0);
     });
@@ -102,7 +102,7 @@ describe("L'entrepôt d'article Crisp", () => {
         catégorieDuBlog: () => '',
       });
 
-      const résumés = await entrepôtArticle.tous();
+      const résumés = await entrepôtArticle.tousLesArticlesDeBlog();
 
       expect(résumés).toHaveLength(0);
     });
@@ -119,8 +119,8 @@ describe("L'entrepôt d'article Crisp", () => {
           .mockResolvedValueOnce(articlesCrisp)
           .mockThrowOnce(new AxiosError('Message', '429', undefined, undefined, response));
 
-        await entrepôtArticle.tous();
-        const résumésMisEnCache = await entrepôtArticle.tous();
+        await entrepôtArticle.tousLesArticlesDeBlog();
+        const résumésMisEnCache = await entrepôtArticle.tousLesArticlesDeBlog();
         vi.advanceTimersByTime(300 * 1000 + 1); // 5 minutes et 1 ms
 
         expect(résumésMisEnCache).toHaveLength(2);
@@ -144,7 +144,7 @@ describe("L'entrepôt d'article Crisp", () => {
     });
 
     it("retourne la représentation html de l'article", async () => {
-      const article = await entrepôtArticle.parSlug('slug-1');
+      const article = await entrepôtArticle.articleDeBlogParSlug('slug-1');
 
       expect(article?.contenu).toBe('<div>contenu</div>');
       expect(article?.description).toBe('Description');
@@ -155,14 +155,14 @@ describe("L'entrepôt d'article Crisp", () => {
     });
 
     it('ne retourne rien si on demande un slug inconnu', async () => {
-      const article = await entrepôtArticle.parSlug('slug-inconnu');
+      const article = await entrepôtArticle.articleDeBlogParSlug('slug-inconnu');
 
       expect(article).toBeUndefined();
     });
 
     it("mets l'article en cache", async () => {
-      await entrepôtArticle.parSlug('slug-1');
-      const article = await entrepôtArticle.parSlug('slug-1');
+      await entrepôtArticle.articleDeBlogParSlug('slug-1');
+      const article = await entrepôtArticle.articleDeBlogParSlug('slug-1');
 
       expect(article?.contenu).toBe('<div>contenu</div>');
       expect(article?.description).toBe('Description');
@@ -179,13 +179,13 @@ describe("L'entrepôt d'article Crisp", () => {
     });
 
     it("retourne la non-présence d'un article", async () => {
-      const articleExistant = await entrepôtArticle.existe('slug-inconnu');
+      const articleExistant = await entrepôtArticle.articleDeBlogExiste('slug-inconnu');
 
       expect(articleExistant).toBeFalsy();
     });
 
     it("retourne la présence d'un article", async () => {
-      const articleExistant = await entrepôtArticle.existe('slug-1');
+      const articleExistant = await entrepôtArticle.articleDeBlogExiste('slug-1');
 
       expect(articleExistant).toBeTruthy();
     });

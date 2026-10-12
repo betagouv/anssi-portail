@@ -28,7 +28,7 @@ export class RésolveurDePage {
   async articleCrisp(routeDemandée: string): Promise<Article | undefined> {
     const slugArticle = routeDemandée.match(/\/conseils-cyber\/(.*)/)?.[1];
     if (slugArticle) {
-      return this.entrepôtArticle.parSlug(slugArticle);
+      return this.entrepôtArticle.articleDeBlogParSlug(slugArticle);
     }
   }
 }
