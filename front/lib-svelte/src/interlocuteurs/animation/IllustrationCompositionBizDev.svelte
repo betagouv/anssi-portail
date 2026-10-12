@@ -5,4 +5,4 @@
   const scènes = [CompositionBizDev];
 </script>
 
-<IllustrationAnimee {scènes} étiquette="Floriane Gallego et Pierre Vernier, chargés de développement." />
+<IllustrationAnimee {scènes} étiquette="Gwendoline Jacquemond et Pierre Vernier, chargés de développement." />
