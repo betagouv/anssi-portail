@@ -6,8 +6,8 @@
     <rect width="180" height="180" x="69.45" y="105" fill="url(#pattern1_20001_213885)" class="image" rx="90" />
     <g class="profil">
       <g filter="url(#filter0_d_20001_213885)">
-        <rect width="259" height="40" x="51" y="255" fill="#fff" rx="20" />
-        <text x="68" y="281" font-size="14" fill="#3a3a3a">Floriane, chargée de déploiement</text>
+        <rect width="280" height="40" x="40" y="255" fill="#fff" rx="20" />
+        <text x="52" y="281" font-size="14" fill="#3a3a3a">Gwendoline, chargée de déploiement</text>
       </g>
     </g>
     <g class="carte carte-1">
@@ -134,7 +134,7 @@
       <use href="#image0_20001_213885" transform="translate(-.1 -.12)scale(.00149167)" />
     </pattern>
     <pattern id="pattern1_20001_213885" width="1" height="1" patternContentUnits="objectBoundingBox">
-      <use href="#image1_20001_213885" transform="matrix(.00084195 0 0 .00084069 -.344489 -.00367177)" />
+      <use href="#image1_20001_213885" transform="translate(-.05 -.09)scale(.0009)" />
     </pattern>
     <image
       id="image0_20001_213885"
@@ -145,8 +145,8 @@
     />
     <image
       id="image1_20001_213885"
-      width="1920"
-      height="1281"
+      width="1200"
+      height="1200"
       href="/assets/images/interlocuteurs/animation/composition-biz-dev-2.avif"
       preserveAspectRatio="none"
     />
