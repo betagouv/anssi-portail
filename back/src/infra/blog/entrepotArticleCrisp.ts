@@ -17,7 +17,7 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
     this.cacheDesRésumés = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
     this.cacheDesArticles = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
   }
-  async tous(): Promise<RésuméArticle[]> {
+  async tousLesArticlesDeBlog(): Promise<RésuméArticle[]> {
     if (!this.adaptateurEnvironnement.crisp().catégorieDuBlog()) {
       return [];
     }
@@ -38,8 +38,8 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
     return this.cacheDesRésumés.get(EntrepôtArticleCrisp.CLÉ_LISTE_RÉSUMÉS_ARTICLE, récupèreDepuisCrisp);
   }
 
-  async parSlug(slug: string): Promise<Article | undefined> {
-    const tousLesRésumésDArticles = await this.tous();
+  async articleDeBlogParSlug(slug: string): Promise<Article | undefined> {
+    const tousLesRésumésDArticles = await this.tousLesArticlesDeBlog();
     const résuméTrouvé = tousLesRésumésDArticles.find((r) => r.slug === slug);
     if (!résuméTrouvé) {
       return undefined;
@@ -58,7 +58,7 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
     return this.cacheDesArticles.get(slug, récupèreDepuisCrisp);
   }
 
-  async existe(slug: string): Promise<boolean> {
-    return (await this.tous()).some((article) => article.slug === slug);
+  async articleDeBlogExiste(slug: string): Promise<boolean> {
+    return (await this.tousLesArticlesDeBlog()).some((article) => article.slug === slug);
   }
 }
