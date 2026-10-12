@@ -166,7 +166,7 @@ export const réflexesParRôle: RéflexesParRôle = {
     {
       proposition: {
         bonRéflexe: 'Partager aux usagers qu’un incident est en cours via les réseaux sociaux',
-        mauvaisRéflexe: 'Autoriser les élus à piloter eux-mêmes la communication de crise',
+        mauvaisRéflexe: 'Autoriser les responsables à piloter eux-mêmes la communication de crise',
       },
       conséquence: {
         bonRéflexe:
@@ -225,7 +225,7 @@ export const réflexesParRôle: RéflexesParRôle = {
     {
       proposition: {
         bonRéflexe: 'Organiser des échanges internes entre direction et équipes impactées',
-        mauvaisRéflexe: 'Laisser les élus gérer les échanges avec les administrés sans coordination',
+        mauvaisRéflexe: 'Laisser les responsables gérer les échanges avec les administrés sans coordination',
       },
       conséquence: {
         bonRéflexe:
