@@ -1,29 +1,18 @@
 import { HttpStatusCode, isAxiosError } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
+import { ID_CRISP_KIT_RELAIS } from '../metier/pageCrisp.js';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';
 
-const CORRESPONDANCE_ID_CRISP: Record<string, string> = {
-  'kit-relais': '9d295bcd-88ba-4f8a-99d5-61fdc788032d',
-};
-
 const ressourcePageCrisp = ({ cmsCrisp }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
-    '/:slug',
+    '/kit-relais',
     valideCorpsRequete(corpsVide),
-    filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
-      const slug = requete.params.slug as string;
-
-      const idPageCrisp = CORRESPONDANCE_ID_CRISP[slug];
-
-      if (!idPageCrisp) {
-        return reponse.sendStatus(HttpStatusCode.NotFound);
-      }
-
+    filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
       try {
-        const pageHtmlCrisp = await cmsCrisp.recupereArticle(idPageCrisp);
+        const pageHtmlCrisp = await cmsCrisp.recupereArticle(ID_CRISP_KIT_RELAIS);
         const { titre, tableDesMatieres, description, contenu } = pageHtmlCrisp;
         reponse.send({ titre, description, contenu, tableDesMatieres });
       } catch (e) {

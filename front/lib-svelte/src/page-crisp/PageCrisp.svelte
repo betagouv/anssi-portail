@@ -1,36 +1,15 @@
 <script lang="ts">
-  import axios from 'axios';
-  import { onMount, untrack } from 'svelte';
+  import { estServeur } from '$plateforme/environnement';
   import { enPropriétéWebC } from '$plateforme/webComponent';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
-
-  type EntreeTableDesMatieres = {
-    profondeur: number;
-    texte: string;
-    id: string;
-  };
-
-  type PageHtmlCrisp = {
-    titre: string;
-    contenu: string | null;
-    description: string;
-    tableDesMatieres: EntreeTableDesMatieres[];
-  };
+  import type { PageHtmlCrisp } from './pageCrisp.type';
 
   type Props = {
-    pageCrispInitiale?: PageHtmlCrisp;
+    pageCrisp?: PageHtmlCrisp;
   };
 
-  const { pageCrispInitiale }: Props = $props();
-
-  let pageCrisp = $state<PageHtmlCrisp | undefined>(untrack(() => pageCrispInitiale));
-
-  onMount(async () => {
-    const slug = window.location.pathname;
-    const réponse = await axios.get<PageHtmlCrisp>(`/api/pages-crisp${slug}`);
-    pageCrisp = réponse.data;
-  });
+  const { pageCrisp }: Props = $props();
 
   let tableDesMatières = $derived(pageCrisp ? pageCrisp.tableDesMatieres.filter((e) => e.profondeur === 2) : []);
 
@@ -43,18 +22,22 @@
         ]
       : []
   );
+
+  const propsTableDesMatières = $derived({
+    [estServeur ? 'table-des-matieres' : 'tableDesMatieres']: enPropriétéWebC(tableDesMatières),
+  });
 </script>
 
 {#if pageCrisp}
   <Heros
     titre={pageCrisp.titre}
-    description={pageCrisp.description}
+    description={pageCrisp.description ?? ''}
     segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
     theme="clair"
     format="banniere"
   />
 
-  <lab-anssi-page-crisp tableDesMatieres={enPropriétéWebC(tableDesMatières)} contenu={pageCrisp.contenu}>
+  <lab-anssi-page-crisp {...propsTableDesMatières} contenu={pageCrisp.contenu}>
     <article slot="seo">
       <div class="contenu">
         <!-- eslint-disable-next-line svelte/no-at-html-tags-->
