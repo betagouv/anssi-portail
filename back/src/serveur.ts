@@ -205,7 +205,6 @@ const host = process.env.HOST;
     entrepotSessionDeGroupe,
     adaptateurMonAideCyber,
     adaptateurEnvironnement,
-    cmsCrisp,
     generateurCodeSessionDeGroupe: new GenerateurAleatoireCodeSessionDeGroupe(entrepotSessionDeGroupe),
     adaptateurHachage,
     messagerieInstantanee,

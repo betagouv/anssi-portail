@@ -61,6 +61,7 @@ export class ConstructeurDArticleAvecToutesLesMétadonnées {
       id: this.id,
       slug: this.slug,
       titre: this.titre,
+      tableDesMatières: [],
     };
   }
 }

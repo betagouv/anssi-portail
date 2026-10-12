@@ -19,4 +19,11 @@ export class EntrepôtArticleMémoire implements EntrepôtArticle {
   articleDeBlogExiste = async (slug: string) => this.articles.some((article) => article.slug === slug);
 
   taille = async () => this.articles.length;
+
+  kitRelais = async (): Promise<Article> => ({
+    contenu: '',
+    description: '',
+    titre: '',
+    tableDesMatières: [],
+  });
 }

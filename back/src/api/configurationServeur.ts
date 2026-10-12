@@ -1,4 +1,3 @@
-import { CmsCrisp } from '@lab-anssi/lib';
 import { BusEvenements } from '../bus/busEvenements.js';
 import { AdaptateurCellar } from '../infra/adaptateurCellar.js';
 import { AdaptateurCompression } from '../infra/adaptateurCompression.js';
@@ -47,7 +46,6 @@ export type ConfigurationServeur = {
   adaptateurStatistiqueMiniTests: AdaptateurStatistiqueMiniTests;
   adaptateurStatistiqueParcours: AdaptateurStatistiqueParcours;
   busEvenements: BusEvenements;
-  cmsCrisp: CmsCrisp;
   entrepôtArticle: EntrepôtArticle;
   entrepotFavori: EntrepotFavori;
   entrepotFinancement: EntrepotFinancement;
