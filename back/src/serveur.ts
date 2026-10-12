@@ -152,8 +152,7 @@ const adaptateurEnrichissement = await fabriqueAdaptateurEnrichissement(
   entrepotGuide,
   entrepotExigence,
   entrepotFinancement,
-  entrepôtArticle,
-  cmsCrisp
+  entrepôtArticle
 );
 
 const attributionParcours = fabriqueAttributionParcours({ entrepotUtilisateur, busEvenements });
