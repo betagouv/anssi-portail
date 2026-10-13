@@ -1,9 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import compression from 'compression';
-import express, { json, NextFunction, Request, Response } from 'express';
+import express, { json } from 'express';
 import { ConfigurationServeur } from '../configurationServeur.js';
-import { erreurPageInterdite, erreurPageNonTrouvée, ErreurTraverséeDeChemin } from '../erreurs.js';
-import { FichierInconnu } from '../fournisseurChemin.js';
 import { ressourceDocumentGuide } from '../guides/ressourceDocumentGuide.js';
 import { ressourceDocumentRessource } from '../ressourceDocumentRessource.js';
 import { ressourceLlmsTxt } from '../ressourceLlmsTxt.js';
@@ -15,9 +13,10 @@ import { ressourcePagesJekyllConnectees } from '../ressourcePagesJekyllConnectee
 import { ressourceRobotsTxt } from '../ressourceRobotsTxt.js';
 import { ressourceSitemapXml } from '../ressourceSitemapXml.js';
 import { routesPagesConnecteesStatiques } from '../routesPagesConnectees.js';
-import { configureLesCookies } from './cookies.js';
 import { enregistreRouteDansExpress } from './enregistreRoutes.js';
-import { configureLeRateLimit } from './rateLimit.js';
+import { configureLesCookies } from './middlewares/cookies.js';
+import { configureLaGestionDErreur } from './middlewares/gestionDErreurs.js';
+import { configureLeRateLimit } from './middlewares/rateLimit.js';
 import { enregistreLesRoutesAPI } from './routes/API.js';
 import { enregistreLAuthentification } from './routes/authentification.js';
 import { enregistreLesFichiersStatiques } from './routes/fichiersStatiques.js';
@@ -113,23 +112,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreRoute('/llms.txt', ressourceLlmsTxt(configurationServeur));
   enregistreRoute('/sitemap.xml', ressourceSitemapXml(routesStatiques, configurationServeur));
 
-  app.use((erreur: unknown, _requete: Request, reponse: Response, suite: NextFunction) => {
-    if (erreur instanceof FichierInconnu) {
-      return erreurPageNonTrouvée(reponse, fournisseurChemin);
-    }
-    if (erreur instanceof ErreurTraverséeDeChemin) {
-      return erreurPageInterdite(reponse);
-    }
-    suite(erreur);
-  });
-
-  // A laisser à la fin de la fonction
-  app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
-
-  // A laisser à la fin de la fonction
-  app.use((_requete: Request, reponse: Response) => {
-    return erreurPageNonTrouvée(reponse, fournisseurChemin);
-  });
+  // À laisser à la fin de la fonction
+  configureLaGestionDErreur(app, configurationServeur);
 
   return app;
 };
