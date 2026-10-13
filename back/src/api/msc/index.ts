@@ -103,6 +103,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'exposition',
     'conseils-cyber',
     'kit-relais',
+    'parcours-securisation',
+    'parcours-cyberdepart',
+    'parcours-securisation-complet',
   ];
 
   if (configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()) {
@@ -139,9 +142,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreRoute('/visas', ressourceVisa(configurationServeur));
 
   enregistreRoutesAPI(app, configurationServeur);
-
-  const landingPages = ['parcours-securisation', 'parcours-cyberdepart', 'parcours-securisation-complet'];
-  routesStatiques.push(...landingPages);
 
   enregistreRoute('/module-cyberdepart', (_, reponse) => reponse.redirect(HttpStatusCode.SeeOther, '/modules/1'));
   enregistreRoute(
