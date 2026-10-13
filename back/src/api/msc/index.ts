@@ -34,10 +34,6 @@ import { ressourceDemandesAide } from '../mon-aide-cyber/ressourceDemandesAide.j
 import { ressourceExigencesNis2 } from '../nis2/ressourceExigencesNis2.js';
 import { ressourceExigencesNis2Csv } from '../nis2/ressourceExigencesNis2Csv.js';
 import { ressourceSimulateurNis2 } from '../nis2/ressourceSimulateurNis2.js';
-import { ressourceApresAuthentificationOIDC } from '../oidc/ressourceApresAuthentificationOIDC.js';
-import { ressourceApresDeconnexionOIDC } from '../oidc/ressourceApresDeconnexionOIDC.js';
-import { ressourceConnexionOIDC } from '../oidc/ressourceConnexionOIDC.js';
-import { ressourceDeconnexionOIDC } from '../oidc/ressourceDeconnexionOIDC.js';
 import { ressourceAbonnementInfolettre } from '../ressourceAbonnementInfolettre.js';
 import { ressourceAnnuaireDepartements } from '../ressourceAnnuaireDepartements.js';
 import { ressourceAnnuaireOrganisations } from '../ressourceAnnuaireOrganisations.js';
@@ -52,7 +48,6 @@ import { ressourceFinancements } from '../ressourceFinancements.js';
 import { ressourceInformationsCreationCompte } from '../ressourceInformationsCreationCompte.js';
 import { ressourceInfosSite } from '../ressourceInfosSite.js';
 import { ressourceLlmsTxt } from '../ressourceLlmsTxt.js';
-import { ressourcePageConnexion } from '../ressourcePageConnexion.js';
 import { ressourcePageContact } from '../ressourcePageContact.js';
 import { ressourcePageCrisp } from '../ressourcePageCrisp.js';
 import { ressourcePageRessource } from '../ressourcePageRessource.js';
@@ -75,6 +70,7 @@ import { ressourceResultatsDeTest } from '../testMaturite/ressourceResultatsDeTe
 import { ressourceResultatsSessionDeGroupe } from '../testMaturite/ressourceResultatsSessionDeGroupe.js';
 import { ressourceSessionDeGroupe } from '../testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from '../testMaturite/ressourceSessionsDeGroupe.js';
+import { configureLAuthentification } from './authentification.js';
 import { configureLesCookies } from './cookies.js';
 import { enregistreRouteDansExpress } from './enregistreRoutes.js';
 import { enregistreFichiersStatiques } from './fichiersStatiques.js';
@@ -179,21 +175,13 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     enregistreRoute(`/${page}`, ressourcePagesJekyllConnectees(configurationServeur, page))
   );
 
-  enregistreRoute('/connexion', ressourcePageConnexion(configurationServeur));
+  configureLAuthentification(app, configurationServeur);
 
   enregistreRoute(`/services`, ressourcePageService(configurationServeur));
 
   enregistreRoute(`/ressources`, ressourcePageRessource(configurationServeur));
 
   enregistreRoute(`/contacts`, ressourcePageContact(configurationServeur));
-
-  enregistreRoute('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
-
-  enregistreRoute('/oidc/apres-authentification', ressourceApresAuthentificationOIDC(configurationServeur));
-
-  enregistreRoute('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
-
-  enregistreRoute('/oidc/apres-deconnexion', ressourceApresDeconnexionOIDC());
 
   enregistreRoute('/api/profil', ressourceProfil(configurationServeur));
 
