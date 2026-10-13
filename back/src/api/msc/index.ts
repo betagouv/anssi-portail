@@ -1,6 +1,5 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import compression from 'compression';
-import cors from 'cors';
 import express, { json, NextFunction, Request, Response } from 'express';
 import { ressourceArticle } from '../blog/ressourceArticle.js';
 import { ressourceArticles } from '../blog/ressourceArticles.js';
@@ -10,7 +9,7 @@ import { erreurPageInterdite, erreurPageNonTrouvée, ErreurTraverséeDeChemin } 
 import { ressourceFavori } from '../favoris/ressourceFavori.js';
 import { ressourceFavoris } from '../favoris/ressourceFavoris.js';
 import { ressourceFavorisPartages } from '../favoris/ressourceFavorisPartages.js';
-import { FichierInconnu, FournisseurChemin } from '../fournisseurChemin.js';
+import { FichierInconnu } from '../fournisseurChemin.js';
 import { ressourceDocumentGuide } from '../guides/ressourceDocumentGuide.js';
 import { ressourceDocumentsGuide } from '../guides/ressourceDocumentsGuide.js';
 import { ressourceGuide } from '../guides/ressourceGuide.js';
@@ -78,6 +77,7 @@ import { ressourceSessionDeGroupe } from '../testMaturite/ressourceSessionDeGrou
 import { ressourceSessionsDeGroupe } from '../testMaturite/ressourceSessionsDeGroupe.js';
 import { configureLesCookies } from './cookies.js';
 import { enregistreRouteDansExpress } from './enregistreRoutes.js';
+import { enregistreFichiersStatiques } from './fichiersStatiques.js';
 import { configureLeRateLimit } from './rateLimit.js';
 import { configureLesRedirections } from './redirections.js';
 
@@ -110,20 +110,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   const enregistreRoute = enregistreRouteDansExpress(app);
 
-  const sertLesFichiersStatiques = (
-    fournisseurChemin: FournisseurChemin['jekyll']['assets' | 'scripts' | 'libSvelte' | 'favicon']
-  ) =>
-    express.static(fournisseurChemin(), {
-      setHeaders: (réponse: Response) => {
-        réponse.setHeader('cache-control', process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store');
-        réponse.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
-      },
-    });
-
-  enregistreRoute(`/assets`, cors(), sertLesFichiersStatiques(fournisseurChemin.jekyll.assets));
-  enregistreRoute('/scripts', sertLesFichiersStatiques(fournisseurChemin.jekyll.scripts));
-  enregistreRoute('/lib-svelte', sertLesFichiersStatiques(fournisseurChemin.jekyll.libSvelte));
-  enregistreRoute('/favicon.ico', sertLesFichiersStatiques(fournisseurChemin.jekyll.favicon));
+  enregistreFichiersStatiques(app, fournisseurChemin);
 
   enregistreRoute('/financements', (requete, reponse) => {
     const id = requete.query.idFinancement;
