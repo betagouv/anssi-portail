@@ -20,6 +20,7 @@ import { configureLeRateLimit } from './middlewares/rateLimit.js';
 import { enregistreLesRoutesAPI } from './routes/API.js';
 import { enregistreLAuthentification } from './routes/authentification.js';
 import { enregistreLesFichiersStatiques } from './routes/fichiersStatiques.js';
+import { enregistreLesFinancements } from './routes/financements.js';
 import { enregistreLesRedirections } from './routes/redirections.js';
 import { enregistreLesRoutesStatiques, routesStatiques } from './routes/statiques.js';
 import { enregistreLesVisas } from './routes/visas.js';
@@ -51,22 +52,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreLesRoutesAPI(app, configurationServeur);
   enregistreLesRoutesStatiques(app, configurationServeur);
   enregistreLesVisas(app, configurationServeur);
+  enregistreLesFinancements(app, configurationServeur);
 
   const enregistreRoute = enregistreRouteDansExpress(app);
-
-  enregistreRoute('/financements', (requete, reponse) => {
-    const id = requete.query.idFinancement;
-    if (Object.keys(requete.query).length > 0 && id) {
-      // on garde la redirection pour ne pas casser les liens existants
-      return reponse.redirect(HttpStatusCode.MovedPermanently, `/financements/${id}`);
-    }
-    reponse
-      .contentType('text/html')
-      .status(HttpStatusCode.Ok)
-      .envoieFichierEnrichi(fournisseurChemin.jekyll.page('financements'));
-  });
-
-  enregistreRoute('/financements/:id', ressourcePagesJekyll(configurationServeur, 'financements'));
 
   enregistreRoute('/favoris-partages/:id', ressourcePagesJekyll(configurationServeur, 'favoris-partages'));
 
