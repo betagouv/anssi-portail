@@ -157,11 +157,14 @@
             <dsfr-radios-group
               value={reponseCourante}
               radios={etapesTestMaturite[$questionnaireStore.questionCourante].propositions.map(
-                (proposition, index) => ({
-                  label: `${index + 1}. ${proposition}`,
-                  id: `radio-${index}`,
-                  value: index,
-                })
+                (proposition, index) => {
+                  const valeur = index + 1;
+                  return {
+                    label: `${valeur}. ${proposition}`,
+                    id: `radio-${valeur}`,
+                    value: valeur,
+                  };
+                }
               )}
               onvaluechanged={(e: CustomEvent<number>) => {
                 reponseCourante = e.detail;

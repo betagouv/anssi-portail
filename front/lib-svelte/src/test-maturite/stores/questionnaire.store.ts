@@ -31,7 +31,7 @@ export const questionnaireStore = {
 export const resultatsQuestionnaire = derived(questionnaireStore, ($questionnaireStore) => {
   function reponse(question: number) {
     const resultat = $questionnaireStore.toutesLesReponses[question];
-    return resultat === null ? null : resultat + 1;
+    return resultat === null ? null : resultat;
   }
 
   return {

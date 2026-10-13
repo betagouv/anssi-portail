@@ -53,9 +53,9 @@ describe('Le store du questionnaire', () => {
   });
 
   it('peut donner les résultats avec les identifiants', () => {
-    questionnaireStore.reponds(4);
-    questionnaireStore.reponds(2);
-    questionnaireStore.reponds(0);
+    questionnaireStore.reponds(5);
+    questionnaireStore.reponds(3);
+    questionnaireStore.reponds(1);
 
     const resultats = get(resultatsQuestionnaire);
 
