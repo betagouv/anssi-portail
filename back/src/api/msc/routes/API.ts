@@ -29,6 +29,7 @@ import { ressourceDemandesAide } from '../../mon-aide-cyber/ressourceDemandesAid
 import { ressourceExigencesNis2 } from '../../nis2/ressourceExigencesNis2.js';
 import { ressourceExigencesNis2Csv } from '../../nis2/ressourceExigencesNis2Csv.js';
 import { ressourceSimulateurNis2 } from '../../nis2/ressourceSimulateurNis2.js';
+import { ressourceModeleAnnuaireDeCrise } from '../../outils/ressourceModeleAnnuaireDeCrise.js';
 import { ressourceAbonnementInfolettre } from '../../ressourceAbonnementInfolettre.js';
 import { ressourceAnnuaireDepartements } from '../../ressourceAnnuaireDepartements.js';
 import { ressourceAnnuaireOrganisations } from '../../ressourceAnnuaireOrganisations.js';
@@ -165,4 +166,6 @@ export const enregistreLesRoutesAPI = (app: Express, configurationServeur: Confi
   enregistreRoute('/modules', ressourceModule(configurationServeur));
 
   enregistreRoute('/retour-mini-tests', ressourceRetourMiniTest(configurationServeur));
+
+  enregistreRoute('/outils', ressourceModeleAnnuaireDeCrise(configurationServeur));
 };
