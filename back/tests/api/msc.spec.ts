@@ -2,7 +2,7 @@ import { join } from 'node:path';
 import { HttpStatusCode } from '@anssi-portail/axios';
 import request from 'supertest';
 import { describe, expect, it } from 'vitest';
-import { creeServeur } from '../../src/api/msc.js';
+import { creeServeur } from '../../src/api/msc/index.js';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets.js';
 
 describe('La configuration de notre serveur', () => {

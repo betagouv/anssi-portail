@@ -4,7 +4,7 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { ConfigurationServeur } from '../../src/api/configurationServeur.js';
-import { creeServeur } from '../../src/api/msc.js';
+import { creeServeur } from '../../src/api/msc/index.js';
 import { AdaptateurCellar, CleDuBucket } from '../../src/infra/adaptateurCellar.js';
 import { configurationDeTestDuServeur, fauxAdaptateurCellar } from './fauxObjets.js';
 

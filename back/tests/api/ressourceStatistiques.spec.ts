@@ -2,7 +2,7 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../src/api/msc.js';
+import { creeServeur } from '../../src/api/msc/index.js';
 import { AdaptateurMonAideCyber } from '../../src/infra/adaptateurMonAideCyber.js';
 import { AdaptateurStatistiqueMiniTestsMémoire } from '../../src/infra/adaptateurStatistiqueMiniTestsMémoire.js';
 import { AdaptateurStatistiqueParcoursMémoire } from '../../src/infra/adaptateurStatistiqueParcoursMémoire.js';

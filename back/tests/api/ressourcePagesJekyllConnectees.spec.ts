@@ -3,7 +3,7 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { fabriquePublieMesureConsultée } from '../../src/api/middlewares/publieMesureConsultee.js';
-import { creeServeur } from '../../src/api/msc.js';
+import { creeServeur } from '../../src/api/msc/index.js';
 import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
 import { Parcours } from '../../src/metier/parcours.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';

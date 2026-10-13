@@ -6,7 +6,7 @@ import sharp from 'sharp';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { ServiceRécompensesCyberDépart } from '../../../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
-import { creeServeur } from '../../../../src/api/msc.js';
+import { creeServeur } from '../../../../src/api/msc/index.js';
 import { EntrepotUtilisateur } from '../../../../src/metier/entrepotUtilisateur.js';
 import { EntrepôtModuleMémoire } from '../../../persistance/EntrepôtModuleMémoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
