@@ -1,11 +1,8 @@
 <script lang="ts">
-  import { untrack } from 'svelte';
   import { clic } from '../../directives/actions.svelte';
   import type { Mesure } from './../mesure';
-  import ModaleTutoriel from './ModaleTutoriel.svelte';
 
   const { mesure, surSélectionProcédure }: { mesure: Mesure; surSélectionProcédure: () => void } = $props();
-  let étatDesModales: boolean[] = $state(untrack(() => Array(mesure.procédures.length).fill(false)));
   const aDesProcédures: boolean = $derived(mesure.procédures.length > 0);
   const aDesLiens: boolean = $derived(mesure.liens?.length > 0);
 
@@ -36,8 +33,6 @@
       >
         <dsfr-badge slot="badgesgroup" label="Boite à outils" type="accent" accent="purple-glycine"></dsfr-badge>
       </dsfr-card>
-
-      <ModaleTutoriel {tutoriel} bind:estOuverte={étatDesModales[index]} />
     {/each}
   </div>
 {/if}
