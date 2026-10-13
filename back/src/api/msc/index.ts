@@ -38,7 +38,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(json());
 
   const { middleware } = configurationServeur;
-
   app.use(middleware.ajouteMethodeEnrichissement);
   app.use(middleware.positionneLesCsp());
   app.use(middleware.interdisLaMiseEnCache);
@@ -110,6 +109,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     routesStatiques.push('simulateur-nis2');
   }
 
+  routesStatiques.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
+
   enregistreRoute('/financements/:id', ressourcePagesJekyll(configurationServeur, 'financements'));
 
   enregistreRoute('/favoris-partages/:id', ressourcePagesJekyll(configurationServeur, 'favoris-partages'));
@@ -155,8 +156,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     '/mesures/:id',
     ressourcePagesJekyllConnectees(configurationServeur, 'mesures', [publieMesureConsultée, attributionParcoursMesure])
   );
-
-  routesStatiques.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
 
   enregistreRoute('/robots.txt', ressourceRobotsTxt(configurationServeur));
   enregistreRoute('/llms.txt', ressourceLlmsTxt(configurationServeur));
