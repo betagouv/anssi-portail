@@ -13,7 +13,7 @@ const sertLesFichiersStatiques = (
     },
   });
 
-export const enregistreFichiersStatiques = (app: Express, fournisseurChemin: FournisseurChemin) => {
+export const enregistreLesFichiersStatiques = (app: Express, fournisseurChemin: FournisseurChemin) => {
   const enregistreRoute = enregistreRouteDansExpress(app);
   enregistreRoute(`/assets`, cors(), sertLesFichiersStatiques(fournisseurChemin.jekyll.assets));
   enregistreRoute('/scripts', sertLesFichiersStatiques(fournisseurChemin.jekyll.scripts));

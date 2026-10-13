@@ -7,7 +7,7 @@ import { ressourceDeconnexionOIDC } from '../oidc/ressourceDeconnexionOIDC.js';
 import { ressourcePageConnexion } from '../ressourcePageConnexion.js';
 import { enregistreRouteDansExpress } from './enregistreRoutes.js';
 
-export const configureLAuthentification = (app: Express, configurationServeur: ConfigurationServeur) => {
+export const enregistreLAuthentification = (app: Express, configurationServeur: ConfigurationServeur) => {
   const enregistreRoute = enregistreRouteDansExpress(app);
   enregistreRoute('/connexion', ressourcePageConnexion(configurationServeur));
   enregistreRoute('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
