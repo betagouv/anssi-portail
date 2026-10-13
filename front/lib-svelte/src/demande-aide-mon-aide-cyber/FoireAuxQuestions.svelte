@@ -145,12 +145,6 @@
     </div>
   </Accordeon>
 </div>
-<div class="besoin-aide">
-  <p>
-    Participez à un webinaire pour en savoir plus sur le diagnostic cyber.
-    <Lien href="https://app.livestorm.co/lab-anssi/webinaire-cyberdepart" libelle="Je m’inscris" blank />
-  </p>
-</div>
 
 <style lang="scss">
   p {
@@ -168,10 +162,6 @@
         border-radius: 10px;
       }
     }
-  }
-
-  .besoin-aide {
-    margin-top: 48px;
   }
 
   video {

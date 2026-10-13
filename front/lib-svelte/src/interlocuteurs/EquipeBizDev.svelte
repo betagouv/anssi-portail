@@ -6,23 +6,12 @@
   <dsfr-card
     title="Notre équipe est à votre écoute"
     has-description
-    description="Participez à un webinaire collectif de 45 minutes pour en savoir plus sur MesServicesCyber, le test de maturité et le diagnostic cyber afin de mieux savoir comment protéger votre entité des cyberattaques."
-    href="https://app.livestorm.co/lab-anssi/webinaire-cyberdepart"
+    description="Une question sur MesServicesCyber, le parcours de sécurisation ou un autre sujet ? Notre équipe vous répond et vous aide à identifier les prochaines étapes pour protéger votre entité."
+    href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert"
     enlarge
     no-icon
-    has-buttons
+    size="sm"
   >
-    <dsfr-button
-      label="Assister au webinaire"
-      kind="secondary"
-      size="md"
-      has-icon
-      icon="calendar-event-fill"
-      icon-place="left"
-      markup="a"
-      href="https://app.livestorm.co/lab-anssi/webinaire-cyberdepart"
-      slot="buttonsgroup"
-    ></dsfr-button>
   </dsfr-card>
 
   <div class="visuel">
@@ -67,15 +56,6 @@
     :global(.illustration-animee) {
       height: auto;
       max-width: 100%;
-    }
-
-    dsfr-card {
-      min-height: auto;
-
-      @include a-partir-de(lg) {
-        flex: 1;
-        order: 1;
-      }
     }
   }
 </style>
