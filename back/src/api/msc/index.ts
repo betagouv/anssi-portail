@@ -1,7 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import compression from 'compression';
 import cors from 'cors';
-import express, { json, NextFunction, Request, RequestHandler, Response } from 'express';
+import express, { json, NextFunction, Request, Response } from 'express';
 import { ressourceArticle } from '../blog/ressourceArticle.js';
 import { ressourceArticles } from '../blog/ressourceArticles.js';
 import { ressourceAvisArticle } from '../blog/ressourceAvisArticle.js';
@@ -77,6 +77,7 @@ import { ressourceResultatsSessionDeGroupe } from '../testMaturite/ressourceResu
 import { ressourceSessionDeGroupe } from '../testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from '../testMaturite/ressourceSessionsDeGroupe.js';
 import { configureLesCookies } from './cookies.js';
+import { enregistreRouteDansExpress } from './enregistreRoutes.js';
 import { configureLeRateLimit } from './rateLimit.js';
 import { configureLesRedirections } from './redirections.js';
 
@@ -105,31 +106,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   configureLesRedirections(app);
 
-  const enregistreRoute = (chemin: string, ...gestionnaires: RequestHandler[]) => {
-    const redirigeSansSlashFinal: RequestHandler = (requête, réponse, suite) => {
-      const cheminRequête = requête.originalUrl.split('?', 1)[0];
-
-      const motifPlusieursSlashsdAffilé: RegExp = /^\/{2,}$/;
-      const estRacineAvecPlusieursSlashs = chemin === '/' && motifPlusieursSlashsdAffilé.test(cheminRequête);
-
-      const paramètres = requête.originalUrl.slice(cheminRequête.length);
-
-      if (estRacineAvecPlusieursSlashs) {
-        return réponse.redirect(HttpStatusCode.PermanentRedirect, `/${paramètres}`);
-      }
-
-      if (chemin !== '/' && cheminRequête.endsWith('/')) {
-        const motifSlashFinal: RegExp = /\/+$/;
-        const cheminNormalisé = cheminRequête.replace(motifSlashFinal, '');
-
-        return réponse.redirect(HttpStatusCode.PermanentRedirect, `${cheminNormalisé}${paramètres}`);
-      }
-
-      suite();
-    };
-
-    return app.use(chemin, redirigeSansSlashFinal, ...gestionnaires);
-  };
+  const enregistreRoute = enregistreRouteDansExpress(app);
 
   const sertLesFichiersStatiques = (
     fournisseurChemin: FournisseurChemin['jekyll']['assets' | 'scripts' | 'libSvelte' | 'favicon']
