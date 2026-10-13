@@ -1,81 +1,29 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import compression from 'compression';
 import express, { json, NextFunction, Request, Response } from 'express';
-import { ressourceArticle } from '../blog/ressourceArticle.js';
-import { ressourceArticles } from '../blog/ressourceArticles.js';
-import { ressourceAvisArticle } from '../blog/ressourceAvisArticle.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { erreurPageInterdite, erreurPageNonTrouvée, ErreurTraverséeDeChemin } from '../erreurs.js';
-import { ressourceFavori } from '../favoris/ressourceFavori.js';
-import { ressourceFavoris } from '../favoris/ressourceFavoris.js';
-import { ressourceFavorisPartages } from '../favoris/ressourceFavorisPartages.js';
 import { FichierInconnu } from '../fournisseurChemin.js';
 import { ressourceDocumentGuide } from '../guides/ressourceDocumentGuide.js';
-import { ressourceDocumentsGuide } from '../guides/ressourceDocumentsGuide.js';
-import { ressourceGuide } from '../guides/ressourceGuide.js';
-import { ressourceGuides } from '../guides/ressourceGuides.js';
-import { ressourceGuidesMemesCollections } from '../guides/ressourceGuidesMemesCollections.js';
-import { ressourceAvisMesure } from '../mesures/ressourceAvisMesure.js';
-import { ressourceMesure } from '../mesures/ressourceMesure.js';
-import { ressourceMesureCsv } from '../mesures/ressourceMesureCsv.js';
-import { ressourceModule } from '../mesures/ressourceModule.js';
-import { ressourceParcoursComplet } from '../mesures/ressourceParcoursComplet.js';
-import { ressourcePriseEnCompte } from '../mesures/ressourcePriseEnCompte.js';
-import { ressourceRécompensesCyberDépart } from '../mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepart.js';
-import { ressourceRécompensesCyberDépartSansBadge } from '../mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepartSansBadge.js';
-import { ressourceTestsExposition } from '../mini-tests/exposition/ressourceTestsExposition.js';
-import { ressourceRéponsesRéflexesCyber } from '../mini-tests/reflexes-cyber/ressourceReponsesReflexesCyber.js';
-import { ressourceInfoMiniTests } from '../mini-tests/ressourceInfoMiniTests.js';
-import { ressourceReactionMiniTest } from '../mini-tests/ressourceReactionMiniTest.js';
-import { ressourceRetourMiniTest } from '../mini-tests/ressourceRetourMiniTest.js';
-import { ressourceRéponsesVraiFaux } from '../mini-tests/vrai-faux/ressourceReponsesVraiFaux.js';
-import { ressourceVraiFaux } from '../mini-tests/vrai-faux/ressourceVraiFaux.js';
-import { ressourceDemandesAide } from '../mon-aide-cyber/ressourceDemandesAide.js';
-import { ressourceExigencesNis2 } from '../nis2/ressourceExigencesNis2.js';
-import { ressourceExigencesNis2Csv } from '../nis2/ressourceExigencesNis2Csv.js';
-import { ressourceSimulateurNis2 } from '../nis2/ressourceSimulateurNis2.js';
-import { ressourceAbonnementInfolettre } from '../ressourceAbonnementInfolettre.js';
-import { ressourceAnnuaireDepartements } from '../ressourceAnnuaireDepartements.js';
-import { ressourceAnnuaireOrganisations } from '../ressourceAnnuaireOrganisations.js';
-import { ressourceAnnuaireRegions } from '../ressourceAnnuaireRegions.js';
-import { ressourceAnnuaireSecteursActivite } from '../ressourceAnnuaireSecteursActivite.js';
-import { ressourceAnnuaireTranchesEffectif } from '../ressourceAnnuaireTranchesEffectif.js';
-import { ressourceAvisUtilisateur } from '../ressourceAvisUtilisateur.js';
 import { ressourceControleContenuListeConfiance } from '../ressourceControleContenuListeConfiance.js';
 import { ressourceDocumentRessource } from '../ressourceDocumentRessource.js';
-import { ressourceFinancement } from '../ressourceFinancement.js';
-import { ressourceFinancements } from '../ressourceFinancements.js';
-import { ressourceInformationsCreationCompte } from '../ressourceInformationsCreationCompte.js';
-import { ressourceInfosSite } from '../ressourceInfosSite.js';
 import { ressourceLlmsTxt } from '../ressourceLlmsTxt.js';
 import { ressourcePageContact } from '../ressourcePageContact.js';
-import { ressourcePageCrisp } from '../ressourcePageCrisp.js';
 import { ressourcePageRessource } from '../ressourcePageRessource.js';
 import { ressourcePageService } from '../ressourcePageService.js';
 import { ressourcePagesJekyll } from '../ressourcePagesJekyll.js';
 import { ressourcePagesJekyllConnectees } from '../ressourcePagesJekyllConnectees.js';
-import { ressourceProfil } from '../ressourceProfil.js';
-import { ressourceRetoursExperience } from '../ressourceRetoursExperience.js';
 import { ressourceRobotsTxt } from '../ressourceRobotsTxt.js';
-import { ressourceSanteGuides } from '../ressourceSanteGuides.js';
 import { ressourceSitemapXml } from '../ressourceSitemapXml.js';
-import { ressourceStatistiques } from '../ressourceStatistiques.js';
-import { ressourceUtilisateurs } from '../ressourceUtilisateurs.js';
 import { ressourceVisa } from '../ressourceVisa.js';
 import { routesPagesConnecteesStatiques } from '../routesPagesConnectees.js';
-import { ressourceDernierResultatDeTest } from '../testMaturite/ressourceDernierResultatDeTest.js';
-import { ressourceRepartitionDesResultatsDeTest } from '../testMaturite/ressourceRepartitionDesResultatsDeTest.js';
-import { ressourceResultatDeTest } from '../testMaturite/ressourceResultatDeTest.js';
-import { ressourceResultatsDeTest } from '../testMaturite/ressourceResultatsDeTest.js';
-import { ressourceResultatsSessionDeGroupe } from '../testMaturite/ressourceResultatsSessionDeGroupe.js';
-import { ressourceSessionDeGroupe } from '../testMaturite/ressourceSessionDeGroupe.js';
-import { ressourceSessionsDeGroupe } from '../testMaturite/ressourceSessionsDeGroupe.js';
 import { configureLAuthentification } from './authentification.js';
 import { configureLesCookies } from './cookies.js';
 import { enregistreRouteDansExpress } from './enregistreRoutes.js';
 import { enregistreFichiersStatiques } from './fichiersStatiques.js';
 import { configureLeRateLimit } from './rateLimit.js';
 import { configureLesRedirections } from './redirections.js';
+import { enregistreRoutesAPI } from './routesAPI.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -183,72 +131,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute(`/contacts`, ressourcePageContact(configurationServeur));
 
-  enregistreRoute('/api/profil', ressourceProfil(configurationServeur));
-
-  enregistreRoute('/api/utilisateurs', ressourceUtilisateurs(configurationServeur));
-
-  enregistreRoute('/api/mon-aide-cyber/demandes-aide', ressourceDemandesAide(configurationServeur));
-
-  enregistreRoute('/api/favoris', ressourceFavoris(configurationServeur), ressourceFavori(configurationServeur));
-
-  enregistreRoute('/api/favoris-partages', ressourceFavorisPartages(configurationServeur));
-
-  enregistreRoute('/api/informations-creation-compte', ressourceInformationsCreationCompte(configurationServeur));
-
-  enregistreRoute(
-    '/api/resultats-test',
-    ressourceResultatsDeTest(configurationServeur),
-    ressourceResultatDeTest(configurationServeur)
-  );
-  enregistreRoute('/api/resultats-test/dernier', ressourceDernierResultatDeTest(configurationServeur));
-
-  enregistreRoute(
-    '/api/sessions-groupe',
-    ressourceSessionsDeGroupe(configurationServeur),
-    ressourceSessionDeGroupe(configurationServeur),
-    ressourceResultatsSessionDeGroupe(configurationServeur)
-  );
-
-  enregistreRoute('/api/annuaire/organisations', ressourceAnnuaireOrganisations(configurationServeur));
-
-  enregistreRoute('/api/annuaire/departements', ressourceAnnuaireDepartements(configurationServeur));
-
-  enregistreRoute('/api/annuaire/regions', ressourceAnnuaireRegions(configurationServeur));
-
-  enregistreRoute('/api/annuaire/secteurs-activite', ressourceAnnuaireSecteursActivite(configurationServeur));
-
-  enregistreRoute('/api/annuaire/tranches-effectif', ressourceAnnuaireTranchesEffectif(configurationServeur));
-
-  enregistreRoute('/api/pages-crisp', ressourcePageCrisp(configurationServeur));
-
-  enregistreRoute('/api/infos-site', ressourceInfosSite(configurationServeur));
-
-  enregistreRoute('/api/retours-experience', ressourceRetoursExperience(configurationServeur));
-
-  enregistreRoute('/api/info-mini-tests', ressourceInfoMiniTests(configurationServeur));
-
-  enregistreRoute('/api/reactions-mini-tests', ressourceReactionMiniTest(configurationServeur));
-
-  enregistreRoute('/api/statistiques', ressourceStatistiques(configurationServeur));
-
-  enregistreRoute('/api/repartition-resultats-test', ressourceRepartitionDesResultatsDeTest(configurationServeur));
-
-  enregistreRoute('/api/avis-utilisateur', ressourceAvisUtilisateur(configurationServeur));
-
-  enregistreRoute(
-    '/api/financements',
-    ressourceFinancements(configurationServeur),
-    ressourceFinancement(configurationServeur)
-  );
-
-  enregistreRoute(
-    '/api/guides',
-    ressourceGuides(configurationServeur),
-    ressourceGuide(configurationServeur),
-    ressourceGuidesMemesCollections(configurationServeur),
-    ressourceDocumentsGuide(configurationServeur)
-  );
-
   enregistreRoute('/documents-guides', ressourceDocumentGuide(configurationServeur));
   enregistreRoute('/documents-ressources', ressourceDocumentRessource(configurationServeur));
 
@@ -256,47 +138,11 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreRoute('/visas/tl-fr_v6.sha2', ressourceControleContenuListeConfiance({ version: 'v6' }));
   enregistreRoute('/visas', ressourceVisa(configurationServeur));
 
-  enregistreRoute('/api/exigences-nis2', ressourceExigencesNis2(configurationServeur));
-  enregistreRoute('/api/exigences-nis2.csv', ressourceExigencesNis2Csv(configurationServeur));
+  enregistreRoutesAPI(app, configurationServeur);
 
-  if (configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur())
-    enregistreRoute('/api/simulateur-nis2', ressourceSimulateurNis2(configurationServeur));
-
-  enregistreRoute('/api/sante-guides', ressourceSanteGuides(configurationServeur));
-
-  enregistreRoute('/api/abonnement-infolettre', ressourceAbonnementInfolettre(configurationServeur));
-
-  enregistreRoute(
-    '/api/cyberdepart/attestation_badge_cyberdepart.zip',
-    ressourceRécompensesCyberDépart(configurationServeur)
-  );
-
-  enregistreRoute(
-    '/api/cyberdepart/visuels_cyberdepart.zip',
-    ressourceRécompensesCyberDépartSansBadge(configurationServeur)
-  );
-
-  enregistreRoute('/api/mini-tests/vrai-faux', ressourceVraiFaux(configurationServeur));
-  enregistreRoute('/api/mini-tests/vrai-faux/reponses', ressourceRéponsesVraiFaux(configurationServeur));
-  enregistreRoute('/api/mini-tests/reflexes-cyber/reponses', ressourceRéponsesRéflexesCyber(configurationServeur));
-  enregistreRoute('/api/mini-tests/exposition/tests', ressourceTestsExposition(configurationServeur));
-  enregistreRoute(
-    '/api/articles',
-    ressourceArticles(configurationServeur),
-    ressourceArticle(configurationServeur),
-    ressourceAvisArticle(configurationServeur)
-  );
-
-  enregistreRoute(
-    '/api/mesures',
-    ressourceMesure(configurationServeur),
-    ressourceAvisMesure(configurationServeur),
-    ressourcePriseEnCompte(configurationServeur)
-  );
   const landingPages = ['parcours-securisation', 'parcours-cyberdepart', 'parcours-securisation-complet'];
   routesStatiques.push(...landingPages);
-  enregistreRoute('/api/mesures.csv', ressourceMesureCsv(configurationServeur));
-  enregistreRoute('/api/modules', ressourceModule(configurationServeur));
+
   enregistreRoute('/module-cyberdepart', (_, reponse) => reponse.redirect(HttpStatusCode.SeeOther, '/modules/1'));
   enregistreRoute(
     '/modules/1',
@@ -310,13 +156,12 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     '/parcours-complet',
     ressourcePagesJekyllConnectees(configurationServeur, 'parcours-complet', [attributionParcours('complet')])
   );
-  enregistreRoute('/api/parcours/complet', ressourceParcoursComplet(configurationServeur));
+  enregistreRoute(`/partage-cyberdepart`, ressourcePagesJekyll(configurationServeur, 'partage-badge-cyberdepart'));
   enregistreRoute(
     '/mesures/:id',
     ressourcePagesJekyllConnectees(configurationServeur, 'mesures', [publieMesureConsultée, attributionParcoursMesure])
   );
-  enregistreRoute('/api/retour-mini-tests', ressourceRetourMiniTest(configurationServeur));
-  enregistreRoute(`/partage-cyberdepart`, ressourcePagesJekyll(configurationServeur, 'partage-badge-cyberdepart'));
+
   routesStatiques.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
   enregistreRoute('/robots.txt', ressourceRobotsTxt(configurationServeur));
   enregistreRoute('/llms.txt', ressourceLlmsTxt(configurationServeur));
