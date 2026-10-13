@@ -57,5 +57,13 @@
       height: auto;
       max-width: 100%;
     }
+
+    dsfr-card {
+      min-height: auto;
+      @include a-partir-de(lg) {
+        flex: 1;
+        order: 1;
+      }
+    }
   }
 </style>
