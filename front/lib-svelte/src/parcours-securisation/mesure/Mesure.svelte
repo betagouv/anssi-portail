@@ -12,8 +12,8 @@
   import InterlocuteursParcoursSecurisation from './../InterlocuteursParcoursSecurisation.svelte';
   import type { Mesure } from './../mesure';
   import PriseEnCompteMesure from './../PriseEnCompteMesure.svelte';
+  import BoiteAOutils from './BoiteAOutils.svelte';
   import CartesLiensProcédures from './CartesLiensProcédures.svelte';
-  import Procedure from './Procedure.svelte';
 
   let mesure: Mesure | undefined = $state();
   let indexOngletActif: 0 | 1 = $state(0);
@@ -148,9 +148,7 @@
             {/if}
           </div>
           <div class="boite-a-outils" slot="panel-2">
-            {#each mesure.procédures as procédure, index (index)}
-              <Procedure {procédure} />
-            {/each}
+            <BoiteAOutils {mesure} />
           </div>
         </dsfr-tabs>
 
@@ -290,6 +288,6 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding-block: 1rem;
+    padding-top: 1rem;
   }
 </style>
