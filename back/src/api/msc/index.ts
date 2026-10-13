@@ -5,7 +5,6 @@ import { ConfigurationServeur } from '../configurationServeur.js';
 import { erreurPageInterdite, erreurPageNonTrouvée, ErreurTraverséeDeChemin } from '../erreurs.js';
 import { FichierInconnu } from '../fournisseurChemin.js';
 import { ressourceDocumentGuide } from '../guides/ressourceDocumentGuide.js';
-import { ressourceControleContenuListeConfiance } from '../ressourceControleContenuListeConfiance.js';
 import { ressourceDocumentRessource } from '../ressourceDocumentRessource.js';
 import { ressourceLlmsTxt } from '../ressourceLlmsTxt.js';
 import { ressourcePageContact } from '../ressourcePageContact.js';
@@ -15,7 +14,6 @@ import { ressourcePagesJekyll } from '../ressourcePagesJekyll.js';
 import { ressourcePagesJekyllConnectees } from '../ressourcePagesJekyllConnectees.js';
 import { ressourceRobotsTxt } from '../ressourceRobotsTxt.js';
 import { ressourceSitemapXml } from '../ressourceSitemapXml.js';
-import { ressourceVisa } from '../ressourceVisa.js';
 import { routesPagesConnecteesStatiques } from '../routesPagesConnectees.js';
 import { configureLesCookies } from './cookies.js';
 import { enregistreRouteDansExpress } from './enregistreRoutes.js';
@@ -25,6 +23,7 @@ import { enregistreLAuthentification } from './routes/authentification.js';
 import { enregistreLesFichiersStatiques } from './routes/fichiersStatiques.js';
 import { enregistreLesRedirections } from './routes/redirections.js';
 import { enregistreLesRoutesStatiques, routesStatiques } from './routes/statiques.js';
+import { enregistreLesVisas } from './routes/visas.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -52,6 +51,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreLesFichiersStatiques(app, fournisseurChemin);
   enregistreLesRoutesAPI(app, configurationServeur);
   enregistreLesRoutesStatiques(app, configurationServeur);
+  enregistreLesVisas(app, configurationServeur);
 
   const enregistreRoute = enregistreRouteDansExpress(app);
 
@@ -89,10 +89,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute('/documents-guides', ressourceDocumentGuide(configurationServeur));
   enregistreRoute('/documents-ressources', ressourceDocumentRessource(configurationServeur));
-
-  enregistreRoute('/visas/tl-fr.sha2', ressourceControleContenuListeConfiance({ version: 'v5' }));
-  enregistreRoute('/visas/tl-fr_v6.sha2', ressourceControleContenuListeConfiance({ version: 'v6' }));
-  enregistreRoute('/visas', ressourceVisa(configurationServeur));
 
   enregistreRoute('/module-cyberdepart', (_, reponse) => reponse.redirect(HttpStatusCode.SeeOther, '/modules/1'));
   enregistreRoute(
