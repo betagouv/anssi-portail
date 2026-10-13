@@ -7,14 +7,14 @@ Télécharger le fichier `mini-test-expostion.php` en fonction de l'envrionnemen
 <details>
 <summary>Démo</summary>
 
-> https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.1.2/demo/mini-test-expostion.php
+> https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/demo/mini-test-exposition.php
 
 </details>
 
 <details open>
 <summary>Prod</summary>
 
-> https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.1.2/prod/mini-test-expostion.php
+> https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/prod/mini-test-exposition.php
 
 </details>
 
