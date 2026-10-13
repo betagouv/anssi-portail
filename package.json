@@ -39,7 +39,7 @@
     "vitest": "catalog:"
   },
   "runtimeDependencies": {
-    "@lab-anssi/ui-kit": "1.62.1"
+    "@lab-anssi/ui-kit": "1.61.3"
   },
   "devEngines": {
     "packageManager": {
