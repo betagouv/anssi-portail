@@ -35,21 +35,17 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     gestionnairesRequêtesComplémentaires;
 
   app.use(compression());
-
-  app.use(configurationServeur.middleware.ajouteMethodeEnrichissement);
-
-  app.use(configurationServeur.middleware.positionneLesCsp());
-
-  app.use(configurationServeur.middleware.interdisLaMiseEnCache);
-
-  app.use(configurationServeur.middleware.verifieModeMaintenance);
-
-  configureLeRateLimit(app, configurationServeur);
-
-  configureLesCookies(app, configurationServeur);
-
   app.use(json());
 
+  const { middleware } = configurationServeur;
+
+  app.use(middleware.ajouteMethodeEnrichissement);
+  app.use(middleware.positionneLesCsp());
+  app.use(middleware.interdisLaMiseEnCache);
+  app.use(middleware.verifieModeMaintenance);
+
+  configureLeRateLimit(app, configurationServeur);
+  configureLesCookies(app, configurationServeur);
   configureLesRedirections(app);
 
   const enregistreRoute = enregistreRouteDansExpress(app);
@@ -163,6 +159,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   );
 
   routesStatiques.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
+
   enregistreRoute('/robots.txt', ressourceRobotsTxt(configurationServeur));
   enregistreRoute('/llms.txt', ressourceLlmsTxt(configurationServeur));
   enregistreRoute('/sitemap.xml', ressourceSitemapXml(routesStatiques, configurationServeur));
