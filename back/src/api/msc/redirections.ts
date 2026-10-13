@@ -1,7 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express, NextFunction, Request, Response } from 'express';
 
-export const configureLesRedirections = (app: Express) => {
+export const enregistreLesRedirections = (app: Express) => {
   [
     ['/aPropos', '/a-propos'],
     ['/directive-nis2', '/nis2'],

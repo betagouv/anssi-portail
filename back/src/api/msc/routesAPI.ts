@@ -55,7 +55,7 @@ import { ressourceSessionDeGroupe } from '../testMaturite/ressourceSessionDeGrou
 import { ressourceSessionsDeGroupe } from '../testMaturite/ressourceSessionsDeGroupe.js';
 import { enregistreRouteDansExpress } from './enregistreRoutes.js';
 
-export const enregistreRoutesAPI = (app: Express, configurationServeur: ConfigurationServeur) => {
+export const enregistreLesRoutesAPI = (app: Express, configurationServeur: ConfigurationServeur) => {
   const enregistreRoute = (suffixe: string, ...gestionnaires: RequestHandler[]) =>
     enregistreRouteDansExpress(app)(`/api${suffixe}`, ...gestionnaires);
 
