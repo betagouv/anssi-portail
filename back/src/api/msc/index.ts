@@ -2,12 +2,9 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import compression from 'compression';
 import cors from 'cors';
 import express, { json, NextFunction, Request, RequestHandler, Response } from 'express';
-import { IpFilter } from 'express-ipfilter';
-import rateLimit from 'express-rate-limit';
 import { ressourceArticle } from '../blog/ressourceArticle.js';
 import { ressourceArticles } from '../blog/ressourceArticles.js';
 import { ressourceAvisArticle } from '../blog/ressourceAvisArticle.js';
-import { fabriqueCleRateLimit } from '../clefRateLimit.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { erreurPageInterdite, erreurPageNonTrouvée, ErreurTraverséeDeChemin } from '../erreurs.js';
 import { ressourceFavori } from '../favoris/ressourceFavori.js';
@@ -80,6 +77,7 @@ import { ressourceResultatsSessionDeGroupe } from '../testMaturite/ressourceResu
 import { ressourceSessionDeGroupe } from '../testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from '../testMaturite/ressourceSessionsDeGroupe.js';
 import { configureLesCookies } from './cookies.js';
+import { configureLeRateLimit } from './rateLimit.js';
 import { configureLesRedirections } from './redirections.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
@@ -99,42 +97,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use(configurationServeur.middleware.interdisLaMiseEnCache);
 
-  const limiteRequetesParMinuteGlobal = rateLimit({
-    windowMs: 60 * 1000,
-    limit: configurationServeur.reseau.maxRequetesParMinutes,
-    keyGenerator: fabriqueCleRateLimit(configurationServeur.reseau.trustProxy),
-  });
-  const limiteRequetesParMinuteAPI = rateLimit({
-    windowMs: 60 * 1000,
-    limit: configurationServeur.reseau.maxRequetesParMinuteAPI,
-    keyGenerator: fabriqueCleRateLimit(configurationServeur.reseau.trustProxy),
-  });
-  app.set('trust proxy', configurationServeur.reseau.trustProxy);
-  app.use(limiteRequetesParMinuteGlobal);
-
-  if (configurationServeur.reseau.ipAutorisees) {
-    app.use(
-      IpFilter(configurationServeur.reseau.ipAutorisees, {
-        detectIp: (request) => {
-          const forwardedFor = request.headers['x-forwarded-for'];
-          if (typeof forwardedFor === 'string') {
-            const ips = forwardedFor
-              .split(',')
-              .map((ip) => ip.trim())
-              .filter((ip) => ip !== '');
-
-            if (ips.length > 0) {
-              const ipWaf = ips[ips.length - 1];
-              return ipWaf;
-            }
-          }
-          return 'interdire';
-        },
-        mode: 'allow',
-        log: false,
-      })
-    );
-  }
+  configureLeRateLimit(app, configurationServeur);
 
   configureLesCookies(app, configurationServeur);
 
@@ -260,8 +223,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute(`/contacts`, ressourcePageContact(configurationServeur));
 
-  app.use('/oidc', limiteRequetesParMinuteAPI);
-
   enregistreRoute('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
 
   enregistreRoute('/oidc/apres-authentification', ressourceApresAuthentificationOIDC(configurationServeur));
@@ -269,8 +230,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreRoute('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
 
   enregistreRoute('/oidc/apres-deconnexion', ressourceApresDeconnexionOIDC());
-
-  app.use('/api', limiteRequetesParMinuteAPI);
 
   enregistreRoute('/api/profil', ressourceProfil(configurationServeur));
 
