@@ -98,6 +98,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use(configurationServeur.middleware.interdisLaMiseEnCache);
 
+  app.use(configurationServeur.middleware.verifieModeMaintenance);
+
   configureLeRateLimit(app, configurationServeur);
 
   configureLesCookies(app, configurationServeur);
@@ -122,8 +124,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreRoute('/scripts', sertLesFichiersStatiques(fournisseurChemin.jekyll.scripts));
   enregistreRoute('/lib-svelte', sertLesFichiersStatiques(fournisseurChemin.jekyll.libSvelte));
   enregistreRoute('/favicon.ico', sertLesFichiersStatiques(fournisseurChemin.jekyll.favicon));
-
-  app.use(configurationServeur.middleware.verifieModeMaintenance);
 
   enregistreRoute('/financements', (requete, reponse) => {
     const id = requete.query.idFinancement;
