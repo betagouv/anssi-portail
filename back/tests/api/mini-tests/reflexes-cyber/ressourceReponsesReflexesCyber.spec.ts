@@ -2,7 +2,7 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../../../src/api/msc.js';
+import { creeServeur } from '../../../../src/api/msc/index.js';
 import { SimulationRéflexesCyberRéponseSoumise } from '../../../../src/bus/evenements/simulationReflexesCyberReponseSoumise.js';
 import { SimulationRéflexesCyberTerminé } from '../../../../src/bus/evenements/simulationReflexesCyberTermine.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';

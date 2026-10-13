@@ -4,7 +4,7 @@ import jsonwebtoken from 'jsonwebtoken';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT.js';
-import { creeServeur } from '../../src/api/msc.js';
+import { creeServeur } from '../../src/api/msc/index.js';
 import { CompteCree } from '../../src/bus/evenements/compteCree.js';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
 import { ErreurChargementOrganisation } from '../../src/metier/utilisateur.js';

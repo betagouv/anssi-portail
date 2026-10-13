@@ -3,7 +3,7 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { FichierInconnu, FournisseurChemin } from '../../src/api/fournisseurChemin.js';
-import { creeServeur } from '../../src/api/msc.js';
+import { creeServeur } from '../../src/api/msc/index.js';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin, ressourceFactice } from './fauxObjets.js';
 
 describe('La ressource page Service', () => {

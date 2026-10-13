@@ -4,7 +4,7 @@ import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import z from 'zod';
 import { schemaRessourceDemandesAide } from '../../../src/api/mon-aide-cyber/ressourceDemandesAide.schema.js';
-import { creeServeur } from '../../../src/api/msc.js';
+import { creeServeur } from '../../../src/api/msc/index.js';
 import { DemandeAide } from '../../../src/infra/adaptateurMonAideCyber.js';
 import { adaptateurMonAideCyberVide } from '../../../src/infra/adaptateurMonAideCyberVide.js';
 import { CodeDepartement } from '../../../src/metier/referentielDepartements.js';

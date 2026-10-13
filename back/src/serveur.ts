@@ -7,7 +7,7 @@ import { fabriqueAttributionParcours } from './api/middlewares/attributionParcou
 import { fabriqueAttributionParcoursMesure } from './api/middlewares/attributionParcoursMesure.js';
 import { fabriqueMiddleware } from './api/middlewares/middleware.js';
 import { fabriquePublieMesureConsultée } from './api/middlewares/publieMesureConsultee.js';
-import { creeServeur } from './api/msc.js';
+import { creeServeur } from './api/msc/index.js';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC.js';
 import { BusEvenements } from './bus/busEvenements.js';
 import { cableTousLesAbonnes } from './bus/cablage.js';
