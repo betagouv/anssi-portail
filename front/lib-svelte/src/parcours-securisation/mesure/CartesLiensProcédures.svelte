@@ -4,13 +4,13 @@
   import type { Mesure } from './../mesure';
   import ModaleTutoriel from './ModaleTutoriel.svelte';
 
-  const { mesure }: { mesure: Mesure } = $props();
+  const { mesure, surSélectionProcédure }: { mesure: Mesure; surSélectionProcédure: () => void } = $props();
   let étatDesModales: boolean[] = $state(untrack(() => Array(mesure.procédures.length).fill(false)));
   const aDesProcédures: boolean = $derived(mesure.procédures.length > 0);
   const aDesLiens: boolean = $derived(mesure.liens?.length > 0);
 
   const selectionneLaProcédure = (index: number) => {
-    étatDesModales[index] = true;
+    surSélectionProcédure();
     const procédure = mesure.procédures.at(index);
     window._paq?.push([
       'trackEvent',
