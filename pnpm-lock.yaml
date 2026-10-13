@@ -481,7 +481,7 @@ importers:
     dependencies:
       '@sentry/browser':
         specifier: ^10.70.0
-        version: 10.76.0
+        version: 10.76.1
       axios:
         specifier: 'catalog:'
         version: 1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
@@ -1985,12 +1985,12 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@sentry/browser-utils@10.76.0':
-    resolution: {integrity: sha512-PiNBEDSCW74NlBQynazauyIfqAYW4r7WgOpw1Fl36C/5CWAZMWLZVGIXjt8gnzx3yAm13O6qkhJU5KPdeVkHQQ==}
+  '@sentry/browser-utils@10.76.1':
+    resolution: {integrity: sha512-Z7f0YyONonexnyjVIpfd2U2z73Tc8YmDrDWGt7ylHjzCtu6R+zW7k0jxl3uGUntjR+rIlFVqEAHIAVogZc0eaQ==}
     engines: {node: '>=18'}
 
-  '@sentry/browser@10.76.0':
-    resolution: {integrity: sha512-x81duXkPe9bYHJI1H42O6OjPakcYXrEBAqV+G806oKTYzcIUzSbRwwDwQRec3QiMtvogvuR1vBI+4m1acpwx1Q==}
+  '@sentry/browser@10.76.1':
+    resolution: {integrity: sha512-Lz6YFVXaouOVKnv2WzYbUgxvtnWNwTwFwgQ7CBex98k5EaGzmuGtFL3A4n0Qfyns4/un7xdZk4Bw7DsiiaQtew==}
     engines: {node: '>=18'}
 
   '@sentry/bundler-plugins@10.76.0':
@@ -2065,8 +2065,12 @@ packages:
     resolution: {integrity: sha512-H9irBNXHdkgvl86EKlQrPTGYyzvI8GUZ8eoWLay9IuqqZC6pWesf0nH7z/glxKBo7BEw3PIG+unQByHugBnsCg==}
     engines: {node: '>=18'}
 
-  '@sentry/feedback@10.76.0':
-    resolution: {integrity: sha512-2kqcAsqAdHxlqN/uKKvIYloWOhltK9Vxt8z43Jb87iPdqm+rxpyxAJZJMFIzOPCqCLod9HrULo/bPd/aHwRpew==}
+  '@sentry/core@10.76.1':
+    resolution: {integrity: sha512-WZ1D30FDrvZPWcEgbCgaVHROBOaVGxNUcEeF5O5xRAdGu6UB7Epg+CQBeoatw/SxEctQq0BPbMIwtBgbe1QK3g==}
+    engines: {node: '>=18'}
+
+  '@sentry/feedback@10.76.1':
+    resolution: {integrity: sha512-GwJdYLH5jaVAml0ld0QC6LGRIDTbvu5n/mNzs8Xku7eDRiUZVdlWi79+W0uzCAyP08xknBPXWUBaEBmCG0SFag==}
     engines: {node: '>=18'}
 
   '@sentry/node-core@10.76.0':
@@ -2102,12 +2106,12 @@ packages:
       '@opentelemetry/core': ^1.30.1 || ^2.1.0
       '@opentelemetry/sdk-trace-base': ^1.30.1 || ^2.1.0
 
-  '@sentry/replay-canvas@10.76.0':
-    resolution: {integrity: sha512-Bq4x5YHEE28ulu8rZGepTPYjjC4koScxBI2E+rQj0iHVCB5ISHqO9S8GhDA2DTn08GrZyTQzzyvL+aQaw4tDEA==}
+  '@sentry/replay-canvas@10.76.1':
+    resolution: {integrity: sha512-YtsCtGcYKk78AlQCPgdVMZPYmfn73yREFCC9lutilayRHr16cLyF7v1oISLIxjaDQF3d8BpgcvFNg/iws05lyg==}
     engines: {node: '>=18'}
 
-  '@sentry/replay@10.76.0':
-    resolution: {integrity: sha512-ldO+F4koH+x5WaFcAuFIMU0WMDorhHJQM1mFUoR97JtnuC48/U3+AiH3FgC39JeRwDArusjiT+xmpjt1Q/buHQ==}
+  '@sentry/replay@10.76.1':
+    resolution: {integrity: sha512-k2nHnQSDYEFhwbNmSeDFcV9Np//bGJI7HS0uoHVLKrbic1Dp0ezehu6I4i9cRUpbPVt3KF71eUh6C7I/PPAROw==}
     engines: {node: '>=18'}
 
   '@sentry/server-utils@10.76.0':
@@ -6188,19 +6192,19 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.59.0':
     optional: true
 
-  '@sentry/browser-utils@10.76.0':
+  '@sentry/browser-utils@10.76.1':
     dependencies:
       '@sentry/conventions': 0.16.0
-      '@sentry/core': 10.76.0
+      '@sentry/core': 10.76.1
 
-  '@sentry/browser@10.76.0':
+  '@sentry/browser@10.76.1':
     dependencies:
-      '@sentry/browser-utils': 10.76.0
+      '@sentry/browser-utils': 10.76.1
       '@sentry/conventions': 0.16.0
-      '@sentry/core': 10.76.0
-      '@sentry/feedback': 10.76.0
-      '@sentry/replay': 10.76.0
-      '@sentry/replay-canvas': 10.76.0
+      '@sentry/core': 10.76.1
+      '@sentry/feedback': 10.76.1
+      '@sentry/replay': 10.76.1
+      '@sentry/replay-canvas': 10.76.1
 
   '@sentry/bundler-plugins@10.76.0(rollup@4.59.0)(supports-color@10.2.2)':
     dependencies:
@@ -6267,9 +6271,13 @@ snapshots:
     dependencies:
       '@sentry/conventions': 0.16.0
 
-  '@sentry/feedback@10.76.0':
+  '@sentry/core@10.76.1':
     dependencies:
-      '@sentry/core': 10.76.0
+      '@sentry/conventions': 0.16.0
+
+  '@sentry/feedback@10.76.1':
+    dependencies:
+      '@sentry/core': 10.76.1
 
   '@sentry/node-core@10.76.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/instrumentation@0.220.0(@opentelemetry/api@1.9.1)(supports-color@10.2.2))(@opentelemetry/sdk-trace-base@2.10.0(@opentelemetry/api@1.9.1))':
     dependencies:
@@ -6307,15 +6315,15 @@ snapshots:
       '@sentry/conventions': 0.16.0
       '@sentry/core': 10.76.0
 
-  '@sentry/replay-canvas@10.76.0':
+  '@sentry/replay-canvas@10.76.1':
     dependencies:
-      '@sentry/core': 10.76.0
-      '@sentry/replay': 10.76.0
+      '@sentry/core': 10.76.1
+      '@sentry/replay': 10.76.1
 
-  '@sentry/replay@10.76.0':
+  '@sentry/replay@10.76.1':
     dependencies:
-      '@sentry/browser-utils': 10.76.0
-      '@sentry/core': 10.76.0
+      '@sentry/browser-utils': 10.76.1
+      '@sentry/core': 10.76.1
 
   '@sentry/server-utils@10.76.0':
     dependencies:
