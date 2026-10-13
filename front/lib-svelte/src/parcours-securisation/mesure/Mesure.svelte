@@ -132,7 +132,7 @@
             </div>
             {#if aDesLiens}
               <div class="liens">
-                <p class="texte-article-lg">Pour aller plus loin</p>
+                <p class="texte-article-lg">Fiche Pratique</p>
                 {#each mesure.liens as lien (lien.libelle)}
                   <msc-lien href={lien.url} libelle={lien.libelle}></msc-lien>
                 {/each}
