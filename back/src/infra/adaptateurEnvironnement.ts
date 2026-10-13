@@ -82,7 +82,6 @@ type AdaptateurEnvironnement = {
   fonctionnalites: () => {
     nis2: () => {
       afficheCyFun23: () => boolean;
-      afficheSimulateur: () => boolean;
     };
   };
   rechercheEntreprise: () => {
@@ -280,7 +279,6 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     nis2: () => ({
       afficheObservations: () => process.env.FEATURE_FLAG_NIS2_OBSERVATIONS === 'true',
       afficheCyFun23: () => process.env.FEATURE_FLAG_NIS2_CYFUN23 === 'true',
-      afficheSimulateur: () => process.env.FEATURE_FLAG_NIS2_SIMULATEUR === 'true',
     }),
   }),
   rechercheEntreprise: () => ({

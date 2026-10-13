@@ -103,11 +103,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'parcours-securisation',
     'parcours-cyberdepart',
     'parcours-securisation-complet',
+    'simulateur-nis2',
   ];
-
-  if (configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()) {
-    routesStatiques.push('simulateur-nis2');
-  }
 
   routesStatiques.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
 

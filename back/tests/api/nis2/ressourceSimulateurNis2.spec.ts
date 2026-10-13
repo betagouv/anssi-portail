@@ -18,7 +18,7 @@ describe('La ressource qui gère le simulateur NIS2', () => {
       ...fauxAdaptateurEnvironnement,
       fonctionnalites: () => ({
         ...fauxAdaptateurEnvironnement.fonctionnalites(),
-        nis2: () => ({ afficheSimulateur: () => true, afficheCyFun23: () => true }),
+        nis2: () => ({ afficheCyFun23: () => true }),
       }),
     };
     busEvenements = fabriqueBusPourLesTests();

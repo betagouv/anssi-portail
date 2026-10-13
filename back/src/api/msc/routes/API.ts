@@ -124,8 +124,7 @@ export const enregistreLesRoutesAPI = (app: Express, configurationServeur: Confi
   enregistreRoute('/exigences-nis2', ressourceExigencesNis2(configurationServeur));
   enregistreRoute('/exigences-nis2.csv', ressourceExigencesNis2Csv(configurationServeur));
 
-  if (configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur())
-    enregistreRoute('/simulateur-nis2', ressourceSimulateurNis2(configurationServeur));
+  enregistreRoute('/simulateur-nis2', ressourceSimulateurNis2(configurationServeur));
 
   enregistreRoute('/sante-guides', ressourceSanteGuides(configurationServeur));
 
