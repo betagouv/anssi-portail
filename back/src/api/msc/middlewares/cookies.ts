@@ -1,7 +1,7 @@
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import { Express } from 'express';
-import { ConfigurationServeur } from '../configurationServeur.js';
+import { ConfigurationServeur } from '../../configurationServeur.js';
 
 export const configureLesCookies = (app: Express, configurationServeur: ConfigurationServeur) => {
   app.use(
