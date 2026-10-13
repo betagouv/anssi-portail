@@ -1,7 +1,5 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import compression from 'compression';
-import cookieParser from 'cookie-parser';
-import cookieSession from 'cookie-session';
 import cors from 'cors';
 import express, { json, NextFunction, Request, RequestHandler, Response } from 'express';
 import { IpFilter } from 'express-ipfilter';
@@ -81,6 +79,7 @@ import { ressourceResultatsDeTest } from '../testMaturite/ressourceResultatsDeTe
 import { ressourceResultatsSessionDeGroupe } from '../testMaturite/ressourceResultatsSessionDeGroupe.js';
 import { ressourceSessionDeGroupe } from '../testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from '../testMaturite/ressourceSessionsDeGroupe.js';
+import { configureLesCookies } from './cookies.js';
 import { configureLesRedirections } from './redirections.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
@@ -137,17 +136,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     );
   }
 
-  app.use(
-    cookieSession({
-      name: 'session',
-      sameSite: true,
-      secret: configurationServeur.adaptateurEnvironnement.secrets().cookie(),
-      secure: configurationServeur.adaptateurEnvironnement.nodeEnv() !== 'developpement',
-      signed: configurationServeur.adaptateurEnvironnement.nodeEnv() !== 'developpement',
-    })
-  );
+  configureLesCookies(app, configurationServeur);
 
-  app.use(cookieParser());
   app.use(json());
 
   configureLesRedirections(app);
