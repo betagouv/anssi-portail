@@ -16,6 +16,8 @@
   import Procedure from './Procedure.svelte';
 
   let mesure: Mesure | undefined = $state();
+  let indexOngletActif: 0 | 1 = $state(0);
+  let divConteneur: HTMLElement | undefined = $state();
 
   onMount(async () => {
     const chemin = new URL(window.location.href).pathname;
@@ -66,6 +68,10 @@
       : []
   );
   const aDesLiens: boolean = $derived((mesure?.liens?.length ?? 0) > 0);
+  const surSélectionProcédure = () => {
+    indexOngletActif = 1;
+    divConteneur?.scrollIntoView({ behavior: 'smooth' });
+  };
 </script>
 
 {#if mesure}
@@ -79,7 +85,7 @@
     segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
   />
 
-  <dsfr-container>
+  <dsfr-container bind:this={divConteneur}>
     <div class="article">
       <div class="prise-en-compte">
         <PriseEnCompteMesure {mesure} />
@@ -96,6 +102,8 @@
               label: 'Boite à outils',
             },
           ])}
+          active-tab-index={indexOngletActif}
+          ontabchanged={(e: CustomEvent) => (indexOngletActif = e.detail.index)}
         >
           <div slot="panel-1">
             <div class="contenu-section">
@@ -128,7 +136,7 @@
                   <p slot="text">{mesure.actionFacileAFaire}</p>
                 </dsfr-highlight>
               {/if}
-              <CartesLiensProcédures {mesure} />
+              <CartesLiensProcédures {mesure} {surSélectionProcédure} />
             </div>
             {#if aDesLiens}
               <div class="liens">
