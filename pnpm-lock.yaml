@@ -500,7 +500,7 @@ importers:
     devDependencies:
       '@sentry/vite-plugin':
         specifier: ^5.4.0
-        version: 5.4.0(rollup@4.59.0)(supports-color@10.2.2)
+        version: 5.4.1(rollup@4.59.0)(supports-color@10.2.2)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^7.0.0
         version: 7.3.1(svelte@5.57.1(@typescript-eslint/types@8.71.0))(vite@8.3.3(@types/node@26.6.3)(esbuild@0.28.2)(sass@1.105.1)(tsx@4.23.15))
@@ -1993,8 +1993,8 @@ packages:
     resolution: {integrity: sha512-x81duXkPe9bYHJI1H42O6OjPakcYXrEBAqV+G806oKTYzcIUzSbRwwDwQRec3QiMtvogvuR1vBI+4m1acpwx1Q==}
     engines: {node: '>=18'}
 
-  '@sentry/bundler-plugins@10.66.0':
-    resolution: {integrity: sha512-u0Dzji4GouTR3zhNzCDal+mDxzOsnCVzA4mxOkTq89k2vKX6cuAVrrBWlSOcVYa8qbt43c0QNJxFnD0AqjhJtw==}
+  '@sentry/bundler-plugins@10.76.0':
+    resolution: {integrity: sha512-xDcvwDk3WlvK67wtuHzNdaJit7z9dmp5urftgAtH2sIt8YmpdV68J8crFh6W4TEulYdhJHvSogLEnX+UoFl01A==}
     engines: {node: '>= 18'}
     peerDependencies:
       rollup: '>=3.2.0'
@@ -2061,10 +2061,6 @@ packages:
     resolution: {integrity: sha512-fO9PLmHdVURcSPUpWCItWAtgKiMwGdJHbovoSEyLplX5sxs2ugvI4CBPTrkkgqhObnZOD0CnWBKDzSVQYBKEyQ==}
     engines: {node: '>=14'}
 
-  '@sentry/core@10.66.0':
-    resolution: {integrity: sha512-9UbgSvds7bMJsP561eWmeyMLcfOmnwxtnx2QuW3yLobzP2Ob7CyJCOzP4tGzlTAGDrzShkFEZhiyuBUKiEK2oQ==}
-    engines: {node: '>=18'}
-
   '@sentry/core@10.76.0':
     resolution: {integrity: sha512-H9irBNXHdkgvl86EKlQrPTGYyzvI8GUZ8eoWLay9IuqqZC6pWesf0nH7z/glxKBo7BEw3PIG+unQByHugBnsCg==}
     engines: {node: '>=18'}
@@ -2118,8 +2114,8 @@ packages:
     resolution: {integrity: sha512-PJT8i3xsaSEAwVjgVrVClpFVB9+caxn4AVlUbgjt3/NwkoggKmSaoSUq5vpvzFPO11H1V+50qz9xxCw9gc9EzQ==}
     engines: {node: '>=18'}
 
-  '@sentry/vite-plugin@5.4.0':
-    resolution: {integrity: sha512-fFJgCxs5hDyAm9BbZJ+LbA+LK2tjX5OoD0v0ARU4StR6KQmGUduoPs69yJ9AfqZ0om3Rlp5JDliiwFcNkasORA==}
+  '@sentry/vite-plugin@5.4.1':
+    resolution: {integrity: sha512-poFfn3sQbSFaZpXH8CG27D0eNtDD64wFEniQCb853e7huko9vOl4UP3BjT3vsrnmVuRqagnbxItza10MOC7ysA==}
     engines: {node: '>= 18'}
 
   '@simple-git/args-pathspec@1.0.3':
@@ -2494,11 +2490,6 @@ packages:
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
 
-  baseline-browser-mapping@2.11.24:
-    resolution: {integrity: sha512-hYrgxie335U08WqICoGqKRzV1HFXv6zdxwJE4ekCb80CM9a0SVVsN4QPwT67RraRo+9h8IATk6uxHJw7QSkdOg==}
-    engines: {node: '>=6.0.0'}
-    hasBin: true
-
   baseline-browser-mapping@2.11.26:
     resolution: {integrity: sha512-GLQdD3y6UF8iVuMJl5fHgE4jdn/ua7n+toKfLgNlg3BqQtOZjpy68T8Tup8/wGWZCDlm7KMg7tPb4MPn7oN0TQ==}
     engines: {node: '>=6.0.0'}
@@ -2528,11 +2519,6 @@ packages:
   brace-expansion@5.0.9:
     resolution: {integrity: sha512-ScQ4IuvIEF1TMlP7Zt+vjJ//9zlPb2SDcxWxM3bk8s6t6GGdJ7KO1dCcTidOPJKePW30LE/2cT7wCyPho9/Wxg==}
     engines: {node: 20 || >=22}
-
-  browserslist@4.29.0:
-    resolution: {integrity: sha512-3GSvyjvDI4Dur1Meg2BekJquu5uF+9R9a1+5M1Mde192eZoXbeXjzgOsgqPS2V8D5wrrip0gR5Hf/GhWQ9ZzaA==}
-    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
-    hasBin: true
 
   browserslist@4.29.3:
     resolution: {integrity: sha512-1R4kiYKXGViqEN0CnoDrXc1StD9niAwu+j2dukWzrD4bJgsD4lDmEp0CRbc6E/vYJIfTHwPmwyaKtVSudICdPA==}
@@ -2582,9 +2568,6 @@ packages:
 
   caniuse-api@4.0.0:
     resolution: {integrity: sha512-B0hQ1OLyJuHTQSOWXvwibWqM6DCoqJdvBA6X1S/53bd4XU7LJ1yurIPlrsouol3mw1jh9pGI4ivubSpmJeIqCA==}
-
-  caniuse-lite@1.0.30001810:
-    resolution: {integrity: sha512-TITQPUkaz+aVk5GL6NhOdwk1aEaNTSDPsGFWrTuhKGtjTF70jL/Oht2W4c6rXUe5fu7Ie19VIahAXHIIiWWNeg==}
 
   caniuse-lite@1.0.30001814:
     resolution: {integrity: sha512-/Uaf1lAzr59XcMpW0o96WoEfr+VXK2OX4U9AgFoiSHsVJ4HppnIFUjtYzsyDH2+tgANaQb2/oxYGwCPapN1FpA==}
@@ -2957,9 +2940,6 @@ packages:
 
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
-
-  electron-to-chromium@1.5.430:
-    resolution: {integrity: sha512-e1QEj72Y4zd8RlNZVmoTg+iCOSVwpk05IOiiQwdrkwCSVlZfPthevErhE+nckGd2YbsXfp1SkisznhGVIXP2NQ==}
 
   electron-to-chromium@1.5.439:
     resolution: {integrity: sha512-qu6QIPXhsb+CRcAiTMNjR4A1y/7tCYKkKjr5CZXRVih6qkDf79peZ2BpEU3qoDBNCRrcy3Mra3X9nG5oruuA7Q==}
@@ -3739,10 +3719,6 @@ packages:
   lodash@4.18.1:
     resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
-  lru-cache@11.5.2:
-    resolution: {integrity: sha512-4pfM1Ff0x50o0tQwb5ucw/RzNyD0/YJME6IVcStalZuMWxdt3sR3huStTtxz4PUmvZfRguvDejasvQ2kifR11g==}
-    engines: {node: 20 || >=22}
-
   lru-cache@11.5.3:
     resolution: {integrity: sha512-U4N8FgzmWxc8k1VH8Kr6lQg18U7Fjvby6wXHVRX/ZZ7IwWbRMgrRbP0Wrb5q5NVinryp4SQampHKdvtecItxUg==}
     engines: {node: 20 || >=22}
@@ -3916,10 +3892,6 @@ packages:
         optional: true
       '@types/node':
         optional: true
-
-  node-releases@2.0.56:
-    resolution: {integrity: sha512-x0InOIyzgdk+eyaWaRJFH5snEtiImgBgblZ2CyPrLmqqcuMQkEvcDPHbzqbD8eDsSeJbVOjn+crzyzHaM4D+/A==}
-    engines: {node: '>=18'}
 
   node-releases@2.0.57:
     resolution: {integrity: sha512-kQK9LGGFiHtrWiNhZtA7Qbw17AQz+dmsEKODRIVTXA9+e5MS/2gZEBhYJt13GrAz5/IOZKddH/0Z3TP/Zgo+yw==}
@@ -5348,7 +5320,7 @@ snapshots:
     dependencies:
       '@babel/compat-data': 7.29.7
       '@babel/helper-validator-option': 7.29.7
-      browserslist: 4.29.0
+      browserslist: 4.29.3
       lru-cache: 5.1.1
       semver: 6.3.1
 
@@ -6230,11 +6202,11 @@ snapshots:
       '@sentry/replay': 10.76.0
       '@sentry/replay-canvas': 10.76.0
 
-  '@sentry/bundler-plugins@10.66.0(rollup@4.59.0)(supports-color@10.2.2)':
+  '@sentry/bundler-plugins@10.76.0(rollup@4.59.0)(supports-color@10.2.2)':
     dependencies:
       '@babel/core': 7.29.7(supports-color@10.2.2)
       '@sentry/cli': 2.58.6(supports-color@10.2.2)
-      '@sentry/core': 10.66.0
+      '@sentry/core': 10.76.0
       dotenv: 17.4.2
       find-up: 5.0.0
       glob: 13.0.6
@@ -6290,10 +6262,6 @@ snapshots:
       - supports-color
 
   '@sentry/conventions@0.16.0': {}
-
-  '@sentry/core@10.66.0':
-    dependencies:
-      '@sentry/conventions': 0.16.0
 
   '@sentry/core@10.76.0':
     dependencies:
@@ -6354,9 +6322,9 @@ snapshots:
       '@sentry/conventions': 0.16.0
       '@sentry/core': 10.76.0
 
-  '@sentry/vite-plugin@5.4.0(rollup@4.59.0)(supports-color@10.2.2)':
+  '@sentry/vite-plugin@5.4.1(rollup@4.59.0)(supports-color@10.2.2)':
     dependencies:
-      '@sentry/bundler-plugins': 10.66.0(rollup@4.59.0)(supports-color@10.2.2)
+      '@sentry/bundler-plugins': 10.76.0(rollup@4.59.0)(supports-color@10.2.2)
     transitivePeerDependencies:
       - encoding
       - rollup
@@ -6809,8 +6777,6 @@ snapshots:
 
   base64-js@1.5.1: {}
 
-  baseline-browser-mapping@2.11.24: {}
-
   baseline-browser-mapping@2.11.26: {}
 
   bcrypt@6.0.0:
@@ -6854,14 +6820,6 @@ snapshots:
   brace-expansion@5.0.9:
     dependencies:
       balanced-match: 4.0.4
-
-  browserslist@4.29.0:
-    dependencies:
-      baseline-browser-mapping: 2.11.24
-      caniuse-lite: 1.0.30001810
-      electron-to-chromium: 1.5.430
-      node-releases: 2.0.56
-      update-browserslist-db: 1.3.3(browserslist@4.29.0)
 
   browserslist@4.29.3:
     dependencies:
@@ -6921,8 +6879,6 @@ snapshots:
     dependencies:
       browserslist: 4.29.3
       caniuse-lite: 1.0.30001814
-
-  caniuse-lite@1.0.30001810: {}
 
   caniuse-lite@1.0.30001814: {}
 
@@ -7306,8 +7262,6 @@ snapshots:
       safe-buffer: 5.2.1
 
   ee-first@1.1.1: {}
-
-  electron-to-chromium@1.5.430: {}
 
   electron-to-chromium@1.5.439: {}
 
@@ -8078,8 +8032,6 @@ snapshots:
 
   lodash@4.18.1: {}
 
-  lru-cache@11.5.2: {}
-
   lru-cache@11.5.3: {}
 
   lru-cache@5.1.1:
@@ -8200,8 +8152,6 @@ snapshots:
       '@types/express': 5.0.6
       '@types/node': 24.13.3
 
-  node-releases@2.0.56: {}
-
   node-releases@2.0.57: {}
 
   npm-normalize-package-bin@6.0.0: {}
@@ -8307,7 +8257,7 @@ snapshots:
 
   path-scurry@2.0.2:
     dependencies:
-      lru-cache: 11.5.2
+      lru-cache: 11.5.3
       minipass: 7.1.3
 
   path-to-regexp@8.4.2: {}
@@ -9194,12 +9144,6 @@ snapshots:
   undici@8.11.2: {}
 
   unpipe@1.0.0: {}
-
-  update-browserslist-db@1.3.3(browserslist@4.29.0):
-    dependencies:
-      browserslist: 4.29.0
-      escalade: 3.2.0
-      picocolors: 1.1.1
 
   update-browserslist-db@1.3.3(browserslist@4.29.3):
     dependencies:
