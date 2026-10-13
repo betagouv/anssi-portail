@@ -17,13 +17,13 @@ import { ressourceRobotsTxt } from '../ressourceRobotsTxt.js';
 import { ressourceSitemapXml } from '../ressourceSitemapXml.js';
 import { ressourceVisa } from '../ressourceVisa.js';
 import { routesPagesConnecteesStatiques } from '../routesPagesConnectees.js';
-import { enregistreLAuthentification } from './authentification.js';
 import { configureLesCookies } from './cookies.js';
 import { enregistreRouteDansExpress } from './enregistreRoutes.js';
-import { enregistreLesFichiersStatiques } from './fichiersStatiques.js';
 import { configureLeRateLimit } from './rateLimit.js';
-import { enregistreLesRedirections } from './redirections.js';
-import { enregistreLesRoutesAPI } from './routesAPI.js';
+import { enregistreLesRoutesAPI } from './routes/API.js';
+import { enregistreLAuthentification } from './routes/authentification.js';
+import { enregistreLesFichiersStatiques } from './routes/fichiersStatiques.js';
+import { enregistreLesRedirections } from './routes/redirections.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();

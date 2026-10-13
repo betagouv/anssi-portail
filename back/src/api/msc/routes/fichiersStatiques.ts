@@ -1,7 +1,7 @@
 import cors from 'cors';
 import express, { Express, Response } from 'express';
-import { FournisseurChemin } from '../fournisseurChemin.js';
-import { enregistreRouteDansExpress } from './enregistreRoutes.js';
+import { FournisseurChemin } from '../../fournisseurChemin.js';
+import { enregistreRouteDansExpress } from '../enregistreRoutes.js';
 
 const sertLesFichiersStatiques = (
   fournisseurChemin: FournisseurChemin['jekyll']['assets' | 'scripts' | 'libSvelte' | 'favicon']
