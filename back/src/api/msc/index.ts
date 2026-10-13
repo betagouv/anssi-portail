@@ -24,6 +24,7 @@ import { enregistreLesRoutesAPI } from './routes/API.js';
 import { enregistreLAuthentification } from './routes/authentification.js';
 import { enregistreLesFichiersStatiques } from './routes/fichiersStatiques.js';
 import { enregistreLesRedirections } from './routes/redirections.js';
+import { enregistreLesRoutesStatiques, routesStatiques } from './routes/statiques.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -50,6 +51,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreLAuthentification(app, configurationServeur);
   enregistreLesFichiersStatiques(app, fournisseurChemin);
   enregistreLesRoutesAPI(app, configurationServeur);
+  enregistreLesRoutesStatiques(app, configurationServeur);
 
   const enregistreRoute = enregistreRouteDansExpress(app);
 
@@ -64,49 +66,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       .status(HttpStatusCode.Ok)
       .envoieFichierEnrichi(fournisseurChemin.jekyll.page('financements'));
   });
-
-  const routesStatiques = [
-    '',
-    'catalogue',
-    'test-maturite',
-    'niveaux-maturite',
-    'apres-authentification',
-    'a-propos',
-    'mentions-legales',
-    'confidentialite',
-    'cgu',
-    'accessibilite',
-    'creation-compte',
-    'securite',
-    'statistiques',
-    'inscription',
-    'cyberdepart',
-    'session-groupe',
-    'resultats-session-groupe',
-    'prestataires-labellises',
-    'contacts',
-    'nis2',
-    'collectivites',
-    'associations',
-    'entreprises',
-    'sante',
-    'abonnement-infolettre',
-    'confirmation-abonnement-infolettre',
-    'faire-le-test',
-    'vrai-faux',
-    'vrai-faux/quiz',
-    'reflexes-cyber-en-ligne',
-    'reflexes-cyber-en-ligne/parcours',
-    'exposition',
-    'conseils-cyber',
-    'kit-relais',
-    'parcours-securisation',
-    'parcours-cyberdepart',
-    'parcours-securisation-complet',
-    'simulateur-nis2',
-  ];
-
-  routesStatiques.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
 
   enregistreRoute('/financements/:id', ressourcePagesJekyll(configurationServeur, 'financements'));
 
