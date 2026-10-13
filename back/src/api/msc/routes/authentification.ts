@@ -1,11 +1,11 @@
 import { Express } from 'express';
-import { ConfigurationServeur } from '../configurationServeur.js';
-import { ressourceApresAuthentificationOIDC } from '../oidc/ressourceApresAuthentificationOIDC.js';
-import { ressourceApresDeconnexionOIDC } from '../oidc/ressourceApresDeconnexionOIDC.js';
-import { ressourceConnexionOIDC } from '../oidc/ressourceConnexionOIDC.js';
-import { ressourceDeconnexionOIDC } from '../oidc/ressourceDeconnexionOIDC.js';
-import { ressourcePageConnexion } from '../ressourcePageConnexion.js';
-import { enregistreRouteDansExpress } from './enregistreRoutes.js';
+import { ConfigurationServeur } from '../../configurationServeur.js';
+import { ressourceApresAuthentificationOIDC } from '../../oidc/ressourceApresAuthentificationOIDC.js';
+import { ressourceApresDeconnexionOIDC } from '../../oidc/ressourceApresDeconnexionOIDC.js';
+import { ressourceConnexionOIDC } from '../../oidc/ressourceConnexionOIDC.js';
+import { ressourceDeconnexionOIDC } from '../../oidc/ressourceDeconnexionOIDC.js';
+import { ressourcePageConnexion } from '../../ressourcePageConnexion.js';
+import { enregistreRouteDansExpress } from './../enregistreRoutes.js';
 
 export const enregistreLAuthentification = (app: Express, configurationServeur: ConfigurationServeur) => {
   const enregistreRoute = enregistreRouteDansExpress(app);
