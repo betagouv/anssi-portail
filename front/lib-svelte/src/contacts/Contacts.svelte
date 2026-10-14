@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { untrack } from 'svelte';
   import { creeLeFragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
   import { profilStore } from '../stores/profil.store';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
@@ -8,24 +8,33 @@
   import Heros from '../ui/Heros.svelte';
   import Lien from '../ui/Lien.svelte';
   import { estCodeSecteurContact } from './contacts';
-  import { contactsParRegion, contactsParSecteur } from './contacts.donnees';
-  import { estCodeRegion } from './contacts.type';
+  import { estCodeRegion, type ContactsInitiaux } from './contacts.type';
   import FiltresContacts from './FiltresContacts.svelte';
   import NoteInformation from './NoteInformation.svelte';
 
-  let regionSelectionnee: string = $state('');
+  type Props = {
+    contactsInitiaux?: ContactsInitiaux;
+    regionInitiale?: string;
+  };
+
+  const { contactsInitiaux, regionInitiale = '' }: Props = $props();
+
+  // Les props proviennent du prérendu serveur, elles ne sont lues qu'une fois.
+  let regionSelectionnee: string = $state(untrack(() => regionInitiale));
   let secteurSelectionne: string = $state('');
 
   const contactsRegionaux = $derived(
-    estCodeRegion(regionSelectionnee) ? contactsParRegion[regionSelectionnee] : undefined
+    estCodeRegion(regionSelectionnee) ? contactsInitiaux?.regionaux[regionSelectionnee] : undefined
   );
 
   const contactSectoriel = $derived(
-    estCodeSecteurContact(secteurSelectionne) ? contactsParSecteur[secteurSelectionne] : undefined
+    estCodeSecteurContact(secteurSelectionne) ? contactsInitiaux?.sectoriels[secteurSelectionne] : undefined
   );
 
-  // Gestion du fragment
-  let fragmentDeNavigation = $state(creeLeFragmentDeNavigation());
+  // Gestion du fragment : sur /contacts/fr-xxx, la région de l'URL alimente le fragment
+  let fragmentDeNavigation = $state(
+    creeLeFragmentDeNavigation(untrack(() => (regionInitiale ? `#?region=${regionInitiale}` : undefined)))
+  );
 
   // Gestion des filtres
   const appliqueLesFiltres = () => {
@@ -41,14 +50,6 @@
     fragmentDeNavigation.actualise();
   });
 
-  onMount(() => {
-    const [codeRegionExtrait] = window.location.pathname.split('/').slice(-1);
-    const codeRegion = codeRegionExtrait.toUpperCase();
-    if (estCodeRegion(codeRegion)) {
-      history.replaceState({}, '', '/contacts/');
-      window.location.hash = `#?region=${codeRegion}`;
-    }
-  });
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Contacts cyber', fondSombre: true };
 </script>
 

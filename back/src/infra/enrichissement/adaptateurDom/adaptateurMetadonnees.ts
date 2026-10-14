@@ -1,5 +1,6 @@
 import DOMPurify from 'isomorphic-dompurify';
 import { JSDOM } from 'jsdom';
+import { libellesRegionsContacts } from '../../../metier/contacts/libellesRegions.js';
 import { RésolveurDePage } from '../resolveurDePage.js';
 import { AdaptateurDom } from './adaptateurDom.js';
 
@@ -27,6 +28,17 @@ export class MétadonnéesDeFinancement implements FournisseurDeMétadonnées {
   async description(route: string) {
     const financement = await this.résolveurDePage.financement(route);
     return financement ? `${financement.nom} (${financement.perimetresGeographiques})` : undefined;
+  }
+}
+
+export class MétadonnéesDeContactsRegion implements FournisseurDeMétadonnées {
+  constructor(private readonly résolveurDePage: RésolveurDePage) {}
+
+  async description(route: string) {
+    const codeRegion = this.résolveurDePage.codeRegionContact(route);
+    return codeRegion
+      ? `Des contacts cyber de proximité ${libellesRegionsContacts[codeRegion]} pour vous orienter et répondre à vos questions.`
+      : undefined;
   }
 }
 

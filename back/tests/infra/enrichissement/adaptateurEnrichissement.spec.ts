@@ -7,6 +7,7 @@ import { ConstructeurDArticleAvecToutesLesMétadonnées } from '../../api/blog/c
 import { fauxAdaptateurEnvironnement, fauxFournisseurDeChemin } from '../../api/fauxObjets.js';
 import { financementCyberPME, guideDevsecops, kitRelais } from '../../api/objetsPretsALEmploi.js';
 import { EntrepôtArticleMémoire } from '../../persistance/entrepotArticleMemoire.js';
+import { EntrepotContactMemoire } from '../../persistance/entrepotContactMemoire.js';
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire.js';
 import { EntrepotFinancementMemoire } from '../../persistance/entrepotFinancementMemoire.js';
 import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire.js';
@@ -27,7 +28,8 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       entrepôtGuide,
       new EntrepotExigenceMemoire(),
       entrepôtFinancement,
-      entrepôtArticle
+      entrepôtArticle,
+      new EntrepotContactMemoire()
     );
   });
 
@@ -88,6 +90,25 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       expect(rendu).toMatch(
         /<meta property="og:url" content="http:\/\/localhost:3000\/conseils-cyber\/slug-article-1">/
       );
+    });
+  });
+
+  describe('sait modifier le lien canonique et le titre des contacts régionaux', () => {
+    it('lorsqu’on sert la page des contacts de Bretagne', async () => {
+      const htmlFactice = fabriqueHtmlFactice('http://localhost:3000/contacts');
+
+      const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/contacts/fr-bre');
+
+      expect(rendu).toMatch(/<link rel="canonical" href="http:\/\/localhost:3000\/contacts\/fr-bre">/);
+      expect(rendu).toMatch(/<title>Contacts de Bretagne \| MesServicesCyber<\/title>/);
+    });
+
+    it('laisse la page /contacts inchangée', async () => {
+      const htmlFactice = fabriqueHtmlFactice('http://localhost:3000/contacts');
+
+      const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/contacts');
+
+      expect(rendu).toMatch(/<title>titre<\/title>/);
     });
   });
 

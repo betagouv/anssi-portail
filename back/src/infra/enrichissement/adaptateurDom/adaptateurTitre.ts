@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import { libellesRegionsContacts } from '../../../metier/contacts/libellesRegions.js';
 import { RésolveurDePage } from '../resolveurDePage.js';
 import { AdaptateurDom } from './adaptateurDom.js';
 
@@ -22,6 +23,15 @@ export class TitreDeFinancement implements FournisseurDeTitre {
   async titre(route: string) {
     const financement = await this.résolveurDePage.financement(route);
     return financement ? `${financement.nom} (${financement.perimetresGeographiques})` : undefined;
+  }
+}
+
+export class TitreDeContactsRegion implements FournisseurDeTitre {
+  constructor(private readonly résolveurDePage: RésolveurDePage) {}
+
+  async titre(route: string) {
+    const codeRegion = this.résolveurDePage.codeRegionContact(route);
+    return codeRegion ? `Contacts ${libellesRegionsContacts[codeRegion]}` : undefined;
   }
 }
 
