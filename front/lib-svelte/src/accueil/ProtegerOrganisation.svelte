@@ -10,7 +10,12 @@
   let enPause = $state(false);
   let organisationsAccompagnées = $state(0);
 
-  const tags = [{ label: 'TPE' }, { label: 'PME' }, { label: 'ETI' }, { label: 'Collectivités' }];
+  const tags = [
+    { label: 'TPE', id: 'TPE' },
+    { label: 'PME', id: 'PME' },
+    { label: 'ETI', id: 'ETI' },
+    { label: 'Collectivités', id: 'Collectivités' },
+  ];
   const libelléPause = $derived(enPause ? 'Lancer les animations' : 'Mettre les animations en pause');
 
   const basculePause = () => {

@@ -96,7 +96,7 @@
         {#if item.tagsSpecifiques}
           <dsfr-tags-group
             tags={enPropriétéWebC(
-              item.tagsSpecifiques.map((tag) => ({ label: tag, 'has-icon': true, icon: 'government-line' }))
+              item.tagsSpecifiques.map((tag) => ({ label: tag, id: tag, 'has-icon': true, icon: 'government-line' }))
             )}
             size="sm"
             groupMarkup="span"
@@ -105,7 +105,7 @@
         {/if}
         {#if item.sources}
           <dsfr-tags-group
-            tags={enPropriétéWebC(item.sources.map((source) => ({ label: source })))}
+            tags={enPropriétéWebC(item.sources.map((source) => ({ label: source, id: source })))}
             size="sm"
             groupMarkup="span"
           ></dsfr-tags-group>
