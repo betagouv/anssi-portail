@@ -1,4 +1,4 @@
-import { CodeRegion } from '../../metier/referentielRegions.js';
+import { CodeRégion } from '../../metier/referentielRegions.js';
 import { CodeSecteur } from '../../metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../metier/referentielTranchesEffectifEtablissement.js';
 import { EvenementDuBus } from '../busEvenements.js';
@@ -8,7 +8,7 @@ export class QuestionnaireVraiFauxRéponseSoumise implements EvenementDuBus {
   readonly idQuestion: string;
   readonly réponseCorrecte: boolean;
   readonly email?: string;
-  readonly codeRegion?: CodeRegion;
+  readonly codeRegion?: CodeRégion;
   readonly codeSecteur?: CodeSecteur;
   readonly codeTrancheEffectif?: CodeTrancheEffectif;
   constructor({
@@ -24,7 +24,7 @@ export class QuestionnaireVraiFauxRéponseSoumise implements EvenementDuBus {
     idQuestion: string;
     réponseCorrecte: boolean;
     email?: string;
-    codeRegion?: CodeRegion;
+    codeRegion?: CodeRégion;
     codeSecteur?: CodeSecteur;
     codeTrancheEffectif?: CodeTrancheEffectif;
   }) {

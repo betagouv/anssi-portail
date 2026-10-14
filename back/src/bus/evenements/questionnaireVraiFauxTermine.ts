@@ -1,4 +1,4 @@
-import { CodeRegion } from '../../metier/referentielRegions.js';
+import { CodeRégion } from '../../metier/referentielRegions.js';
 import { CodeSecteur } from '../../metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../metier/referentielTranchesEffectifEtablissement.js';
 import { EvenementDuBus } from '../busEvenements.js';
@@ -6,7 +6,7 @@ import { EvenementDuBus } from '../busEvenements.js';
 export class QuestionnaireVraiFauxTerminé implements EvenementDuBus {
   readonly idCorrélation: string;
   readonly email?: string;
-  readonly codeRegion?: CodeRegion;
+  readonly codeRegion?: CodeRégion;
   readonly codeSecteur?: CodeSecteur;
   readonly codeTrancheEffectif?: CodeTrancheEffectif;
   constructor({
@@ -18,7 +18,7 @@ export class QuestionnaireVraiFauxTerminé implements EvenementDuBus {
   }: {
     idCorrélation: string;
     email?: string;
-    codeRegion?: CodeRegion;
+    codeRegion?: CodeRégion;
     codeSecteur?: CodeSecteur;
     codeTrancheEffectif?: CodeTrancheEffectif;
   }) {

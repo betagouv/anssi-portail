@@ -1,6 +1,6 @@
 import { v7 as uuidv7 } from 'uuid';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise.js';
-import { CodeRegion, estCodeRegion } from './referentielRegions.js';
+import { CodeRégion, estCodeRegion } from './referentielRegions.js';
 import { CodeSecteur, estCodeSecteur } from './referentielSecteurs.js';
 import { CodeTrancheEffectif, trancheEffectifParCode } from './referentielTranchesEffectifEtablissement.js';
 import { Utilisateur } from './utilisateur.js';
@@ -8,7 +8,7 @@ import { Utilisateur } from './utilisateur.js';
 export type ReponsesTestMaturite = Record<string, number>;
 
 export type DonneesCreationResultatTestMaturite = {
-  region: CodeRegion | undefined;
+  region: CodeRégion | undefined;
   secteur: CodeSecteur | undefined;
   tailleOrganisation: CodeTrancheEffectif | undefined;
   reponses: ReponsesTestMaturite;
@@ -34,7 +34,7 @@ export type IdRubrique = (typeof tousLesIdRubrique)[number];
 
 export class ResultatTestMaturite {
   id!: string;
-  region: CodeRegion | undefined;
+  region: CodeRégion | undefined;
   secteur: CodeSecteur | undefined;
   tailleOrganisation: CodeTrancheEffectif | undefined;
   reponses: ReponsesTestMaturite;

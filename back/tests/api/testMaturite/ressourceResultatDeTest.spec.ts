@@ -4,7 +4,7 @@ import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
 import { ProprieteTestRevendiquee } from '../../../src/bus/evenements/proprieteTestRevendiquee.js';
-import { CodeRegion } from '../../../src/metier/referentielRegions.js';
+import { CodeRégion } from '../../../src/metier/referentielRegions.js';
 import { CodeSecteur } from '../../../src/metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../../src/metier/referentielTranchesEffectifEtablissement.js';
 import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite.js';
@@ -40,7 +40,7 @@ describe('La ressource qui gère un résultat de test', () => {
 
   const donneesResultatTestCorrectes = () => ({
     utilisateur: undefined,
-    region: 'FR-NOR' as CodeRegion,
+    region: 'FR-NOR' as CodeRégion,
     secteur: 'J' as CodeSecteur,
     tailleOrganisation: '51' as CodeTrancheEffectif,
     reponses: {

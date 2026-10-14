@@ -1,7 +1,7 @@
 import { BusEvenements } from '../../../bus/busEvenements.js';
 import { SimulationRéflexesCyberRéponseSoumise } from '../../../bus/evenements/simulationReflexesCyberReponseSoumise.js';
 import { SimulationRéflexesCyberTerminé } from '../../../bus/evenements/simulationReflexesCyberTermine.js';
-import { CodeRegion } from '../../referentielRegions.js';
+import { CodeRégion } from '../../referentielRegions.js';
 import { CodeSecteur } from '../../referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../referentielTranchesEffectifEtablissement.js';
 import { Utilisateur } from '../../utilisateur.js';
@@ -30,7 +30,7 @@ export class RéflexesCyber {
     utilisateur?: Utilisateur;
   }) => {
     let email: string | undefined;
-    let codeRegion: CodeRegion | undefined;
+    let codeRegion: CodeRégion | undefined;
     let codeSecteur: CodeSecteur | undefined;
     let codeTrancheEffectif: CodeTrancheEffectif | undefined;
 

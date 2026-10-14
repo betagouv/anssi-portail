@@ -2,12 +2,12 @@ import {
   CodeSecteurContact,
   ContactNational,
   ContactSectoriel,
-  ContactsRegionaux,
+  ContactsRégionaux,
 } from '../metier/contacts/contacts.js';
-import { EntrepotContact } from '../metier/contacts/entrepotContact.js';
-import { CodeRegion } from '../metier/referentielRegions.js';
+import { EntrepôtContact } from '../metier/contacts/entrepotContact.js';
+import { CodeRégion } from '../metier/referentielRegions.js';
 
-const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
+const contactsParRegion: Record<CodeRégion, ContactsRégionaux> = {
   'FR-ARA': {
     CSIRT: {
       nom: 'Cyber Assistance Auvergne Rhône Alpes',
@@ -347,12 +347,12 @@ const contactsNationaux: ContactNational[] = [
   },
 ];
 
-export class EntrepotContactStatique implements EntrepotContact {
-  async regionaux(): Promise<Record<CodeRegion, ContactsRegionaux>> {
+export class EntrepôtContactStatique implements EntrepôtContact {
+  async régionaux(): Promise<Record<CodeRégion, ContactsRégionaux>> {
     return contactsParRegion;
   }
 
-  async regional(codeRegion: CodeRegion): Promise<ContactsRegionaux | undefined> {
+  async régional(codeRegion: CodeRégion): Promise<ContactsRégionaux | undefined> {
     return contactsParRegion[codeRegion];
   }
 

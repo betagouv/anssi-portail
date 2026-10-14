@@ -1,4 +1,4 @@
-export const regions = [
+export const régions = [
   { codeINSEE: '84', codeIso: 'FR-ARA', nom: 'Auvergne-Rhône-Alpes' },
   { codeINSEE: '27', codeIso: 'FR-BFC', nom: 'Bourgogne-Franche-Comté' },
   { codeINSEE: '53', codeIso: 'FR-BRE', nom: 'Bretagne' },
@@ -31,21 +31,21 @@ export const regions = [
   { codeINSEE: '989', codeIso: 'FR-CP', nom: 'Île de Clipperton' },
 ] as const;
 
-export const codesRegion = regions.map((s) => s.codeIso);
+export const codesRégion = régions.map((s) => s.codeIso);
 
-export type CodeRegion = (typeof codesRegion)[number];
-export type Region = (typeof regions)[number];
+export type CodeRégion = (typeof codesRégion)[number];
+export type Région = (typeof régions)[number];
 
-export function regionParCode(code: CodeRegion): Region;
-export function regionParCode(code: string | undefined): Region | undefined;
+export function regionParCode(code: CodeRégion): Région;
+export function regionParCode(code: string | undefined): Région | undefined;
 export function regionParCode(code: string | undefined) {
-  return regions.find((region) => region.codeIso === code);
+  return régions.find((région) => région.codeIso === code);
 }
 
-export function estCodeRegion(code: string | undefined): code is CodeRegion {
-  return regions.some((region) => region.codeIso === code);
+export function estCodeRegion(code: string | undefined): code is CodeRégion {
+  return régions.some((région) => région.codeIso === code);
 }
 
-export function regionParNom(nom: string): Region | undefined {
-  return regions.find((region) => region.nom.toLocaleLowerCase().trim() === nom.toLocaleLowerCase().trim());
+export function regionParNom(nom: string): Région | undefined {
+  return régions.find((région) => région.nom.toLocaleLowerCase().trim() === nom.toLocaleLowerCase().trim());
 }

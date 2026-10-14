@@ -1,5 +1,5 @@
 import axios, { AxiosError } from '@anssi-portail/axios';
-import { regions } from '../metier/referentielRegions.js';
+import { régions } from '../metier/referentielRegions.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { AdaptateurRechercheEntreprise, ResultatRechercheEntreprise } from './adaptateurRechercheEntreprise.js';
 import { Cache } from './cache.js';
@@ -83,7 +83,7 @@ const extraisInfosÉtablissement = (
     siretRetour = resultat.siege.siret;
   }
 
-  const codeRégion = regions.find((region) => region.codeINSEE === resultat.siege.region)?.codeIso;
+  const codeRégion = régions.find((region) => region.codeINSEE === resultat.siege.region)?.codeIso;
 
   return {
     nom,

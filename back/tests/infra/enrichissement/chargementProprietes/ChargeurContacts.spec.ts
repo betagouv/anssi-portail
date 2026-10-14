@@ -2,16 +2,16 @@ import { JSDOM } from 'jsdom';
 import { describe, expect, it } from 'vitest';
 import { ChargeurContacts } from '../../../../src/infra/enrichissement/chargementProprietes/chargeurContacts.js';
 import { RésolveurDePage } from '../../../../src/infra/enrichissement/resolveurDePage.js';
-import { EntrepotContactStatique } from '../../../../src/infra/entrepotContactStatique.js';
+import { EntrepôtContactStatique } from '../../../../src/infra/entrepotContactStatique.js';
 import { EntrepôtArticleMémoire } from '../../../persistance/entrepotArticleMemoire.js';
 import { EntrepotFinancementMemoire } from '../../../persistance/entrepotFinancementMemoire.js';
 import { EntrepotGuideMemoire } from '../../../persistance/entrepotGuideMemoire.js';
 
 describe('Le chargeur de props des contacts', () => {
-  const entrepotContact = new EntrepotContactStatique();
+  const entrepôtContact = new EntrepôtContactStatique();
   const chargeur = new ChargeurContacts(
     new RésolveurDePage(new EntrepotGuideMemoire(), new EntrepotFinancementMemoire(), new EntrepôtArticleMémoire()),
-    entrepotContact
+    entrepôtContact
   );
   const dom = new JSDOM('');
 
@@ -20,9 +20,9 @@ describe('Le chargeur de props des contacts', () => {
 
     expect(props).toStrictEqual({
       contactsInitiaux: {
-        regionaux: await entrepotContact.regionaux(),
-        sectoriels: await entrepotContact.sectoriels(),
-        nationaux: await entrepotContact.nationaux(),
+        regionaux: await entrepôtContact.régionaux(),
+        sectoriels: await entrepôtContact.sectoriels(),
+        nationaux: await entrepôtContact.nationaux(),
       },
     });
   });

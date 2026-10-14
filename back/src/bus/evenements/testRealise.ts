@@ -1,11 +1,11 @@
-import { CodeRegion } from '../../metier/referentielRegions.js';
+import { CodeRégion } from '../../metier/referentielRegions.js';
 import { CodeSecteur } from '../../metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../metier/referentielTranchesEffectifEtablissement.js';
 import { ReponsesTestMaturite } from '../../metier/resultatTestMaturite.js';
 import { EvenementDuBus } from '../busEvenements.js';
 
 export class TestRealise implements EvenementDuBus {
-  region: CodeRegion | undefined;
+  region: CodeRégion | undefined;
   secteur: CodeSecteur | undefined;
   tailleOrganisation: CodeTrancheEffectif | undefined;
   reponses: ReponsesTestMaturite;
@@ -20,7 +20,7 @@ export class TestRealise implements EvenementDuBus {
     codeSessionGroupe,
     idResultatTest,
   }: {
-    region: CodeRegion | undefined;
+    region: CodeRégion | undefined;
     secteur: CodeSecteur | undefined;
     tailleOrganisation: CodeTrancheEffectif | undefined;
     reponses: ReponsesTestMaturite;

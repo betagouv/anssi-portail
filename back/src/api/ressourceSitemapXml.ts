@@ -89,7 +89,7 @@ export const ressourceSitemapXml = (pagesStatiques: string[], configurationServe
 };
 
 const construitRoutesDynamiques = async ({
-  entrepotContact,
+  entrepôtContact,
   entrepotFinancement,
   entrepotGuide,
   entrepôtArticle,
@@ -137,7 +137,7 @@ const construitRoutesDynamiques = async ({
       return { url: `/services/${basename(f, '.html')}`, modifiéLe: new Date(données.modifiéLe) };
     });
 
-  const liensContactsRégionaux = Object.keys(await entrepotContact.regionaux()).map((codeRegion): LienSitemap => ({
+  const liensContactsRégionaux = Object.keys(await entrepôtContact.régionaux()).map((codeRegion): LienSitemap => ({
     url: `/contacts/${codeRegion.toLowerCase()}`,
   }));
 
