@@ -1,4 +1,3 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
@@ -10,7 +9,12 @@ export const ressourceModeleAnnuaireDeCrise = (_config: ConfigurationServeur) =>
     '/modele-annuaire-de-crise.xlsx',
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
-      reponse.sendStatus(HttpStatusCode.Ok);
+      const modèle = Buffer.from('un contenu');
+
+      reponse
+        .contentType('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        .attachment('modele-annuaire-de-crise.xlsx')
+        .send(modèle);
     })
   );
   return routeur;
