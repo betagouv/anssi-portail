@@ -23,6 +23,12 @@
       "groupName": "AWS SDK"
     },
     {
+      "description": "Regroupe les mises à jour des dépendances Sentry",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["@sentry/node", "@sentry/browser"],
+      "groupName": "Sentry"
+    },
+    {
       "description": "lockFileMaintenance",
       "matchUpdateTypes": ["pin", "digest", "patch", "minor", "major", "lockFileMaintenance"],
       "minimumReleaseAge": "7 days"
