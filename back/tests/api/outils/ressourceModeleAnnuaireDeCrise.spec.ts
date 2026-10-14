@@ -13,7 +13,15 @@ describe("La ressource du modèle de l'annuaire de crise", () => {
   });
 
   describe('sur une requête GET', () => {
-    const récupèreModèle = async () => request(serveur).get('/api/outils/modele-annuaire-de-crise.xlsx');
+    const récupèreModèle = async () =>
+      request(serveur)
+        .get('/api/outils/modele-annuaire-de-crise.xlsx')
+        .buffer(true)
+        .parse((res, callback) => {
+          const morceaux: Buffer[] = [];
+          res.on('data', (morceau: Buffer) => morceaux.push(morceau));
+          res.on('end', () => callback(null, Buffer.concat(morceaux)));
+        });
 
     it('réponds 200', async () => {
       const { status } = await récupèreModèle();
@@ -26,6 +34,12 @@ describe("La ressource du modèle de l'annuaire de crise", () => {
 
       expect(headers['content-type']).toBe('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
       expect(headers['content-disposition']).toBe('attachment; filename="modele-annuaire-de-crise.xlsx"');
+    });
+
+    it('renvoie un fichier valide', async () => {
+      const { body } = await récupèreModèle();
+
+      expect(Buffer.isBuffer(body)).toBe(true);
     });
   });
 });
