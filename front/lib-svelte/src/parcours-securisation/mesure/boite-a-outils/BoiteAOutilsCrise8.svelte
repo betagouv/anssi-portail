@@ -52,11 +52,9 @@
         <strong>Maintenez la liste à jour</strong><br /><br />
         Maintenir à jour cette liste, notamment à chaque départ, arrivée ou changement de prestataire.<br /><br />
         <em
-          >En confirmant avoir pris en compte cette mesure, un rappel automatique vous sera envoyé par e-mail dans un an
-          pour vérifier que le fichier est toujours à jour (désactivable depuis votre espace Notifications et
-          consentement).</em
-        ><br /><br />
-        <em>Vous pouvez aussi l’ajouter directement à votre propre agenda&nbsp;:</em>
+          >Vous pouvez ajouter directement à votre propre agenda un rappel dans un an pour vérifier que le fichier est
+          toujours à jour&nbsp;:</em
+        >
       </p>
       <OutilRappelMiseAJourAnnuaire />
     </EtapeProcedure>
