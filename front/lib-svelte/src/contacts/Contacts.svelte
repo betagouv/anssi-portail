@@ -19,7 +19,6 @@
 
   const { contactsInitiaux, regionInitiale = '' }: Props = $props();
 
-  // Les props proviennent du prérendu serveur, elles ne sont lues qu'une fois.
   let regionSelectionnee: string = $state(untrack(() => regionInitiale));
   let secteurSelectionne: string = $state('');
 
@@ -31,18 +30,17 @@
     estCodeSecteurContact(secteurSelectionne) ? contactsInitiaux?.sectoriels[secteurSelectionne] : undefined
   );
 
-  // Gestion du fragment : sur /contacts/fr-xxx, la région de l'URL alimente le fragment
   let fragmentDeNavigation = $state(
     creeLeFragmentDeNavigation(untrack(() => (regionInitiale ? `#?region=${regionInitiale}` : undefined)))
   );
 
-  // Gestion des filtres
   const appliqueLesFiltres = () => {
     const parametreRegion = fragmentDeNavigation.extraisValeur('region', '');
     regionSelectionnee = estCodeRegion(parametreRegion) ? parametreRegion : '';
     const parametreSecteur = fragmentDeNavigation.extraisValeur('secteur', '');
     secteurSelectionne = estCodeSecteurContact(parametreSecteur) ? parametreSecteur : '';
   };
+
   $effect(() => appliqueLesFiltres());
   $effect(() => {
     fragmentDeNavigation.change('region', regionSelectionnee);
