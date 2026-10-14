@@ -1,7 +1,7 @@
 <script lang="ts">
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
-  import Lien from '../../ui/Lien.svelte';
-  import type { Procédure } from './../mesure';
+  import Lien from '../../../ui/Lien.svelte';
+  import type { Procédure } from '../../mesure';
 
   let { procédure }: { procédure: Procédure } = $props();
 </script>

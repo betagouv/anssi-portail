@@ -12,7 +12,7 @@
   import InterlocuteursParcoursSecurisation from './../InterlocuteursParcoursSecurisation.svelte';
   import type { Mesure } from './../mesure';
   import PriseEnCompteMesure from './../PriseEnCompteMesure.svelte';
-  import BoiteAOutils from './BoiteAOutils.svelte';
+  import BoiteAOutils from './boite-a-outils/BoiteAOutils.svelte';
   import CartesLiensProcédures from './CartesLiensProcédures.svelte';
 
   let mesure: Mesure | undefined = $state();
