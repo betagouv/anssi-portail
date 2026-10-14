@@ -1,7 +1,9 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
+import { loadWorkbook } from '@office-kit/xlsx/io';
+import { fromBuffer } from '@office-kit/xlsx/node';
 import { Express } from 'express';
 import request from 'supertest';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
 import { OutilTéléchargé } from '../../../src/bus/evenements/outilTelecharge.js';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
@@ -74,6 +76,29 @@ describe("La ressource du modèle de l'annuaire de crise", () => {
       const évènement = busEvenements.recupereEvenement(OutilTéléchargé);
       expect(évènement!.outil).toBe('Modèle_annuaire_crise');
       expect(évènement!.email).toBe(jeanneDupont.email);
+    });
+
+    describe('contextualise le contenu', () => {
+      const récupèreModeleExcel = async () => {
+        const { body } = await récupèreModèle();
+
+        const wb = await loadWorkbook(fromBuffer(body));
+        return wb.sheets[0]?.sheet;
+      };
+
+      beforeEach(() => {
+        vi.useFakeTimers({ toFake: ['Date'] });
+        vi.setSystemTime(new Date('2018-11-17T10:11:12Z'));
+      });
+
+      afterEach(() => {
+        vi.useRealTimers();
+      });
+
+      it('en changeant le nom de la feuille', async () => {
+        const feuille = await récupèreModeleExcel();
+        expect(feuille.title).toBe('Version du 17-11-2018');
+      });
     });
   });
 });
