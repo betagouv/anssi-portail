@@ -8,7 +8,7 @@
   has-description="true"
   description="XLSX"
   download="true"
-  href="#"
+  href="/api/outils/modele-annuaire-de-crise.xlsx"
   enlarge="true"
   has-badge="true"
   src="/assets/images/parcours-securisation/outils/icone-telechargement-xlsx.svg"
