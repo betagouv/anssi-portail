@@ -30,19 +30,17 @@ describe("La ressource du modèle de l'annuaire de crise", () => {
   });
 
   describe('sur une requête GET', () => {
-    const récupèreModèle = async (mode: 'connecté' | 'non-connecté' = 'connecté') => {
-      const ressource = request(serveur).get('/api/outils/modele-annuaire-de-crise.xlsx');
-      const requête =
-        mode === 'connecté'
-          ? ressource.set('Cookie', [encodeSession({ email: jeanneDupont.email, token: 'valide' })])
-          : ressource;
-
-      return requête.buffer(true).parse((res, callback) => {
-        const morceaux: Buffer[] = [];
-        res.on('data', (morceau: Buffer) => morceaux.push(morceau));
-        res.on('end', () => callback(null, Buffer.concat(morceaux)));
-      });
-    };
+    const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
+    const récupèreModèle = async () =>
+      request(serveur)
+        .get('/api/outils/modele-annuaire-de-crise.xlsx')
+        .set('Cookie', cookieJeanneDupont)
+        .buffer(true)
+        .parse((res, callback) => {
+          const morceaux: Buffer[] = [];
+          res.on('data', (morceau: Buffer) => morceaux.push(morceau));
+          res.on('end', () => callback(null, Buffer.concat(morceaux)));
+        });
 
     it('réponds 200', async () => {
       const { status } = await récupèreModèle();
@@ -64,7 +62,7 @@ describe("La ressource du modèle de l'annuaire de crise", () => {
     });
 
     it('refuse un utilisateur non connecté', async () => {
-      const { status } = await récupèreModèle('non-connecté');
+      const { status } = await request(serveur).get('/api/outils/modele-annuaire-de-crise.xlsx');
 
       expect(status).toBe(HttpStatusCode.Unauthorized);
     });
