@@ -14,6 +14,7 @@ import { adaptateurCompression } from '../../src/infra/adaptateurCompression.js'
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
 import { adaptateurGestionVide } from '../../src/infra/adaptateurGestionErreurVide.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
+import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { adaptateurMonAideCyberVide } from '../../src/infra/adaptateurMonAideCyberVide.js';
 import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi.js';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
@@ -319,10 +320,16 @@ export const fauxGestionnaireRequêtesComplémentaires: GestionnaireRequêtesCom
     suite();
   },
 };
+
+export const fauxAdaptateurHorloge: AdaptateurHorloge = {
+  maintenant: () => new Date(),
+};
+
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
   adaptateurGestionErreur: adaptateurGestionVide,
   adaptateurHachage: fauxAdaptateurHachage,
+  adaptateurHorloge: fauxAdaptateurHorloge,
   adaptateurJWT: fauxAdaptateurJWT,
   adaptateurMonAideCyber: fauxAdaptateurMonAideCyber,
   adaptateurOIDC: fauxAdaptateurOIDC,

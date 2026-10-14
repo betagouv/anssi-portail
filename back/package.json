@@ -67,6 +67,7 @@
     "forwarded-parse": "^2.1.2",
     "helmet": "^8.1.0",
     "html-entities": "^2.6.0",
+    "ics": "^3.12.1",
     "isomorphic-dompurify": "catalog:",
     "jsdom": "^30.0.0",
     "jsonwebtoken": "^9.0.3",
