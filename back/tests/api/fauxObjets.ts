@@ -26,6 +26,7 @@ import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js
 import { Parcours } from '../../src/metier/parcours.js';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests.js';
 import { EntrepôtArticleMémoire } from '../persistance/entrepotArticleMemoire.js';
+import { EntrepotContactMemoire } from '../persistance/entrepotContactMemoire.js';
 import { EntrepotExigenceMemoire } from '../persistance/entrepotExigenceMemoire.js';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire.js';
 import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire.js';
@@ -66,8 +67,8 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
     llmsTxt: () => ressourceFactice(),
     page: (_nom: string) => ressourceFactice(),
     ressource: (_nom: string) => ressourceFactice(),
-    contact: (_nom: string) => ressourceFactice(),
     service: (_nom: string) => ressourceFactice(),
+    contact: (_nom: string) => ressourceFactice(),
     composantSvelteCompilé: (_nom: string) => ressourceFactice(),
 
     assets: () => ressourceFactice(),
@@ -340,6 +341,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   busEvenements: fabriqueBusPourLesTests(),
   entrepôtArticle: new EntrepôtArticleMémoire(),
   entrepotFavori: new EntrepotFavoriMemoire(),
+  entrepotContact: new EntrepotContactMemoire(),
   entrepotFinancement: new EntrepotFinancementMemoire(),
   entrepotGuide: new EntrepotGuideMemoire(),
   entrepotGuideTravail: new EntrepotGuideTravailMemoire(),

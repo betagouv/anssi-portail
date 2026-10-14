@@ -38,6 +38,7 @@ import { ressourceAnnuaireRegions } from '../../ressourceAnnuaireRegions.js';
 import { ressourceAnnuaireSecteursActivite } from '../../ressourceAnnuaireSecteursActivite.js';
 import { ressourceAnnuaireTranchesEffectif } from '../../ressourceAnnuaireTranchesEffectif.js';
 import { ressourceAvisUtilisateur } from '../../ressourceAvisUtilisateur.js';
+import { ressourceContacts } from '../../ressourceContacts.js';
 import { ressourceFinancement } from '../../ressourceFinancement.js';
 import { ressourceFinancements } from '../../ressourceFinancements.js';
 import { ressourceInformationsCreationCompte } from '../../ressourceInformationsCreationCompte.js';
@@ -108,6 +109,8 @@ export const enregistreLesRoutesAPI = (app: Express, configurationServeur: Confi
   enregistreRoute('/repartition-resultats-test', ressourceRepartitionDesResultatsDeTest(configurationServeur));
 
   enregistreRoute('/avis-utilisateur', ressourceAvisUtilisateur(configurationServeur));
+
+  enregistreRoute('/contacts', ressourceContacts(configurationServeur));
 
   enregistreRoute(
     '/financements',

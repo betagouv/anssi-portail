@@ -13,6 +13,7 @@ import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { AdaptateurStatistiqueMiniTests } from '../metier/adaptateurStatistiqueMiniTests.js';
 import { AdaptateurStatistiqueParcours } from '../metier/adaptateurStatistiqueParcours.js';
 import { EntrepôtArticle } from '../metier/blog/entrepotArticle.js';
+import { EntrepotContact } from '../metier/contacts/entrepotContact.js';
 import { EntrepotFavori } from '../metier/entrepotFavori.js';
 import { EntrepotFinancement } from '../metier/entrepotFinancement.js';
 import { EntrepotGuide } from '../metier/entrepotGuide.js';
@@ -49,6 +50,7 @@ export type ConfigurationServeur = {
   adaptateurStatistiqueParcours: AdaptateurStatistiqueParcours;
   busEvenements: BusEvenements;
   entrepôtArticle: EntrepôtArticle;
+  entrepotContact: EntrepotContact;
   entrepotFavori: EntrepotFavori;
   entrepotFinancement: EntrepotFinancement;
   entrepotGuide: EntrepotGuide;
