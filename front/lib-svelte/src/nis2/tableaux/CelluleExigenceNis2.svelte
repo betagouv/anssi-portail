@@ -11,9 +11,9 @@
   let { exigence }: Props = $props();
 
   const tags = $derived([
-    ...(exigence.objectifSecurite ? [{ label: exigence.objectifSecurite }] : []),
-    { label: exigence.thematique },
-    { label: exigence.reference },
+    ...(exigence.objectifSecurite ? [{ label: exigence.objectifSecurite, id: exigence.objectifSecurite }] : []),
+    { label: exigence.thematique, id: exigence.thematique },
+    { label: exigence.reference, id: exigence.reference },
   ]);
   const badges = $derived(badgesExigence(exigence));
 </script>
@@ -21,7 +21,7 @@
 <GroupeDeBadges {badges} />
 <dsfr-tags-group tags={enPropriétéWebC(tags)} size="sm" groupMarkup="div">
   <ul slot="seo">
-    {#each tags as tag (tag)}
+    {#each tags as tag (tag.id)}
       <li>{tag.label}</li>
     {/each}
   </ul>

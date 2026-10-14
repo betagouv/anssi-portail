@@ -15,18 +15,21 @@
 
   const tagsParcoursBasique = [
     {
+      id: 'TPE / PME',
       label: 'TPE / PME',
       accent: 'défaut',
       size: 'md',
       icon: 'store-2-fill',
     },
     {
+      id: 'Collectivités',
       label: 'Collectivités',
       accent: 'défaut',
       size: 'md',
       icon: 'bank-fill',
     },
     {
+      id: 'Associations',
       label: 'Associations',
       accent: 'défaut',
       size: 'md',
@@ -36,12 +39,14 @@
 
   const tagsParcoursComplet = [
     {
+      id: 'PME / ETI',
       label: 'PME / ETI',
       accent: 'défaut',
       size: 'md',
       icon: 'building-fill',
     },
     {
+      id: 'Organisations concernées NIS 2',
       label: 'Organisations concernées NIS 2',
       accent: 'défaut',
       size: 'md',

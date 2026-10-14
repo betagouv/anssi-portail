@@ -4,41 +4,46 @@
   import Lien from '../ui/Lien.svelte';
 
   const tags = [
-    { label: 'Administrations publiques', icon: 'bank-line' },
-    { label: 'Eaux potables', icon: 'drop-line' },
-    { label: 'Eaux non potables', icon: 'blur-off-line' },
-    { label: 'Énergies', icon: 'flashlight-line' },
-    { label: 'Espace', icon: 'contrast-line' },
+    { id: 'Administrations publiques', label: 'Administrations publiques', icon: 'bank-line' },
+    { id: 'Eaux potables', label: 'Eaux potables', icon: 'drop-line' },
+    { id: 'Eaux non potables', label: 'Eaux non potables', icon: 'blur-off-line' },
+    { id: 'Énergies', label: 'Énergies', icon: 'flashlight-line' },
+    { id: 'Espace', label: 'Espace', icon: 'contrast-line' },
     {
+      id: "Gestion des services Technologies de l'information et de la Communication (interentreprises)",
       label: "Gestion des services Technologies de l'information et de la Communication (interentreprises)",
       icon: 'chat-settings-line',
     },
     {
+      id: 'Infrastructures des marchés financiers',
       label: 'Infrastructures des marchés financiers',
       icon: 'line-chart-line',
     },
-    { label: 'Infrastructures numériques', icon: 'mac-line' },
-    { label: 'Santé', icon: 'heart-pulse-line' },
-    { label: 'Secteur bancaire', icon: 'bank-card-line' },
-    { label: 'Transport', icon: 'bus-line' },
+    { id: 'Infrastructures numériques', label: 'Infrastructures numériques', icon: 'mac-line' },
+    { id: 'Santé', label: 'Santé', icon: 'heart-pulse-line' },
+    { id: 'Secteur bancaire', label: 'Secteur bancaire', icon: 'bank-card-line' },
+    { id: 'Transport', label: 'Transport', icon: 'bus-line' },
   ];
   const autreTags = [
     {
+      id: 'Fabrication, production et distribution de produits chimiques',
       label: 'Fabrication, production et distribution de produits chimiques',
       icon: 'paint-line',
     },
-    { label: 'Fournisseurs numériques', icon: 'macbook-line' },
-    { label: 'Gestion des déchets', icon: 'recycle-line' },
-    { label: 'Industries manufacturières', icon: 'settings-5-line' },
+    { id: 'Fournisseurs numériques', label: 'Fournisseurs numériques', icon: 'macbook-line' },
+    { id: 'Gestion des déchets', label: 'Gestion des déchets', icon: 'recycle-line' },
+    { id: 'Industries manufacturières', label: 'Industries manufacturières', icon: 'settings-5-line' },
     {
+      id: 'Production, transformation et distribution de denrées alimentaires',
       label: 'Production, transformation et distribution de denrées alimentaires',
       icon: 'restaurant-line',
     },
     {
+      id: 'Recherche',
       label: 'Recherche',
       icon: 'microscope-line',
     },
-    { label: 'Services postaux et d’expédition', icon: 'mail-send-line' },
+    { id: 'Services postaux et d’expédition', label: 'Services postaux et d’expédition', icon: 'mail-send-line' },
   ];
 </script>
 
@@ -52,7 +57,7 @@
     <h4>Secteurs hautement critiques</h4>
     <dsfr-tags-group size="md" group-markup="ul" has-icon="true" tags={enPropriétéWebC(tags)}>
       <ul slot="seo">
-        {#each tags as tag (tag)}
+        {#each tags as tag (tag.id)}
           <li>{tag.label}</li>
         {/each}
       </ul>
@@ -61,7 +66,7 @@
     <h4>Autres secteurs critiques</h4>
     <dsfr-tags-group size="md" group-markup="ul" has-icon="true" tags={enPropriétéWebC(autreTags)}>
       <ul slot="seo">
-        {#each autreTags as tag (tag)}
+        {#each autreTags as tag (tag.id)}
           <li>{tag.label}</li>
         {/each}
       </ul>
