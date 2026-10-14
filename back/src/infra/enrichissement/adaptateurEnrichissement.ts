@@ -2,7 +2,7 @@ import { JSDOM } from 'jsdom';
 import { render } from 'svelte/server';
 import { FournisseurChemin } from '../../api/fournisseurChemin.js';
 import { EntrepôtArticle } from '../../metier/blog/entrepotArticle.js';
-import { EntrepotContact } from '../../metier/contacts/entrepotContact.js';
+import { EntrepôtContact } from '../../metier/contacts/entrepotContact.js';
 import { EntrepotFinancement } from '../../metier/entrepotFinancement.js';
 import { EntrepotGuide } from '../../metier/entrepotGuide.js';
 import { EntrepotExigence } from '../../metier/nis2/entrepotExigence.js';
@@ -107,7 +107,7 @@ export const fabriqueAdaptateurEnrichissement = async (
   entrepôtExigence: EntrepotExigence,
   entrepôtFinancement: EntrepotFinancement,
   entrepôtArticle: EntrepôtArticle,
-  entrepôtContact: EntrepotContact
+  entrepôtContact: EntrepôtContact
 ): Promise<AdaptateurEnrichissement> => {
   const résolveurDePage = new RésolveurDePage(entrepotGuide, entrepôtFinancement, entrepôtArticle);
 

@@ -1,9 +1,9 @@
-import { CodeRegion } from '../referentielRegions.js';
-import { CodeSecteurContact, ContactNational, ContactSectoriel, ContactsRegionaux } from './contacts.js';
+import { CodeRégion } from '../referentielRegions.js';
+import { CodeSecteurContact, ContactNational, ContactSectoriel, ContactsRégionaux } from './contacts.js';
 
-export interface EntrepotContact {
-  regionaux: () => Promise<Record<CodeRegion, ContactsRegionaux>>;
-  regional: (codeRegion: CodeRegion) => Promise<ContactsRegionaux | undefined>;
+export interface EntrepôtContact {
+  régionaux: () => Promise<Record<CodeRégion, ContactsRégionaux>>;
+  régional: (codeRégion: CodeRégion) => Promise<ContactsRégionaux | undefined>;
   nationaux: () => Promise<ContactNational[]>;
   sectoriels: () => Promise<Record<CodeSecteurContact, ContactSectoriel>>;
 }

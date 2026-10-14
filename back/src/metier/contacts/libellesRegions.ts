@@ -1,7 +1,7 @@
-import { CodeRegion } from '../referentielRegions.js';
+import { CodeRégion } from '../referentielRegions.js';
 
 // Complète « Contacts » dans le titre des pages régionales : « Contacts de Bretagne »
-export const libellesRegionsContacts: Record<CodeRegion, string> = {
+export const libellesRegionsContacts: Record<CodeRégion, string> = {
   'FR-ARA': "d'Auvergne-Rhône-Alpes",
   'FR-BFC': 'de Bourgogne-Franche-Comté',
   'FR-BRE': 'de Bretagne',

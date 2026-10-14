@@ -2,7 +2,7 @@ import { Article } from '../../metier/blog/article.js';
 import { EntrepôtArticle } from '../../metier/blog/entrepotArticle.js';
 import { EntrepotFinancement } from '../../metier/entrepotFinancement.js';
 import { EntrepotGuide } from '../../metier/entrepotGuide.js';
-import { CodeRegion, estCodeRegion } from '../../metier/referentielRegions.js';
+import { CodeRégion, estCodeRegion } from '../../metier/referentielRegions.js';
 
 export class RésolveurDePage {
   constructor(
@@ -26,7 +26,7 @@ export class RésolveurDePage {
     }
   }
 
-  codeRegionContact(routeDemandée: string): CodeRegion | undefined {
+  codeRegionContact(routeDemandée: string): CodeRégion | undefined {
     const idRegion = routeDemandée.match(/\/contacts\/([^/]+)\/?$/)?.[1]?.toUpperCase();
     return estCodeRegion(idRegion) ? idRegion : undefined;
   }

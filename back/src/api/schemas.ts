@@ -1,7 +1,7 @@
 import z from 'zod';
 import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
 import { codeDepartement } from '../metier/referentielDepartements.js';
-import { codesRegion } from '../metier/referentielRegions.js';
+import { codesRégion } from '../metier/referentielRegions.js';
 import { codesSecteur } from '../metier/referentielSecteurs.js';
 import { codesTranchesEffectif } from '../metier/referentielTranchesEffectifEtablissement.js';
 import { valideSiret } from '../metier/valideSiret.js';
@@ -36,7 +36,7 @@ export const schemas = {
     },
     region: (erreur: string | (() => string) | undefined = undefined) => {
       const e = typeof erreur === 'function' ? erreur() : (erreur ?? 'Veuillez saisir un code région valide.');
-      return z.enum(codesRegion, e);
+      return z.enum(codesRégion, e);
     },
   },
   internet: {

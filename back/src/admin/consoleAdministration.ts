@@ -23,7 +23,7 @@ import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { EntrepotFavori } from '../metier/entrepotFavori.js';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur.js';
 import { EntrepotExigence } from '../metier/nis2/entrepotExigence.js';
-import { CodeRegion } from '../metier/referentielRegions.js';
+import { CodeRégion } from '../metier/referentielRegions.js';
 import { CodeSecteur } from '../metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement.js';
 import { ReponsesTestMaturite } from '../metier/resultatTestMaturite.js';
@@ -455,7 +455,7 @@ export class ConsoleAdministration {
 
     type DonneesResultatPourRattrapage = {
       id: string;
-      region: CodeRegion | undefined;
+      region: CodeRégion | undefined;
       secteur: CodeSecteur | undefined;
       taille_organisation: CodeTrancheEffectif | undefined;
       reponses: ReponsesTestMaturite;

@@ -1,5 +1,5 @@
 import { Rôle, Scénario } from '../../metier/mini-tests/reflexes-cyber/reflexesCyber.js';
-import { CodeRegion } from '../../metier/referentielRegions.js';
+import { CodeRégion } from '../../metier/referentielRegions.js';
 import { CodeSecteur } from '../../metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../metier/referentielTranchesEffectifEtablissement.js';
 import { EvenementDuBus } from '../busEvenements.js';
@@ -9,7 +9,7 @@ export class SimulationRéflexesCyberTerminé implements EvenementDuBus {
   readonly idScénario: Scénario;
   readonly idRôle: Rôle;
   readonly email?: string;
-  readonly codeRegion?: CodeRegion;
+  readonly codeRegion?: CodeRégion;
   readonly codeSecteur?: CodeSecteur;
   readonly codeTrancheEffectif?: CodeTrancheEffectif;
   constructor({
@@ -25,7 +25,7 @@ export class SimulationRéflexesCyberTerminé implements EvenementDuBus {
     idScénario: Scénario;
     idRôle: Rôle;
     email?: string;
-    codeRegion?: CodeRegion;
+    codeRegion?: CodeRégion;
     codeSecteur?: CodeSecteur;
     codeTrancheEffectif?: CodeTrancheEffectif;
   }) {

@@ -1,4 +1,4 @@
-import { CodeRegion } from './referentielRegions.js';
+import { CodeRégion } from './referentielRegions.js';
 
 export const departements = [
   { nom: 'Ain', code: '01', codeRegion: 'FR-ARA' },
@@ -121,7 +121,7 @@ export const codeDepartement = departements.map((s) => s.code);
 export const estCodeDepartement = (code: string | undefined | null): code is CodeDepartement =>
   departements.some((d) => d.code === code);
 
-export const regionDuDepartement = (codeDepartement: CodeDepartement | undefined): CodeRegion | undefined =>
+export const regionDuDepartement = (codeDepartement: CodeDepartement | undefined): CodeRégion | undefined =>
   departements.find((d) => d.code === codeDepartement)?.codeRegion;
 
 export type CodeDepartement = (typeof codeDepartement)[number];

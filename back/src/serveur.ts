@@ -30,7 +30,7 @@ import { AdaptateurStatistiqueParcoursMémoire } from './infra/adaptateurStatist
 import { AdaptateurStatistiqueParcoursPostgres } from './infra/adaptateurStatistiqueParcoursPostgres.js';
 import { EntrepôtArticleCrisp } from './infra/blog/entrepotArticleCrisp.js';
 import { fabriqueAdaptateurEnrichissement } from './infra/enrichissement/adaptateurEnrichissement.js';
-import { EntrepotContactStatique } from './infra/entrepotContactStatique.js';
+import { EntrepôtContactStatique } from './infra/entrepotContactStatique.js';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres.js';
 import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist.js';
 import { EntrepotGuideGrist } from './infra/entrepotGuideGrist.js';
@@ -76,7 +76,7 @@ const entrepotFinancement = new EntrepotFinancementGrist({
   clientHttp: axios,
   adaptateurEnvironnement,
 });
-const entrepotContact = new EntrepotContactStatique();
+const entrepôtContact = new EntrepôtContactStatique();
 const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 const adaptateurRechercheEntreprise = new AdaptateurRechercheEntrepriseGouv(adaptateurEnvironnement);
@@ -155,7 +155,7 @@ const adaptateurEnrichissement = await fabriqueAdaptateurEnrichissement(
   entrepotExigence,
   entrepotFinancement,
   entrepôtArticle,
-  entrepotContact
+  entrepôtContact
 );
 
 const attributionParcours = fabriqueAttributionParcours({ entrepotUtilisateur, busEvenements });
@@ -212,7 +212,7 @@ const host = process.env.HOST;
     adaptateurHorloge,
     messagerieInstantanee,
     entrepôtArticle,
-    entrepotContact,
+    entrepôtContact,
     entrepotFinancement,
     entrepotGuide,
     entrepotGuideTravail: entrepotGuideTravail,

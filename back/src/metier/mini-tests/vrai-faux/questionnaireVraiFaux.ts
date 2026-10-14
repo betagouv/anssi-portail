@@ -1,7 +1,7 @@
 import { BusEvenements } from '../../../bus/busEvenements.js';
 import { QuestionnaireVraiFauxRéponseSoumise } from '../../../bus/evenements/questionnaireVraiFauxReponseSoumise.js';
 import { QuestionnaireVraiFauxTerminé } from '../../../bus/evenements/questionnaireVraiFauxTermine.js';
-import { CodeRegion } from '../../referentielRegions.js';
+import { CodeRégion } from '../../referentielRegions.js';
 import { CodeSecteur } from '../../referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../referentielTranchesEffectifEtablissement.js';
 import { Utilisateur } from '../../utilisateur.js';
@@ -28,7 +28,7 @@ export class QuestionnaireVraiFaux {
       throw new Error('réponse à une question inconnue : ' + idQuestion);
     }
     let email: string | undefined;
-    let codeRegion: CodeRegion | undefined;
+    let codeRegion: CodeRégion | undefined;
     let codeSecteur: CodeSecteur | undefined;
     let codeTrancheEffectif: CodeTrancheEffectif | undefined;
 

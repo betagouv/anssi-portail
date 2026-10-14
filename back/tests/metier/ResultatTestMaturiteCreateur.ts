@@ -1,5 +1,5 @@
 import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest.js';
-import { CodeRegion } from '../../src/metier/referentielRegions.js';
+import { CodeRégion } from '../../src/metier/referentielRegions.js';
 import { CodeSecteur } from '../../src/metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../src/metier/referentielTranchesEffectifEtablissement.js';
 import { IdNiveauMaturite, ReponsesTestMaturite, ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
@@ -19,7 +19,7 @@ export class ResultatTestMaturiteCreateur {
   utilisateur: Utilisateur | undefined;
   entrepotResultatTest: EntrepotResultatTest | undefined;
   secteur: CodeSecteur | undefined;
-  region: CodeRegion | undefined;
+  region: CodeRégion | undefined;
 
   deNiveau(idNiveau: IdNiveauMaturite) {
     const pointsParNiveau: Record<IdNiveauMaturite, number> = {
@@ -56,7 +56,7 @@ export class ResultatTestMaturiteCreateur {
     return this;
   }
 
-  deRegion(region: CodeRegion) {
+  deRegion(region: CodeRégion) {
     this.region = region;
     return this;
   }

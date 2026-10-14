@@ -1,4 +1,4 @@
-import { CodeRegion, regionParNom } from './referentielRegions.js';
+import { CodeRégion, regionParNom } from './referentielRegions.js';
 
 export class Financement {
   id: number;
@@ -7,7 +7,7 @@ export class Financement {
   typesDeFinancement: string[];
   entitesElligibles: string[];
   perimetresGeographiques: string[];
-  regions: Array<CodeRegion | 'FRANCE'>;
+  regions: Array<CodeRégion | 'FRANCE'>;
   objectifs: string;
   operationsEligibles: string;
   benificiaires: string;

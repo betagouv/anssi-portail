@@ -3,15 +3,15 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/msc/index.js';
-import { EntrepotContactStatique } from '../../src/infra/entrepotContactStatique.js';
+import { EntrepôtContactStatique } from '../../src/infra/entrepotContactStatique.js';
 import { configurationDeTestDuServeur } from './fauxObjets.js';
 
 describe('La ressource Contacts', () => {
   let serveur: Express;
-  const entrepotContact = new EntrepotContactStatique();
+  const entrepôtContact = new EntrepôtContactStatique();
 
   beforeEach(() => {
-    serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotContact });
+    serveur = creeServeur({ ...configurationDeTestDuServeur, entrepôtContact });
   });
 
   it('répond 200 avec les contacts régionaux, sectoriels et nationaux', async () => {
@@ -19,9 +19,9 @@ describe('La ressource Contacts', () => {
 
     expect(reponse.status).toBe(HttpStatusCode.Ok);
     expect(reponse.body).toStrictEqual({
-      regionaux: await entrepotContact.regionaux(),
-      sectoriels: await entrepotContact.sectoriels(),
-      nationaux: await entrepotContact.nationaux(),
+      regionaux: await entrepôtContact.régionaux(),
+      sectoriels: await entrepôtContact.sectoriels(),
+      nationaux: await entrepôtContact.nationaux(),
     });
   });
 });

@@ -1,12 +1,12 @@
 import { JSDOM } from 'jsdom';
-import { EntrepotContact } from '../../../metier/contacts/entrepotContact.js';
+import { EntrepôtContact } from '../../../metier/contacts/entrepotContact.js';
 import { RésolveurDePage } from '../resolveurDePage.js';
 import { ChargeurDeProps } from './chargeurDeProps.js';
 
 export class ChargeurContacts implements ChargeurDeProps {
   constructor(
     private readonly résolveurDePage: RésolveurDePage,
-    private readonly entrepôtContact: EntrepotContact
+    private readonly entrepôtContact: EntrepôtContact
   ) {}
 
   async charge(_dom: JSDOM, routeDemandée: string) {
@@ -15,7 +15,7 @@ export class ChargeurContacts implements ChargeurDeProps {
     }
 
     const contactsInitiaux = {
-      regionaux: await this.entrepôtContact.regionaux(),
+      regionaux: await this.entrepôtContact.régionaux(),
       sectoriels: await this.entrepôtContact.sectoriels(),
       nationaux: await this.entrepôtContact.nationaux(),
     };
