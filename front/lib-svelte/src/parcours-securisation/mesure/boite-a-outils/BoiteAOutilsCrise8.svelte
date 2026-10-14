@@ -15,14 +15,14 @@
     <EtapeProcedure>
       <p class="texte-standard-md avec-outil">
         <strong>Identifiez les rôles et les contacts à mobiliser en cas de cyberattaque</strong><br /><br />
-        Listez, dans votre entité, qui assure la décision, l'informatique, la communication, le juridique et le lien avec
-        l'assurance (une personne peut cumuler plusieurs rôles), et ajoutez les contacts externes clés (prestataire IT, hébergeur,
-        banque, assureur, forces de l'ordre, Cybermalveillance.gouv.fr, ANSSI/CERT). Pour chacun : nom, fonction, téléphone,
-        email et références utiles (contrat, police d'assurance, astreinte).<br /><br />
+        Listez, dans votre entité, qui assure la décision, l’informatique, la communication, le juridique et le lien avec
+        l’assurance (une personne peut cumuler plusieurs rôles), et ajoutez les contacts externes clés (prestataire IT, hébergeur,
+        banque, assureur, forces de l’ordre, Cybermalveillance.gouv.fr, ANSSI/CERT). Pour chacun&nbsp;: nom, fonction, téléphone,
+        email et références utiles (contrat, police d’assurance, astreinte).<br /><br />
         <em
-          >Utilisez notre modèle d'annuaire de crise : il propose déjà des contacts pré-identifiés selon votre région et
-          des exemples de rôles à adapter . A vous de le compléter avec les rôles et les personnes propres à votre
-          organisation.</em
+          >Utilisez notre modèle d’annuaire de crise&nbsp;: il propose déjà des contacts pré-identifiés selon votre
+          région et des exemples de rôles à adapter . A vous de le compléter avec les rôles et les personnes propres à
+          votre organisation.</em
         >
       </p>
       <OutilsModeleAnnuaireDeCrise />
@@ -31,18 +31,18 @@
     <EtapeProcedure>
       <p class="texte-standard-md">
         <strong>Imprimez et répartissez plusieurs exemplaires</strong><br /><br />
-        Imprimer plusieurs exemplaires et les répartir intelligemment : classeur de crise au bureau, domicile du dirigeant,
-        véhicule ou sac du responsable informatique. Le principe : la liste doit rester lisible sans ordinateur, sans réseau
-        et sans internet.
+        Imprimer plusieurs exemplaires et les répartir intelligemment&nbsp;: classeur de crise au bureau, domicile du dirigeant,
+        véhicule ou sac du responsable informatique. Le principe&nbsp;: la liste doit rester lisible sans ordinateur, sans
+        réseau et sans internet.
       </p>
     </EtapeProcedure>
 
     <EtapeProcedure>
       <p class="texte-standard-md">
         <strong>Protégez la diffusion du document</strong><br /><br />
-        Protéger le document : il contient des données personnelles et une cartographie de vos prestataires. Informer les
-        personnes concernées, limiter la diffusion aux seules personnes utiles, et ne pas laisser d’exemplaires traîner dans
-        des espaces communs.
+        Protéger le document&nbsp;: il contient des données personnelles et une cartographie de vos prestataires. Informer
+        les personnes concernées, limiter la diffusion aux seules personnes utiles, et ne pas laisser d’exemplaires traîner
+        dans des espaces communs.
       </p>
     </EtapeProcedure>
 
@@ -55,7 +55,7 @@
           pour vérifier que le fichier est toujours à jour (désactivable depuis votre espace Notifications et
           consentement).</em
         ><br /><br />
-        <em>Vous pouvez aussi l'ajouter directement à votre propre agenda&nbsp;:</em>
+        <em>Vous pouvez aussi l’ajouter directement à votre propre agenda&nbsp;:</em>
       </p>
     </EtapeProcedure>
   </EtapesProcedure>
