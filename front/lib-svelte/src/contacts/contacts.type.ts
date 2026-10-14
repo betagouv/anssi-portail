@@ -18,6 +18,11 @@ export type ContactsRegionaux = {
   designation: 'territoire' | 'région';
 };
 
+export type ContactsInitiaux = {
+  regionaux: Record<CodeRegion, ContactsRegionaux>;
+  sectoriels: Record<CodeSecteurContact, ContactSectoriel>;
+};
+
 export const CodeRegions = [
   'FR-ARA',
   'FR-BFC',

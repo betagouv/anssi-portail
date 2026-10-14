@@ -2,6 +2,7 @@ import { Article } from '../../metier/blog/article.js';
 import { EntrepôtArticle } from '../../metier/blog/entrepotArticle.js';
 import { EntrepotFinancement } from '../../metier/entrepotFinancement.js';
 import { EntrepotGuide } from '../../metier/entrepotGuide.js';
+import { CodeRegion, estCodeRegion } from '../../metier/referentielRegions.js';
 
 export class RésolveurDePage {
   constructor(
@@ -23,6 +24,11 @@ export class RésolveurDePage {
     if (idFinancement) {
       return this.entrepôtFinancement.parId(Number(idFinancement));
     }
+  }
+
+  codeRegionContact(routeDemandée: string): CodeRegion | undefined {
+    const idRegion = routeDemandée.match(/\/contacts\/([^/]+)\/?$/)?.[1]?.toUpperCase();
+    return estCodeRegion(idRegion) ? idRegion : undefined;
   }
 
   async articleCrisp(routeDemandée: string): Promise<Article | undefined> {

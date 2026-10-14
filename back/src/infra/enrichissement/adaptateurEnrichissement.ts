@@ -2,6 +2,7 @@ import { JSDOM } from 'jsdom';
 import { render } from 'svelte/server';
 import { FournisseurChemin } from '../../api/fournisseurChemin.js';
 import { EntrepôtArticle } from '../../metier/blog/entrepotArticle.js';
+import { EntrepotContact } from '../../metier/contacts/entrepotContact.js';
 import { EntrepotFinancement } from '../../metier/entrepotFinancement.js';
 import { EntrepotGuide } from '../../metier/entrepotGuide.js';
 import { EntrepotExigence } from '../../metier/nis2/entrepotExigence.js';
@@ -12,15 +13,18 @@ import { AdaptateurLiensSeo } from './adaptateurDom/adaptateurLiensSeo.js';
 import {
   AdaptateurMétadonnées,
   MétadonnéesDArticleCrisp,
+  MétadonnéesDeContactsRegion,
   MétadonnéesDeFinancement,
   MétadonnéesDeGuide,
 } from './adaptateurDom/adaptateurMetadonnees.js';
 import {
   AdaptateurTitre,
   TitreDArticleCrisp,
+  TitreDeContactsRegion,
   TitreDeFinancement,
   TitreDeGuide,
 } from './adaptateurDom/adaptateurTitre.js';
+import { ChargeurContacts } from './chargementProprietes/chargeurContacts.js';
 import { ChargeurCrisp } from './chargementProprietes/chargeurCrisp.js';
 import { ChargeurDeProps } from './chargementProprietes/chargeurDeProps.js';
 import { ChargeurExigences } from './chargementProprietes/chargeurExigences.js';
@@ -102,7 +106,8 @@ export const fabriqueAdaptateurEnrichissement = async (
   entrepotGuide: EntrepotGuide,
   entrepôtExigence: EntrepotExigence,
   entrepôtFinancement: EntrepotFinancement,
-  entrepôtArticle: EntrepôtArticle
+  entrepôtArticle: EntrepôtArticle,
+  entrepôtContact: EntrepotContact
 ): Promise<AdaptateurEnrichissement> => {
   const résolveurDePage = new RésolveurDePage(entrepotGuide, entrepôtFinancement, entrepôtArticle);
 
@@ -111,6 +116,7 @@ export const fabriqueAdaptateurEnrichissement = async (
     new ChargeurGuide(résolveurDePage, adaptateurEnvironnement),
     new ChargeurExigences(entrepôtExigence),
     new ChargeurFinancements(résolveurDePage, entrepôtFinancement),
+    new ChargeurContacts(résolveurDePage, entrepôtContact),
     new ChargeurCrisp(résolveurDePage, entrepôtArticle),
     new ChargeurPageCrisp(entrepôtArticle),
     new ChargeurFilAriane(),
@@ -118,15 +124,17 @@ export const fabriqueAdaptateurEnrichissement = async (
 
   const adaptateursDom: AdaptateurDom[] = [
     new AdaptateurLiensSeo(),
-    new AdaptateurLienCanonique(['/financements', '/guides', '/conseils-cyber']),
+    new AdaptateurLienCanonique(['/financements', '/guides', '/conseils-cyber', '/contacts']),
     new AdaptateurTitre([
       new TitreDeGuide(résolveurDePage),
       new TitreDeFinancement(résolveurDePage),
+      new TitreDeContactsRegion(résolveurDePage),
       new TitreDArticleCrisp(résolveurDePage),
     ]),
     new AdaptateurMétadonnées([
       new MétadonnéesDeGuide(résolveurDePage),
       new MétadonnéesDeFinancement(résolveurDePage),
+      new MétadonnéesDeContactsRegion(résolveurDePage),
       new MétadonnéesDArticleCrisp(résolveurDePage),
     ]),
   ];

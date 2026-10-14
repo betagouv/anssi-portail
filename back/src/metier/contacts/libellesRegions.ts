@@ -1,0 +1,31 @@
+import { CodeRegion } from '../referentielRegions.js';
+
+// Complète « Contacts » dans le titre des pages régionales : « Contacts de Bretagne »
+export const libellesRegionsContacts: Record<CodeRegion, string> = {
+  'FR-ARA': "d'Auvergne-Rhône-Alpes",
+  'FR-BFC': 'de Bourgogne-Franche-Comté',
+  'FR-BRE': 'de Bretagne',
+  'FR-CVL': 'de Centre-Val de Loire',
+  'FR-20R': 'de Corse',
+  'FR-GES': 'du Grand Est',
+  'FR-HDF': 'des Hauts-de-France',
+  'FR-IDF': "d'Île-de-France",
+  'FR-NOR': 'de Normandie',
+  'FR-NAQ': 'de Nouvelle-Aquitaine',
+  'FR-OCC': "d'Occitanie",
+  'FR-PDL': 'des Pays de la Loire',
+  'FR-PAC': 'de Provence-Alpes-Côte d’Azur',
+  'FR-971': 'de Guadeloupe',
+  'FR-972': 'de Martinique',
+  'FR-973': 'de Guyane',
+  'FR-BL': 'de Saint-Barthélemy',
+  'FR-MF': 'de Saint-Martin',
+  'FR-PM': 'de Saint-Pierre-et-Miquelon',
+  'FR-974': 'de La Réunion',
+  'FR-976': 'de Mayotte',
+  'FR-WF': 'de Wallis-et-Futuna',
+  'FR-NC': 'de Nouvelle-Calédonie',
+  'FR-PF': 'de Polynésie française',
+  'FR-CP': 'de Clipperton',
+  'FR-TF': 'des Terres australes et antarctiques françaises',
+};
