@@ -2,7 +2,7 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { FichierInconnu, FournisseurChemin } from '../../src/api/fournisseurChemin.js';
+import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
 import { creeServeur } from '../../src/api/msc/index.js';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin, ressourceFactice } from './fauxObjets.js';
 
@@ -32,16 +32,18 @@ describe('La ressource page Contact', () => {
       expect(reponse.headers['content-type']).toMatch(/html/);
     });
 
-    it('sers le fichier html de jekyll', async () => {
-      let idDemandé: string;
-      fournisseurChemin.jekyll.contact = (id: string) => {
-        idDemandé = id;
-        return ressourceFactice();
-      };
+    it('sers la page des contacts', async () => {
+      const espionFournisseurDeChemin = vi.spyOn(fournisseurChemin.jekyll, 'page').mockReturnValue(ressourceFactice());
 
       await request(serveur).get('/contacts/fr-naq');
 
-      expect(idDemandé!).toBe('fr-naq');
+      expect(espionFournisseurDeChemin).toHaveBeenCalledExactlyOnceWith('contacts');
+    });
+
+    it('accepte le code région quelle que soit la casse', async () => {
+      const reponse = await request(serveur).get('/contacts/FR-NAQ');
+
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
   });
 
@@ -84,11 +86,7 @@ describe('La ressource page Contact', () => {
     }
   );
 
-  it('retourne une erreur 404 si la page n’est pas trouvée', async () => {
-    fournisseurChemin.jekyll.contact = (_id: string) => {
-      throw new FichierInconnu('');
-    };
-
+  it('retourne une erreur 404 si la région est inconnue', async () => {
     const page404 = vi.spyOn(fournisseurChemin.jekyll, 'page404').mockReturnValue(ressourceFactice());
 
     const réponse = await request(serveur).get('/contacts/inconnu').accept('text/html');

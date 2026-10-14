@@ -56,13 +56,6 @@ describe('le fournisseurChemin', () => {
       expect(fournisseurChemin.jekyll.service('demainspecialistecyber')).toBe(chemin);
     });
 
-    it('résout une URL de contact sans extension vers le fichier HTML', () => {
-      const chemin = `${process.cwd()}/front/_site/contacts/FR-IDF.html`;
-      siteFront.fichiers = () => [chemin];
-
-      expect(fournisseurChemin.jekyll.contact('FR-IDF')).toBe(chemin);
-    });
-
     it('refuse un fichier qui ne se trouve pas dans le site', () => {
       siteFront.fichiers = () => [];
 
