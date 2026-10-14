@@ -12,6 +12,7 @@ export const ressourceContacts = ({ entrepotContact }: ConfigurationServeur) => 
       reponse.send({
         regionaux: await entrepotContact.regionaux(),
         sectoriels: await entrepotContact.sectoriels(),
+        nationaux: await entrepotContact.nationaux(),
       });
     })
   );

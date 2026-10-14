@@ -1,4 +1,9 @@
-import { CodeSecteurContact, ContactSectoriel, ContactsRegionaux } from '../metier/contacts/contacts.js';
+import {
+  CodeSecteurContact,
+  ContactNational,
+  ContactSectoriel,
+  ContactsRegionaux,
+} from '../metier/contacts/contacts.js';
 import { EntrepotContact } from '../metier/contacts/entrepotContact.js';
 import { CodeRegion } from '../metier/referentielRegions.js';
 
@@ -314,6 +319,34 @@ const contactsParSecteur: Record<CodeSecteurContact, ContactSectoriel> = {
   },
 };
 
+const contactsNationaux: ContactNational[] = [
+  {
+    nom: 'CERT-FR',
+    description:
+      "Le CERT-FR est l'interlocuteur de référence des entités publiques et régulées (opérateurs d'importance vitale, opérateurs de services essentiels).",
+    contacts: {
+      introduction: 'Contactez le CERT-FR pour :',
+      liens: [
+        {
+          libelle: 'Déclarer un incident et/ou demander une assistance',
+          href: 'https://club.ssi.gouv.fr/#/declaration-incident',
+        },
+        {
+          libelle: 'Signaler une vulnérabilité produit',
+          href: 'https://club.ssi.gouv.fr/#/declaration-art-2321-4-1',
+        },
+      ],
+    },
+    lienPrincipal: { libelle: 'Toutes les coordonnées du CERT-FR', href: 'https://www.cert.ssi.gouv.fr/contact/' },
+  },
+  {
+    nom: '17 Cyber',
+    description:
+      'Le 17cyber propose aux particuliers et aux autres entités, un diagnostic permettant d’obtenir des recommandations en cas d’incident et d’être mis en relation avec un policier, un gendarme, un prestataire ou un CSIRT territorial.',
+    lienPrincipal: { libelle: 'Aller sur le 17Cyber', href: 'https://www.cybermalveillance.gouv.fr/diagnostic' },
+  },
+];
+
 export class EntrepotContactStatique implements EntrepotContact {
   async regionaux(): Promise<Record<CodeRegion, ContactsRegionaux>> {
     return contactsParRegion;
@@ -321,6 +354,10 @@ export class EntrepotContactStatique implements EntrepotContact {
 
   async regional(codeRegion: CodeRegion): Promise<ContactsRegionaux | undefined> {
     return contactsParRegion[codeRegion];
+  }
+
+  async nationaux(): Promise<ContactNational[]> {
+    return contactsNationaux;
   }
 
   async sectoriels(): Promise<Record<CodeSecteurContact, ContactSectoriel>> {

@@ -17,6 +17,7 @@ export class ChargeurContacts implements ChargeurDeProps {
     const contactsInitiaux = {
       regionaux: await this.entrepôtContact.regionaux(),
       sectoriels: await this.entrepôtContact.sectoriels(),
+      nationaux: await this.entrepôtContact.nationaux(),
     };
     const codeRegion = this.résolveurDePage.codeRegionContact(routeDemandée);
     return codeRegion ? { contactsInitiaux, regionInitiale: codeRegion } : { contactsInitiaux };
