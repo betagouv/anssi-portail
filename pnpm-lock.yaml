@@ -266,6 +266,9 @@ importers:
       '@napi-rs/canvas':
         specifier: ^1.0.5
         version: 1.0.10
+      '@office-kit/xlsx':
+        specifier: ^0.24.0
+        version: 0.24.0
       '@sentry/node':
         specifier: ^10.0.0
         version: 10.76.2(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(supports-color@10.2.2)
@@ -1608,6 +1611,10 @@ packages:
   '@noble/hashes@1.8.0':
     resolution: {integrity: sha512-jCs9ldd7NwzpgXDIf6P3+NrHh9/sD6CQdxHyjQI+h/6rDNo88ypBxxz45UDuZHz9r3tNz7N/VInSVoVdtXEI4A==}
     engines: {node: ^14.21.3 || >=16}
+
+  '@office-kit/xlsx@0.24.0':
+    resolution: {integrity: sha512-ZEcXX46wwHbKAeF/ULk1guKlVfZvxY1BimCzHfQpFCVRa46gXoLCd1PBTX3mS8huleSHHD0/adrjpZmyDmKnWA==}
+    engines: {node: '>=22.0.0'}
 
   '@opentelemetry/api-logs@0.220.0':
     resolution: {integrity: sha512-CmVa4ImJ+ynfrPMNaAXHET6Bhb44SwzmfyVJFq9ni2jgXJR/l7C6gfVFddNmHP+ZOkP9cf4f9DBe68qVLTHc9w==}
@@ -3127,6 +3134,9 @@ packages:
 
   fetch-event-stream@0.1.6:
     resolution: {integrity: sha512-GREtJ5HNikdU2AXtZ6E/5bk+aslMU6ie5mPG6H9nvsdDkkHQ6m5lHwmmmDTOBexok9hApQ7EprsXCdmz9ZC68w==}
+
+  fflate@0.8.3:
+    resolution: {integrity: sha512-tbZNuJrLwGUp3zshBtdy4W+ORxZuIh8a5ilyIEQDC5rY1f3U20JMry0Ll3WBzU58EZKsEuJFXhb5gwv8CsPvgA==}
 
   file-entry-cache@11.1.5:
     resolution: {integrity: sha512-+PFTHITI08JIGhnNpGNI8T8inUpgZfk3GNEqfT9R2zZV2iFXg3CvqzSl/uEhs7TSGujYRELEANyDvS8Fj7+S7Q==}
@@ -5953,6 +5963,11 @@ snapshots:
 
   '@noble/hashes@1.8.0': {}
 
+  '@office-kit/xlsx@0.24.0':
+    dependencies:
+      fflate: 0.8.3
+      saxes: 6.0.0
+
   '@opentelemetry/api-logs@0.220.0':
     dependencies:
       '@opentelemetry/api': 1.9.1
@@ -7484,6 +7499,8 @@ snapshots:
       picomatch: 4.0.7
 
   fetch-event-stream@0.1.6: {}
+
+  fflate@0.8.3: {}
 
   file-entry-cache@11.1.5:
     dependencies:
