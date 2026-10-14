@@ -55,6 +55,7 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
       join(process.cwd(), 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'badge.png'),
     banniereSvgRécompenseCyberdepart: () =>
       join(process.cwd(), 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'banniere.svg'),
+    modèleAnnuaireDeCrise: () => join(process.cwd(), 'src', 'api', 'outils', 'modele.xlsx'),
   },
   jekyll: {
     page403: () => ressourceFactice(),
