@@ -14,7 +14,7 @@
 
     counter-reset: item;
     list-style: none;
-    margin: 0;
-    padding: 1rem 0 0;
+    margin: 0 0 1.5rem 0;
+    padding: 1rem 0;
   }
 </style>

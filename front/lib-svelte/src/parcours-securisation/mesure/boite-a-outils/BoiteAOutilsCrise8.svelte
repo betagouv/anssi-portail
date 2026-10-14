@@ -81,7 +81,12 @@
     font-style: italic;
   }
 
+  .texte-standard-md {
+    margin-bottom: 0;
+  }
+
   dsfr-card {
+    margin-top: 1.5rem;
     min-height: auto;
   }
 </style>
