@@ -21,12 +21,12 @@ import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRecherc
 import { AdaptateurStatistiqueMiniTestsMémoire } from '../../src/infra/adaptateurStatistiqueMiniTestsMémoire.js';
 import { AdaptateurStatistiqueParcoursMémoire } from '../../src/infra/adaptateurStatistiqueParcoursMémoire.js';
 import { AdaptateurEnrichissement } from '../../src/infra/enrichissement/adaptateurEnrichissement.js';
+import { EntrepotContactStatique } from '../../src/infra/entrepotContactStatique.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js';
 import { Parcours } from '../../src/metier/parcours.js';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests.js';
 import { EntrepôtArticleMémoire } from '../persistance/entrepotArticleMemoire.js';
-import { EntrepotContactMemoire } from '../persistance/entrepotContactMemoire.js';
 import { EntrepotExigenceMemoire } from '../persistance/entrepotExigenceMemoire.js';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire.js';
 import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire.js';
@@ -340,7 +340,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   busEvenements: fabriqueBusPourLesTests(),
   entrepôtArticle: new EntrepôtArticleMémoire(),
   entrepotFavori: new EntrepotFavoriMemoire(),
-  entrepotContact: new EntrepotContactMemoire(),
+  entrepotContact: new EntrepotContactStatique(),
   entrepotFinancement: new EntrepotFinancementMemoire(),
   entrepotGuide: new EntrepotGuideMemoire(),
   entrepotGuideTravail: new EntrepotGuideTravailMemoire(),
