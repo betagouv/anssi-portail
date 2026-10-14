@@ -89,7 +89,7 @@ export const fournisseurChemin: FournisseurChemin = {
       join(process.cwd(), 'back', 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'badge.png'),
     banniereSvgRécompenseCyberdepart: () =>
       join(process.cwd(), 'back', 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'banniere.svg'),
-    modèleAnnuaireDeCrise: () => join(process.cwd(), 'back', 'src', 'api', 'outils', 'modele.xlsx'),
+    modèleAnnuaireDeCrise: () => join(process.cwd(), 'back', 'src', 'api', 'outils', 'modele-annuaire-de-crise.xlsx'),
   },
   jekyll: {
     page403: () => construisCheminVersArtefactJekyll('403.html'),

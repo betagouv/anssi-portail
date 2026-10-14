@@ -8,8 +8,8 @@ export const ressourceModeleAnnuaireDeCrise = ({ fournisseurChemin }: Configurat
   routeur.get(
     '/modele-annuaire-de-crise.xlsx',
     valideCorpsRequete(corpsVide),
-    filetRouteAsynchrone(async (_requete: Request, reponse: Response, suite: NextFunction) => {
-      reponse
+    filetRouteAsynchrone(async (_requête: Request, réponse: Response, suite: NextFunction) => {
+      réponse
         .attachment('modele-annuaire-de-crise.xlsx')
         .sendFile(fournisseurChemin.back.modèleAnnuaireDeCrise(), (erreur) => {
           if (erreur) suite(erreur); // sendFile ne rejette pas d'erreur, il faut la propager manuellement
