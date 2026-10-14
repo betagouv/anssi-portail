@@ -23,6 +23,21 @@ export type ContactSectoriel = {
   siteWeb: string;
 };
 
+export type LienContact = {
+  libelle: string;
+  href: string;
+};
+
+export type ContactNational = {
+  nom: string;
+  description: string;
+  contacts?: {
+    introduction: string;
+    liens: LienContact[];
+  };
+  lienPrincipal: LienContact;
+};
+
 export const codesSecteurContact = [
   'aviation',
   'defense',

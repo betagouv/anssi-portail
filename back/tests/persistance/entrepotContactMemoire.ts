@@ -1,11 +1,17 @@
-import { CodeSecteurContact, ContactSectoriel, ContactsRegionaux } from '../../src/metier/contacts/contacts.js';
+import {
+  CodeSecteurContact,
+  ContactNational,
+  ContactSectoriel,
+  ContactsRegionaux,
+} from '../../src/metier/contacts/contacts.js';
 import { EntrepotContact } from '../../src/metier/contacts/entrepotContact.js';
 import { CodeRegion } from '../../src/metier/referentielRegions.js';
 
 export class EntrepotContactMemoire implements EntrepotContact {
   constructor(
     private readonly contactsRegionaux: Partial<Record<CodeRegion, ContactsRegionaux>> = {},
-    private readonly contactsSectoriels: Partial<Record<CodeSecteurContact, ContactSectoriel>> = {}
+    private readonly contactsSectoriels: Partial<Record<CodeSecteurContact, ContactSectoriel>> = {},
+    private readonly contactsNationaux: ContactNational[] = []
   ) {}
 
   async regionaux() {
@@ -14,6 +20,10 @@ export class EntrepotContactMemoire implements EntrepotContact {
 
   async regional(codeRegion: CodeRegion) {
     return this.contactsRegionaux[codeRegion];
+  }
+
+  async nationaux() {
+    return this.contactsNationaux;
   }
 
   async sectoriels() {

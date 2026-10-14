@@ -142,47 +142,24 @@
 
         <h2>Contacts nationaux</h2>
 
-        <div class="carte-contact">
-          <h3>CERT-FR</h3>
-          <div>
-            <p>
-              Le CERT-FR est l'interlocuteur de référence des entités publiques et régulées (opérateurs d'importance
-              vitale, opérateurs de services essentiels).
-            </p>
-            <br />
-            <p>Contactez le CERT-FR pour :</p>
-            <ul>
-              <li>
-                <Lien
-                  href="https://club.ssi.gouv.fr/#/declaration-incident"
-                  libelle="Déclarer un incident et/ou demander une assistance"
-                  blank
-                ></Lien>
-              </li>
-              <li>
-                <Lien
-                  href="https://club.ssi.gouv.fr/#/declaration-art-2321-4-1"
-                  blank
-                  libelle="Signaler une vulnérabilité produit"
-                ></Lien>
-              </li>
-            </ul>
-            <Lien href="https://www.cert.ssi.gouv.fr/contact/" blank libelle="Toutes les coordonnées du CERT-FR"></Lien>
+        {#each contactsInitiaux?.nationaux ?? [] as { nom, description, contacts, lienPrincipal } (nom)}
+          <div class="carte-contact">
+            <h3>{nom}</h3>
+            <div>
+              <p>{description}</p>
+              <br />
+              {#if contacts}
+                <p>{contacts.introduction}</p>
+                <ul>
+                  {#each contacts.liens as { libelle, href } (href)}
+                    <li><Lien {href} {libelle} blank></Lien></li>
+                  {/each}
+                </ul>
+              {/if}
+              <Lien href={lienPrincipal.href} libelle={lienPrincipal.libelle} blank></Lien>
+            </div>
           </div>
-        </div>
-
-        <div class="carte-contact">
-          <h3>17 Cyber</h3>
-          <div>
-            <p>
-              Le 17cyber propose aux particuliers et aux autres entités, un diagnostic permettant d'obtenir des
-              recommandations en cas d'incident et d'être mis en relation avec un policier, un gendarme, un prestataire
-              ou un CSIRT territorial .
-            </p>
-            <br />
-            <Lien href="https://www.cybermalveillance.gouv.fr/diagnostic" blank libelle="Aller sur le 17Cyber"></Lien>
-          </div>
-        </div>
+        {/each}
       </div>
     {:else}
       <div class="aucun-resultat">

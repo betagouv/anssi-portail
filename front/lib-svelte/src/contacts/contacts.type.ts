@@ -18,9 +18,30 @@ export type ContactsRegionaux = {
   designation: 'territoire' | 'région';
 };
 
+export type ContactSectoriel = {
+  nom: string;
+  siteWeb: string;
+};
+
+export type LienContact = {
+  libelle: string;
+  href: string;
+};
+
+export type ContactNational = {
+  nom: string;
+  description: string;
+  contacts?: {
+    introduction: string;
+    liens: LienContact[];
+  };
+  lienPrincipal: LienContact;
+};
+
 export type ContactsInitiaux = {
   regionaux: Record<CodeRegion, ContactsRegionaux>;
   sectoriels: Record<CodeSecteurContact, ContactSectoriel>;
+  nationaux: ContactNational[];
 };
 
 export const CodeRegions = [
@@ -58,10 +79,6 @@ export const estCodeRegion = (codeRegion: string): codeRegion is CodeRegion => {
   return (CodeRegions as readonly string[]).includes(codeRegion);
 };
 
-export type ContactSectoriel = {
-  nom: string;
-  siteWeb: string;
-};
 export const secteursContacts = [
   { valeur: 'aviation', libelle: 'Aviation' },
   { valeur: 'defense', libelle: 'Défense' },

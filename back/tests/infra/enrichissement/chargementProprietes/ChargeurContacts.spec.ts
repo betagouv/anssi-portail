@@ -23,7 +23,9 @@ describe('Le chargeur de props des contacts', () => {
   it('fournit tous les contacts sur /contacts', async () => {
     const props = await chargeur.charge(dom, '/contacts');
 
-    expect(props).toStrictEqual({ contactsInitiaux: { regionaux: { 'FR-BRE': bretagne }, sectoriels: {} } });
+    expect(props).toStrictEqual({
+      contactsInitiaux: { regionaux: { 'FR-BRE': bretagne }, sectoriels: {}, nationaux: [] },
+    });
   });
 
   it('fournit aussi la région demandée sur /contacts/fr-bre', async () => {
