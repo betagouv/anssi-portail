@@ -59,6 +59,7 @@ Copy `.env.template` to `.env` and fill in:
 - ESLint + TypeScript in backend
 - Prek pre-commit hooks run `pnpm format`
 - **Always use `pnpm`, not `npm`** (enforced in preinstall script)
+- Use french diacritics in code (but not in filenames and URI)
 
 ## Docker & Deployment
 
