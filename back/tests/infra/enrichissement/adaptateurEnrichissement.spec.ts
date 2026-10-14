@@ -3,11 +3,11 @@ import {
   AdaptateurEnrichissement,
   fabriqueAdaptateurEnrichissement,
 } from '../../../src/infra/enrichissement/adaptateurEnrichissement.js';
+import { EntrepotContactStatique } from '../../../src/infra/entrepotContactStatique.js';
 import { ConstructeurDArticleAvecToutesLesMétadonnées } from '../../api/blog/constructeurDeResumeDArticle.js';
 import { fauxAdaptateurEnvironnement, fauxFournisseurDeChemin } from '../../api/fauxObjets.js';
 import { financementCyberPME, guideDevsecops, kitRelais } from '../../api/objetsPretsALEmploi.js';
 import { EntrepôtArticleMémoire } from '../../persistance/entrepotArticleMemoire.js';
-import { EntrepotContactMemoire } from '../../persistance/entrepotContactMemoire.js';
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire.js';
 import { EntrepotFinancementMemoire } from '../../persistance/entrepotFinancementMemoire.js';
 import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire.js';
@@ -29,7 +29,7 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       new EntrepotExigenceMemoire(),
       entrepôtFinancement,
       entrepôtArticle,
-      new EntrepotContactMemoire()
+      new EntrepotContactStatique()
     );
   });
 

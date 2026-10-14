@@ -2,18 +2,13 @@ import { JSDOM } from 'jsdom';
 import { describe, expect, it } from 'vitest';
 import { ChargeurContacts } from '../../../../src/infra/enrichissement/chargementProprietes/chargeurContacts.js';
 import { RésolveurDePage } from '../../../../src/infra/enrichissement/resolveurDePage.js';
-import { ContactsRegionaux } from '../../../../src/metier/contacts/contacts.js';
+import { EntrepotContactStatique } from '../../../../src/infra/entrepotContactStatique.js';
 import { EntrepôtArticleMémoire } from '../../../persistance/entrepotArticleMemoire.js';
-import { EntrepotContactMemoire } from '../../../persistance/entrepotContactMemoire.js';
 import { EntrepotFinancementMemoire } from '../../../persistance/entrepotFinancementMemoire.js';
 import { EntrepotGuideMemoire } from '../../../persistance/entrepotGuideMemoire.js';
 
 describe('Le chargeur de props des contacts', () => {
-  const bretagne: ContactsRegionaux = {
-    COT: { nom: 'Jérôme LAINE', email: 'bretagne@ssi.gouv.fr' },
-    designation: 'région',
-  };
-  const entrepotContact = new EntrepotContactMemoire({ 'FR-BRE': bretagne });
+  const entrepotContact = new EntrepotContactStatique();
   const chargeur = new ChargeurContacts(
     new RésolveurDePage(new EntrepotGuideMemoire(), new EntrepotFinancementMemoire(), new EntrepôtArticleMémoire()),
     entrepotContact
@@ -24,7 +19,11 @@ describe('Le chargeur de props des contacts', () => {
     const props = await chargeur.charge(dom, '/contacts');
 
     expect(props).toStrictEqual({
-      contactsInitiaux: { regionaux: { 'FR-BRE': bretagne }, sectoriels: {}, nationaux: [] },
+      contactsInitiaux: {
+        regionaux: await entrepotContact.regionaux(),
+        sectoriels: await entrepotContact.sectoriels(),
+        nationaux: await entrepotContact.nationaux(),
+      },
     });
   });
 
