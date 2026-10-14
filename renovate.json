@@ -34,6 +34,13 @@
       "minimumReleaseAge": "7 days"
     },
     {
+      "description": "Regroupe les montées de version patch de npm dans une seule PR",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["patch"],
+      "groupName": "npm - mises à jour patch",
+      "schedule": ["* * * * 1,4"]
+    },
+    {
       "matchPackageNames": ["@lab-anssi/ui-kit"],
       "enabled": false
     }
