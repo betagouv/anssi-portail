@@ -1,6 +1,7 @@
 <script lang="ts">
   import EtapeProcedure from './EtapeProcedure.svelte';
   import EtapesProcedure from './EtapesProcedure.svelte';
+  import OutilsModeleAnnuaireDeCrise from './OutilsModeleAnnuaireDeCrise.svelte';
 </script>
 
 <div>
@@ -12,7 +13,7 @@
 
   <EtapesProcedure>
     <EtapeProcedure>
-      <p class="texte-standard-md">
+      <p class="texte-standard-md avec-outil">
         <strong>Identifiez les rôles et les contacts à mobiliser en cas de cyberattaque</strong><br /><br />
         Listez, dans votre entité, qui assure la décision, l'informatique, la communication, le juridique et le lien avec
         l'assurance (une personne peut cumuler plusieurs rôles), et ajoutez les contacts externes clés (prestataire IT, hébergeur,
@@ -24,23 +25,7 @@
           organisation.</em
         >
       </p>
-      <dsfr-card
-        title="Téléchargez notre modèle d’annuaire de crise"
-        size="sm"
-        horizontal="true"
-        has-description="true"
-        description="XLSX"
-        download="true"
-        href="#"
-        enlarge="true"
-        has-badge="true"
-        src="/assets/images/parcours-securisation/outils/icone-telechargement-xlsx.svg"
-        has-header-badge
-      >
-        <div slot="headerbadges">
-          <dsfr-badge label="Outil sécurisation" type="status" status="success" size="md"></dsfr-badge>
-        </div>
-      </dsfr-card>
+      <OutilsModeleAnnuaireDeCrise />
     </EtapeProcedure>
 
     <EtapeProcedure>
@@ -85,8 +70,7 @@
     margin-bottom: 0;
   }
 
-  dsfr-card {
-    margin-top: 1.5rem;
-    min-height: auto;
+  .avec-outil {
+    margin-bottom: 1.5rem;
   }
 </style>
