@@ -167,5 +167,5 @@ export const enregistreLesRoutesAPI = (app: Express, configurationServeur: Confi
 
   enregistreRoute('/retour-mini-tests', ressourceRetourMiniTest(configurationServeur));
 
-  enregistreRoute('/outils', ressourceModeleAnnuaireDeCrise(configurationServeur));
+  enregistreRoute('/outils/modele-annuaire-de-crise.xlsx', ressourceModeleAnnuaireDeCrise(configurationServeur));
 };
