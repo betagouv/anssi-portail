@@ -1,6 +1,7 @@
 <script lang="ts">
   import EtapeProcedure from './EtapeProcedure.svelte';
   import EtapesProcedure from './EtapesProcedure.svelte';
+  import OutilRappelMiseAJourAnnuaire from './OutilRappelMiseAJourAnnuaire.svelte';
   import OutilsModeleAnnuaireDeCrise from './OutilsModeleAnnuaireDeCrise.svelte';
 </script>
 
@@ -47,7 +48,7 @@
     </EtapeProcedure>
 
     <EtapeProcedure>
-      <p class="texte-standard-md">
+      <p class="texte-standard-md avec-outil">
         <strong>Maintenez la liste à jour</strong><br /><br />
         Maintenir à jour cette liste, notamment à chaque départ, arrivée ou changement de prestataire.<br /><br />
         <em
@@ -57,6 +58,7 @@
         ><br /><br />
         <em>Vous pouvez aussi l’ajouter directement à votre propre agenda&nbsp;:</em>
       </p>
+      <OutilRappelMiseAJourAnnuaire />
     </EtapeProcedure>
   </EtapesProcedure>
 </div>
