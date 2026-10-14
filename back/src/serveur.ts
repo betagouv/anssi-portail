@@ -206,6 +206,7 @@ const host = process.env.HOST;
     adaptateurEnvironnement,
     generateurCodeSessionDeGroupe: new GenerateurAleatoireCodeSessionDeGroupe(entrepotSessionDeGroupe),
     adaptateurHachage,
+    adaptateurHorloge,
     messagerieInstantanee,
     entrepôtArticle,
     entrepotFinancement,

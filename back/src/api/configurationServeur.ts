@@ -4,6 +4,7 @@ import { AdaptateurCompression } from '../infra/adaptateurCompression.js';
 import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
 import { AdaptateurGestionErreur } from '../infra/adaptateurGestionErreurSentry.js';
 import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
+import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
 import { AdaptateurMonAideCyber } from '../infra/adaptateurMonAideCyber.js';
 import { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi.js';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise.js';
@@ -38,6 +39,7 @@ export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
   adaptateurGestionErreur: AdaptateurGestionErreur;
   adaptateurHachage: AdaptateurHachage;
+  adaptateurHorloge: AdaptateurHorloge;
   adaptateurJWT: AdaptateurJWT;
   adaptateurMonAideCyber: AdaptateurMonAideCyber;
   adaptateurOIDC: AdaptateurOIDC;
