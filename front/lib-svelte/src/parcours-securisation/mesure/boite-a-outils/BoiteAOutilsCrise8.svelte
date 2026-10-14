@@ -1,4 +1,6 @@
 <script lang="ts">
+  import EtapeProcedure from './EtapeProcedure.svelte';
+  import EtapesProcedure from './EtapesProcedure.svelte';
 </script>
 
 <div>
@@ -8,8 +10,8 @@
     outils et méthodes de votre choix.
   </p>
 
-  <ol>
-    <li>
+  <EtapesProcedure>
+    <EtapeProcedure>
       <p class="texte-standard-md">
         <strong>Identifiez les rôles et les contacts à mobiliser en cas de cyberattaque</strong><br /><br />
         Listez, dans votre entité, qui assure la décision, l'informatique, la communication, le juridique et le lien avec
@@ -39,27 +41,27 @@
           <dsfr-badge label="Outil sécurisation" type="status" status="success" size="md"></dsfr-badge>
         </div>
       </dsfr-card>
-    </li>
+    </EtapeProcedure>
 
-    <li>
+    <EtapeProcedure>
       <p class="texte-standard-md">
         <strong>Imprimez et répartissez plusieurs exemplaires</strong><br /><br />
         Imprimer plusieurs exemplaires et les répartir intelligemment : classeur de crise au bureau, domicile du dirigeant,
         véhicule ou sac du responsable informatique. Le principe : la liste doit rester lisible sans ordinateur, sans réseau
         et sans internet.
       </p>
-    </li>
+    </EtapeProcedure>
 
-    <li>
+    <EtapeProcedure>
       <p class="texte-standard-md">
         <strong>Protégez la diffusion du document</strong><br /><br />
         Protéger le document : il contient des données personnelles et une cartographie de vos prestataires. Informer les
         personnes concernées, limiter la diffusion aux seules personnes utiles, et ne pas laisser d’exemplaires traîner dans
         des espaces communs.
       </p>
-    </li>
+    </EtapeProcedure>
 
-    <li>
+    <EtapeProcedure>
       <p class="texte-standard-md">
         <strong>Maintenez la liste à jour</strong><br /><br />
         Maintenir à jour cette liste, notamment à chaque départ, arrivée ou changement de prestataire.<br /><br />
@@ -70,78 +72,13 @@
         ><br /><br />
         <em>Vous pouvez aussi l'ajouter directement à votre propre agenda&nbsp;:</em>
       </p>
-    </li>
-  </ol>
+    </EtapeProcedure>
+  </EtapesProcedure>
 </div>
 
 <style lang="scss">
   .texte-mention-xs {
     font-style: italic;
-  }
-
-  ol {
-    --largeur-numéro: 2.5rem;
-    --espacement-numéro: 1rem;
-    --largeur-totale: calc(var(--largeur-numéro) + var(--espacement-numéro));
-
-    counter-reset: item;
-    list-style: none;
-    margin: 0;
-    padding: 1rem 0 0;
-
-    li {
-      counter-increment: item;
-      position: relative;
-
-      padding-block: 1.5rem;
-      padding-inline-start: var(--largeur-totale);
-
-      &::before {
-        content: counter(item);
-
-        position: absolute;
-        inset-block-start: 1.5rem;
-        inset-inline-start: 0;
-
-        display: grid;
-        place-items: center;
-
-        inline-size: var(--largeur-numéro);
-        block-size: var(--largeur-numéro);
-        border-radius: 50%;
-
-        background-color: var(--background-alt-blue-france);
-        color: var(--text-title-blue-france);
-
-        font-size: 1.375rem;
-        font-weight: 700;
-        text-align: center;
-      }
-
-      &:not(:last-child)::after {
-        content: '';
-
-        position: absolute;
-        inset-block-end: 0;
-        inset-inline-start: var(--largeur-totale);
-        inset-inline-end: 0;
-
-        block-size: 1px;
-        background-color: var(--border-default-grey);
-      }
-
-      &:first-child {
-        padding-block-start: 0;
-
-        &::before {
-          inset-block-start: 0;
-        }
-      }
-
-      &:last-child {
-        padding-block-end: 0;
-      }
-    }
   }
 
   dsfr-card {
