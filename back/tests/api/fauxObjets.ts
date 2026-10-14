@@ -68,7 +68,6 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
     page: (_nom: string) => ressourceFactice(),
     ressource: (_nom: string) => ressourceFactice(),
     service: (_nom: string) => ressourceFactice(),
-    contact: (_nom: string) => ressourceFactice(),
     composantSvelteCompilé: (_nom: string) => ressourceFactice(),
 
     assets: () => ressourceFactice(),

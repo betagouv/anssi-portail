@@ -1,7 +1,8 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
-import { CodeRegion } from '../metier/referentielRegions.js';
+import { estCodeRegion } from '../metier/referentielRegions.js';
 import { ConfigurationServeur } from './configurationServeur.js';
+import { FichierInconnu } from './fournisseurChemin.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';
 
@@ -12,10 +13,14 @@ const ressourcePageContact = ({ fournisseurChemin }: ConfigurationServeur): Rout
     '/:id',
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
+      const idRegion = String(requete.params.id);
+      if (!estCodeRegion(idRegion.toUpperCase())) {
+        throw new FichierInconnu(idRegion);
+      }
       await reponse
         .contentType('text/html')
         .status(HttpStatusCode.Ok)
-        .envoieFichierEnrichi(fournisseurChemin.jekyll.contact(requete.params.id as CodeRegion));
+        .envoieFichierEnrichi(fournisseurChemin.jekyll.page('contacts'));
     })
   );
 

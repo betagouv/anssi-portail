@@ -1,6 +1,5 @@
 import { readdirSync } from 'node:fs';
 import { join } from 'path';
-import { CodeRegion } from '../metier/referentielRegions.js';
 import { ErreurTraverséeDeChemin } from './erreurs.js';
 
 export class FichierInconnu extends Error {
@@ -30,7 +29,6 @@ export interface FournisseurChemin {
 
     page: (nom: string) => string;
     ressource: (nom: string) => string;
-    contact: (codeRegion: CodeRegion) => string;
     service: (nom: string) => string;
     composantSvelteCompilé: (nom: string) => string;
 
@@ -100,7 +98,6 @@ export const fournisseurChemin: FournisseurChemin = {
 
     page: (nom: string) => construisCheminVersArtefactJekyll(nom, 'index.html'),
     ressource: (nom: string) => construisCheminVersArtefactJekyll('ressources', `${nom}.html`),
-    contact: (nom: string) => construisCheminVersArtefactJekyll('contacts', `${nom}.html`),
     service: (nom: string) => construisCheminVersArtefactJekyll('services', `${nom}.html`),
     composantSvelteCompilé: (nom: string) =>
       construisCheminVersArtefactJekyll('lib-svelte', 'dist', 'serveur', 'assets', `${nom}.js`),
