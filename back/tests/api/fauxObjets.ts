@@ -9,6 +9,7 @@ import {
   Middleware,
 } from '../../src/api/middlewares/middleware.js';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC.js';
+import { ServiceModeleAnnuaireDeCrise } from '../../src/api/outils/serviceModeleAnnuaireDeCrise.js';
 import { AdaptateurCellar } from '../../src/infra/adaptateurCellar.js';
 import { adaptateurCompression } from '../../src/infra/adaptateurCompression.js';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
@@ -325,6 +326,8 @@ export const fauxAdaptateurHorloge: AdaptateurHorloge = {
   maintenant: () => new Date(),
 };
 
+const entrepôtContact = new EntrepôtContactStatique();
+
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
   adaptateurGestionErreur: adaptateurGestionVide,
@@ -340,7 +343,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   busEvenements: fabriqueBusPourLesTests(),
   entrepôtArticle: new EntrepôtArticleMémoire(),
   entrepotFavori: new EntrepotFavoriMemoire(),
-  entrepôtContact: new EntrepôtContactStatique(),
+  entrepôtContact,
   entrepotFinancement: new EntrepotFinancementMemoire(),
   entrepotGuide: new EntrepotGuideMemoire(),
   entrepotGuideTravail: new EntrepotGuideTravailMemoire(),
@@ -353,6 +356,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   entrepôtModule: new EntrepôtModuleMémoire(),
   entrepôtQuestionVraieFausse: new EntrepôtQuestionVraieFausseMémoire(),
   serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(fauxFournisseurDeChemin),
+  serviceModeleAnnuaireDeCrise: new ServiceModeleAnnuaireDeCrise(fauxFournisseurDeChemin, entrepôtContact),
   entrepotUtilisateur,
   fournisseurChemin: fauxFournisseurDeChemin,
   generateurCodeSessionDeGroupe: fauxGenerateurCodeSessionDeGroupe,
