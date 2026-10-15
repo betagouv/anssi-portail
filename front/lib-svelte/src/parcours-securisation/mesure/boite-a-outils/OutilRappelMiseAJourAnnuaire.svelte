@@ -11,7 +11,7 @@
   href="/api/outils/rappel-mise-a-jour-annuaire-contacts.ics"
   enlarge="true"
   has-badge="true"
-  src="/assets/images/parcours-securisation/outils/icone-telechargement-xlsx.svg"
+  src="/assets/images/parcours-securisation/outils/icone-telechargement-ics.svg"
   has-header-badge
 >
   <div slot="headerbadges">
