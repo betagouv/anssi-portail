@@ -3,15 +3,30 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
+import { OutilTéléchargé } from '../../../src/bus/evenements/outilTelecharge.js';
+import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
+import { MockBusEvenement } from '../../bus/busPourLesTests.js';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
 import { jeanneDupont } from '../objetsPretsALEmploi.js';
 
 describe("La ressource du modèle de l'annuaire de crise", () => {
   let serveur: Express;
+  let busEvenements: MockBusEvenement;
+  let entrepotUtilisateur: EntrepotUtilisateur;
 
-  beforeEach(() => {
-    serveur = creeServeur(configurationDeTestDuServeur);
+  beforeEach(async () => {
+    busEvenements = new MockBusEvenement();
+    entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+
+    await entrepotUtilisateur.ajoute(jeanneDupont);
+
+    serveur = creeServeur({
+      ...configurationDeTestDuServeur,
+      busEvenements,
+      entrepotUtilisateur,
+    });
   });
 
   describe('sur une requête GET', () => {
@@ -52,6 +67,15 @@ describe("La ressource du modèle de l'annuaire de crise", () => {
       const { status } = await récupèreModèle('non-connecté');
 
       expect(status).toBe(HttpStatusCode.Unauthorized);
+    });
+
+    it('publie un évènement de téléchargement', async () => {
+      await récupèreModèle();
+
+      expect(busEvenements.aRecuUnEvenement(OutilTéléchargé)).toBe(true);
+      const évènement = busEvenements.recupereEvenement(OutilTéléchargé);
+      expect(évènement!.outil).toBe('Modèle_annuaire_crise');
+      expect(évènement!.email).toBe(jeanneDupont.email);
     });
   });
 });
