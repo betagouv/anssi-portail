@@ -1,7 +1,7 @@
 <script lang="ts">
+  import type { CodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
   import type { Option } from '../test-maturite/SelecteurSimple';
   import SelecteurSimple from '../test-maturite/SelecteurSimple.svelte';
-  import { secteursContacts } from './contacts.type';
 
   type Props = {
     id?: string;
@@ -11,9 +11,18 @@
 
   let { id = undefined, libelle, secteur = $bindable() }: Props = $props();
 
-  const options: Option[] = secteursContacts.map((s) => ({
-    valeur: s.valeur,
-    libelle: s.libelle,
+  const toutesLesOptions: Record<CodeSecteurContact, string> = {
+    aviation: 'Aviation',
+    defense: 'Défense',
+    sante: 'Santé',
+    maritime: 'Maritime',
+    'enseignement-recherche': 'Enseignement, recherche',
+    social: 'Social',
+  };
+
+  const options: Option[] = Object.entries(toutesLesOptions).map(([clef, valeur]) => ({
+    valeur: clef,
+    libelle: valeur,
   }));
 </script>
 

@@ -37,6 +37,7 @@
     "vitest-localstorage-mock": "^0.1.2"
   },
   "dependencies": {
+    "@anssi-portail/contacts-sectoriels": "workspace:^",
     "@sentry/browser": "^10.70.0",
     "axios": "catalog:",
     "dompurify": "^3.4.11",

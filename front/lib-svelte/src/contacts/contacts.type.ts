@@ -1,3 +1,5 @@
+import type { CodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
+
 export type ContactsRegionaux = {
   CSIRT?: {
     nom: string;
@@ -78,16 +80,3 @@ export type CodeRegion = (typeof CodeRegions)[number];
 export const estCodeRegion = (codeRegion: string): codeRegion is CodeRegion => {
   return (CodeRegions as readonly string[]).includes(codeRegion);
 };
-
-export const secteursContacts = [
-  { valeur: 'aviation', libelle: 'Aviation' },
-  { valeur: 'defense', libelle: 'Défense' },
-  { valeur: 'sante', libelle: 'Santé' },
-  { valeur: 'maritime', libelle: 'Maritime' },
-  { valeur: 'enseignement-recherche', libelle: 'Enseignement, recherche' },
-  { valeur: 'social', libelle: 'Social' },
-] as const;
-
-export const codesSecteurContact = secteursContacts.map((s) => s.valeur);
-
-export type CodeSecteurContact = (typeof codesSecteurContact)[number];

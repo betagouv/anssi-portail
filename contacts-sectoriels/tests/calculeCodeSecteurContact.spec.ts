@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { calculeCodeSecteurContact } from '../../src/contacts/contacts';
+import { calculeCodeSecteurContact } from '../src/calculeCodeSecteurContact.js';
 
 describe("Le secteur de contact est retrouvé pour un code d'activité", () => {
   it('est indéfini pour une activité non gérée', () => {
