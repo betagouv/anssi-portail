@@ -3,7 +3,11 @@ import { type Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
+import { OutilTéléchargé } from '../../../src/bus/evenements/outilTelecharge.js';
 import { AdaptateurHorloge } from '../../../src/infra/adaptateurHorloge.js';
+import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
+import { MockBusEvenement } from '../../bus/busPourLesTests.js';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurHorloge } from '../fauxObjets.js';
 import { jeanneDupont } from '../objetsPretsALEmploi.js';
@@ -11,14 +15,23 @@ import { jeanneDupont } from '../objetsPretsALEmploi.js';
 describe("La ressource du rappel de mise à jour de l'annuaire des contacts", () => {
   let serveur: Express;
   let adaptateurHorloge: AdaptateurHorloge;
+  let busEvenements: MockBusEvenement;
+  let entrepotUtilisateur: EntrepotUtilisateur;
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    busEvenements = new MockBusEvenement();
+    entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+
+    await entrepotUtilisateur.ajoute(jeanneDupont);
     adaptateurHorloge = {
       ...fauxAdaptateurHorloge,
     };
+
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       adaptateurHorloge,
+      busEvenements,
+      entrepotUtilisateur,
     });
   });
 
@@ -91,6 +104,15 @@ describe("La ressource du rappel de mise à jour de l'annuaire des contacts", ()
       const { status } = await récupèrelÉvènement('non-connecté');
 
       expect(status).toBe(HttpStatusCode.Unauthorized);
+    });
+
+    it('publie un évènement de téléchargement', async () => {
+      await récupèrelÉvènement();
+
+      expect(busEvenements.aRecuUnEvenement(OutilTéléchargé)).toBe(true);
+      const évènement = busEvenements.recupereEvenement(OutilTéléchargé);
+      expect(évènement!.outil).toBe('Rappel_mise-à-jour_annuaire');
+      expect(évènement!.email).toBe(jeanneDupont.email);
     });
   });
 });
