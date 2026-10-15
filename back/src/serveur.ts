@@ -9,6 +9,7 @@ import { fabriqueMiddleware } from './api/middlewares/middleware.js';
 import { fabriquePublieMesureConsultée } from './api/middlewares/publieMesureConsultee.js';
 import { creeServeur } from './api/msc/index.js';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC.js';
+import { ServiceModeleAnnuaireDeCrise } from './api/outils/serviceModeleAnnuaireDeCrise.js';
 import { BusEvenements } from './bus/busEvenements.js';
 import { cableTousLesAbonnes } from './bus/cablage.js';
 import { EntrepôtModulePostgres } from './entrepotModulePostgres.js';
@@ -227,6 +228,7 @@ const host = process.env.HOST;
     adaptateurEmail,
     generateurImage: new GenerateurImageAvif(),
     serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(fournisseurChemin),
+    serviceModeleAnnuaireDeCrise: new ServiceModeleAnnuaireDeCrise(fournisseurChemin, entrepôtContact),
     adaptateurCompression,
     gestionnairesRequêtesComplémentaires: {
       attributionParcours,

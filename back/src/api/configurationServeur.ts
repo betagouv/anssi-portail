@@ -35,6 +35,7 @@ import { FournisseurChemin } from './fournisseurChemin.js';
 import { ServiceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 import { GestionnaireRequêtesComplémentaires, Middleware } from './middlewares/middleware.js';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
+import { ServiceModeleAnnuaireDeCrise } from './outils/serviceModeleAnnuaireDeCrise.js';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -77,6 +78,7 @@ export type ConfigurationServeur = {
   cellar: AdaptateurCellar;
   serviceSanteGuides: ServiceSanteGuides;
   serviceRécompensesCyberDépart: ServiceRécompensesCyberDépart;
+  serviceModeleAnnuaireDeCrise: ServiceModeleAnnuaireDeCrise;
   adaptateurEmail: AdaptateurEmail;
   generateurImage: GenerateurImage;
   adaptateurCompression: AdaptateurCompression;
