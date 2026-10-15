@@ -6,13 +6,17 @@ import { getCellsInRow } from '@office-kit/xlsx/worksheet';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ServiceModeleAnnuaireDeCrise } from '../../../src/api/outils/serviceModeleAnnuaireDeCrise.js';
 import { EntrepôtContactStatique } from '../../../src/infra/entrepotContactStatique.js';
+import { CodeRégion } from '../../../src/metier/referentielRegions.js';
 import { fauxFournisseurDeChemin } from '../fauxObjets.js';
 
 describe("Le service du modèle de l'annuaire de crise", () => {
-  const récupèreModèleExcel = async ({ codeActivité }: { codeActivité?: string } = {}) => {
+  const récupèreModèleExcel = async ({
+    codeActivité,
+    codeRégion,
+  }: { codeActivité?: string; codeRégion?: CodeRégion } = {}) => {
     const service = new ServiceModeleAnnuaireDeCrise(fauxFournisseurDeChemin, new EntrepôtContactStatique());
 
-    const wb = await loadWorkbook(fromBuffer(await service.génèreModèle({ codeActivité })));
+    const wb = await loadWorkbook(fromBuffer(await service.génèreModèle({ codeActivité, codeRégion })));
     const feuille = getSheetByIndex(wb, 0);
     if (!feuille) {
       throw Error('Feuille non définie !');
@@ -151,6 +155,87 @@ describe("Le service du modèle de l'annuaire de crise", () => {
           expect.objectContaining({
             ref: getCoordinate(donnéesComplémentaire),
             target: 'https://www.defense.gouv.fr/drsd/ressources-entreprises/cert-entreprises-defense',
+          }),
+        ])
+      );
+    });
+  });
+
+  describe('gère les contacts régionaux', () => {
+    it("en les ajoutant dans les bonnes lignes lorsqu'ils existent", async () => {
+      const LigneDeContactRégionaux = 62;
+      const codeRégion: CodeRégion = 'FR-BRE';
+
+      const feuille = await récupèreModèleExcel({ codeRégion });
+
+      const [
+        _entêteCOT,
+        nomCOT,
+        fonctionCOT,
+        téléphoneCOT,
+        emailCOT,
+        emailDeSecoursCOT,
+        _statusCOT,
+        donnéesComplémentaireCOT,
+      ] = getCellsInRow(feuille, LigneDeContactRégionaux);
+
+      expect(nomCOT.value).toBe('Jérôme LAINE');
+      expect(fonctionCOT.value).toBeNull();
+      expect(téléphoneCOT.value).toBeNull();
+      expect(emailCOT.value).toBe('bretagne@ssi.gouv.fr');
+      expect(emailDeSecoursCOT.value).toBeNull();
+      expect(donnéesComplémentaireCOT.value).toBeNull();
+
+      const [
+        _entêteCSIRT,
+        nomCSIRT,
+        fonctionCSIRT,
+        téléphoneCSIRT,
+        emailCSIRT,
+        emailDeSecoursCSIRT,
+        _statusCSIRT,
+        donnéesComplémentaireCSIRT,
+      ] = getCellsInRow(feuille, LigneDeContactRégionaux + 1);
+
+      expect(nomCSIRT.value).toBe('Breizh Cyber');
+      expect(fonctionCSIRT.value).toBeNull();
+      expect(téléphoneCSIRT.value).toBe('0 800 200 008');
+      expect(emailCSIRT.value).toBeNull();
+      expect(emailDeSecoursCSIRT.value).toBeNull();
+      expect(donnéesComplémentaireCSIRT.value).toBe('site web - https://breizhcyber.bzh/');
+
+      expect(feuille.hyperlinks).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            ref: getCoordinate(donnéesComplémentaireCSIRT),
+            target: 'https://breizhcyber.bzh/',
+          }),
+        ])
+      );
+
+      const [
+        _entêteCampus,
+        nomCampus,
+        fonctionCampus,
+        téléphoneCampus,
+        emailCampus,
+        emailDeSecoursCampus,
+        _statusCampus,
+        donnéesComplémentaireCampus,
+      ] = getCellsInRow(feuille, LigneDeContactRégionaux + 2);
+
+      expect(nomCampus.value).toBe('Bretagne Cyber Alliance');
+      expect(fonctionCampus.value).toBeNull();
+      expect(téléphoneCampus.value).toBeNull();
+      expect(emailCampus.value).toBe('contact@cyberalliance.bzh');
+      expect(emailDeSecoursCampus.value).toBeNull();
+      expect(donnéesComplémentaireCampus.value).toBe('site web - https://www.cyberalliance.bzh/');
+
+      expect(feuille.hyperlinks).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            ref: getCoordinate(donnéesComplémentaireCampus),
+            target: 'https://www.cyberalliance.bzh/',
           }),
         ])
       );
