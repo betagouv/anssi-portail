@@ -12,6 +12,6 @@
 <dsfr-badge
   type="accent"
   accent="green-bourgeon"
-  label={`+${statistiques?.diagnosticsCyberArrondis ?? 0} organisations accompagnées 🚀`}
+  label={`+${statistiques?.démarchesDeSécurisationArrondies ?? 0} organisations accompagnées 🚀`}
   size="sm"
 ></dsfr-badge>

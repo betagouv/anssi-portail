@@ -17,7 +17,7 @@
 <div class="composition" class:large>
   <img class="illustration" src="/assets/images/homme-regardant-webinaire.avif" alt="Homme regardant un webinaire" />
   <div class="annotation">
-    <p class="fr-h5">+{statistiques?.diagnosticsCyberArrondis ?? 0}</p>
+    <p class="fr-h5">+{statistiques?.démarchesDeSécurisationArrondies ?? 0}</p>
     <p class="texte-standard-md">organisations<br />accompagnées</p>
   </div>
   <div class="legende-illustree">

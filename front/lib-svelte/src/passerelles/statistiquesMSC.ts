@@ -36,7 +36,6 @@ export type Statistiques = {
       optimal: number;
     };
   };
-  diagnosticsCyberArrondis: number;
   satisfactionUtilisateur: number;
   testsRéalisés: number;
   démarchesDeSécurisation: number;
@@ -53,11 +52,9 @@ export const récupèreStatistiquesMSC = async (options?: { urlBase: string }): 
     miniTests,
     parcoursSécurisation,
   } = réponse.data;
-  const diagnosticsCyberArrondis = Math.floor(diagnosticsCyber / 100) * 100;
   const testsRéalisés = miniTests.vraiFaux + testsMaturite.total + miniTests.exposition + miniTests.reflexesCyber;
   const démarchesDeSécurisation = diagnosticsCyber + parcoursSécurisation.nombreDémarrés;
   return {
-    diagnosticsCyberArrondis,
     satisfactionUtilisateur,
     testsRéalisés,
     testsMaturite,
