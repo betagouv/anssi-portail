@@ -40,6 +40,7 @@
   let commentaire = $state('');
   let erreurCommentaire = $state(false);
   let emailDeContact: string | undefined = $state();
+  const pageSource = sessionStorage.getItem('pageSource');
 
   $effect(() => {
     if (satisfaction) erreurSatisfaction = false;
@@ -71,7 +72,7 @@
     if (erreurCommentaire || erreurSatisfaction) return;
 
     try {
-      await axios.post('/api/avis-utilisateur', {
+      await axios.post(`/api/avis-utilisateur?pageSource=${pageSource}`, {
         niveauDeSatisfaction: satisfaction,
         commentaire,
         emailDeContact,

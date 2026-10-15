@@ -86,5 +86,16 @@ describe('La ressource avis utilisateur', () => {
       expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       expect(reponse.body.fieldErrors.emailDeContact[0]).toBe("L'email est invalide");
     });
+
+    it('envoie la page source à la messagerie instantanée', async () => {
+      let avisUtilisateurEnvoye: AvisUtilisateur | undefined;
+      messagerieInstantanee.notifieUnAvisUtilisateur = async (avisUtilisateur: AvisUtilisateur) => {
+        avisUtilisateurEnvoye = avisUtilisateur;
+      };
+
+      await request(serveur).post('/api/avis-utilisateur?pageSource=/mesures/CRISE.8').send(avisUtilisateur);
+
+      expect(avisUtilisateurEnvoye!.pageSource).toBe('/mesures/CRISE.8');
+    });
   });
 });

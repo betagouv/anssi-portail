@@ -17,10 +17,12 @@ export const ressourceAvisUtilisateur = ({ busEvenements, messagerieInstantanee 
     filetRouteAsynchrone(
       async (requete: CorpsDeRequeteTypee<z.output<typeof schemaRessourceAvisUtilisateur>>, reponse: Response) => {
         const { niveauDeSatisfaction, commentaire, emailDeContact } = requete.body;
+        const pageSource = requete.query.pageSource as string;
         await messagerieInstantanee.notifieUnAvisUtilisateur({
           niveauDeSatisfaction,
           commentaire,
           emailDeContact,
+          pageSource,
         });
         await busEvenements.publie(new AvisUtilisateurDonne({ niveauDeSatisfaction, emailDeContact }));
         reponse.sendStatus(HttpStatusCode.Created);
