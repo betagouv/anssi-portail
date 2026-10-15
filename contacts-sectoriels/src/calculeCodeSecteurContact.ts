@@ -4,7 +4,7 @@ export const calculeCodeSecteurContact = (codeActivite: string): CodeSecteurCont
   if (codeActivite === '25.40Z' || codeActivite === '84.22Z') {
     return 'defense';
   }
-  if (codeActivite.startsWith('86.') || codeActivite.startsWith('84.12')) {
+  if (codeActivite.startsWith('86') || codeActivite.startsWith('84.12')) {
     return 'sante';
   }
 
@@ -13,7 +13,7 @@ export const calculeCodeSecteurContact = (codeActivite: string): CodeSecteurCont
   }
 
   if (
-    codeActivite.startsWith('50.') ||
+    codeActivite.startsWith('50') ||
     codeActivite.startsWith('52.22') ||
     codeActivite === '52.24A' ||
     codeActivite.startsWith('42.91') ||
@@ -22,11 +22,11 @@ export const calculeCodeSecteurContact = (codeActivite: string): CodeSecteurCont
     return 'maritime';
   }
 
-  if (codeActivite.startsWith('85.') || codeActivite.startsWith('72.1')) {
+  if (codeActivite.startsWith('85') || codeActivite.startsWith('72.1')) {
     return 'enseignement-recherche';
   }
 
-  if (codeActivite.startsWith('51.')) {
+  if (codeActivite.startsWith('51')) {
     return 'aviation';
   }
 
