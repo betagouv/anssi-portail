@@ -1,4 +1,5 @@
 import { readFile } from 'node:fs/promises';
+import { calculeCodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
 import { Cell, getCoordinate } from '@office-kit/xlsx/cell';
 import { loadWorkbook } from '@office-kit/xlsx/io';
 import { fromBuffer, workbookToBuffer } from '@office-kit/xlsx/node';
@@ -8,6 +9,7 @@ import { EntrepôtContact } from '../../metier/contacts/entrepotContact.js';
 import { FournisseurChemin } from '../fournisseurChemin.js';
 
 const LIGNE_PREMIER_CONTACT_NATIONAL = 70;
+const LIGNE_CONTACT_SECTORIEL = 66;
 
 const changeLeTitreDeLaFeuille = (feuille: Worksheet): void => {
   const dateFormattée = new Date().toLocaleDateString('fr-FR').replace(/\//g, '-');
@@ -30,7 +32,7 @@ export class ServiceModeleAnnuaireDeCrise {
     private readonly entrepôtContact: EntrepôtContact
   ) {}
 
-  async génèreModèle(): Promise<Buffer> {
+  async génèreModèle({ codeActivité }: { codeActivité?: string } = {}): Promise<Buffer> {
     const fichier = await readFile(this.fournisseurChemin.back.modèleAnnuaireDeCrise());
 
     const wb = await loadWorkbook(fromBuffer(fichier));
@@ -42,6 +44,7 @@ export class ServiceModeleAnnuaireDeCrise {
     changeLeTitreDeLaFeuille(feuille);
 
     await this.complèteContactsNationaux(feuille);
+    await this.complèteContactSectoriel(feuille, codeActivité);
 
     return await workbookToBuffer(wb);
   }
@@ -60,5 +63,18 @@ export class ServiceModeleAnnuaireDeCrise {
         contacts[i].lienPrincipal.href
       );
     }
+  }
+
+  private async complèteContactSectoriel(feuille: Worksheet, codeActivité?: string): Promise<void> {
+    if (!codeActivité) return;
+    const codeSecteurContact = calculeCodeSecteurContact(codeActivité);
+    if (!codeSecteurContact) return;
+
+    const contact = (await this.entrepôtContact.sectoriels())[codeSecteurContact];
+
+    const [_entête, nom, _fonction, _téléphone, _email, _emailDeSecours, _status, donnéesComplémentaire] =
+      getCellsInRow(feuille, LIGNE_CONTACT_SECTORIEL);
+    nom.value = contact.nom;
+    ajouteUnLien(feuille, donnéesComplémentaire, `${contact.siteWeb}`, contact.siteWeb);
   }
 }
