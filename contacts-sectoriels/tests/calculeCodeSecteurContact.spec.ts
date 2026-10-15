@@ -1,11 +1,11 @@
+import { calculeCodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
 import { describe, expect, it } from 'vitest';
-import { calculeCodeSecteurContact } from '../src/calculeCodeSecteurContact.js';
 
 describe("Le secteur de contact est retrouvé pour un code d'activité", () => {
   it('est indéfini pour une activité non gérée', () => {
     const codeSecteur = calculeCodeSecteurContact('01.11Z');
 
-    expect(codeSecteur).toBe(undefined);
+    expect(codeSecteur).toBeUndefined();
   });
 
   describe('concernant le secteur Aviation', () => {
@@ -44,7 +44,7 @@ describe("Le secteur de contact est retrouvé pour un code d'activité", () => {
 
     it("pour la division des services d'administration publique (tutelle) de la santé, de la formation, de la culture et des services sociaux, autre que sécurité sociale", () => {
       expect(calculeCodeSecteurContact('84.12Z')).toBe('sante');
-      expect(calculeCodeSecteurContact('84.11Z')).toBe(undefined);
+      expect(calculeCodeSecteurContact('84.11Z')).toBeUndefined();
     });
   });
 
@@ -62,21 +62,21 @@ describe("Le secteur de contact est retrouvé pour un code d'activité", () => {
     });
 
     it("pour la division de l'entreposage et services auxiliaires des transports", () => {
-      expect(calculeCodeSecteurContact('52.10A')).toBe(undefined);
+      expect(calculeCodeSecteurContact('52.10A')).toBeUndefined();
       expect(calculeCodeSecteurContact('52.22Z')).toBe('maritime');
       expect(calculeCodeSecteurContact('52.24A')).toBe('maritime');
-      expect(calculeCodeSecteurContact('52.24B')).toBe(undefined);
+      expect(calculeCodeSecteurContact('52.24B')).toBeUndefined();
     });
 
     it('pour la division Génie civil', () => {
-      expect(calculeCodeSecteurContact('42.11Z')).toBe(undefined);
+      expect(calculeCodeSecteurContact('42.11Z')).toBeUndefined();
       expect(calculeCodeSecteurContact('42.91Z')).toBe('maritime');
-      expect(calculeCodeSecteurContact('42.99Z')).toBe(undefined);
+      expect(calculeCodeSecteurContact('42.99Z')).toBeUndefined();
     });
 
     it('pour la division Activités de location et location-bail', () => {
       expect(calculeCodeSecteurContact('77.34Z')).toBe('maritime');
-      expect(calculeCodeSecteurContact('77.33Z')).toBe(undefined);
+      expect(calculeCodeSecteurContact('77.33Z')).toBeUndefined();
     });
   });
 
@@ -88,7 +88,15 @@ describe("Le secteur de contact est retrouvé pour un code d'activité", () => {
     it('pour la division Recherche-développement scientifique', () => {
       expect(calculeCodeSecteurContact('72.11Z')).toBe('enseignement-recherche');
       expect(calculeCodeSecteurContact('72.19Z')).toBe('enseignement-recherche');
-      expect(calculeCodeSecteurContact('72.20Z')).toBe(undefined);
+      expect(calculeCodeSecteurContact('72.20Z')).toBeUndefined();
     });
+  });
+});
+
+describe("Le secteur de contact n'est pas retrouvé", () => {
+  it("pour un code d'activité invalide", () => {
+    expect(calculeCodeSecteurContact('toto')).toBeUndefined();
+    expect(calculeCodeSecteurContact('72.11z')).toBeUndefined();
+    expect(calculeCodeSecteurContact('7211Z')).toBeUndefined();
   });
 });

@@ -1,34 +1,38 @@
 import { type CodeSecteurContact } from './codesSecteurContact.js';
 
-export const calculeCodeSecteurContact = (codeActivite: string): CodeSecteurContact | undefined => {
-  if (codeActivite === '25.40Z' || codeActivite === '84.22Z') {
-    return 'defense';
-  }
-  if (codeActivite.startsWith('86') || codeActivite.startsWith('84.12')) {
-    return 'sante';
-  }
+const codeSecteurContactParCodeNAF = new Map<string, CodeSecteurContact>([
+  ['25.40Z', 'defense'],
+  ['84.22Z', 'defense'],
 
-  if (codeActivite.startsWith('84.3')) {
-    return 'social';
-  }
+  ['84.12', 'sante'],
+  ['86', 'sante'],
 
-  if (
-    codeActivite.startsWith('50') ||
-    codeActivite.startsWith('52.22') ||
-    codeActivite === '52.24A' ||
-    codeActivite.startsWith('42.91') ||
-    codeActivite.startsWith('77.34')
-  ) {
-    return 'maritime';
-  }
+  ['84.3', 'social'],
 
-  if (codeActivite.startsWith('85') || codeActivite.startsWith('72.1')) {
-    return 'enseignement-recherche';
-  }
+  ['42.91', 'maritime'],
+  ['50', 'maritime'],
+  ['52.22', 'maritime'],
+  ['52.24A', 'maritime'],
+  ['77.34', 'maritime'],
 
-  if (codeActivite.startsWith('51')) {
-    return 'aviation';
-  }
+  ['72.1', 'enseignement-recherche'],
+  ['85', 'enseignement-recherche'],
 
-  return undefined;
+  ['51', 'aviation'],
+]);
+
+export const calculeCodeSecteurContact = (codeActivité: string): CodeSecteurContact | undefined => {
+  const NAF_REGEX = /^(\d{2})\.(\d)(\d)([A-Z])$/;
+  const match = codeActivité.match(NAF_REGEX);
+
+  if (!match) return undefined;
+
+  const [, division, groupe, classe, sousClasse] = match;
+
+  return (
+    codeSecteurContactParCodeNAF.get(`${division}.${groupe}${classe}${sousClasse}`) ??
+    codeSecteurContactParCodeNAF.get(`${division}.${groupe}${classe}`) ??
+    codeSecteurContactParCodeNAF.get(`${division}.${groupe}`) ??
+    codeSecteurContactParCodeNAF.get(`${division}`)
+  );
 };
