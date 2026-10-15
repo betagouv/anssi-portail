@@ -46,7 +46,7 @@
     const statistiques: Statistiques = await récupèreStatistiquesMSC({ urlBase });
     badges = [
       {
-        label: `+${statistiques.diagnosticsCyberArrondis} organisations accompagnées`,
+        label: `+${statistiques.démarchesDeSécurisationArrondies} organisations accompagnées`,
         accent: 'yellow-tournesol',
       },
       {
