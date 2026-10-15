@@ -3,9 +3,9 @@ import { createEventsAsync, EventAttributes } from 'ics';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
 
-export const ressourceRappelMiseAJourAnnuaireContacts = ({ adaptateurHorloge }: ConfigurationServeur) => {
+export const ressourceRappelMiseAJourAnnuaireContacts = ({ adaptateurHorloge, middleware }: ConfigurationServeur) => {
   const routeur = Router();
-  routeur.get('/', valideCorpsRequete(corpsVide), async (_, réponse) => {
+  routeur.get('/', middleware.verifieJWT, valideCorpsRequete(corpsVide), async (_, réponse) => {
     const maintenant = adaptateurHorloge.maintenant();
     const dansUnAn: [number, number, number] = [
       maintenant.getFullYear() + 1,

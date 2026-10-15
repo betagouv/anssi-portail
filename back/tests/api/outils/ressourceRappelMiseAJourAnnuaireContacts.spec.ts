@@ -4,7 +4,9 @@ import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
 import { AdaptateurHorloge } from '../../../src/infra/adaptateurHorloge.js';
+import { encodeSession } from '../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurHorloge } from '../fauxObjets.js';
+import { jeanneDupont } from '../objetsPretsALEmploi.js';
 
 describe("La ressource du rappel de mise à jour de l'annuaire des contacts", () => {
   let serveur: Express;
@@ -21,8 +23,12 @@ describe("La ressource du rappel de mise à jour de l'annuaire des contacts", ()
   });
 
   describe('sur une requête GET', () => {
-    const récupèrelÉvènement = async () =>
-      await request(serveur).get('/api/outils/rappel-mise-a-jour-annuaire-contacts.ics');
+    const récupèrelÉvènement = async (mode: 'connecté' | 'non-connecté' = 'connecté') => {
+      const ressource = request(serveur).get('/api/outils/rappel-mise-a-jour-annuaire-contacts.ics');
+      return mode === 'connecté'
+        ? ressource.set('Cookie', [encodeSession({ email: jeanneDupont.email, token: 'valide' })])
+        : ressource;
+    };
 
     it('réponds 200', async () => {
       const { status } = await récupèrelÉvènement();
@@ -79,6 +85,12 @@ describe("La ressource du rappel de mise à jour de l'annuaire des contacts", ()
 
       const lignes = text.split('\r\n');
       expect(lignes[11]).toBe('DTSTART;VALUE=DATE:20271014');
+    });
+
+    it('refuse un utilisateur non connecté', async () => {
+      const { status } = await récupèrelÉvènement('non-connecté');
+
+      expect(status).toBe(HttpStatusCode.Unauthorized);
     });
   });
 });
