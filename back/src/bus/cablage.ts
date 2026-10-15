@@ -13,6 +13,7 @@ import { consigneMAJFavorisUtilisateurDansJournal } from './consigneMAJFavorisUt
 import { consigneMesureConsulteeDansJournal } from './consigneMesureConsulteeDansJournal.js';
 import { consigneMesurePriseEnCompteDansJournal } from './consigneMesurePriseEnCompteDansJournal.js';
 import { consigneModuleTerminéDansJournal } from './consigneModuleTerminéDansJournal.js';
+import { consigneOutilTéléchargéDansJournal } from './consigneOutilTelechargeDansJournal.js';
 import { consigneParcoursAllégéTerminéDansJournal } from './consigneParcoursAllegeTermineDansJournal.js';
 import { consigneParcoursChangéDansJournal } from './consigneParcoursChangeDansJournal.js';
 import { consigneParcoursCompletTerminéDansJournal } from './consigneParcoursCompletTermineDansJournal.js';
@@ -38,6 +39,7 @@ import { CompteCree } from './evenements/compteCree.js';
 import { MesureConsultee } from './evenements/mesureConsultee.js';
 import { MesurePriseEnCompte } from './evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from './evenements/moduleTermine.js';
+import { OutilTéléchargé } from './evenements/outilTelecharge.js';
 import { ParcoursAllégéTerminé } from './evenements/parcoursAllegeTermine.js';
 import { ParcoursChangé } from './evenements/parcoursChange.js';
 import { ParcoursCompletTerminé } from './evenements/parcoursCompletTermine.js';
@@ -239,6 +241,15 @@ export const cableTousLesAbonnes = ({
   busEvenements.abonne(
     SimulationRéflexesCyberTerminé,
     consigneRéflexesCyberTerminéDansJournal({
+      adaptateurJournal,
+      adaptateurHorloge,
+      adaptateurHachage,
+    })
+  );
+
+  busEvenements.abonne(
+    OutilTéléchargé,
+    consigneOutilTéléchargéDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,

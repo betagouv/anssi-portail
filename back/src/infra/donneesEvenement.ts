@@ -2,6 +2,7 @@ import { AvisMesureDonne } from '../bus/evenements/avisMesureDonne.js';
 import { MesureConsultee } from '../bus/evenements/mesureConsultee.js';
 import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
+import { OutilTéléchargé } from '../bus/evenements/outilTelecharge.js';
 import { RetourArticleDonné } from '../bus/evenements/retourArticleDonne.js';
 import { SimulationRéflexesCyberRéponseSoumise } from '../bus/evenements/simulationReflexesCyberReponseSoumise.js';
 import { SimulationRéflexesCyberTerminé } from '../bus/evenements/simulationReflexesCyberTermine.js';
@@ -42,7 +43,8 @@ export type DonneesEvenement =
   | DonneesSimulationRéflexesCyberReponseSoumise
   | DonneesSimulationRéflexesCyberTermine
   | DonnéesRetourTestReflexesCyber
-  | DonnéesRetourArticle;
+  | DonnéesRetourArticle
+  | DonneesOutilTéléchargé;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -194,4 +196,9 @@ type DonneesSimulationRéflexesCyberReponseSoumise = Evenement<
 type DonneesSimulationRéflexesCyberTermine = Evenement<
   'SIMULATION_REFLEXES_CYBER_TERMINEE',
   Omit<SimulationRéflexesCyberTerminé, 'email'> & { idUtilisateur?: string }
+>;
+
+type DonneesOutilTéléchargé = Evenement<
+  'OUTIL_TÉLÉCHARGÉ',
+  Omit<OutilTéléchargé, 'email'> & { idUtilisateur?: string }
 >;
