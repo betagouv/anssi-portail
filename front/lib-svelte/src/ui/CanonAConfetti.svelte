@@ -38,6 +38,8 @@
     '#E0A3F2',
   ];
 
+  // FIX: Faux positif, voir issue https://github.com/sveltejs/eslint-plugin-svelte/issues/1607.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let { lectureAutomatique: autoplay = false, couleurs = couleursParDéfaut, ref = $bindable() }: Props = $props();
 
   let canevas = $state<HTMLCanvasElement | null>(null);
