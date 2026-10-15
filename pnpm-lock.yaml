@@ -251,6 +251,9 @@ importers:
       '@anssi-portail/axios':
         specifier: workspace:^
         version: link:../axios
+      '@anssi-portail/contacts-sectoriels':
+        specifier: workspace:^
+        version: link:../contacts-sectoriels
       '@aws-sdk/client-s3':
         specifier: ^3.1112.0
         version: 3.1148.0
@@ -494,6 +497,9 @@ importers:
 
   front/lib-svelte:
     dependencies:
+      '@anssi-portail/contacts-sectoriels':
+        specifier: workspace:^
+        version: link:../../contacts-sectoriels
       '@sentry/browser':
         specifier: ^10.70.0
         version: 10.76.2

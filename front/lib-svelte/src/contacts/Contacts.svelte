@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { estCodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
   import { untrack } from 'svelte';
   import { creeLeFragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
   import { profilStore } from '../stores/profil.store';
@@ -7,7 +8,6 @@
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Heros from '../ui/Heros.svelte';
   import Lien from '../ui/Lien.svelte';
-  import { estCodeSecteurContact } from './contacts';
   import { estCodeRegion, type ContactsInitiaux } from './contacts.type';
   import FiltresContacts from './FiltresContacts.svelte';
   import NoteInformation from './NoteInformation.svelte';

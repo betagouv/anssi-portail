@@ -37,14 +37,3 @@ export type ContactNational = {
   };
   lienPrincipal: LienContact;
 };
-
-export const codesSecteurContact = [
-  'aviation',
-  'defense',
-  'sante',
-  'maritime',
-  'enseignement-recherche',
-  'social',
-] as const;
-
-export type CodeSecteurContact = (typeof codesSecteurContact)[number];
