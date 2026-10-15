@@ -11,6 +11,7 @@ export type AvisUtilisateur = {
   niveauDeSatisfaction: NiveauDeSatisfaction;
   commentaire: string;
   emailDeContact?: string;
+  pageSource?: string;
 };
 
 export type AvisNegatifSurUneMesure = {

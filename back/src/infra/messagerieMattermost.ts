@@ -37,6 +37,7 @@ Email de contact : ${retourExperience.emailDeContact}`;
 Un utilisateur a laissé un avis
 Niveau de satisfaction : ${avisUtilisateur.niveauDeSatisfaction}
 Commentaire : ${aseptiseMarkdown(avisUtilisateur.commentaire ?? '')}
+Page source : ${aseptiseMarkdown(avisUtilisateur.pageSource ?? '')}
 Email de contact : ${avisUtilisateur.emailDeContact}`;
       await axios.post(urlWebhook, { text: message });
     }
