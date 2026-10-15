@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import type { Option } from './SelecteurSimple';
 
   type Props = {
@@ -25,7 +26,7 @@
   label={libelle}
   placeholder={optionDefautIntitule}
   placeholderDisabled={!optionDefautSelectionnable}
-  options={options.map((o) => ({ label: o.libelle, value: o.valeur }))}
+  options={enPropriétéWebC(options.map((o) => ({ label: o.libelle, value: o.valeur })))}
   value={valeurSelectionnee}
   onvaluechanged={(e: CustomEvent<string | object>) => (valeurSelectionnee = e.detail)}
 >
