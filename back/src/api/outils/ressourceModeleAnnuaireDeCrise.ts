@@ -3,10 +3,11 @@ import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
 
-export const ressourceModeleAnnuaireDeCrise = ({ fournisseurChemin }: ConfigurationServeur) => {
+export const ressourceModeleAnnuaireDeCrise = ({ fournisseurChemin, middleware }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
     '/',
+    middleware.verifieJWT,
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requête: Request, réponse: Response, suite: NextFunction) => {
       réponse
