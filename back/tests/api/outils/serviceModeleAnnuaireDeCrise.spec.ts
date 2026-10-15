@@ -9,7 +9,7 @@ import { EntrepôtContactStatique } from '../../../src/infra/entrepotContactStat
 import { fauxFournisseurDeChemin } from '../fauxObjets.js';
 
 describe("Le service du modèle de l'annuaire de crise", () => {
-  const récupèreModeleExcel = async () => {
+  const récupèreModèleExcel = async () => {
     const service = new ServiceModeleAnnuaireDeCrise(fauxFournisseurDeChemin, new EntrepôtContactStatique());
 
     const wb = await loadWorkbook(fromBuffer(await service.génèreModèle()));
@@ -30,7 +30,7 @@ describe("Le service du modèle de l'annuaire de crise", () => {
   });
 
   it('change le nom de la feuille', async () => {
-    const feuille = await récupèreModeleExcel();
+    const feuille = await récupèreModèleExcel();
 
     expect(feuille.title).toBe('Version du 17-11-2018');
   });
@@ -39,7 +39,7 @@ describe("Le service du modèle de l'annuaire de crise", () => {
     const premièreligneDesContactsNationnaux = 70;
     const deuxièmeLigneDesContactsNationaux = 71;
 
-    const feuille = await récupèreModeleExcel();
+    const feuille = await récupèreModèleExcel();
 
     const [
       _entêteCERT,
