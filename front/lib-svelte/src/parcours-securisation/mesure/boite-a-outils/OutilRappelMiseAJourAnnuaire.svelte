@@ -3,8 +3,9 @@
 </script>
 
 <Outil
-  titre="Télécharger un rappel annuel"
   href="/api/outils/rappel-mise-a-jour-annuaire-contacts.ics"
+  identifiant="rappel-mise-a-jour-annuaire-contacts.ics"
   taille="1 Ko"
+  titre="Télécharger un rappel annuel"
   typeFichier="ICS"
 />

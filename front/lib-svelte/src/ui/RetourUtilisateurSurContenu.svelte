@@ -35,7 +35,7 @@
       {
         article: `/api/articles/${identifiantCible}/avis`,
         mesure: `/api/mesures/${identifiantCible}/avis`,
-        outil: ``,
+        outil: `/api/outils/retours/${identifiantCible}`,
 
         exposition: '/api/retour-mini-tests/exposition',
         'reflexes-cyber': '/api/retour-mini-tests/reflexes-cyber',
