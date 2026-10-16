@@ -4,6 +4,7 @@ import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
 import { OutilTéléchargé } from '../bus/evenements/outilTelecharge.js';
 import { RetourArticleDonné } from '../bus/evenements/retourArticleDonne.js';
+import { RetourOutilDonné } from '../bus/evenements/retourOutilDonne.js';
 import { SimulationRéflexesCyberRéponseSoumise } from '../bus/evenements/simulationReflexesCyberReponseSoumise.js';
 import { SimulationRéflexesCyberTerminé } from '../bus/evenements/simulationReflexesCyberTermine.js';
 import { FacteurAggravant, Secteur, TypeOrganisation } from '../metier/mini-tests/exposition/exposition.js';
@@ -44,7 +45,8 @@ export type DonneesEvenement =
   | DonneesSimulationRéflexesCyberTermine
   | DonnéesRetourTestReflexesCyber
   | DonnéesRetourArticle
-  | DonneesOutilTéléchargé;
+  | DonneesOutilTéléchargé
+  | DonnéesRetourOutil;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -202,3 +204,5 @@ type DonneesOutilTéléchargé = Evenement<
   'OUTIL_TÉLÉCHARGÉ',
   Omit<OutilTéléchargé, 'email'> & { idUtilisateur?: string }
 >;
+
+type DonnéesRetourOutil = Evenement<'RETOUR_OUTIL_DONNE', RetourOutilDonné>;
