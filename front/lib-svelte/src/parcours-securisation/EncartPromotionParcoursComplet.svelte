@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, type Snippet } from 'svelte';
   import { enPropriétéWebC } from '$plateforme/webComponent';
+  import Lien from '../ui/Lien.svelte';
   import IllustrationModules from './animation/IllustrationModules.svelte';
   import IllustrationProgression from './animation/IllustrationProgression.svelte';
   import IllustrationRecyf from './animation/IllustrationRecyf.svelte';
@@ -85,14 +86,15 @@
       </div>
     </div>
 
-    <dsfr-button
-      label="Rejoindre le parcours complet"
-      kind="primary"
-      size="lg"
-      slot="cta"
-      href={`/parcours-complet?pageSource=${pageSource}`}
-      markup="a"
-    ></dsfr-button>
+    <div slot="cta">
+      <Lien
+        apparence="bouton"
+        href={`/parcours-complet?pageSource=${pageSource}`}
+        libelle="Rejoindre le parcours complet"
+        taille="lg"
+        type="primaire"
+      />
+    </div>
   </lab-anssi-fonctionnalites>
 </dsfr-container>
 
