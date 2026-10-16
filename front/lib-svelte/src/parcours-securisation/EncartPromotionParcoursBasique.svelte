@@ -2,6 +2,7 @@
   import { onMount, type Snippet } from 'svelte';
   import { afficheBadgeCyberdépart } from '$plateforme/environnement';
   import { enPropriétéWebC } from '$plateforme/webComponent';
+  import Lien from '../ui/Lien.svelte';
   import IllustrationBadge from './animation/IllustrationBadge.svelte';
   import IllustrationMesure from './animation/IllustrationMesure.svelte';
   import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';
@@ -102,14 +103,15 @@
       </div>
     </div>
 
-    <dsfr-button
-      label="Se lancer en 12 mesures"
-      kind="primary"
-      size="lg"
-      slot="cta"
-      href={`${urlBase}/modules/1?pageSource=${pageSource}`}
-      markup="a"
-    ></dsfr-button>
+    <div slot="cta">
+      <Lien
+        apparence="bouton"
+        href={`${urlBase}/modules/1?pageSource=${pageSource}`}
+        libelle="Se lancer en 12 mesures"
+        taille="lg"
+        type="primaire"
+      />
+    </div>
   </lab-anssi-fonctionnalites>
 </dsfr-container>
 
