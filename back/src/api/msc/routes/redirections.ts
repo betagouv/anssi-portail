@@ -52,6 +52,7 @@ export const enregistreLesRedirections = (app: Express) => {
     ['/promouvoir-diagnostic-cyber', '/'],
     ['/parcours-debuter', '/parcours-cyberdepart'],
     ['/parcours-approfondir', '/parcours-securisation-complet'],
+    ['/cyberdepart', '/parcours-cyberdepart'],
   ].forEach(([precedent, nouveau]: string[]) => {
     app.use(precedent, (requete: Request, reponse: Response, suite: NextFunction) => {
       if (requete.originalUrl === precedent || requete.originalUrl === `${precedent}/`) {
