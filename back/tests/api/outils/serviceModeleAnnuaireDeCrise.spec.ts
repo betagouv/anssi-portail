@@ -70,16 +70,16 @@ describe("Le service du modèle de l'annuaire de crise", () => {
 
       expect(nomCERT.value).toBe('CERT-FR');
       expect(fonctionCERT.value).toBe('ANSSI');
-      expect(téléphoneCERT.value).toBeNull();
-      expect(emailCERT.value).toBeNull();
+      expect(téléphoneCERT.value).toBe('3218 ou 09 70 83 32 18');
+      expect(emailCERT.value).toBe('cert-fr@ssi.gouv.fr');
       expect(emailDeSecoursCERT.value).toBeNull();
       expect(donnéesComplémentaireCERT.value).toBe(
         'Toutes les coordonnées du CERT-FR - https://www.cert.ssi.gouv.fr/contact/'
       );
 
       expect(nomCyber17.value).toBe('17 Cyber');
-      expect(fonctionCyber17.value).toBe('ANSSI');
-      expect(téléphoneCyber17.value).toBeNull();
+      expect(fonctionCyber17.value).toBe('Police nationale, la Gendarmerie et Cybermalveillance.gouv.fr');
+      expect(téléphoneCyber17.value).toBe('17 (France) ou 112 (Europe)');
       expect(emailCyber17.value).toBeNull();
       expect(emailDeSecoursCyber17.value).toBeNull();
       expect(donnéesComplémentaireCyber17.value).toBe(
