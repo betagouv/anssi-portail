@@ -202,6 +202,9 @@ importers:
       '@ianvs/prettier-plugin-sort-imports':
         specifier: ^4.7.1
         version: 4.7.1(prettier@3.9.9)(supports-color@10.2.2)
+      '@lab-anssi/ui-kit':
+        specifier: 1.62.1
+        version: 1.62.1(svelte@5.57.1(@typescript-eslint/types@8.71.1))
       clever-tools:
         specifier: ^5.0.2
         version: 5.1.1(@types/node@24.13.3)(supports-color@10.2.2)
@@ -1470,6 +1473,12 @@ packages:
     resolution: {integrity: sha512-lQRoiaXyHvTyZaYWwa8UwYJGjD10sFgWc+sNGBWk+4tO0B7djFQcPTnuOeR4wJztiN9bpDDpCEhtmfd2MRhgRw==}
     peerDependencies:
       express: ~5.2.1
+
+  '@lab-anssi/ui-kit@1.62.1':
+    resolution: {integrity: sha512-3xeqtkd8XPJSUlUXLZPj2ISOsqrP8jDDNzvAB4P7QJpE5jZcbiFps+mwq8kdqyWxrYq5lKXtEj9GvCCZDswY7A==}
+    engines: {node: '>=24.21.0'}
+    peerDependencies:
+      svelte: ^5.57.0
 
   '@myriaddreamin/typst-ts-node-compiler-android-arm-eabi@0.7.0':
     resolution: {integrity: sha512-25gKyErQai/u/EWBOSSZvV0rFfSL4tqHgYEyd4rZPXSHMpkvvgPmfA/Ees8InB1nnPV9Jlu9r0sftV6oiccprg==}
@@ -5840,6 +5849,10 @@ snapshots:
     transitivePeerDependencies:
       - debug
       - supports-color
+
+  '@lab-anssi/ui-kit@1.62.1(svelte@5.57.1(@typescript-eslint/types@8.71.1))':
+    dependencies:
+      svelte: 5.57.1(@typescript-eslint/types@8.71.1)
 
   '@myriaddreamin/typst-ts-node-compiler-android-arm-eabi@0.7.0':
     optional: true
