@@ -18,6 +18,7 @@
 
   type Props = {
     children?: Snippet;
+    mode?: 'carte' | 'page';
   } & (
     | {
         typeDeRetour: TypeDeRetourRessourcesIdentifiées;
@@ -28,7 +29,7 @@
         identifiantCible?: never;
       }
   );
-  const { typeDeRetour, children, identifiantCible }: Props = $props();
+  const { typeDeRetour, children, identifiantCible, mode = 'page' }: Props = $props();
   const urlDePost = $derived(
     (
       {
@@ -111,7 +112,7 @@
   };
 </script>
 
-<div class="section-aide retour">
+<div class={['section-aide', 'retour', mode]}>
   <div class="texte-information-avis-utilisateur">
     {#if children}
       {@render children()}
@@ -123,16 +124,18 @@
   </div>
   <div class="conteneur-emoji-avis">
     <Bouton
-      type={étatBoutons === true ? 'primaire' : 'tertiaire'}
+      type={étatBoutons === true ? 'primaire' : mode === 'page' ? 'tertiaire' : 'tertiaire-sans-bordure'}
       iconeSeule
       icone="thumb-up-line"
+      taille={mode === 'page' ? 'md' : 'sm'}
       titre="Réponse positive"
       surClic={() => soumetsAvisPositif()}
     ></Bouton>
     <Bouton
-      type={étatBoutons === false ? 'primaire' : 'tertiaire'}
+      type={étatBoutons === false ? 'primaire' : mode === 'page' ? 'tertiaire' : 'tertiaire-sans-bordure'}
       iconeSeule
       icone="thumb-down-line"
+      taille={mode === 'page' ? 'md' : 'sm'}
       titre="Réponse négative"
       surClic={() => afficheCommentaire()}
     ></Bouton>
@@ -165,9 +168,42 @@
 
 <style lang="scss">
   .section-aide {
-    &.retour .texte-information-avis-utilisateur {
-      margin-bottom: 1rem;
-      color: var(--text-title-grey);
+    &.carte {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      align-items: center;
+
+      border: 1px solid var(--border-default-grey);
+      border-top: 0;
+
+      .encart-commentaire-avis,
+      .alerte-soumission {
+        grid-column: 1 / -1;
+      }
+
+      .texte-information-avis-utilisateur {
+        margin-bottom: 0;
+      }
+
+      .conteneur-emoji-avis {
+        :global(dsfr-button) {
+          min-height: initial;
+        }
+      }
+    }
+
+    &.page {
+      .texte-information-avis-utilisateur {
+        margin-bottom: 1;
+      }
+    }
+
+    &.retour {
+      .texte-information-avis-utilisateur {
+        color: var(--text-title-grey);
+      }
     }
 
     .conteneur-emoji-avis {
