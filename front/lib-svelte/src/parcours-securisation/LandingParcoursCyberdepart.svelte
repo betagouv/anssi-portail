@@ -134,7 +134,7 @@
     <BlocDiagnostic
       titre="Vous préférez échanger avec un Aidant cyber ?"
       labelBouton="Demander un accompagnement gratuit"
-      lienBouton="/cyberdepart?origine=landing-parcours-cyberdepart"
+      lienBouton="/cyberdepart/diagnostic-gratuit?origine=landing-parcours-cyberdepart"
     >
       {#snippet description()}
         <p class="texte-standard-md">

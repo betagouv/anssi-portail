@@ -6,7 +6,7 @@ avecFicheDetaillee: true
 description: Bénéficier d'un diagnostic cyber gratuit et accompagné
 titreHtml: MonAideCyber
 illustration: mac/mac-diag.avif
-lien: https://messervices.cyber.gouv.fr/cyberdepart
+lien: https://messervices.cyber.gouv.fr/cyberdepart/diagnostic-gratuit
 droitsAcces:
   - ACCES_LIBRE
 sources:
@@ -21,7 +21,7 @@ cible: |
 liens:
   - accompagnement:
     titre: Bénéficiez d’un accompagnement
-    lien: https://messervices.cyber.gouv.fr/cyberdepart
+    lien: https://messervices.cyber.gouv.fr/cyberdepart/diagnostic-gratuit
     illustration: mac/mac-diag.avif
 ---
 

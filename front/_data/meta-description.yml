@@ -14,7 +14,7 @@
 /connexion/: 'Connectez-vous à MesServicesCyber via ProConnect pour accéder à vos services personnalisés, vos résultats de test et vos ressources favorites.'
 /contacts/: "Contactez l'équipe MesServicesCyber pour toute question sur la plateforme ou les services de cybersécurité proposés par l'ANSSI et ses partenaires."
 /creation-compte/: 'Créez votre compte MesServicesCyber via ProConnect pour sauvegarder vos résultats de test de maturité et accéder à des recommandations personnalisées.'
-/cyberdepart/: 'Lancez-vous dans la cybersécurité avec CyberDépart : un diagnostic gratuit de 1h30 réalisé par des aidants MonAideCyber pour sécuriser votre organisation.'
+/cyberdepart/diagnostic-gratuit/: 'Lancez-vous dans la cybersécurité avec CyberDépart : un diagnostic gratuit de 1h30 réalisé par des aidants MonAideCyber pour sécuriser votre organisation.'
 /favoris/: 'Retrouvez les services et ressources de cybersécurité que vous avez sauvegardés dans vos favoris sur MesServicesCyber.'
 /favoris-partages/: 'Consultez une sélection de services et ressources de cybersécurité partagée avec vous via MesServicesCyber.'
 /inscription/: "Inscrivez-vous sur MesServicesCyber via ProConnect pour accéder gratuitement à l'ensemble des services, guides et outils de cybersécurité de l'ANSSI."
