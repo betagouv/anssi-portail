@@ -18,7 +18,7 @@ export const routesStatiques = [
   'securite',
   'statistiques',
   'inscription',
-  'cyberdepart',
+  'cyberdepart/diagnostic-gratuit',
   'session-groupe',
   'resultats-session-groupe',
   'prestataires-labellises',

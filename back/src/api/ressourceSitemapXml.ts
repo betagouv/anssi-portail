@@ -15,7 +15,6 @@ interface LienSitemap {
 const récupèreLiens = (pages: string[], { fournisseurChemin }: ConfigurationServeur): LienSitemap[] => {
   const pagesRenommées = {
     '/front.html': '/front/accueil.html',
-    '/cyberdepart.html': '/demande-aide-mon-aide-cyber.html',
     '/prestataires-labellises.html': '/prestataires.html',
     '/faire-le-test.html': '/mini-tests.html',
     '/vrai-faux.html': '/mini-test-vrai-faux.html',
