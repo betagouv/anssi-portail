@@ -140,22 +140,33 @@
 
         <h2>Contacts nationaux</h2>
 
-        {#each contactsInitiaux?.nationaux ?? [] as { nom, description, contacts, lienPrincipal } (nom)}
+        {#each contactsInitiaux?.nationaux ?? [] as { nom, description, contacts, lienPrincipal, email, téléphone } (nom)}
           <div class="carte-contact">
             <h3>{nom}</h3>
-            <div>
-              <p>{description}</p>
-              <br />
-              {#if contacts}
+            <p>{description}</p>
+            {#if contacts}
+              <div>
                 <p>{contacts.introduction}</p>
                 <ul>
                   {#each contacts.liens as { libelle, href } (href)}
                     <li><Lien {href} {libelle} blank></Lien></li>
                   {/each}
                 </ul>
-              {/if}
+              </div>
+            {/if}
+            <p class="site-web">
               <Lien href={lienPrincipal.href} libelle={lienPrincipal.libelle} blank></Lien>
-            </div>
+            </p>
+            {#if email}
+              <p class="email">
+                <Lien href="mailto:{email}" libelle={email}></Lien>
+              </p>
+            {/if}
+            {#if téléphone}
+              <p class="telephone">
+                <Lien href="tel:{téléphone}" libelle={téléphone}></Lien>
+              </p>
+            {/if}
           </div>
         {/each}
       </div>

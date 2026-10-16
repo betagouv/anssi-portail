@@ -31,13 +31,15 @@ export type LienContact = {
 };
 
 export type ContactNational = {
-  nom: string;
-  description: string;
   contacts?: {
     introduction: string;
     liens: LienContact[];
   };
+  description: string;
+  email?: string;
+  téléphone?: string;
   lienPrincipal: LienContact;
+  nom: string;
 };
 
 export type ContactsInitiaux = {
