@@ -320,6 +320,8 @@ const contactsNationaux: ContactNational[] = [
     nom: 'CERT-FR',
     description:
       "Le CERT-FR est l'interlocuteur de référence des entités publiques et régulées (opérateurs d'importance vitale, opérateurs de services essentiels).",
+    email: 'cert-fr@ssi.gouv.fr',
+    fonction: 'ANSSI',
     contacts: {
       introduction: 'Contactez le CERT-FR pour :',
       liens: [
@@ -334,12 +336,15 @@ const contactsNationaux: ContactNational[] = [
       ],
     },
     lienPrincipal: { libelle: 'Toutes les coordonnées du CERT-FR', href: 'https://www.cert.ssi.gouv.fr/contact/' },
+    téléphone: '3218 ou 09 70 83 32 18',
   },
   {
     nom: '17 Cyber',
     description:
       'Le 17cyber propose aux particuliers et aux autres entités, un diagnostic permettant d’obtenir des recommandations en cas d’incident et d’être mis en relation avec un policier, un gendarme, un prestataire ou un CSIRT territorial.',
+    fonction: 'Police nationale, la Gendarmerie et Cybermalveillance.gouv.fr',
     lienPrincipal: { libelle: 'Aller sur le 17Cyber', href: 'https://www.cybermalveillance.gouv.fr/diagnostic' },
+    téléphone: '17 (France) ou 112 (Europe)',
   },
 ];
 
