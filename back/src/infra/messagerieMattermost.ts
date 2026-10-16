@@ -6,6 +6,7 @@ import {
   RetourExperience,
   RetourNégatifSurArticle,
   RetourNégatifSurMiniTest,
+  RetourNégatifSurOutil,
 } from '../metier/messagerieInstantanee.js';
 import { type MiniTest } from '../metier/mini-tests/mini-test.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
@@ -64,7 +65,9 @@ ${aseptiseMarkdown(avis.commentaire ?? '')}`;
         'vrai-faux': 'Test Vrai-Faux',
         exposition: 'Test Exposition',
         'reflexes-cyber': 'Test Réflexes Cyber',
-      } satisfies { [C in MiniTest]: string }
+      } satisfies {
+        [C in MiniTest]: string;
+      }
     )[retour.miniTest];
 
     if (urlWebhook) {
@@ -81,6 +84,17 @@ ${aseptiseMarkdown(retour.commentaire ? `Commentaire: ${retour.commentaire}` : '
     if (urlWebhook) {
       const message = `### Retour utilisateur Article
 Un utilisateur a laissé un retour négatif sur l'article \`${retour.slug}\`
+${aseptiseMarkdown(retour.commentaire ? `Commentaire: ${retour.commentaire}` : 'Aucun commentaire laissé')}`;
+      await axios.post(urlWebhook, { text: message });
+    }
+  },
+
+  notifieUnRetourNégatifSurOutil: async (retour: RetourNégatifSurOutil) => {
+    const urlWebhook = adaptateurEnvironnement.mattermost().webhookAvisUtilisateur();
+
+    if (urlWebhook) {
+      const message = `### Retour utilisateur Outil
+Un utilisateur a laissé un retour négatif sur l'outil \`${retour.outil}\`
 ${aseptiseMarkdown(retour.commentaire ? `Commentaire: ${retour.commentaire}` : 'Aucun commentaire laissé')}`;
       await axios.post(urlWebhook, { text: message });
     }

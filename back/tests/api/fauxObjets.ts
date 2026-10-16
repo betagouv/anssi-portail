@@ -279,6 +279,7 @@ export const fausseMessagerieInstantanee: MessagerieInstantanee = {
   notifieUnAvisNegatifSurUneMesure: async () => {},
   notifieUnRetourNégatifSurMiniTest: async () => {},
   notifieUnRetourNégatifSurArticle: async () => {},
+  notifieUnRetourNégatifSurOutil: async () => {},
 };
 
 export const fauxAdaptateurHachage: AdaptateurHachage = {

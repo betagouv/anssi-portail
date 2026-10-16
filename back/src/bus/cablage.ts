@@ -26,6 +26,7 @@ import { consigneRéflexesCyberTerminéDansJournal } from './consigneReflexesCyb
 import { consigneRetourArticleDonnéDansJournal } from './consigneRetourArticleDonneDansJournal.js';
 import { consigneRetourExperienceDonneDansJournal } from './consigneRetourExperienceDonneDansJournal.js';
 import { consigneRetourMiniTestDonnéDansJournal } from './consigneRetourMiniTestDonneDansJournal.js';
+import { consigneRetourOutilDonnéDansJournal } from './consigneRetourOutilDonneDansJournal.js';
 import { consigneSimulationNis2TermineeDansJournal } from './consigneSimulationNis2TermineeDansJournal.js';
 import { consigneTestExpositionRealiseDansJournal } from './consigneTestExpositionRealiseDansJournal.js';
 import { consigneTestRealiseDansJournal } from './consigneTestRealiseDansJournal.js';
@@ -50,6 +51,7 @@ import { QuestionnaireVraiFauxTerminé } from './evenements/questionnaireVraiFau
 import { RetourArticleDonné } from './evenements/retourArticleDonne.js';
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne.js';
 import { RetourMiniTestDonné } from './evenements/retourMiniTestDonne.js';
+import { RetourOutilDonné } from './evenements/retourOutilDonne.js';
 import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee.js';
 import { SimulationRéflexesCyberRéponseSoumise } from './evenements/simulationReflexesCyberReponseSoumise.js';
 import { SimulationRéflexesCyberTerminé } from './evenements/simulationReflexesCyberTermine.js';
@@ -60,6 +62,7 @@ import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur.js';
 import { notifieCommentaireAvisMesureDonneDansMessagerie } from './notifieCommentaireAvisMesureDonneDansMessagerie.js';
 import { notifieUnRetourNégatifSurArticle } from './notifieRetourNegatifSurArticle.js';
 import { notifieUnRetourNégatifSurMiniTest } from './notifieRetourNegatifSurMiniTest.js';
+import { notifieUnRetourNégatifSurOutil } from './notifieRetourNegatifSurOutil.js';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
@@ -255,4 +258,9 @@ export const cableTousLesAbonnes = ({
       adaptateurHachage,
     })
   );
+
+  busEvenements.abonnePlusieurs(RetourOutilDonné, [
+    consigneRetourOutilDonnéDansJournal({ adaptateurJournal, adaptateurHorloge }),
+    notifieUnRetourNégatifSurOutil({ messagerieInstantanee }),
+  ]);
 };
