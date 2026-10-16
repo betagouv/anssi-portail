@@ -14,6 +14,7 @@ import { Mesure } from './mesure.js';
 import { Module } from './module.js';
 import { MotifChangementParcours, Parcours } from './parcours.js';
 import { PriseEnCompte } from './PriseEnCompte.js';
+import { estCodeDepartement, regionDuDepartement } from './referentielDepartements.js';
 import { CodeRégion, estCodeRegion } from './referentielRegions.js';
 import { CodeSecteur, estCodeSecteur } from './referentielSecteurs.js';
 import { CodeTrancheEffectif, trancheEffectifParCode } from './referentielTranchesEffectifEtablissement.js';
@@ -259,8 +260,13 @@ export class Utilisateur {
   }
 
   async codeRegion(): Promise<CodeRégion | undefined> {
-    const code = (await this.organisation()).region;
-    return estCodeRegion(code) ? code : undefined;
+    const { departement, region } = await this.organisation();
+    if (estCodeRegion(region)) {
+      return region;
+    }
+    if (estCodeDepartement(departement)) {
+      return regionDuDepartement(departement);
+    }
   }
 
   async codeSecteur(): Promise<CodeSecteur | undefined> {

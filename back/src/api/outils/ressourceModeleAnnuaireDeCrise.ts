@@ -16,12 +16,17 @@ export const ressourceModeleAnnuaireDeCrise = ({
   routeur.get(
     '/',
     middleware.verifieJWT,
-    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideCorpsRequete(corpsVide),
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     filetRouteAsynchrone(async (requête: Request, réponse: Response) => {
-      const utilisateur = requête.utilisateur as Utilisateur;
+      const utilisateur: Utilisateur = requête.utilisateur;
+      const { codeActivite } = await utilisateur.organisation();
+      const codeRégion = await utilisateur.codeRegion();
 
-      const contenuBinaire = await serviceModeleAnnuaireDeCrise.génèreModèle();
+      const contenuBinaire = await serviceModeleAnnuaireDeCrise.génèreModèle({
+        codeActivité: codeActivite,
+        codeRégion,
+      });
 
       réponse
         .type('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
