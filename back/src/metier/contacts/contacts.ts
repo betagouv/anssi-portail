@@ -30,10 +30,13 @@ export type LienContact = {
 
 export type ContactNational = {
   nom: string;
-  description: string;
   contacts?: {
     introduction: string;
     liens: LienContact[];
   };
+  description: string;
+  email?: string;
+  fonction: string;
   lienPrincipal: LienContact;
+  téléphone?: string;
 };
