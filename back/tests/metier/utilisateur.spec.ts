@@ -104,6 +104,59 @@ describe("L'utilisateur", () => {
     });
   });
 
+  describe('Concernant le code région', () => {
+    const utilisateurAvecOrganisation = ({
+      departement,
+      codeRegion,
+    }: {
+      departement: string | null;
+      codeRegion?: string;
+    }) =>
+      new Utilisateur(
+        {
+          ...infosUtilisateur,
+          organisation: new Organisation({
+            nom: 'beta',
+            departement,
+            codeRegion,
+            siret: '1234',
+            codeActivite: '62.01Z',
+            codeSecteur: undefined,
+            codeTrancheEffectif: undefined,
+          }),
+        },
+        fauxAdaptateurRechercheEntreprise,
+        fauxAdaptateurHachage
+      );
+
+    it("retourne la région de l'organisation si elle est valide, même si le département indique une autre région", async () => {
+      const utilisateur = utilisateurAvecOrganisation({ departement: '75', codeRegion: 'FR-ARA' });
+
+      expect(await utilisateur.codeRegion()).toBe('FR-ARA');
+    });
+
+    it("se rabat sur la région du département $departement quand l'organisation n'a pas de région", async () => {
+      const utilisateur = utilisateurAvecOrganisation({ departement: '33' });
+
+      expect(await utilisateur.codeRegion()).toBe('FR-NAQ');
+    });
+
+    it("se rabat sur la région du département quand la région de l'organisation est invalide", async () => {
+      const utilisateur = utilisateurAvecOrganisation({ departement: '75', codeRegion: 'XX' });
+
+      expect(await utilisateur.codeRegion()).toBe('FR-IDF');
+    });
+
+    it.each([
+      { departement: null, description: 'absent' },
+      { departement: '99', description: 'inconnu' },
+    ])('retourne undefined quand la région est absente et le département $description', async ({ departement }) => {
+      const utilisateur = utilisateurAvecOrganisation({ departement });
+
+      expect(await utilisateur.codeRegion()).toBeUndefined();
+    });
+  });
+
   it("se décrit comme un agent ANSSI si son organisation est le siège social de l'ANSSI", async () => {
     const utilisateur = new Utilisateur(
       {
