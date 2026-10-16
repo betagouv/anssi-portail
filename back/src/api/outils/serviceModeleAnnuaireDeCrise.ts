@@ -58,15 +58,32 @@ export class ServiceModeleAnnuaireDeCrise {
   private async complèteContactsNationaux(feuille: Worksheet): Promise<void> {
     const contacts = await this.entrepôtContact.nationaux();
     for (let i = 0; i < 2; i++) {
-      const [_entête, nom, fonction, _téléphone, _email, _emailDeSecours, _status, donnéesComplémentaire] =
-        getCellsInRow(feuille, LIGNE_PREMIER_CONTACT_NATIONAL + i);
-      nom.value = contacts[i].nom;
-      fonction.value = 'ANSSI';
+      const [
+        _celluleEntête,
+        celluleNom,
+        celluleFonction,
+        celluleTéléphone,
+        celluleEmail,
+        _celluleEmailDeSecours,
+        _celluleStatus,
+        celluleDonnéesComplémentaire,
+      ] = getCellsInRow(feuille, LIGNE_PREMIER_CONTACT_NATIONAL + i);
+
+      const { nom, fonction, téléphone, email, lienPrincipal } = contacts[i];
+
+      celluleNom.value = nom;
+      celluleFonction.value = fonction;
+      if (email) {
+        celluleEmail.value = email;
+      }
+      if (téléphone) {
+        celluleTéléphone.value = téléphone;
+      }
       ajouteUnLien(
         feuille,
-        donnéesComplémentaire,
-        `${contacts[i].lienPrincipal.libelle} - ${contacts[i].lienPrincipal.href}`,
-        contacts[i].lienPrincipal.href
+        celluleDonnéesComplémentaire,
+        `${lienPrincipal.libelle} - ${lienPrincipal.href}`,
+        lienPrincipal.href
       );
     }
   }
