@@ -1,7 +1,7 @@
 <script module lang="ts">
   export type TypeDeRetour = TypeDeRetourMiniTests | TypeDeRetourRessourcesIdentifiées;
   export type TypeDeRetourMiniTests = 'test-maturité' | 'vrai-faux' | 'exposition' | 'reflexes-cyber';
-  export type TypeDeRetourRessourcesIdentifiées = 'article' | 'mesure';
+  export type TypeDeRetourRessourcesIdentifiées = 'article' | 'mesure' | 'outil';
 </script>
 
 <script lang="ts">
@@ -34,6 +34,7 @@
       {
         article: `/api/articles/${identifiantCible}/avis`,
         mesure: `/api/mesures/${identifiantCible}/avis`,
+        outil: ``,
 
         exposition: '/api/retour-mini-tests/exposition',
         'reflexes-cyber': '/api/retour-mini-tests/reflexes-cyber',
@@ -48,6 +49,7 @@
       {
         article: `article:${identifiantCible}`,
         mesure: `mesure:${identifiantCible}`,
+        outil: `outil:${identifiantCible}`,
 
         exposition: 'retour-utilisateur:exposition',
         'reflexes-cyber': 'retour-utilisateur:reflexes-cyber',
@@ -111,13 +113,13 @@
 
 <div class="section-aide retour">
   <div class="texte-information-avis-utilisateur">
-    <span class="titre-avis">
-      {#if children}
-        {@render children()}
-      {:else}
+    {#if children}
+      {@render children()}
+    {:else}
+      <span class="titre-avis">
         <b>Ce contenu vous a-t-il aidé&nbsp;?</b>
-      {/if}
-    </span>
+      </span>
+    {/if}
   </div>
   <div class="conteneur-emoji-avis">
     <Bouton
