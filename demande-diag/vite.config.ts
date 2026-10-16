@@ -7,7 +7,7 @@ import { remplaceVersionsDansPhp } from './plugin/remplaceVersionsDansPhp';
 
 const rootPkgPath = resolve(__dirname, '..', 'package.json');
 const pkg = JSON.parse(readFileSync(rootPkgPath, 'utf-8'));
-const version_lab_ui_kit = pkg.runtimeDependencies?.['@lab-anssi/ui-kit'];
+const version_lab_ui_kit = pkg.devDependencies?.['@lab-anssi/ui-kit'];
 
 export default defineConfig({
   build: {

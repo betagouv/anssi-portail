@@ -10,7 +10,7 @@ Jekyll::Hooks.register :site, :after_init do |site|
   end
 
   package = JSON.parse(File.read(package_json))
-  deps = package['runtimeDependencies'] || {}
+  deps = package['devDependencies'] || {}
 
   site.config['version_lab_ui_kit'] = deps['@lab-anssi/ui-kit']
 end
