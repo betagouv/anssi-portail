@@ -1,7 +1,7 @@
 <script module lang="ts">
   export type TypeDeRetour = TypeDeRetourMiniTests | TypeDeRetourRessourcesIdentifiées;
   export type TypeDeRetourMiniTests = 'test-maturité' | 'vrai-faux' | 'exposition' | 'reflexes-cyber';
-  export type TypeDeRetourRessourcesIdentifiées = 'article' | 'mesure';
+  export type TypeDeRetourRessourcesIdentifiées = 'article' | 'mesure' | 'outil';
 </script>
 
 <script lang="ts">
@@ -18,6 +18,7 @@
 
   type Props = {
     children?: Snippet;
+    mode?: 'carte' | 'page';
   } & (
     | {
         typeDeRetour: TypeDeRetourRessourcesIdentifiées;
@@ -28,12 +29,13 @@
         identifiantCible?: never;
       }
   );
-  const { typeDeRetour, children, identifiantCible }: Props = $props();
+  const { typeDeRetour, children, identifiantCible, mode = 'page' }: Props = $props();
   const urlDePost = $derived(
     (
       {
         article: `/api/articles/${identifiantCible}/avis`,
         mesure: `/api/mesures/${identifiantCible}/avis`,
+        outil: `/api/outils/retours/${identifiantCible}`,
 
         exposition: '/api/retour-mini-tests/exposition',
         'reflexes-cyber': '/api/retour-mini-tests/reflexes-cyber',
@@ -48,6 +50,7 @@
       {
         article: `article:${identifiantCible}`,
         mesure: `mesure:${identifiantCible}`,
+        outil: `outil:${identifiantCible}`,
 
         exposition: 'retour-utilisateur:exposition',
         'reflexes-cyber': 'retour-utilisateur:reflexes-cyber',
@@ -109,28 +112,30 @@
   };
 </script>
 
-<div class="section-aide retour">
+<div class={['section-aide', 'retour', mode]}>
   <div class="texte-information-avis-utilisateur">
-    <span class="titre-avis">
-      {#if children}
-        {@render children()}
-      {:else}
+    {#if children}
+      {@render children()}
+    {:else}
+      <span class="titre-avis">
         <b>Ce contenu vous a-t-il aidé&nbsp;?</b>
-      {/if}
-    </span>
+      </span>
+    {/if}
   </div>
   <div class="conteneur-emoji-avis">
     <Bouton
-      type={étatBoutons === true ? 'primaire' : 'tertiaire'}
+      type={étatBoutons === true ? 'primaire' : mode === 'page' ? 'tertiaire' : 'tertiaire-sans-bordure'}
       iconeSeule
       icone="thumb-up-line"
+      taille={mode === 'page' ? 'md' : 'sm'}
       titre="Réponse positive"
       surClic={() => soumetsAvisPositif()}
     ></Bouton>
     <Bouton
-      type={étatBoutons === false ? 'primaire' : 'tertiaire'}
+      type={étatBoutons === false ? 'primaire' : mode === 'page' ? 'tertiaire' : 'tertiaire-sans-bordure'}
       iconeSeule
       icone="thumb-down-line"
+      taille={mode === 'page' ? 'md' : 'sm'}
       titre="Réponse négative"
       surClic={() => afficheCommentaire()}
     ></Bouton>
@@ -163,9 +168,42 @@
 
 <style lang="scss">
   .section-aide {
-    &.retour .texte-information-avis-utilisateur {
-      margin-bottom: 1rem;
-      color: var(--text-title-grey);
+    &.carte {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      align-items: center;
+
+      border: 1px solid var(--border-default-grey);
+      border-top: 0;
+
+      .encart-commentaire-avis,
+      .alerte-soumission {
+        grid-column: 1 / -1;
+      }
+
+      .texte-information-avis-utilisateur {
+        margin-bottom: 0;
+      }
+
+      .conteneur-emoji-avis {
+        :global(dsfr-button) {
+          min-height: initial;
+        }
+      }
+    }
+
+    &.page {
+      .texte-information-avis-utilisateur {
+        margin-bottom: 1;
+      }
+    }
+
+    &.retour {
+      .texte-information-avis-utilisateur {
+        color: var(--text-title-grey);
+      }
     }
 
     .conteneur-emoji-avis {

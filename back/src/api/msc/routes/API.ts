@@ -31,6 +31,7 @@ import { ressourceExigencesNis2Csv } from '../../nis2/ressourceExigencesNis2Csv.
 import { ressourceSimulateurNis2 } from '../../nis2/ressourceSimulateurNis2.js';
 import { ressourceModeleAnnuaireDeCrise } from '../../outils/ressourceModeleAnnuaireDeCrise.js';
 import { ressourceRappelMiseAJourAnnuaireContacts } from '../../outils/ressourceRappelMiseAJourAnnuaireContacts.js';
+import { ressourceRetoursSurOutil } from '../../outils/ressourceRetoursSurOutil.js';
 import { ressourceAbonnementInfolettre } from '../../ressourceAbonnementInfolettre.js';
 import { ressourceAnnuaireDepartements } from '../../ressourceAnnuaireDepartements.js';
 import { ressourceAnnuaireOrganisations } from '../../ressourceAnnuaireOrganisations.js';
@@ -176,4 +177,5 @@ export const enregistreLesRoutesAPI = (app: Express, configurationServeur: Confi
     '/outils/rappel-mise-a-jour-annuaire-contacts.ics',
     ressourceRappelMiseAJourAnnuaireContacts(configurationServeur)
   );
+  enregistreRoute('/outils/retours', ressourceRetoursSurOutil(configurationServeur));
 };
