@@ -5,7 +5,7 @@ import { RetourMiniTestDonné } from '../../bus/evenements/retourMiniTestDonne.j
 import { estMiniTest } from '../../metier/mini-tests/mini-test.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
-import { schemaRessourceRetourTestMaturite } from '../testMaturite/ressourceRetourTestMaturite.schema.js';
+import { schemaRetourUtilisateur } from '../retourUtilisateur.schema.js';
 import { valideCorpsRequete } from '../zod.js';
 
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
@@ -15,9 +15,9 @@ const ressourceRetourMiniTest = ({ busEvenements }: ConfigurationServeur) => {
 
   routeur.post(
     '/:miniTest',
-    valideCorpsRequete(schemaRessourceRetourTestMaturite),
+    valideCorpsRequete(schemaRetourUtilisateur),
     filetRouteAsynchrone(
-      async (requete: CorpsDeRequeteTypee<z.output<typeof schemaRessourceRetourTestMaturite>>, reponse: Response) => {
+      async (requete: CorpsDeRequeteTypee<z.output<typeof schemaRetourUtilisateur>>, reponse: Response) => {
         const miniTest = requete.params.miniTest;
         if (!estMiniTest(miniTest)) return reponse.sendStatus(HttpStatusCode.NotFound);
 
