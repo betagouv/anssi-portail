@@ -103,12 +103,9 @@
     </div>
 
     <dsfr-button
-      label="Je commence à sécuriser"
+      label="Se lancer en 12 mesures"
       kind="primary"
       size="lg"
-      has-icon
-      icon="arrow-right-circle-line"
-      icon-place="right"
       slot="cta"
       href={`${urlBase}/modules/1?pageSource=${pageSource}`}
       markup="a"

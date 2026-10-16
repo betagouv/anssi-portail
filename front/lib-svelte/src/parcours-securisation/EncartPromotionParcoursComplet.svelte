@@ -86,12 +86,9 @@
     </div>
 
     <dsfr-button
-      label="Je commence à sécuriser"
+      label="Rejoindre le parcours complet"
       kind="primary"
       size="lg"
-      has-icon
-      icon="arrow-right-circle-line"
-      icon-place="right"
       slot="cta"
       href={`/parcours-complet?pageSource=${pageSource}`}
       markup="a"
