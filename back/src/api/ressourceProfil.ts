@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { decode } from 'html-entities';
-import { estCodeDepartement, regionDuDepartement } from '../metier/referentielDepartements.js';
+import { estCodeDepartement } from '../metier/referentielDepartements.js';
 import { Organisation, Utilisateur } from '../metier/utilisateur.js';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
@@ -28,7 +28,7 @@ const ressourceProfil = ({
 
         const codeDepartement = estCodeDepartement(organisation?.departement) ? organisation.departement : undefined;
 
-        const codeRegion = organisation?.region ?? regionDuDepartement(codeDepartement);
+        const codeRegion = await utilisateurConnecte?.codeRegion();
 
         reponse.send({
           email: utilisateurConnecte?.email,
