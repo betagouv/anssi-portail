@@ -82,12 +82,21 @@
     {/snippet}
     {#snippet actions()}
       <dsfr-button
-        label="Se lancer en 12 mesures"
-        kind="primary"
-        size="lg"
+        centered
         href={`/modules/1?pageSource=${pageSource}`}
+        kind="primary"
+        label="Se lancer en 12 mesures"
         markup="a"
+        size="lg"
       ></dsfr-button>
+      <Lien
+        apparence="bouton"
+        etire
+        href={`/parcours-complet?pageSource=${pageSource}`}
+        libelle="Rejoindre le programme complet"
+        taille="lg"
+        type="secondaire"
+      />
     {/snippet}
     {#snippet illustration()}
       <figure class="illustration">

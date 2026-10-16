@@ -171,6 +171,19 @@
     margin-block-end: 0;
   }
 
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    @include a-partir-de(md) {
+      flex-direction: row;
+    }
+    @include a-partir-de(lg) {
+      margin-bottom: 0;
+    }
+  }
+
   .illustration {
     grid-area: illustration;
     position: relative;
