@@ -81,14 +81,14 @@
       Je <MotEnExergue motif="cercle">protège</MotEnExergue> mon organisation contre les cyber&shy;attaques
     {/snippet}
     {#snippet actions()}
-      <dsfr-button
-        centered
+      <Lien
+        apparence="bouton"
+        etire
         href={`/modules/1?pageSource=${pageSource}`}
-        kind="primary"
-        label="Se lancer en 12 mesures"
-        markup="a"
-        size="lg"
-      ></dsfr-button>
+        libelle="Se lancer en 12 mesures"
+        taille="lg"
+        type="primaire"
+      />
       <Lien
         apparence="bouton"
         etire
