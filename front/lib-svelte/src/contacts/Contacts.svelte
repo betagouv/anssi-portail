@@ -8,8 +8,10 @@
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Heros from '../ui/Heros.svelte';
   import Lien from '../ui/Lien.svelte';
+  import CarteContact from './CarteContact.svelte';
   import { estCodeRegion, type ContactsInitiaux } from './contacts.type';
   import FiltresContacts from './FiltresContacts.svelte';
+  import LigneContact from './LigneContact.svelte';
   import NoteInformation from './NoteInformation.svelte';
 
   type Props = {
@@ -59,9 +61,13 @@
   titre="Contacts cyber"
 />
 
+{#snippet filtres()}
+  <FiltresContacts bind:regionSelectionnee bind:secteurSelectionne />
+{/snippet}
+
 {#if !$profilStore}
   <FiltresMobile filtreActif={false}>
-    <FiltresContacts bind:regionSelectionnee bind:secteurSelectionne />
+    {@render filtres()}
   </FiltresMobile>
 {/if}
 
@@ -69,7 +75,7 @@
   <div class="contenu-section">
     {#if !$profilStore}
       <FiltresBureau filtreActif={false}>
-        <FiltresContacts bind:regionSelectionnee bind:secteurSelectionne />
+        {@render filtres()}
       </FiltresBureau>
     {/if}
 
@@ -82,67 +88,48 @@
 
           {#if contactsRegionaux.COT}
             {@const { nom, email } = contactsRegionaux.COT}
-            <div class="carte-contact">
-              <h3>
-                Délégué(e)s ANSSI de votre {contactsRegionaux.designation}
-              </h3>
-              <p class="nom">{nom}</p>
-              <p class="email">
-                <Lien href="mailto:{email}" libelle={email}></Lien>
-              </p>
-            </div>
+            <CarteContact titre="Délégué(e)s ANSSI de votre {contactsRegionaux.designation}">
+              <LigneContact type="nom" valeur={nom} />
+              <LigneContact type="email" valeur={email} />
+            </CarteContact>
           {/if}
 
           {#if contactsRegionaux.CSIRT}
             {@const { nom, telephone, siteWeb, adresse } = contactsRegionaux.CSIRT}
-            <div class="carte-contact">
-              <h3>{nom}</h3>
+            <CarteContact titre={nom}>
               {#if telephone}
-                <p class="telephone">
-                  <Lien href="tel:{telephone}" libelle={telephone}></Lien>
-                </p>
+                <LigneContact type="telephone" valeur={telephone} />
               {/if}
-              <p class="site-web">
-                <Lien href={siteWeb} libelle={siteWeb} blank></Lien>
-              </p>
+              <LigneContact type="site-web" valeur={siteWeb} />
               {#if adresse}
-                <p class="adresse">{adresse}</p>
+                <LigneContact type="adresse" valeur={adresse} />
               {/if}
-            </div>
+            </CarteContact>
           {/if}
 
           {#if contactsRegionaux.campus}
             {@const { nom, siteWeb, adresse, email } = contactsRegionaux.campus}
-            <div class="carte-contact">
-              <h3>{nom}</h3>
+            <CarteContact titre={nom}>
               {#if email}
-                <p class="email">
-                  <Lien href="mailto:{email}" libelle={email}></Lien>
-                </p>
+                <LigneContact type="email" valeur={email} />
               {/if}
-              <p class="site-web">
-                <Lien href={siteWeb} libelle={siteWeb} blank></Lien>
-              </p>
-              <p class="adresse">{adresse}</p>
-            </div>
+              <LigneContact type="site-web" valeur={siteWeb} />
+              <LigneContact type="adresse" valeur={adresse} />
+            </CarteContact>
           {/if}
         {/if}
 
         {#if contactSectoriel}
           <h2>Contacts sectoriels</h2>
-          <div class="carte-contact">
-            <h3>{contactSectoriel.nom}</h3>
-            <p class="site-web">
-              <Lien href={contactSectoriel.siteWeb} libelle={contactSectoriel.siteWeb} blank></Lien>
-            </p>
-          </div>
+          <CarteContact titre={contactSectoriel.nom}>
+            <LigneContact type="site-web" valeur={contactSectoriel.siteWeb} />
+          </CarteContact>
         {/if}
 
         <h2>Contacts nationaux</h2>
 
         {#each contactsInitiaux?.nationaux ?? [] as { nom, description, contacts, lienPrincipal, email, téléphone } (nom)}
-          <div class="carte-contact">
-            <h3>{nom}</h3>
+          <CarteContact titre={nom}>
             <p>{description}</p>
             {#if contacts}
               <div>
@@ -154,20 +141,14 @@
                 </ul>
               </div>
             {/if}
-            <p class="site-web">
-              <Lien href={lienPrincipal.href} libelle={lienPrincipal.libelle} blank></Lien>
-            </p>
+            <LigneContact type="site-web" valeur={lienPrincipal.href} libelle={lienPrincipal.libelle} />
             {#if email}
-              <p class="email">
-                <Lien href="mailto:{email}" libelle={email}></Lien>
-              </p>
+              <LigneContact type="email" valeur={email} />
             {/if}
             {#if téléphone}
-              <p class="telephone">
-                <Lien href="tel:{téléphone}" libelle={téléphone}></Lien>
-              </p>
+              <LigneContact type="telephone" valeur={téléphone} />
             {/if}
-          </div>
+          </CarteContact>
         {/each}
       </div>
     {:else}
@@ -198,7 +179,6 @@
     }
   }
 
-  h3,
   h2,
   p {
     margin: 0;
@@ -214,44 +194,8 @@
     }
   }
 
-  h3 {
-    margin-bottom: 8px;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-  }
-
   p {
     line-height: 1.5rem;
-    display: flex;
-    gap: 8px;
-    align-items: start;
-
-    &:before {
-      width: 16px;
-      height: 16px;
-      display: block;
-      padding: 4px 0 3px 0;
-    }
-
-    &.telephone:before {
-      content: url('/assets/images/icone-contact-telephone.svg');
-    }
-
-    &.email:before {
-      content: url('/assets/images/icone-contact-email.svg');
-    }
-
-    &.nom:before {
-      content: url('/assets/images/icone-contact-nom.svg');
-    }
-
-    &.site-web:before {
-      content: url('/assets/images/icone-contact-site-web.svg');
-    }
-
-    &.adresse:before {
-      content: url('/assets/images/icone-contact-adresse.svg');
-    }
   }
 
   .contacts {
@@ -269,15 +213,6 @@
         width: min(100%, 792px);
       }
     }
-  }
-
-  .carte-contact {
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    border: 1px solid var(--border-default-grey);
-    border-radius: 8px;
   }
 
   .aucun-resultat {
