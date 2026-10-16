@@ -31,7 +31,7 @@
       <dsfr-badge label="Outil sécurisation" type="accent" accent="green-emeraude" size="sm"></dsfr-badge>
     </div>
   </dsfr-card>
-  <RetourUtilisateurSurContenu identifiantCible={titre} typeDeRetour="outil">
+  <RetourUtilisateurSurContenu identifiantCible={titre} typeDeRetour="outil" mode="carte">
     <b>Cet outil vous a-t-il aidé&nbsp;?</b>
   </RetourUtilisateurSurContenu>
 </div>
