@@ -2,6 +2,7 @@
   import Lien from '../../../ui/Lien.svelte';
   import EtapeProcedure from './EtapeProcedure.svelte';
   import EtapesProcedure from './EtapesProcedure.svelte';
+  import OutilJeuCarteReflexesCyber from './OutilJeuCarteReflexesCyber.svelte';
 </script>
 
 <div>
@@ -21,6 +22,7 @@
         À partir d’un scénario réaliste (rançongiciel, fuite de données, messagerie indisponible…), échangez ensemble
         sur les décisions à prendre.
       </p>
+      <OutilJeuCarteReflexesCyber />
     </EtapeProcedure>
     <EtapeProcedure titre="Identifiez les axes d’améliorations">
       <p class="texte-standard-md">
