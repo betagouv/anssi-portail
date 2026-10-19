@@ -3,6 +3,7 @@
   import EtapeProcedure from './EtapeProcedure.svelte';
   import EtapesProcedure from './EtapesProcedure.svelte';
   import OutilJeuCarteReflexesCyber from './OutilJeuCarteReflexesCyber.svelte';
+  import OutilJeuReflexesCyberEnLigne from './OutilJeuReflexesCyberEnLigne.svelte';
 </script>
 
 <div>
@@ -22,7 +23,10 @@
         À partir d’un scénario réaliste (rançongiciel, fuite de données, messagerie indisponible…), échangez ensemble
         sur les décisions à prendre.
       </p>
-      <OutilJeuCarteReflexesCyber />
+      <div class="outils-reflexes-cyber">
+        <OutilJeuCarteReflexesCyber />
+        <OutilJeuReflexesCyberEnLigne />
+      </div>
     </EtapeProcedure>
     <EtapeProcedure titre="Identifiez les axes d’améliorations">
       <p class="texte-standard-md">
@@ -124,5 +128,11 @@
     gap: 0.5rem;
     list-style-type: disc;
     padding: 0 0 1.5rem 1.5rem;
+  }
+
+  .outils-reflexes-cyber {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 </style>
