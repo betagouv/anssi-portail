@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Outil from './Outil.svelte';
+  import OutilTelechargement from './OutilTelechargement.svelte';
 </script>
 
-<Outil
+<OutilTelechargement
   href="/api/outils/rappel-mise-a-jour-annuaire-contacts.ics"
   identifiant="rappel-mise-a-jour-annuaire-contacts.ics"
   taille="1 Ko"

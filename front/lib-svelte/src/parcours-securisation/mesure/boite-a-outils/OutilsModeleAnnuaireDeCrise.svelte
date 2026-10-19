@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Outil from './Outil.svelte';
+  import OutilTelechargement from './OutilTelechargement.svelte';
 </script>
 
-<Outil
+<OutilTelechargement
   href="/api/outils/modele-annuaire-de-crise.xlsx"
   identifiant="modele-annuaire-de-crise.xlsx"
   taille="26 Ko"
