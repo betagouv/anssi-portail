@@ -1,11 +1,13 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
 
-  let { children, titre }: { children: Snippet; titre: string } = $props();
+  let { children, titre }: { children: Snippet; titre?: string } = $props();
 </script>
 
 <li>
-  <h3 class="fr-h6">{titre}</h3>
+  {#if titre}
+    <h3 class="fr-h6">{titre}</h3>
+  {/if}
   {@render children()}
 </li>
 

@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Component } from 'svelte';
   import type { Mesure } from '../../mesure';
-  import Procedure from './Procedure.svelte';
+  import BoiteAOutilsGenerique from './BoiteAOutilsGenerique.svelte';
 
   const { mesure }: { mesure: Mesure } = $props();
   const boitesÀOutils = import.meta.glob<{ default: Component } | undefined>('./personnalisee/BoiteAOutils*.svelte');
@@ -17,8 +17,6 @@
   {#if BoiteAOutils}
     <BoiteAOutils />
   {:else}
-    {#each mesure.procédures as procédure, index (index)}
-      <Procedure {procédure} />
-    {/each}
+    <BoiteAOutilsGenerique {mesure} />
   {/if}
 {/await}
