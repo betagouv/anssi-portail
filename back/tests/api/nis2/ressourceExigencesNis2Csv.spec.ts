@@ -148,22 +148,20 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
       it('pour les exigences NIS2 uniquement', async () => {
         const { headers } = await request(serveur).get('/api/exigences-nis2.csv');
 
-        expect(headers['content-disposition']).toBe(
-          'attachment; filename="Liste_des_exigences_applicables_a_NIS2.csv"'
-        );
+        expect(headers['content-disposition']).toBe('attachment; filename=Liste_des_exigences_applicables_a_NIS2.csv');
       });
 
       it('pour les exigences NIS2 comparées à ISO', async () => {
         const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=NIS2&cible=ISO');
 
-        expect(headers['content-disposition']).toBe('attachment; filename="Comparaison_ReCyf-NIS2_ISO.csv"');
+        expect(headers['content-disposition']).toBe('attachment; filename=Comparaison_ReCyf-NIS2_ISO.csv');
       });
 
       it('pour les exigences NIS2 comparées à AE', async () => {
         const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=NIS2&cible=AE');
 
         expect(headers['content-disposition']).toBe(
-          'attachment; filename="Comparaison_ReCyf-NIS2_Annexe_Reglement_execution_2024_2690.csv"'
+          'attachment; filename=Comparaison_ReCyf-NIS2_Annexe_Reglement_execution_2024_2690.csv'
         );
       });
 
@@ -171,21 +169,21 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
         const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=NIS2&cible=CyFun23');
 
         expect(headers['content-disposition']).toBe(
-          'attachment; filename="Comparaison_ReCyf-NIS2_CyberFundamentals_Framework_2023_Belgique.csv"'
+          'attachment; filename=Comparaison_ReCyf-NIS2_CyberFundamentals_Framework_2023_Belgique.csv'
         );
       });
 
       it('pour les exigences ISO comparées à NIS2', async () => {
         const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=ISO&cible=NIS2');
 
-        expect(headers['content-disposition']).toBe('attachment; filename="Comparaison_ISO_ReCyf-NIS2.csv"');
+        expect(headers['content-disposition']).toBe('attachment; filename=Comparaison_ISO_ReCyf-NIS2.csv');
       });
 
       it('pour les exigences AE comparées à NIS2', async () => {
         const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=AE&cible=NIS2');
 
         expect(headers['content-disposition']).toBe(
-          'attachment; filename="Comparaison_Annexe_Reglement_execution_2024_2690_ReCyf-NIS2.csv"'
+          'attachment; filename=Comparaison_Annexe_Reglement_execution_2024_2690_ReCyf-NIS2.csv'
         );
       });
 
@@ -193,7 +191,7 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
         const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=CyFun23&cible=NIS2');
 
         expect(headers['content-disposition']).toBe(
-          'attachment; filename="Comparaison_CyberFundamentals_Framework_2023_Belgique_ReCyf-NIS2.csv"'
+          'attachment; filename=Comparaison_CyberFundamentals_Framework_2023_Belgique_ReCyf-NIS2.csv'
         );
       });
 
@@ -201,7 +199,7 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
         const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=CyFun23&cible=NIS2&langue=EN');
 
         expect(headers['content-disposition']).toBe(
-          'attachment; filename="Comparaison_CyberFundamentals_Framework_2023_Belgique_ReCyf-NIS2-EN.csv"'
+          'attachment; filename=Comparaison_CyberFundamentals_Framework_2023_Belgique_ReCyf-NIS2-EN.csv'
         );
       });
 
@@ -209,7 +207,7 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
         const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=CyFun23&cible=NIS2&langue=FR');
 
         expect(headers['content-disposition']).toBe(
-          'attachment; filename="Comparaison_CyberFundamentals_Framework_2023_Belgique_ReCyf-NIS2.csv"'
+          'attachment; filename=Comparaison_CyberFundamentals_Framework_2023_Belgique_ReCyf-NIS2.csv'
         );
       });
 
@@ -217,7 +215,7 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
         const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=CyFun23&cible=NIS2&langue=ES');
 
         expect(headers['content-disposition']).toBe(
-          'attachment; filename="Comparaison_CyberFundamentals_Framework_2023_Belgique_ReCyf-NIS2.csv"'
+          'attachment; filename=Comparaison_CyberFundamentals_Framework_2023_Belgique_ReCyf-NIS2.csv'
         );
       });
     });
