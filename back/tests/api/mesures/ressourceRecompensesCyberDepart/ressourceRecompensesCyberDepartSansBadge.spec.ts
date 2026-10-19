@@ -69,7 +69,7 @@ describe('La ressource des récompenses CyberDépart sans le badge', () => {
 
     expect(reponse.status).toBe(HttpStatusCode.Ok);
     expect(reponse.headers['content-type']).toBe('application/zip');
-    expect(reponse.headers['content-disposition']).toBe('attachment; filename="visuels_cyberdepart.zip"');
+    expect(reponse.headers['content-disposition']).toBe('attachment; filename=visuels_cyberdepart.zip');
   });
 
   describe('L\'archive "visuels_cyberdepart.zip"', () => {

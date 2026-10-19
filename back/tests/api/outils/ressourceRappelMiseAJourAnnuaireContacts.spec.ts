@@ -53,7 +53,7 @@ describe("La ressource du rappel de mise à jour de l'annuaire des contacts", ()
       const { headers } = await récupèrelÉvènement();
 
       expect(headers['content-type']).toBe('text/calendar; charset=utf-8');
-      expect(headers['content-disposition']).toBe('attachment; filename="rappel-mise-a-jour-annuaire-contacts.ics"');
+      expect(headers['content-disposition']).toBe('attachment; filename=rappel-mise-a-jour-annuaire-contacts.ics');
     });
 
     it('renvoi un évènement calendrier', async () => {

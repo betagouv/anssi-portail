@@ -52,7 +52,7 @@ describe("La ressource du modèle de l'annuaire de crise", () => {
       const { headers } = await récupèreModèle();
 
       expect(headers['content-type']).toBe('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-      expect(headers['content-disposition']).toBe('attachment; filename="modele-annuaire-de-crise.xlsx"');
+      expect(headers['content-disposition']).toBe('attachment; filename=modele-annuaire-de-crise.xlsx');
     });
 
     it('renvoie un fichier valide', async () => {
