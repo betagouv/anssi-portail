@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Lien from '../../../ui/Lien.svelte';
-  import EtapeProcedure from './EtapeProcedure.svelte';
-  import EtapesProcedure from './EtapesProcedure.svelte';
-  import OutilJeuCarteReflexesCyber from './OutilJeuCarteReflexesCyber.svelte';
-  import OutilJeuReflexesCyberEnLigne from './OutilJeuReflexesCyberEnLigne.svelte';
+  import Lien from '../../../../ui/Lien.svelte';
+  import EtapeProcedure from '../EtapeProcedure.svelte';
+  import EtapesProcedure from '../EtapesProcedure.svelte';
+  import OutilJeuCarteReflexesCyber from '../OutilJeuCarteReflexesCyber.svelte';
+  import OutilJeuReflexesCyberEnLigne from '../OutilJeuReflexesCyberEnLigne.svelte';
 </script>
 
 <div>
