@@ -127,7 +127,7 @@ const contactsParRegion: Record<CodeRégion, ContactsRégionaux> = {
       telephone: '0 805 29 29 40',
     },
     COT: {
-      nom: 'Martin VERON / Jean-Denis LAVAL',
+      nom: 'Jean-Denis LAVAL',
       email: 'nouvelle-aquitaine@ssi.gouv.fr',
     },
     campus: {
