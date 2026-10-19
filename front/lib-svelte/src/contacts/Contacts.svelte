@@ -163,6 +163,7 @@
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
+  @use '../../../assets/styles/grille' as *;
 
   * {
     box-sizing: border-box;
@@ -172,8 +173,8 @@
     padding: 48px 0 72px;
 
     .contenu-section {
+      display: flex;
       @include a-partir-de(md) {
-        display: flex;
         gap: 1.5rem;
       }
     }
@@ -188,10 +189,6 @@
     margin: 8px 0 0 0;
     font-size: 2rem;
     line-height: 2.5rem;
-
-    @include a-partir-de(lg) {
-      width: 790px;
-    }
   }
 
   p {
@@ -200,17 +197,14 @@
 
   .contacts {
     display: flex;
-    flex: 1;
     flex-direction: column;
     gap: 24px;
 
     &.centre {
       @include a-partir-de(lg) {
-        align-items: center;
-      }
-
-      > * {
-        width: min(100%, 792px);
+        max-width: taille-pour-colonnes(8);
+        margin-left: auto;
+        margin-right: auto;
       }
     }
   }
@@ -218,7 +212,6 @@
   .aucun-resultat {
     align-items: center;
     display: flex;
-    flex: 1;
     flex-direction: column;
     gap: 16px;
 

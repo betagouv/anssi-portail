@@ -23,6 +23,7 @@
     border: 1px solid var(--border-default-grey);
     border-radius: 8px;
     box-sizing: border-box;
+    width: 100%;
   }
 
   h3 {
