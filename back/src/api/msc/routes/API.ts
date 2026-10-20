@@ -30,6 +30,7 @@ import { ressourceExigencesNis2 } from '../../nis2/ressourceExigencesNis2.js';
 import { ressourceExigencesNis2Csv } from '../../nis2/ressourceExigencesNis2Csv.js';
 import { ressourceSimulateurNis2 } from '../../nis2/ressourceSimulateurNis2.js';
 import { ressourceModeleAnnuaireDeCrise } from '../../outils/ressourceModeleAnnuaireDeCrise.js';
+import { ressourceModeleListeDActivites } from '../../outils/ressourceModeleListeDActivites.js';
 import { ressourceModeleModificationsMotsDePasse } from '../../outils/ressourceModeleModificationsMotsDePasse.js';
 import { ressourceRappelMiseAJourAnnuaireContacts } from '../../outils/ressourceRappelMiseAJourAnnuaireContacts.js';
 import { ressourceRetoursSurOutil } from '../../outils/ressourceRetoursSurOutil.js';
@@ -182,5 +183,6 @@ export const enregistreLesRoutesAPI = (app: Express, configurationServeur: Confi
     '/outils/rappel-mise-a-jour-annuaire-contacts.ics',
     ressourceRappelMiseAJourAnnuaireContacts(configurationServeur)
   );
+  enregistreRoute('/outils/modele-liste-d-activites.xlsx', ressourceModeleListeDActivites(configurationServeur));
   enregistreRoute('/outils/retours', ressourceRetoursSurOutil(configurationServeur));
 };

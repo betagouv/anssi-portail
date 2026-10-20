@@ -61,6 +61,7 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
     modèleAnnuaireDeCrise: () => join(process.cwd(), 'src', 'api', 'outils', 'modele-annuaire-de-crise.xlsx'),
     modèleModificationsMotsDePasse: () =>
       join(process.cwd(), 'src', 'api', 'outils', 'modele-modifications-mots-de-passe.xlsx'),
+    modèleListeDActivités: () => join(process.cwd(), 'src', 'api', 'outils', 'modele-liste-d-activites.xlsx'),
   },
   jekyll: {
     page403: () => ressourceFactice(),
