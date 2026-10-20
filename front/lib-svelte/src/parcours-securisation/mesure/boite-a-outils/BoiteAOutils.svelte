@@ -1,22 +1,22 @@
 <script lang="ts">
   import type { Component } from 'svelte';
   import type { Mesure } from '../../mesure';
-  import BoiteAOutilsGenerique from './BoiteAOutilsGenerique.svelte';
+  import BoiteÀOutilsGénérique from './BoiteAOutilsGenerique.svelte';
 
   const { mesure }: { mesure: Mesure } = $props();
   const boitesÀOutils = import.meta.glob<{ default: Component } | undefined>('./personnalisee/BoiteAOutils*.svelte');
 
-  const boiteÀOutils = $derived.by(async () => {
+  const chargeBoiteÀOutilsPersonnalisée = $derived.by(async () => {
     return (await boitesÀOutils[`./personnalisee/BoiteAOutils${mesure.id.replaceAll('.', '')}.svelte`]?.())?.default;
   });
 </script>
 
-{#await boiteÀOutils}
+{#await chargeBoiteÀOutilsPersonnalisée}
   Chargement...
-{:then BoiteAOutils}
-  {#if BoiteAOutils}
-    <BoiteAOutils />
+{:then BoiteÀOutilsPersonnalisée}
+  {#if BoiteÀOutilsPersonnalisée}
+    <BoiteÀOutilsPersonnalisée />
   {:else}
-    <BoiteAOutilsGenerique {mesure} />
+    <BoiteÀOutilsGénérique {mesure} />
   {/if}
 {/await}
