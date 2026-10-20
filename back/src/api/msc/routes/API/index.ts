@@ -30,11 +30,6 @@ import { ressourceExigencesNis2 } from '../../../nis2/ressourceExigencesNis2.js'
 import { ressourceExigencesNis2Csv } from '../../../nis2/ressourceExigencesNis2Csv.js';
 import { ressourceSimulateurNis2 } from '../../../nis2/ressourceSimulateurNis2.js';
 import { ressourceAbonnementInfolettre } from '../../../ressourceAbonnementInfolettre.js';
-import { ressourceAnnuaireDepartements } from '../../../ressourceAnnuaireDepartements.js';
-import { ressourceAnnuaireOrganisations } from '../../../ressourceAnnuaireOrganisations.js';
-import { ressourceAnnuaireRegions } from '../../../ressourceAnnuaireRegions.js';
-import { ressourceAnnuaireSecteursActivite } from '../../../ressourceAnnuaireSecteursActivite.js';
-import { ressourceAnnuaireTranchesEffectif } from '../../../ressourceAnnuaireTranchesEffectif.js';
 import { ressourceAvisUtilisateur } from '../../../ressourceAvisUtilisateur.js';
 import { ressourceContacts } from '../../../ressourceContacts.js';
 import { ressourceFinancement } from '../../../ressourceFinancement.js';
@@ -55,6 +50,7 @@ import { ressourceResultatsSessionDeGroupe } from '../../../testMaturite/ressour
 import { ressourceSessionDeGroupe } from '../../../testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from '../../../testMaturite/ressourceSessionsDeGroupe.js';
 import { enregistreRouteDansExpress } from '../../enregistreRoutes.js';
+import { enregistreLesAnnuaires } from './annuaire.js';
 import { enregistreLesOutils } from './outils.js';
 
 export const enregistreLesRoutesAPI = (app: Express, configurationServeur: ConfigurationServeur) => {
@@ -62,6 +58,7 @@ export const enregistreLesRoutesAPI = (app: Express, configurationServeur: Confi
     enregistreRouteDansExpress(app)(`/api${suffixe}`, ...gestionnaires);
 
   enregistreLesOutils(app, configurationServeur);
+  enregistreLesAnnuaires(app, configurationServeur);
 
   enregistreRoute('/profil', ressourceProfil(configurationServeur));
 
@@ -88,16 +85,6 @@ export const enregistreLesRoutesAPI = (app: Express, configurationServeur: Confi
     ressourceSessionDeGroupe(configurationServeur),
     ressourceResultatsSessionDeGroupe(configurationServeur)
   );
-
-  enregistreRoute('/annuaire/organisations', ressourceAnnuaireOrganisations(configurationServeur));
-
-  enregistreRoute('/annuaire/departements', ressourceAnnuaireDepartements(configurationServeur));
-
-  enregistreRoute('/annuaire/regions', ressourceAnnuaireRegions(configurationServeur));
-
-  enregistreRoute('/annuaire/secteurs-activite', ressourceAnnuaireSecteursActivite(configurationServeur));
-
-  enregistreRoute('/annuaire/tranches-effectif', ressourceAnnuaireTranchesEffectif(configurationServeur));
 
   enregistreRoute('/pages-crisp', ressourcePageCrisp(configurationServeur));
 
