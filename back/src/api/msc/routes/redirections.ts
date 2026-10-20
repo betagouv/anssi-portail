@@ -55,7 +55,8 @@ export const enregistreLesRedirections = (app: Express) => {
     ['/cyberdepart', '/parcours-cyberdepart'],
   ].forEach(([precedent, nouveau]: string[]) => {
     app.use(precedent, (requete: Request, reponse: Response, suite: NextFunction) => {
-      if (requete.originalUrl === precedent || requete.originalUrl === `${precedent}/`) {
+      const chemin = new URL(requete.originalUrl, 'http://localhost').pathname;
+      if (chemin === precedent || chemin === `${precedent}/`) {
         return reponse.redirect(HttpStatusCode.MovedPermanently, nouveau);
       }
       suite();
