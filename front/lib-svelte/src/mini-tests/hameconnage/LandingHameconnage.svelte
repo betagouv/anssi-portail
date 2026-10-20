@@ -4,6 +4,7 @@
   import type { PropriétésFilAriane } from '../../ui/filAriane';
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import Lien from '../../ui/Lien.svelte';
+  import IllustrationHerosHameconnage from './IllustrationHerosHameconnage.svelte';
 
   const { mode, suivant, urlBase = '' }: { mode?: 'autonome'; suivant?: () => void; urlBase?: string } = $props();
 
@@ -35,7 +36,7 @@
     {/snippet}
     {#snippet illustration()}
       <figure class="illustration">
-        <!--                <IllustrationHerosHameconnage {urlBase} />-->
+        <IllustrationHerosHameconnage {urlBase} />
       </figure>
     {/snippet}
 
