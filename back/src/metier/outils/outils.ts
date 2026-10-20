@@ -2,6 +2,7 @@ const outils = [
   'modele-annuaire-de-crise.xlsx',
   'rappel-mise-a-jour-annuaire-contacts.ics',
   'modele-modifications-mots-de-passe.xlsx',
+  'modele-liste-d-activites.xlsx',
 ] as const;
 export type Outil = (typeof outils)[number];
 
