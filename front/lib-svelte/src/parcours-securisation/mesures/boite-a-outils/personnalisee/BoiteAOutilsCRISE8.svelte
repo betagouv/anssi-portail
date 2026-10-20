@@ -1,8 +1,8 @@
 <script lang="ts">
   import EtapeProcedure from '../EtapeProcedure.svelte';
   import EtapesProcedure from '../EtapesProcedure.svelte';
-  import OutilModèleAnnuaireDeCrise from '../OutilModeleAnnuaireDeCrise.svelte';
-  import OutilRappelMiseAJourAnnuaire from '../OutilRappelMiseAJourAnnuaire.svelte';
+  import OutilModèleAnnuaireDeCrise from './outils/OutilModeleAnnuaireDeCrise.svelte';
+  import OutilRappelMiseAJourAnnuaire from './outils/OutilRappelMiseAJourAnnuaire.svelte';
 </script>
 
 <div>

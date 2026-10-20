@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { CouleurDeBadge } from '../../../ui/badge.type';
+  import type { CouleurDeBadge } from '../../../../../../ui/badge.type';
 
   type Props = {
     couleurBadge: CouleurDeBadge;

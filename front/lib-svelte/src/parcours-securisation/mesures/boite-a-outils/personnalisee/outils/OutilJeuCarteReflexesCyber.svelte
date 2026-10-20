@@ -1,5 +1,5 @@
 <script lang="ts">
-  import OutilLien from './OutilLien.svelte';
+  import OutilLien from './patrons/OutilLien.svelte';
 </script>
 
 <OutilLien

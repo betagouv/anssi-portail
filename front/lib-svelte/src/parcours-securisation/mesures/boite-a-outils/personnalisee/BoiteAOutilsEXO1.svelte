@@ -2,8 +2,8 @@
   import Lien from '../../../../ui/Lien.svelte';
   import EtapeProcedure from '../EtapeProcedure.svelte';
   import EtapesProcedure from '../EtapesProcedure.svelte';
-  import OutilJeuCarteReflexesCyber from '../OutilJeuCarteReflexesCyber.svelte';
-  import OutilJeuReflexesCyberEnLigne from '../OutilJeuReflexesCyberEnLigne.svelte';
+  import OutilJeuCarteReflexesCyber from './outils/OutilJeuCarteReflexesCyber.svelte';
+  import OutilJeuReflexesCyberEnLigne from './outils/OutilJeuReflexesCyberEnLigne.svelte';
 </script>
 
 <div>
