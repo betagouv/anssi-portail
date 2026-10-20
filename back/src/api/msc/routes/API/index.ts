@@ -18,13 +18,6 @@ import { ressourceParcoursComplet } from '../../../mesures/ressourceParcoursComp
 import { ressourcePriseEnCompte } from '../../../mesures/ressourcePriseEnCompte.js';
 import { ressourceRécompensesCyberDépart } from '../../../mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepart.js';
 import { ressourceRécompensesCyberDépartSansBadge } from '../../../mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepartSansBadge.js';
-import { ressourceTestsExposition } from '../../../mini-tests/exposition/ressourceTestsExposition.js';
-import { ressourceRéponsesRéflexesCyber } from '../../../mini-tests/reflexes-cyber/ressourceReponsesReflexesCyber.js';
-import { ressourceInfoMiniTests } from '../../../mini-tests/ressourceInfoMiniTests.js';
-import { ressourceReactionMiniTest } from '../../../mini-tests/ressourceReactionMiniTest.js';
-import { ressourceRetourMiniTest } from '../../../mini-tests/ressourceRetourMiniTest.js';
-import { ressourceRéponsesVraiFaux } from '../../../mini-tests/vrai-faux/ressourceReponsesVraiFaux.js';
-import { ressourceVraiFaux } from '../../../mini-tests/vrai-faux/ressourceVraiFaux.js';
 import { ressourceDemandesAide } from '../../../mon-aide-cyber/ressourceDemandesAide.js';
 import { ressourceExigencesNis2 } from '../../../nis2/ressourceExigencesNis2.js';
 import { ressourceExigencesNis2Csv } from '../../../nis2/ressourceExigencesNis2Csv.js';
@@ -51,6 +44,7 @@ import { ressourceSessionDeGroupe } from '../../../testMaturite/ressourceSession
 import { ressourceSessionsDeGroupe } from '../../../testMaturite/ressourceSessionsDeGroupe.js';
 import { enregistreRouteDansExpress } from '../../enregistreRoutes.js';
 import { enregistreLesAnnuaires } from './annuaire.js';
+import { enregistreLesMiniTests } from './miniTests.js';
 import { enregistreLesOutils } from './outils.js';
 
 export const enregistreLesRoutesAPI = (app: Express, configurationServeur: ConfigurationServeur) => {
@@ -59,6 +53,7 @@ export const enregistreLesRoutesAPI = (app: Express, configurationServeur: Confi
 
   enregistreLesOutils(app, configurationServeur);
   enregistreLesAnnuaires(app, configurationServeur);
+  enregistreLesMiniTests(app, configurationServeur);
 
   enregistreRoute('/profil', ressourceProfil(configurationServeur));
 
@@ -141,12 +136,6 @@ export const enregistreLesRoutesAPI = (app: Express, configurationServeur: Confi
   );
   enregistreRoute('/parcours/complet', ressourceParcoursComplet(configurationServeur));
 
-  enregistreRoute('/reactions-mini-tests', ressourceReactionMiniTest(configurationServeur));
-  enregistreRoute('/info-mini-tests', ressourceInfoMiniTests(configurationServeur));
-  enregistreRoute('/mini-tests/vrai-faux', ressourceVraiFaux(configurationServeur));
-  enregistreRoute('/mini-tests/vrai-faux/reponses', ressourceRéponsesVraiFaux(configurationServeur));
-  enregistreRoute('/mini-tests/reflexes-cyber/reponses', ressourceRéponsesRéflexesCyber(configurationServeur));
-  enregistreRoute('/mini-tests/exposition/tests', ressourceTestsExposition(configurationServeur));
   enregistreRoute(
     '/articles',
     ressourceArticles(configurationServeur),
@@ -156,6 +145,4 @@ export const enregistreLesRoutesAPI = (app: Express, configurationServeur: Confi
 
   enregistreRoute('/mesures.csv', ressourceMesureCsv(configurationServeur));
   enregistreRoute('/modules', ressourceModule(configurationServeur));
-
-  enregistreRoute('/retour-mini-tests', ressourceRetourMiniTest(configurationServeur));
 };
