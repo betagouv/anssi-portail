@@ -8,6 +8,11 @@ export function createConfig(tsconfigRootDir, { autoriseImportAxios = false } = 
       ignores: ['dist/**', 'node_modules/**'],
     },
     {
+      linterOptions: {
+        reportUnusedDisableDirectives: 'error',
+      },
+    },
+    {
       files: ['**/*.ts'],
       extends: [eslint.configs.recommended, tseslint.configs.recommended],
       rules: {
