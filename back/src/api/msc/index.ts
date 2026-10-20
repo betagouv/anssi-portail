@@ -17,7 +17,7 @@ import { enregistreRouteDansExpress } from './enregistreRoutes.js';
 import { configureLesCookies } from './middlewares/cookies.js';
 import { configureLaGestionDErreur } from './middlewares/gestionDErreurs.js';
 import { configureLeRateLimit } from './middlewares/rateLimit.js';
-import { enregistreLesRoutesAPI } from './routes/API.js';
+import { enregistreLesRoutesAPI } from './routes/API/index.js';
 import { enregistreLAuthentification } from './routes/authentification.js';
 import { enregistreLesFichiersStatiques } from './routes/fichiersStatiques.js';
 import { enregistreLesFinancements } from './routes/financements.js';

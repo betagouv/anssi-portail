@@ -1,0 +1,26 @@
+import { Express, RequestHandler } from 'express';
+import { ConfigurationServeur } from '../../../configurationServeur.js';
+import { ressourceModeleAnnuaireDeCrise } from '../../../outils/ressourceModeleAnnuaireDeCrise.js';
+import { ressourceModeleListeDActivites } from '../../../outils/ressourceModeleListeDActivites.js';
+import { ressourceModeleModificationsMotsDePasse } from '../../../outils/ressourceModeleModificationsMotsDePasse.js';
+import { ressourceRappelMiseAJourAnnuaireContacts } from '../../../outils/ressourceRappelMiseAJourAnnuaireContacts.js';
+import { ressourceRetoursSurOutil } from '../../../outils/ressourceRetoursSurOutil.js';
+import { enregistreRouteDansExpress } from '../../enregistreRoutes.js';
+
+export const enregistreLesOutils = (app: Express, configurationServeur: ConfigurationServeur) => {
+  const enregistreRoute = (suffixe: string, ...gestionnaires: RequestHandler[]) =>
+    enregistreRouteDansExpress(app)(`/api/outils${suffixe}`, ...gestionnaires);
+
+  enregistreRoute('/retours', ressourceRetoursSurOutil(configurationServeur));
+
+  enregistreRoute('/modele-annuaire-de-crise.xlsx', ressourceModeleAnnuaireDeCrise(configurationServeur));
+  enregistreRoute(
+    '/modele-modifications-mots-de-passe.xlsx',
+    ressourceModeleModificationsMotsDePasse(configurationServeur)
+  );
+  enregistreRoute(
+    '/rappel-mise-a-jour-annuaire-contacts.ics',
+    ressourceRappelMiseAJourAnnuaireContacts(configurationServeur)
+  );
+  enregistreRoute('/modele-liste-d-activites.xlsx', ressourceModeleListeDActivites(configurationServeur));
+};
