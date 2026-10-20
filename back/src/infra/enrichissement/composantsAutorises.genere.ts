@@ -25,6 +25,7 @@ export const composantsAutorisés: string[] = [
   'illustration-connexion-inscription',
   'mini-tests',
   'mini-test-vrai-faux',
+  'mini-test-hameconnage',
   'mini-test-vrai-faux-quiz',
   'mini-test-reflexe-cyber',
   'mini-test-reflexe-cyber-parcours',

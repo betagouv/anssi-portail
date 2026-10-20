@@ -21,6 +21,7 @@ const récupèreLiens = (pages: string[], { fournisseurChemin }: ConfigurationSe
     '/vrai-faux/quiz.html': '/mini-test-vrai-faux-quiz.html',
     '/reflexes-cyber-en-ligne.html': '/mini-test-reflexe-cyber.html',
     '/reflexes-cyber-en-ligne/parcours.html': '/mini-test-reflexe-cyber-parcours.html',
+    '/hameconnage.html': '/mini-test-hameconnage.html',
   };
 
   return pages.map((page): LienSitemap => {
