@@ -1,5 +1,5 @@
 <script lang="ts">
-  import RetourUtilisateurSurContenu from '../../../ui/RetourUtilisateurSurContenu.svelte';
+  import RetourUtilisateurSurContenu from '../../../../../../ui/RetourUtilisateurSurContenu.svelte';
 
   type Props = {
     href: string;

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import OutilTelechargement from './OutilTelechargement.svelte';
+  import OutilTelechargement from './patrons/OutilTelechargement.svelte';
 </script>
 
 <OutilTelechargement
