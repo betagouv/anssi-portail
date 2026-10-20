@@ -6,8 +6,6 @@
     doitEtreOuvert: boolean;
   }
 
-  // FIX: Faux positif, voir issue https://github.com/sveltejs/eslint-plugin-svelte/issues/1607.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let { elements, doitEtreOuvert = $bindable() }: Props = $props();
 
   const gereClic = (e: MouseEvent | KeyboardEvent) => {
