@@ -1,8 +1,8 @@
 <script lang="ts">
   import EtapeProcedure from '../EtapeProcedure.svelte';
   import EtapesProcedure from '../EtapesProcedure.svelte';
+  import OutilModèleAnnuaireDeCrise from '../OutilModeleAnnuaireDeCrise.svelte';
   import OutilRappelMiseAJourAnnuaire from '../OutilRappelMiseAJourAnnuaire.svelte';
-  import OutilsModeleAnnuaireDeCrise from '../OutilsModeleAnnuaireDeCrise.svelte';
 </script>
 
 <div>
@@ -25,7 +25,7 @@
         et des exemples de rôles à adapter . A vous de le compléter avec les rôles et les personnes propres à votre
         organisation.
       </p>
-      <OutilsModeleAnnuaireDeCrise />
+      <OutilModèleAnnuaireDeCrise />
     </EtapeProcedure>
 
     <EtapeProcedure titre="Imprimez et répartissez plusieurs exemplaires">
