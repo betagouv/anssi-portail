@@ -3,6 +3,7 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
+import { OutilTéléchargé } from '../../../src/bus/evenements/outilTelecharge.js';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
 import { MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
@@ -64,6 +65,15 @@ describe('La ressource du modèle de la liste des modifications des mots de pass
       const { status } = await request(serveur).get('/api/outils/modele-modifications-mots-de-passe.xlsx');
 
       expect(status).toBe(HttpStatusCode.Unauthorized);
+    });
+
+    it('publie un évènement de téléchargement', async () => {
+      await récupèreModèle();
+
+      expect(busEvenements.aRecuUnEvenement(OutilTéléchargé)).toBe(true);
+      const évènement = busEvenements.recupereEvenement(OutilTéléchargé);
+      expect(évènement!.outil).toBe('Modèle_modification_mots_de_passe');
+      expect(évènement!.email).toBe(jeanneDupont.email);
     });
   });
 });
