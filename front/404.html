@@ -2,17 +2,6 @@
 permalink: /404.html
 layout: defaut
 noindex: true
-styles:
-  - /assets/styles/404.css
 ---
 
-<dsfr-container>
-  <div class="contenu-section">
-    <h2>Oups&nbsp;! Cette page est introuvable.</h2>
-    <p class="texte-chapo-xl">Nous sommes désolés, la page que vous recherchez n'existe pas.</p>
-    <dsfr-button markup="a" href="/" label="Revenir à la page d’accueil"></dsfr-button>
-    <picture>
-      <img src="/assets/images/erreur-404.svg" />
-    </picture>
-  </div>
-</dsfr-container>
+{% include composant-svelte.html id="404" %}
