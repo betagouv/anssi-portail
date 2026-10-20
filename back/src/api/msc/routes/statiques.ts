@@ -43,6 +43,7 @@ export const routesStatiques = [
   'parcours-securisation-complet',
   'simulateur-nis2',
   'hameconnage',
+  'hameconnage/test',
 ];
 
 export const enregistreLesRoutesStatiques = (app: Express, configurationServeur: ConfigurationServeur) => {

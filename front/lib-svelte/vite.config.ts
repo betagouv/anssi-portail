@@ -117,6 +117,7 @@ export default defineConfig(({ command, mode }) => {
           'mini-test-reflexe-cyber': 'src/main-mini-test-reflexe-cyber.ts',
           'mini-test-reflexe-cyber-parcours': 'src/main-mini-test-reflexe-cyber-parcours.ts',
           'mini-test-hameconnage': 'src/main-mini-test-hameconnage.ts',
+          'mini-test-hameconnage-test': 'src/main-mini-test-hameconnage-test.ts',
           exposition: 'src/main-exposition.ts',
           'conseils-cyber': 'src/main-conseils-cyber.ts',
         },

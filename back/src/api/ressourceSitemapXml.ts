@@ -22,6 +22,7 @@ const récupèreLiens = (pages: string[], { fournisseurChemin }: ConfigurationSe
     '/reflexes-cyber-en-ligne.html': '/mini-test-reflexe-cyber.html',
     '/reflexes-cyber-en-ligne/parcours.html': '/mini-test-reflexe-cyber-parcours.html',
     '/hameconnage.html': '/mini-test-hameconnage.html',
+    '/hameconnage/test.html': '/mini-test-hameconnage-test.html',
   };
 
   return pages.map((page): LienSitemap => {
