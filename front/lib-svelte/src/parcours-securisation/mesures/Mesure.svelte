@@ -1,10 +1,10 @@
 <script lang="ts">
   import axios from 'axios';
-  import { onMount } from 'svelte';
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { enPropriétéWebC } from '$plateforme/webComponent';
   import CelluleExigenceNis2 from '../../nis2/tableaux/CelluleExigenceNis2.svelte';
   import { profilStore } from '../../stores/profil.store';
+  import Page404 from '../../ui/404.svelte';
   import Accordeon from '../../ui/Accordeon.svelte';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
   import Heros from '../../ui/Heros.svelte';
@@ -19,27 +19,23 @@
   let indexOngletActif: 0 | 1 = $state(0);
   let divConteneur: HTMLElement | undefined = $state();
 
-  onMount(async () => {
+  const chargeMesure = async () => {
     const chemin = new URL(window.location.href).pathname;
-    const idMesureACharger = chemin.split('/').reverse()[0];
-    const reponse = await axios.get<Mesure>(`/api/mesures/${idMesureACharger}`);
-    mesure = reponse.data;
-  });
+    const idMesureÀCharger = chemin.split('/').reverse()[0];
+    const réponse = await axios.get<Mesure>(`/api/mesures/${idMesureÀCharger}`);
+    mesure = réponse.data;
+  };
 
-  let explications = $derived(mesure ? aseptiseHtml(mesure.explications) : '');
-  let actionPrioritaire = $derived(mesure ? aseptiseHtml(mesure.actionPrioritaire) : '');
-  let exigencesTrieesParObjectif = $derived(
+  let exigencesTriéesParObjectif = $derived(
     mesure
       ? mesure.exigences.toSorted((a, b) =>
           a.objectifSecurite.localeCompare(b.objectifSecurite, 'fr', { sensitivity: 'base' })
         )
       : []
   );
-  let exigencesRegroupeesParObjectif = $derived(
-    mesure ? Object.groupBy(exigencesTrieesParObjectif, ({ objectifSecurite }) => objectifSecurite) : {}
+  let exigencesRegroupéesParObjectif = $derived(
+    mesure ? Object.groupBy(exigencesTriéesParObjectif, ({ objectifSecurite }) => objectifSecurite) : {}
   );
-
-  const idMesure = $derived(mesure?.id);
 
   const titre = $derived(mesure ? mesure.phraseAccroche || mesure.titre : '');
   const description = $derived(mesure && mesure.phraseAccroche ? mesure.titre : '');
@@ -67,121 +63,123 @@
         ]
       : []
   );
-  const aDesLiens: boolean = $derived((mesure?.liens?.length ?? 0) > 0);
+
   const surSélectionProcédure = () => {
     indexOngletActif = 1;
     divConteneur?.scrollIntoView({ behavior: 'smooth' });
   };
 </script>
 
-{#if mesure}
-  <Heros
-    {description}
-    illustrationSource="/assets/images/parcours-securisation/mesure-{mesure.id}.avif"
-    illustrationAlt=""
-    format="details"
-    {titre}
-    theme="clair"
-    segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
-  />
+{#await chargeMesure()}
+  <dsfr-container>Chargement... </dsfr-container>
+{:then}
+  {#if mesure}
+    <Heros
+      {description}
+      illustrationSource="/assets/images/parcours-securisation/mesure-{mesure.id}.avif"
+      illustrationAlt=""
+      format="details"
+      {titre}
+      theme="clair"
+      segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
+    />
 
-  <dsfr-container bind:this={divConteneur}>
-    <div class="article">
-      <div class="prise-en-compte">
-        <PriseEnCompteMesure {mesure} />
-      </div>
-      <div class="contenu-principal">
-        <dsfr-tabs
-          tabs={enPropriétéWebC([
-            {
-              id: 'presentation-mesure',
-              label: 'Présentation mesure',
-            },
-            {
-              id: 'boite-à-outils',
-              label: 'Boite à outils',
-            },
-          ])}
-          active-tab-index={indexOngletActif}
-          ontabchanged={(e: CustomEvent) => (indexOngletActif = e.detail.index)}
-        >
-          <div slot="panel-1">
-            <div class="contenu-section">
-              <h2>Présentation</h2>
-              <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-              {@html explications}
-            </div>
-
-            <div class="contenu-section">
-              <h2>Les risques évités</h2>
-              <ul class="risques-list">
-                {#each mesure.risques as risque (risque.libelle)}
-                  <li>
-                    <strong>{risque.libelle}&nbsp;:</strong>
-                    {risque.description}
-                  </li>
-                {/each}
-              </ul>
-            </div>
-
-            <div class="contenu-section priorites">
-              <h2><lab-anssi-icone nom="arrow-right-line"></lab-anssi-icone>À faire en priorité</h2>
-              <div>
+    <dsfr-container bind:this={divConteneur}>
+      <div class="article">
+        <div class="prise-en-compte">
+          <PriseEnCompteMesure {mesure} />
+        </div>
+        <div class="contenu-principal">
+          <dsfr-tabs
+            tabs={enPropriétéWebC([
+              {
+                id: 'presentation-mesure',
+                label: 'Présentation mesure',
+              },
+              {
+                id: 'boite-à-outils',
+                label: 'Boite à outils',
+              },
+            ])}
+            active-tab-index={indexOngletActif}
+            ontabchanged={(e: CustomEvent) => (indexOngletActif = e.detail.index)}
+          >
+            <div slot="panel-1">
+              <div class="contenu-section">
+                <h2>Présentation</h2>
                 <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-                <p>{@html actionPrioritaire}</p>
+                {@html aseptiseHtml(mesure.explications)}
               </div>
-              {#if mesure.actionFacileAFaire}
-                <dsfr-highlight size="md" text="slot">
-                  <h3 class="fr-h5" slot="title">Bonne nouvelle&nbsp;!</h3>
-                  <p slot="text">{mesure.actionFacileAFaire}</p>
-                </dsfr-highlight>
-              {/if}
-              <CartesLiensProcédures {mesure} {surSélectionProcédure} />
-            </div>
-            {#if aDesLiens}
-              <div class="liens">
-                <p class="texte-article-lg">Fiche Pratique</p>
-                {#each mesure.liens as lien (lien.libelle)}
-                  <msc-lien href={lien.url} libelle={lien.libelle}></msc-lien>
-                {/each}
-              </div>
-            {/if}
-          </div>
-          <div class="boite-a-outils" slot="panel-2">
-            <BoiteAOutils {mesure} />
-          </div>
-        </dsfr-tabs>
 
-        <div class="contenu-section avis-utilisateur">
-          {#if idMesure}
-            <div class="retour-utilisateur">
-              <RetourUtilisateurSurContenu identifiantCible={idMesure} typeDeRetour="mesure" />
+              <div class="contenu-section">
+                <h2>Les risques évités</h2>
+                <ul class="risques-list">
+                  {#each mesure.risques as risque (risque.libelle)}
+                    <li>
+                      <strong>{risque.libelle}&nbsp;:</strong>
+                      {risque.description}
+                    </li>
+                  {/each}
+                </ul>
+              </div>
+
+              <div class="contenu-section priorites">
+                <h2><lab-anssi-icone nom="arrow-right-line"></lab-anssi-icone>À faire en priorité</h2>
+                <div>
+                  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                  <p>{@html aseptiseHtml(mesure.actionPrioritaire)}</p>
+                </div>
+                {#if mesure.actionFacileAFaire}
+                  <dsfr-highlight size="md" text="slot">
+                    <h3 class="fr-h5" slot="title">Bonne nouvelle&nbsp;!</h3>
+                    <p slot="text">{mesure.actionFacileAFaire}</p>
+                  </dsfr-highlight>
+                {/if}
+                <CartesLiensProcédures {mesure} {surSélectionProcédure} />
+              </div>
+              {#if mesure.liens.length > 0}
+                <div class="liens">
+                  <p class="texte-article-lg">Fiche Pratique</p>
+                  {#each mesure.liens as lien (lien.libelle)}
+                    <msc-lien href={lien.url} libelle={lien.libelle}></msc-lien>
+                  {/each}
+                </div>
+              {/if}
             </div>
-          {/if}
-          <div class="section-aide recyf">
-            <p>
-              Les mesures proposées sur MesServicesCyber sont inspirées du Référentiel Cyber France (ReCyF). Simplifiées
-              et accompagnées d’explications pédagogiques, elles contribuent à faciliter les efforts de sécurisation de
-              toutes les organisations, notamment celles concernées par la directive NIS2.
-            </p>
-            <p>Pour approfondir, consultez la ou les exigences ReCyF/NIS2 dont est inspirée cette mesure.</p>
-            {#each Object.entries(exigencesRegroupeesParObjectif) as [objectif, exigences], index (index)}
-              <Accordeon libelle={objectif}>
-                {#each exigences as exigence (exigence.reference)}
-                  <CelluleExigenceNis2 {exigence} />
-                  <hr />
-                {/each}
-              </Accordeon>
-            {/each}
+            <div class="boite-a-outils" slot="panel-2">
+              <BoiteAOutils {mesure} />
+            </div>
+          </dsfr-tabs>
+
+          <div class="contenu-section avis-utilisateur">
+            <div class="retour-utilisateur">
+              <RetourUtilisateurSurContenu identifiantCible={mesure.id} typeDeRetour="mesure" />
+            </div>
+            <div class="section-aide recyf">
+              <p>
+                Les mesures proposées sur MesServicesCyber sont inspirées du Référentiel Cyber France (ReCyF).
+                Simplifiées et accompagnées d’explications pédagogiques, elles contribuent à faciliter les efforts de
+                sécurisation de toutes les organisations, notamment celles concernées par la directive NIS2.
+              </p>
+              <p>Pour approfondir, consultez la ou les exigences ReCyF/NIS2 dont est inspirée cette mesure.</p>
+              {#each Object.entries(exigencesRegroupéesParObjectif) as [objectif, exigences], index (index)}
+                <Accordeon libelle={objectif}>
+                  {#each exigences as exigence (exigence.reference)}
+                    <CelluleExigenceNis2 {exigence} />
+                    <hr />
+                  {/each}
+                </Accordeon>
+              {/each}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </dsfr-container>
-  <InterlocuteursParcoursSecurisation />
-{:else}
-  <dsfr-container>Chargement... </dsfr-container>
-{/if}
+    </dsfr-container>
+    <InterlocuteursParcoursSecurisation />
+  {/if}
+{:catch}
+  <Page404 />
+{/await}
 
 <style lang="scss">
   @use '../../../../assets/styles/responsive' as *;
