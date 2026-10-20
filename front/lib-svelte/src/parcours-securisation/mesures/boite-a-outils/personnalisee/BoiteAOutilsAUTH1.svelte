@@ -1,6 +1,7 @@
 <script lang="ts">
   import EtapeProcedure from '../EtapeProcedure.svelte';
   import EtapesProcedure from '../EtapesProcedure.svelte';
+  import OutilModeleModificationMotsDePasse from './outils/OutilModeleModificationMotsDePasse.svelte';
 </script>
 
 <div>
@@ -20,6 +21,7 @@
         défaut. Cette liste est indicative et non exhaustive&nbsp;: pensez à la compléter et à l’adapter aux équipements
         de votre organisation.
       </p>
+      <OutilModeleModificationMotsDePasse />
     </EtapeProcedure>
     <EtapeProcedure titre="Retrouver les identifiants d'origine">
       <ul class="enumeration">
