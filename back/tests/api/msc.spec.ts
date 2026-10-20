@@ -94,4 +94,13 @@ describe('La configuration de notre serveur', () => {
 
     expect(réponse.statusCode).toBe(HttpStatusCode.NotFound);
   });
+
+  it('redirige URL connue avec des paramètres vers la nouvelle URL', async () => {
+    const serveur = creeServeur(configurationDeTestDuServeur);
+
+    const réponse = await request(serveur).get('/cyberdepart?email=test@mail.com');
+
+    expect(réponse.statusCode).toBe(HttpStatusCode.MovedPermanently);
+    expect(réponse.headers.location).toBe('/parcours-cyberdepart');
+  });
 });
