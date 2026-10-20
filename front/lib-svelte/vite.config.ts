@@ -62,6 +62,7 @@ export default defineConfig(({ command, mode }) => {
       outDir: 'dist/client',
       rolldownOptions: {
         input: {
+          '404': 'src/main-404.ts',
           'avis-utilisateur': 'src/main-avis-utilisateur.ts',
           'centre-aide': 'src/main-centre-aide.ts',
           'creation-compte': 'src/main-creation-compte.ts',

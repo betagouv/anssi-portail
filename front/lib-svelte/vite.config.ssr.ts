@@ -6,6 +6,7 @@ import { injecteNonce } from './src/utils/injecteNonce.plugin.js';
 
 const rolldownOptions: NonNullable<UserConfig['build']>['rolldownOptions'] = {
   input: {
+    '404': 'src/ui/404.svelte',
     entreprises: 'src/protection/entreprises/PresentationEntreprises.svelte',
     associations: 'src/protection/associations/PresentationAssociations.svelte',
     navigation: 'src/navigation/Navigation.svelte',

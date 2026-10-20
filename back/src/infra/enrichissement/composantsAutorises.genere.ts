@@ -1,5 +1,6 @@
 // Fichier généré automatiquement au build Svelte (emetComposantsAutorisés). Ne pas modifier à la main.
 export const composantsAutorisés: string[] = [
+  '404',
   'entreprises',
   'associations',
   'navigation',
