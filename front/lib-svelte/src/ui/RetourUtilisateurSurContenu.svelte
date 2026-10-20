@@ -117,9 +117,9 @@
     {#if children}
       {@render children()}
     {:else}
-      <span class="titre-avis">
+      <p class="texte-article-lg">
         <b>Ce contenu vous a-t-il aidé&nbsp;?</b>
-      </span>
+      </p>
     {/if}
   </div>
   <div class="conteneur-emoji-avis">
