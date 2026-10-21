@@ -1,7 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
 import { OutilTéléchargé } from '../../../src/bus/evenements/outilTelecharge.js';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
@@ -17,6 +17,8 @@ describe('La ressource du modèle de la liste des modifications des mots de pass
   let entrepotUtilisateur: EntrepotUtilisateur;
 
   beforeEach(async () => {
+    vi.resetAllMocks();
+
     busEvenements = new MockBusEvenement();
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 
@@ -59,6 +61,14 @@ describe('La ressource du modèle de la liste des modifications des mots de pass
       const { body } = await récupèreModèle();
 
       expect(Buffer.isBuffer(body)).toBe(true);
+    });
+
+    it('configure le modèle grâce au service', async () => {
+      const espion = vi.spyOn(configurationDeTestDuServeur.serviceModèleModificationMotsDePasse, 'génèreModèle');
+
+      await récupèreModèle();
+
+      expect(espion).toHaveBeenCalledExactlyOnceWith();
     });
 
     it('refuse un utilisateur non connecté', async () => {

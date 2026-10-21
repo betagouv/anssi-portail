@@ -11,6 +11,7 @@ import {
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from '../../src/api/outils/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from '../../src/api/outils/serviceModeleListeDActivites.js';
+import { ServiceModèleModificationMotsDePasse } from '../../src/api/outils/serviceModeleModificationMotsDePasse.js';
 import { AdaptateurCellar } from '../../src/infra/adaptateurCellar.js';
 import { adaptateurCompression } from '../../src/infra/adaptateurCompression.js';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
@@ -367,6 +368,10 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
     fauxAdaptateurHorloge
   ),
   serviceModèleListeDActivités: new ServiceModèleListeDActivités(fauxFournisseurDeChemin, fauxAdaptateurHorloge),
+  serviceModèleModificationMotsDePasse: new ServiceModèleModificationMotsDePasse(
+    fauxFournisseurDeChemin,
+    fauxAdaptateurHorloge
+  ),
   entrepotUtilisateur,
   fournisseurChemin: fauxFournisseurDeChemin,
   generateurCodeSessionDeGroupe: fauxGenerateurCodeSessionDeGroupe,
