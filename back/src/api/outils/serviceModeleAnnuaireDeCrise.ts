@@ -1,22 +1,14 @@
-import { readFile } from 'node:fs/promises';
 import { calculeCodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
 import { Cell, getCoordinate } from '@office-kit/xlsx/cell';
-import { loadWorkbook } from '@office-kit/xlsx/io';
-import { fromBuffer, workbookToBuffer } from '@office-kit/xlsx/node';
-import { getSheetByIndex } from '@office-kit/xlsx/workbook';
 import { getCellsInRow, setHyperlinks, Worksheet } from '@office-kit/xlsx/worksheet';
 import { EntrepôtContact } from '../../metier/contacts/entrepotContact.js';
 import { CodeRégion } from '../../metier/referentielRegions.js';
 import { FournisseurChemin } from '../fournisseurChemin.js';
+import { ServiceÉditionXLSX } from './serviceEditionXLSX.js';
 
 const LIGNE_PREMIER_CONTACT_NATIONAL = 70;
 const LIGNE_CONTACT_SECTORIEL = 66;
 const LIGNE_PREMIER_CONTACT_RÉGIONAL = 62;
-
-const changeLeTitreDeLaFeuille = (feuille: Worksheet): void => {
-  const dateFormattée = new Date().toLocaleDateString('fr-FR').replace(/\//g, '-');
-  feuille.title = `Version du ${dateFormattée}`;
-};
 
 const ajouteUnLien = (feuille: Worksheet, cellule: Cell, libelle: string, href: string): void => {
   cellule.value = libelle;
@@ -38,21 +30,18 @@ export class ServiceModeleAnnuaireDeCrise {
     codeActivité,
     codeRégion,
   }: { codeActivité?: string; codeRégion?: CodeRégion } = {}): Promise<Buffer> {
-    const fichier = await readFile(this.fournisseurChemin.back.modèleAnnuaireDeCrise());
-
-    const wb = await loadWorkbook(fromBuffer(fichier));
-    const feuille = getSheetByIndex(wb, 0);
-
-    if (!feuille) {
-      throw new Error("Impossible de récupérer la première feuille du modèle d'annuaire de crise");
-    }
-    changeLeTitreDeLaFeuille(feuille);
+    const éditeurDeDocument = await new ServiceÉditionXLSX().chargeDocument(
+      this.fournisseurChemin.back.modèleAnnuaireDeCrise
+    );
+    const éditeurDeFeuille = éditeurDeDocument.chargeLaFeuilleÀLaPosition(0);
+    éditeurDeFeuille.définisLibelléÀLaVersionDuJour();
+    const feuille = éditeurDeFeuille.récupèreRéférence();
 
     await this.complèteContactsNationaux(feuille);
     await this.complèteContactSectoriel(feuille, codeActivité);
     await this.complèteContactRégionaux(feuille, codeRégion);
 
-    return await workbookToBuffer(wb);
+    return éditeurDeDocument.versBuffer();
   }
 
   private async complèteContactsNationaux(feuille: Worksheet): Promise<void> {
