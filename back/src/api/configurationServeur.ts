@@ -39,6 +39,7 @@ import { ServiceModeleAnnuaireDeCrise } from './outils/modeleAnnuaireDeCrise/ser
 import { ServiceModèleListeDActivités } from './outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleModificationMotsDePasse } from './outils/modeleModificationMotsDePasse/serviceModeleModificationMotsDePasse.js';
 import { ServiceModèleRevueComptesUtilisateurs } from './outils/modeleRevueComptesUtilisateurs/serviceModeleRevueComptesUtilisateurs.js';
+import { ServiceModèleRevueDroitsDAccès } from './outils/modeleRevueDroitsDAcces/serviceModeleRevueDroitsDAcces.js';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -85,6 +86,7 @@ export type ConfigurationServeur = {
   serviceModèleListeDActivités: ServiceModèleListeDActivités;
   serviceModèleModificationMotsDePasse: ServiceModèleModificationMotsDePasse;
   serviceModèleRevueComptesUtilisateurs: ServiceModèleRevueComptesUtilisateurs;
+  serviceModèleRevueDroitsDAccès: ServiceModèleRevueDroitsDAccès;
   adaptateurEmail: AdaptateurEmail;
   generateurImage: GenerateurImage;
   adaptateurCompression: AdaptateurCompression;

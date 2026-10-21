@@ -22,6 +22,7 @@ export interface FournisseurChemin {
     modèleListeDActivités: () => string;
     modèleModificationsMotsDePasse: () => string;
     modèleRevueComptesUtilisateurs: () => string;
+    modèleRevueDroitsDAccès: () => string;
   };
   jekyll: {
     page403: () => string;
@@ -113,6 +114,16 @@ export const fournisseurChemin: FournisseurChemin = {
         'outils',
         'modeleRevueComptesUtilisateurs',
         'modele-revue-comptes-utilisateurs.xlsx'
+      ),
+    modèleRevueDroitsDAccès: () =>
+      join(
+        process.cwd(),
+        'back',
+        'src',
+        'api',
+        'outils',
+        'modeleRevueDroitsDAcces',
+        'modele-revue-droits-d-acces.xlsx'
       ),
   },
   jekyll: {
