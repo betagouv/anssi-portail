@@ -15,6 +15,7 @@
 
 <div class="outil">
   <dsfr-card
+    blank
     {description}
     enlarge="true"
     has-badge="true"
