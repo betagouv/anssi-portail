@@ -12,6 +12,7 @@ import { adaptateurOIDC } from './api/oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from './api/outils/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from './api/outils/serviceModeleListeDActivites.js';
 import { ServiceModèleModificationMotsDePasse } from './api/outils/serviceModeleModificationMotsDePasse.js';
+import { ServiceModèleRevueComptesUtilisateurs } from './api/outils/serviceModeleRevueComptesUtilisateurs.js';
 import { BusEvenements } from './bus/busEvenements.js';
 import { cableTousLesAbonnes } from './bus/cablage.js';
 import { EntrepôtModulePostgres } from './entrepotModulePostgres.js';
@@ -237,6 +238,10 @@ const host = process.env.HOST;
     ),
     serviceModèleListeDActivités: new ServiceModèleListeDActivités(fournisseurChemin, adaptateurHorloge),
     serviceModèleModificationMotsDePasse: new ServiceModèleModificationMotsDePasse(
+      fournisseurChemin,
+      adaptateurHorloge
+    ),
+    serviceModèleRevueComptesUtilisateurs: new ServiceModèleRevueComptesUtilisateurs(
       fournisseurChemin,
       adaptateurHorloge
     ),
