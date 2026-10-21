@@ -10,6 +10,7 @@ import { fabriquePublieMesureConsultée } from './api/middlewares/publieMesureCo
 import { creeServeur } from './api/msc/index.js';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from './api/outils/serviceModeleAnnuaireDeCrise.js';
+import { ServiceModèleListeDActivités } from './api/outils/serviceModeleListeDActivites.js';
 import { BusEvenements } from './bus/busEvenements.js';
 import { cableTousLesAbonnes } from './bus/cablage.js';
 import { EntrepôtModulePostgres } from './entrepotModulePostgres.js';
@@ -233,6 +234,7 @@ const host = process.env.HOST;
       entrepôtContact,
       adaptateurHorloge
     ),
+    serviceModèleListeDActivités: new ServiceModèleListeDActivités(fournisseurChemin, adaptateurHorloge),
     adaptateurCompression,
     gestionnairesRequêtesComplémentaires: {
       attributionParcours,
