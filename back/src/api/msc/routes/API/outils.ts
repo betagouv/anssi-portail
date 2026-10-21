@@ -4,6 +4,7 @@ import { ressourceModeleAnnuaireDeCrise } from '../../../outils/ressourceModeleA
 import { ressourceModeleListeDActivites } from '../../../outils/ressourceModeleListeDActivites.js';
 import { ressourceModeleModificationsMotsDePasse } from '../../../outils/ressourceModeleModificationsMotsDePasse.js';
 import { ressourceRappelMiseAJourAnnuaireContacts } from '../../../outils/ressourceRappelMiseAJourAnnuaireContacts.js';
+import { ressourceRappelMiseAJourListeDActivités } from '../../../outils/ressourceRappelMiseÀJourListeDActivites.js';
 import { ressourceRetoursSurOutil } from '../../../outils/ressourceRetoursSurOutil.js';
 import { enregistreRouteDansExpress } from '../../enregistreRoutes.js';
 
@@ -23,4 +24,8 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
     ressourceRappelMiseAJourAnnuaireContacts(configurationServeur)
   );
   enregistreRoute('/modele-liste-d-activites.xlsx', ressourceModeleListeDActivites(configurationServeur));
+  enregistreRoute(
+    '/rappel-mise-a-jour-liste-d-activites.ics',
+    ressourceRappelMiseAJourListeDActivités(configurationServeur)
+  );
 };
