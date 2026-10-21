@@ -28,7 +28,7 @@
     <ÉtapeProcédure titre="Évaluez l'impact d'un incident sur chaque activité">
       <p class="texte-standard-md">
         Pour chaque activité, sélectionner celles à protéger en priorité en se posant la question de l'impact d'un
-        incident&nbsp;: 
+        incident&nbsp;:
       </p>
       <ul>
         <li>
@@ -40,7 +40,6 @@
           (clients, techniques, bancaires)&nbsp;?
         </li>
       </ul>
-       
     </ÉtapeProcédure>
 
     <ÉtapeProcédure titre="Marquez les activités prioritaires">

@@ -5,7 +5,7 @@
 <OutilTéléchargement
   href="/api/outils/modele-liste-d-activites.xlsx"
   identifiant="modele-liste-d-activites.xlsx"
-  taille="24 Ko"
+  taille="19,9 Ko"
   titre="Télécharger notre modèle d’activités"
   typeFichier="XLSX"
 />
