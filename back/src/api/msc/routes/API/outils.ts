@@ -1,7 +1,7 @@
 import { Express, RequestHandler } from 'express';
 import { ConfigurationServeur } from '../../../configurationServeur.js';
 import { ressourceModeleAnnuaireDeCrise } from '../../../outils/modeleAnnuaireDeCrise/ressourceModeleAnnuaireDeCrise.js';
-import { ressourceModeleListeDActivites } from '../../../outils/ressourceModeleListeDActivites.js';
+import { ressourceModeleListeDActivites } from '../../../outils/modeleListeDActivites/ressourceModeleListeDActivites.js';
 import { ressourceModeleModificationsMotsDePasse } from '../../../outils/ressourceModeleModificationsMotsDePasse.js';
 import { ressourceModèleRevueComptesUtilisateurs } from '../../../outils/ressourceModeleRevueComptesUtilisateurs.js';
 import { ressourceRappelMiseAJourAnnuaireContacts } from '../../../outils/ressourceRappelMiseAJourAnnuaireContacts.js';
