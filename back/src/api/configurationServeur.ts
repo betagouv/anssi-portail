@@ -36,7 +36,7 @@ import { ServiceRécompensesCyberDépart } from './mesures/ressourceRecompensesC
 import { GestionnaireRequêtesComplémentaires, Middleware } from './middlewares/middleware.js';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from './outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
-import { ServiceModèleListeDActivités } from './outils/serviceModeleListeDActivites.js';
+import { ServiceModèleListeDActivités } from './outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleModificationMotsDePasse } from './outils/serviceModeleModificationMotsDePasse.js';
 import { ServiceModèleRevueComptesUtilisateurs } from './outils/serviceModeleRevueComptesUtilisateurs.js';
 
