@@ -37,6 +37,7 @@ import { GestionnaireRequêtesComplémentaires, Middleware } from './middlewares
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from './outils/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from './outils/serviceModeleListeDActivites.js';
+import { ServiceModèleModificationMotsDePasse } from './outils/serviceModeleModificationMotsDePasse.js';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -81,6 +82,7 @@ export type ConfigurationServeur = {
   serviceRécompensesCyberDépart: ServiceRécompensesCyberDépart;
   serviceModeleAnnuaireDeCrise: ServiceModeleAnnuaireDeCrise;
   serviceModèleListeDActivités: ServiceModèleListeDActivités;
+  serviceModèleModificationMotsDePasse: ServiceModèleModificationMotsDePasse;
   adaptateurEmail: AdaptateurEmail;
   generateurImage: GenerateurImage;
   adaptateurCompression: AdaptateurCompression;

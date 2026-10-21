@@ -10,7 +10,7 @@ export const ressourceModeleModificationsMotsDePasse = ({
   busEvenements,
   entrepotUtilisateur,
   middleware,
-  fournisseurChemin,
+  serviceModèleModificationMotsDePasse,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
@@ -21,10 +21,12 @@ export const ressourceModeleModificationsMotsDePasse = ({
     filetRouteAsynchrone(async (requête: Request, réponse: Response) => {
       const utilisateur: Utilisateur = requête.utilisateur;
 
+      const contenuBinaire = await serviceModèleModificationMotsDePasse.génèreModèle();
+
       await réponse
         .type('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         .attachment('modele-modifications-mots-de-passe.xlsx')
-        .sendFile(fournisseurChemin.back.modèleModificationsMotsDePasse());
+        .send(contenuBinaire);
 
       await busEvenements.publie(new OutilTéléchargé(utilisateur.email, 'modele-modifications-mots-de-passe.xlsx'));
     })
