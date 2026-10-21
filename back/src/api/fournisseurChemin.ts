@@ -95,7 +95,15 @@ export const fournisseurChemin: FournisseurChemin = {
     modèleListeDActivités: () =>
       join(process.cwd(), 'back', 'src', 'api', 'outils', 'modeleListeDActivites', 'modele-liste-d-activites.xlsx'),
     modèleModificationsMotsDePasse: () =>
-      join(process.cwd(), 'back', 'src', 'api', 'outils', 'modele-modifications-mots-de-passe.xlsx'),
+      join(
+        process.cwd(),
+        'back',
+        'src',
+        'api',
+        'outils',
+        'modeleModificationMotsDePasse',
+        'modele-modifications-mots-de-passe.xlsx'
+      ),
     modèleRevueComptesUtilisateurs: () =>
       join(process.cwd(), 'back', 'src', 'api', 'outils', 'modele-revue-comptes-utilisateurs.xlsx'),
   },

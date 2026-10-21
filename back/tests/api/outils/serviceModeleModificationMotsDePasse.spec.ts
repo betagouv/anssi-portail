@@ -2,7 +2,7 @@ import { loadWorkbook } from '@office-kit/xlsx/io';
 import { fromBuffer } from '@office-kit/xlsx/node';
 import { getSheetByIndex } from '@office-kit/xlsx/workbook';
 import { describe, expect, it } from 'vitest';
-import { ServiceModèleModificationMotsDePasse } from '../../../src/api/outils/serviceModeleModificationMotsDePasse.js';
+import { ServiceModèleModificationMotsDePasse } from '../../../src/api/outils/modeleModificationMotsDePasse/serviceModeleModificationMotsDePasse.js';
 import { AdaptateurHorloge } from '../../../src/infra/adaptateurHorloge.js';
 import { fauxFournisseurDeChemin } from '../fauxObjets.js';
 

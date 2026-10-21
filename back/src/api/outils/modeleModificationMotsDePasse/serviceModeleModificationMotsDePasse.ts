@@ -1,6 +1,6 @@
-import { AdaptateurHorloge } from '../../infra/adaptateurHorloge.js';
-import { FournisseurChemin } from '../fournisseurChemin.js';
-import { ServiceÉditionXLSX } from './serviceEditionXLSX.js';
+import { AdaptateurHorloge } from '../../../infra/adaptateurHorloge.js';
+import { FournisseurChemin } from '../../fournisseurChemin.js';
+import { ServiceÉditionXLSX } from '../serviceEditionXLSX.js';
 
 export class ServiceModèleModificationMotsDePasse {
   constructor(
