@@ -228,7 +228,11 @@ const host = process.env.HOST;
     adaptateurEmail,
     generateurImage: new GenerateurImageAvif(),
     serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(fournisseurChemin),
-    serviceModeleAnnuaireDeCrise: new ServiceModeleAnnuaireDeCrise(fournisseurChemin, entrepôtContact),
+    serviceModeleAnnuaireDeCrise: new ServiceModeleAnnuaireDeCrise(
+      fournisseurChemin,
+      entrepôtContact,
+      adaptateurHorloge
+    ),
     adaptateurCompression,
     gestionnairesRequêtesComplémentaires: {
       attributionParcours,
