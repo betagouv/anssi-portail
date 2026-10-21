@@ -3,18 +3,26 @@ import { loadWorkbook } from '@office-kit/xlsx/io';
 import { fromBuffer } from '@office-kit/xlsx/node';
 import { getSheetByIndex } from '@office-kit/xlsx/workbook';
 import { getCellsInRow } from '@office-kit/xlsx/worksheet';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { ServiceModeleAnnuaireDeCrise } from '../../../src/api/outils/serviceModeleAnnuaireDeCrise.js';
+import { AdaptateurHorloge } from '../../../src/infra/adaptateurHorloge.js';
 import { EntrepôtContactStatique } from '../../../src/infra/entrepotContactStatique.js';
 import { CodeRégion } from '../../../src/metier/referentielRegions.js';
 import { fauxFournisseurDeChemin } from '../fauxObjets.js';
 
 describe("Le service du modèle de l'annuaire de crise", () => {
+  const fauxAdaptateurHorloge: AdaptateurHorloge = {
+    maintenant: () => new Date(2018, 10, 17),
+  };
   const récupèreModèleExcel = async ({
     codeActivité,
     codeRégion,
   }: { codeActivité?: string; codeRégion?: CodeRégion } = {}) => {
-    const service = new ServiceModeleAnnuaireDeCrise(fauxFournisseurDeChemin, new EntrepôtContactStatique());
+    const service = new ServiceModeleAnnuaireDeCrise(
+      fauxFournisseurDeChemin,
+      new EntrepôtContactStatique(),
+      fauxAdaptateurHorloge
+    );
 
     const wb = await loadWorkbook(fromBuffer(await service.génèreModèle({ codeActivité, codeRégion })));
     const feuille = getSheetByIndex(wb, 0);
@@ -23,15 +31,6 @@ describe("Le service du modèle de l'annuaire de crise", () => {
     }
     return feuille;
   };
-
-  beforeEach(() => {
-    vi.useFakeTimers({ toFake: ['Date'] });
-    vi.setSystemTime(new Date('2018-11-17T10:11:12Z'));
-  });
-
-  afterEach(() => {
-    vi.useRealTimers();
-  });
 
   it('change le nom de la feuille', async () => {
     const feuille = await récupèreModèleExcel();

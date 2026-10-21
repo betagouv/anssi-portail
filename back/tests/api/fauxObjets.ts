@@ -360,7 +360,11 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   entrepôtModule: new EntrepôtModuleMémoire(),
   entrepôtQuestionVraieFausse: new EntrepôtQuestionVraieFausseMémoire(),
   serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(fauxFournisseurDeChemin),
-  serviceModeleAnnuaireDeCrise: new ServiceModeleAnnuaireDeCrise(fauxFournisseurDeChemin, entrepôtContact),
+  serviceModeleAnnuaireDeCrise: new ServiceModeleAnnuaireDeCrise(
+    fauxFournisseurDeChemin,
+    entrepôtContact,
+    fauxAdaptateurHorloge
+  ),
   entrepotUtilisateur,
   fournisseurChemin: fauxFournisseurDeChemin,
   generateurCodeSessionDeGroupe: fauxGenerateurCodeSessionDeGroupe,

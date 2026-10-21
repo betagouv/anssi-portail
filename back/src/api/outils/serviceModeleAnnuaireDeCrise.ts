@@ -1,6 +1,7 @@
 import { calculeCodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
 import { Cell, getCoordinate } from '@office-kit/xlsx/cell';
 import { getCellsInRow, setHyperlinks, Worksheet } from '@office-kit/xlsx/worksheet';
+import { AdaptateurHorloge } from '../../infra/adaptateurHorloge.js';
 import { EntrepôtContact } from '../../metier/contacts/entrepotContact.js';
 import { CodeRégion } from '../../metier/referentielRegions.js';
 import { FournisseurChemin } from '../fournisseurChemin.js';
@@ -23,14 +24,15 @@ const ajouteUnLien = (feuille: Worksheet, cellule: Cell, libelle: string, href: 
 export class ServiceModeleAnnuaireDeCrise {
   constructor(
     private readonly fournisseurChemin: FournisseurChemin,
-    private readonly entrepôtContact: EntrepôtContact
+    private readonly entrepôtContact: EntrepôtContact,
+    private readonly adaptateurHorloge: AdaptateurHorloge
   ) {}
 
   async génèreModèle({
     codeActivité,
     codeRégion,
   }: { codeActivité?: string; codeRégion?: CodeRégion } = {}): Promise<Buffer> {
-    const éditeurDeDocument = await new ServiceÉditionXLSX().chargeDocument(
+    const éditeurDeDocument = await new ServiceÉditionXLSX(this.adaptateurHorloge).chargeDocument(
       this.fournisseurChemin.back.modèleAnnuaireDeCrise
     );
     const éditeurDeFeuille = éditeurDeDocument.chargeLaFeuilleÀLaPosition(0);
