@@ -9,7 +9,7 @@ import { fabriqueMiddleware } from './api/middlewares/middleware.js';
 import { fabriquePublieMesureConsultée } from './api/middlewares/publieMesureConsultee.js';
 import { creeServeur } from './api/msc/index.js';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC.js';
-import { ServiceModeleAnnuaireDeCrise } from './api/outils/serviceModeleAnnuaireDeCrise.js';
+import { ServiceModeleAnnuaireDeCrise } from './api/outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from './api/outils/serviceModeleListeDActivites.js';
 import { ServiceModèleModificationMotsDePasse } from './api/outils/serviceModeleModificationMotsDePasse.js';
 import { ServiceModèleRevueComptesUtilisateurs } from './api/outils/serviceModeleRevueComptesUtilisateurs.js';

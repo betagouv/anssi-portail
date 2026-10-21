@@ -35,7 +35,7 @@ import { FournisseurChemin } from './fournisseurChemin.js';
 import { ServiceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 import { GestionnaireRequêtesComplémentaires, Middleware } from './middlewares/middleware.js';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
-import { ServiceModeleAnnuaireDeCrise } from './outils/serviceModeleAnnuaireDeCrise.js';
+import { ServiceModeleAnnuaireDeCrise } from './outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from './outils/serviceModeleListeDActivites.js';
 import { ServiceModèleModificationMotsDePasse } from './outils/serviceModeleModificationMotsDePasse.js';
 import { ServiceModèleRevueComptesUtilisateurs } from './outils/serviceModeleRevueComptesUtilisateurs.js';

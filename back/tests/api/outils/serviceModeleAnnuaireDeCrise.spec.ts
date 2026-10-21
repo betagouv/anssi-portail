@@ -4,7 +4,7 @@ import { fromBuffer } from '@office-kit/xlsx/node';
 import { getSheetByIndex } from '@office-kit/xlsx/workbook';
 import { getCellsInRow } from '@office-kit/xlsx/worksheet';
 import { describe, expect, it } from 'vitest';
-import { ServiceModeleAnnuaireDeCrise } from '../../../src/api/outils/serviceModeleAnnuaireDeCrise.js';
+import { ServiceModeleAnnuaireDeCrise } from '../../../src/api/outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { AdaptateurHorloge } from '../../../src/infra/adaptateurHorloge.js';
 import { EntrepôtContactStatique } from '../../../src/infra/entrepotContactStatique.js';
 import { CodeRégion } from '../../../src/metier/referentielRegions.js';

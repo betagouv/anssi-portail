@@ -1,9 +1,9 @@
 import { Request, Response, Router } from 'express';
-import { OutilTéléchargé } from '../../bus/evenements/outilTelecharge.js';
-import { Utilisateur } from '../../metier/utilisateur.js';
-import { ConfigurationServeur } from '../configurationServeur.js';
-import { filetRouteAsynchrone } from '../middlewares/middleware.js';
-import { corpsVide, valideCorpsRequete } from '../zod.js';
+import { OutilTéléchargé } from '../../../bus/evenements/outilTelecharge.js';
+import { Utilisateur } from '../../../metier/utilisateur.js';
+import { ConfigurationServeur } from '../../configurationServeur.js';
+import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
+import { corpsVide, valideCorpsRequete } from '../../zod.js';
 
 export const ressourceModeleAnnuaireDeCrise = ({
   adaptateurHachage,
