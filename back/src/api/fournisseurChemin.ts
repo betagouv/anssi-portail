@@ -105,7 +105,15 @@ export const fournisseurChemin: FournisseurChemin = {
         'modele-modifications-mots-de-passe.xlsx'
       ),
     modèleRevueComptesUtilisateurs: () =>
-      join(process.cwd(), 'back', 'src', 'api', 'outils', 'modele-revue-comptes-utilisateurs.xlsx'),
+      join(
+        process.cwd(),
+        'back',
+        'src',
+        'api',
+        'outils',
+        'modeleRevueComptesUtilisateurs',
+        'modele-revue-comptes-utilisateurs.xlsx'
+      ),
   },
   jekyll: {
     page403: () => construisCheminVersArtefactJekyll('403.html'),

@@ -38,7 +38,7 @@ import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from './outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from './outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleModificationMotsDePasse } from './outils/modeleModificationMotsDePasse/serviceModeleModificationMotsDePasse.js';
-import { ServiceModèleRevueComptesUtilisateurs } from './outils/serviceModeleRevueComptesUtilisateurs.js';
+import { ServiceModèleRevueComptesUtilisateurs } from './outils/modeleRevueComptesUtilisateurs/serviceModeleRevueComptesUtilisateurs.js';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;

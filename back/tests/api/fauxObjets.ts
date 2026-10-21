@@ -12,7 +12,7 @@ import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from '../../src/api/outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from '../../src/api/outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleModificationMotsDePasse } from '../../src/api/outils/modeleModificationMotsDePasse/serviceModeleModificationMotsDePasse.js';
-import { ServiceModèleRevueComptesUtilisateurs } from '../../src/api/outils/serviceModeleRevueComptesUtilisateurs.js';
+import { ServiceModèleRevueComptesUtilisateurs } from '../../src/api/outils/modeleRevueComptesUtilisateurs/serviceModeleRevueComptesUtilisateurs.js';
 import { AdaptateurCellar } from '../../src/infra/adaptateurCellar.js';
 import { adaptateurCompression } from '../../src/infra/adaptateurCompression.js';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
@@ -75,7 +75,14 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
     modèleListeDActivités: () =>
       join(process.cwd(), 'src', 'api', 'outils', 'modeleListeDActivites', 'modele-liste-d-activites.xlsx'),
     modèleRevueComptesUtilisateurs: () =>
-      join(process.cwd(), 'src', 'api', 'outils', 'modele-revue-comptes-utilisateurs.xlsx'),
+      join(
+        process.cwd(),
+        'src',
+        'api',
+        'outils',
+        'modeleRevueComptesUtilisateurs',
+        'modele-revue-comptes-utilisateurs.xlsx'
+      ),
   },
   jekyll: {
     page403: () => ressourceFactice(),
