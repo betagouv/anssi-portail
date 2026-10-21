@@ -13,6 +13,7 @@ import { ServiceModeleAnnuaireDeCrise } from './api/outils/modeleAnnuaireDeCrise
 import { ServiceModèleListeDActivités } from './api/outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleModificationMotsDePasse } from './api/outils/modeleModificationMotsDePasse/serviceModeleModificationMotsDePasse.js';
 import { ServiceModèleRevueComptesUtilisateurs } from './api/outils/modeleRevueComptesUtilisateurs/serviceModeleRevueComptesUtilisateurs.js';
+import { ServiceModèleRevueDroitsDAccès } from './api/outils/modeleRevueDroitsDAcces/serviceModeleRevueDroitsDAcces.js';
 import { BusEvenements } from './bus/busEvenements.js';
 import { cableTousLesAbonnes } from './bus/cablage.js';
 import { EntrepôtModulePostgres } from './entrepotModulePostgres.js';
@@ -245,6 +246,7 @@ const host = process.env.HOST;
       fournisseurChemin,
       adaptateurHorloge
     ),
+    serviceModèleRevueDroitsDAccès: new ServiceModèleRevueDroitsDAccès(fournisseurChemin, adaptateurHorloge),
     adaptateurCompression,
     gestionnairesRequêtesComplémentaires: {
       attributionParcours,

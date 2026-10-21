@@ -4,6 +4,7 @@ import { ressourceModeleAnnuaireDeCrise } from '../../../outils/modeleAnnuaireDe
 import { ressourceModeleListeDActivites } from '../../../outils/modeleListeDActivites/ressourceModeleListeDActivites.js';
 import { ressourceModeleModificationsMotsDePasse } from '../../../outils/modeleModificationMotsDePasse/ressourceModeleModificationsMotsDePasse.js';
 import { ressourceModèleRevueComptesUtilisateurs } from '../../../outils/modeleRevueComptesUtilisateurs/ressourceModeleRevueComptesUtilisateurs.js';
+import { ressourceModèleRevueDroitsDAccès } from '../../../outils/modeleRevueDroitsDAcces/ressourceModeleRevueDroitsDAcces.js';
 import { ressourceRappelMiseAJourAnnuaireContacts } from '../../../outils/ressourceRappelMiseAJourAnnuaireContacts.js';
 import { ressourceRappelMiseAJourListeDActivités } from '../../../outils/ressourceRappelMiseÀJourListeDActivites.js';
 import { ressourceRetoursSurOutil } from '../../../outils/ressourceRetoursSurOutil.js';
@@ -34,4 +35,5 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
     '/modele-revue-comptes-utilisateurs.xlsx',
     ressourceModèleRevueComptesUtilisateurs(configurationServeur)
   );
+  enregistreRoute('/modele-revue-droits-d-acces.xlsx', ressourceModèleRevueDroitsDAccès(configurationServeur));
 };

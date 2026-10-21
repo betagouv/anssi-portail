@@ -13,6 +13,7 @@ import { ServiceModeleAnnuaireDeCrise } from '../../src/api/outils/modeleAnnuair
 import { ServiceModèleListeDActivités } from '../../src/api/outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleModificationMotsDePasse } from '../../src/api/outils/modeleModificationMotsDePasse/serviceModeleModificationMotsDePasse.js';
 import { ServiceModèleRevueComptesUtilisateurs } from '../../src/api/outils/modeleRevueComptesUtilisateurs/serviceModeleRevueComptesUtilisateurs.js';
+import { ServiceModèleRevueDroitsDAccès } from '../../src/api/outils/modeleRevueDroitsDAcces/serviceModeleRevueDroitsDAcces.js';
 import { AdaptateurCellar } from '../../src/infra/adaptateurCellar.js';
 import { adaptateurCompression } from '../../src/infra/adaptateurCompression.js';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
@@ -83,6 +84,8 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
         'modeleRevueComptesUtilisateurs',
         'modele-revue-comptes-utilisateurs.xlsx'
       ),
+    modèleRevueDroitsDAccès: () =>
+      join(process.cwd(), 'src', 'api', 'outils', 'modeleRevueDroitsDAcces', 'modele-revue-droits-d-acces.xlsx'),
   },
   jekyll: {
     page403: () => ressourceFactice(),
@@ -395,6 +398,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
     fauxFournisseurDeChemin,
     fauxAdaptateurHorloge
   ),
+  serviceModèleRevueDroitsDAccès: new ServiceModèleRevueDroitsDAccès(fauxFournisseurDeChemin, fauxAdaptateurHorloge),
   entrepotUtilisateur,
   fournisseurChemin: fauxFournisseurDeChemin,
   generateurCodeSessionDeGroupe: fauxGenerateurCodeSessionDeGroupe,
