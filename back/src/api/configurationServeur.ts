@@ -38,6 +38,7 @@ import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from './outils/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from './outils/serviceModeleListeDActivites.js';
 import { ServiceModèleModificationMotsDePasse } from './outils/serviceModeleModificationMotsDePasse.js';
+import { ServiceModèleRevueComptesUtilisateurs } from './outils/serviceModeleRevueComptesUtilisateurs.js';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -83,6 +84,7 @@ export type ConfigurationServeur = {
   serviceModeleAnnuaireDeCrise: ServiceModeleAnnuaireDeCrise;
   serviceModèleListeDActivités: ServiceModèleListeDActivités;
   serviceModèleModificationMotsDePasse: ServiceModèleModificationMotsDePasse;
+  serviceModèleRevueComptesUtilisateurs: ServiceModèleRevueComptesUtilisateurs;
   adaptateurEmail: AdaptateurEmail;
   generateurImage: GenerateurImage;
   adaptateurCompression: AdaptateurCompression;

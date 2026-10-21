@@ -12,6 +12,7 @@ import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from '../../src/api/outils/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from '../../src/api/outils/serviceModeleListeDActivites.js';
 import { ServiceModèleModificationMotsDePasse } from '../../src/api/outils/serviceModeleModificationMotsDePasse.js';
+import { ServiceModèleRevueComptesUtilisateurs } from '../../src/api/outils/serviceModeleRevueComptesUtilisateurs.js';
 import { AdaptateurCellar } from '../../src/infra/adaptateurCellar.js';
 import { adaptateurCompression } from '../../src/infra/adaptateurCompression.js';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
@@ -64,6 +65,8 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
     modèleModificationsMotsDePasse: () =>
       join(process.cwd(), 'src', 'api', 'outils', 'modele-modifications-mots-de-passe.xlsx'),
     modèleListeDActivités: () => join(process.cwd(), 'src', 'api', 'outils', 'modele-liste-d-activites.xlsx'),
+    modèleRevueComptesUtilisateurs: () =>
+      join(process.cwd(), 'src', 'api', 'outils', 'modele-revue-comptes-utilisateurs.xlsx'),
   },
   jekyll: {
     page403: () => ressourceFactice(),
@@ -369,6 +372,10 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   ),
   serviceModèleListeDActivités: new ServiceModèleListeDActivités(fauxFournisseurDeChemin, fauxAdaptateurHorloge),
   serviceModèleModificationMotsDePasse: new ServiceModèleModificationMotsDePasse(
+    fauxFournisseurDeChemin,
+    fauxAdaptateurHorloge
+  ),
+  serviceModèleRevueComptesUtilisateurs: new ServiceModèleRevueComptesUtilisateurs(
     fauxFournisseurDeChemin,
     fauxAdaptateurHorloge
   ),

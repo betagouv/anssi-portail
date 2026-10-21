@@ -3,6 +3,7 @@ import { ConfigurationServeur } from '../../../configurationServeur.js';
 import { ressourceModeleAnnuaireDeCrise } from '../../../outils/ressourceModeleAnnuaireDeCrise.js';
 import { ressourceModeleListeDActivites } from '../../../outils/ressourceModeleListeDActivites.js';
 import { ressourceModeleModificationsMotsDePasse } from '../../../outils/ressourceModeleModificationsMotsDePasse.js';
+import { ressourceModèleRevueComptesUtilisateurs } from '../../../outils/ressourceModeleRevueComptesUtilisateurs.js';
 import { ressourceRappelMiseAJourAnnuaireContacts } from '../../../outils/ressourceRappelMiseAJourAnnuaireContacts.js';
 import { ressourceRappelMiseAJourListeDActivités } from '../../../outils/ressourceRappelMiseÀJourListeDActivites.js';
 import { ressourceRetoursSurOutil } from '../../../outils/ressourceRetoursSurOutil.js';
@@ -27,5 +28,10 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
   enregistreRoute(
     '/rappel-mise-a-jour-liste-d-activites.ics',
     ressourceRappelMiseAJourListeDActivités(configurationServeur)
+  );
+
+  enregistreRoute(
+    '/modele-revue-comptes-utilisateurs.xlsx',
+    ressourceModèleRevueComptesUtilisateurs(configurationServeur)
   );
 };
