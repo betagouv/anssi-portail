@@ -72,7 +72,7 @@ describe('La ressource du modèle de la liste des modifications des mots de pass
 
       expect(busEvenements.aRecuUnEvenement(OutilTéléchargé)).toBe(true);
       const évènement = busEvenements.recupereEvenement(OutilTéléchargé);
-      expect(évènement!.outil).toBe('Modèle_modification_mots_de_passe');
+      expect(évènement!.outil).toBe('modele-modifications-mots-de-passe.xlsx');
       expect(évènement!.email).toBe(jeanneDupont.email);
     });
   });

@@ -111,7 +111,7 @@ describe("La ressource du rappel de mise à jour de l'annuaire des contacts", ()
 
       expect(busEvenements.aRecuUnEvenement(OutilTéléchargé)).toBe(true);
       const évènement = busEvenements.recupereEvenement(OutilTéléchargé);
-      expect(évènement!.outil).toBe('Rappel_mise-à-jour_annuaire');
+      expect(évènement!.outil).toBe('rappel-mise-a-jour-annuaire-contacts.ics');
       expect(évènement!.email).toBe(jeanneDupont.email);
     });
   });

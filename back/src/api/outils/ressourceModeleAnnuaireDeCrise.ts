@@ -33,7 +33,7 @@ export const ressourceModeleAnnuaireDeCrise = ({
         .attachment('modele-annuaire-de-crise.xlsx')
         .send(contenuBinaire);
 
-      await busEvenements.publie(new OutilTéléchargé(utilisateur.email, 'Modèle_annuaire_crise'));
+      await busEvenements.publie(new OutilTéléchargé(utilisateur.email, 'modele-annuaire-de-crise.xlsx'));
     })
   );
   return routeur;

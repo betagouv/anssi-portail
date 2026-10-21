@@ -35,11 +35,11 @@ describe("L'abonnement qui consigne le téléchargement d'un outil dans le journ
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
-    })(new OutilTéléchargé(jeanneDupont.email, 'Modèle_annuaire_crise'));
+    })(new OutilTéléchargé(jeanneDupont.email, 'modele-annuaire-de-crise.xlsx'));
 
     expect(evenementRecu).toBeDefined();
     expect(evenementRecu!.type).toBe('OUTIL_TÉLÉCHARGÉ');
-    expect(evenementRecu!.donnees.outil).toBe('Modèle_annuaire_crise');
+    expect(evenementRecu!.donnees.outil).toBe('modele-annuaire-de-crise.xlsx');
   });
 
   it("hache l'email de l'utilisateur", async () => {
@@ -54,7 +54,7 @@ describe("L'abonnement qui consigne le téléchargement d'un outil dans le journ
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
-    })(new OutilTéléchargé(jeanneDupont.email, 'Modèle_annuaire_crise'));
+    })(new OutilTéléchargé(jeanneDupont.email, 'modele-annuaire-de-crise.xlsx'));
 
     expect(evenementRecu!.donnees.idUtilisateur).toBe('jeanne.dupont@user.com-hacheHMAC');
   });

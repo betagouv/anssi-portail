@@ -59,7 +59,7 @@ Pensez ensuite à dater la nouvelle version, à réimprimer le document et à re
       réponse.attachment('rappel-mise-a-jour-annuaire-contacts.ics');
       réponse.contentType('text/calendar');
       réponse.send(évènement.value);
-      await busEvenements.publie(new OutilTéléchargé(utilisateur.email, 'Rappel_mise-à-jour_annuaire'));
+      await busEvenements.publie(new OutilTéléchargé(utilisateur.email, 'rappel-mise-a-jour-annuaire-contacts.ics'));
     }
   );
 

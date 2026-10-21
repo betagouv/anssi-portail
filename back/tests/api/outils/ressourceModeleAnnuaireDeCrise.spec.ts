@@ -72,7 +72,7 @@ describe("La ressource du modèle de l'annuaire de crise", () => {
 
       expect(busEvenements.aRecuUnEvenement(OutilTéléchargé)).toBe(true);
       const évènement = busEvenements.recupereEvenement(OutilTéléchargé);
-      expect(évènement!.outil).toBe('Modèle_annuaire_crise');
+      expect(évènement!.outil).toBe('modele-annuaire-de-crise.xlsx');
       expect(évènement!.email).toBe(jeanneDupont.email);
     });
   });
