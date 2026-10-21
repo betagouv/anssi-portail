@@ -11,7 +11,7 @@ import {
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from '../../src/api/outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from '../../src/api/outils/modeleListeDActivites/serviceModeleListeDActivites.js';
-import { ServiceModèleModificationMotsDePasse } from '../../src/api/outils/serviceModeleModificationMotsDePasse.js';
+import { ServiceModèleModificationMotsDePasse } from '../../src/api/outils/modeleModificationMotsDePasse/serviceModeleModificationMotsDePasse.js';
 import { ServiceModèleRevueComptesUtilisateurs } from '../../src/api/outils/serviceModeleRevueComptesUtilisateurs.js';
 import { AdaptateurCellar } from '../../src/infra/adaptateurCellar.js';
 import { adaptateurCompression } from '../../src/infra/adaptateurCompression.js';
@@ -64,7 +64,14 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
     modèleAnnuaireDeCrise: () =>
       join(process.cwd(), 'src', 'api', 'outils', 'modeleAnnuaireDeCrise', 'modele-annuaire-de-crise.xlsx'),
     modèleModificationsMotsDePasse: () =>
-      join(process.cwd(), 'src', 'api', 'outils', 'modele-modifications-mots-de-passe.xlsx'),
+      join(
+        process.cwd(),
+        'src',
+        'api',
+        'outils',
+        'modeleModificationMotsDePasse',
+        'modele-modifications-mots-de-passe.xlsx'
+      ),
     modèleListeDActivités: () =>
       join(process.cwd(), 'src', 'api', 'outils', 'modeleListeDActivites', 'modele-liste-d-activites.xlsx'),
     modèleRevueComptesUtilisateurs: () =>
