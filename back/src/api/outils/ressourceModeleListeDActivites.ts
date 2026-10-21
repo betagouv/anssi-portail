@@ -1,4 +1,3 @@
-import { readFile } from 'node:fs/promises';
 import { Request, Response, Router } from 'express';
 import { OutilTéléchargé } from '../../bus/evenements/outilTelecharge.js';
 import { Utilisateur } from '../../metier/utilisateur.js';
@@ -10,8 +9,8 @@ export const ressourceModeleListeDActivites = ({
   adaptateurHachage,
   busEvenements,
   entrepotUtilisateur,
-  fournisseurChemin,
   middleware,
+  serviceModèleListeDActivités,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
@@ -22,7 +21,7 @@ export const ressourceModeleListeDActivites = ({
     filetRouteAsynchrone(async (requête: Request, réponse: Response) => {
       const utilisateur: Utilisateur = requête.utilisateur;
 
-      const contenuBinaire = await readFile(fournisseurChemin.back.modèleAnnuaireDeCrise());
+      const contenuBinaire = await serviceModèleListeDActivités.génèreModèle();
 
       réponse
         .type('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')

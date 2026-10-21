@@ -10,6 +10,7 @@ import {
 } from '../../src/api/middlewares/middleware.js';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from '../../src/api/outils/serviceModeleAnnuaireDeCrise.js';
+import { ServiceModèleListeDActivités } from '../../src/api/outils/serviceModeleListeDActivites.js';
 import { AdaptateurCellar } from '../../src/infra/adaptateurCellar.js';
 import { adaptateurCompression } from '../../src/infra/adaptateurCompression.js';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
@@ -365,6 +366,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
     entrepôtContact,
     fauxAdaptateurHorloge
   ),
+  serviceModèleListeDActivités: new ServiceModèleListeDActivités(fauxFournisseurDeChemin, fauxAdaptateurHorloge),
   entrepotUtilisateur,
   fournisseurChemin: fauxFournisseurDeChemin,
   generateurCodeSessionDeGroupe: fauxGenerateurCodeSessionDeGroupe,
