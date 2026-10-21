@@ -26,7 +26,7 @@ export const ressourceModeleModificationsMotsDePasse = ({
         .attachment('modele-modifications-mots-de-passe.xlsx')
         .sendFile(fournisseurChemin.back.modèleModificationsMotsDePasse());
 
-      await busEvenements.publie(new OutilTéléchargé(utilisateur.email, 'Modèle_modification_mots_de_passe'));
+      await busEvenements.publie(new OutilTéléchargé(utilisateur.email, 'modele-modifications-mots-de-passe.xlsx'));
     })
   );
   return routeur;

@@ -1,8 +1,4 @@
-export type Outil =
-  | 'Modèle_annuaire_crise'
-  | 'Rappel_mise-à-jour_annuaire'
-  | 'Modèle_modification_mots_de_passe'
-  | 'modele-liste-d-activites.xlsx';
+import { Outil } from '../../metier/outils/outils.js';
 
 export class OutilTéléchargé {
   constructor(
