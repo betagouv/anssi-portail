@@ -1,8 +1,8 @@
 <script lang="ts">
-  import EtapeProcedure from '../EtapeProcedure.svelte';
-  import EtapesProcedure from '../EtapesProcedure.svelte';
+  import ÉtapeProcédure from '../EtapeProcedure.svelte';
+  import ÉtapesProcédure from '../EtapesProcedure.svelte';
   import OutilModèleAnnuaireDeCrise from './outils/OutilModeleAnnuaireDeCrise.svelte';
-  import OutilRappelMiseAJourAnnuaire from './outils/OutilRappelMiseAJourAnnuaire.svelte';
+  import OutilRappelMiseÀJourAnnuaire from './outils/OutilRappelMiseAJourAnnuaire.svelte';
 </script>
 
 <div>
@@ -12,8 +12,8 @@
     outils et méthodes de votre choix.
   </p>
 
-  <EtapesProcedure>
-    <EtapeProcedure titre="Identifiez les rôles et les contacts à mobiliser en cas de cyberattaque">
+  <ÉtapesProcédure>
+    <ÉtapeProcédure titre="Identifiez les rôles et les contacts à mobiliser en cas de cyberattaque">
       <p class="texte-standard-md avec-outil">
         Listez, dans votre entité, qui assure la décision, l’informatique, la communication, le juridique et le lien
         avec l’assurance (une personne peut cumuler plusieurs rôles), et ajoutez les contacts externes clés (prestataire
@@ -26,25 +26,25 @@
         organisation.
       </p>
       <OutilModèleAnnuaireDeCrise />
-    </EtapeProcedure>
+    </ÉtapeProcédure>
 
-    <EtapeProcedure titre="Imprimez et répartissez plusieurs exemplaires">
+    <ÉtapeProcédure titre="Imprimez et répartissez plusieurs exemplaires">
       <p class="texte-standard-md">
         Imprimer plusieurs exemplaires et les répartir intelligemment&nbsp;: classeur de crise au bureau, domicile du
         dirigeant, véhicule ou sac du responsable informatique. Le principe&nbsp;: la liste doit rester lisible sans
         ordinateur, sans réseau et sans internet.
       </p>
-    </EtapeProcedure>
+    </ÉtapeProcédure>
 
-    <EtapeProcedure titre="Protégez la diffusion du document">
+    <ÉtapeProcédure titre="Protégez la diffusion du document">
       <p class="texte-standard-md">
         Protéger le document&nbsp;: il contient des données personnelles et une cartographie de vos prestataires.
         Informer les personnes concernées, limiter la diffusion aux seules personnes utiles, et ne pas laisser
         d’exemplaires traîner dans des espaces communs.
       </p>
-    </EtapeProcedure>
+    </ÉtapeProcédure>
 
-    <EtapeProcedure titre="Maintenez la liste à jour">
+    <ÉtapeProcédure titre="Maintenez la liste à jour">
       <p class="texte-standard-md">
         Maintenir à jour cette liste, notamment à chaque départ, arrivée ou changement de prestataire.
       </p>
@@ -52,9 +52,9 @@
         Vous pouvez ajouter directement à votre propre agenda un rappel dans un an pour vérifier que le fichier est
         toujours à jour&nbsp;:
       </p>
-      <OutilRappelMiseAJourAnnuaire />
-    </EtapeProcedure>
-  </EtapesProcedure>
+      <OutilRappelMiseÀJourAnnuaire />
+    </ÉtapeProcédure>
+  </ÉtapesProcédure>
 </div>
 
 <style lang="scss">

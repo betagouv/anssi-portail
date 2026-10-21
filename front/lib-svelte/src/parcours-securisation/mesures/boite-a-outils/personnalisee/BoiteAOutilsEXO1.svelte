@@ -1,9 +1,9 @@
 <script lang="ts">
   import Lien from '../../../../ui/Lien.svelte';
-  import EtapeProcedure from '../EtapeProcedure.svelte';
-  import EtapesProcedure from '../EtapesProcedure.svelte';
-  import OutilJeuCarteReflexesCyber from './outils/OutilJeuCarteReflexesCyber.svelte';
-  import OutilJeuReflexesCyberEnLigne from './outils/OutilJeuReflexesCyberEnLigne.svelte';
+  import ÉtapeProcédure from '../EtapeProcedure.svelte';
+  import ÉtapesProcédure from '../EtapesProcedure.svelte';
+  import OutilJeuCarteRéflexesCyber from './outils/OutilJeuCarteReflexesCyber.svelte';
+  import OutilJeuRéflexesCyberEnLigne from './outils/OutilJeuReflexesCyberEnLigne.svelte';
 </script>
 
 <div>
@@ -12,8 +12,8 @@
     Cette démarche est proposée à titre indicatif. Vous êtes libre de l’adapter à votre contexte et de mobiliser les
     outils et méthodes de votre choix.
   </p>
-  <EtapesProcedure>
-    <EtapeProcedure titre="Organisez un premier exercice simple avec votre équipe">
+  <ÉtapesProcédure>
+    <ÉtapeProcédure titre="Organisez un premier exercice simple avec votre équipe">
       <p class="texte-standard-md">
         Pas besoin de mettre en place un exercice complexe pour commencer&nbsp;: un format «&nbsp;sur table&nbsp;»
         suffit. Réunissez les personnes clés de votre organisation&nbsp;: direction, informatique ou prestataire IT,
@@ -24,11 +24,11 @@
         sur les décisions à prendre.
       </p>
       <div class="outils-reflexes-cyber">
-        <OutilJeuCarteReflexesCyber />
-        <OutilJeuReflexesCyberEnLigne />
+        <OutilJeuCarteRéflexesCyber />
+        <OutilJeuRéflexesCyberEnLigne />
       </div>
-    </EtapeProcedure>
-    <EtapeProcedure titre="Identifiez les axes d’améliorations">
+    </ÉtapeProcédure>
+    <ÉtapeProcédure titre="Identifiez les axes d’améliorations">
       <p class="texte-standard-md">
         À la fin de l’exercice, notez les difficultés rencontrées et les actions à mettre en place pour être mieux
         préparés en cas de véritable incident, par exemple&nbsp;: qui alerter en premier&nbsp;? Qui prend les
@@ -41,8 +41,8 @@
         libelle="8 fiches réflexes cyber"
         href="/documents-ressources/ReflexesCyber%20-%20Fiches%20Reflexes.pdf"
       />
-    </EtapeProcedure>
-    <EtapeProcedure titre="Structurez et outillez la gestion de crise de votre organisation">
+    </ÉtapeProcédure>
+    <ÉtapeProcédure titre="Structurez et outillez la gestion de crise de votre organisation">
       <p class="texte-standard-md">
         Votre organisation est prête à aller plus loin ? Il est maintenant est nécessaire de préparer et d’outiller la
         gestion de crise cyber de votre organisation, notamment en&nbsp;:
@@ -82,8 +82,8 @@
           />
         </li>
       </ul>
-    </EtapeProcedure>
-    <EtapeProcedure titre="Organisez des exercices de crise réguliers">
+    </ÉtapeProcédure>
+    <ÉtapeProcédure titre="Organisez des exercices de crise réguliers">
       <p class="texte-standard-md">
         Il est important de continuer à sensibiliser et à entraîner à intervalle régulier vos équipes en vous dotant
         d’une stratégie d’entraînements.
@@ -107,8 +107,8 @@
           />
         </li>
       </ul>
-    </EtapeProcedure>
-  </EtapesProcedure>
+    </ÉtapeProcédure>
+  </ÉtapesProcédure>
   <h3>Pour aller plus loin</h3>
   <Lien
     libelle="La collection complète des guides de l’ANSSI sur la gestion des crises cyber"
