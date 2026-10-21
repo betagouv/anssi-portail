@@ -12,7 +12,7 @@ import { adaptateurOIDC } from './api/oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from './api/outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from './api/outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleModificationMotsDePasse } from './api/outils/modeleModificationMotsDePasse/serviceModeleModificationMotsDePasse.js';
-import { ServiceModèleRevueComptesUtilisateurs } from './api/outils/serviceModeleRevueComptesUtilisateurs.js';
+import { ServiceModèleRevueComptesUtilisateurs } from './api/outils/modeleRevueComptesUtilisateurs/serviceModeleRevueComptesUtilisateurs.js';
 import { BusEvenements } from './bus/busEvenements.js';
 import { cableTousLesAbonnes } from './bus/cablage.js';
 import { EntrepôtModulePostgres } from './entrepotModulePostgres.js';

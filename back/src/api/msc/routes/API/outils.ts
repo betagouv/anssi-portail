@@ -3,7 +3,7 @@ import { ConfigurationServeur } from '../../../configurationServeur.js';
 import { ressourceModeleAnnuaireDeCrise } from '../../../outils/modeleAnnuaireDeCrise/ressourceModeleAnnuaireDeCrise.js';
 import { ressourceModeleListeDActivites } from '../../../outils/modeleListeDActivites/ressourceModeleListeDActivites.js';
 import { ressourceModeleModificationsMotsDePasse } from '../../../outils/modeleModificationMotsDePasse/ressourceModeleModificationsMotsDePasse.js';
-import { ressourceModèleRevueComptesUtilisateurs } from '../../../outils/ressourceModeleRevueComptesUtilisateurs.js';
+import { ressourceModèleRevueComptesUtilisateurs } from '../../../outils/modeleRevueComptesUtilisateurs/ressourceModeleRevueComptesUtilisateurs.js';
 import { ressourceRappelMiseAJourAnnuaireContacts } from '../../../outils/ressourceRappelMiseAJourAnnuaireContacts.js';
 import { ressourceRappelMiseAJourListeDActivités } from '../../../outils/ressourceRappelMiseÀJourListeDActivites.js';
 import { ressourceRetoursSurOutil } from '../../../outils/ressourceRetoursSurOutil.js';
