@@ -2,7 +2,6 @@
   import { onMount, untrack } from 'svelte';
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { enPropriétéWebC } from '$plateforme/webComponent';
-  import EncartLienVersParcoursCyberdepart from '../../demande-aide-mon-aide-cyber/EncartLienVersParcoursCyberdepart.svelte';
   import { clic } from '../../directives/actions.svelte';
   import BoutonFavori from '../../favoris/BoutonFavori.svelte';
   import { profilStore } from '../../stores/profil.store';
@@ -15,6 +14,8 @@
   import { chargeGuidesDansLeStore, guidesStore } from '../stores/guides/guides.store';
   import BadgesDeCollections from './BadgesDeCollections.svelte';
   import BoutonsDocumentsGuide from './BoutonsDocumentsGuide.svelte';
+  import EncartLienVersParcoursComplet from './EncartLienVersParcoursComplet.svelte';
+  import EncartLienVersParcoursCyberdépart from './EncartLienVersParcoursCyberdepart.svelte';
   import { decodeEntitesHtml, guidePourCarteItem } from './guide';
   import InciteASAbonner from './InciteASAbonner.svelte';
   import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
@@ -92,6 +93,27 @@
         return 'en';
     }
   });
+
+  const guidesAyantUneModaleParcoursAllégé = new Set([
+    '/guides/guide-dhygiene-informatique',
+    '/guides/recommandations-relatives-lauthentification-multifacteur-et-aux-mots-de-passe',
+    '/guides/bonnes-pratiques-lusage-des-professionnels-en-deplacement',
+    '/guides/anticiper-et-gerer-sa-communication-de-crise-cyber',
+    '/guides/essentiels-wifi',
+    '/guides/hygiene-numerique-des-telephones-mobiles',
+  ]);
+  const guidesAyantUneModaleParcoursComplet = new Set([
+    '/guides/la-methode-ebios-risk-manager-le-guide',
+    '/guides/fiches-pratiques-recyf',
+    '/guides/recommandations-de-securite-pour-un-systeme-dia-generative',
+    '/guides/recommandations-relatives-ladministration-securisee-des-si',
+    '/guides/mecanismes-cryptographiques',
+    '/guides/recommandations-pour-ladministration-securisee-des-si-reposant-sur-ad',
+    '/guides/recommandations-de-securite-relatives-un-systeme-gnulinux',
+    '/guides/recommandations-pour-les-architectures-des-si-sensibles-ou-dr',
+    '/guides/cartographie-du-systeme-dinformation',
+    '/guides/securisation-des-systemes-de-controle-dacces-physique-et-videoprotection',
+  ]);
 </script>
 
 {#if guide}
@@ -198,8 +220,10 @@
       </div>
     </div>
   </dsfr-container>
-  {#if guide.id === '/guides/guide-dhygiene-informatique'}
-    <EncartLienVersParcoursCyberdepart />
+  {#if guidesAyantUneModaleParcoursAllégé.has(guide.id)}
+    <EncartLienVersParcoursCyberdépart />
+  {:else if guidesAyantUneModaleParcoursComplet.has(guide.id)}
+    <EncartLienVersParcoursComplet />
   {/if}
 {:else if !chargementEnCours}
   <dsfr-container>
