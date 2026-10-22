@@ -74,7 +74,12 @@
           iconeADroite
           href={hrefCTA}
         ></Lien>
-        <Lien apparence="bouton" etire type="tertiaire-sans-bordure" libelle="En savoir plus" href="/entreprises"
+        <Lien
+          apparence="bouton"
+          etire
+          type="tertiaire-sans-bordure"
+          libelle="En savoir plus"
+          href="/parcours-cyberdepart"
         ></Lien>
       </div>
     </div>
