@@ -84,6 +84,7 @@
 
     @include a-partir-de(lg) {
       max-width: taille-pour-colonnes(6);
+      margin: 2rem;
     }
 
     @include a-partir-de(xxl) {
