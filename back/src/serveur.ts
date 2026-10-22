@@ -203,6 +203,9 @@ const host = process.env.HOST;
       trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
       maxRequetesParMinutes: adaptateurEnvironnement.serveur().maxRequetesParMinute(),
       maxRequetesParMinuteAPI: adaptateurEnvironnement.serveur().maxRequetesParMinuteAPI(),
+      maxRequetesParMinuteRetoursUtilisateurs: adaptateurEnvironnement
+        .serveur()
+        .maxRequetesParMinuteRetoursUtilisateurs(),
       ipAutorisees: adaptateurEnvironnement.serveur().ipAutorisees(),
     },
     adaptateurRechercheEntreprise,

@@ -77,6 +77,7 @@ export type ConfigurationServeur = {
     trustProxy: number;
     maxRequetesParMinutes: number;
     maxRequetesParMinuteAPI: number;
+    maxRequetesParMinuteRetoursUtilisateurs: number;
     ipAutorisees: string[] | false;
   };
   cellar: AdaptateurCellar;

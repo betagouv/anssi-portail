@@ -12,6 +12,7 @@ type AdaptateurEnvironnement = {
     trustProxy: () => number;
     maxRequetesParMinute: () => number;
     maxRequetesParMinuteAPI: () => number;
+    maxRequetesParMinuteRetoursUtilisateurs: () => number;
     ipAutorisees: () => false | string[];
   };
   sentry: () => {
@@ -145,6 +146,15 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       const maxEnNombre = Number(maxEnChaine);
       if (isNaN(maxEnNombre)) {
         throw new Error(`SERVEUR_MAX_REQUETES_PAR_MINUTE_API n'est pas un nombre : ${maxEnChaine}`);
+      } else {
+        return maxEnNombre;
+      }
+    },
+    maxRequetesParMinuteRetoursUtilisateurs: () => {
+      const maxEnChaine = process.env.SERVEUR_MAX_REQUETES_PAR_MINUTE_RETOURS_UTILISATEURS || '20';
+      const maxEnNombre = Number(maxEnChaine);
+      if (isNaN(maxEnNombre)) {
+        throw new Error(`SERVEUR_MAX_REQUETES_PAR_MINUTE_RETOURS_UTILISATEURS n'est pas un nombre : ${maxEnChaine}`);
       } else {
         return maxEnNombre;
       }
