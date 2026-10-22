@@ -28,9 +28,12 @@
     </div>
   </aside>
   <div class="boite-mail">
-    <div class="champ-recherche">
-      <lab-anssi-icone nom="search-line" taille="sm"></lab-anssi-icone>
-      <input placeholder="Chercher votre mail" />
+    <div class="entete">
+      <h2 class="fr-h3">Ma boîte mail</h2>
+      <div class="champ-recherche">
+        <lab-anssi-icone nom="search-line" taille="sm"></lab-anssi-icone>
+        <input name="recherche-email" placeholder="Chercher votre mail" />
+      </div>
     </div>
     <div class="mails">
       <div class="mail non-lu">
@@ -58,6 +61,9 @@
 </dsfr-container>
 
 <style lang="scss">
+  @use '../../../../assets/styles/responsive' as *;
+  @use '../../../../assets/styles/grille' as *;
+
   dsfr-container {
     background-color: var(--background-alt-blue-france);
     display: flex;
@@ -68,6 +74,9 @@
   h1 {
     text-align: center;
     margin-bottom: 1rem;
+    @include a-partir-de(sm) {
+      text-align: left;
+    }
   }
 
   aside {
@@ -75,6 +84,10 @@
     flex-direction: column;
     gap: 0.5rem;
     margin-bottom: 1rem;
+
+    @include a-partir-de(lg) {
+      max-width: taille-pour-colonnes(4);
+    }
 
     p {
       margin-bottom: 0;
@@ -127,22 +140,36 @@
     flex-direction: column;
     font-family: Roboto, serif;
 
-    .champ-recherche {
-      border-radius: 6.5rem;
-      background-color: var(--background-alt-blue-france);
+    .entete {
       display: flex;
-      gap: 1rem;
       align-items: center;
-      margin-inline: 2.5rem;
-      padding: 0.75rem 1rem;
+      justify-content: space-between;
       margin-bottom: 1rem;
+      gap: 3rem;
+      padding-inline: 2.5rem;
 
-      input {
-        border: none;
-        background: none;
-        display: inline;
-        width: 8rem;
-        height: 1rem;
+      h2 {
+        display: none;
+        margin-bottom: 0;
+        @include a-partir-de(sm) {
+          display: block;
+        }
+      }
+      .champ-recherche {
+        border-radius: 6.5rem;
+        background-color: var(--background-alt-blue-france);
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        flex: 1;
+        input {
+          border: none;
+          background: none;
+          display: inline;
+          width: 8rem;
+          height: 1rem;
+        }
       }
     }
 
@@ -151,6 +178,9 @@
       display: flex;
       gap: 0.5rem;
       border-bottom: 1px solid var(--border-default-grey);
+      @include a-partir-de(sm) {
+        gap: 2.5rem;
+      }
 
       .libelles {
         display: flex;
@@ -160,6 +190,11 @@
         span {
           overflow: hidden;
           text-overflow: ellipsis;
+        }
+        @include a-partir-de(sm) {
+          display: grid;
+          grid-template-columns: 0.5fr 1fr;
+          gap: 1.5rem;
         }
       }
 
