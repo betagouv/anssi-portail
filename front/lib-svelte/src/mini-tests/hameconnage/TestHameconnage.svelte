@@ -13,47 +13,49 @@
   />
 
   <h1 class="fr-h6">Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?</h1>
-  <aside>
-    <div class="carte-score panneau">
-      <p class="texte-article-lg">email 1 sur 9</p>
-      <div class="score">
-        <lab-anssi-icone nom="shield-fill" taille="md"></lab-anssi-icone>
-        <p class="texte-article-lg">3</p>
-      </div>
-    </div>
-    <div class="panneau">
-      <p class="texte-detail-sm">
-        Ouvrez un à un les email et tentez de determinez lesquels sont légitimes et lesquels ne le sont pas
-      </p>
-    </div>
-  </aside>
-  <div class="boite-mail">
-    <div class="entete">
-      <h2 class="fr-h3">Ma boîte mail</h2>
-      <div class="champ-recherche">
-        <lab-anssi-icone nom="search-line" taille="sm"></lab-anssi-icone>
-        <input name="recherche-email" placeholder="Chercher votre mail" />
-      </div>
-    </div>
-    <div class="mails">
-      <div class="mail non-lu">
-        <div class="libelles">
-          <span class="expediteur">EDF - Service Recouvrement</span>
-          <span class="objet">Usurpation d'organisme parapublic - urgence de coupure de service</span>
-        </div>
-        <div class="infos">
-          <span class="heure">10:34</span>
-          <Bouton type="tertiaire-sans-bordure" taille="sm" iconeSeule icone="arrow-right-line" />
+  <div class="conteneur">
+    <aside>
+      <div class="carte-score panneau">
+        <p class="texte-article-lg">email 1 sur 9</p>
+        <div class="score">
+          <lab-anssi-icone nom="shield-fill" taille="md"></lab-anssi-icone>
+          <p class="texte-article-lg">3</p>
         </div>
       </div>
-      <div class="mail lu">
-        <div class="libelles">
-          <span class="expediteur">EDF - Service Recouvrement</span>
-          <span class="objet">Usurpation d'organisme parapublic - urgence de coupure de service</span>
+      <div class="panneau">
+        <p class="texte-detail-sm">
+          Ouvrez un à un les email et tentez de determinez lesquels sont légitimes et lesquels ne le sont pas
+        </p>
+      </div>
+    </aside>
+    <div class="boite-mail">
+      <div class="entete">
+        <h2 class="fr-h3">Ma boîte mail</h2>
+        <div class="champ-recherche">
+          <lab-anssi-icone nom="search-line" taille="sm"></lab-anssi-icone>
+          <input name="recherche-email" placeholder="Chercher votre mail" />
         </div>
-        <div class="infos">
-          <span class="heure">10:34</span>
-          <img src="/assets/icones/coche-verte.svg" alt="Bonne réponse" />
+      </div>
+      <div class="mails">
+        <div class="mail non-lu">
+          <div class="libelles">
+            <span class="expediteur">EDF - Service Recouvrement</span>
+            <span class="objet">Usurpation d'organisme parapublic - urgence de coupure de service</span>
+          </div>
+          <div class="infos">
+            <span class="heure">10:34</span>
+            <Bouton type="tertiaire-sans-bordure" taille="sm" iconeSeule icone="arrow-right-line" />
+          </div>
+        </div>
+        <div class="mail lu">
+          <div class="libelles">
+            <span class="expediteur">EDF - Service Recouvrement</span>
+            <span class="objet">Usurpation d'organisme parapublic - urgence de coupure de service</span>
+          </div>
+          <div class="infos">
+            <span class="heure">10:34</span>
+            <img src="/assets/icones/coche-verte.svg" alt="Bonne réponse" />
+          </div>
         </div>
       </div>
     </div>
@@ -71,11 +73,23 @@
     padding-bottom: 1.5rem;
   }
 
+  .conteneur {
+    @include a-partir-de(lg) {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+  }
+
   h1 {
     text-align: center;
     margin-bottom: 1rem;
     @include a-partir-de(sm) {
       text-align: left;
+    }
+    @include a-partir-de(lg) {
+      margin-bottom: 2.5rem;
     }
   }
 
@@ -176,6 +190,7 @@
     .mail {
       padding: 1rem;
       display: flex;
+      justify-content: space-between;
       gap: 0.5rem;
       border-bottom: 1px solid var(--border-default-grey);
       @include a-partir-de(sm) {
