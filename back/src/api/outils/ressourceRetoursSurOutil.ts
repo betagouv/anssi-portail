@@ -10,10 +10,11 @@ import { valideCorpsRequete } from '../zod.js';
 
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
-export const ressourceRetoursSurOutil = ({ busEvenements }: ConfigurationServeur) => {
+export const ressourceRetoursSurOutil = ({ busEvenements, middleware }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.post(
     '/:idOutil',
+    middleware.verifieJWT,
     valideCorpsRequete(schemaRetourUtilisateur),
     filetRouteAsynchrone(
       async (requête: CorpsDeRequeteTypee<z.output<typeof schemaRetourUtilisateur>>, réponse: Response) => {
