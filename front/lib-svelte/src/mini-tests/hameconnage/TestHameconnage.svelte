@@ -2,6 +2,81 @@
   import Bouton from '../../ui/Bouton.svelte';
   import { fabriqueFilAriane } from '../../ui/filAriane';
   import FilAriane from '../../ui/FilAriane.svelte';
+
+  type MailHameçonnage = {
+    id: string;
+    expediteur: string;
+    objet: string;
+    heuresMinutesRéception: string;
+    estLu: boolean;
+    réponseUtilisateur?: 'bonne' | 'mauvaise';
+  };
+
+  const mails: MailHameçonnage[] = [
+    {
+      id: 'ENEDIS',
+      expediteur: 'Enedis - Service Exploitation',
+      objet: 'Anomalie critique détectée sur votre compteur professionnel — Intervention à programmer sous 24h',
+      heuresMinutesRéception: '08:30',
+      estLu: false,
+    },
+    {
+      id: 'PROCONNECT',
+      expediteur: 'ProConnect',
+      objet: 'Nouvelle connexion détectée avec ProConnect',
+      heuresMinutesRéception: '09:14',
+      estLu: true,
+    },
+    {
+      id: 'INPI',
+      expediteur: 'INPI',
+      objet: 'Votre formalité a été transmise aux organismes destinataires',
+      heuresMinutesRéception: '09:15',
+      estLu: false,
+    },
+    {
+      id: 'CPF',
+      expediteur: 'Mon Compte Formation',
+      objet: 'Vos droits CPF vont expirer – Sécurisez-les avant le 30/09',
+      heuresMinutesRéception: '10:05',
+      estLu: true,
+    },
+    {
+      id: 'LA_POSTE',
+      expediteur: 'La Poste - Colisimo',
+      objet: 'Votre colis arrive !',
+      heuresMinutesRéception: '10:50',
+      estLu: true,
+    },
+    {
+      id: 'AMENDES.GOUV',
+      expediteur: 'amendes.gouv.fr - Trésor Public',
+      objet: 'Avis de contravention n°AM-664821 - À retourner sous 5 jours',
+      heuresMinutesRéception: '12:10',
+      estLu: true,
+    },
+    {
+      id: 'ORANGE',
+      expediteur: 'Orange - Service Mobile',
+      objet: 'Une demande de portabilité de votre numéro a été initiée',
+      heuresMinutesRéception: '14:02',
+      estLu: true,
+    },
+    {
+      id: 'BANQUE_POSTALE',
+      expediteur: 'La Banque Postale',
+      objet: 'Votre relevé de compte de septembre est disponible',
+      heuresMinutesRéception: '16:40',
+      estLu: true,
+    },
+    {
+      id: 'ANSSI',
+      expediteur: 'ANSSI - CERT-FR',
+      objet: 'Votre relevé de compte de septembre est disponible',
+      heuresMinutesRéception: '16:40',
+      estLu: true,
+    },
+  ];
 </script>
 
 <dsfr-container>
@@ -24,7 +99,7 @@
       </div>
       <div class="panneau">
         <p class="texte-detail-sm">
-          Ouvrez un à un les email et tentez de determinez lesquels sont légitimes et lesquels ne le sont pas
+          Ouvrez un à un les emails et tentez de determinez lesquels sont légitimes et lesquels ne le sont pas
         </p>
       </div>
     </aside>
@@ -37,26 +112,22 @@
         </div>
       </div>
       <div class="mails">
-        <div class="mail non-lu">
-          <div class="libelles">
-            <span class="expediteur">EDF - Service Recouvrement</span>
-            <span class="objet">Usurpation d'organisme parapublic - urgence de coupure de service</span>
+        {#each mails as mail (mail.id)}
+          <div class="mail" class:lu={mail.estLu} class:non-lu={!mail.estLu}>
+            <div class="libelles">
+              <span class="expediteur">{mail.expediteur}</span>
+              <span class="objet">{mail.objet}</span>
+            </div>
+            <div class="infos">
+              <span class="heure">{mail.heuresMinutesRéception}</span>
+              {#if !mail.estLu}
+                <Bouton type="tertiaire-sans-bordure" taille="sm" iconeSeule icone="arrow-right-line" />
+              {:else}
+                <img src="/assets/icones/coche-verte.svg" alt="Bonne réponse" />
+              {/if}
+            </div>
           </div>
-          <div class="infos">
-            <span class="heure">10:34</span>
-            <Bouton type="tertiaire-sans-bordure" taille="sm" iconeSeule icone="arrow-right-line" />
-          </div>
-        </div>
-        <div class="mail lu">
-          <div class="libelles">
-            <span class="expediteur">EDF - Service Recouvrement</span>
-            <span class="objet">Usurpation d'organisme parapublic - urgence de coupure de service</span>
-          </div>
-          <div class="infos">
-            <span class="heure">10:34</span>
-            <img src="/assets/icones/coche-verte.svg" alt="Bonne réponse" />
-          </div>
-        </div>
+        {/each}
       </div>
     </div>
   </div>
@@ -208,6 +279,7 @@
         @include a-partir-de(sm) {
           display: grid;
           grid-template-columns: 0.5fr 1fr;
+          width: 100%;
           gap: 1.5rem;
         }
       }
