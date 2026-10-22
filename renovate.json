@@ -7,8 +7,8 @@
   "prConcurrentLimit": 4,
   "packageRules": [
     {
-      "description": "@sentry/node et @sentry/browser restent en version majeure 10",
-      "matchPackageNames": ["@sentry/node", "@sentry/browser"],
+      "description": "Version 11 supportant à minina un backend Sentry en version 26.4.2. Backend actuel: 25.9.0",
+      "matchPackageNames": ["@sentry/node", "@sentry/browser", "@sentry/vite-plugin"],
       "allowedVersions": "<11.0.0"
     },
     {
