@@ -6,7 +6,9 @@ import { creeServeur } from '../../../src/api/msc/index.js';
 import { RetourOutilDonné } from '../../../src/bus/evenements/retourOutilDonne.js';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
+import { encodeSession } from '../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
+import { jeanneDupont } from '../objetsPretsALEmploi.js';
 
 describe("La ressource qui gère les retours d'un outil", () => {
   const retourPositif = {
@@ -14,10 +16,17 @@ describe("La ressource qui gère les retours d'un outil", () => {
   };
 
   let serveur: Express;
+  let cookieJeanneDupont: string;
+
   let adaptateurEnvironnement: AdaptateurEnvironnement;
   let busEvenements: MockBusEvenement;
 
   beforeEach(async () => {
+    cookieJeanneDupont = encodeSession({
+      email: jeanneDupont.email,
+      token: 'token',
+    });
+
     adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
     };
@@ -32,6 +41,7 @@ describe("La ressource qui gère les retours d'un outil", () => {
     it("réponds 201 pour le modèle d'annuaire de crise", async () => {
       const { status } = await request(serveur)
         .post(`/api/outils/retours/modele-annuaire-de-crise.xlsx`)
+        .set('Cookie', [cookieJeanneDupont])
         .send(retourPositif);
 
       expect(status).toBe(HttpStatusCode.Created);
@@ -40,13 +50,17 @@ describe("La ressource qui gère les retours d'un outil", () => {
     it("réponds 201 pour le rappel de mise à jour de l'annuaire de contacts", async () => {
       const { status } = await request(serveur)
         .post(`/api/outils/retours/rappel-mise-a-jour-annuaire-contacts.ics`)
+        .set('Cookie', [cookieJeanneDupont])
         .send(retourPositif);
 
       expect(status).toBe(HttpStatusCode.Created);
     });
 
     it('doit répondre 400 si le corps de la requête est vide', async () => {
-      const { body, status } = await request(serveur).post('/api/outils/retours/modele-annuaire-de-crise.xlsx').send();
+      const { body, status } = await request(serveur)
+        .post('/api/outils/retours/modele-annuaire-de-crise.xlsx')
+        .set('Cookie', [cookieJeanneDupont])
+        .send();
 
       expect(status).toBe(HttpStatusCode.BadRequest);
       expect(body.fieldErrors.retour[0]).toBe('Le retour doit être "POSITIF" ou "NEGATIF"');
@@ -55,6 +69,8 @@ describe("La ressource qui gère les retours d'un outil", () => {
     it("doit répondre 400 si le retour n'est pas valide", async () => {
       const { body, status } = await request(serveur)
         .post('/api/outils/retours/modele-annuaire-de-crise.xlsx')
+        .set('Cookie', [cookieJeanneDupont])
+
         .send({ retour: 'INVALIDE' });
 
       expect(status).toBe(HttpStatusCode.BadRequest);
@@ -64,6 +80,7 @@ describe("La ressource qui gère les retours d'un outil", () => {
     it('doit répondre 400 si le commentaire est trop long', async () => {
       const { body, status } = await request(serveur)
         .post('/api/outils/retours/modele-annuaire-de-crise.xlsx')
+        .set('Cookie', [cookieJeanneDupont])
         .send({ retour: 'NEGATIF', commentaire: 'x'.repeat(1001) });
 
       expect(status).toBe(HttpStatusCode.BadRequest);
@@ -71,14 +88,20 @@ describe("La ressource qui gère les retours d'un outil", () => {
     });
 
     it("doit répondre 404 si l'outil est inconnu", async () => {
-      const reponse = await request(serveur).post('/api/outils/retours/outil-inconnu').send(retourPositif);
+      const reponse = await request(serveur)
+        .post('/api/outils/retours/outil-inconnu')
+        .set('Cookie', [cookieJeanneDupont])
+        .send(retourPositif);
 
       expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
     describe('concernant les retours positifs', () => {
       it('publie un événement', async () => {
-        await request(serveur).post('/api/outils/retours/modele-annuaire-de-crise.xlsx').send(retourPositif);
+        await request(serveur)
+          .post('/api/outils/retours/modele-annuaire-de-crise.xlsx')
+          .set('Cookie', [cookieJeanneDupont])
+          .send(retourPositif);
 
         busEvenements.aRecuUnEvenement(RetourOutilDonné);
         const evenement = busEvenements.recupereEvenement(RetourOutilDonné);
@@ -88,6 +111,8 @@ describe("La ressource qui gère les retours d'un outil", () => {
       it('publie un événement sans commentaire', async () => {
         await request(serveur)
           .post('/api/outils/retours/modele-annuaire-de-crise.xlsx')
+          .set('Cookie', [cookieJeanneDupont])
+
           .send({ retour: 'POSITIF', commentaire: 'Ce test est sympa !' });
 
         busEvenements.aRecuUnEvenement(RetourOutilDonné);
@@ -101,6 +126,8 @@ describe("La ressource qui gère les retours d'un outil", () => {
       it('publie un événement avec commentaire', async () => {
         await request(serveur)
           .post('/api/outils/retours/modele-annuaire-de-crise.xlsx')
+          .set('Cookie', [cookieJeanneDupont])
+
           .send({ retour: 'NEGATIF', commentaire: 'Ce test est nul !' });
 
         busEvenements.aRecuUnEvenement(RetourOutilDonné);
