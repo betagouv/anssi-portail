@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { afficheBadgeCyberdépart } from '$plateforme/environnement';
-  import { clic } from '../directives/actions.svelte';
-  import Lien from '../ui/Lien.svelte';
-  import BadgeOrganisationsAccompagnes from './BadgeOrganisationsAccompagnées.svelte';
+  import BadgeOrganisationsAccompagnées from '../../demande-aide-mon-aide-cyber/BadgeOrganisationsAccompagnées.svelte';
+  import { clic } from '../../directives/actions.svelte';
+  import Lien from '../../ui/Lien.svelte';
 
   let encart = $state<HTMLDivElement | undefined>();
   let repliVisible = $state(false);
@@ -11,7 +11,9 @@
 
   onMount(async () => {
     setTimeout(() => {
-      if (!encart) return;
+      if (!encart) {
+        return;
+      }
       if (typeof encart.showPopover === 'function' && typeof encart.hidePopover === 'function') {
         encart.showPopover();
       } else {
@@ -52,7 +54,7 @@
       ></dsfr-button>
     </div>
     <div class="contenu">
-      <BadgeOrganisationsAccompagnes />
+      <BadgeOrganisationsAccompagnées />
       <h3>12 mesures simples pour protéger votre organisation contre les cyberattaques</h3>
 
       <ul>
@@ -80,8 +82,8 @@
 </div>
 
 <style lang="scss">
-  @use '../../../assets/styles/responsive' as *;
-  @use '../../../assets/styles/grille.scss' as *;
+  @use '../../../../assets/styles/responsive' as *;
+  @use '../../../../assets/styles/grille.scss' as *;
 
   .encart-audessus {
     border: 0;
