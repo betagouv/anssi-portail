@@ -5,21 +5,21 @@ import { fabriqueCleRateLimit } from '../../clefRateLimit.js';
 import { ConfigurationServeur } from '../../configurationServeur.js';
 
 export const configureLeRateLimit = (app: Express, configurationServeur: ConfigurationServeur) => {
-  const limiteRequetesParMinuteGlobal = rateLimit({
+  const limiteRequêtesParMinuteGlobal = rateLimit({
     windowMs: 60 * 1000,
     limit: configurationServeur.reseau.maxRequetesParMinutes,
     keyGenerator: fabriqueCleRateLimit(configurationServeur.reseau.trustProxy),
   });
-  const limiteRequetesParMinuteAPI = rateLimit({
+  const limiteRequêtesParMinuteAPI = rateLimit({
     windowMs: 60 * 1000,
     limit: configurationServeur.reseau.maxRequetesParMinuteAPI,
     keyGenerator: fabriqueCleRateLimit(configurationServeur.reseau.trustProxy),
   });
   app.set('trust proxy', configurationServeur.reseau.trustProxy);
 
-  app.use(limiteRequetesParMinuteGlobal);
-  app.use('/api', limiteRequetesParMinuteAPI);
-  app.use('/oidc', limiteRequetesParMinuteAPI);
+  app.use(limiteRequêtesParMinuteGlobal);
+  app.use('/api', limiteRequêtesParMinuteAPI);
+  app.use('/oidc', limiteRequêtesParMinuteAPI);
 
   if (configurationServeur.reseau.ipAutorisees) {
     app.use(
