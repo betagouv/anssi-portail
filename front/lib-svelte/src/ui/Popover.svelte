@@ -90,12 +90,6 @@
       max-width: taille-pour-colonnes(4);
     }
 
-    @starting-style {
-      &[popover]:popover-open {
-        transform: translateX(100%);
-      }
-    }
-
     &[popover] {
       display: none;
       transition:
@@ -107,7 +101,13 @@
 
     &[popover]:popover-open {
       display: block;
-      transform: translateY(0);
+      transform: translateX(0);
+    }
+
+    @starting-style {
+      &[popover]:popover-open {
+        transform: translateX(100%);
+      }
     }
 
     &.repli-visible {
