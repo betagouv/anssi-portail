@@ -5,7 +5,11 @@
 
   type MailHameçonnage = {
     id: string;
-    expediteur: string;
+    expediteur: {
+      nom: string;
+      mail: string;
+    };
+    destinataire: string;
     objet: string;
     heuresMinutesRéception: string;
     estLu: boolean;
@@ -15,69 +19,182 @@
   const mails: MailHameçonnage[] = [
     {
       id: 'ENEDIS',
-      expediteur: 'Enedis - Service Exploitation',
+      expediteur: {
+        nom: 'Enedis - Service Exploitation',
+        mail: 'intervention@enedis-exploitation-pro.com',
+      },
+      destinataire: 'maintenance@votreentreprise.fr',
       objet: 'Anomalie critique détectée sur votre compteur professionnel — Intervention à programmer sous 24h',
       heuresMinutesRéception: '08:30',
       estLu: false,
     },
     {
       id: 'PROCONNECT',
-      expediteur: 'ProConnect',
+      expediteur: {
+        nom: 'ProConnect',
+        mail: 'notifications@proconnect.gouv.fr',
+      },
+      destinataire: 'vous@votreorganisation.fr',
       objet: 'Nouvelle connexion détectée avec ProConnect',
       heuresMinutesRéception: '09:14',
-      estLu: true,
+      estLu: false,
     },
     {
       id: 'INPI',
-      expediteur: 'INPI',
+      expediteur: {
+        nom: 'INPI',
+        mail: 'noreply@inpi.fr',
+      },
+      destinataire: 'contact@votreentreprise.fr',
       objet: 'Votre formalité a été transmise aux organismes destinataires',
       heuresMinutesRéception: '09:15',
       estLu: false,
     },
     {
       id: 'CPF',
-      expediteur: 'Mon Compte Formation',
+      expediteur: {
+        nom: 'Mon Compte Formation',
+        mail: 'cpf-droits@moncompteformation-securite.net',
+      },
+      destinataire: 'vous@votreadresse.fr',
       objet: 'Vos droits CPF vont expirer – Sécurisez-les avant le 30/09',
       heuresMinutesRéception: '10:05',
       estLu: true,
     },
     {
       id: 'LA_POSTE',
-      expediteur: 'La Poste - Colisimo',
+      expediteur: {
+        nom: 'La Poste - Colisimo',
+        mail: 'laposte@notifications.laposte.fr',
+      },
+      destinataire: 'vous@votreadresse.fr',
       objet: 'Votre colis arrive !',
       heuresMinutesRéception: '10:50',
       estLu: true,
     },
     {
       id: 'AMENDES.GOUV',
-      expediteur: 'amendes.gouv.fr - Trésor Public',
+      expediteur: {
+        nom: 'amendes.gouv.fr - Trésor Public',
+        mail: 'recouvrement@amendes-gouv-huissier.com',
+      },
+      destinataire: 'vous@votreadresse.fr',
       objet: 'Avis de contravention n°AM-664821 - À retourner sous 5 jours',
       heuresMinutesRéception: '12:10',
       estLu: true,
     },
     {
       id: 'ORANGE',
-      expediteur: 'Orange - Service Mobile',
+      expediteur: {
+        nom: 'Orange - Service Mobile',
+        mail: 'portabilite@orange-mobile-service.com',
+      },
+      destinataire: 'vous@votreadresse.fr',
       objet: 'Une demande de portabilité de votre numéro a été initiée',
       heuresMinutesRéception: '14:02',
       estLu: true,
     },
     {
       id: 'BANQUE_POSTALE',
-      expediteur: 'La Banque Postale',
+      expediteur: {
+        nom: 'La Banque Postale',
+        mail: 'vous@votreadresse.fr',
+      },
+      destinataire: 'vous@votreadresse.fr',
       objet: 'Votre relevé de compte de septembre est disponible',
       heuresMinutesRéception: '16:40',
       estLu: true,
     },
     {
       id: 'ANSSI',
-      expediteur: 'ANSSI - CERT-FR',
+      expediteur: {
+        nom: 'ANSSI - CERT-FR',
+        mail: 'alerte-cert@anssi-gouv-fr.net',
+      },
+      destinataire: 'rssi@votreentreprise.fr',
       objet: 'Votre relevé de compte de septembre est disponible',
       heuresMinutesRéception: '16:40',
       estLu: true,
     },
   ];
+
+  let mailOuvert: MailHameçonnage | undefined = $state();
 </script>
+
+{#snippet boiteMail()}
+  <div class="boite-mail">
+    <div class="entete">
+      <h2 class="fr-h3">Ma boîte mail</h2>
+      <div class="champ-recherche">
+        <lab-anssi-icone nom="search-line" taille="sm"></lab-anssi-icone>
+        <input name="recherche-email" placeholder="Chercher votre mail" />
+      </div>
+    </div>
+    <div class="mails">
+      {#each mails as mail (mail.id)}
+        <div class="mail" class:lu={mail.estLu} class:non-lu={!mail.estLu}>
+          <div class="libelles">
+            <span class="expediteur">{mail.expediteur.nom}</span>
+            <span class="objet">{mail.objet}</span>
+          </div>
+          <div class="infos">
+            <span class="heure">{mail.heuresMinutesRéception}</span>
+            {#if !mail.estLu}
+              <Bouton
+                type="tertiaire-sans-bordure"
+                taille="sm"
+                iconeSeule
+                icone="arrow-right-line"
+                surClic={() => (mailOuvert = mail)}
+              />
+            {:else}
+              <img src="/assets/icones/coche-verte.svg" alt="Bonne réponse" />
+            {/if}
+          </div>
+        </div>
+      {/each}
+    </div>
+  </div>
+{/snippet}
+
+{#snippet panneauLatéral()}
+  <aside>
+    <div class="carte-score panneau">
+      <p class="texte-article-lg">email 1 sur 9</p>
+      <div class="score">
+        <lab-anssi-icone nom="shield-fill" taille="md"></lab-anssi-icone>
+        <p class="texte-article-lg">3</p>
+      </div>
+    </div>
+    <div class="panneau">
+      <p class="texte-detail-sm">
+        Ouvrez un à un les emails et tentez de determinez lesquels sont légitimes et lesquels ne le sont pas
+      </p>
+    </div>
+  </aside>
+{/snippet}
+
+{#snippet mail()}
+  <div class="mail-ouvert">
+    <div class="entete-mail">
+      <h2 class="fr-h6">
+        Anomalie critique détectée sur votre compteur professionnel - Intervention à programmer sous 24h
+      </h2>
+      <p class="texte-mention-xs">
+        {Intl.DateTimeFormat('fr-FR').format(new Date())}
+        {mailOuvert?.heuresMinutesRéception}
+      </p>
+      <div class="mail-info">
+        <p>de&nbsp;:</p>
+        <p><strong>{mailOuvert?.expediteur.nom}</strong>&nbsp;&lt;{mailOuvert?.expediteur?.mail}&gt;</p>
+      </div>
+      <div class="mail-info">
+        <p>à&nbsp;:</p>
+        <p>{mailOuvert?.destinataire}</p>
+      </div>
+    </div>
+  </div>
+{/snippet}
 
 <dsfr-container>
   <FilAriane
@@ -86,50 +203,14 @@
       branche: { nom: 'Faire le test !', lien: '/faire-le-test' },
     })}
   />
-
   <h1 class="fr-h6">Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?</h1>
   <div class="conteneur">
-    <aside>
-      <div class="carte-score panneau">
-        <p class="texte-article-lg">email 1 sur 9</p>
-        <div class="score">
-          <lab-anssi-icone nom="shield-fill" taille="md"></lab-anssi-icone>
-          <p class="texte-article-lg">3</p>
-        </div>
-      </div>
-      <div class="panneau">
-        <p class="texte-detail-sm">
-          Ouvrez un à un les emails et tentez de determinez lesquels sont légitimes et lesquels ne le sont pas
-        </p>
-      </div>
-    </aside>
-    <div class="boite-mail">
-      <div class="entete">
-        <h2 class="fr-h3">Ma boîte mail</h2>
-        <div class="champ-recherche">
-          <lab-anssi-icone nom="search-line" taille="sm"></lab-anssi-icone>
-          <input name="recherche-email" placeholder="Chercher votre mail" />
-        </div>
-      </div>
-      <div class="mails">
-        {#each mails as mail (mail.id)}
-          <div class="mail" class:lu={mail.estLu} class:non-lu={!mail.estLu}>
-            <div class="libelles">
-              <span class="expediteur">{mail.expediteur}</span>
-              <span class="objet">{mail.objet}</span>
-            </div>
-            <div class="infos">
-              <span class="heure">{mail.heuresMinutesRéception}</span>
-              {#if !mail.estLu}
-                <Bouton type="tertiaire-sans-bordure" taille="sm" iconeSeule icone="arrow-right-line" />
-              {:else}
-                <img src="/assets/icones/coche-verte.svg" alt="Bonne réponse" />
-              {/if}
-            </div>
-          </div>
-        {/each}
-      </div>
-    </div>
+    {@render panneauLatéral()}
+    {#if mailOuvert}
+      {@render mail()}
+    {:else}
+      {@render boiteMail()}
+    {/if}
   </div>
 </dsfr-container>
 
@@ -336,6 +417,46 @@
         .infos .heure {
           font-weight: normal;
         }
+      }
+    }
+  }
+
+  .mail-ouvert {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
+    display: flex;
+    flex-direction: column;
+    font-family: Roboto, serif;
+    .entete-mail {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 1rem;
+      overflow: hidden;
+
+      h2 {
+        margin: 0;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+      }
+      p {
+        margin: 0;
+        text-align: start;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .mail-info {
+        display: grid;
+        grid-template-columns: 4rem 1fr;
+        width: 100%;
       }
     }
   }
