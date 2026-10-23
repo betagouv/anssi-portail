@@ -27,17 +27,23 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
       return [];
     }
     const récupèreDepuisCrisp = async () => {
-      const articlesCrisp = await this.cmsCrisp.recupereArticlesParChemin(
-        this.adaptateurEnvironnement.crisp().catégorieDuBlog()
-      );
-      return articlesCrisp
-        .filter((ac): ac is ResumeArticleCrispAvecSlug & { slug: string } => !!ac.slug)
-        .map((ac): RésuméArticle => ({
-          id: ac.chemin,
-          slug: ac.slug,
-          titre: ac.titre,
-        }));
+      try {
+        const articlesCrisp = await this.cmsCrisp.recupereArticlesParChemin(
+          this.adaptateurEnvironnement.crisp().catégorieDuBlog()
+        );
+        return articlesCrisp
+          .filter((ac): ac is ResumeArticleCrispAvecSlug & { slug: string } => !!ac.slug)
+          .map((ac): RésuméArticle => ({
+            id: ac.chemin,
+            slug: ac.slug,
+            titre: ac.titre,
+          }));
+      } catch {
+        console.error('Erreur sur tousLesArticlesDeBlog');
+        return [];
+      }
     };
+
     return this.cacheDesRésumés.get(EntrepôtArticleCrisp.CLÉ_LISTE_RÉSUMÉS_ARTICLE, récupèreDepuisCrisp);
   }
 
