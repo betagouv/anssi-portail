@@ -52,7 +52,7 @@
     "@anssi-portail/contacts-sectoriels": "workspace:^",
     "@aws-sdk/client-s3": "^3.1112.0",
     "@aws-sdk/credential-providers": "^3.1112.0",
-    "@lab-anssi/lib": "^2.3.0",
+    "@lab-anssi/lib": "^3.0.0",
     "@myriaddreamin/typst-ts-node-compiler": "^0.7.0",
     "@napi-rs/canvas": "^1.0.5",
     "@office-kit/xlsx": "^0.24.0",
