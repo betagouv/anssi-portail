@@ -10,21 +10,14 @@ import { MockCmsCrisp } from '../mockCmsCrisp.js';
 describe("L'entrepôt d'article Crisp", () => {
   const articlesCrisp: ResumeArticleCrispAvecSlug[] = [
     {
-      estPublie: true,
-      id: 'id1',
-      section: {},
+      chemin: 'id1',
       slug: 'slug-1',
       titre: 'titre 1',
-      url: 'url-1',
-      dateMiseAJour: '2024-10-01T14:43:00.000Z',
     },
     {
-      estPublie: false,
-      id: 'id2',
-      section: {},
+      chemin: 'id2',
       slug: 'slug-2',
       titre: 'titre 2',
-      url: 'url-2',
     },
   ];
 
@@ -46,18 +39,14 @@ describe("L'entrepôt d'article Crisp", () => {
 
   describe('lors de la récupération des résumés', () => {
     it("retourne les détails des résumes d'article", async () => {
-      cmsCrisp.recupereArticlesCategorie = vi.fn().mockResolvedValue(articlesCrisp);
+      cmsCrisp.recupereArticlesParChemin = vi.fn().mockResolvedValue(articlesCrisp);
 
       const résumés = await entrepôtArticle.tousLesArticlesDeBlog();
 
       expect(résumés).toHaveLength(2);
-      expect(résumés[0].dateDeMiseÀJour?.toISOString()).toEqual('2024-10-01T14:43:00.000Z');
-      expect(résumés[0].estPublie).toBeTruthy();
       expect(résumés[0].id).toBe('id1');
       expect(résumés[0].slug).toBe('slug-1');
       expect(résumés[0].titre).toBe('titre 1');
-      expect(résumés[1].dateDeMiseÀJour).toBeUndefined();
-      expect(résumés[1].estPublie).toBeFalsy();
       expect(résumés[1].id).toBe('id2');
       expect(résumés[1].slug).toBe('slug-2');
       expect(résumés[1].titre).toBe('titre 2');
@@ -65,7 +54,7 @@ describe("L'entrepôt d'article Crisp", () => {
 
     it('initialise le cache après le premier appel', async () => {
       const recupereArticlesCategorieEspion = vi
-        .spyOn(cmsCrisp, 'recupereArticlesCategorie')
+        .spyOn(cmsCrisp, 'recupereArticlesParChemin')
         .mockResolvedValue(articlesCrisp);
 
       const résumésInitial = await entrepôtArticle.tousLesArticlesDeBlog();
@@ -80,7 +69,7 @@ describe("L'entrepôt d'article Crisp", () => {
     });
 
     it('ignore les articles sans slug', async () => {
-      cmsCrisp.recupereArticlesCategorie = vi.fn().mockResolvedValue([
+      cmsCrisp.recupereArticlesParChemin = vi.fn().mockResolvedValue([
         {
           id: 'id1',
           section: {},
@@ -96,7 +85,7 @@ describe("L'entrepôt d'article Crisp", () => {
     });
 
     it("retourne une liste vide si la catégorie n'est pas fournie", async () => {
-      cmsCrisp.recupereArticlesCategorie = vi.fn().mockResolvedValue(articlesCrisp);
+      cmsCrisp.recupereArticlesParChemin = vi.fn().mockResolvedValue(articlesCrisp);
       adaptateurEnvironnement.crisp = () => ({
         ...fauxAdaptateurEnvironnement.crisp(),
         catégorieDuBlog: () => '',
@@ -114,7 +103,7 @@ describe("L'entrepôt d'article Crisp", () => {
           status: HttpStatusCode.TooManyRequests,
         } as AxiosResponse;
 
-        cmsCrisp.recupereArticlesCategorie = vi
+        cmsCrisp.recupereArticlesParChemin = vi
           .fn()
           .mockResolvedValueOnce(articlesCrisp)
           .mockThrowOnce(new AxiosError('Message', '429', undefined, undefined, response));
@@ -134,12 +123,10 @@ describe("L'entrepôt d'article Crisp", () => {
       description: 'Description',
       tableDesMatieres: [],
       titre: 'titre 1',
-      dateMiseAJour: '2026-10-01T14:43:00.000Z',
-      datePublication: '2026-10-01T17:43:00.000Z',
     } satisfies PageHtmlCrisp;
 
     beforeEach(() => {
-      cmsCrisp.recupereArticlesCategorie = vi.fn().mockResolvedValue(articlesCrisp);
+      cmsCrisp.recupereArticlesParChemin = vi.fn().mockResolvedValue(articlesCrisp);
       cmsCrisp.recupereArticle = vi.fn().mockResolvedValue(articleCrisp);
     });
 
@@ -149,8 +136,6 @@ describe("L'entrepôt d'article Crisp", () => {
       expect(article?.contenu).toBe('<div>contenu</div>');
       expect(article?.description).toBe('Description');
       expect(article?.titre).toBe('titre 1');
-      expect(article?.dateDeMiseÀJour?.toISOString()).toEqual('2026-10-01T14:43:00.000Z');
-      expect(article?.dateDePublication?.toISOString()).toEqual('2026-10-01T17:43:00.000Z');
       expect(cmsCrisp.recupereArticle).toHaveBeenCalledExactlyOnceWith('id1');
     });
 
@@ -167,15 +152,13 @@ describe("L'entrepôt d'article Crisp", () => {
       expect(article?.contenu).toBe('<div>contenu</div>');
       expect(article?.description).toBe('Description');
       expect(article?.titre).toBe('titre 1');
-      expect(article?.dateDeMiseÀJour?.toISOString()).toEqual('2026-10-01T14:43:00.000Z');
-      expect(article?.dateDePublication?.toISOString()).toEqual('2026-10-01T17:43:00.000Z');
       expect(cmsCrisp.recupereArticle).toHaveBeenCalledExactlyOnceWith('id1');
     });
   });
 
   describe("lors du test d'existence d'un article", () => {
     beforeEach(() => {
-      cmsCrisp.recupereArticlesCategorie = vi.fn().mockResolvedValue(articlesCrisp);
+      cmsCrisp.recupereArticlesParChemin = vi.fn().mockResolvedValue(articlesCrisp);
     });
 
     it("retourne la non-présence d'un article", async () => {

@@ -27,15 +27,13 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
       return [];
     }
     const récupèreDepuisCrisp = async () => {
-      const articlesCrisp = await this.cmsCrisp.recupereArticlesCategorie(
+      const articlesCrisp = await this.cmsCrisp.recupereArticlesParChemin(
         this.adaptateurEnvironnement.crisp().catégorieDuBlog()
       );
       return articlesCrisp
         .filter((ac): ac is ResumeArticleCrispAvecSlug & { slug: string } => !!ac.slug)
         .map((ac): RésuméArticle => ({
-          dateDeMiseÀJour: ac.dateMiseAJour ? new Date(ac.dateMiseAJour) : undefined,
-          estPublie: ac.estPublie,
-          id: ac.id,
+          id: ac.chemin,
           slug: ac.slug,
           titre: ac.titre,
         }));
@@ -74,8 +72,8 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
   private depuis(articleCrisp: PageHtmlCrisp): Article {
     return {
       contenu: aseptiseHtml(articleCrisp.contenu ?? ''),
-      dateDeMiseÀJour: articleCrisp.dateMiseAJour ? new Date(articleCrisp.dateMiseAJour) : undefined,
-      dateDePublication: articleCrisp.datePublication ? new Date(articleCrisp.datePublication) : undefined,
+      dateDeMiseÀJour: undefined,
+      dateDePublication: undefined,
       description: articleCrisp.description,
       titre: articleCrisp.titre,
       tableDesMatières: articleCrisp.tableDesMatieres,
