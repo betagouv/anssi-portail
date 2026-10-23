@@ -104,7 +104,6 @@ const construitRoutesDynamiques = async ({
 
   const liensArticlesBlog = (await entrepôtArticle.tousLesArticlesDeBlog()).map((résuméDArticle) => ({
     url: `/conseils-cyber/${résuméDArticle.slug}`,
-    modifiéLe: résuméDArticle.dateDeMiseÀJour,
   }));
 
   const contientFicheDétaillée = (chemin: string) => {

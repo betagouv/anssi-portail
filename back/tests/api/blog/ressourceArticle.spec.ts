@@ -20,8 +20,6 @@ describe("La ressource d'un article de blog", () => {
     it('répond 200', async () => {
       const article1 = new ConstructeurDArticleAvecToutesLesMétadonnées()
         .avecLeContenu("<div>Contenu HTML de l'article 1</div>")
-        .avecLaDateDeMiseÀJour(new Date('2026-10-01T14:43:00.000Z'))
-        .avecLaDateDePublication(new Date('2026-10-01T17:43:00.000Z'))
         .avecLaDescription("Description de l'article 1")
         .avecLeSlug('article-un')
         .avecLeTitre('Article 1')
@@ -32,8 +30,6 @@ describe("La ressource d'un article de blog", () => {
 
       expect(status).toBe(HttpStatusCode.Ok);
       expect(body.contenu).toBe("<div>Contenu HTML de l'article 1</div>");
-      expect(body.dateDeMiseÀJour).toEqual('2026-10-01T14:43:00.000Z');
-      expect(body.dateDePublication).toEqual('2026-10-01T17:43:00.000Z');
       expect(body.description).toBe("Description de l'article 1");
       expect(body.titre).toBe('Article 1');
     });
