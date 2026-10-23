@@ -32,6 +32,8 @@ const rolldownOptions: NonNullable<UserConfig['build']>['rolldownOptions'] = {
     'illustration-connexion-inscription': 'src/connexion/IllustrationConnexionInscription.svelte',
     'mini-tests': 'src/mini-tests/MiniTests.svelte',
     'mini-test-vrai-faux': 'src/mini-tests/vrai-faux/LandingVraiFaux.svelte',
+    'mini-test-hameconnage': 'src/mini-tests/hameconnage/LandingHameconnage.svelte',
+    'mini-test-hameconnage-test': 'src/mini-tests/hameconnage/TestHameconnage.svelte',
     'mini-test-vrai-faux-quiz': 'src/mini-tests/vrai-faux/moteur-de-jeu/QuizVraiFaux.svelte',
     'mini-test-reflexe-cyber': 'src/mini-tests/reflexe-cyber/LandingReflexeCyber.svelte',
     'mini-test-reflexe-cyber-parcours': 'src/mini-tests/reflexe-cyber/moteur-de-jeu/ParcoursReflexeCyber.svelte',
