@@ -42,6 +42,7 @@ export const routesStatiques = [
   'parcours-cyberdepart',
   'parcours-securisation-complet',
   'simulateur-nis2',
+  'integrer-webc',
 ];
 
 export const enregistreLesRoutesStatiques = (app: Express, configurationServeur: ConfigurationServeur) => {
