@@ -31,4 +31,5 @@ export const composantsAutorisés: string[] = [
   'mini-test-reflexe-cyber-parcours',
   'exposition',
   'conseils-cyber',
+  'integrer-webc',
 ];
