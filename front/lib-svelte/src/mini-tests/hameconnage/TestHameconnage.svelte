@@ -2,11 +2,11 @@
   import { fabriqueFilAriane } from '../../ui/filAriane';
   import FilAriane from '../../ui/FilAriane.svelte';
   import BoiteMail from './BoiteMail.svelte';
-  import type { MailHameçonnage } from './hameconnage';
+  import { mailOuvert, tousLesMails } from './hameconnage.store';
   import Mail from './Mail.svelte';
   import PanneauLateral from './PanneauLateral.svelte';
 
-  const mails: MailHameçonnage[] = [
+  $tousLesMails = [
     {
       id: 'ENEDIS',
       expediteur: {
@@ -107,8 +107,6 @@
       estLu: true,
     },
   ];
-
-  let mailOuvert: MailHameçonnage | undefined = $state();
 </script>
 
 <dsfr-container>
@@ -121,10 +119,10 @@
   <h1 class="fr-h6">Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?</h1>
   <div class="conteneur">
     <PanneauLateral />
-    {#if mailOuvert}
-      <Mail mail={mailOuvert} />
+    {#if $mailOuvert}
+      <Mail />
     {:else}
-      <BoiteMail {mails} bind:mailOuvert />
+      <BoiteMail />
     {/if}
   </div>
 </dsfr-container>
