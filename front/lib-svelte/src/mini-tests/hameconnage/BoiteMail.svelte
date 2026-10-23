@@ -1,9 +1,6 @@
 <script lang="ts">
   import Bouton from '../../ui/Bouton.svelte';
-  import type { MailHameçonnage } from './hameconnage';
-
-  let { mails, mailOuvert = $bindable() }: { mails: MailHameçonnage[]; mailOuvert: MailHameçonnage | undefined } =
-    $props();
+  import { mailOuvert, tousLesMails } from './hameconnage.store';
 </script>
 
 <div class="boite-mail">
@@ -15,7 +12,7 @@
     </div>
   </div>
   <div class="mails">
-    {#each mails as mail (mail.id)}
+    {#each $tousLesMails as mail (mail.id)}
       <div class="mail" class:lu={mail.estLu} class:non-lu={!mail.estLu}>
         <div class="libelles">
           <span class="expediteur">{mail.expediteur.nom}</span>
@@ -29,7 +26,7 @@
               taille="sm"
               iconeSeule
               icone="arrow-right-line"
-              surClic={() => (mailOuvert = mail)}
+              surClic={() => ($mailOuvert = mail)}
             />
           {:else}
             <img src="/assets/icones/coche-verte.svg" alt="Bonne réponse" />

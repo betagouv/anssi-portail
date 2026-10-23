@@ -1,7 +1,5 @@
 <script lang="ts">
-  import type { MailHameçonnage } from './hameconnage';
-
-  let { mail }: { mail: MailHameçonnage } = $props();
+  import { mailOuvert } from './hameconnage.store';
 </script>
 
 <div class="mail-ouvert">
@@ -11,15 +9,15 @@
     </h2>
     <p class="texte-mention-xs">
       {Intl.DateTimeFormat('fr-FR').format(new Date())}
-      {mail.heuresMinutesRéception}
+      {$mailOuvert?.heuresMinutesRéception}
     </p>
     <div class="mail-info">
       <p>de&nbsp;:</p>
-      <p><strong>{mail.expediteur.nom}</strong>&nbsp;&lt;{mail.expediteur.mail}&gt;</p>
+      <p><strong>{$mailOuvert?.expediteur.nom}</strong>&nbsp;&lt;{$mailOuvert?.expediteur.mail}&gt;</p>
     </div>
     <div class="mail-info">
       <p>à&nbsp;:</p>
-      <p>{mail.destinataire}</p>
+      <p>{$mailOuvert?.destinataire}</p>
     </div>
   </div>
 </div>
