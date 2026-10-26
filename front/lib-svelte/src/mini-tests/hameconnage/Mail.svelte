@@ -19,6 +19,66 @@
       <p>à&nbsp;:</p>
       <p>{$mailOuvert?.destinataire}</p>
     </div>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
+    </p>
   </div>
 </div>
 
@@ -28,8 +88,10 @@
     border-radius: 0.5rem;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
     display: flex;
+    flex: 1;
     flex-direction: column;
     font-family: Roboto, serif;
+    min-width: 0;
     .entete-mail {
       display: flex;
       flex-direction: column;

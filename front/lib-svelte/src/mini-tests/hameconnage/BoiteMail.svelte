@@ -45,8 +45,10 @@
     border-radius: 0.5rem;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
     display: flex;
+    flex: 1;
     flex-direction: column;
     font-family: Roboto, serif;
+    min-width: 0;
 
     .entete {
       display: flex;
