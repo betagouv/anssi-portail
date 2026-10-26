@@ -37,7 +37,6 @@
     }
 
     &.sommaire-deplie {
-      flex: 1;
       max-width: 282px;
 
       :global(.chevron) {
