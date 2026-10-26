@@ -4,6 +4,7 @@
   import BoiteMail from './BoiteMail.svelte';
   import { mailOuvert, tousLesMails } from './hameconnage.store';
   import Mail from './Mail.svelte';
+  import PanneauActionsMail from './PanneauActionsMail.svelte';
   import PanneauLateral from './PanneauLateral.svelte';
 
   $tousLesMails = [
@@ -121,6 +122,7 @@
     <PanneauLateral />
     {#if $mailOuvert}
       <Mail />
+      <PanneauActionsMail mode="mobile" />
     {:else}
       <BoiteMail />
     {/if}
