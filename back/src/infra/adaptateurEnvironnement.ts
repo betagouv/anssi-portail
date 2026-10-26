@@ -166,7 +166,7 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     environnement: () => process.env.SENTRY_ENVIRONNEMENT,
   }),
   crisp: () => ({
-    catégorieDuBlog: () => process.env.CRISP_ID_CATEGORIE_DU_BLOG || '',
+    catégorieDuBlog: () => process.env.CRISP_CHEMIN_CATEGORIE_DU_BLOG || '',
     duréeDuCacheEnSecondes: () => {
       const dureeEnChaine = process.env.CRISP_DUREE_CACHE_EN_SECONDES;
       const dureeEnNombre = Number(dureeEnChaine);
