@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { mailOuvert } from './hameconnage.store';
+  import PanneauActionsMail from './PanneauActionsMail.svelte';
 </script>
 
 <aside>
@@ -9,11 +11,15 @@
       <p class="texte-article-lg">3</p>
     </div>
   </div>
-  <div class="panneau">
-    <p class="texte-detail-sm">
-      Ouvrez un à un les emails et tentez de determinez lesquels sont légitimes et lesquels ne le sont pas
-    </p>
-  </div>
+  {#if $mailOuvert}
+    <PanneauActionsMail mode="bureau" />
+  {:else}
+    <div class="panneau">
+      <p class="texte-detail-sm">
+        Ouvrez un à un les emails et tentez de determinez lesquels sont légitimes et lesquels ne le sont pas
+      </p>
+    </div>
+  {/if}
 </aside>
 
 <style lang="scss">
@@ -27,7 +33,7 @@
     margin-bottom: 1rem;
 
     @include a-partir-de(lg) {
-      max-width: taille-pour-colonnes(4);
+      width: taille-pour-colonnes(4);
     }
 
     p {
