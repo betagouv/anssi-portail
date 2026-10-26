@@ -7,11 +7,6 @@
   "prConcurrentLimit": 4,
   "packageRules": [
     {
-      "description": "Version 11 supportant à minina un backend Sentry en version 26.4.2. Backend actuel: 25.9.0",
-      "matchPackageNames": ["@sentry/node", "@sentry/browser", "@sentry/vite-plugin"],
-      "allowedVersions": "<11.0.0"
-    },
-    {
       "description": "@types/node reste aligné sur la version majeure 24 définie dans .nvmrc",
       "matchPackageNames": ["@types/node"],
       "allowedVersions": "<25.0.0"
@@ -25,7 +20,7 @@
     {
       "description": "Regroupe les mises à jour des dépendances Sentry",
       "matchManagers": ["npm"],
-      "matchPackageNames": ["@sentry/node", "@sentry/browser"],
+      "matchPackageNames": ["@sentry/node", "@sentry/browser", "@sentry/vite-plugin"],
       "groupName": "Sentry"
     },
     {
