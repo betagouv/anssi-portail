@@ -38,6 +38,18 @@
 
     &.bureau {
       display: none;
+
+      @include a-partir-de(lg) {
+        display: flex;
+        flex-direction: column;
+        h3 {
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+        .boutons-vote {
+          flex-direction: column;
+        }
+      }
     }
 
     .boutons-vote {
