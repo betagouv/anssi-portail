@@ -9,7 +9,7 @@ import { Cache } from '../cache.js';
 export class EntrepôtArticleCrisp implements EntrepôtArticle {
   private static CLÉ_LISTE_RÉSUMÉS_ARTICLE = 'CLE_LISTE_RÉSUMÉS_ARTICLE';
   private static CLÉ_KIT_RELAIS = 'kit-relais';
-  private static ID_CRISP_KIT_RELAIS = '9d295bcd-88ba-4f8a-99d5-61fdc788032d';
+  private static SLUG_CRISP_KIT_RELAIS = 'le-kit-relais-messervicescyber.md';
 
   private cacheDesRésumés: Cache<RésuméArticle[]>;
   private cacheDesArticles: Cache<Article>;
@@ -68,7 +68,7 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
 
   async kitRelais(): Promise<Article> {
     const récupèreDepuisCrisp = async (): Promise<Article> => {
-      const article = await this.cmsCrisp.recupereArticle(EntrepôtArticleCrisp.ID_CRISP_KIT_RELAIS);
+      const article = await this.cmsCrisp.recupereArticle(EntrepôtArticleCrisp.SLUG_CRISP_KIT_RELAIS);
       return this.depuis(article);
     };
 
