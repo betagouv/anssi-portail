@@ -164,6 +164,9 @@ settings:
 
 catalogs:
   default:
+    '@lab-anssi/ui-kit':
+      specifier: 1.64.0
+      version: 1.64.0(svelte@5.57.1(@typescript-eslint/types@8.72.0))
     '@types/node':
       specifier: ^26.0.0
       version: 26.6.5
@@ -202,9 +205,6 @@ importers:
       '@ianvs/prettier-plugin-sort-imports':
         specifier: ^4.7.1
         version: 4.7.1(prettier@3.9.9)(supports-color@10.2.2)
-      '@lab-anssi/ui-kit':
-        specifier: 1.64.0
-        version: 1.64.0(svelte@5.57.1(@typescript-eslint/types@8.72.0))
       clever-tools:
         specifier: ^5.0.2
         version: 5.2.0(@opentelemetry/api@1.9.1)(@types/node@24.13.3)(supports-color@10.2.2)
@@ -503,6 +503,9 @@ importers:
       '@anssi-portail/contacts-sectoriels':
         specifier: workspace:^
         version: link:../../contacts-sectoriels
+      '@lab-anssi/ui-kit':
+        specifier: 'catalog:'
+        version: 1.64.0(svelte@5.57.1(@typescript-eslint/types@8.72.0))
       '@sentry/browser':
         specifier: ^10.70.0
         version: 10.76.2
