@@ -2,7 +2,9 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import HerosRiche from '../ui/HerosRiche.svelte';
+  import Lien from '../ui/Lien.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
+  import Separateur from '../ui/Separateur.svelte';
   import { collecteLesErreurs } from '../utils/erreurApi';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import DialogueSortieDiagnostic from './DialogueSortieDiagnostic.svelte';
@@ -121,8 +123,12 @@
     <FoireAuxQuestions />
   </div>
 </dsfr-container>
-<dsfr-container class="zone-aide">
-  <div class="contenu-section"></div>
+<Separateur />
+<dsfr-container>
+  <div class="contactez-nous">
+    <p>Vous souhaitez intégrer notre demande de diagnostic cyber directement sur votre site&nbsp;?&nbsp;</p>
+    <Lien href="/integrer-webc" libelle="Découvrez comment l'intégrer" neutre />
+  </div>
 </dsfr-container>
 
 <style lang="scss">
@@ -156,10 +162,22 @@
   }
 
   .zone-faq {
-    padding: 0 0 96px 0;
+    padding: 0 0 3rem 0;
 
     .contenu-section {
       max-width: 792px;
+    }
+  }
+
+  .contactez-nous {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+
+    p {
+      margin: 0;
     }
   }
 </style>
