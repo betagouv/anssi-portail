@@ -29,6 +29,12 @@
       "groupName": "Sentry"
     },
     {
+      "description": "Regroupe les mises à jour typescript-eslint",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["typescript-eslint", "@typescript-eslint/utils"],
+      "groupName": "typescript-eslint"
+    },
+    {
       "description": "lockFileMaintenance",
       "matchUpdateTypes": ["pin", "digest", "patch", "minor", "major", "lockFileMaintenance"],
       "minimumReleaseAge": "7 days"
