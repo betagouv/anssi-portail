@@ -479,9 +479,6 @@ importers:
 
   front:
     dependencies:
-      svelte:
-        specifier: 'catalog:'
-        version: 5.57.1(@typescript-eslint/types@8.72.0)
       uuid:
         specifier: 'catalog:'
         version: 14.0.2
