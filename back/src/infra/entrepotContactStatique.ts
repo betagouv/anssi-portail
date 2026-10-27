@@ -304,7 +304,7 @@ const contactsParSecteur: Record<CodeSecteurContact, ContactSectoriel> = {
     nom: 'CERT Entreprise Défense (CERT ED)',
     siteWeb: 'https://www.defense.gouv.fr/drsd/ressources-entreprises/cert-entreprises-defense',
   },
-  maritime: { nom: 'CERT Maritime', siteWeb: 'https://www.m-cert.fr/' },
+  maritime: { nom: 'CERT Maritime', siteWeb: 'https://www.m-cert.fr/', téléphone: '0 974 985 217' },
   sante: {
     nom: 'CERT Santé',
     siteWeb: 'https://cyberveille.esante.gouv.fr/',

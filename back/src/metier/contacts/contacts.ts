@@ -21,6 +21,7 @@ export type ContactsRégionaux = {
 export type ContactSectoriel = {
   nom: string;
   siteWeb: string;
+  téléphone?: string;
 };
 
 export type LienContact = {
