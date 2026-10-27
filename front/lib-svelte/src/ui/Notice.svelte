@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { DsfrNotice } from '@lab-anssi/ui-kit';
+
   type Props = {
     description?: string;
     estRejetable: boolean;
@@ -23,15 +25,16 @@
   });
 </script>
 
-<dsfr-notice
+<DsfrNotice
   type={typeDsfr}
-  has-icon={aUneIcone || undefined}
+  hasIcon={aUneIcone}
   desc={description}
-  dismissible={estRejetable ? true : undefined}
-  hasDescription={description ? true : undefined}
-  hasLink={lien ? true : undefined}
+  dismissible={estRejetable}
+  hasDescription={Boolean(description)}
+  hasLink={Boolean(lien)}
+  buttonLabel="Masquer le message"
   linkHref={lien?.url}
   linkLabel={lien?.libelle}
   linkTitle={lien?.titre}
   title={titre}
-></dsfr-notice>
+></DsfrNotice>
