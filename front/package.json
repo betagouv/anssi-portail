@@ -14,5 +14,7 @@
   "directories": {
     "test": "test"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "vitest": "catalog:"
+  }
 }

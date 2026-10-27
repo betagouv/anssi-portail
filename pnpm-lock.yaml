@@ -477,7 +477,11 @@ importers:
         specifier: ^8.2.1
         version: 8.3.4(@types/node@24.13.3)(esbuild@0.28.2)(sass@1.105.2)(tsx@4.23.15)
 
-  front: {}
+  front:
+    devDependencies:
+      vitest:
+        specifier: 'catalog:'
+        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.105.2)(tsx@4.23.15))
 
   front/lib-svelte:
     dependencies:
