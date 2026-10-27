@@ -479,9 +479,6 @@ importers:
 
   front:
     dependencies:
-      axios:
-        specifier: 'catalog:'
-        version: 1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
       entities:
         specifier: 'catalog:'
         version: 8.1.0

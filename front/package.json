@@ -15,7 +15,6 @@
     "test": "test"
   },
   "dependencies": {
-    "axios": "catalog:",
     "entities": "catalog:",
     "svelte": "catalog:",
     "uuid": "catalog:"
