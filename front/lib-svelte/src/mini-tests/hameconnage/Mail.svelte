@@ -14,7 +14,7 @@
   <div class="mail-ouvert">
     <div class="entete-mail">
       <h2 class="fr-h6">
-        Anomalie critique détectée sur votre compteur professionnel - Intervention à programmer sous 24h
+        {$mailOuvert?.objet}
       </h2>
       <p class="texte-mention-xs">
         {Intl.DateTimeFormat('fr-FR').format(new Date())}
