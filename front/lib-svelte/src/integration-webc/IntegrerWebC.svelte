@@ -40,7 +40,7 @@
         lienProd="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/prod/ini-test-expostion.php"
       />
     </Accordeon>
-    <Accordeon libelle="Demande de diagnostic cyber&nbsp;?">
+    <Accordeon libelle="Demande de diagnostic cyber">
       <SectionWebCAccordeon
         fichierPhp="demande-diag.php"
         lienDémo="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.1.2/demo/demande-diag.php"
