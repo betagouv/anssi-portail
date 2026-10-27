@@ -15,7 +15,6 @@
     "test": "test"
   },
   "dependencies": {
-    "entities": "catalog:",
     "svelte": "catalog:",
     "uuid": "catalog:"
   },
