@@ -206,8 +206,8 @@ importers:
         specifier: ^4.7.1
         version: 4.7.1(prettier@3.9.9)(supports-color@10.2.2)
       '@lab-anssi/ui-kit':
-        specifier: 1.64.0
-        version: 1.64.0(svelte@5.57.1(@typescript-eslint/types@8.72.1))
+        specifier: 2.0.0
+        version: 2.0.0(svelte@5.57.3(@typescript-eslint/types@8.72.1))
       clever-tools:
         specifier: ^5.0.2
         version: 5.2.0(@opentelemetry/api@1.9.1)(@types/node@24.13.3)(supports-color@10.2.2)
@@ -222,7 +222,7 @@ importers:
         version: 3.9.9
       prettier-plugin-svelte:
         specifier: ^4.0.0
-        version: 4.1.1(prettier@3.9.9)(svelte@5.57.1(@typescript-eslint/types@8.72.1))
+        version: 4.1.1(prettier@3.9.9)(svelte@5.57.3(@typescript-eslint/types@8.72.1))
       tsx:
         specifier: 'catalog:'
         version: 4.23.15
@@ -1488,11 +1488,11 @@ packages:
     peerDependencies:
       express: ~5.2.1
 
-  '@lab-anssi/ui-kit@1.64.0':
-    resolution: {integrity: sha512-vE0rVI1I64uQqpgSohwo0FOGzPBg1iWw/S/pcsaBYGogXccUsULBwvOn41cMFl5IlBkW8uRMlz2Osli2xDHX2g==}
-    engines: {node: '>=24.21.0'}
+  '@lab-anssi/ui-kit@2.0.0':
+    resolution: {integrity: sha512-6ASYAwxaaKsrrTnA6Tz2B/7QInTeB6snNAfh5cJTIi6y9VEn0t0H99VMRcHrbe+jrS+tQdi9SAVwmshyGVIS5A==}
+    engines: {node: '>=24.22.1'}
     peerDependencies:
-      svelte: ^5.57.0
+      svelte: ^5.57.2
 
   '@myriaddreamin/typst-ts-node-compiler-android-arm-eabi@0.7.0':
     resolution: {integrity: sha512-25gKyErQai/u/EWBOSSZvV0rFfSL4tqHgYEyd4rZPXSHMpkvvgPmfA/Ees8InB1nnPV9Jlu9r0sftV6oiccprg==}
@@ -4501,6 +4501,10 @@ packages:
     resolution: {integrity: sha512-Uqj49lWKB+iSSnneuwiYYJ7MZgkB+eXr0LXBhv4uDuAkXqnWmq65Sxflfvp0Lc6MdKjMUxGaeOKWJqz5SNiVIA==}
     engines: {node: '>=18'}
 
+  svelte@5.57.3:
+    resolution: {integrity: sha512-5mAftM3SoDV9X0zdF386F9p2pv8iKOwi/KfBS1XnBAkVCKFzVOLHUoa8iGWAt4buoicLmyWVRpuuD5wplXOQsg==}
+    engines: {node: '>=18'}
+
   tarn@3.1.2:
     resolution: {integrity: sha512-3RTvqKZcK/17jnJ8rMKFXbyNogywTs1z0gVPPwFsJGX46rkmUHOdIaSQ/aVO1rS7nH+soiXiWk7rvUXxndm8Dg==}
     engines: {node: '>=8.0.0'}
@@ -5674,9 +5678,9 @@ snapshots:
       - debug
       - supports-color
 
-  '@lab-anssi/ui-kit@1.64.0(svelte@5.57.1(@typescript-eslint/types@8.72.1))':
+  '@lab-anssi/ui-kit@2.0.0(svelte@5.57.3(@typescript-eslint/types@8.72.1))':
     dependencies:
-      svelte: 5.57.1(@typescript-eslint/types@8.72.1)
+      svelte: 5.57.3(@typescript-eslint/types@8.72.1)
 
   '@myriaddreamin/typst-ts-node-compiler-android-arm-eabi@0.7.0':
     optional: true
@@ -8104,6 +8108,11 @@ snapshots:
       prettier: 3.9.9
       svelte: 5.57.1(@typescript-eslint/types@8.72.1)
 
+  prettier-plugin-svelte@4.1.1(prettier@3.9.9)(svelte@5.57.3(@typescript-eslint/types@8.72.1)):
+    dependencies:
+      prettier: 3.9.9
+      svelte: 5.57.3(@typescript-eslint/types@8.72.1)
+
   prettier@3.9.9: {}
 
   process-nextick-args@2.0.1: {}
@@ -8582,6 +8591,26 @@ snapshots:
       svelte: 5.57.1(@typescript-eslint/types@8.72.1)
 
   svelte@5.57.1(@typescript-eslint/types@8.72.1):
+    dependencies:
+      '@jridgewell/remapping': 2.3.5
+      '@jridgewell/sourcemap-codec': 1.6.0
+      '@sveltejs/acorn-typescript': 1.0.13(acorn@8.18.0)
+      '@types/estree': 1.0.9
+      acorn: 8.18.0
+      aria-query: 5.3.1
+      axobject-query: 4.1.0
+      clsx: 2.1.1
+      devalue: 5.9.4
+      esm-env: 1.2.2
+      esrap: 2.3.7(@typescript-eslint/types@8.72.1)
+      is-reference: 3.0.3
+      locate-character: 3.0.0
+      magic-string: 0.30.21
+      zimmerframe: 1.1.4
+    transitivePeerDependencies:
+      - '@typescript-eslint/types'
+
+  svelte@5.57.3(@typescript-eslint/types@8.72.1):
     dependencies:
       '@jridgewell/remapping': 2.3.5
       '@jridgewell/sourcemap-codec': 1.6.0
