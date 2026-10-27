@@ -1,5 +1,13 @@
 <script lang="ts">
+  import type { Component } from 'svelte';
   import { mailOuvert } from './hameconnage.store';
+
+  const corpsDeMails = import.meta.glob<{ default: Component } | undefined>('./corps-de-mail/CorpsMail*.svelte');
+
+  const chargeCorpsDeMail = $derived.by(async () => {
+    const id = $mailOuvert?.id.replaceAll('.', '');
+    return (await corpsDeMails[`./corps-de-mail/CorpsMail${id}.svelte`]?.())?.default;
+  });
 </script>
 
 <div class="mail">
@@ -20,81 +28,12 @@
         <p>à&nbsp;:</p>
         <p>{$mailOuvert?.destinataire}</p>
       </div>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
-        labore.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
-        labore.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
-        labore.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
-        labore.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
-        labore.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
-        labore.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
-        labore.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
-        labore.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
-        labore.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
-        labore.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
-        labore.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
-        labore.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
-        labore.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
-        labore.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
-        labore.
-      </p>
+
+      {#await chargeCorpsDeMail then CorpsDeMail}
+        {#if CorpsDeMail}
+          <CorpsDeMail />
+        {/if}
+      {/await}
     </div>
   </div>
   <p class="texte-mention-xs">
@@ -114,46 +53,47 @@
       font-style: italic;
       color: black;
     }
-  }
-  .mail-ouvert {
-    background-color: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    font-family: Roboto, serif;
-    min-width: 0;
-    margin-bottom: 1rem;
-    .entete-mail {
+    .mail-ouvert {
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
       display: flex;
+      flex: 1;
       flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 0.5rem;
-      padding: 1rem;
-      overflow: hidden;
-
-      h2 {
-        margin: 0;
+      font-family: Roboto, serif;
+      min-width: 0;
+      margin-bottom: 1rem;
+      .entete-mail {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 1rem;
         overflow: hidden;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-      }
-      p {
-        margin: 0;
-        text-align: start;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+        border-bottom: 1px solid var(--border-default-grey);
 
-      .mail-info {
-        display: grid;
-        grid-template-columns: 4rem 1fr;
-        width: 100%;
+        h2 {
+          margin: 0;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          line-clamp: 2;
+        }
+        p {
+          margin: 0;
+          text-align: start;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .mail-info {
+          display: grid;
+          grid-template-columns: 4rem 1fr;
+          width: 100%;
+        }
       }
     }
   }
