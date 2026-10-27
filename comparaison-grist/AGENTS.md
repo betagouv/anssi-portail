@@ -36,7 +36,6 @@ Compare guides and other content with Grist spreadsheets:
 
 - `axios` - HTTP requests
 - `diff` - Diff/patch library
-- `isomorphic-dompurify` - HTML sanitization
 - TypeScript, ESLint - Quality tools
 
 ## Entry Points

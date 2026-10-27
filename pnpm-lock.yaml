@@ -435,9 +435,6 @@ importers:
       diff:
         specifier: ^9.0.0
         version: 9.0.0
-      isomorphic-dompurify:
-        specifier: 'catalog:'
-        version: 4.4.0(@noble/hashes@1.8.0)
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -488,9 +485,6 @@ importers:
       entities:
         specifier: 'catalog:'
         version: 8.1.0
-      isomorphic-dompurify:
-        specifier: 'catalog:'
-        version: 4.4.0(@noble/hashes@1.8.0)
       svelte:
         specifier: 'catalog:'
         version: 5.57.1(@typescript-eslint/types@8.72.0)
