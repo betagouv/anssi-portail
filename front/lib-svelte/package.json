@@ -46,7 +46,8 @@
     "dompurify": "^3.4.11",
     "entities": "catalog:",
     "isomorphic-dompurify": "catalog:",
-    "qrcode": "^1.5.4"
+    "qrcode": "^1.5.4",
+    "uuid": "catalog:"
   },
   "main": "svelte.config.js",
   "directories": {

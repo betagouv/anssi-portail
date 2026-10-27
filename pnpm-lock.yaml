@@ -477,11 +477,7 @@ importers:
         specifier: ^8.2.1
         version: 8.3.4(@types/node@24.13.3)(esbuild@0.28.2)(sass@1.105.2)(tsx@4.23.15)
 
-  front:
-    dependencies:
-      uuid:
-        specifier: 'catalog:'
-        version: 14.0.2
+  front: {}
 
   front/lib-svelte:
     dependencies:
@@ -506,6 +502,9 @@ importers:
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
+      uuid:
+        specifier: 'catalog:'
+        version: 14.0.2
     devDependencies:
       '@sentry/vite-plugin':
         specifier: ^5.4.0

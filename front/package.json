@@ -14,8 +14,5 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {
-    "uuid": "catalog:"
-  },
   "devDependencies": {}
 }
