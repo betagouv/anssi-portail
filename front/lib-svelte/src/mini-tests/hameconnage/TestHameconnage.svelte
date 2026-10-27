@@ -1,4 +1,5 @@
 <script lang="ts">
+  import CanonAConfetti from '../../ui/CanonAConfetti.svelte';
   import { fabriqueFilAriane } from '../../ui/filAriane';
   import FilAriane from '../../ui/FilAriane.svelte';
   import BoiteMail from './BoiteMail.svelte';
@@ -6,9 +7,11 @@
   import Mail from './Mail.svelte';
   import PanneauActionsMail from './PanneauActionsMail.svelte';
   import PanneauLateral from './PanneauLateral.svelte';
+
+  const réponseUtilisateur = $derived($mailOuvert?.réponseUtilisateur);
 </script>
 
-<dsfr-container>
+<dsfr-container class={`${réponseUtilisateur}-reponse`}>
   <FilAriane
     segments={fabriqueFilAriane({
       feuille: 'Hameçonnage : saurez-vous distinguer le mail légitime du faux&nbsp;?',
@@ -26,6 +29,9 @@
     {/if}
   </div>
 </dsfr-container>
+{#if réponseUtilisateur === 'bonne'}
+  <CanonAConfetti lectureAutomatique={true} />
+{/if}
 
 <style lang="scss">
   @use '../../../../assets/styles/responsive' as *;
@@ -36,6 +42,14 @@
     display: flex;
     flex-direction: column;
     padding-bottom: 1.5rem;
+
+    &.bonne-reponse {
+      background-color: var(--success-975-75);
+    }
+
+    &.mauvaise-reponse {
+      background-color: var(--error-975-75);
+    }
   }
 
   .conteneur {
