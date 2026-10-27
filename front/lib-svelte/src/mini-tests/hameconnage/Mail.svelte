@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Component } from 'svelte';
   import { mailOuvert } from './hameconnage.store';
+  import ReponseMail from './ReponseMail.svelte';
 
   const corpsDeMails = import.meta.glob<{ default: Component } | undefined>('./corps-de-mail/CorpsMail*.svelte');
 
@@ -11,36 +12,40 @@
 </script>
 
 <div class="mail">
-  <div class="mail-ouvert">
-    <div class="entete-mail">
-      <h2 class="fr-h6">
-        {$mailOuvert?.objet}
-      </h2>
-      <p class="texte-mention-xs">
-        {Intl.DateTimeFormat('fr-FR').format(new Date())}
-        {$mailOuvert?.heuresMinutesRéception}
-      </p>
-      <div class="mail-info">
-        <p>de&nbsp;:</p>
-        <p><strong>{$mailOuvert?.expediteur.nom}</strong>&nbsp;&lt;{$mailOuvert?.expediteur.mail}&gt;</p>
-      </div>
-      <div class="mail-info">
-        <p>à&nbsp;:</p>
-        <p>{$mailOuvert?.destinataire}</p>
-      </div>
+  {#if $mailOuvert?.réponseUtilisateur}
+    <ReponseMail />
+  {:else}
+    <div class="mail-ouvert">
+      <div class="entete-mail">
+        <h2 class="fr-h6">
+          {$mailOuvert?.objet}
+        </h2>
+        <p class="texte-mention-xs">
+          {Intl.DateTimeFormat('fr-FR').format(new Date())}
+          {$mailOuvert?.heuresMinutesRéception}
+        </p>
+        <div class="mail-info">
+          <p>de&nbsp;:</p>
+          <p><strong>{$mailOuvert?.expediteur.nom}</strong>&nbsp;&lt;{$mailOuvert?.expediteur.mail}&gt;</p>
+        </div>
+        <div class="mail-info">
+          <p>à&nbsp;:</p>
+          <p>{$mailOuvert?.destinataire}</p>
+        </div>
 
-      {#await chargeCorpsDeMail then CorpsDeMail}
-        {#if CorpsDeMail}
-          <CorpsDeMail />
-        {/if}
-      {/await}
+        {#await chargeCorpsDeMail then CorpsDeMail}
+          {#if CorpsDeMail}
+            <CorpsDeMail />
+          {/if}
+        {/await}
+      </div>
     </div>
-  </div>
-  <p class="texte-mention-xs">
-    Exemples fictifs inspirés de services réels utilisés par les entreprises et organismes publics, à des fins
-    uniquement pédagogiques.<br /> Si vous ne souhaitez pas que votre organisation et son image apparaissent sur cette page
-    contactez-nous pour demander le retrait de cet exemple.
-  </p>
+    <p class="texte-mention-xs">
+      Exemples fictifs inspirés de services réels utilisés par les entreprises et organismes publics, à des fins
+      uniquement pédagogiques.<br /> Si vous ne souhaitez pas que votre organisation et son image apparaissent sur cette page
+      contactez-nous pour demander le retrait de cet exemple.
+    </p>
+  {/if}
 </div>
 
 <style lang="scss">
