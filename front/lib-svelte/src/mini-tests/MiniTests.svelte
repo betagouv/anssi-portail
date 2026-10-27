@@ -5,6 +5,8 @@
   import BoutonsPartagePage from '../test-maturite/BoutonsPartagePage.svelte';
   import type { PropriétésFilAriane } from '../ui/filAriane';
   import HerosRiche from '../ui/HerosRiche.svelte';
+  import Lien from '../ui/Lien.svelte';
+  import Separateur from '../ui/Separateur.svelte';
   import CarteTest from './CarteTest.svelte';
   import IllustrationHeroMiniTest from './IllustrationHeroMiniTest.svelte';
   import LaptopAnime from './LaptopAnime.svelte';
@@ -137,11 +139,18 @@
     <BoutonsPartagePage cheminPartagé="/faire-le-test" sujetMail="Tests gratuits pour maîtriser les risques cyber" />
   </div>
 </dsfr-container>
+<Separateur />
+<dsfr-container>
+  <div class="contactez-nous">
+    <p>Vous souhaitez intégrer nos tests cyber directement sur votre site&nbsp;?&nbsp;</p>
+    <Lien href="/integrer-webc" libelle="Découvrez comment les intégrer" neutre />
+  </div>
+</dsfr-container>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
   .contenu-section {
-    padding-block: 3rem 4.5rem;
+    padding-block: 3rem 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 3rem;
@@ -157,6 +166,16 @@
         gap: 1.5rem;
         grid-template-columns: repeat(3, 1fr);
       }
+    }
+  }
+  .contactez-nous {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+
+    p {
+      margin: 0;
     }
   }
 </style>
