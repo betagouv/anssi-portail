@@ -24,6 +24,8 @@
 </script>
 
 <script lang="ts">
+  import { DsfrAlert } from '@lab-anssi/ui-kit';
+
   let { type = 'neutre', estRejetable = false, titre, taille, children }: Props = $props();
 
   const typeDsfr = $derived(
@@ -34,12 +36,12 @@
         erreur: 'error',
         information: 'info',
         attention: 'warning',
-      } satisfies { [k in TypeAlerte]: string }
+      } satisfies { [k in TypeAlerte]: 'default' | 'success' | 'error' | 'info' | 'warning' }
     )[type]
   );
 </script>
 
-<dsfr-alert
+<DsfrAlert
   type={typeDsfr}
   size={taille}
   title={titre}
@@ -48,16 +50,14 @@
   dismissible={estRejetable}
   buttonCloseLabel={estRejetable ? 'Fermer cette alerte' : undefined}
 >
-  {#if children}
-    <p slot="description">{@render children()}</p>
-  {/if}
-</dsfr-alert>
+  <svelte:fragment slot="description">
+    {#if children}
+      <p>{@render children()}</p>
+    {/if}
+  </svelte:fragment>
+</DsfrAlert>
 
 <style>
-  dsfr-alert {
-    width: 100%;
-  }
-
   p {
     margin: var(--text-spacing);
     font-size: 1rem;
