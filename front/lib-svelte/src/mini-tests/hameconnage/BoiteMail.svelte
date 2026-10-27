@@ -13,14 +13,14 @@
   </div>
   <div class="mails">
     {#each $tousLesMails as mail (mail.id)}
-      <div class="mail" class:lu={mail.estLu} class:non-lu={!mail.estLu}>
+      <div class="mail" class:lu={mail.réponseUtilisateur} class:non-lu={!mail.réponseUtilisateur}>
         <div class="libelles">
           <span class="expediteur">{mail.expediteur.nom}</span>
           <span class="objet">{mail.objet}</span>
         </div>
         <div class="infos">
           <span class="heure">{mail.heuresMinutesRéception}</span>
-          {#if !mail.estLu}
+          {#if !mail.réponseUtilisateur}
             <Bouton
               type="tertiaire-sans-bordure"
               taille="sm"
@@ -29,7 +29,11 @@
               surClic={() => ($mailOuvert = mail)}
             />
           {:else}
-            <img src="/assets/icones/coche-verte.svg" alt="Bonne réponse" />
+            {#if mail.réponseUtilisateur === 'bonne'}
+              <img src="/assets/icones/coche-verte.svg" alt="Bonne réponse" />
+            {:else}
+              <img src="/assets/icones/croix-rouge.svg" alt="Mauvaise réponse" />
+            {/if}
           {/if}
         </div>
       </div>

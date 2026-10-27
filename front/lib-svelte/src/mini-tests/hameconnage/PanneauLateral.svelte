@@ -1,14 +1,18 @@
 <script lang="ts">
-  import { mailOuvert } from './hameconnage.store';
+  import { mailOuvert, tousLesMails } from './hameconnage.store';
   import PanneauActionsMail from './PanneauActionsMail.svelte';
+
+  const nombreTotalMails = $derived($tousLesMails.length);
+  const nombreTotalMailRépondu = $derived($tousLesMails.filter((mail) => mail.réponseUtilisateur).length);
+  const score = $derived($tousLesMails.filter((mail) => mail.réponseUtilisateur === 'bonne').length);
 </script>
 
 <aside>
   <div class="carte-score panneau">
-    <p class="texte-article-lg">email 1 sur 9</p>
+    <p class="texte-article-lg">{`email ${nombreTotalMailRépondu} sur ${nombreTotalMails}`}</p>
     <div class="score">
       <lab-anssi-icone nom="shield-fill" taille="md"></lab-anssi-icone>
-      <p class="texte-article-lg">3</p>
+      <p class="texte-article-lg">{score}</p>
     </div>
   </div>
   {#if $mailOuvert}

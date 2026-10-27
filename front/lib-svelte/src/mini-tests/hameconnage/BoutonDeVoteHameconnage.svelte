@@ -1,7 +1,7 @@
 <script lang="ts">
   import { clic } from '../../directives/actions.svelte';
 
-  type Réponse = 'Légitime' | 'Hameçonnage';
+  export type Réponse = 'Légitime' | 'Hameçonnage';
 
   interface Props {
     réponse: Réponse;
