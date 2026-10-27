@@ -2,87 +2,119 @@
   import { mailOuvert } from './hameconnage.store';
 </script>
 
-<div class="mail-ouvert">
-  <div class="entete-mail">
-    <h2 class="fr-h6">
-      Anomalie critique détectée sur votre compteur professionnel - Intervention à programmer sous 24h
-    </h2>
-    <p class="texte-mention-xs">
-      {Intl.DateTimeFormat('fr-FR').format(new Date())}
-      {$mailOuvert?.heuresMinutesRéception}
-    </p>
-    <div class="mail-info">
-      <p>de&nbsp;:</p>
-      <p><strong>{$mailOuvert?.expediteur.nom}</strong>&nbsp;&lt;{$mailOuvert?.expediteur.mail}&gt;</p>
+<div class="mail">
+  <div class="mail-ouvert">
+    <div class="entete-mail">
+      <h2 class="fr-h6">
+        Anomalie critique détectée sur votre compteur professionnel - Intervention à programmer sous 24h
+      </h2>
+      <p class="texte-mention-xs">
+        {Intl.DateTimeFormat('fr-FR').format(new Date())}
+        {$mailOuvert?.heuresMinutesRéception}
+      </p>
+      <div class="mail-info">
+        <p>de&nbsp;:</p>
+        <p><strong>{$mailOuvert?.expediteur.nom}</strong>&nbsp;&lt;{$mailOuvert?.expediteur.mail}&gt;</p>
+      </div>
+      <div class="mail-info">
+        <p>à&nbsp;:</p>
+        <p>{$mailOuvert?.destinataire}</p>
+      </div>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
+        labore.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
+        labore.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
+        labore.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
+        labore.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
+        labore.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
+        labore.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
+        labore.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
+        labore.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
+        labore.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
+        labore.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
+        labore.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
+        labore.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
+        labore.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
+        labore.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
+        doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum
+        labore.
+      </p>
     </div>
-    <div class="mail-info">
-      <p>à&nbsp;:</p>
-      <p>{$mailOuvert?.destinataire}</p>
-    </div>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati incidunt beatae sed iusto nesciunt eligendi
-      doloribus corporis fuga dolore, possimus, reprehenderit ipsum doloremque nemo officiis enim et, alias eum labore.
-    </p>
   </div>
+  <p class="texte-mention-xs">
+    Exemples fictifs inspirés de services réels utilisés par les entreprises et organismes publics, à des fins
+    uniquement pédagogiques.<br /> Si vous ne souhaitez pas que votre organisation et son image apparaissent sur cette page
+    contactez-nous pour demander le retrait de cet exemple.
+  </p>
 </div>
 
 <style lang="scss">
+  .mail {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    flex-direction: column;
+    .texte-mention-xs {
+      font-style: italic;
+      color: black;
+    }
+  }
   .mail-ouvert {
     background-color: white;
     border-radius: 0.5rem;
@@ -92,6 +124,7 @@
     flex-direction: column;
     font-family: Roboto, serif;
     min-width: 0;
+    margin-bottom: 1rem;
     .entete-mail {
       display: flex;
       flex-direction: column;
