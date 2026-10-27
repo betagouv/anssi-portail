@@ -7,6 +7,6 @@ export type MailHameçonnage = {
   destinataire: string;
   objet: string;
   heuresMinutesRéception: string;
-  estLu: boolean;
   réponseUtilisateur?: 'bonne' | 'mauvaise';
+  type: 'Légitime' | 'Hameçonnage';
 };

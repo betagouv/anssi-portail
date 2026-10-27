@@ -17,8 +17,9 @@
       destinataire: 'maintenance@votreentreprise.fr',
       objet: 'Anomalie critique détectée sur votre compteur professionnel — Intervention à programmer sous 24h',
       heuresMinutesRéception: '08:30',
-      estLu: false,
+      type: 'Hameçonnage',
     },
+
     {
       id: 'PROCONNECT',
       expediteur: {
@@ -28,8 +29,9 @@
       destinataire: 'vous@votreorganisation.fr',
       objet: 'Nouvelle connexion détectée avec ProConnect',
       heuresMinutesRéception: '09:14',
-      estLu: false,
+      type: 'Légitime',
     },
+
     {
       id: 'INPI',
       expediteur: {
@@ -39,8 +41,9 @@
       destinataire: 'contact@votreentreprise.fr',
       objet: 'Votre formalité a été transmise aux organismes destinataires',
       heuresMinutesRéception: '09:15',
-      estLu: false,
+      type: 'Légitime',
     },
+
     {
       id: 'CPF',
       expediteur: {
@@ -50,8 +53,9 @@
       destinataire: 'vous@votreadresse.fr',
       objet: 'Vos droits CPF vont expirer – Sécurisez-les avant le 30/09',
       heuresMinutesRéception: '10:05',
-      estLu: true,
+      type: 'Hameçonnage',
     },
+
     {
       id: 'LA_POSTE',
       expediteur: {
@@ -61,8 +65,9 @@
       destinataire: 'vous@votreadresse.fr',
       objet: 'Votre colis arrive !',
       heuresMinutesRéception: '10:50',
-      estLu: true,
+      type: 'Légitime',
     },
+
     {
       id: 'AMENDES.GOUV',
       expediteur: {
@@ -72,7 +77,7 @@
       destinataire: 'vous@votreadresse.fr',
       objet: 'Avis de contravention n°AM-664821 - À retourner sous 5 jours',
       heuresMinutesRéception: '12:10',
-      estLu: true,
+      type: 'Hameçonnage',
     },
     {
       id: 'ORANGE',
@@ -83,8 +88,9 @@
       destinataire: 'vous@votreadresse.fr',
       objet: 'Une demande de portabilité de votre numéro a été initiée',
       heuresMinutesRéception: '14:02',
-      estLu: true,
+      type: 'Hameçonnage',
     },
+
     {
       id: 'BANQUE_POSTALE',
       expediteur: {
@@ -94,8 +100,9 @@
       destinataire: 'vous@votreadresse.fr',
       objet: 'Votre relevé de compte de septembre est disponible',
       heuresMinutesRéception: '16:40',
-      estLu: true,
+      type: 'Légitime',
     },
+
     {
       id: 'ANSSI',
       expediteur: {
@@ -105,7 +112,7 @@
       destinataire: 'rssi@votreentreprise.fr',
       objet: 'Votre relevé de compte de septembre est disponible',
       heuresMinutesRéception: '16:40',
-      estLu: true,
+      type: 'Hameçonnage',
     },
   ];
 </script>
