@@ -123,6 +123,9 @@
           <h2>Contacts sectoriels</h2>
           <CarteContact titre={contactSectoriel.nom}>
             <LigneContact type="site-web" valeur={contactSectoriel.siteWeb} />
+            {#if contactSectoriel.téléphone}
+              <LigneContact type="telephone" valeur={contactSectoriel.téléphone} />
+            {/if}
           </CarteContact>
         {/if}
 
