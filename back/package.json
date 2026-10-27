@@ -82,7 +82,7 @@
     "pdfjs-dist": "^6.2.108",
     "pg": "^8.20.0",
     "sharp": "^0.35.0",
-    "sitemap": "^9.0.1",
+    "sitemap": "^10.0.0",
     "svelte": "catalog:",
     "uuid": "catalog:",
     "zod": "^4.5.4"
