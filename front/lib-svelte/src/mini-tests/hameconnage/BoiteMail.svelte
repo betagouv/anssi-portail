@@ -161,6 +161,7 @@
       }
 
       &.lu {
+        background-color: var(--grey-975-75);
         .libelles {
           .expediteur {
             font-weight: bold;
