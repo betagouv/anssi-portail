@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "@anssi-portail/contacts-sectoriels": "workspace:^",
+    "@lab-anssi/ui-kit": "catalog:",
     "@pdfme/pdf-lib": "^6.2.8",
     "@sentry/browser": "^10.70.0",
     "axios": "catalog:",
