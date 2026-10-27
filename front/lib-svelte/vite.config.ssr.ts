@@ -57,7 +57,7 @@ export const configSsr: UserConfig = {
     svelte({
       compilerOptions: {
         css: 'injected',
-        customElement: true,
+        customElement: false,
       },
     }),
     injecteNonce(),
