@@ -1,6 +1,9 @@
 <script lang="ts">
-  import Bouton from '../../ui/Bouton.svelte';
+  import { clic } from '../../directives/actions.svelte';
+  import type { MailHameçonnage } from './hameconnage';
   import { mailOuvert, tousLesMails } from './hameconnage.store';
+
+  const ouvreLeMail = (mail: MailHameçonnage) => ($mailOuvert = mail);
 </script>
 
 <div class="boite-mail">
@@ -13,7 +16,12 @@
   </div>
   <div class="mails">
     {#each $tousLesMails as mail (mail.id)}
-      <div class="mail" class:lu={mail.réponseUtilisateur} class:non-lu={!mail.réponseUtilisateur}>
+      <button
+        class="mail"
+        class:lu={mail.réponseUtilisateur}
+        class:non-lu={!mail.réponseUtilisateur}
+        use:clic={() => ouvreLeMail(mail)}
+      >
         <div class="libelles">
           <span class="expediteur">{mail.expediteur.nom}</span>
           <span class="objet">{mail.objet}</span>
@@ -21,13 +29,7 @@
         <div class="infos">
           <span class="heure">{mail.heuresMinutesRéception}</span>
           {#if !mail.réponseUtilisateur}
-            <Bouton
-              type="tertiaire-sans-bordure"
-              taille="sm"
-              iconeSeule
-              icone="arrow-right-line"
-              surClic={() => ($mailOuvert = mail)}
-            />
+            <lab-anssi-icone nom="arrow-right-line" taille="sm"></lab-anssi-icone>
           {:else}
             {#if mail.réponseUtilisateur === 'bonne'}
               <img src="/assets/icones/coche-verte.svg" alt="Bonne réponse" />
@@ -36,7 +38,7 @@
             {/if}
           {/if}
         </div>
-      </div>
+      </button>
     {/each}
   </div>
 </div>
@@ -91,7 +93,13 @@
       padding: 1rem;
       display: flex;
       justify-content: space-between;
+      width: 100%;
+      align-items: center;
       gap: 0.5rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
       border-bottom: 1px solid var(--border-default-grey);
       @include a-partir-de(sm) {
         gap: 2.5rem;
