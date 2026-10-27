@@ -37,7 +37,7 @@
     }
 
     &.sommaire-deplie {
-      max-width: 282px;
+      min-width: 282px;
 
       :global(.chevron) {
         display: none;
