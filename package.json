@@ -39,7 +39,8 @@
     "tsx": "catalog:",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.2",
-    "vitest": "catalog:"
+    "vitest": "catalog:",
+    "@lab-anssi/ui-kit": "1.64.0"
   },
   "devEngines": {
     "packageManager": {

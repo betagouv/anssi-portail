@@ -19,7 +19,7 @@ export default {
   onwarn(warning, defaultHandler) {
     defaultHandler(warning);
 
-    if (!warning.filename?.includes('node_modules')) {
+    if (process.env.CI) {
       throw new Error(`[svelte:${warning.code}] ${warning.message}`);
     }
   },
