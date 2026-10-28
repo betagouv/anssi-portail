@@ -37,6 +37,7 @@ export default defineConfig(({ command, mode }) => {
       .map(({ address }) => `http://${address}:${portServeur}`),
   ];
   return {
+    base: './',
     define: {
       // `loadEnv` ne lit que les fichiers `.env` présents sur le disque : sans fichier `.env`
       // (cas de la CI, où `.env` est gitignoré), il ne reprend pas la variable déjà présente
