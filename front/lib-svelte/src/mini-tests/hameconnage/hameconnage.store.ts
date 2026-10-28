@@ -28,7 +28,7 @@ export const tousLesMails = writable<MailHameçonnage[]>([
   {
     id: 'INPI',
     expediteur: {
-      nom: 'INPI',
+      nom: "INPI - Guichet unique des formalités d'entreprises",
       mail: 'noreply@inpi.fr',
     },
     destinataire: 'contact@votreentreprise.fr',
