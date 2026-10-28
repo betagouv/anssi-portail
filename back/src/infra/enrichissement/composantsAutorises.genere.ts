@@ -34,4 +34,5 @@ export const composantsAutorisés: string[] = [
   'exposition',
   'conseils-cyber',
   'integrer-webc',
+  'kit-de-sensibilisation-interne',
 ];
