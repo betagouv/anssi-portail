@@ -50,8 +50,8 @@ export const tousLesMails = writable<MailHameçonnage[]>([
   {
     id: 'LAPOSTE',
     expediteur: {
-      nom: 'La Poste - Colisimo',
-      mail: 'laposte@notifications.laposte.fr',
+      nom: 'La Poste - Colissimo',
+      mail: 'noreply@notif-colissimo-laposte.info',
     },
     destinataire: 'vous@votreadresse.fr',
     objet: 'Votre colis arrive !',
