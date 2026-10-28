@@ -84,7 +84,7 @@ export const tousLesMails = writable<MailHameçonnage[]>([
     id: 'BANQUEPOSTALE',
     expediteur: {
       nom: 'La Banque Postale',
-      mail: 'vous@votreadresse.fr',
+      mail: 'notifications@voscomptesenligne.labanquepostale.fr',
     },
     destinataire: 'vous@votreadresse.fr',
     objet: 'Votre relevé de compte de septembre est disponible',
