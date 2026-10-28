@@ -48,7 +48,7 @@ export const tousLesMails = writable<MailHameçonnage[]>([
     type: 'Hameçonnage',
   },
   {
-    id: 'LA_POSTE',
+    id: 'LAPOSTE',
     expediteur: {
       nom: 'La Poste - Colisimo',
       mail: 'laposte@notifications.laposte.fr',
@@ -58,9 +58,8 @@ export const tousLesMails = writable<MailHameçonnage[]>([
     heuresMinutesRéception: '10:50',
     type: 'Légitime',
   },
-
   {
-    id: 'AMENDES.GOUV',
+    id: 'AMENDESGOUV',
     expediteur: {
       nom: 'amendes.gouv.fr - Trésor Public',
       mail: 'recouvrement@amendes-gouv-huissier.com',
@@ -82,7 +81,7 @@ export const tousLesMails = writable<MailHameçonnage[]>([
     type: 'Hameçonnage',
   },
   {
-    id: 'BANQUE_POSTALE',
+    id: 'BANQUEPOSTALE',
     expediteur: {
       nom: 'La Banque Postale',
       mail: 'vous@votreadresse.fr',
