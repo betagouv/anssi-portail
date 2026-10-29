@@ -7,14 +7,9 @@
 <script lang="ts">
   import axios from 'axios';
   import type { Snippet } from 'svelte';
+  import { ajouteRetour, récupèreRetour, supprimeRetour } from '$plateforme/retourUtilisateurSurContenu';
   import Alerte from './Alerte.svelte';
   import Bouton from './Bouton.svelte';
-  import {
-    ajouteRetour,
-    récupèreRetour,
-    supprimeRetour,
-    type RetourUtilisateur,
-  } from './retourUtilisateurSurContenu.store';
 
   type Props = {
     children?: Snippet;
@@ -60,7 +55,7 @@
     )[typeDeRetour]
   );
 
-  const retourUtilisateur: RetourUtilisateur | undefined = $derived(clé ? récupèreRetour(clé) : undefined);
+  const retourUtilisateur = $derived(clé ? récupèreRetour(clé) : undefined);
   let étatBoutons = $derived(retourUtilisateur?.positif);
 
   type Etat = 'Soumis' | 'AfficheCommentaire' | undefined;
