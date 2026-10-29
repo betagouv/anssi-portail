@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Bouton from '../ui/Bouton.svelte';
-  import type { PropriétésFilAriane } from '../ui/filAriane';
-  import HerosRiche from '../ui/HerosRiche.svelte';
-  import RetourUtilisateurSurContenu from '../ui/RetourUtilisateurSurContenu.svelte';
+  import Bouton from '../../ui/Bouton.svelte';
+  import type { PropriétésFilAriane } from '../../ui/filAriane';
+  import HerosRiche from '../../ui/HerosRiche.svelte';
+  import RetourUtilisateurSurContenu from '../../ui/RetourUtilisateurSurContenu.svelte';
   import IllustrationHerosKitSensibilisation from './animation/IllustrationHerosKitSensibilisation.svelte';
   import Thématique from './Thematique.svelte';
   import { thématiques } from './thematiques';
@@ -65,7 +65,7 @@
 </dsfr-container>
 
 <style lang="scss">
-  @use '../../../assets/styles/responsive' as *;
+  @use '../../../../assets/styles/responsive' as *;
 
   dsfr-container {
     padding-bottom: 3.5rem;

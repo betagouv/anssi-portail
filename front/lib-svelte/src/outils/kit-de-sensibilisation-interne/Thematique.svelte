@@ -33,7 +33,7 @@
 </div>
 
 <style lang="scss">
-  @use '../../../assets/styles/responsive' as *;
+  @use '../../../../assets/styles/responsive' as *;
 
   .thématique {
     display: flex;
