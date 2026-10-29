@@ -21,6 +21,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "pnpm --reporter=append-only -r test",
+    "typecheck": "pnpm --reporter=append-only -r typecheck",
     "migre-bdd": "pnpm --filter @anssi-portail/back migre-bdd",
     "postinstall": "pnpm -F regles-eslint build",
     "start": "node back/dist/src/serveur.js",
