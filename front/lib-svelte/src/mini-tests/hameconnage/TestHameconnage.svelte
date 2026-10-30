@@ -3,34 +3,43 @@
   import { fabriqueFilAriane } from '../../ui/filAriane';
   import FilAriane from '../../ui/FilAriane.svelte';
   import BoiteMail from './BoiteMail.svelte';
-  import { mailOuvert } from './hameconnage.store';
+  import { mailOuvert, scoreFinalAffiché, tousLesMails } from './hameconnage.store';
   import Mail from './Mail.svelte';
   import PanneauActionsMail from './PanneauActionsMail.svelte';
   import PanneauLateral from './PanneauLateral.svelte';
+  import ScoreFinalHameconnage from './ScoreFinalHameconnage.svelte';
 
   const réponseUtilisateur = $derived($mailOuvert?.réponseUtilisateur);
+  const réponses = $derived($tousLesMails.map((mail) => mail.réponseUtilisateur === 'bonne'));
 </script>
 
-<dsfr-container class={`${réponseUtilisateur}-reponse`}>
+<dsfr-container class={$scoreFinalAffiché ? 'score-final' : `${réponseUtilisateur}-reponse`}>
   <FilAriane
     segments={fabriqueFilAriane({
       feuille: 'Hameçonnage : saurez-vous distinguer le mail légitime du faux&nbsp;?',
       branche: { nom: 'Faire le test !', lien: '/faire-le-test' },
     })}
   />
-  <h1 class="fr-h6">Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?</h1>
-  <div class="conteneur">
-    <PanneauLateral />
-    {#if $mailOuvert}
-      <Mail />
-      <PanneauActionsMail mode="mobile" />
-    {:else}
-      <BoiteMail />
-    {/if}
-  </div>
 </dsfr-container>
-{#if réponseUtilisateur === 'bonne'}
-  <CanonAConfetti lectureAutomatique={true} />
+
+{#if $scoreFinalAffiché}
+  <ScoreFinalHameconnage {réponses} />
+{:else}
+  <dsfr-container class={['zone-test', `${réponseUtilisateur}-reponse`]}>
+    <h1 class="fr-h6">Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?</h1>
+    <div class="conteneur">
+      <PanneauLateral />
+      {#if $mailOuvert}
+        <Mail />
+        <PanneauActionsMail mode="mobile" />
+      {:else}
+        <BoiteMail />
+      {/if}
+    </div>
+  </dsfr-container>
+  {#if réponseUtilisateur === 'bonne'}
+    <CanonAConfetti lectureAutomatique={true} />
+  {/if}
 {/if}
 
 <style lang="scss">
@@ -41,7 +50,10 @@
     background-color: var(--background-alt-blue-france);
     display: flex;
     flex-direction: column;
-    padding-bottom: 1.5rem;
+
+    &.zone-test {
+      padding-bottom: 1.5rem;
+    }
 
     &.bonne-reponse {
       background-color: var(--success-975-75);
@@ -49,6 +61,10 @@
 
     &.mauvaise-reponse {
       background-color: var(--error-975-75);
+    }
+
+    &.score-final {
+      background-color: var(--background-default-grey);
     }
   }
 
