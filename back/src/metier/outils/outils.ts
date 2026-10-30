@@ -6,6 +6,7 @@ const outils = [
   'rappel-mise-a-jour-liste-d-activites.ics',
   'modele-revue-comptes-utilisateurs.xlsx',
   'modele-revue-droits-d-acces.xlsx',
+  'kit-de-sensibilisation-interne',
 ] as const;
 export type Outil = (typeof outils)[number];
 
