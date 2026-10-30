@@ -515,6 +515,9 @@ importers:
       entities:
         specifier: 'catalog:'
         version: 8.1.0
+      fflate:
+        specifier: ^0.8.3
+        version: 0.8.3
       isomorphic-dompurify:
         specifier: 'catalog:'
         version: 4.4.0(@noble/hashes@1.8.0)
