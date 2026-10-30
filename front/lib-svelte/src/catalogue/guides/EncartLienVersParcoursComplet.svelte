@@ -7,7 +7,7 @@
   let hrefCTA = $state('/parcours-complet');
 
   onMount(() => {
-    const pageSource = `${window.location.pathname}-encart-lien-vers-parcours-cyberdepart`;
+    const pageSource = `${window.location.pathname}-encart-lien-vers-parcours-complet`;
     hrefCTA = `/parcours-complet?pageSource=${pageSource}`;
   });
 </script>
