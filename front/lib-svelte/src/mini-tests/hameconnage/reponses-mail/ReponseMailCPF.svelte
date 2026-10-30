@@ -1,8 +1,10 @@
-<h3 class="fr-h6">
-  Cet email est bien une tentative de hameçonnage.<br />
-  Les indices clés à retenir&nbsp;:
-</h3>
-<ul class="texte-article-lg">
+<script lang="ts">
+  import ReponseMailGenerique from './ReponseMailGenerique.svelte';
+</script>
+
+<ReponseMailGenerique
+  résumé="En résumé&nbsp;: la fraude au CPF est l'une des arnaques les plus répandues en France. Les droits CPF ne se gèrent que depuis moncompteformation.gouv.fr, en se connectant soi-même via FranceConnect, jamais via un lien ou un QR code reçu."
+>
   <li>
     Le QR code permet de contourner les filtres de sécurité qui analysent les liens texte dans les emails
     («&nbsp;quishing&nbsp;»)
@@ -16,23 +18,4 @@
     compris par SMS
   </li>
   <li>Aucune référence à un dossier de formation en cours, ni à une action initiée par vous</li>
-</ul>
-
-<dsfr-highlight
-  size="lg"
-  text="En résumé&nbsp;: la fraude au CPF est l'une des arnaques les plus répandues en France. Les droits CPF ne se gèrent que depuis moncompteformation.gouv.fr, en se connectant soi-même via FranceConnect, jamais via un lien ou un QR code reçu."
-></dsfr-highlight>
-
-<style lang="scss">
-  h3 {
-    margin: 0;
-  }
-
-  ul {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin: 0;
-    padding-inline-start: 1.75rem;
-  }
-</style>
+</ReponseMailGenerique>
