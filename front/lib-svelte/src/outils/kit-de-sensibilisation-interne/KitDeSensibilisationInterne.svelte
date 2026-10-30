@@ -1,16 +1,30 @@
 <script lang="ts">
+  import axios from 'axios';
   import Bouton from '../../ui/Bouton.svelte';
   import type { PropriétésFilAriane } from '../../ui/filAriane';
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import RetourUtilisateurSurContenu from '../../ui/RetourUtilisateurSurContenu.svelte';
   import IllustrationHerosKitSensibilisation from './animation/IllustrationHerosKitSensibilisation.svelte';
+  import { retireTemplatesSansLogo, téléchargeFichierDansNavigateur } from './manipulationZip';
   import Thématique from './Thematique.svelte';
   import { thématiques } from './thematiques';
 
+  let téléchargementEnCours = $state(false);
+
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Kit de sensibilisation interne' };
 
-  const téléchargeLeKit = () => {
-    window.location.href = '/api/outils/kit-de-sensibilisation-interne.zip';
+  const téléchargeLeKit = async () => {
+    try {
+      téléchargementEnCours = true;
+      const { data } = await axios.get<ArrayBuffer>('/api/outils/kit-de-sensibilisation-interne', {
+        responseType: 'arraybuffer',
+      });
+
+      const cleaned = retireTemplatesSansLogo(data);
+      téléchargeFichierDansNavigateur(cleaned, 'ANSSI-kit-sensibilisation.zip');
+    } finally {
+      téléchargementEnCours = false;
+    }
   };
 </script>
 
@@ -42,7 +56,12 @@
           oninput={() => alert('tip')}
         />
       </div>
-      <Bouton icone="download-line" libelle="Télécharger le kit" surClic={téléchargeLeKit} />
+      <Bouton
+        desactive={téléchargementEnCours}
+        icone="download-line"
+        libelle="Télécharger le kit"
+        surClic={téléchargeLeKit}
+      />
     </div>
     <div class="section-droite">
       <img src="/assets/images/kit-de-sensibilisation/apercu-encart.svg" alt="" />
