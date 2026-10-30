@@ -8,6 +8,10 @@
   import { thématiques } from './thematiques';
 
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Kit de sensibilisation interne' };
+
+  const téléchargeLeKit = () => {
+    window.location.href = '/api/outils/kit-de-sensibilisation-interne.zip';
+  };
 </script>
 
 <HerosRiche
@@ -38,7 +42,7 @@
           oninput={() => alert('tip')}
         />
       </div>
-      <Bouton icone="download-line" libelle="Télécharger le kit" surClic={() => alert('top')} />
+      <Bouton icone="download-line" libelle="Télécharger le kit" surClic={téléchargeLeKit} />
     </div>
     <div class="section-droite">
       <img src="/assets/images/kit-de-sensibilisation/apercu-encart.svg" alt="" />
