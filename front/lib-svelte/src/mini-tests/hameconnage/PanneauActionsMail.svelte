@@ -1,7 +1,7 @@
 <script lang="ts">
   import Bouton from '../../ui/Bouton.svelte';
   import BoutonDeVoteHameconnage, { type Réponse } from './BoutonDeVoteHameconnage.svelte';
-  import { mailOuvert, tousLesMails } from './hameconnage.store';
+  import { mailOuvert, scoreFinalAffiché, tousLesMails } from './hameconnage.store';
 
   let { mode }: { mode: 'mobile' | 'bureau' } = $props();
   const surVote = (réponse: Réponse) => () => {
@@ -16,12 +16,18 @@
       return mail;
     });
   };
+  const tousLesMailsOntUneRéponse = $derived($tousLesMails.every((mail) => mail.réponseUtilisateur));
   const refermeLeMail = () => ($mailOuvert = undefined);
+  const obtenirLeRésultat = () => ($scoreFinalAffiché = true);
 </script>
 
 <div class={['panneau', mode]} class:deja-repondu={$mailOuvert?.réponseUtilisateur}>
   {#if $mailOuvert?.réponseUtilisateur}
-    <Bouton libelle="Retourner à la liste de mails" surClic={refermeLeMail} etire />
+    {#if tousLesMailsOntUneRéponse}
+      <Bouton libelle="Obtenir mon résultat" surClic={obtenirLeRésultat} etire />
+    {:else}
+      <Bouton libelle="Retourner à la liste de mails" surClic={refermeLeMail} etire />
+    {/if}
   {:else}
     <h3 class="fr-h6">Vrai ou faux mail ?</h3>
     <div class="boutons-vote">
