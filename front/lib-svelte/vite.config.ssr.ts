@@ -40,6 +40,7 @@ const rolldownOptions: NonNullable<UserConfig['build']>['rolldownOptions'] = {
     exposition: 'src/mini-tests/exposition/ExpositionCyberattaques.svelte',
     'conseils-cyber': 'src/conseils-cyber/ConseilsCyber.svelte',
     'integrer-webc': 'src/integration-webc/IntegrerWebC.svelte',
+    'kit-de-sensibilisation-interne': 'src/outils/kit-de-sensibilisation-interne/KitDeSensibilisationInterne.svelte',
   },
   output: {
     entryFileNames: `assets/[name].js`,

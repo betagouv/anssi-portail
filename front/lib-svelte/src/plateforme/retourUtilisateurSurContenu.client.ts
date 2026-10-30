@@ -1,6 +1,4 @@
-export type RetourUtilisateur = {
-  positif: boolean;
-};
+import type { RetourUtilisateur } from './retourUtilisateurSurContenu';
 
 export const récupèreRetour = (clé: string): RetourUtilisateur | undefined => {
   const item = localStorage.getItem(clé);

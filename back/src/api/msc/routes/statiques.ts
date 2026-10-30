@@ -45,6 +45,7 @@ export const routesStatiques = [
   'integrer-webc',
   'hameconnage',
   'hameconnage/test',
+  'kit-de-sensibilisation-interne',
 ];
 
 export const enregistreLesRoutesStatiques = (app: Express, configurationServeur: ConfigurationServeur) => {
