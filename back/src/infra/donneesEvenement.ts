@@ -7,6 +7,7 @@ import { RetourArticleDonné } from '../bus/evenements/retourArticleDonne.js';
 import { RetourOutilDonné } from '../bus/evenements/retourOutilDonne.js';
 import { SimulationRéflexesCyberRéponseSoumise } from '../bus/evenements/simulationReflexesCyberReponseSoumise.js';
 import { SimulationRéflexesCyberTerminé } from '../bus/evenements/simulationReflexesCyberTermine.js';
+import { TestHameçonnageRéponseSoumise } from '../bus/evenements/testHameconnageReponseSoumise.js';
 import { FacteurAggravant, Secteur, TypeOrganisation } from '../metier/mini-tests/exposition/exposition.js';
 import { ReponsesEtResultatAvecAnalyse } from '../metier/nis2-simulateur/questionnaire/calculEligibilite.js';
 import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction.js';
@@ -43,6 +44,7 @@ export type DonneesEvenement =
   | DonneesQuestionnaireVraiFauxTerminé
   | DonneesSimulationRéflexesCyberReponseSoumise
   | DonneesSimulationRéflexesCyberTermine
+  | DonneesTestHameçonnageRéponseSoumise
   | DonnéesRetourTestReflexesCyber
   | DonnéesRetourArticle
   | DonneesOutilTéléchargé
@@ -206,3 +208,8 @@ type DonneesOutilTéléchargé = Evenement<
 >;
 
 type DonnéesRetourOutil = Evenement<'RETOUR_OUTIL_DONNE', RetourOutilDonné>;
+
+type DonneesTestHameçonnageRéponseSoumise = Evenement<
+  'TEST_HAMECONNAGE_REPONSE_SOUMISE',
+  Omit<TestHameçonnageRéponseSoumise, 'email'> & { idUtilisateur?: string }
+>;
