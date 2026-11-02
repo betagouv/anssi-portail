@@ -3,14 +3,19 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc/index.js';
+import { TestHameçonnageRéponseSoumise } from '../../../../src/bus/evenements/testHameconnageReponseSoumise.js';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
 
 describe('La ressource des réponses au mini test hameçonnage', () => {
   let serveur: Express;
+  let busÉvénements: MockBusEvenement;
+  beforeEach(async () => {
+    busÉvénements = fabriqueBusPourLesTests();
 
-  beforeEach(() => {
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
+      busEvenements: busÉvénements,
     });
   });
 
@@ -33,6 +38,30 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
       });
 
       expect(réponse.status).toBe(HttpStatusCode.Created);
+    });
+
+    it("publie un évènement lorsqu'une réponse est fournie", async () => {
+      await request(serveur).post('/api/mini-tests/hameconnage/reponses').send({
+        idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
+        idMail: 'ENEDIS',
+        réponse: 'bonne',
+      });
+
+      expect(busÉvénements.aRecuUnEvenement(TestHameçonnageRéponseSoumise)).toBeTruthy();
+    });
+
+    it('publie un évènement avec la réponse utilisateur', async () => {
+      await request(serveur).post('/api/mini-tests/hameconnage/reponses').send({
+        idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
+        idMail: 'ENEDIS',
+        réponse: 'bonne',
+      });
+
+      const événement = busÉvénements.recupereEvenement(TestHameçonnageRéponseSoumise);
+
+      expect(événement?.idCorrélation).toBe('01a19bd7-6c3f-7592-9c6c-d12de96cbef1');
+      expect(événement?.idMail).toBe('ENEDIS');
+      expect(événement?.réponseCorrecte).toBe(true);
     });
   });
 });
