@@ -22,3 +22,15 @@ export const publieRéponseQuestionnaireExposition = async (
 ): Promise<void> => {
   await axios.post(`${options?.urlBase ?? ''}/api/mini-tests/exposition/tests`, réponse);
 };
+
+export const publieRéponseTestHameçonnage = async (
+  réponse: {
+    idCorrélation: string;
+    idMail: string;
+    réponse: 'bonne' | 'mauvaise';
+    numéroRéponse: number;
+  },
+  options?: { urlBase?: string }
+): Promise<void> => {
+  await axios.post(`${options?.urlBase ?? ''}/api/mini-tests/hameconnage/reponses`, réponse);
+};

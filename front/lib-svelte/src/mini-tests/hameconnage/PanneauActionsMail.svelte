@@ -1,11 +1,13 @@
 <script lang="ts">
+  import { publieRéponseTestHameçonnage } from '../../passerelles/mini-tests/publicationRéponses';
   import Bouton from '../../ui/Bouton.svelte';
   import BoutonDeVoteHameconnage, { type Réponse } from './BoutonDeVoteHameconnage.svelte';
-  import { mailOuvert, scoreFinalAffiché, tousLesMails } from './hameconnage.store';
+  import { idCorrélation, mailOuvert, scoreFinalAffiché, tousLesMails } from './hameconnage.store';
 
   let { mode }: { mode: 'mobile' | 'bureau' } = $props();
-  const surVote = (réponse: Réponse) => () => {
+  const surVote = (réponse: Réponse) => async () => {
     if (!$mailOuvert) return;
+    const idMail = $mailOuvert.id;
     const aBienVoté = réponse === $mailOuvert?.type;
     const réponseUtilisateur = aBienVoté ? 'bonne' : 'mauvaise';
     $mailOuvert.réponseUtilisateur = réponseUtilisateur;
@@ -14,6 +16,12 @@
         mail = { ...mail, réponseUtilisateur };
       }
       return mail;
+    });
+    await publieRéponseTestHameçonnage({
+      idCorrélation,
+      idMail,
+      réponse: réponseUtilisateur,
+      numéroRéponse: $tousLesMails.filter((mail) => mail.réponseUtilisateur).length,
     });
   };
   const tousLesMailsOntUneRéponse = $derived($tousLesMails.every((mail) => mail.réponseUtilisateur));
