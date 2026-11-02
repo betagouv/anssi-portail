@@ -1,17 +1,21 @@
 import { unzipSync, zipSync } from 'fflate';
 
-function filtreContenuZipParSuffix(buffer: ArrayBuffer, suffixesÀSupprimer: string[]): Uint8Array<ArrayBuffer> {
+function filtreContenuZipParSuffix(buffer: ArrayBuffer, fichiersÀSupprimer: RegExp[]): Uint8Array<ArrayBuffer> {
   const files = unzipSync(new Uint8Array(buffer), {
     filter: ({ name }) => {
-      return !suffixesÀSupprimer.some((suffix) => name.endsWith(suffix));
+      return !fichiersÀSupprimer.some((regExp) => name.match(regExp));
     },
   });
 
   return zipSync(files, { level: 6 }) as Uint8Array<ArrayBuffer>;
 }
 
-export function retireTemplatesSansLogo(buffer: ArrayBuffer): Uint8Array<ArrayBuffer> {
-  return filtreContenuZipParSuffix(buffer, ['_sans_logo.pdf']);
+export function retireTemplatesAvecLogo(buffer: ArrayBuffer): Uint8Array<ArrayBuffer> {
+  return filtreContenuZipParSuffix(buffer, [/(?<!sans)_logo\.pdf$/]);
+}
+
+export function retireAffichesSansLogo(buffer: ArrayBuffer): Uint8Array<ArrayBuffer> {
+  return filtreContenuZipParSuffix(buffer, [/_sans_logo.pdf$/]);
 }
 
 export function téléchargeFichierDansNavigateur(data: Uint8Array<ArrayBuffer>, filename: string) {
