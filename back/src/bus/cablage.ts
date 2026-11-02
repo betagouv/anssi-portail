@@ -30,6 +30,7 @@ import { consigneRetourOutilDonnéDansJournal } from './consigneRetourOutilDonne
 import { consigneSimulationNis2TermineeDansJournal } from './consigneSimulationNis2TermineeDansJournal.js';
 import { consigneTestExpositionRealiseDansJournal } from './consigneTestExpositionRealiseDansJournal.js';
 import { consigneTestHameconnageReponseSoumiseDansJournal } from './consigneTestHameconnageReponseSoumiseDansJournal.js';
+import { consigneTestHameconnageTermineDansJournal } from './consigneTestHameconnageTermineDansJournal.js';
 import { consigneTestRealiseDansJournal } from './consigneTestRealiseDansJournal.js';
 import { consigneUtilisateurConnecteDansJournal } from './consigneUtilisateurConnecteDansJournal.js';
 import { creeContactBrevo } from './creeContactBrevo.js';
@@ -58,6 +59,7 @@ import { SimulationRéflexesCyberRéponseSoumise } from './evenements/simulation
 import { SimulationRéflexesCyberTerminé } from './evenements/simulationReflexesCyberTermine.js';
 import { TestExpositionRéalisé } from './evenements/TestExpositionRealise.js';
 import { TestHameçonnageRéponseSoumise } from './evenements/testHameconnageReponseSoumise.js';
+import { TestHameçonnageTerminé } from './evenements/testHameconnageTermine.js';
 import { TestRealise } from './evenements/testRealise.js';
 import { UtilisateurConnecte } from './evenements/utilisateurConnecte.js';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur.js';
@@ -255,6 +257,15 @@ export const cableTousLesAbonnes = ({
   busEvenements.abonne(
     TestHameçonnageRéponseSoumise,
     consigneTestHameconnageReponseSoumiseDansJournal({
+      adaptateurJournal,
+      adaptateurHorloge,
+      adaptateurHachage,
+    })
+  );
+
+  busEvenements.abonne(
+    TestHameçonnageTerminé,
+    consigneTestHameconnageTermineDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
