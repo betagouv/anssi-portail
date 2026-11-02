@@ -1,6 +1,7 @@
 import { Express, RequestHandler } from 'express';
 import { ConfigurationServeur } from '../../../configurationServeur.js';
 import { ressourceTestsExposition } from '../../../mini-tests/exposition/ressourceTestsExposition.js';
+import { ressourceRéponsesHameçonnage } from '../../../mini-tests/hameconnage/ressourceReponsesHameconnage.js';
 import { ressourceRéponsesRéflexesCyber } from '../../../mini-tests/reflexes-cyber/ressourceReponsesReflexesCyber.js';
 import { ressourceInfoMiniTests } from '../../../mini-tests/ressourceInfoMiniTests.js';
 import { ressourceReactionMiniTest } from '../../../mini-tests/ressourceReactionMiniTest.js';
@@ -18,6 +19,7 @@ export const enregistreLesMiniTests = (app: Express, configurationServeur: Confi
   enregistreRoute('/mini-tests/vrai-faux', ressourceVraiFaux(configurationServeur));
   enregistreRoute('/mini-tests/vrai-faux/reponses', ressourceRéponsesVraiFaux(configurationServeur));
   enregistreRoute('/mini-tests/reflexes-cyber/reponses', ressourceRéponsesRéflexesCyber(configurationServeur));
+  enregistreRoute('/mini-tests/hameconnage/reponses', ressourceRéponsesHameçonnage());
   enregistreRoute('/mini-tests/exposition/tests', ressourceTestsExposition(configurationServeur));
   enregistreRoute('/retour-mini-tests', ressourceRetourMiniTest(configurationServeur));
 };
