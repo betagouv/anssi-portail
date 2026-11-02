@@ -28,6 +28,7 @@ describe("L'abonnement qui consigne la fin du test d'hameçonnage dans le journa
         codeRegion: 'FR-IDF',
         codeSecteur: 'A',
         codeTrancheEffectif: '00',
+        parcours: 'allégé',
       })
     );
 
@@ -39,6 +40,7 @@ describe("L'abonnement qui consigne la fin du test d'hameçonnage dans le journa
         codeRegion: 'FR-IDF',
         codeSecteur: 'A',
         codeTrancheEffectif: '00',
+        parcours: 'allégé',
       },
       date: new Date('2025-03-10'),
     });

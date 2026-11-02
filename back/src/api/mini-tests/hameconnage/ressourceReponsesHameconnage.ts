@@ -31,6 +31,7 @@ export const ressourceRéponsesHameçonnage = ({
           codeRegion: await utilisateur?.codeRegion(),
           codeSecteur: await utilisateur?.codeSecteur(),
           codeTrancheEffectif: await utilisateur?.codeTrancheEffectif(),
+          parcours: utilisateur?.parcoursActuel() ?? undefined,
         };
         await busEvenements.publie(
           new TestHameçonnageRéponseSoumise({
