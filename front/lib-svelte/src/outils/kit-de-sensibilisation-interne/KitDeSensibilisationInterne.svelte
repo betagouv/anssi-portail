@@ -7,7 +7,7 @@
   import IllustrationHerosKitSensibilisation from './animation/IllustrationHerosKitSensibilisation.svelte';
   import {
     récupèreArchiveGénérique,
-    récupèreArchivePerosnnalisée,
+    récupèreArchivePersonnalisée,
     téléchargeFichierDansNavigateur,
   } from './manipulationZip';
   import Thématique from './Thematique.svelte';
@@ -27,7 +27,7 @@
 
       let archiveFinale;
       if (logo) {
-        archiveFinale = await récupèreArchivePerosnnalisée(data, logo);
+        archiveFinale = await récupèreArchivePersonnalisée(data, logo);
       } else {
         archiveFinale = récupèreArchiveGénérique(data);
       }
