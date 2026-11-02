@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Bouton from '../ui/Bouton.svelte';
   import Lien from '../ui/Lien.svelte';
+  import BlocDeCode from './BlocDeCode.svelte';
 
   type Props = {
     fichierPhp: string;
@@ -9,25 +9,7 @@
     nomDuWebComponent: string;
   };
   const { fichierPhp, lienDémo, lienProd, nomDuWebComponent }: Props = $props();
-
-  const copyTexte = (texte: string) => {
-    try {
-      navigator.clipboard.writeText(texte).then(() => {
-        alert('Code copié dans le presse-papier.');
-      });
-    } catch {
-      alert('Échec de la copie dans le presse-papier.');
-    }
-  };
 </script>
-
-{#snippet blocDeCode(code: string)}
-  <div class="code-a-copier">
-    {code}
-    <Bouton icone="clipboard-line" libelle="copier" surClic={() => copyTexte(code)} type="tertiaire-sans-bordure"
-    ></Bouton>
-  </div>
-{/snippet}
 
 <h2 class="fr-h4">Installation</h2>
 
@@ -43,11 +25,11 @@
 <p>
   Ouvrir le fichier <code>wp-content/themes/&lt;votre-thème&gt;/functions.php</code> et ajouter cette ligne à la fin&nbsp;:
 </p>
-{@render blocDeCode(`require_once( get_stylesheet_directory() . '/lab-anssi/${fichierPhp}' );`)}
+<BlocDeCode code={`require_once( get_stylesheet_directory() . '/lab-anssi/${fichierPhp}' );`} />
 
 <hr />
 <h3 class="texte-article-lg">Intégration dans les pages HTML</h3>
-{@render blocDeCode(`<${nomDuWebComponent}></${nomDuWebComponent}>`)}
+<BlocDeCode code={`<${nomDuWebComponent}></${nomDuWebComponent}>`} />
 
 <style lang="scss">
   hr {
@@ -61,13 +43,5 @@
     padding: 0.25rem;
     border-radius: 0.25rem;
     background-color: var(--brown-cafe-creme-975-75);
-  }
-
-  .code-a-copier {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem 1rem;
-    background-color: var(--background-alt-grey);
   }
 </style>
