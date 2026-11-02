@@ -6,8 +6,8 @@
   import RetourUtilisateurSurContenu from '../../ui/RetourUtilisateurSurContenu.svelte';
   import IllustrationHerosKitSensibilisation from './animation/IllustrationHerosKitSensibilisation.svelte';
   import {
-    retireAffichesAvecEmplacementLogo,
-    retireAffichesSansEmplacementLogo,
+    récupèreArchiveGénérique,
+    récupèreArchivePerosnnalisée,
     téléchargeFichierDansNavigateur,
   } from './manipulationZip';
   import Thématique from './Thematique.svelte';
@@ -27,9 +27,9 @@
 
       let archiveFinale;
       if (logo) {
-        archiveFinale = await retireAffichesSansEmplacementLogo(data, logo);
+        archiveFinale = await récupèreArchivePerosnnalisée(data, logo);
       } else {
-        archiveFinale = retireAffichesAvecEmplacementLogo(data);
+        archiveFinale = récupèreArchiveGénérique(data);
       }
       téléchargeFichierDansNavigateur(archiveFinale, 'ANSSI-kit-sensibilisation.zip');
     } finally {
