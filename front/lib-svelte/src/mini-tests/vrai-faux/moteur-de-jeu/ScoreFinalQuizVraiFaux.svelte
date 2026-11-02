@@ -13,8 +13,8 @@
   const conseils = [
     "Vous avez répondu juste à toutes les questions. Maintenez cette vigilance et partagez ce quiz à vos pairs. Pour aller plus loin, l'ANSSI met à disposition un parcours de sécurisation, à commencer par le Cyberdépart.",
     "Vous avez de bonnes intuitions, mais certaines idées reçues persistent. L'ANSSI met à disposition un parcours de sécurisation et notamment des ressources pour prendre votre Cyberdépart — c'est exactement ce qu'il faut pour combler ces écarts.",
-    "Plusieurs idées fausses sur la menace peuvent vous coûter cher. Bonne nouvelle : l'ANSSI met à disposition un parcours de sécurisation avec des mesures concrètes pour prendre votre Cyberdépart.",
-    "Les écarts entre votre perception et la réalité de la menace sont importants. Ce n'est pas une fatalité : l'ANSSI propose un parcours de sécurisation, à commencer par le Cyberdépart — un point d'entrée adapté aux dirigeants de petites structures.",
+    "Plusieurs idées fausses sur la menace peuvent vous coûter cher. Bonne nouvelle\u00a0: l'ANSSI met à disposition un parcours de sécurisation avec des mesures concrètes pour prendre votre Cyberdépart.",
+    "Les écarts entre votre perception et la réalité de la menace sont importants. Ce n'est pas une fatalité\u00a0: l'ANSSI propose un parcours de sécurisation, à commencer par le Cyberdépart — un point d'entrée adapté aux dirigeants de petites structures.",
   ];
 
   const { réponses, urlBase = '', mode }: Props = $props();

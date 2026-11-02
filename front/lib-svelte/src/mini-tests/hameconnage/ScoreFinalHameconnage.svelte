@@ -10,10 +10,10 @@
   };
 
   const conseils = [
-    "Excellent ! Vous êtes très difficile à piéger. Pensez à sensibiliser vos collègues — beaucoup échoueraient à ce quiz.Pour aller plus loin, l'ANSSI met à disposition un parcours de sécurisation, à commencer par le Cyberdépart.",
+    "Excellent\u00a0! Vous êtes très difficile à piéger. Pensez à sensibiliser vos collègues — beaucoup échoueraient à ce quiz.Pour aller plus loin, l'ANSSI met à disposition un parcours de sécurisation, à commencer par le Cyberdépart.",
     "Vous avez de bonnes intuitions, mais certaines idées reçues persistent. Vous détectez la majorité des hameçonnages. Restez attentif aux domaines suspects et aux demandes urgentes, même en interne. Pour aller plus loin, l'ANSSI met à disposition un parcours de sécurisation et notamment des ressources pour faire votre Cyberdépart — c'est exactement ce qu'il faut pour combler ces écarts.",
-    "Quelques hameçonnages vous ont trompé(e). Vérifiez systématiquement le domaine exact de l'expéditeur, y compris pour les emails « internes ».Bonne nouvelle : l'ANSSI met à disposition un parcours de sécurisation avec des mesures concrètes pour prendre votre Cyberdépart.",
-    "Plusieurs hameçonnages vous ont échappé. Retenez les indices clés : domaine exact de l'expéditeur, urgence artificielle, isolement, demandes inhabituelles. Ce n'est pas une fatalité : l'ANSSI propose un parcours de sécurisation, à commencer par le Cyberdépart — un point d'entrée adapté aux dirigeants de petites structures.",
+    "Quelques hameçonnages vous ont trompé(e). Vérifiez systématiquement le domaine exact de l'expéditeur, y compris pour les emails «\u00a0internes\u00a0».Bonne nouvelle\u00a0: l'ANSSI met à disposition un parcours de sécurisation avec des mesures concrètes pour prendre votre Cyberdépart.",
+    "Plusieurs hameçonnages vous ont échappé. Retenez les indices clés\u00a0: domaine exact de l'expéditeur, urgence artificielle, isolement, demandes inhabituelles. Ce n'est pas une fatalité\u00a0: l'ANSSI propose un parcours de sécurisation, à commencer par le Cyberdépart — un point d'entrée adapté aux dirigeants de petites structures.",
   ];
 
   const { réponses, urlBase = '', mode }: Props = $props();
