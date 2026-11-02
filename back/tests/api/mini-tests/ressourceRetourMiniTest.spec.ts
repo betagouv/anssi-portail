@@ -42,6 +42,12 @@ describe('La ressource retour sur les mini-tests', () => {
       expect(reponse.status).toBe(HttpStatusCode.Created);
     });
 
+    it('doit répondre 201 pour le mini-test hameçonnage', async () => {
+      const reponse = await request(serveur).post('/api/retour-mini-tests/hameconnage').send(retourPositif);
+
+      expect(reponse.status).toBe(HttpStatusCode.Created);
+    });
+
     it('doit répondre 400 si le corps de la requête est vide', async () => {
       const reponse = await request(serveur).post('/api/retour-mini-tests/test-maturité').send({});
 

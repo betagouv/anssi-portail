@@ -1,4 +1,4 @@
-const miniTest = ['test-maturité', 'vrai-faux', 'exposition', 'reflexes-cyber'] as const;
+const miniTest = ['test-maturité', 'vrai-faux', 'exposition', 'reflexes-cyber', 'hameconnage'] as const;
 export type MiniTest = (typeof miniTest)[number];
 
 export const estMiniTest = (valeur: unknown): valeur is MiniTest => {

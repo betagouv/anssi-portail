@@ -48,6 +48,7 @@ export type DonneesEvenement =
   | DonneesTestHameçonnageRéponseSoumise
   | DonneesTestHameçonnageTerminé
   | DonnéesRetourTestReflexesCyber
+  | DonnéesRetourTestHameconnage
   | DonnéesRetourArticle
   | DonneesOutilTéléchargé
   | DonnéesRetourOutil;
@@ -166,6 +167,10 @@ type DonnéesRetourTestVraiFaux = Evenement<'RETOUR_TEST_VRAI_FAUX_DONNÉ', { re
 type DonnéesRetourTestExposition = Evenement<'RETOUR_TEST_EXPOSITION_DONNÉ', { retour: string; commentaire?: string }>;
 type DonnéesRetourTestReflexesCyber = Evenement<
   'RETOUR_TEST_REFLEXES_CYBER_DONNÉ',
+  { retour: string; commentaire?: string }
+>;
+type DonnéesRetourTestHameconnage = Evenement<
+  'RETOUR_TEST_HAMECONNAGE_DONNÉ',
   { retour: string; commentaire?: string }
 >;
 type DonnéesRetourArticle = Evenement<'RETOUR_ARTICLE_DONNE', RetourArticleDonné>;

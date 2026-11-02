@@ -65,6 +65,7 @@ ${aseptiseMarkdown(avis.commentaire ?? '')}`;
         'vrai-faux': 'Test Vrai-Faux',
         exposition: 'Test Exposition',
         'reflexes-cyber': 'Test Réflexes Cyber',
+        hameconnage: 'Test Hameçonnage',
       } satisfies {
         [C in MiniTest]: string;
       }
