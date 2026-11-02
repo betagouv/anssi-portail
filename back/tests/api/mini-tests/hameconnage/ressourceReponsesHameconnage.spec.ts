@@ -2,8 +2,10 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
+import { NOMBRE_DE_MAILS_HAMEÇONNAGE } from '../../../../src/api/mini-tests/hameconnage/ressourceReponsesHameconnage.schema.js';
 import { creeServeur } from '../../../../src/api/msc/index.js';
 import { TestHameçonnageRéponseSoumise } from '../../../../src/bus/evenements/testHameconnageReponseSoumise.js';
+import { TestHameçonnageTerminé } from '../../../../src/bus/evenements/testHameconnageTermine.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';
@@ -97,6 +99,47 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
       });
 
       expect(réponse.status).toBe(HttpStatusCode.BadRequest);
+    });
+
+    it('publie un évènement de fin de test lorsque la réponse fournie est la dernière', async () => {
+      await request(serveur).post('/api/mini-tests/hameconnage/reponses').send({
+        idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
+        idMail: 'ENEDIS',
+        réponse: 'bonne',
+        numéroRéponse: NOMBRE_DE_MAILS_HAMEÇONNAGE,
+      });
+
+      const événement = busÉvénements.recupereEvenement(TestHameçonnageTerminé);
+
+      expect(événement?.idCorrélation).toBe('01a19bd7-6c3f-7592-9c6c-d12de96cbef1');
+    });
+
+    it("publie les informations de l'utilisateur dans l'évènement de fin de test si elles sont disponibles", async () => {
+      const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'token' });
+      await request(serveur).post('/api/mini-tests/hameconnage/reponses').set('Cookie', [cookieJeanneDupont]).send({
+        idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
+        idMail: 'ENEDIS',
+        réponse: 'bonne',
+        numéroRéponse: NOMBRE_DE_MAILS_HAMEÇONNAGE,
+      });
+
+      const événement = busÉvénements.recupereEvenement(TestHameçonnageTerminé);
+
+      expect(événement?.email).toBe(jeanneDupont.email);
+      expect(événement?.codeRegion).toBe('FR-971');
+    });
+
+    it("ne publie pas d'évènement de fin de test si la réponse fournie n'est pas la dernière", async () => {
+      await request(serveur)
+        .post('/api/mini-tests/hameconnage/reponses')
+        .send({
+          idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
+          idMail: 'ENEDIS',
+          réponse: 'bonne',
+          numéroRéponse: NOMBRE_DE_MAILS_HAMEÇONNAGE - 1,
+        });
+
+      expect(busÉvénements.naPasRecuDEvenement(TestHameçonnageTerminé)).toBeTruthy();
     });
   });
 });
