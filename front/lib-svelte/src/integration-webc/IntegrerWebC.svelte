@@ -4,6 +4,7 @@
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
   import Lien from '../ui/Lien.svelte';
+  import BlocDeCode from './BlocDeCode.svelte';
   import SectionWebCAccordeon from './SectionWebCAccordeon.svelte';
 
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Intégrer nos dispositifs' };
@@ -49,6 +50,11 @@
         lienDémo="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.1.2/demo/demande-diag.php"
         lienProd="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.1.2/prod/demande-diag.php"
         nomDuWebComponent="lab-anssi-demande-diagnostic"
+      />
+
+      <p>Pour ajouter un SIRET d’aidant, utile pour flécher la demande d’aide&nbsp;:</p>
+      <BlocDeCode
+        code="<lab-anssi-demande-diagnostic siret-aidant=&quot;01234...&quot;></lab-anssi-demande-diagnostic>"
       />
     </Accordeon>
   </div>
