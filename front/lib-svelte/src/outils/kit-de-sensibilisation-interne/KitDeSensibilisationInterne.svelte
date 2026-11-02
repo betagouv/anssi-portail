@@ -5,7 +5,11 @@
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import RetourUtilisateurSurContenu from '../../ui/RetourUtilisateurSurContenu.svelte';
   import IllustrationHerosKitSensibilisation from './animation/IllustrationHerosKitSensibilisation.svelte';
-  import { retireAffichesSansLogo, retireTemplatesAvecLogo, téléchargeFichierDansNavigateur } from './manipulationZip';
+  import {
+    retireAffichesAvecEmplacementLogo,
+    retireAffichesSansEmplacementLogo,
+    téléchargeFichierDansNavigateur,
+  } from './manipulationZip';
   import Thématique from './Thematique.svelte';
   import { thématiques } from './thematiques';
 
@@ -23,10 +27,9 @@
 
       let archiveFinale;
       if (logo) {
-        archiveFinale = retireAffichesSansLogo(data);
-        // TODO modifie les PDF pour y ajouter le logo
+        archiveFinale = await retireAffichesSansEmplacementLogo(data, logo);
       } else {
-        archiveFinale = retireTemplatesAvecLogo(data);
+        archiveFinale = retireAffichesAvecEmplacementLogo(data);
       }
       téléchargeFichierDansNavigateur(archiveFinale, 'ANSSI-kit-sensibilisation.zip');
     } finally {
