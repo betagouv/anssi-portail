@@ -31,6 +31,7 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
         idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
         idMail: 'INCORRECT',
         réponse: 'non',
+        numéroRéponse: 1,
       });
 
       expect(réponse.status).toBe(HttpStatusCode.BadRequest);
@@ -41,6 +42,7 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
         idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
         idMail: 'ENEDIS',
         réponse: 'bonne',
+        numéroRéponse: 1,
       });
 
       expect(réponse.status).toBe(HttpStatusCode.Created);
@@ -51,6 +53,7 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
         idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
         idMail: 'ENEDIS',
         réponse: 'bonne',
+        numéroRéponse: 1,
       });
 
       expect(busÉvénements.aRecuUnEvenement(TestHameçonnageRéponseSoumise)).toBeTruthy();
@@ -61,6 +64,7 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
         idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
         idMail: 'ENEDIS',
         réponse: 'bonne',
+        numéroRéponse: 1,
       });
 
       const événement = busÉvénements.recupereEvenement(TestHameçonnageRéponseSoumise);
@@ -76,11 +80,23 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
         idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
         idMail: 'ENEDIS',
         réponse: 'bonne',
+        numéroRéponse: 1,
       });
 
       const événement = busÉvénements.recupereEvenement(TestHameçonnageRéponseSoumise);
 
       expect(événement?.codeRegion).toBe('FR-971');
+    });
+
+    it("répond un 400 si le numéroRéponse n'est pas valide", async () => {
+      const réponse = await request(serveur).post('/api/mini-tests/hameconnage/reponses').send({
+        idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
+        idMail: 'ENEDIS',
+        réponse: 'bonne',
+        numéroRéponse: 12,
+      });
+
+      expect(réponse.status).toBe(HttpStatusCode.BadRequest);
     });
   });
 });
