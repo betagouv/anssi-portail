@@ -24,6 +24,7 @@
         fichierPhp="mini-test-maturite.php"
         lienDémo="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/demo/mini-test-maturite.php"
         lienProd="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/prod/mini-test-maturite.php"
+        nomDuWebComponent="lab-anssi-mini-test-maturite"
       />
     </Accordeon>
     <Accordeon libelle="Test • Cyber&ZeroWidthSpace;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?">
@@ -31,6 +32,7 @@
         fichierPhp="mini-test-vrai-faux.php"
         lienDémo="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/demo/mini-test-vrai-faux.php"
         lienProd="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/prod/mini-test-vrai-faux.php"
+        nomDuWebComponent="lab-anssi-mini-test-vrai-faux"
       />
     </Accordeon>
     <Accordeon libelle="Test • Quels types de cyber&ZeroWidthSpace;attaques peuvent cibler mon organisation&nbsp;?">
@@ -38,6 +40,7 @@
         fichierPhp="mini-test-expostion.php"
         lienDémo="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/demo/ini-test-expostion.php"
         lienProd="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/prod/ini-test-expostion.php"
+        nomDuWebComponent="lab-anssi-mini-test-expostion"
       />
     </Accordeon>
     <Accordeon libelle="Demande de diagnostic cyber">
@@ -45,6 +48,7 @@
         fichierPhp="demande-diag.php"
         lienDémo="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.1.2/demo/demande-diag.php"
         lienProd="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.1.2/prod/demande-diag.php"
+        nomDuWebComponent="lab-anssi-demande-diagnostic"
       />
     </Accordeon>
   </div>
