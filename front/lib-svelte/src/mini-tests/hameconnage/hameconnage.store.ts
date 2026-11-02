@@ -99,7 +99,7 @@ export const tousLesMails = writable<MailHameçonnage[]>([
       mail: 'alerte-cert@anssi-gouv-fr.net',
     },
     destinataire: 'rssi@votreentreprise.fr',
-    objet: 'Votre relevé de compte de septembre est disponible',
+    objet: "[URGENT] Vulnérabilité critique détectée sur votre système d'information - Correctif à appliquer sous 24h",
     heuresMinutesRéception: '08:12',
     type: 'Hameçonnage',
   },
