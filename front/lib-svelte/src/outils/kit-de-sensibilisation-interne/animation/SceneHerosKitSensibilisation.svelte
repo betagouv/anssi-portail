@@ -1,6 +1,6 @@
 <script lang="ts"></script>
 
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="770 76 527 280">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="768 76 527 280">
   <g>
     <g class="image">
       <g clip-path="url(#clip0_24172_39083)">
