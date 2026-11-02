@@ -9,19 +9,30 @@ import { schémaPostRéponsesHameçonnage } from './ressourceReponsesHameconnage
 
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
-export const ressourceRéponsesHameçonnage = ({ busEvenements }: ConfigurationServeur) => {
+export const ressourceRéponsesHameçonnage = ({
+  busEvenements,
+  middleware,
+  entrepotUtilisateur,
+  adaptateurHachage,
+}: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.post(
     '/',
     valideCorpsRequete(schémaPostRéponsesHameçonnage),
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     filetRouteAsynchrone(
       async (requête: CorpsDeRequeteTypee<z.output<typeof schémaPostRéponsesHameçonnage>>, réponse) => {
+        const { utilisateur } = requête;
         await busEvenements.publie(
           new TestHameçonnageRéponseSoumise({
             idCorrélation: requête.body.idCorrélation,
             idMail: requête.body.idMail,
             réponseCorrecte: requête.body.réponse === 'bonne',
+            email: utilisateur?.email,
+            codeRegion: await utilisateur?.codeRegion(),
+            codeSecteur: await utilisateur?.codeSecteur(),
+            codeTrancheEffectif: await utilisateur?.codeTrancheEffectif(),
           })
         );
         return réponse.sendStatus(HttpStatusCode.Created);
