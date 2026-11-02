@@ -90,6 +90,19 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
       expect(événement?.codeRegion).toBe('FR-971');
     });
 
+    it("publie le parcours de l'utilisateur dans l’évènement de réponse s'il en a un", async () => {
+      await jeanneDupont.rejoinsParcours('allégé', busÉvénements, 'visite-page-mesure');
+      const cookie = encodeSession({ email: jeanneDupont.email, token: 'token' });
+      await request(serveur).post('/api/mini-tests/hameconnage/reponses').set('Cookie', [cookie]).send({
+        idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
+        idMail: 'ENEDIS',
+        réponse: 'bonne',
+        numéroRéponse: 1,
+      });
+
+      expect(busÉvénements.recupereEvenement(TestHameçonnageRéponseSoumise)?.parcours).toBe('allégé');
+    });
+
     it("répond un 400 si le numéroRéponse n'est pas valide", async () => {
       const réponse = await request(serveur).post('/api/mini-tests/hameconnage/reponses').send({
         idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
@@ -127,6 +140,19 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
 
       expect(événement?.email).toBe(jeanneDupont.email);
       expect(événement?.codeRegion).toBe('FR-971');
+    });
+
+    it("publie le parcours de l'utilisateur dans l'évènement de fin de test s'il en a un", async () => {
+      await jeanneDupont.rejoinsParcours('allégé', busÉvénements, 'visite-page-mesure');
+      const cookie = encodeSession({ email: jeanneDupont.email, token: 'token' });
+      await request(serveur).post('/api/mini-tests/hameconnage/reponses').set('Cookie', [cookie]).send({
+        idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
+        idMail: 'ENEDIS',
+        réponse: 'bonne',
+        numéroRéponse: NOMBRE_DE_MAILS_HAMEÇONNAGE,
+      });
+
+      expect(busÉvénements.recupereEvenement(TestHameçonnageTerminé)?.parcours).toBe('allégé');
     });
 
     it("ne publie pas d'évènement de fin de test si la réponse fournie n'est pas la dernière", async () => {

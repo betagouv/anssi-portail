@@ -23,6 +23,7 @@ export const consigneTestHameconnageReponseSoumiseDansJournal = ({
         ...(evenement.codeRegion && { codeRegion: evenement.codeRegion }),
         ...(evenement.codeSecteur && { codeSecteur: evenement.codeSecteur }),
         ...(evenement.codeTrancheEffectif && { codeTrancheEffectif: evenement.codeTrancheEffectif }),
+        ...(evenement.parcours && { parcours: evenement.parcours }),
       },
       type: 'TEST_HAMECONNAGE_REPONSE_SOUMISE',
       date: adaptateurHorloge.maintenant(),

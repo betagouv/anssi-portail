@@ -30,6 +30,7 @@ describe("L'abonnement qui consigne une réponse au test d'hameçonnage dans le 
         codeRegion: 'FR-IDF',
         codeSecteur: 'A',
         codeTrancheEffectif: '00',
+        parcours: 'allégé',
       })
     );
 
@@ -43,6 +44,7 @@ describe("L'abonnement qui consigne une réponse au test d'hameçonnage dans le 
         codeRegion: 'FR-IDF',
         codeSecteur: 'A',
         codeTrancheEffectif: '00',
+        parcours: 'allégé',
       },
       date: new Date('2025-03-10'),
     });

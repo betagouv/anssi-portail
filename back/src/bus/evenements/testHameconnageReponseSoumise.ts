@@ -1,3 +1,4 @@
+import { Parcours } from '../../metier/parcours.js';
 import { CodeRégion } from '../../metier/referentielRegions.js';
 import { CodeSecteur } from '../../metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../metier/referentielTranchesEffectifEtablissement.js';
@@ -11,6 +12,7 @@ export class TestHameçonnageRéponseSoumise implements EvenementDuBus {
   readonly codeRegion?: CodeRégion;
   readonly codeSecteur?: CodeSecteur;
   readonly codeTrancheEffectif?: CodeTrancheEffectif;
+  readonly parcours?: Parcours;
 
   constructor({
     idCorrélation,
@@ -20,6 +22,7 @@ export class TestHameçonnageRéponseSoumise implements EvenementDuBus {
     codeRegion,
     codeSecteur,
     codeTrancheEffectif,
+    parcours,
   }: {
     idCorrélation: string;
     idMail: string;
@@ -28,6 +31,7 @@ export class TestHameçonnageRéponseSoumise implements EvenementDuBus {
     codeRegion?: CodeRégion;
     codeSecteur?: CodeSecteur;
     codeTrancheEffectif?: CodeTrancheEffectif;
+    parcours?: Parcours;
   }) {
     this.idCorrélation = idCorrélation;
     this.idMail = idMail;
@@ -36,5 +40,6 @@ export class TestHameçonnageRéponseSoumise implements EvenementDuBus {
     this.codeRegion = codeRegion;
     this.codeSecteur = codeSecteur;
     this.codeTrancheEffectif = codeTrancheEffectif;
+    this.parcours = parcours;
   }
 }

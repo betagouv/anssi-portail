@@ -21,6 +21,7 @@ export const consigneTestHameconnageTermineDansJournal = ({
         ...(evenement.codeRegion && { codeRegion: evenement.codeRegion }),
         ...(evenement.codeSecteur && { codeSecteur: evenement.codeSecteur }),
         ...(evenement.codeTrancheEffectif && { codeTrancheEffectif: evenement.codeTrancheEffectif }),
+        ...(evenement.parcours && { parcours: evenement.parcours }),
       },
       type: 'TEST_HAMECONNAGE_TERMINE',
       date: adaptateurHorloge.maintenant(),
