@@ -1,6 +1,8 @@
 import { writable } from 'svelte/store';
+import { v7 as uuidv7 } from 'uuid';
 import type { MailHameçonnage } from './hameconnage';
 
+export const idCorrélation = uuidv7();
 export const mailOuvert = writable<MailHameçonnage | undefined>();
 export const scoreFinalAffiché = writable(false);
 export const tousLesMails = writable<MailHameçonnage[]>([
