@@ -11,14 +11,11 @@ function filtreContenuZipParSuffix(buffer: ArrayBuffer, fichiersÀSupprimer: Reg
   return zipSync(files, { level: 6 });
 }
 
-export function retireAffichesAvecEmplacementLogo(buffer: ArrayBuffer): Uint8Array<ArrayBuffer> {
+export function récupèreArchiveGénérique(buffer: ArrayBuffer): Uint8Array<ArrayBuffer> {
   return filtreContenuZipParSuffix(buffer, [/(?<!sans)_logo\.pdf$/]);
 }
 
-export async function retireAffichesSansEmplacementLogo(
-  buffer: ArrayBuffer,
-  logo: File
-): Promise<Uint8Array<ArrayBuffer>> {
+export async function récupèreArchivePerosnnalisée(buffer: ArrayBuffer, logo: File): Promise<Uint8Array<ArrayBuffer>> {
   const files: Unzipped = unzipSync(new Uint8Array(buffer), {
     filter: ({ name }) => {
       return !name.match(/_sans_logo.pdf$/);
