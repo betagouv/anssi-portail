@@ -1,6 +1,6 @@
 <script module lang="ts">
   export type TypeDeRetour = TypeDeRetourMiniTests | TypeDeRetourRessourcesIdentifiées;
-  export type TypeDeRetourMiniTests = 'test-maturité' | 'vrai-faux' | 'exposition' | 'reflexes-cyber';
+  export type TypeDeRetourMiniTests = 'test-maturité' | 'vrai-faux' | 'exposition' | 'reflexes-cyber' | 'hameconnage';
   export type TypeDeRetourRessourcesIdentifiées = 'article' | 'mesure' | 'outil';
 </script>
 
@@ -34,6 +34,7 @@
 
         exposition: '/api/retour-mini-tests/exposition',
         'reflexes-cyber': '/api/retour-mini-tests/reflexes-cyber',
+        hameconnage: '/api/retour-mini-tests/hameconnage',
         'test-maturité': '/api/retour-mini-tests/test-maturité',
         'vrai-faux': '/api/retour-mini-tests/vrai-faux',
       } satisfies { [C in TypeDeRetour]: string }
@@ -49,6 +50,7 @@
 
         exposition: 'retour-utilisateur:exposition',
         'reflexes-cyber': 'retour-utilisateur:reflexes-cyber',
+        hameconnage: 'retour-utilisateur:hameconnage',
         'test-maturité': 'resultat-test',
         'vrai-faux': 'retour-utilisateur:vrai-faux',
       } satisfies { [C in TypeDeRetour]: string }

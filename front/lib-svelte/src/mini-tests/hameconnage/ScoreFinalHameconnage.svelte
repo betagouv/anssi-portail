@@ -1,6 +1,7 @@
 <script lang="ts">
   import EncartPromotionParcoursBasique from '../../parcours-securisation/EncartPromotionParcoursBasique.svelte';
   import TagProgrammeGratuit from '../../parcours-securisation/TagProgrammeGratuit.svelte';
+  import PartageTest from '../../test-maturite/PartageTest.svelte';
   import EnteteAutonome from '../../ui/EnteteAutonome.svelte';
 
   type Props = {
@@ -89,6 +90,15 @@
     {/snippet}
   </EncartPromotionParcoursBasique>
 </dsfr-container>
+{#if mode !== 'autonome'}
+  <dsfr-container>
+    <PartageTest
+      cheminPartagé="/hameconnage/test"
+      sujetMail="Hameçonnage : saurez-vous déjouer les mails piégés ?"
+      typeDeRetour="hameconnage"
+    />
+  </dsfr-container>
+{/if}
 
 <style lang="scss">
   @use '../../../../assets/styles/responsive' as *;
