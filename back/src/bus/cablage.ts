@@ -29,6 +29,7 @@ import { consigneRetourMiniTestDonnéDansJournal } from './consigneRetourMiniTes
 import { consigneRetourOutilDonnéDansJournal } from './consigneRetourOutilDonneDansJournal.js';
 import { consigneSimulationNis2TermineeDansJournal } from './consigneSimulationNis2TermineeDansJournal.js';
 import { consigneTestExpositionRealiseDansJournal } from './consigneTestExpositionRealiseDansJournal.js';
+import { consigneTestHameconnageReponseSoumiseDansJournal } from './consigneTestHameconnageReponseSoumiseDansJournal.js';
 import { consigneTestRealiseDansJournal } from './consigneTestRealiseDansJournal.js';
 import { consigneUtilisateurConnecteDansJournal } from './consigneUtilisateurConnecteDansJournal.js';
 import { creeContactBrevo } from './creeContactBrevo.js';
@@ -56,6 +57,7 @@ import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee.js';
 import { SimulationRéflexesCyberRéponseSoumise } from './evenements/simulationReflexesCyberReponseSoumise.js';
 import { SimulationRéflexesCyberTerminé } from './evenements/simulationReflexesCyberTermine.js';
 import { TestExpositionRéalisé } from './evenements/TestExpositionRealise.js';
+import { TestHameçonnageRéponseSoumise } from './evenements/testHameconnageReponseSoumise.js';
 import { TestRealise } from './evenements/testRealise.js';
 import { UtilisateurConnecte } from './evenements/utilisateurConnecte.js';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur.js';
@@ -244,6 +246,15 @@ export const cableTousLesAbonnes = ({
   busEvenements.abonne(
     SimulationRéflexesCyberTerminé,
     consigneRéflexesCyberTerminéDansJournal({
+      adaptateurJournal,
+      adaptateurHorloge,
+      adaptateurHachage,
+    })
+  );
+
+  busEvenements.abonne(
+    TestHameçonnageRéponseSoumise,
+    consigneTestHameconnageReponseSoumiseDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
