@@ -1,21 +1,17 @@
 import { PDFDocument, PDFImage } from '@pdfme/pdf-lib';
 import { unzipSync, zipSync, type Unzipped } from 'fflate';
 
-function filtreContenuZipParSuffix(buffer: ArrayBuffer, fichiersÀSupprimer: RegExp[]): Uint8Array<ArrayBuffer> {
+export function récupèreArchiveGénérique(buffer: ArrayBuffer): Uint8Array<ArrayBuffer> {
   const files = unzipSync(new Uint8Array(buffer), {
     filter: ({ name }) => {
-      return !fichiersÀSupprimer.some((regExp) => name.match(regExp));
+      return !name.match(/(?<!sans)_logo\.pdf$/);
     },
   });
 
   return zipSync(files, { level: 6 });
 }
 
-export function récupèreArchiveGénérique(buffer: ArrayBuffer): Uint8Array<ArrayBuffer> {
-  return filtreContenuZipParSuffix(buffer, [/(?<!sans)_logo\.pdf$/]);
-}
-
-export async function récupèreArchivePerosnnalisée(buffer: ArrayBuffer, logo: File): Promise<Uint8Array<ArrayBuffer>> {
+export async function récupèreArchivePersonnalisée(buffer: ArrayBuffer, logo: File): Promise<Uint8Array<ArrayBuffer>> {
   const files: Unzipped = unzipSync(new Uint8Array(buffer), {
     filter: ({ name }) => {
       return !name.match(/_sans_logo.pdf$/);
