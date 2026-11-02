@@ -6,8 +6,9 @@
     fichierPhp: string;
     lienDémo: string;
     lienProd: string;
+    nomDuWebComponent: string;
   };
-  const { fichierPhp, lienDémo, lienProd }: Props = $props();
+  const { fichierPhp, lienDémo, lienProd, nomDuWebComponent }: Props = $props();
 
   const copyTexte = (texte: string) => {
     try {
@@ -46,7 +47,7 @@
 
 <hr />
 <h3 class="texte-article-lg">Intégration dans les pages HTML</h3>
-{@render blocDeCode('<lab-anssi-mini-test-maturite></lab-anssi-mini-test-maturite>')}
+{@render blocDeCode(`<${nomDuWebComponent}></${nomDuWebComponent}>`)}
 
 <style lang="scss">
   hr {
