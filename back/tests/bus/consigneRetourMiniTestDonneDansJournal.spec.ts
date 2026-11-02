@@ -9,6 +9,7 @@ describe("L'abonnement qui consigne l'évènement de retour de test de maturité
   it.each([
     { miniTest: 'test-maturité' as MiniTest, expected: { type: 'RETOUR_TEST_MATURITE_DONNE' } },
     { miniTest: 'vrai-faux' as MiniTest, expected: { type: 'RETOUR_TEST_VRAI_FAUX_DONNÉ' } },
+    { miniTest: 'hameconnage' as MiniTest, expected: { type: 'RETOUR_TEST_HAMECONNAGE_DONNÉ' } },
   ])(`consigne l'évènement $miniTest`, async ({ miniTest, expected }) => {
     let évènementReçu;
     const adaptateurJournal: AdaptateurJournal = {
