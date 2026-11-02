@@ -5,11 +5,12 @@
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import RetourUtilisateurSurContenu from '../../ui/RetourUtilisateurSurContenu.svelte';
   import IllustrationHerosKitSensibilisation from './animation/IllustrationHerosKitSensibilisation.svelte';
-  import { retireTemplatesSansLogo, téléchargeFichierDansNavigateur } from './manipulationZip';
+  import { retireAffichesSansLogo, retireTemplatesAvecLogo, téléchargeFichierDansNavigateur } from './manipulationZip';
   import Thématique from './Thematique.svelte';
   import { thématiques } from './thematiques';
 
   let téléchargementEnCours = $state(false);
+  let logo = $state<File | null>(null);
 
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Kit de sensibilisation interne' };
 
@@ -20,8 +21,14 @@
         responseType: 'arraybuffer',
       });
 
-      const cleaned = retireTemplatesSansLogo(data);
-      téléchargeFichierDansNavigateur(cleaned, 'ANSSI-kit-sensibilisation.zip');
+      let archiveFinale;
+      if (logo) {
+        archiveFinale = retireAffichesSansLogo(data);
+        // TODO modifie les PDF pour y ajouter le logo
+      } else {
+        archiveFinale = retireTemplatesAvecLogo(data);
+      }
+      téléchargeFichierDansNavigateur(archiveFinale, 'ANSSI-kit-sensibilisation.zip');
     } finally {
       téléchargementEnCours = false;
     }
@@ -53,7 +60,7 @@
           id="couverture"
           name="couverture"
           accept="image/jpeg, image/png, image/jpg"
-          oninput={() => alert('tip')}
+          onchange={(e) => (logo = e.currentTarget.files?.[0] ?? null)}
         />
       </div>
       <Bouton
