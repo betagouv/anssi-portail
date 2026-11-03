@@ -22,7 +22,7 @@
       <Lien
         apparence="bouton"
         href={lienFactice}
-        libelle="«&nbsp;Je signale une usurpation&nbsp;»"
+        libelle="Je signale une usurpation"
         surClic={(e) => e.preventDefault()}
         taille="sm"
       />
