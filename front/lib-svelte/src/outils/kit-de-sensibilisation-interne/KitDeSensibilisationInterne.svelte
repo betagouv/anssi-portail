@@ -13,28 +13,43 @@
   import Thématique from './Thematique.svelte';
   import { thématiques } from './thematiques';
 
-  let téléchargementEnCours = $state(false);
   let logo = $state<File | null>(null);
+  let _pdfs: Uint8Array<ArrayBuffer>[] = $state([]);
+  let générationEnCours = $state(false);
+
+  $effect(() => {
+    logo;
+    cacheArchive = null;
+  });
 
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Kit de sensibilisation interne' };
 
-  const téléchargeLeKit = async () => {
+  let cacheArchive: Uint8Array<ArrayBuffer> | null = $state(null);
+  const génèreArchivePersonnalisée = async (): Promise<Uint8Array<ArrayBuffer>> => {
+    if (cacheArchive) {
+      return cacheArchive;
+    }
+
     try {
-      téléchargementEnCours = true;
+      générationEnCours = true;
       const { data } = await axios.get<ArrayBuffer>('/api/outils/kit-de-sensibilisation-interne', {
         responseType: 'arraybuffer',
       });
 
-      let archiveFinale;
       if (logo) {
-        archiveFinale = await récupèreArchivePersonnalisée(data, logo);
+        [cacheArchive, _pdfs] = await récupèreArchivePersonnalisée(data, logo);
       } else {
-        archiveFinale = récupèreArchiveGénérique(data);
+        cacheArchive = récupèreArchiveGénérique(data);
       }
-      téléchargeFichierDansNavigateur(archiveFinale, 'ANSSI-kit-sensibilisation.zip');
     } finally {
-      téléchargementEnCours = false;
+      générationEnCours = false;
     }
+    return cacheArchive;
+  };
+
+  const téléchargeLeKit = async () => {
+    const archive = await génèreArchivePersonnalisée();
+    téléchargeFichierDansNavigateur(archive, 'ANSSI-kit-sensibilisation.zip');
   };
 </script>
 
@@ -67,7 +82,7 @@
         />
       </div>
       <Bouton
-        desactive={téléchargementEnCours}
+        desactive={générationEnCours}
         icone="download-line"
         libelle="Télécharger le kit"
         surClic={téléchargeLeKit}
