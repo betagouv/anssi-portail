@@ -104,6 +104,10 @@
       max-width: 100%;
       padding: 0.25rem 0.5rem 0.25rem 1rem;
 
+      &:hover {
+        background-color: #f5f5fe;
+      }
+
       img {
         height: 1.5rem;
         width: 1.5rem;
