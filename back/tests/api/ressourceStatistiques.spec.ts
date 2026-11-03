@@ -48,6 +48,7 @@ describe('La ressource Statistiques', () => {
         exposition: 0,
         vraiFaux: 0,
         reflexesCyber: 0,
+        hameconnage: 0,
       };
     });
 

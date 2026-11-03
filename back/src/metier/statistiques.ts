@@ -25,6 +25,7 @@ export type Statistiques = {
     vraiFaux: number;
     exposition: number;
     reflexesCyber: number;
+    hameconnage: number;
   };
   parcoursSécurisation: {
     nombreDémarrés: number;

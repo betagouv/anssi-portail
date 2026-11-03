@@ -67,5 +67,11 @@ describe('La ressource des informations des mini-tests', () => {
 
       expect(reponse.body.compteurs.ReflexesCyber).toBe(5600);
     });
+
+    it('renvoie le compteur des tests hameçonnage', async () => {
+      const reponse = await request(serveur).get('/api/info-mini-tests');
+
+      expect(reponse.body.compteurs.Hameconnage).toBe(3400);
+    });
   });
 });

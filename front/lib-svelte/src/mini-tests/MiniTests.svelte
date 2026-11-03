@@ -54,6 +54,7 @@
     VraiFaux: donnéesPage.compteurs.VraiFaux > seuil ? arrondis(donnéesPage.compteurs.VraiFaux) : 0,
     Exposition: donnéesPage.compteurs.Exposition > seuil ? arrondis(donnéesPage.compteurs.Exposition) : 0,
     ReflexesCyber: donnéesPage.compteurs.ReflexesCyber > seuil ? arrondis(donnéesPage.compteurs.ReflexesCyber) : 0,
+    Hameconnage: donnéesPage.compteurs.Hameconnage > seuil ? arrondis(donnéesPage.compteurs.Hameconnage) : 0,
   });
 </script>
 
@@ -144,7 +145,10 @@
         titre="Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?"
         href="/hameconnage"
         réactions={donnéesPage?.réactions.Hameconnage ?? {}}
-        badge={{ libellé: undefined, accent: 'pink-macaron' }}
+        badge={{
+          libellé: compteursArrondis.Hameconnage ? `+${compteursArrondis.Hameconnage} tests réalisés` : undefined,
+          accent: 'pink-macaron',
+        }}
         estimationEnMinutes={6}
       >
         {#snippet image(survol)}
