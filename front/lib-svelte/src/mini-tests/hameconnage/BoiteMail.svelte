@@ -101,6 +101,7 @@
       cursor: pointer;
       text-align: left;
       border-bottom: 1px solid var(--border-default-grey);
+
       @include a-partir-de(sm) {
         gap: 2.5rem;
       }
@@ -158,6 +159,10 @@
         .infos .heure {
           font-weight: 800;
         }
+
+        &:hover {
+          background-color: var(--background-contrast-blue-france);
+        }
       }
 
       &.lu {
@@ -173,6 +178,10 @@
         }
         .infos .heure {
           font-weight: normal;
+        }
+
+        &:hover {
+          background-color: var(--background-alt-blue-france);
         }
       }
     }
