@@ -8,6 +8,7 @@ const correspondanceÉvénementsEtStatistique: Partial<Record<DonneesEvenement['
   QUESTIONNAIRE_VRAI_FAUX_TERMINE: 'vraiFaux',
   TEST_EXPOSITION_REALISE: 'exposition',
   SIMULATION_REFLEXES_CYBER_TERMINEE: 'reflexesCyber',
+  TEST_HAMECONNAGE_TERMINE: 'hameconnage',
 };
 
 export class AdaptateurStatistiqueMiniTestsPostgres implements AdaptateurStatistiqueMiniTests {

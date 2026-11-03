@@ -6,6 +6,7 @@ export class AdaptateurStatistiqueMiniTestsMémoire implements AdaptateurStatist
       vraiFaux: 12000,
       exposition: 1780,
       reflexesCyber: 5678,
+      hameconnage: 3456,
     };
   }
 }
