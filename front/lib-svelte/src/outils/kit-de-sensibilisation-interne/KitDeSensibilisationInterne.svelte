@@ -14,14 +14,20 @@
 
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Kit de sensibilisation interne' };
 
+  let téléchargementEnCours = $state(false);
+
   const téléchargeLeKit = async () => {
-    const archive = await archiveKit.génère();
-    téléchargeFichierDansNavigateur(archive, 'ANSSI-kit-sensibilisation.zip');
+    try {
+      téléchargementEnCours = true;
+      const { archive } = await archiveKit.génère();
+      téléchargeFichierDansNavigateur(archive, 'ANSSI-kit-sensibilisation.zip');
+    } finally {
+      téléchargementEnCours = false;
+    }
   };
 
-  const prévisualiser = async () => {
+  const prévisualiser = () => {
     aperçuEnCours = true;
-    await archiveKit.génère();
   };
 </script>
 
@@ -55,7 +61,7 @@
       </div>
       <div class="actions">
         <Bouton
-          desactive={archiveKit.générationEnCours}
+          desactive={téléchargementEnCours}
           icone="download-line"
           libelle="Télécharger le kit"
           surClic={téléchargeLeKit}

@@ -1,46 +1,42 @@
 import axios from 'axios';
 import { récupèreArchiveGénérique, récupèreArchivePersonnalisée } from './manipulationZip';
 
+type Kit = {
+  archive: Uint8Array<ArrayBuffer>;
+  pdfs: Uint8Array<ArrayBuffer>[];
+};
+
 let logo = $state<File | null>(null);
-let cacheArchive = $state<Uint8Array<ArrayBuffer> | null>(null);
-let pdfs = $state<Uint8Array<ArrayBuffer>[]>([]);
-let générationEnCours = $state(false);
+let promesseKit: Promise<Kit> | null = null;
+
+const récupèreKit = async (logoÀAppliquer: File | null): Promise<Kit> => {
+  const { data } = await axios.get<ArrayBuffer>('/api/outils/kit-de-sensibilisation-interne', {
+    responseType: 'arraybuffer',
+  });
+
+  if (logoÀAppliquer) {
+    const [archive, pdfs] = await récupèreArchivePersonnalisée(data, logoÀAppliquer);
+    return { archive, pdfs };
+  }
+
+  return { archive: récupèreArchiveGénérique(data), pdfs: [] };
+};
 
 export const archiveKit = {
   get logo() {
     return logo;
   },
-  get pdfs() {
-    return pdfs;
-  },
-  get générationEnCours() {
-    return générationEnCours;
-  },
 
   définisLogo(nouveauLogo: File | null) {
     logo = nouveauLogo;
-    cacheArchive = null;
+    promesseKit = null;
   },
 
-  async génère(): Promise<Uint8Array<ArrayBuffer>> {
-    if (cacheArchive) {
-      return cacheArchive;
-    }
-
-    try {
-      générationEnCours = true;
-      const { data } = await axios.get<ArrayBuffer>('/api/outils/kit-de-sensibilisation-interne', {
-        responseType: 'arraybuffer',
-      });
-
-      if (logo) {
-        [cacheArchive, pdfs] = await récupèreArchivePersonnalisée(data, logo);
-      } else {
-        cacheArchive = récupèreArchiveGénérique(data);
-      }
-    } finally {
-      générationEnCours = false;
-    }
-    return cacheArchive;
+  génère(): Promise<Kit> {
+    promesseKit ??= récupèreKit(logo).catch((erreur) => {
+      promesseKit = null;
+      throw erreur;
+    });
+    return promesseKit;
   },
 };
