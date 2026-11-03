@@ -33,5 +33,10 @@
     gap: 0.5rem;
     margin: 0;
     padding-inline-start: 1.75rem;
+
+    :global(li) {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
   }
 </style>
