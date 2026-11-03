@@ -145,7 +145,7 @@
     <div class="contenu-aperçu">
       <div class="aperçu">
         {#if générationEnCours}
-          <span>Chargement...</span>
+          <div class="skeleton"></div>
         {:else}
           <object type="application/pdf" title="Aperçu" data={URLPDFS[indexPrévisualisation]}> </object>
         {/if}
@@ -280,12 +280,20 @@
         justify-content: center;
         min-height: 0;
 
-        object {
+        object,
+        .skeleton {
           display: block;
           flex: 1;
           width: 100%;
           height: 100%;
           min-height: 0;
+        }
+
+        .skeleton {
+          background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+          background-size: 200% 100%;
+          animation: shimmer 1.5s infinite;
+          border-radius: 4px;
         }
       }
 
@@ -295,6 +303,15 @@
         gap: 1rem;
         justify-content: center;
         align-items: center;
+      }
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
       }
     }
   }
