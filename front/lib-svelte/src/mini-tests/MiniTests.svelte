@@ -8,6 +8,7 @@
   import Lien from '../ui/Lien.svelte';
   import Separateur from '../ui/Separateur.svelte';
   import CarteTest from './CarteTest.svelte';
+  import HameconnageAnime from './HameconnageAnime.svelte';
   import IllustrationHeroMiniTest from './IllustrationHeroMiniTest.svelte';
   import LaptopAnime from './LaptopAnime.svelte';
   import PlanteAnimee from './PlanteAnimee.svelte';
@@ -27,12 +28,14 @@
       VraiFaux: 0,
       Exposition: 0,
       ReflexesCyber: 0,
+      Hameconnage: 0,
     },
     réactions: {
       MaturiteCyber: réactionsInitiales,
       VraiFaux: réactionsInitiales,
       Exposition: réactionsInitiales,
       ReflexesCyber: réactionsInitiales,
+      Hameconnage: réactionsInitiales,
     },
   };
   type DonnéesPage = typeof donnéesInitiales;
@@ -133,6 +136,19 @@
       >
         {#snippet image(survol)}
           <LaptopAnime {survol} />
+        {/snippet}
+      </CarteTest>
+      <CarteTest
+        cible="Hameconnage"
+        couleurDeFond="--background-alt-pink-macaron"
+        titre="Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?"
+        href="/hameconnage"
+        réactions={donnéesPage?.réactions.Hameconnage ?? {}}
+        badge={{ libellé: undefined, accent: 'pink-macaron' }}
+        estimationEnMinutes={6}
+      >
+        {#snippet image(survol)}
+          <HameconnageAnime {survol} />
         {/snippet}
       </CarteTest>
     </div>
