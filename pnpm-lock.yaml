@@ -176,6 +176,9 @@ catalogs:
     isomorphic-dompurify:
       specifier: ^4.0.0
       version: 4.4.0
+    pdfjs-dist:
+      specifier: ^6.2.108
+      version: 6.4.299
     prettier:
       specifier: 3.9.9
       version: 3.9.9
@@ -345,7 +348,7 @@ importers:
         specifier: ^5.5.3
         version: 5.7.0
       pdfjs-dist:
-        specifier: ^6.2.108
+        specifier: 'catalog:'
         version: 6.4.299
       pg:
         specifier: ^8.20.0
@@ -524,6 +527,9 @@ importers:
       isomorphic-dompurify:
         specifier: 'catalog:'
         version: 4.4.0(@noble/hashes@1.8.0)
+      pdfjs-dist:
+        specifier: 'catalog:'
+        version: 6.4.299
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4

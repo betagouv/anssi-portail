@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { getDocument } from 'pdfjs-dist';
+  import 'pdfjs-dist/build/pdf.worker.mjs';
   import Bouton from '../../ui/Bouton.svelte';
   import Modale from '../../ui/Modale.svelte';
 
@@ -9,9 +11,51 @@
   };
 
   let { aperçuEnCours = $bindable(), générationEnCours, pdfs = [] }: Props = $props();
-
   let indexPrévisualisation: number = $state(0);
-  let URLPDFS = $derived(pdfs.map((pdf) => URL.createObjectURL(new Blob([pdf], { type: 'application/pdf' }))));
+  let statutConversion: 'non complété' | 'complété' | 'échoué' = $state('non complété');
+  let URLImages: string[] = $state([]);
+
+  const convertitPDFEnImages = async (pdf: Uint8Array<ArrayBuffer>) => {
+    const chargementPDF = getDocument({ data: pdf.slice() });
+    const documentPDF = await chargementPDF.promise;
+
+    try {
+      const page = await documentPDF.getPage(1);
+      const viewport = page.getViewport({ scale: 1 });
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.ceil(viewport.width);
+      canvas.height = Math.ceil(viewport.height);
+
+      await page.render({ canvas, viewport }).promise;
+
+      const image = await new Promise<Blob>((résout, rejette) => {
+        canvas.toBlob((blob) => (blob ? résout(blob) : rejette(new Error('Conversion du PDF en image impossible'))));
+      });
+      return [await image.arrayBuffer()];
+    } finally {
+      await chargementPDF.destroy();
+    }
+  };
+
+  $effect(() => {
+    pdfs;
+    indexPrévisualisation = 0;
+    statutConversion = 'non complété';
+
+    const effect = async () => {
+      const promessesDeConversion = pdfs.map(convertitPDFEnImages);
+
+      try {
+        const images = (await Promise.all(promessesDeConversion)).map((pages) => pages[0]);
+        URLImages = images.map((arrayBuffer) => URL.createObjectURL(new Blob([arrayBuffer], { type: 'image/png' })));
+        statutConversion = 'complété';
+      } catch {
+        statutConversion = 'échoué';
+      }
+    };
+
+    effect();
+  });
 
   const aperçuPrécédent = () => {
     if (indexPrévisualisation <= 0) return;
@@ -27,27 +71,32 @@
 <Modale titre="Aperçu" bind:estOuverte={aperçuEnCours}>
   <div class="contenu-aperçu">
     <div class="aperçu">
-      {#if générationEnCours}
+      {#if statutConversion === 'non complété' || générationEnCours}
         <div class="skeleton"></div>
+      {:else if statutConversion === 'échoué'}
+        <p role="alert">L’aperçu n’a pas pu être généré.</p>
       {:else}
-        <object type="application/pdf" title="Aperçu" data={URLPDFS[indexPrévisualisation]}> </object>
+        <img
+          src={URLImages[indexPrévisualisation]}
+          alt={`Aperçu de l’affiche ${indexPrévisualisation + 1} sur ${pdfs.length}`}
+        />
       {/if}
     </div>
     <div class="pagination">
       <Bouton
-        desactive={indexPrévisualisation === 0}
+        desactive={indexPrévisualisation === 0 || statutConversion !== 'complété' || générationEnCours}
         libelle="Précédent"
         type="secondaire"
         taille="sm"
         surClic={aperçuPrécédent}
       />
-      {#if générationEnCours}
+      {#if statutConversion !== 'complété' || générationEnCours}
         <span>-/-</span>
       {:else}
         <span>{indexPrévisualisation + 1}/{pdfs.length}</span>
       {/if}
       <Bouton
-        desactive={indexPrévisualisation === pdfs.length - 1}
+        desactive={indexPrévisualisation === pdfs.length - 1 || statutConversion !== 'complété' || générationEnCours}
         libelle="Suivant"
         type="secondaire"
         taille="sm"
@@ -81,13 +130,17 @@
       justify-content: center;
       min-height: 0;
 
-      object,
+      img,
       .skeleton {
         display: block;
         flex: 1;
         width: 100%;
         height: 100%;
         min-height: 0;
+      }
+
+      img {
+        object-fit: contain;
       }
 
       .skeleton {
