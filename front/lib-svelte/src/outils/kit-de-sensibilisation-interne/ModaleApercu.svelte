@@ -3,14 +3,14 @@
   import 'pdfjs-dist/build/pdf.worker.mjs';
   import Bouton from '../../ui/Bouton.svelte';
   import Modale from '../../ui/Modale.svelte';
+  import { archiveKit } from './archiveKit.svelte';
 
   type Props = {
     aperçuEnCours: boolean;
-    générationEnCours: boolean;
-    pdfs: Uint8Array<ArrayBuffer>[];
   };
 
-  let { aperçuEnCours = $bindable(), générationEnCours, pdfs = [] }: Props = $props();
+  let { aperçuEnCours = $bindable() }: Props = $props();
+  const pdfs = $derived(archiveKit.pdfs);
   let indexPrévisualisation: number = $state(0);
 
   const récupèrePromesseDeConversion = async (pdf: Uint8Array<ArrayBuffer>) => {
@@ -59,7 +59,7 @@
 
 <Modale titre="Aperçu" bind:estOuverte={aperçuEnCours}>
   <div class="contenu-aperçu">
-    {#if générationEnCours}
+    {#if archiveKit.générationEnCours}
       <div class="aperçu">
         <div class="skeleton"></div>
       </div>

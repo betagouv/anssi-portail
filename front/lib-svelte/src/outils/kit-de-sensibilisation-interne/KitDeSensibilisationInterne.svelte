@@ -1,62 +1,27 @@
 <script lang="ts">
-  import axios from 'axios';
   import Bouton from '../../ui/Bouton.svelte';
   import type { PropriétésFilAriane } from '../../ui/filAriane';
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import RetourUtilisateurSurContenu from '../../ui/RetourUtilisateurSurContenu.svelte';
   import IllustrationHerosKitSensibilisation from './animation/IllustrationHerosKitSensibilisation.svelte';
-  import {
-    récupèreArchiveGénérique,
-    récupèreArchivePersonnalisée,
-    téléchargeFichierDansNavigateur,
-  } from './manipulationZip';
+  import { archiveKit } from './archiveKit.svelte';
+  import { téléchargeFichierDansNavigateur } from './manipulationZip';
   import ModaleAperçu from './ModaleApercu.svelte';
   import Thématique from './Thematique.svelte';
   import { thématiques } from './thematiques';
 
   let aperçuEnCours = $state(false);
-  let logo = $state<File | null>(null);
-  let pdfs: Uint8Array<ArrayBuffer>[] = $state([]);
-  let générationEnCours = $state(false);
-
-  $effect(() => {
-    logo;
-    cacheArchive = null;
-  });
 
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Kit de sensibilisation interne' };
 
-  let cacheArchive: Uint8Array<ArrayBuffer> | null = $state(null);
-  const génèreArchivePersonnalisée = async (): Promise<Uint8Array<ArrayBuffer>> => {
-    if (cacheArchive) {
-      return cacheArchive;
-    }
-
-    try {
-      générationEnCours = true;
-      const { data } = await axios.get<ArrayBuffer>('/api/outils/kit-de-sensibilisation-interne', {
-        responseType: 'arraybuffer',
-      });
-
-      if (logo) {
-        [cacheArchive, pdfs] = await récupèreArchivePersonnalisée(data, logo);
-      } else {
-        cacheArchive = récupèreArchiveGénérique(data);
-      }
-    } finally {
-      générationEnCours = false;
-    }
-    return cacheArchive;
-  };
-
   const téléchargeLeKit = async () => {
-    const archive = await génèreArchivePersonnalisée();
+    const archive = await archiveKit.génère();
     téléchargeFichierDansNavigateur(archive, 'ANSSI-kit-sensibilisation.zip');
   };
 
   const prévisualiser = async () => {
     aperçuEnCours = true;
-    await génèreArchivePersonnalisée();
+    await archiveKit.génère();
   };
 </script>
 
@@ -85,17 +50,17 @@
           id="couverture"
           name="couverture"
           accept="image/jpeg, image/png, image/jpg"
-          onchange={(e) => (logo = e.currentTarget.files?.[0] ?? null)}
+          onchange={(e) => archiveKit.définisLogo(e.currentTarget.files?.[0] ?? null)}
         />
       </div>
       <div class="actions">
         <Bouton
-          desactive={générationEnCours}
+          desactive={archiveKit.générationEnCours}
           icone="download-line"
           libelle="Télécharger le kit"
           surClic={téléchargeLeKit}
         />
-        {#if logo}
+        {#if archiveKit.logo}
           <Bouton
             type="secondaire"
             icone="eye-line"
@@ -129,7 +94,7 @@
     <p class="texte-article-lg">Ce contenu vous a-t-il aidé&nbsp;?</p>
   </RetourUtilisateurSurContenu>
 
-  <ModaleAperçu bind:aperçuEnCours {générationEnCours} {pdfs}></ModaleAperçu>
+  <ModaleAperçu bind:aperçuEnCours></ModaleAperçu>
 </dsfr-container>
 
 <style lang="scss">
