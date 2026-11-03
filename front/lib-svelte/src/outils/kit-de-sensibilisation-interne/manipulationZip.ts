@@ -53,10 +53,15 @@ async function prépareAjoutLogoAuPdf(
 
   return async (fichierPDF) => {
     const pdfDoc = await PDFDocument.load(fichierPDF);
-    const image: PDFImage = await {
-      'image/jpeg': pdfDoc.embedJpg(donnéesLogo),
-      'image/png': pdfDoc.embedPng(donnéesLogo),
-    }[typeLogo];
+    let image: PDFImage;
+    switch (typeLogo) {
+      case 'image/jpeg':
+        image = await pdfDoc.embedJpg(donnéesLogo);
+        break;
+      case 'image/png':
+        image = await pdfDoc.embedPng(donnéesLogo);
+        break;
+    }
 
     const page = pdfDoc.getPage(0);
     const dimensionsLogo = image.scaleToFit(ZONE_LOGO.width, ZONE_LOGO.height);
