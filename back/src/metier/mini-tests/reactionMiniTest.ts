@@ -1,4 +1,10 @@
-export const identifiantsMiniTest = ['VraiFaux', 'MaturiteCyber', 'Exposition', 'ReflexesCyber'] as const;
+export const identifiantsMiniTest = [
+  'VraiFaux',
+  'MaturiteCyber',
+  'Exposition',
+  'ReflexesCyber',
+  'Hameconnage',
+] as const;
 export type IdentifiantMiniTest = (typeof identifiantsMiniTest)[number];
 
 export const typesRéaction = ['❤️', '🔥', '👍'] as const;
