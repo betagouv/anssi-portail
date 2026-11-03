@@ -48,6 +48,7 @@
     "entities": "catalog:",
     "fflate": "^0.8.3",
     "isomorphic-dompurify": "catalog:",
+    "pdfjs-dist": "catalog:",
     "qrcode": "^1.5.4"
   },
   "main": "svelte.config.js",
