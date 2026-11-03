@@ -12,10 +12,8 @@
 
   let { aperçuEnCours = $bindable(), générationEnCours, pdfs = [] }: Props = $props();
   let indexPrévisualisation: number = $state(0);
-  let statutConversion: 'non complété' | 'complété' | 'échoué' = $state('non complété');
-  let URLImages: string[] = $state([]);
 
-  const convertitPDFEnImages = async (pdf: Uint8Array<ArrayBuffer>) => {
+  const récupèrePromesseDeConversion = async (pdf: Uint8Array<ArrayBuffer>) => {
     const chargementPDF = getDocument({ data: pdf.slice() });
     const documentPDF = await chargementPDF.promise;
 
@@ -37,24 +35,15 @@
     }
   };
 
+  const convertitPDFsEnImages = async () => {
+    const promessesDeConversion = pdfs.map(récupèrePromesseDeConversion);
+    const images = (await Promise.all(promessesDeConversion)).map((pages) => pages[0]);
+    return images.map((arrayBuffer) => URL.createObjectURL(new Blob([arrayBuffer], { type: 'image/png' })));
+  };
+
   $effect(() => {
     pdfs;
     indexPrévisualisation = 0;
-    statutConversion = 'non complété';
-
-    const effect = async () => {
-      const promessesDeConversion = pdfs.map(convertitPDFEnImages);
-
-      try {
-        const images = (await Promise.all(promessesDeConversion)).map((pages) => pages[0]);
-        URLImages = images.map((arrayBuffer) => URL.createObjectURL(new Blob([arrayBuffer], { type: 'image/png' })));
-        statutConversion = 'complété';
-      } catch {
-        statutConversion = 'échoué';
-      }
-    };
-
-    effect();
   });
 
   const aperçuPrécédent = () => {
@@ -70,39 +59,60 @@
 
 <Modale titre="Aperçu" bind:estOuverte={aperçuEnCours}>
   <div class="contenu-aperçu">
-    <div class="aperçu">
-      {#if statutConversion === 'non complété' || générationEnCours}
+    {#if générationEnCours}
+      <div class="aperçu">
         <div class="skeleton"></div>
-      {:else if statutConversion === 'échoué'}
-        <p role="alert">L’aperçu n’a pas pu être généré.</p>
-      {:else}
-        <img
-          src={URLImages[indexPrévisualisation]}
-          alt={`Aperçu de l’affiche ${indexPrévisualisation + 1} sur ${pdfs.length}`}
-        />
-      {/if}
-    </div>
-    <div class="pagination">
-      <Bouton
-        desactive={indexPrévisualisation === 0 || statutConversion !== 'complété' || générationEnCours}
-        libelle="Précédent"
-        type="secondaire"
-        taille="sm"
-        surClic={aperçuPrécédent}
-      />
-      {#if statutConversion !== 'complété' || générationEnCours}
+      </div>
+      <div class="pagination">
+        <Bouton desactive libelle="Précédent" type="secondaire" taille="sm" />
         <span>-/-</span>
-      {:else}
-        <span>{indexPrévisualisation + 1}/{pdfs.length}</span>
-      {/if}
-      <Bouton
-        desactive={indexPrévisualisation === pdfs.length - 1 || statutConversion !== 'complété' || générationEnCours}
-        libelle="Suivant"
-        type="secondaire"
-        taille="sm"
-        surClic={aperçuSuivant}
-      />
-    </div>
+        <Bouton desactive libelle="Suivant" type="secondaire" taille="sm" />
+      </div>
+    {:else}
+      {#await convertitPDFsEnImages()}
+        <div class="aperçu">
+          <div class="skeleton"></div>
+        </div>
+        <div class="pagination">
+          <Bouton desactive libelle="Précédent" type="secondaire" taille="sm" />
+          <span>-/-</span>
+          <Bouton desactive libelle="Suivant" type="secondaire" taille="sm" />
+        </div>
+      {:then URLsImages}
+        <div class="aperçu">
+          <img
+            src={URLsImages[indexPrévisualisation]}
+            alt={`Aperçu de l’affiche ${indexPrévisualisation + 1} sur ${pdfs.length}`}
+          />
+        </div>
+        <div class="pagination">
+          <Bouton
+            desactive={indexPrévisualisation === 0}
+            libelle="Précédent"
+            type="secondaire"
+            taille="sm"
+            surClic={aperçuPrécédent}
+          />
+          <span>{indexPrévisualisation + 1}/{pdfs.length}</span>
+          <Bouton
+            desactive={indexPrévisualisation === pdfs.length - 1}
+            libelle="Suivant"
+            type="secondaire"
+            taille="sm"
+            surClic={aperçuSuivant}
+          />
+        </div>
+      {:catch}
+        <div class="aperçu">
+          <p role="alert">L’aperçu n’a pas pu être généré.</p>
+        </div>
+        <div class="pagination">
+          <Bouton desactive libelle="Précédent" type="secondaire" taille="sm" />
+          <span>-/-</span>
+          <Bouton desactive libelle="Suivant" type="secondaire" taille="sm" />
+        </div>
+      {/await}
+    {/if}
   </div>
 </Modale>
 
