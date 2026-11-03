@@ -50,7 +50,6 @@
   .panneau {
     display: flex;
     background-color: white;
-    box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
     padding: 1rem;
     gap: 1rem;
     h3 {
