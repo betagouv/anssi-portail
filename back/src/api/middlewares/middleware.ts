@@ -145,6 +145,7 @@ export const fabriqueMiddleware = ({
             'https://ressources-mac.cellar-c2.services.clever-cloud.com',
             adaptateurEnvironnement.urlCellar().ressourcesCyber(),
           ],
+          objectSrc: ['blob:'],
           scriptSrc: [
             "'self'",
             ...(process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true' ? [`'nonce-${reponse.locals.nonce}'`] : []),
