@@ -3,6 +3,7 @@
   import Bouton from '../../ui/Bouton.svelte';
   import type { PropriétésFilAriane } from '../../ui/filAriane';
   import HerosRiche from '../../ui/HerosRiche.svelte';
+  import Modale from '../../ui/Modale.svelte';
   import RetourUtilisateurSurContenu from '../../ui/RetourUtilisateurSurContenu.svelte';
   import IllustrationHerosKitSensibilisation from './animation/IllustrationHerosKitSensibilisation.svelte';
   import {
@@ -13,9 +14,11 @@
   import Thématique from './Thematique.svelte';
   import { thématiques } from './thematiques';
 
-  let _aperçuEnCours = $state(false);
+  let aperçuEnCours = $state(false);
   let logo = $state<File | null>(null);
-  let _pdfs: Uint8Array<ArrayBuffer>[] = $state([]);
+  let pdfs: Uint8Array<ArrayBuffer>[] = $state([]);
+  let URLPDFS = $derived(pdfs.map((pdf) => URL.createObjectURL(new Blob([pdf], { type: 'application/pdf' }))));
+  let indexPrévisualisation: number = $state(0);
   let générationEnCours = $state(false);
 
   $effect(() => {
@@ -38,7 +41,7 @@
       });
 
       if (logo) {
-        [cacheArchive, _pdfs] = await récupèreArchivePersonnalisée(data, logo);
+        [cacheArchive, pdfs] = await récupèreArchivePersonnalisée(data, logo);
       } else {
         cacheArchive = récupèreArchiveGénérique(data);
       }
@@ -54,8 +57,18 @@
   };
 
   const prévisualiser = async () => {
-    _aperçuEnCours = true;
+    aperçuEnCours = true;
     await génèreArchivePersonnalisée();
+  };
+
+  const aperçuPrécédent = () => {
+    if (indexPrévisualisation <= 0) return;
+    indexPrévisualisation--;
+  };
+
+  const aperçuSuivant = () => {
+    if (indexPrévisualisation >= pdfs.length - 1) return;
+    indexPrévisualisation++;
   };
 </script>
 
@@ -127,6 +140,35 @@
   <RetourUtilisateurSurContenu identifiantCible="kit-de-sensibilisation-interne" typeDeRetour="outil">
     <p class="texte-article-lg">Ce contenu vous a-t-il aidé&nbsp;?</p>
   </RetourUtilisateurSurContenu>
+
+  <Modale titre="Aperçu" bind:estOuverte={aperçuEnCours}>
+    <div class="contenu-aperçu">
+      <div class="aperçu">
+        {#if générationEnCours}
+          <span>Chargement...</span>
+        {:else}
+          <object type="application/pdf" title="Aperçu" data={URLPDFS[indexPrévisualisation]}> </object>
+        {/if}
+      </div>
+      <div class="pagination">
+        <Bouton
+          desactive={indexPrévisualisation === 0}
+          libelle="Précédent"
+          type="secondaire"
+          taille="sm"
+          surClic={aperçuPrécédent}
+        />
+        <span>{indexPrévisualisation + 1}/{pdfs.length}</span>
+        <Bouton
+          desactive={indexPrévisualisation === pdfs.length - 1}
+          libelle="Suivant"
+          type="secondaire"
+          taille="sm"
+          surClic={aperçuSuivant}
+        />
+      </div>
+    </div>
+  </Modale>
 </dsfr-container>
 
 <style lang="scss">
@@ -215,6 +257,45 @@
     .texte-article-lg {
       font-weight: bold;
       margin-bottom: 1rem;
+    }
+
+    .contenu-aperçu {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      height: calc(100dvh - 12.5rem);
+      overflow: hidden;
+
+      background-color: var(--background-alt-blue-france);
+      padding: 1rem;
+
+      @include a-partir-de(md) {
+        height: calc(80dvh - 12.5rem);
+      }
+
+      .aperçu {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        min-height: 0;
+
+        object {
+          display: block;
+          flex: 1;
+          width: 100%;
+          height: 100%;
+          min-height: 0;
+        }
+      }
+
+      .pagination {
+        display: flex;
+        flex: none;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 </style>
