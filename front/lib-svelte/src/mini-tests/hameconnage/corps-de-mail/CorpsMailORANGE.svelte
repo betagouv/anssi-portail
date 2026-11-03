@@ -77,6 +77,10 @@
         line-height: 1.5rem;
         padding: 0.5rem 1rem;
         text-decoration: none;
+
+        &:hover {
+          background-color: #ec7a13;
+        }
       }
     }
   }

@@ -78,6 +78,9 @@
           text-align: left;
           margin: 0;
         }
+        &:hover {
+          background-color: #1212ff;
+        }
       }
     }
   }
