@@ -124,21 +124,6 @@ export const fabriqueMiddleware = ({
     helmet({
       contentSecurityPolicy: {
         directives: {
-          'upgrade-insecure-requests': process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true' ? null : [],
-          scriptSrc: [
-            "'self'",
-            ...(process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true' ? [`'nonce-${reponse.locals.nonce}'`] : []),
-            'https://stats.beta.gouv.fr',
-            'https://browser.sentry-cdn.com',
-            'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
-          ],
-          imgSrc: [
-            "'self'",
-            'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
-            'https://storage.crisp.chat',
-            adaptateurEnvironnement.urlCellar().ressourcesCyber(),
-            'data:',
-          ],
           connectSrc: [
             "'self'",
             'https://stats.beta.gouv.fr',
@@ -147,11 +132,25 @@ export const fabriqueMiddleware = ({
               ? [`ws://${requete.hostname}:${process.env.SVELTE_DEV_PORT ?? '3001'}`]
               : []),
           ],
+          imgSrc: [
+            "'self'",
+            'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
+            'https://storage.crisp.chat',
+            adaptateurEnvironnement.urlCellar().ressourcesCyber(),
+            'data:',
+          ],
           mediaSrc: [
             "'self'",
             'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com',
             'https://ressources-mac.cellar-c2.services.clever-cloud.com',
             adaptateurEnvironnement.urlCellar().ressourcesCyber(),
+          ],
+          scriptSrc: [
+            "'self'",
+            ...(process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true' ? [`'nonce-${reponse.locals.nonce}'`] : []),
+            'https://stats.beta.gouv.fr',
+            'https://browser.sentry-cdn.com',
+            'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
           ],
           styleSrc: [
             "'self'",
@@ -160,6 +159,7 @@ export const fabriqueMiddleware = ({
               : [`'nonce-${reponse.locals.nonce}'`]),
             'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
           ],
+          'upgrade-insecure-requests': process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true' ? null : [],
         },
       },
     })(requete, reponse, suite);
