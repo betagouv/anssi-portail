@@ -10,7 +10,6 @@
   };
 
   let { aperçuEnCours = $bindable() }: Props = $props();
-  const pdfs = $derived(archiveKit.pdfs);
   let indexPrévisualisation: number = $state(0);
 
   const récupèrePromesseDeConversion = async (pdf: Uint8Array<ArrayBuffer>) => {
@@ -36,30 +35,26 @@
   };
 
   const convertitPDFsEnImages = async () => {
+    const { pdfs } = await archiveKit.génère();
     const promessesDeConversion = pdfs.map(récupèrePromesseDeConversion);
     const images = (await Promise.all(promessesDeConversion)).map((pages) => pages[0]);
     return images.map((arrayBuffer) => URL.createObjectURL(new Blob([arrayBuffer], { type: 'image/png' })));
   };
-
-  $effect(() => {
-    pdfs;
-    indexPrévisualisation = 0;
-  });
 
   const aperçuPrécédent = () => {
     if (indexPrévisualisation <= 0) return;
     indexPrévisualisation--;
   };
 
-  const aperçuSuivant = () => {
-    if (indexPrévisualisation >= pdfs.length - 1) return;
+  const aperçuSuivant = (nombreAperçus: number) => {
+    if (indexPrévisualisation >= nombreAperçus - 1) return;
     indexPrévisualisation++;
   };
 </script>
 
-<Modale titre="Aperçu" bind:estOuverte={aperçuEnCours}>
+<Modale titre="Aperçu" bind:estOuverte={aperçuEnCours} surFermeture={() => (indexPrévisualisation = 0)}>
   <div class="contenu-aperçu">
-    {#if archiveKit.générationEnCours}
+    {#await convertitPDFsEnImages()}
       <div class="aperçu">
         <div class="skeleton"></div>
       </div>
@@ -68,51 +63,40 @@
         <span>-/-</span>
         <Bouton desactive libelle="Suivant" type="secondaire" taille="sm" />
       </div>
-    {:else}
-      {#await convertitPDFsEnImages()}
-        <div class="aperçu">
-          <div class="skeleton"></div>
-        </div>
-        <div class="pagination">
-          <Bouton desactive libelle="Précédent" type="secondaire" taille="sm" />
-          <span>-/-</span>
-          <Bouton desactive libelle="Suivant" type="secondaire" taille="sm" />
-        </div>
-      {:then URLsImages}
-        <div class="aperçu">
-          <img
-            src={URLsImages[indexPrévisualisation]}
-            alt={`Aperçu de l’affiche ${indexPrévisualisation + 1} sur ${pdfs.length}`}
-          />
-        </div>
-        <div class="pagination">
-          <Bouton
-            desactive={indexPrévisualisation === 0}
-            libelle="Précédent"
-            type="secondaire"
-            taille="sm"
-            surClic={aperçuPrécédent}
-          />
-          <span>{indexPrévisualisation + 1}/{pdfs.length}</span>
-          <Bouton
-            desactive={indexPrévisualisation === pdfs.length - 1}
-            libelle="Suivant"
-            type="secondaire"
-            taille="sm"
-            surClic={aperçuSuivant}
-          />
-        </div>
-      {:catch}
-        <div class="aperçu">
-          <p role="alert">L’aperçu n’a pas pu être généré.</p>
-        </div>
-        <div class="pagination">
-          <Bouton desactive libelle="Précédent" type="secondaire" taille="sm" />
-          <span>-/-</span>
-          <Bouton desactive libelle="Suivant" type="secondaire" taille="sm" />
-        </div>
-      {/await}
-    {/if}
+    {:then URLsImages}
+      <div class="aperçu">
+        <img
+          src={URLsImages[indexPrévisualisation]}
+          alt={`Aperçu de l’affiche ${indexPrévisualisation + 1} sur ${URLsImages.length}`}
+        />
+      </div>
+      <div class="pagination">
+        <Bouton
+          desactive={indexPrévisualisation === 0}
+          libelle="Précédent"
+          type="secondaire"
+          taille="sm"
+          surClic={aperçuPrécédent}
+        />
+        <span>{indexPrévisualisation + 1}/{URLsImages.length}</span>
+        <Bouton
+          desactive={indexPrévisualisation >= URLsImages.length - 1}
+          libelle="Suivant"
+          type="secondaire"
+          taille="sm"
+          surClic={() => aperçuSuivant(URLsImages.length)}
+        />
+      </div>
+    {:catch}
+      <div class="aperçu">
+        <p role="alert">L’aperçu n’a pas pu être généré.</p>
+      </div>
+      <div class="pagination">
+        <Bouton desactive libelle="Précédent" type="secondaire" taille="sm" />
+        <span>-/-</span>
+        <Bouton desactive libelle="Suivant" type="secondaire" taille="sm" />
+      </div>
+    {/await}
   </div>
 </Modale>
 
