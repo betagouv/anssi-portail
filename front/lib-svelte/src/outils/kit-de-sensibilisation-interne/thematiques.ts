@@ -34,7 +34,7 @@ export const thématiques: { titre: string; cheminAperçu: string; titreEmail: s
     cheminAperçu: `${emplacement}/mobilite-et-deplacement.avif`,
     titreEmail: 'Vos données voyagent avec vous. Les protégez-vous\u00a0?',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at dignissim nunc. Maecenas imperdiet molestie dui.',
+      'Des supports pour sensibiliser aux bons réflexes sur les appareils, le Wi-Fi, la discrétion et la protection des données en déplacement.',
   },
   {
     titre: '6. Réagir face à un incident',
