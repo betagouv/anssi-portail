@@ -41,7 +41,11 @@
         taille="sm"
         surClic={aperçuPrécédent}
       />
-      <span>{indexPrévisualisation + 1}/{pdfs.length}</span>
+      {#if générationEnCours}
+        <span>-/-</span>
+      {:else}
+        <span>{indexPrévisualisation + 1}/{pdfs.length}</span>
+      {/if}
       <Bouton
         desactive={indexPrévisualisation === pdfs.length - 1}
         libelle="Suivant"
