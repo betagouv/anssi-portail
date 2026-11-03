@@ -67,7 +67,6 @@
         justify-content: space-between;
         border: 1px solid var(--border-action-low-blue-france);
         border-radius: 0.25rem;
-        box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
 
         lab-anssi-icone {
           color: var(--artwork-minor-blue-france);
