@@ -13,6 +13,7 @@
   import Thématique from './Thematique.svelte';
   import { thématiques } from './thematiques';
 
+  let _aperçuEnCours = $state(false);
   let logo = $state<File | null>(null);
   let _pdfs: Uint8Array<ArrayBuffer>[] = $state([]);
   let générationEnCours = $state(false);
@@ -51,6 +52,11 @@
     const archive = await génèreArchivePersonnalisée();
     téléchargeFichierDansNavigateur(archive, 'ANSSI-kit-sensibilisation.zip');
   };
+
+  const prévisualiser = async () => {
+    _aperçuEnCours = true;
+    await génèreArchivePersonnalisée();
+  };
 </script>
 
 <HerosRiche
@@ -81,12 +87,23 @@
           onchange={(e) => (logo = e.currentTarget.files?.[0] ?? null)}
         />
       </div>
-      <Bouton
-        desactive={générationEnCours}
-        icone="download-line"
-        libelle="Télécharger le kit"
-        surClic={téléchargeLeKit}
-      />
+      <div class="actions">
+        <Bouton
+          desactive={générationEnCours}
+          icone="download-line"
+          libelle="Télécharger le kit"
+          surClic={téléchargeLeKit}
+        />
+        {#if logo}
+          <Bouton
+            type="secondaire"
+            icone="eye-line"
+            libelle="Afficher l'aperçu"
+            titre="Prévisualiser"
+            surClic={prévisualiser}
+          />
+        {/if}
+      </div>
     </div>
     <div class="section-droite">
       <img src="/assets/images/kit-de-sensibilisation/apercu-encart.svg" alt="" />
@@ -148,6 +165,12 @@
           > :nth-child(2) {
             margin: 0 0 1rem;
           }
+        }
+
+        .actions {
+          display: flex;
+          flex-wrap: wrap-reverse;
+          gap: 1rem;
         }
       }
 
