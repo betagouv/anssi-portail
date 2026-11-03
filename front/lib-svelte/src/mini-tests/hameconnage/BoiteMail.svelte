@@ -145,7 +145,7 @@
       }
 
       &.non-lu {
-        border-left: 2px solid var(--border-active-blue-france);
+        border-left: 3px solid var(--border-active-blue-france);
         .libelles {
           .expediteur {
             font-weight: 800;
