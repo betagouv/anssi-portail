@@ -11,7 +11,11 @@ export function récupèreArchiveGénérique(buffer: ArrayBuffer): Uint8Array<Ar
   return zipSync(files, { level: 6 });
 }
 
-export async function récupèreArchivePersonnalisée(buffer: ArrayBuffer, logo: File): Promise<Uint8Array<ArrayBuffer>> {
+export async function récupèreArchivePersonnalisée(
+  buffer: ArrayBuffer,
+  logo: File
+): Promise<[Uint8Array<ArrayBuffer>, Uint8Array<ArrayBuffer>[]]> {
+  const pdfs: Uint8Array<ArrayBuffer>[] = [];
   const files: Unzipped = unzipSync(new Uint8Array(buffer), {
     filter: ({ name }) => {
       return !name.match(/_sans_logo.pdf$/);
@@ -22,10 +26,12 @@ export async function récupèreArchivePersonnalisée(buffer: ArrayBuffer, logo:
 
   for (const [path] of Object.entries(files)) {
     if (path.normalize('NFC').toLowerCase().endsWith('.pdf')) {
-      files[path] = await ajouteLogoAuPdf(files[path]);
+      const pdfModifié = await ajouteLogoAuPdf(files[path]);
+      files[path] = pdfModifié;
+      pdfs.push(pdfModifié);
     }
   }
-  return zipSync(files, { level: 6 });
+  return [zipSync(files, { level: 6 }), pdfs];
 }
 
 async function prépareAjoutLogoAuPdf(
