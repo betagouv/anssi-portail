@@ -8,6 +8,10 @@ describe("Le secteur de contact est retrouvé pour un code d'activité", () => {
     expect(codeSecteur).toBeUndefined();
   });
 
+  it("est indéfini quand le code d'activité est absent", () => {
+    expect(calculeCodeSecteurContact(undefined)).toBeUndefined();
+  });
+
   describe('concernant le secteur Aviation', () => {
     it('pour la classe des transports spatiaux', () => {
       const codeSecteur = calculeCodeSecteurContact('51.22Z');

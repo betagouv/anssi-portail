@@ -111,14 +111,15 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
 
     const { prenom, nom, telephone, domainesSpecialite, organisation } = profilAnssi;
 
-    const organisationRelue = await this.adaptateurRechercheEntreprise.rechercheOrganisations(
+    const organisationsDeLUtilisateur = await this.adaptateurRechercheEntreprise.rechercheOrganisations(
       organisation.siret,
       organisation.departement
     );
+    const premièreOrganisation = organisationsDeLUtilisateur.length ? organisationsDeLUtilisateur[0] : undefined;
 
-    const codeActivite = organisationRelue[0].codeActivite;
-    const codeSecteur = organisationRelue[0].codeSecteur;
-    const codeTrancheEffectif = organisationRelue[0].codeTrancheEffectif;
+    const codeActivite = premièreOrganisation?.codeActivite;
+    const codeSecteur = premièreOrganisation?.codeSecteur;
+    const codeTrancheEffectif = premièreOrganisation?.codeTrancheEffectif;
 
     const mesuresPrisesEnCompte = await this.recupereMesuresPrisesEnCompte(utilisateurBDD);
 

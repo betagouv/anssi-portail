@@ -11,7 +11,7 @@ export type Profil = {
   idListeFavoris: string;
   codeDepartement: string | undefined;
   codeRegion: string | undefined;
-  codeActivite: string;
+  codeActivite: string | undefined;
   peutGererLesGuides: boolean;
   parcoursSecurisation: {
     parcoursActuel: 'complet' | 'allégé' | null;
