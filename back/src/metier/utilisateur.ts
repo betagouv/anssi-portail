@@ -29,7 +29,7 @@ export class Organisation {
   siret: string;
   departement: string | null;
   region: string | undefined;
-  codeActivite: string;
+  codeActivite: string | undefined;
   codeSecteur: string | undefined;
   codeTrancheEffectif: string | undefined;
 
@@ -46,7 +46,7 @@ export class Organisation {
     siret: string;
     departement: string | null;
     codeRegion?: string;
-    codeActivite: string;
+    codeActivite: string | undefined;
     codeSecteur: string | undefined;
     codeTrancheEffectif: string | undefined;
   }) {

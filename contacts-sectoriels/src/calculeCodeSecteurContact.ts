@@ -21,7 +21,9 @@ const codeSecteurContactParCodeNAF = new Map<string, CodeSecteurContact>([
   ['51', 'aviation'],
 ]);
 
-export const calculeCodeSecteurContact = (codeActivité: string): CodeSecteurContact | undefined => {
+export const calculeCodeSecteurContact = (codeActivité: string | undefined): CodeSecteurContact | undefined => {
+  if (!codeActivité) return undefined;
+
   const NAF_REGEX = /^(\d{2})\.(\d)(\d)([A-Z])$/;
   const match = codeActivité.match(NAF_REGEX);
 
