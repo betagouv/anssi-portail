@@ -6,49 +6,43 @@ import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';
 
-const ressourceProfil = ({
-  adaptateurJWT,
-  entrepotUtilisateur,
-  middleware,
-  adaptateurHachage,
-}: ConfigurationServeur) => {
+const ressourceProfil = ({ entrepotUtilisateur, middleware, adaptateurHachage }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
     '/',
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
+      const utilisateurConnecte = requete.utilisateur as Utilisateur | undefined;
+      let organisation: Organisation | undefined;
       try {
-        adaptateurJWT.decode(requete.session?.token);
+        organisation = await utilisateurConnecte?.organisation();
       } catch {
-        reponse.clearCookie('session');
-      } finally {
-        const utilisateurConnecte = requete.utilisateur as Utilisateur | undefined;
-        const organisation: Organisation | undefined = await utilisateurConnecte?.organisation();
-
-        const codeDepartement = estCodeDepartement(organisation?.departement) ? organisation.departement : undefined;
-
-        const codeRegion = await utilisateurConnecte?.codeRegion();
-
-        reponse.send({
-          email: utilisateurConnecte?.email,
-          nom: utilisateurConnecte?.nom,
-          prenom: utilisateurConnecte?.prenom,
-          siret: decode(organisation?.siret),
-          estAgentAnssi: await utilisateurConnecte?.estAgentAnssi(),
-          idListeFavoris: utilisateurConnecte?.idListeFavoris,
-          codeDepartement,
-          codeRegion,
-          codeActivite: organisation?.codeActivite,
-          parcoursSecurisation: utilisateurConnecte
-            ? {
-                parcoursActuel: utilisateurConnecte.parcoursActuel(),
-              }
-            : undefined,
-          peutGererLesGuides:
-            (requete.session?.connexionAvecMFA && utilisateurConnecte?.peutManipulerLesDocumentsDUnGuide()) ?? false,
-        });
+        organisation = undefined;
       }
+
+      const codeDepartement = estCodeDepartement(organisation?.departement) ? organisation.departement : undefined;
+
+      const codeRegion = await utilisateurConnecte?.codeRegion();
+
+      reponse.send({
+        email: utilisateurConnecte?.email,
+        nom: utilisateurConnecte?.nom,
+        prenom: utilisateurConnecte?.prenom,
+        siret: decode(organisation?.siret),
+        estAgentAnssi: await utilisateurConnecte?.estAgentAnssi(),
+        idListeFavoris: utilisateurConnecte?.idListeFavoris,
+        codeDepartement,
+        codeRegion,
+        codeActivite: organisation?.codeActivite,
+        parcoursSecurisation: utilisateurConnecte
+          ? {
+              parcoursActuel: utilisateurConnecte.parcoursActuel(),
+            }
+          : undefined,
+        peutGererLesGuides:
+          (requete.session?.connexionAvecMFA && utilisateurConnecte?.peutManipulerLesDocumentsDUnGuide()) ?? false,
+      });
     })
   );
   return routeur;
