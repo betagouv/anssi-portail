@@ -30,6 +30,7 @@ import { EntrepôtContactStatique } from '../../src/infra/entrepotContactStatiqu
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js';
 import { Parcours } from '../../src/metier/parcours.js';
+import { RapporteurErreur } from '../../src/metier/rapporteurErreur.js';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests.js';
 import { EntrepôtArticleMémoire } from '../persistance/entrepotArticleMemoire.js';
 import { EntrepotExigenceMemoire } from '../persistance/entrepotExigenceMemoire.js';
@@ -45,6 +46,8 @@ import { EntrepotReactionMiniTestMemoire } from '../persistance/entrepotReaction
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire.js';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
+
+export const fauxRapporteurErreur: RapporteurErreur = { erreur: () => {} };
 
 export const ressourceFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.html');
 export const typstFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.typ');

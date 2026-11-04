@@ -2,6 +2,7 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import * as Sentry from '@sentry/node';
 import { NextFunction, Request, Response } from 'express';
 import expressIpFilter from 'express-ipfilter';
+import { RapporteurErreur } from '../metier/rapporteurErreur.js';
 import { adaptateurEnvironnement } from './adaptateurEnvironnement.js';
 
 const { IpDeniedError } = expressIpFilter;
@@ -35,5 +36,11 @@ export const adaptateurGestionErreurSentry: AdaptateurGestionErreur = {
         suite
       );
     }
+  },
+};
+
+export const rapporteurErreurSentry: RapporteurErreur = {
+  erreur: (erreur, message) => {
+    Sentry.captureException(erreur, message === undefined ? undefined : { extra: { contexte: message } });
   },
 };
