@@ -210,7 +210,7 @@ importers:
         version: 4.7.1(prettier@3.9.9)(supports-color@10.2.2)
       clever-tools:
         specifier: ^5.0.2
-        version: 5.2.0(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(supports-color@10.2.2)
+        version: 5.3.0(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(supports-color@10.2.2)
       concurrently:
         specifier: ^10.0.0
         version: 10.0.6
@@ -2192,11 +2192,11 @@ packages:
     resolution: {integrity: sha512-poFfn3sQbSFaZpXH8CG27D0eNtDD64wFEniQCb853e7huko9vOl4UP3BjT3vsrnmVuRqagnbxItza10MOC7ysA==}
     engines: {node: '>= 18'}
 
-  '@simple-git/args-pathspec@1.0.3':
-    resolution: {integrity: sha512-ngJMaHlsWDTfjyq9F3VIQ8b7NXbBLq5j9i5bJ6XLYtD6qlDXT7fdKY2KscWWUF8t18xx052Y/PUO1K1TRc9yKA==}
+  '@simple-git/args-pathspec@1.0.4':
+    resolution: {integrity: sha512-EtMX6XjRWSastG2SdkmSQByPtJ9dx/NIjnHbpQPCYt62j4RmSx5rgLTGpw0YCjF5h191gZOmBfheOT23cRSFdw==}
 
-  '@simple-git/argv-parser@1.1.1':
-    resolution: {integrity: sha512-Q9lBcfQ+VQCpQqGJFHe5yooOS5hGdLFFbJ5R+R5aDsnkPCahtn1hSkMcORX65J2Z5lxSkD0lQorMsncuBQxYUw==}
+  '@simple-git/argv-parser@2.0.1':
+    resolution: {integrity: sha512-M++IaVWrN+vYalilOHfwvT2IL3wYZtVEBQpmX6DLSOJLtxbZ+SUeIDE3IiPogzhPACLajwtxfa5rp+ZX1FczzQ==}
 
   '@smithy/core@3.37.0':
     resolution: {integrity: sha512-97imTcCyiPd8k0e9+ts/Sp0W65Dn9Ti357J7M09Ov4tI8Q1JDJVFSoAJtjEVKqfHEr3Pdo2jfolqKCaaiszH0g==}
@@ -2630,8 +2630,8 @@ packages:
   clean-git-ref@2.0.1:
     resolution: {integrity: sha512-bLSptAy2P0s6hU4PzuIMKmMJJSE6gLXGH1cntDu7bWJUksvuM+7ReOK61mozULErYvP6a15rnYl0zFDef+pyPw==}
 
-  clever-tools@5.2.0:
-    resolution: {integrity: sha512-Q28C0vMS9N6LqqKJ4kmkiTKEGNVxm/KofpRRxodMpF3bIn0oS+K//ogqV4b5KlYRP9IQnX20+kmHgU18D84mMg==}
+  clever-tools@5.3.0:
+    resolution: {integrity: sha512-PYOACMtOZYDxX4E0QN9RzCNpkZxzqmNARwFoF1Zoj3jsypFul4s+laFeAW0ZlQHDtr1dqnOtv1JOcxMJpMP1/g==}
     engines: {node: '>=24'}
     hasBin: true
 
@@ -4389,8 +4389,8 @@ packages:
   simple-get@4.0.1:
     resolution: {integrity: sha512-brv7p5WgH0jmQJr1ZDDfKDOSeWWg+OVypG99A/5vYGPqJ6pxiaHLy8nxtFjBA7oMa01ebA9gfh1uMCFqOuXxvA==}
 
-  simple-git@3.36.0:
-    resolution: {integrity: sha512-cGQjLjK8bxJw4QuYT7gxHw3/IouVESbhahSsHrX97MzCL1gu2u7oy38W6L2ZIGECEfIBG4BabsWDPjBxJENv9Q==}
+  simple-git@4.0.2:
+    resolution: {integrity: sha512-l0sIsv9VrPwovKELFDBOj/lhmIcbMvxBk2B+hRhsMM4/VL3gKtuZvYnBNixVo+N/0HnqQx2cBdLvxnAbygHpqA==}
 
   sitemap@10.0.0:
     resolution: {integrity: sha512-KSjl4H4KBEnGX5KXgzInPAycdOFhwLar0EmksDcYn6NqW2O+zLiMGeV2THE6tpuv3LCVdv+6xsSo2SWLGaBDKw==}
@@ -4605,12 +4605,12 @@ packages:
   undici-types@8.9.0:
     resolution: {integrity: sha512-KTDyRTYX8sWmKXAikPHHSyc63CRPETMctyjKFupcC6OBLXT3xsN0e9aF7m+mIXutFWpUXuedtowG7iLOzp0kQg==}
 
-  undici@8.10.2:
-    resolution: {integrity: sha512-/y4/bH9YNU5hi9NIrpOuvGXFcxrj3CMrV+/AYpowAYTpHn8gX/XPFjNy766FPoYY0miQhdW977JFWKGNhBdwyQ==}
-    engines: {node: '>=22.19.0'}
-
   undici@8.12.1:
     resolution: {integrity: sha512-usz3OVQBeh1LxNn0DzU0voLXMgn5CU/WUdpBsY6Ti5afNao+vTkmn4H/NxoXolc10cOqe2+YIG0Hspq2rsl64w==}
+    engines: {node: '>=22.19.0'}
+
+  undici@8.12.3:
+    resolution: {integrity: sha512-+fdndUTwBP86cVjihTp21hZHo7d6oj1c/47XPA3lL8mM0XHs+C4EkcjmgRsFnFk2f/UONGDy9ItBItmXsLOQHw==}
     engines: {node: '>=22.19.0'}
 
   unpipe@1.0.0:
@@ -4865,9 +4865,6 @@ packages:
 
   zimmerframe@1.1.4:
     resolution: {integrity: sha512-B58NGBEoc8Y9MWWCQGl/gq9xBCe4IiKM0a2x7GZdQKOW5Exr8S1W24J6OgM1njK8xCRGvAJIL/MxXHf6SkmQKQ==}
-
-  zod@4.5.4:
-    resolution: {integrity: sha512-sC95tT5iHHH9gtpj6A81kh+NEaRAUFN+qlUPDUbRfOMvNf5QCBqsb3WgvnpVtK5Y+4UfA6KqufotuTvMGiTlsA==}
 
   zod@4.6.7:
     resolution: {integrity: sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==}
@@ -5208,9 +5205,9 @@ snapshots:
       eventsource: 4.1.0
       fetch-event-stream: 0.1.6
 
-  '@clevercloud/reglage@0.0.5(zod@4.5.4)':
+  '@clevercloud/reglage@0.0.5(zod@4.6.7)':
     dependencies:
-      zod: 4.5.4
+      zod: 4.6.7
 
   '@colordx/core@7.3.0': {}
 
@@ -6173,11 +6170,11 @@ snapshots:
       - supports-color
       - webpack
 
-  '@simple-git/args-pathspec@1.0.3': {}
+  '@simple-git/args-pathspec@1.0.4': {}
 
-  '@simple-git/argv-parser@1.1.1':
+  '@simple-git/argv-parser@2.0.1':
     dependencies:
-      '@simple-git/args-pathspec': 1.0.3
+      '@simple-git/args-pathspec': 1.0.4
 
   '@smithy/core@3.37.0':
     dependencies:
@@ -6676,10 +6673,10 @@ snapshots:
 
   clean-git-ref@2.0.1: {}
 
-  clever-tools@5.2.0(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(supports-color@10.2.2):
+  clever-tools@5.3.0(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(supports-color@10.2.2):
     dependencies:
       '@clevercloud/client': 12.6.3(eventsource@4.1.0)
-      '@clevercloud/reglage': 0.0.5(zod@4.5.4)
+      '@clevercloud/reglage': 0.0.5(zod@4.6.7)
       '@inquirer/prompts': 8.7.2(@types/node@26.6.5)
       '@redis/client': 6.2.1(@opentelemetry/api@1.9.1)
       char-regex: 2.0.2
@@ -6692,13 +6689,13 @@ snapshots:
       lodash: 4.18.1
       open: 11.0.2
       semver: 7.8.5
-      simple-git: 3.36.0(supports-color@10.2.2)
+      simple-git: 4.0.2(supports-color@10.2.2)
       slugify: 1.6.9
       tldts: 7.4.12
-      undici: 8.10.2
+      undici: 8.12.3
       update-notifier: 7.3.1
       xdg: 0.1.1
-      zod: 4.5.4
+      zod: 4.6.7
     transitivePeerDependencies:
       - '@node-rs/xxhash'
       - '@opentelemetry/api'
@@ -8423,12 +8420,12 @@ snapshots:
       once: 1.4.0
       simple-concat: 1.0.1
 
-  simple-git@3.36.0(supports-color@10.2.2):
+  simple-git@4.0.2(supports-color@10.2.2):
     dependencies:
       '@kwsites/file-exists': 1.1.1(supports-color@10.2.2)
       '@kwsites/promise-deferred': 1.1.1
-      '@simple-git/args-pathspec': 1.0.3
-      '@simple-git/argv-parser': 1.1.1
+      '@simple-git/args-pathspec': 1.0.4
+      '@simple-git/argv-parser': 2.0.1
       debug: 4.4.3(supports-color@10.2.2)
     transitivePeerDependencies:
       - supports-color
@@ -8657,9 +8654,9 @@ snapshots:
 
   undici-types@8.9.0: {}
 
-  undici@8.10.2: {}
-
   undici@8.12.1: {}
+
+  undici@8.12.3: {}
 
   unpipe@1.0.0: {}
 
@@ -8867,7 +8864,5 @@ snapshots:
       type-fest: 2.19.0
 
   zimmerframe@1.1.4: {}
-
-  zod@4.5.4: {}
 
   zod@4.6.7: {}
