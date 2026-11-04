@@ -1,6 +1,10 @@
+<script module lang="ts">
+  // @ts-expect-error pas de types pour le worker pdf.js, import pour effet de bord
+  await import('pdfjs-dist/build/pdf.worker.mjs');
+  const { getDocument } = await import('pdfjs-dist');
+</script>
+
 <script lang="ts">
-  import { getDocument } from 'pdfjs-dist';
-  import 'pdfjs-dist/build/pdf.worker.mjs';
   import Bouton from '../../ui/Bouton.svelte';
   import Modale from '../../ui/Modale.svelte';
   import { archiveKit } from './archiveKit.svelte';
