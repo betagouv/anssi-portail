@@ -377,7 +377,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
   adaptateurStatistiqueMiniTests: new AdaptateurStatistiqueMiniTestsMémoire(),
   adaptateurStatistiqueParcours: new AdaptateurStatistiqueParcoursMémoire(),
-  busEvenements: fabriqueBusPourLesTests(),
+  busEvenements: fabriqueBusPourLesTests(fauxRapporteurErreur),
   entrepôtArticle: new EntrepôtArticleMémoire(),
   entrepotFavori: new EntrepotFavoriMemoire(),
   entrepôtContact,

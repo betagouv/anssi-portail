@@ -6,7 +6,7 @@ import { creeServeur } from '../../src/api/msc/index.js';
 import { AvisUtilisateurDonne } from '../../src/bus/evenements/avisUtilisateurDonne.js';
 import { AvisUtilisateur, MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js';
 import { MockBusEvenement } from '../bus/busPourLesTests.js';
-import { configurationDeTestDuServeur, fausseMessagerieInstantanee } from './fauxObjets.js';
+import { configurationDeTestDuServeur, fausseMessagerieInstantanee, fauxRapporteurErreur } from './fauxObjets.js';
 
 describe('La ressource avis utilisateur', () => {
   let serveur: Express;
@@ -21,7 +21,7 @@ describe('La ressource avis utilisateur', () => {
     messagerieInstantanee = {
       ...fausseMessagerieInstantanee,
     };
-    busEvenements = new MockBusEvenement();
+    busEvenements = new MockBusEvenement(fauxRapporteurErreur);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements,

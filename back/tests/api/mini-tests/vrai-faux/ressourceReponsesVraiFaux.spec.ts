@@ -9,7 +9,7 @@ import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourL
 import { EntrepôtQuestionVraieFausseMémoire } from '../../../persistance/entrepotQuestionVraieFausseMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';
-import { configurationDeTestDuServeur } from '../../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxRapporteurErreur } from '../../fauxObjets.js';
 import { jeanneDupont } from '../../objetsPretsALEmploi.js';
 import { questionVraieFausseDeTest } from './constructeurDeQuestionVraieFausse.js';
 
@@ -19,7 +19,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
   let entrepôtQuestionVraieFausse: EntrepôtQuestionVraieFausseMémoire;
 
   beforeEach(async () => {
-    busÉvénements = fabriqueBusPourLesTests();
+    busÉvénements = fabriqueBusPourLesTests(fauxRapporteurErreur);
     entrepôtQuestionVraieFausse = new EntrepôtQuestionVraieFausseMémoire();
     await entrepôtQuestionVraieFausse.ajoute(
       questionVraieFausseDeTest().avecLIdQuestion('idQuestion1').avecIdéeReçueEstVraie(true).construis()

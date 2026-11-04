@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { QuestionnaireVraiFauxRéponseSoumise } from '../../../../src/bus/evenements/questionnaireVraiFauxReponseSoumise.js';
 import { QuestionnaireVraiFauxTerminé } from '../../../../src/bus/evenements/questionnaireVraiFauxTermine.js';
 import { QuestionnaireVraiFaux } from '../../../../src/metier/mini-tests/vrai-faux/questionnaireVraiFaux.js';
+import { fauxRapporteurErreur } from '../../../api/fauxObjets.js';
 import { ConstructeurDeQuestionVraieFausse } from '../../../api/mini-tests/vrai-faux/constructeurDeQuestionVraieFausse.js';
 import { jeanneDupont, questionVraieFaussePME } from '../../../api/objetsPretsALEmploi.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
@@ -14,7 +15,7 @@ describe('Un questionnaire vrai-faux', () => {
   let busÉvénements: MockBusEvenement;
 
   beforeEach(() => {
-    busÉvénements = fabriqueBusPourLesTests();
+    busÉvénements = fabriqueBusPourLesTests(fauxRapporteurErreur);
   });
 
   describe("lors de l'évaluation d'une réponse", () => {

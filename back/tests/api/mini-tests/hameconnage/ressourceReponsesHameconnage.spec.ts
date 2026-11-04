@@ -9,14 +9,14 @@ import { TestHameçonnageTerminé } from '../../../../src/bus/evenements/testHam
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';
-import { configurationDeTestDuServeur } from '../../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxRapporteurErreur } from '../../fauxObjets.js';
 import { jeanneDupont } from '../../objetsPretsALEmploi.js';
 
 describe('La ressource des réponses au mini test hameçonnage', () => {
   let serveur: Express;
   let busÉvénements: MockBusEvenement;
   beforeEach(async () => {
-    busÉvénements = fabriqueBusPourLesTests();
+    busÉvénements = fabriqueBusPourLesTests(fauxRapporteurErreur);
     const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     await entrepotUtilisateur.ajoute(jeanneDupont);
 

@@ -16,6 +16,7 @@ import {
   fauxAdaptateurJWT,
   fauxFournisseurDeChemin,
   fauxMiddleware,
+  fauxRapporteurErreur,
 } from '../fauxObjets.js';
 import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi.js';
 
@@ -33,7 +34,7 @@ describe('La ressource des services et ressources favoris', () => {
       email: jeanneDupont.email,
       token: 'token',
     });
-    busEvenements = fabriqueBusPourLesTests();
+    busEvenements = fabriqueBusPourLesTests(fauxRapporteurErreur);
 
     serveur = creeServeur({
       ...configurationDeTestDuServeur,

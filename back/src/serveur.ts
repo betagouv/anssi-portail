@@ -127,7 +127,7 @@ const entrepotReactionMiniTest = new EntrepotReactionMiniTestPostgres();
 
 const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });
 
-const busEvenements = new BusEvenements();
+const busEvenements = new BusEvenements(rapporteurErreur);
 cableTousLesAbonnes({
   busEvenements,
   adaptateurEmail,

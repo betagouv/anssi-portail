@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
 import { MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire.js';
-import { configurationDeTestDuServeur } from '../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxRapporteurErreur } from '../fauxObjets.js';
 import { guideZeroTrust } from '../objetsPretsALEmploi.js';
 
 describe('La ressource guide', () => {
@@ -15,7 +15,7 @@ describe('La ressource guide', () => {
 
   beforeEach(async () => {
     entrepotGuide = new EntrepotGuideMemoire();
-    busEvenements = new MockBusEvenement();
+    busEvenements = new MockBusEvenement(fauxRapporteurErreur);
     await entrepotGuide.ajoute(guideZeroTrust());
     serveur = creeServeur({
       ...configurationDeTestDuServeur,

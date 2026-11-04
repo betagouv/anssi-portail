@@ -10,7 +10,7 @@ import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRecherc
 import { ErreurChargementOrganisation } from '../../src/metier/utilisateur.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
-import { configurationDeTestDuServeur } from './fauxObjets.js';
+import { configurationDeTestDuServeur, fauxRapporteurErreur } from './fauxObjets.js';
 
 const { JsonWebTokenError } = jsonwebtoken;
 
@@ -37,7 +37,7 @@ describe('La ressource utilisateur', () => {
 
   beforeEach(() => {
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
-    busEvenements = fabriqueBusPourLesTests();
+    busEvenements = fabriqueBusPourLesTests(fauxRapporteurErreur);
     adaptateurRechercheEntreprise = {
       rechercheOrganisations: async (_: string, __: string | null) => [],
     };

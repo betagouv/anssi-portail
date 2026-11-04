@@ -7,7 +7,7 @@ import { RetourOutilDonné } from '../../../src/bus/evenements/retourOutilDonne.
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { encodeSession } from '../cookie.js';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement, fauxRapporteurErreur } from '../fauxObjets.js';
 import { jeanneDupont } from '../objetsPretsALEmploi.js';
 
 describe("La ressource qui gère les retours d'un outil", () => {
@@ -30,7 +30,7 @@ describe("La ressource qui gère les retours d'un outil", () => {
     adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
     };
-    busEvenements = fabriqueBusPourLesTests();
+    busEvenements = fabriqueBusPourLesTests(fauxRapporteurErreur);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       adaptateurEnvironnement,

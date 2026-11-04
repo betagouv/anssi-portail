@@ -10,7 +10,7 @@ import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesT
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement, fauxRapporteurErreur } from '../fauxObjets.js';
 import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi.js';
 import { utilisateurDeTest } from './constructeurDUtilisateur.js';
 
@@ -34,7 +34,7 @@ describe('La ressource avis sur une mesure de sécurité', () => {
       await entrepotUtilisateur.ajoute(jeanneDupont);
       entrepotMesure = new EntrepotMesureMemoire();
       await entrepotMesure.ajoute(mesureAuthentA2Etapes());
-      busEvenements = fabriqueBusPourLesTests();
+      busEvenements = fabriqueBusPourLesTests(fauxRapporteurErreur);
       serveur = creeServeur({
         ...configurationDeTestDuServeur,
         entrepotUtilisateur,

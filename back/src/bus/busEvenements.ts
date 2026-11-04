@@ -1,3 +1,5 @@
+import { RapporteurErreur } from '../metier/rapporteurErreur.js';
+
 export type GestionnaireDEvenement<T extends EvenementDuBus> = (evenement: T) => Promise<void>;
 
 export type EvenementDuBus = object;
@@ -8,6 +10,7 @@ export type ClasseDEvenementDeBus<T extends EvenementDuBus> = new (
 ) => T;
 
 export class BusEvenements {
+  constructor(private readonly rapporteurErreur: RapporteurErreur) {}
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   gestionnaires: Record<string, GestionnaireDEvenement<any>[]> = {};
 
@@ -28,7 +31,7 @@ export class BusEvenements {
     // Dans un souci de performance : on ne veut pas attendre les exécutions.
     this.gestionnaires[evenement.constructor.name]?.forEach((gestionnaire: GestionnaireDEvenement<T>) => {
       gestionnaire(evenement).catch((e: Error) => {
-        console.error(`Erreur lors du traitement de l'évènement`, e.message);
+        this.rapporteurErreur.erreur(e, `Erreur lors du traitement de l'évènement`);
       });
     });
   }

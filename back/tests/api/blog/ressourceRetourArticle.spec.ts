@@ -7,7 +7,7 @@ import { RetourArticleDonné } from '../../../src/bus/evenements/retourArticleDo
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepôtArticleMémoire } from '../../persistance/entrepotArticleMemoire.js';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement, fauxRapporteurErreur } from '../fauxObjets.js';
 import { ConstructeurDArticleAvecToutesLesMétadonnées } from './constructeurDeResumeDArticle.js';
 
 describe('La ressource retour sur les articles', () => {
@@ -28,7 +28,7 @@ describe('La ressource retour sur les articles', () => {
       adaptateurEnvironnement = {
         ...fauxAdaptateurEnvironnement,
       };
-      busEvenements = fabriqueBusPourLesTests();
+      busEvenements = fabriqueBusPourLesTests(fauxRapporteurErreur);
       serveur = creeServeur({
         ...configurationDeTestDuServeur,
         adaptateurEnvironnement,
