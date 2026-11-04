@@ -9,7 +9,12 @@ import { Parcours } from '../../src/metier/parcours.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from './cookie.js';
-import { configurationDeTestDuServeur, fauxGestionnaireRequêtesComplémentaires, fauxMiddleware } from './fauxObjets.js';
+import {
+  configurationDeTestDuServeur,
+  fauxGestionnaireRequêtesComplémentaires,
+  fauxMiddleware,
+  fauxRapporteurErreur,
+} from './fauxObjets.js';
 import { jeanneDupont } from './objetsPretsALEmploi.js';
 
 describe("La ressource d'une page Jekyll connectée", () => {
@@ -20,7 +25,7 @@ describe("La ressource d'une page Jekyll connectée", () => {
   beforeEach(() => {
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 
-    busEvenements = fabriqueBusPourLesTests();
+    busEvenements = fabriqueBusPourLesTests(fauxRapporteurErreur);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements,

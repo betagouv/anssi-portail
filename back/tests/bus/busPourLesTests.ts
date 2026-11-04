@@ -1,4 +1,5 @@
 import { BusEvenements, ClasseDEvenementDeBus, EvenementDuBus } from '../../src/bus/busEvenements.js';
+import { RapporteurErreur } from '../../src/metier/rapporteurErreur.js';
 
 export class MockBusEvenement extends BusEvenements {
   evenementsRecus: EvenementDuBus[] = [];
@@ -33,6 +34,6 @@ export class MockBusEvenement extends BusEvenements {
   }
 }
 
-export const fabriqueBusPourLesTests = () => {
-  return new MockBusEvenement();
+export const fabriqueBusPourLesTests = (rapporteurErreur: RapporteurErreur) => {
+  return new MockBusEvenement(rapporteurErreur);
 };

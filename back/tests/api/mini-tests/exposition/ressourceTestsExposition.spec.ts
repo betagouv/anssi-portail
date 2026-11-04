@@ -8,7 +8,7 @@ import { EntrepotUtilisateur } from '../../../../src/metier/entrepotUtilisateur.
 import { MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';
-import { configurationDeTestDuServeur } from '../../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxRapporteurErreur } from '../../fauxObjets.js';
 import { jeanneDupont } from '../../objetsPretsALEmploi.js';
 
 describe('La ressource des tests d’exposition', () => {
@@ -18,7 +18,7 @@ describe('La ressource des tests d’exposition', () => {
   const corpsParDéfaut = { typeOrganisation: 'collectivite', secteur: 'sante', facteursAggravant: [] };
 
   beforeEach(async () => {
-    busEvenements = new MockBusEvenement();
+    busEvenements = new MockBusEvenement(fauxRapporteurErreur);
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     await entrepotUtilisateur.ajoute(jeanneDupont);
     serveur = creeServeur({

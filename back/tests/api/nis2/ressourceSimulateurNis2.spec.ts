@@ -6,7 +6,7 @@ import { creeServeur } from '../../../src/api/msc/index.js';
 import { SimulationNis2Terminee } from '../../../src/bus/evenements/simulationNis2Terminee.js';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement, fauxRapporteurErreur } from '../fauxObjets.js';
 
 describe('La ressource qui gère le simulateur NIS2', () => {
   let serveur: Express;
@@ -21,7 +21,7 @@ describe('La ressource qui gère le simulateur NIS2', () => {
         nis2: () => ({ afficheCyFun23: () => true }),
       }),
     };
-    busEvenements = fabriqueBusPourLesTests();
+    busEvenements = fabriqueBusPourLesTests(fauxRapporteurErreur);
 
     serveur = creeServeur({
       ...configurationDeTestDuServeur,

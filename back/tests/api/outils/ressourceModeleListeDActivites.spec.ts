@@ -8,7 +8,7 @@ import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js'
 import { MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';
-import { configurationDeTestDuServeur } from '../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxRapporteurErreur } from '../fauxObjets.js';
 import { jeanneDupont } from '../objetsPretsALEmploi.js';
 
 describe("La ressource du modèle de liste d'activités", () => {
@@ -17,7 +17,7 @@ describe("La ressource du modèle de liste d'activités", () => {
   let entrepotUtilisateur: EntrepotUtilisateur;
 
   beforeEach(async () => {
-    busEvenements = new MockBusEvenement();
+    busEvenements = new MockBusEvenement(fauxRapporteurErreur);
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 
     await entrepotUtilisateur.ajoute(jeanneDupont);

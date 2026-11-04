@@ -11,7 +11,11 @@ import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesT
 import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';
-import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise } from '../fauxObjets.js';
+import {
+  configurationDeTestDuServeur,
+  fauxAdaptateurRechercheEntreprise,
+  fauxRapporteurErreur,
+} from '../fauxObjets.js';
 import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi.js';
 
 const REGEX_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
@@ -38,7 +42,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
   };
 
   beforeEach(() => {
-    busEvenements = fabriqueBusPourLesTests();
+    busEvenements = fabriqueBusPourLesTests(fauxRapporteurErreur);
     entrepotResultatTest = new EntrepotResultatTestMemoire();
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     entrepotUtilisateur.ajoute(jeanneDupont);

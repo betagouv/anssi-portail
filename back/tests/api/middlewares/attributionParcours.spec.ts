@@ -5,6 +5,7 @@ import { ParcoursChangé } from '../../../src/bus/evenements/parcoursChange.js';
 import { ParcoursRejoint } from '../../../src/bus/evenements/parcoursRejoint.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
+import { fauxRapporteurErreur } from '../fauxObjets.js';
 import { ConstructeurDUtilisateur } from '../mesures/constructeurDUtilisateur.js';
 
 describe("Le middleware d'attribution de parcours", () => {
@@ -13,7 +14,7 @@ describe("Le middleware d'attribution de parcours", () => {
   beforeEach(() => {
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 
-    busEvenements = fabriqueBusPourLesTests();
+    busEvenements = fabriqueBusPourLesTests(fauxRapporteurErreur);
   });
   describe("lorsque l'utilisateur n'a pas de parcours", () => {
     it('le rattache à un parcours', async () => {
