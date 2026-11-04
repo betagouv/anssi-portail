@@ -9,7 +9,10 @@ export default {
   preprocess: vitePreprocess(),
 
   vitePlugin: {
-    dynamicCompileOptions({ filename }) {
+    dynamicCompileOptions({ filename, compileOptions }) {
+      if (hotReloadActivé && compileOptions.generate === 'server') {
+        return { dev: true, hmr: true };
+      }
       if (hotReloadActivé && filename.endsWith('/Lien.svelte')) {
         return { customElement: true };
       }
