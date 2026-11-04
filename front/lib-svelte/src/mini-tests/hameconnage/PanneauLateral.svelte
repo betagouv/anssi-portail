@@ -2,6 +2,8 @@
   import { mailOuvert, tousLesMails } from './hameconnage.store';
   import PanneauActionsMail from './PanneauActionsMail.svelte';
 
+  let { urlBase = '' }: { urlBase?: string } = $props();
+
   const nombreTotalMails = $derived($tousLesMails.length);
   const nombreTotalMailRépondu = $derived($tousLesMails.filter((mail) => mail.réponseUtilisateur).length);
   const score = $derived($tousLesMails.filter((mail) => mail.réponseUtilisateur === 'bonne').length);
@@ -16,7 +18,7 @@
     </div>
   </div>
   {#if $mailOuvert}
-    <PanneauActionsMail mode="bureau" />
+    <PanneauActionsMail mode="bureau" {urlBase} />
   {:else}
     <div class="panneau">
       <p class="texte-detail-sm">

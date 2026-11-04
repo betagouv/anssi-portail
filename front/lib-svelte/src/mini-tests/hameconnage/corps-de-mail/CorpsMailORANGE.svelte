@@ -1,10 +1,12 @@
 <script lang="ts">
+  let { urlBase = '' }: { urlBase?: string } = $props();
+  const dossierImages = $derived(`${urlBase}/assets/images/mini-tests/hameconnage/logo`);
   const lienFactice = 'http://orange-mobile-service.com/annuler-rio';
 </script>
 
 <div class="corps-mail">
   <div class="entete">
-    <img src="/assets/images/mini-tests/hameconnage/logo/orange.avif" alt="Logo Orange" />
+    <img src="{dossierImages}/orange.avif" alt="Logo Orange" />
     <p>Le service clients Orange</p>
   </div>
   <div class="texte-mail">

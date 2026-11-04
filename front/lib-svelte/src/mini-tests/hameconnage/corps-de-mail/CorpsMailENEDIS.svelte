@@ -1,10 +1,12 @@
 <script lang="ts">
+  let { urlBase = '' }: { urlBase?: string } = $props();
+  const dossierImages = $derived(`${urlBase}/assets/images/mini-tests/hameconnage/logo`);
   const lienFactice = 'http://enedis-exploitation-pro.com/intervention';
 </script>
 
 <div class="corps-mail">
   <div class="logo">
-    <img src="/assets/images/mini-tests/hameconnage/logo/enedis.avif" alt="Logo enedis" />
+    <img src="{dossierImages}/enedis.avif" alt="Logo enedis" />
   </div>
   <div class="message">
     <p>

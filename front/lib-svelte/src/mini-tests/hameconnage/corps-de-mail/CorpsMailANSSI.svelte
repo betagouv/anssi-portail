@@ -1,19 +1,17 @@
 <script lang="ts">
+  let { urlBase = '' }: { urlBase?: string } = $props();
+  const dossierImages = $derived(`${urlBase}/assets/images/mini-tests/hameconnage/logo`);
   const lienFactice = 'http://anssi-gouv-fr.net/correctifs/patch-urgent.zip';
 </script>
 
 <div class="corps-mail">
   <div class="entete">
-    <img class="logo-anssi" src="/assets/images/mini-tests/hameconnage/logo/anssi.avif" alt="Logo ANSSI" />
-    <img
-      class="logo-republique"
-      src="/assets/images/mini-tests/hameconnage/logo/republique-francaise.avif"
-      alt="Logo République française"
-    />
+    <img class="logo-anssi" src="{dossierImages}/anssi.avif" alt="Logo ANSSI" />
+    <img class="logo-republique" src="{dossierImages}/republique-francaise.avif" alt="Logo République française" />
   </div>
   <div class="texte-mail">
     <div class="carte">
-      <img class="logo-cert" src="/assets/images/mini-tests/hameconnage/logo/cert-fr.avif" alt="Logo CERT-FR" />
+      <img class="logo-cert" src="{dossierImages}/cert-fr.avif" alt="Logo CERT-FR" />
       <p class="titre">ALERTES DE SÉCURITÉ</p>
       <div class="separateur"></div>
       <div class="message">

@@ -1,10 +1,11 @@
+<script lang="ts">
+  let { urlBase = '' }: { urlBase?: string } = $props();
+  const dossierImages = $derived(`${urlBase}/assets/images/mini-tests/hameconnage/logo`);
+</script>
+
 <div class="corps-mail">
   <div class="carte">
-    <img
-      class="logo"
-      src="/assets/images/mini-tests/hameconnage/logo/compte-formation.avif"
-      alt="Logo Mon Compte Formation"
-    />
+    <img class="logo" src="{dossierImages}/compte-formation.avif" alt="Logo Mon Compte Formation" />
 
     <p>
       Bonjour, <br /><br />
@@ -12,7 +13,7 @@
       sécuriser et choisir votre formation.
     </p>
 
-    <img class="qr-code" src="/assets/images/mini-tests/hameconnage/logo/qr-code-compte-formation.avif" alt="QR code" />
+    <img class="qr-code" src="{dossierImages}/qr-code-compte-formation.avif" alt="QR code" />
   </div>
 </div>
 

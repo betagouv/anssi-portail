@@ -4,6 +4,7 @@
   import ReponseMail from './ReponseMail.svelte';
 
   const corpsDeMails = import.meta.glob<{ default: Component } | undefined>('./corps-de-mail/CorpsMail*.svelte');
+  let { urlBase = '' }: { urlBase?: string } = $props();
 
   const chargeCorpsDeMail = $derived.by(async () => {
     const id = $mailOuvert?.id.replaceAll('.', '');
@@ -35,7 +36,7 @@
 
         {#await chargeCorpsDeMail then CorpsDeMail}
           {#if CorpsDeMail}
-            <CorpsDeMail />
+            <CorpsDeMail {urlBase} />
           {/if}
         {/await}
       </div>
