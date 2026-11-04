@@ -1,4 +1,5 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
+import cors from 'cors';
 import { Router } from 'express';
 import { z } from 'zod';
 import { TestHameçonnageRéponseSoumise } from '../../../bus/evenements/testHameconnageReponseSoumise.js';
@@ -18,9 +19,10 @@ export const ressourceRéponsesHameçonnage = ({
   adaptateurHachage,
 }: ConfigurationServeur) => {
   const routeur = Router();
-
+  routeur.options('/', cors());
   routeur.post(
     '/',
+    cors(),
     valideCorpsRequete(schémaPostRéponsesHameçonnage),
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     filetRouteAsynchrone(
