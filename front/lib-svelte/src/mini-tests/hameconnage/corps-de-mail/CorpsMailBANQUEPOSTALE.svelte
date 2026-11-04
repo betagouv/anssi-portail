@@ -1,10 +1,11 @@
+<script lang="ts">
+  let { urlBase = '' }: { urlBase?: string } = $props();
+  const dossierImages = $derived(`${urlBase}/assets/images/mini-tests/hameconnage/logo`);
+</script>
+
 <div class="corps-mail">
   <div class="contenu">
-    <img
-      class="logo"
-      src="/assets/images/mini-tests/hameconnage/logo/banque-postale.avif"
-      alt="Logo La Banque Postale"
-    />
+    <img class="logo" src="{dossierImages}/banque-postale.avif" alt="Logo La Banque Postale" />
     <div class="message">
       <p class="titre">Votre Relevé de compte en ligne</p>
       <p>Bonjour,</p>

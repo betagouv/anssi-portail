@@ -1,6 +1,7 @@
 <script lang="ts">
   const lienSuivi = 'https://www.laposte.fr/outils/suivre-vos-envois';
-  const dossierImages = '/assets/images/mini-tests/hameconnage/logo';
+  let { urlBase = '' }: { urlBase?: string } = $props();
+  const dossierImages = $derived(`${urlBase}/assets/images/mini-tests/hameconnage/logo`);
   const quinzeJours = 15;
   const aujourdhui = new Date();
   const dateDeLivraison = new Date(aujourdhui.getFullYear(), aujourdhui.getMonth(), aujourdhui.getDate() + quinzeJours);

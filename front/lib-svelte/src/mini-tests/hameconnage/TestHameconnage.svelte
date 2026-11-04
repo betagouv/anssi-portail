@@ -1,5 +1,6 @@
 <script lang="ts">
   import CanonAConfetti from '../../ui/CanonAConfetti.svelte';
+  import EnteteAutonome from '../../ui/EnteteAutonome.svelte';
   import { fabriqueFilAriane } from '../../ui/filAriane';
   import FilAriane from '../../ui/FilAriane.svelte';
   import BoiteMail from './BoiteMail.svelte';
@@ -11,29 +12,35 @@
 
   const réponseUtilisateur = $derived($mailOuvert?.réponseUtilisateur);
   const réponses = $derived($tousLesMails.map((mail) => mail.réponseUtilisateur === 'bonne'));
+  let { urlBase = '', mode: modeWebc }: { urlBase?: string; mode?: 'autonome' } = $props();
 </script>
 
-<dsfr-container class={$scoreFinalAffiché ? 'score-final' : `${réponseUtilisateur}-reponse`}>
-  <FilAriane
-    segments={fabriqueFilAriane({
-      feuille: 'Hameçonnage : saurez-vous distinguer le mail légitime du faux&nbsp;?',
-      branche: { nom: 'Faire le test !', lien: '/faire-le-test' },
-    })}
-  />
-</dsfr-container>
+{#if modeWebc !== 'autonome'}
+  <dsfr-container class={$scoreFinalAffiché ? 'score-final' : `${réponseUtilisateur}-reponse`}>
+    <FilAriane
+      segments={fabriqueFilAriane({
+        feuille: 'Hameçonnage : saurez-vous distinguer le mail légitime du faux&nbsp;?',
+        branche: { nom: 'Faire le test !', lien: '/faire-le-test' },
+      })}
+    />
+  </dsfr-container>
+{/if}
 
 {#if $scoreFinalAffiché}
-  <ScoreFinalHameconnage {réponses} />
+  <ScoreFinalHameconnage {réponses} {urlBase} mode={modeWebc} />
 {:else}
   <dsfr-container class={['zone-test', `${réponseUtilisateur}-reponse`]}>
+    {#if modeWebc === 'autonome'}
+      <EnteteAutonome {urlBase} />
+    {/if}
     <h1 class="fr-h6">Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?</h1>
     <div class="conteneur">
-      <PanneauLateral />
+      <PanneauLateral {urlBase} />
       {#if $mailOuvert}
-        <Mail />
-        <PanneauActionsMail mode="mobile" />
+        <Mail {urlBase} />
+        <PanneauActionsMail mode="mobile" {urlBase} />
       {:else}
-        <BoiteMail />
+        <BoiteMail {urlBase} />
       {/if}
     </div>
   </dsfr-container>

@@ -1,12 +1,14 @@
 <script lang="ts">
   import Lien from '../../../ui/Lien.svelte';
 
+  let { urlBase = '' }: { urlBase?: string } = $props();
+  const dossierImages = $derived(`${urlBase}/assets/images/mini-tests/hameconnage/logo`);
   const lienFactice = 'https://proconnect.gouv.fr/signalement';
 </script>
 
 <div class="corps-mail">
   <div class="logo">
-    <img src="/assets/images/mini-tests/hameconnage/logo/proconnect.avif" alt="Logo ProConnect" />
+    <img src="{dossierImages}/proconnect.avif" alt="Logo ProConnect" />
   </div>
   <div class="texte-mail">
     <div class="carte">

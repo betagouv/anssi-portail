@@ -4,7 +4,8 @@
   import BoutonDeVoteHameconnage, { type Réponse } from './BoutonDeVoteHameconnage.svelte';
   import { idCorrélation, mailOuvert, scoreFinalAffiché, tousLesMails } from './hameconnage.store';
 
-  let { mode }: { mode: 'mobile' | 'bureau' } = $props();
+  let { mode, urlBase = '' }: { mode: 'mobile' | 'bureau'; urlBase?: string } = $props();
+
   const surVote = (réponse: Réponse) => async () => {
     if (!$mailOuvert) return;
     const idMail = $mailOuvert.id;
@@ -17,12 +18,15 @@
       }
       return mail;
     });
-    await publieRéponseTestHameçonnage({
-      idCorrélation,
-      idMail,
-      réponse: réponseUtilisateur,
-      numéroRéponse: $tousLesMails.filter((mail) => mail.réponseUtilisateur).length,
-    });
+    await publieRéponseTestHameçonnage(
+      {
+        idCorrélation,
+        idMail,
+        réponse: réponseUtilisateur,
+        numéroRéponse: $tousLesMails.filter((mail) => mail.réponseUtilisateur).length,
+      },
+      { urlBase }
+    );
   };
   const tousLesMailsOntUneRéponse = $derived($tousLesMails.every((mail) => mail.réponseUtilisateur));
   const refermeLeMail = () => ($mailOuvert = undefined);

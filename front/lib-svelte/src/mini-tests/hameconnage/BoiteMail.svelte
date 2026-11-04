@@ -3,6 +3,9 @@
   import type { MailHameçonnage } from './hameconnage';
   import { mailOuvert, tousLesMails } from './hameconnage.store';
 
+  let { urlBase = '' }: { urlBase?: string } = $props();
+  const dossierIcones = $derived(`${urlBase}/assets/icones`);
+
   const ouvreLeMail = (mail: MailHameçonnage) => ($mailOuvert = mail);
 </script>
 
@@ -32,9 +35,9 @@
             <lab-anssi-icone nom="arrow-right-line" taille="sm"></lab-anssi-icone>
           {:else}
             {#if mail.réponseUtilisateur === 'bonne'}
-              <img src="/assets/icones/coche-verte.svg" alt="Bonne réponse" />
+              <img src="{dossierIcones}/coche-verte.svg" alt="Bonne réponse" />
             {:else}
-              <img src="/assets/icones/croix-rouge.svg" alt="Mauvaise réponse" />
+              <img src="{dossierIcones}/croix-rouge.svg" alt="Mauvaise réponse" />
             {/if}
           {/if}
         </div>

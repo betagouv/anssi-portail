@@ -1,5 +1,6 @@
 <script lang="ts">
-  const dossierImages = '/assets/images/mini-tests/hameconnage/logo';
+  let { urlBase = '' }: { urlBase?: string } = $props();
+  const dossierImages = $derived(`${urlBase}/assets/images/mini-tests/hameconnage/logo`);
 </script>
 
 <div class="corps-mail">
