@@ -1,0 +1,11 @@
+@use '../../../front/assets/styles/commun.scss' as commun;
+
+.lab-anssi-mini-test-hameconnage {
+  @include commun.polices-marianne('../../../front/assets/fonts/');
+  @include commun.polices-roboto('../../../front/assets/fonts/');
+  @include commun.titres-dsfr();
+  .texte-article-lg {
+    margin: 0;
+    font-size: 1rem;
+  }
+}
