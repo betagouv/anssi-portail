@@ -13,12 +13,14 @@ import { EntrepotFinancementMemoire } from '../../persistance/entrepotFinancemen
 import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire.js';
 
 describe("L'adaptateur qui enrichie le html servi", () => {
+  let rapporteurErreur: { erreur: (erreur: unknown, message?: string) => void };
   let adaptateurEnrichissement: AdaptateurEnrichissement;
   let entrepôtGuide: EntrepotGuideMemoire;
   let entrepôtFinancement: EntrepotFinancementMemoire;
   let entrepôtArticle: EntrepôtArticleMémoire;
 
   beforeEach(async () => {
+    rapporteurErreur = { erreur: vi.fn() };
     entrepôtGuide = new EntrepotGuideMemoire();
     entrepôtFinancement = new EntrepotFinancementMemoire();
     entrepôtArticle = new EntrepôtArticleMémoire();
@@ -29,8 +31,18 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       new EntrepotExigenceMemoire(),
       entrepôtFinancement,
       entrepôtArticle,
-      new EntrepôtContactStatique()
+      new EntrepôtContactStatique(),
+      rapporteurErreur
     );
+  });
+
+  it('signale une erreur SSR et conserve le contenu original', async () => {
+    const erreur = new Error('lecture impossible');
+    vi.spyOn(entrepôtGuide, 'tous').mockRejectedValue(erreur);
+    const contenu = '<html><body>Contenu original</body></html>';
+
+    expect(await adaptateurEnrichissement.enrichisAvecComposants(contenu, '/guides/test')).toBe(contenu);
+    expect(rapporteurErreur.erreur).toHaveBeenCalledExactlyOnceWith(erreur, "Erreur lors de l'injection svelte");
   });
 
   const fabriqueHtmlFactice = (lienCanonique: string) => {

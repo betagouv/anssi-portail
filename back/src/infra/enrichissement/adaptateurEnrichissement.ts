@@ -6,6 +6,7 @@ import { EntrepôtContact } from '../../metier/contacts/entrepotContact.js';
 import { EntrepotFinancement } from '../../metier/entrepotFinancement.js';
 import { EntrepotGuide } from '../../metier/entrepotGuide.js';
 import { EntrepotExigence } from '../../metier/nis2/entrepotExigence.js';
+import { RapporteurErreur } from '../../metier/rapporteurErreur.js';
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
 import { AdaptateurDom } from './adaptateurDom/adaptateurDom.js';
 import { AdaptateurLienCanonique } from './adaptateurDom/adaptateurLienCanonique.js';
@@ -46,7 +47,8 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     private readonly composantsAutorisés: string[],
     private readonly fournisseurDeChemin: FournisseurChemin,
     private readonly chargeursDeProps: ChargeurDeProps[],
-    private readonly adaptateursDom: AdaptateurDom[]
+    private readonly adaptateursDom: AdaptateurDom[],
+    private readonly rapporteurErreur: RapporteurErreur
   ) {}
 
   async enrichisAvecComposants(contenuPage: string, routeDemandée: string) {
@@ -64,7 +66,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
 
       return dom.serialize();
     } catch (e) {
-      console.error("Erreur lors de l'injection svelte : ", e);
+      this.rapporteurErreur.erreur(e, "Erreur lors de l'injection svelte");
       return contenuPage;
     }
   }
@@ -107,7 +109,8 @@ export const fabriqueAdaptateurEnrichissement = async (
   entrepôtExigence: EntrepotExigence,
   entrepôtFinancement: EntrepotFinancement,
   entrepôtArticle: EntrepôtArticle,
-  entrepôtContact: EntrepôtContact
+  entrepôtContact: EntrepôtContact,
+  rapporteurErreur: RapporteurErreur
 ): Promise<AdaptateurEnrichissement> => {
   const résolveurDePage = new RésolveurDePage(entrepotGuide, entrepôtFinancement, entrepôtArticle);
 
@@ -144,6 +147,7 @@ export const fabriqueAdaptateurEnrichissement = async (
     composantsAutorisés,
     fournisseurDeChemin,
     chargeursDeProps,
-    adaptateursDom
+    adaptateursDom,
+    rapporteurErreur
   );
 };
