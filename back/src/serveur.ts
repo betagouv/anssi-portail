@@ -22,7 +22,6 @@ import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement.js'
 import { adaptateurCompression } from './infra/adaptateurCompression.js';
 import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo.js';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement.js';
-import { adaptateurGestionErreurSentry } from './infra/adaptateurGestionErreurSentry.js';
 import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage.js';
 import { adaptateurHorloge } from './infra/adaptateurHorloge.js';
 import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal.js';
@@ -51,6 +50,8 @@ import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPo
 import { GenerateurImageAvif } from './infra/generateurImage.js';
 import { messagerieMattermost } from './infra/messagerieMattermost.js';
 import { EntrepotExigenceGrist } from './infra/nis2/entrepotExigenceGrist.js';
+import { rapporteurErreurConsole } from './infra/rapporteurErreurConsole.js';
+import { controleurErreursSentry, initialiseSentry, rapporteurErreurSentry } from './infra/sentry.js';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage.js';
 import { EntrepotGuide } from './metier/entrepotGuide.js';
 import { EntrepotGuideTravail } from './metier/entrepotGuideTravail.js';
@@ -59,6 +60,10 @@ import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeS
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
 
+const sentryConfiguré = Boolean(adaptateurEnvironnement.sentry().dsn());
+if (sentryConfiguré) initialiseSentry(adaptateurEnvironnement);
+
+const rapporteurErreur = sentryConfiguré ? rapporteurErreurSentry : rapporteurErreurConsole;
 const adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge);
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
 const adaptateurJournal = fabriqueAdaptateurJournal(adaptateurEnvironnement);
@@ -196,7 +201,8 @@ const host = process.env.HOST;
     }),
     adaptateurOIDC,
     adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
-    adaptateurGestionErreur: adaptateurGestionErreurSentry,
+    rapporteurErreur,
+    controleurErreurs: sentryConfiguré ? controleurErreursSentry : (erreur, _requete, _reponse, suite) => suite(erreur),
     busEvenements,
     entrepotUtilisateur,
     reseau: {

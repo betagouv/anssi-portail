@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { ErrorRequestHandler } from 'express';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT.js';
 import { ConfigurationServeur } from '../../src/api/configurationServeur.js';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
@@ -17,7 +18,6 @@ import { ServiceModèleRevueDroitsDAccès } from '../../src/api/outils/modeleRev
 import { AdaptateurCellar } from '../../src/infra/adaptateurCellar.js';
 import { adaptateurCompression } from '../../src/infra/adaptateurCompression.js';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
-import { adaptateurGestionVide } from '../../src/infra/adaptateurGestionErreurVide.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { adaptateurMonAideCyberVide } from '../../src/infra/adaptateurMonAideCyberVide.js';
@@ -47,7 +47,11 @@ import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTest
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 
-export const fauxRapporteurErreur: RapporteurErreur = { erreur: () => {} };
+export const fauxControleurErreurs: ErrorRequestHandler = (erreur, _requete, _reponse, suite) => suite(erreur);
+
+export const fauxRapporteurErreur: RapporteurErreur = {
+  erreur: () => {},
+};
 
 export const ressourceFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.html');
 export const typstFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.typ');
@@ -362,7 +366,8 @@ const entrepôtContact = new EntrepôtContactStatique();
 
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
-  adaptateurGestionErreur: adaptateurGestionVide,
+  rapporteurErreur: fauxRapporteurErreur,
+  controleurErreurs: fauxControleurErreurs,
   adaptateurHachage: fauxAdaptateurHachage,
   adaptateurHorloge: fauxAdaptateurHorloge,
   adaptateurJWT: fauxAdaptateurJWT,

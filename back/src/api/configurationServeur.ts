@@ -1,8 +1,8 @@
+import { ErrorRequestHandler } from 'express';
 import { BusEvenements } from '../bus/busEvenements.js';
 import { AdaptateurCellar } from '../infra/adaptateurCellar.js';
 import { AdaptateurCompression } from '../infra/adaptateurCompression.js';
 import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
-import { AdaptateurGestionErreur } from '../infra/adaptateurGestionErreurSentry.js';
 import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
 import { AdaptateurMonAideCyber } from '../infra/adaptateurMonAideCyber.js';
@@ -29,6 +29,7 @@ import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
 import { EntrepotReactionMiniTest } from '../metier/mini-tests/entrepotReactionMiniTest.js';
 import { EntrepôtQuestionVraieFausse } from '../metier/mini-tests/vrai-faux/entrepotQuestionVraieFausse.js';
 import { EntrepotExigence } from '../metier/nis2/entrepotExigence.js';
+import { RapporteurErreur } from '../metier/rapporteurErreur.js';
 import { ServiceSanteGuides } from '../metier/serviceSanteGuides.js';
 import { AdaptateurJWT } from './adaptateurJWT.js';
 import { FournisseurChemin } from './fournisseurChemin.js';
@@ -43,7 +44,8 @@ import { ServiceModèleRevueDroitsDAccès } from './outils/modeleRevueDroitsDAcc
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
-  adaptateurGestionErreur: AdaptateurGestionErreur;
+  rapporteurErreur: RapporteurErreur;
+  controleurErreurs: ErrorRequestHandler;
   adaptateurHachage: AdaptateurHachage;
   adaptateurHorloge: AdaptateurHorloge;
   adaptateurJWT: AdaptateurJWT;
