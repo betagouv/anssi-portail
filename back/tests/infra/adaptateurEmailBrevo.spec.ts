@@ -12,7 +12,7 @@ import { adaptateurEmailBrevo } from '../../src/infra/adaptateurEmailBrevo.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
-import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
+import { fauxAdaptateurEnvironnement, fauxRapporteurErreur } from '../api/fauxObjets.js';
 import { fabriqueClientPost, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
 
 describe('L’adaptateur email Brevo', () => {
@@ -49,6 +49,7 @@ describe('L’adaptateur email Brevo', () => {
     };
 
     brevo = adaptateurEmailBrevo({
+      rapporteurErreur: fauxRapporteurErreur,
       clientHttp,
       adaptateurEnvironnement: fauxAdaptateurEnvironnement,
       adaptateurHorloge,
@@ -72,64 +73,26 @@ describe('L’adaptateur email Brevo', () => {
   });
 
   describe('lorsqu’une erreur se produit', () => {
-    beforeEach(() => {
-      clientHttp = {
+    it.each(['contact', 'infolettre'])('signale et propage la même erreur (%s)', async (opération) => {
+      const erreur = new AxiosError('Une erreur s’est produite');
+      const rapporteurErreur = { erreur: vi.fn() };
+      const clientHttp = {
         ...fabriqueFauxClientHttp(),
-        post: fabriqueClientPost(async (_url: string) => {
-          throw new AxiosError('Une erreur s’est produite');
+        post: fabriqueClientPost(async () => {
+          throw erreur;
         }),
       };
-      brevo = adaptateurEmailBrevo({
+      const brevo = adaptateurEmailBrevo({
         clientHttp,
         adaptateurEnvironnement: fauxAdaptateurEnvironnement,
         adaptateurHorloge,
-      });
-    });
-
-    describe('pour la création de contact', () => {
-      it('ne loggue pas l’erreur levée, loggue le message', async () => {
-        const logErreur = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-        await expect(brevo.creeContactBrevo(fauxContact())).rejects.toThrow(AxiosError);
-
-        expect(logErreur).toHaveBeenCalledExactlyOnceWith('Une erreur s’est produite', {
-          'Erreur renvoyée par API Brevo': undefined,
-        });
+        rapporteurErreur,
       });
 
-      it('ne loggue pas trop d’informations', async () => {
-        const logErreur = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-        await expect(brevo.creeContactBrevo(fauxContact())).rejects.toThrow(AxiosError);
-
-        expect(logErreur).toHaveBeenCalledOnce();
-        for (const message of logErreur.mock.calls.flat()) {
-          expect(JSON.stringify(message).length).toBeLessThan(100);
-        }
-      });
-    });
-
-    describe('pour l’inscription à l’infolettre', () => {
-      it('ne loggue pas l’erreur levée, loggue le message', async () => {
-        const logErreur = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-        await expect(brevo.inscrisAInfolettre('email')).rejects.toThrow(AxiosError);
-
-        expect(logErreur).toHaveBeenCalledExactlyOnceWith('Une erreur s’est produite', {
-          'Erreur renvoyée par API Brevo': undefined,
-        });
-      });
-
-      it('ne loggue pas trop d’informations', async () => {
-        const logErreur = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-        await expect(brevo.inscrisAInfolettre('email')).rejects.toThrow(AxiosError);
-
-        expect(logErreur).toHaveBeenCalledOnce();
-        for (const message of logErreur.mock.calls.flat()) {
-          expect(JSON.stringify(message).length).toBeLessThan(100);
-        }
-      });
+      await expect(
+        opération === 'contact' ? brevo.creeContactBrevo(fauxContact()) : brevo.inscrisAInfolettre('email')
+      ).rejects.toBe(erreur);
+      expect(rapporteurErreur.erreur).toHaveBeenCalledExactlyOnceWith(erreur, 'Erreur API Brevo');
     });
   });
 

@@ -1,7 +1,7 @@
 import axios from '@anssi-portail/axios';
 import { describe, expect, it, vi } from 'vitest';
 import { AdaptateurRechercheEntrepriseGouv } from '../../src/infra/adaptateurRechercheEntrepriseGouv.js';
-import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
+import { fauxAdaptateurEnvironnement, fauxRapporteurErreur } from '../api/fauxObjets.js';
 
 describe('La recherche entreprise', () => {
   const resultatSirene = () => ({
@@ -15,7 +15,7 @@ describe('La recherche entreprise', () => {
   describe('avec cache', () => {
     it('retourne le résultat de la recherche entreprise', async () => {
       vi.spyOn(axios, 'get').mockResolvedValue({ data: { results: [resultatSirene()] } });
-      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteurErreur);
 
       const resultats = await adaptateur.rechercheOrganisations('Organisation', '92');
 
@@ -36,7 +36,7 @@ describe('La recherche entreprise', () => {
 
     it('ne rappelle pas la recherche entreprise deux fois', async () => {
       const get = vi.spyOn(axios, 'get').mockResolvedValue({ data: { results: [resultatSirene()] } });
-      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteurErreur);
 
       const premierResultat = await adaptateur.rechercheOrganisations('Organisation', '92');
       const secondResultat = await adaptateur.rechercheOrganisations('Organisation', '92');
@@ -47,7 +47,7 @@ describe('La recherche entreprise', () => {
 
     it('distingue les éléments à mettre en cache par terme et département', async () => {
       const get = vi.spyOn(axios, 'get').mockResolvedValue({ data: { results: [resultatSirene()] } });
-      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteurErreur);
 
       await adaptateur.rechercheOrganisations('Organisation', '92');
       await adaptateur.rechercheOrganisations('Autre organisation', '92');
@@ -70,7 +70,7 @@ describe('La recherche entreprise', () => {
         ],
       },
     });
-    const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+    const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteurErreur);
 
     const resultats = await adaptateur.rechercheOrganisations('Inpi', null);
 
@@ -83,7 +83,7 @@ describe('La recherche entreprise', () => {
     vi.spyOn(axios, 'get').mockResolvedValue({
       data: { results: [{ ...resultatSirene(), siege: {} }] },
     });
-    const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+    const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteurErreur);
 
     const resultats = await adaptateur.rechercheOrganisations('18008001200248', null);
 
@@ -103,7 +103,7 @@ describe('La recherche entreprise', () => {
         results: [{ ...resultat, matching_etablissements: [{ ...resultat.matching_etablissements[0], commune }] }],
       },
     });
-    const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+    const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteurErreur);
 
     const resultats = await adaptateur.rechercheOrganisations('18008001200248', null);
 
@@ -117,7 +117,7 @@ describe('La recherche entreprise', () => {
       vi.spyOn(axios, 'get').mockResolvedValue({
         data: { results: [{ ...resultatSirene(), matching_etablissements: etablissements }] },
       });
-      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteurErreur);
 
       expect(await adaptateur.rechercheOrganisations('18008001200248', null)).toEqual([]);
     }
@@ -130,7 +130,7 @@ describe('La recherche entreprise', () => {
       vi.spyOn(axios, 'get').mockResolvedValue({
         data: { results: [{ ...resultat, siege: { ...resultat.siege, [champ]: valeur } }] },
       });
-      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteurErreur);
 
       expect(await adaptateur.rechercheOrganisations('Inpi', null)).toEqual([]);
     }
@@ -151,7 +151,7 @@ describe('La recherche entreprise', () => {
           ],
         },
       });
-      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteurErreur);
 
       const resultats = await adaptateur.rechercheOrganisations('18008001200248', null);
 
