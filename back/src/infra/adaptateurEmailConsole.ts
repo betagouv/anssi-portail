@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { BadgeCyberdépartDébloqué } from '../bus/evenements/badgeCyberdepartDebloque.js';
 import { MesureConsultee } from '../bus/evenements/mesureConsultee.js';
 import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';

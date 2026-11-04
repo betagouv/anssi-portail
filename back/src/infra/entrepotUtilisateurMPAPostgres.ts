@@ -4,6 +4,7 @@ import config from '../../knexfile.js';
 import { EntrepotMesure } from '../metier/entrepotMesure.js';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur.js';
 import { Parcours } from '../metier/parcours.js';
+import { RapporteurErreur } from '../metier/rapporteurErreur.js';
 import { Organisation, Role, Utilisateur } from '../metier/utilisateur.js';
 import { AdaptateurChiffrement } from './adaptateurChiffrement.js';
 import { AdaptateurHachage } from './adaptateurHachage.js';
@@ -25,6 +26,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   adaptateurChiffrement: AdaptateurChiffrement;
   adaptateurHachage: AdaptateurHachage;
   entrepotMesure: EntrepotMesure;
+  rapporteurErreur: RapporteurErreur;
 
   constructor({
     adaptateurProfilAnssi,
@@ -32,13 +34,16 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     adaptateurHachage,
     adaptateurChiffrement,
     entrepotMesure,
+    rapporteurErreur,
   }: {
     adaptateurProfilAnssi: AdaptateurProfilAnssi;
     adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
     adaptateurHachage: AdaptateurHachage;
     adaptateurChiffrement: AdaptateurChiffrement;
     entrepotMesure: EntrepotMesure;
+    rapporteurErreur: RapporteurErreur;
   }) {
+    this.rapporteurErreur = rapporteurErreur;
     this.knex = Knex(config);
     this.adaptateurProfilAnssi = adaptateurProfilAnssi;
     this.adaptateurRechercheEntreprise = adaptateurRechercheEntreprise;
@@ -105,7 +110,9 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     const donnees = this.dechiffreDonneesUtilisateur(utilisateurBDD);
     const profilAnssi = await this.adaptateurProfilAnssi.recupere(donnees.email);
     if (!profilAnssi) {
-      console.warn('Utilisateur trouvé en base de données sans profil ANSSI ', utilisateurBDD.email_hache);
+      this.rapporteurErreur.erreur(
+        `Utilisateur trouvé en base de données sans profil ANSSI : ${utilisateurBDD.email_hache}`
+      );
       return undefined;
     }
 

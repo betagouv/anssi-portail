@@ -72,6 +72,7 @@ export const ressourceSitemapXml = (pagesStatiques: string[], configurationServe
       streamToPromise(sitemapStream)
         .then((data) => {
           writeFileSync(cheminVersSitemapXml, data.toString());
+          // eslint-disable-next-line no-console
           console.log(`Sitemap généré : ${cheminVersSitemapXml}`);
         })
         .catch((err) => {

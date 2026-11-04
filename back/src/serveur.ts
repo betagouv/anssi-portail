@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from '@anssi-portail/axios';
 import { CmsCrisp } from '@lab-anssi/lib';
 import { adaptateurJWT } from './api/adaptateurJWT.js';
@@ -113,6 +114,7 @@ const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
   adaptateurChiffrement,
   adaptateurHachage,
   entrepotMesure,
+  rapporteurErreur,
 });
 
 const entrepotResultatTest = new EntrepotResultatTestPostgres({

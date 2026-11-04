@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import * as Vite from 'vite';
 
 const estRuntimeCssSvelte = (id: string): boolean => {
