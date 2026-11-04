@@ -44,6 +44,14 @@
         nomDuWebComponent="lab-anssi-mini-test-expostion"
       />
     </Accordeon>
+    <Accordeon libelle="Test • Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?">
+      <SectionWebCAccordeon
+        fichierPhp="mini-test-hameconnage.php"
+        lienDémo="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/demo/mini-test-hameconnage.php"
+        lienProd="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/prod/mini-test-hameconnage.php"
+        nomDuWebComponent="lab-anssi-mini-test-hameconnage"
+      />
+    </Accordeon>
     <Accordeon libelle="Demande de diagnostic cyber">
       <SectionWebCAccordeon
         fichierPhp="demande-diag.php"
