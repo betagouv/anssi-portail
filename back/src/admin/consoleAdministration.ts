@@ -73,6 +73,7 @@ export class ConsoleAdministration {
       adaptateurChiffrement: this.adaptateurChiffrement,
       adaptateurHachage: this.adaptateurHachage,
       entrepotMesure,
+      rapporteurErreur: rapporteurErreurConsole,
     });
     this.adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge, rapporteurErreurConsole);
     this.entrepotFavori = new EntrepotFavoriPostgres({

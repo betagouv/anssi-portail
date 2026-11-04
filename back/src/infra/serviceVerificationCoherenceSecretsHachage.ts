@@ -57,6 +57,7 @@ export const fabriqueServiceVerificationCoherenceSecretsHachage = ({
 }): ServiceCoherenceSecretsDeHachage => ({
   verifieCoherenceSecrets: async () => {
     if (adaptateurEnvironnement.maintenance().actif()) {
+      // eslint-disable-next-line no-console
       console.log('🏗 Pas de vérification des sels en mode maintenance');
       return;
     }

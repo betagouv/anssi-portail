@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { RapporteurErreur } from '../metier/rapporteurErreur.js';
 
 export const rapporteurErreurConsole: RapporteurErreur = {

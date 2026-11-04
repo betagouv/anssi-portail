@@ -49,6 +49,7 @@ export function createConfig(tsconfigRootDir, { autoriseImportAxios = false } = 
             ignoreRestSiblings: false,
           },
         ],
+        'no-console': 'error',
       },
       languageOptions: {
         parserOptions: {
