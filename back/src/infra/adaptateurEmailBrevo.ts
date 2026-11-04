@@ -10,6 +10,7 @@ import { ParcoursCompletTerminé } from '../bus/evenements/parcoursCompletTermin
 import { ParcoursRejoint } from '../bus/evenements/parcoursRejoint.js';
 import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { Parcours } from '../metier/parcours.js';
+import { RapporteurErreur } from '../metier/rapporteurErreur.js';
 import { Telephone } from '../metier/telephone.js';
 import { adaptateurEmailConsole } from './adaptateurEmailConsole.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
@@ -51,7 +52,8 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
   constructor(
     private readonly clientHttp: ClientHttp,
     private readonly adaptateurEnvironnement: AdaptateurEnvironnement,
-    private readonly adaptateurHorloge: AdaptateurHorloge
+    private readonly adaptateurHorloge: AdaptateurHorloge,
+    private readonly rapporteurErreur: RapporteurErreur
   ) {
     this.enteteJSON = {
       headers: {
@@ -152,9 +154,7 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
       if (isAxiosError(erreur)) {
         if (erreur.response?.data.message === 'Contact already exist') return Promise.resolve();
 
-        console.error(erreur.message, {
-          'Erreur renvoyée par API Brevo': erreur.response?.data,
-        });
+        this.rapporteurErreur.erreur(erreur, 'Erreur API Brevo');
         return Promise.reject(erreur);
       }
     }
@@ -177,7 +177,7 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
         if (erreur.response?.data.message === 'Contact already exist') {
           return undefined;
         }
-        console.error(erreur.message, { 'Erreur renvoyée par API Brevo': erreur.response?.data });
+        this.rapporteurErreur.erreur(erreur, 'Erreur API Brevo');
         throw erreur;
       }
     }
@@ -271,16 +271,20 @@ export const adaptateurEmailBrevo = ({
   clientHttp,
   adaptateurEnvironnement,
   adaptateurHorloge,
+  rapporteurErreur,
 }: {
   clientHttp: ClientHttp;
   adaptateurEnvironnement: AdaptateurEnvironnement;
   adaptateurHorloge: AdaptateurHorloge;
-}): AdaptateurEmail => new AdaptateurEmailBrevo(clientHttp, adaptateurEnvironnement, adaptateurHorloge);
+  rapporteurErreur: RapporteurErreur;
+}): AdaptateurEmail =>
+  new AdaptateurEmailBrevo(clientHttp, adaptateurEnvironnement, adaptateurHorloge, rapporteurErreur);
 
 export const fabriqueAdaptateurEmail = (
   adaptateurEnvironnement: AdaptateurEnvironnement,
-  adaptateurHorloge: AdaptateurHorloge
+  adaptateurHorloge: AdaptateurHorloge,
+  rapporteurErreur: RapporteurErreur
 ) =>
   adaptateurEnvironnement.brevo().url() && adaptateurEnvironnement.brevo().cléAPI()
-    ? new AdaptateurEmailBrevo(axiosSécurisé, adaptateurEnvironnement, adaptateurHorloge)
+    ? new AdaptateurEmailBrevo(axiosSécurisé, adaptateurEnvironnement, adaptateurHorloge, rapporteurErreur)
     : adaptateurEmailConsole();

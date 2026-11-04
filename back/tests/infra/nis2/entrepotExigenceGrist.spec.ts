@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ClientHttp } from '../../../src/infra/clientHttp.js';
 import { EntrepotExigenceGrist, ExigenceGrist } from '../../../src/infra/nis2/entrepotExigenceGrist.js';
-import { fauxAdaptateurEnvironnement } from '../../api/fauxObjets.js';
+import { fauxAdaptateurEnvironnement, fauxRapporteurErreur } from '../../api/fauxObjets.js';
 import { fabriqueClientGet, fabriqueFauxClientHttp } from '../fournisseurClientHttp.js';
 
 describe("L'entrepot d'exigence Grist", () => {
@@ -23,6 +23,7 @@ describe("L'entrepot d'exigence Grist", () => {
       get: fabriqueClientGet(async () => ({ data: { records: [] } })),
     };
     entrepotExigenceGrist = new EntrepotExigenceGrist({
+      rapporteurErreur: fauxRapporteurErreur,
       clientHttp,
       adaptateurEnvironnement: fauxAdaptateurEnvironnement,
     });
@@ -62,6 +63,7 @@ describe("L'entrepot d'exigence Grist", () => {
 
   it("ne renvoie rien si l'url source n'est pas définie", async () => {
     const entrepotExigenceGristHorsLigne = new EntrepotExigenceGrist({
+      rapporteurErreur: fauxRapporteurErreur,
       clientHttp,
       adaptateurEnvironnement: {
         ...fauxAdaptateurEnvironnement,

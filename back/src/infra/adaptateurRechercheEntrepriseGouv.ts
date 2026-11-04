@@ -1,4 +1,5 @@
 import axios, { AxiosError } from '@anssi-portail/axios';
+import { RapporteurErreur } from '../metier/rapporteurErreur.js';
 import { régions } from '../metier/referentielRegions.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { AdaptateurRechercheEntreprise, ResultatRechercheEntreprise } from './adaptateurRechercheEntreprise.js';
@@ -10,7 +11,10 @@ export class AdaptateurRechercheEntrepriseGouv implements AdaptateurRechercheEnt
   cache: Cache<ResultatRechercheEntreprise[]>;
   private readonly apiUrl: string;
 
-  constructor(adaptateurEnvironnement: AdaptateurEnvironnement) {
+  constructor(
+    adaptateurEnvironnement: AdaptateurEnvironnement,
+    private readonly rapporteurErreur: RapporteurErreur
+  ) {
     this.cache = new Cache({ ttl: TRENTE_MINUTES });
     this.apiUrl = adaptateurEnvironnement.rechercheEntreprise().apiUrl();
   }
@@ -37,14 +41,10 @@ export class AdaptateurRechercheEntrepriseGouv implements AdaptateurRechercheEnt
 
       return réponse.data.results.flatMap((r) => extraisInfosÉtablissement(terme, r) ?? []);
     } catch (e) {
-      if (e instanceof AxiosError) {
-        console.error(e, {
-          'Erreur renvoyee par API recherche-entreprise': e.response?.data,
-          'Statut HTTP': e.response?.status,
-        });
-      } else {
-        console.error(e);
-      }
+      this.rapporteurErreur.erreur(
+        e,
+        `Erreur de recherche entreprise${e instanceof AxiosError ? ` (HTTP ${e.response?.status})` : ''}`
+      );
 
       return [];
     }

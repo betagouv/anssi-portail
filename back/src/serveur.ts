@@ -64,10 +64,10 @@ const sentryConfiguré = Boolean(adaptateurEnvironnement.sentry().dsn());
 if (sentryConfiguré) initialiseSentry(adaptateurEnvironnement);
 
 const rapporteurErreur = sentryConfiguré ? rapporteurErreurSentry : rapporteurErreurConsole;
-const adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge);
+const adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge, rapporteurErreur);
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
 const adaptateurJournal = fabriqueAdaptateurJournal(adaptateurEnvironnement);
-const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
+const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi(rapporteurErreur);
 const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber(adaptateurEnvironnement);
 const adaptateurHachage = fabriqueAdaptateurHachage({
   adaptateurEnvironnement,
@@ -89,7 +89,7 @@ const entrepotFinancement = new EntrepotFinancementGrist({
 const entrepôtContact = new EntrepôtContactStatique();
 const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
-const adaptateurRechercheEntreprise = new AdaptateurRechercheEntrepriseGouv(adaptateurEnvironnement);
+const adaptateurRechercheEntreprise = new AdaptateurRechercheEntrepriseGouv(adaptateurEnvironnement, rapporteurErreur);
 
 const entrepotGuide: EntrepotGuide = new EntrepotGuideGrist({
   adaptateurEnvironnement,
@@ -100,6 +100,7 @@ const entrepotGuideTravail: EntrepotGuideTravail = new EntrepotGuideTravailGrist
 });
 
 const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
+  rapporteurErreur,
   adaptateurEnvironnement,
 });
 
@@ -157,7 +158,7 @@ const cellar = adaptateurCellar(adaptateurEnvironnement);
 
 const serviceSanteGuides = fabriqueServiceSanteGuides(cellar);
 
-const entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, adaptateurEnvironnement);
+const entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, adaptateurEnvironnement, rapporteurErreur);
 const adaptateurEnrichissement = await fabriqueAdaptateurEnrichissement(
   adaptateurEnvironnement,
   fournisseurChemin,

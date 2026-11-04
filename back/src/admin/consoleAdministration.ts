@@ -18,6 +18,7 @@ import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres.js';
 import { EntrepotMesurePostgres } from '../infra/entrepotMesurePostgres.js';
 import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAPostgres.js';
 import { EntrepotExigenceGrist } from '../infra/nis2/entrepotExigenceGrist.js';
+import { rapporteurErreurConsole } from '../infra/rapporteurErreurConsole.js';
 import { UtilisateurBDD } from '../infra/utilisateurBDD.js';
 import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { EntrepotFavori } from '../metier/entrepotFavori.js';
@@ -50,14 +51,18 @@ export class ConsoleAdministration {
   private knexMSC: Knex.Knex;
 
   constructor() {
-    const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
+    const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi(rapporteurErreurConsole);
     this.adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
     this.adaptateurHachage = fabriqueAdaptateurHachage({
       adaptateurEnvironnement,
     });
-    this.adaptateurRechercheEntreprise = new AdaptateurRechercheEntrepriseGouv(adaptateurEnvironnement);
+    this.adaptateurRechercheEntreprise = new AdaptateurRechercheEntrepriseGouv(
+      adaptateurEnvironnement,
+      rapporteurErreurConsole
+    );
 
     const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
+      rapporteurErreur: rapporteurErreurConsole,
       adaptateurEnvironnement,
     });
     const entrepotMesure = new EntrepotMesurePostgres(entrepotExigence);
@@ -69,7 +74,7 @@ export class ConsoleAdministration {
       adaptateurHachage: this.adaptateurHachage,
       entrepotMesure,
     });
-    this.adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge);
+    this.adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge, rapporteurErreurConsole);
     this.entrepotFavori = new EntrepotFavoriPostgres({
       adaptateurHachage: this.adaptateurHachage,
     });
