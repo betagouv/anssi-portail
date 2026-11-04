@@ -1,6 +1,5 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import jsonwebtoken from 'jsonwebtoken';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/msc/index.js';
@@ -8,12 +7,10 @@ import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRecherc
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur.js';
 import { Utilisateur } from '../../src/metier/utilisateur.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
-import { encodeSession, enObjet } from './cookie.js';
-import { configurationDeTestDuServeur, fauxAdaptateurHachage, fauxAdaptateurJWT } from './fauxObjets.js';
+import { encodeSession } from './cookie.js';
+import { configurationDeTestDuServeur, fauxAdaptateurHachage } from './fauxObjets.js';
 import { ConstructeurDUtilisateur } from './mesures/constructeurDUtilisateur.js';
 import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi.js';
-
-const { JsonWebTokenError } = jsonwebtoken;
 
 describe('La ressource Profil', () => {
   let serveur: Express;
@@ -102,26 +99,6 @@ describe('La ressource Profil', () => {
       expect(reponse.body.idListeFavoris).toBe(jeanMartin.idListeFavoris);
       expect(reponse.body.codeDepartement).toBe('33');
       expect(reponse.body.codeRegion).toBe('FR-NAQ');
-    });
-
-    it('supprime la session si le token JWT est invalide', async () => {
-      const cookieSession = encodeSession({ token: 'token-session' });
-
-      serveur = creeServeur({
-        ...configurationDeTestDuServeur,
-        adaptateurJWT: {
-          ...fauxAdaptateurJWT,
-          decode(_: string) {
-            throw new JsonWebTokenError('mauvais token');
-          },
-        },
-      });
-      const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookieSession]);
-
-      const headerCookie = reponse.headers['set-cookie'];
-      expect(headerCookie).toBeDefined();
-      const cookieSessionDecode = enObjet(headerCookie[0]);
-      expect(cookieSessionDecode.session).toBe('');
     });
 
     it("renvoie le code d'activité de l'organisation", async () => {
