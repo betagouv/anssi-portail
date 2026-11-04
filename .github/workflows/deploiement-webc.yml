@@ -38,6 +38,17 @@ jobs:
       CLEVER_S3_ACCESS_KEY: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
       CLEVER_S3_SECRET_KEY: ${{ secrets.CLEVER_S3_SECRET_KEY }}
 
+  mini-test-hameconnage:
+    uses: $/.github/workflows/deploiement-webc-unique.yml
+    with:
+      package: mini-test-hameconnage
+      repertoire: webc-externes/mini-test-hameconnage
+      environnement: WEB_COMPONENTS
+      nom: WebComponent Hameçonnage
+    secrets:
+      CLEVER_S3_ACCESS_KEY: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
+      CLEVER_S3_SECRET_KEY: ${{ secrets.CLEVER_S3_SECRET_KEY }}
+
   demande-diag:
     uses: $/.github/workflows/deploiement-webc-unique.yml
     with:
