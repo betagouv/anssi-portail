@@ -46,6 +46,7 @@ const récupèreLiens = (pages: string[], { fournisseurChemin }: ConfigurationSe
 
 export const ressourceSitemapXml = (pagesStatiques: string[], configurationServeur: ConfigurationServeur) => {
   const cheminVersSitemapXml = configurationServeur.fournisseurChemin.front.sitemapXml();
+  const rapporteurErreur = configurationServeur.rapporteurErreur;
   if (cheminVersSitemapXml.length === 0) return () => {};
   try {
     const sitemapStream = new SitemapStream({ hostname: 'https://messervices.cyber.gouv.fr' });
@@ -74,11 +75,11 @@ export const ressourceSitemapXml = (pagesStatiques: string[], configurationServe
           console.log(`Sitemap généré : ${cheminVersSitemapXml}`);
         })
         .catch((err) => {
-          console.error('Erreur lors de la génération :', err);
+          rapporteurErreur.erreur(err, 'Erreur lors de la génération');
         });
     });
   } catch (error) {
-    console.error('Erreur lors de la génération du sitemap :', error);
+    rapporteurErreur.erreur(error, 'Erreur lors de la génération du sitemap');
   }
 
   const routeur = Router();
