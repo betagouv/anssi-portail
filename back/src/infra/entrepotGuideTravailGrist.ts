@@ -16,8 +16,8 @@ export class EntrepotGuideTravailGrist extends EntrepotGrist<GuideGrist> impleme
     clientHttp?: ClientHttp;
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
-    const grist = adaptateurEnvironnement.grist();
-    super(clientHttp, grist.gestionGuides().urlTable(), grist.gestionGuides().cleApi(), grist.dureeCacheEnSecondes());
+    const grist = adaptateurEnvironnement.grist;
+    super(clientHttp, grist.gestionGuides.urlTable(), grist.gestionGuides.cleApi(), grist.dureeCacheEnSecondes());
   }
 
   private readonly convertiBesoin = (besoin: string): BesoinCyber | undefined => {

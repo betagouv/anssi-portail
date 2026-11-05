@@ -1,6 +1,6 @@
 type AdaptateurEnvironnement = {
   urlBaseMSC: () => string;
-  oidc: () => {
+  oidc: {
     authentificationMultiFacteursDésactivée: () => boolean;
     urlRedirectionApresAuthentification: () => string;
     urlRedirectionApresDeconnexion: () => string;
@@ -8,100 +8,102 @@ type AdaptateurEnvironnement = {
     clientId: () => string;
     clientSecret: () => string;
   };
-  serveur: () => {
+  serveur: {
     trustProxy: () => number;
     maxRequetesParMinute: () => number;
     maxRequetesParMinuteAPI: () => number;
     maxRequetesParMinuteRetoursUtilisateurs: () => number;
     ipAutorisees: () => false | string[];
   };
-  sentry: () => {
+  sentry: {
     dsn: () => string | undefined;
     environnement: () => string | undefined;
   };
-  crisp: () => {
+  crisp: {
     catégorieDuBlog: () => string;
     duréeDuCacheEnSecondes: () => number;
   };
-  hachage: () => {
+  hachage: {
     tousLesSecretsDeHachage: () => { version: number; secret: string }[];
   };
-  maintenance: () => {
+  maintenance: {
     actif: () => boolean;
     detailsPreparation: () => string | undefined;
   };
-  chiffrement: () => {
+  chiffrement: {
     cleChaCha20Hex: () => string;
   };
-  repartition: () => {
+  repartition: {
     nombreMinimumDeResultats: () => number;
   };
-  mattermost: () => {
+  mattermost: {
     webhookRetourExperience: () => string | undefined;
     webhookAvisUtilisateur: () => string | undefined;
     webhookAvisMesure: () => string | undefined;
   };
-  grist: () => {
+  grist: {
     baseURL: () => string;
-    financement: () => {
+    cleApi: () => string;
+    financement: {
       urlTable: () => string;
       cleApi: () => string;
     };
-    gestionGuides: () => {
+    gestionGuides: {
       urlTable: () => string;
       cleApi: () => string;
     };
-    guides: () => {
+    guides: {
       urlTable: () => string;
       cleApi: () => string;
     };
-    nis2: () => {
+    nis2: {
       idDocument: () => string;
       cleApi: () => string;
     };
     dureeCacheEnSecondes: () => number;
   };
-  urlCellar: () => {
+  urlCellar: {
     ressourcesCyber: () => string;
     guides: () => string;
     visas: () => string;
   };
-  cellar: () => {
+  cellar: {
     url: () => string;
     region: () => string;
-    gestionGuides: () => {
+    gestionGuides: {
       nomDuBucket: () => string;
     };
   };
-  matomo: () => {
+  matomo: {
     idSite: () => string;
   };
-  monAideCyber: () => {
+  monAideCyber: {
     url: () => string;
     dureeCacheStatistiquesEnSecondes: () => number;
   };
-  fonctionnalites: () => {
-    nis2: () => {
+  fonctionnalites: {
+    nis2: {
+      afficheObservations: () => boolean;
       afficheCyFun23: () => boolean;
     };
   };
-  rechercheEntreprise: () => {
+  rechercheEntreprise: {
     apiUrl: () => string;
   };
   nodeEnv: () => string | undefined;
   versionDeConstruction: () => string;
-  siret: () => {
+  siret: {
     desactiveValidationStricte: () => boolean;
   };
-  secrets: () => {
+  secrets: {
     jwt: () => string;
     cookie: () => string;
   };
-  brevo: () => {
+  brevo: {
     cléAPI: () => string;
     url: () => string;
   };
-  journal: () => {
+  journal: {
     baseDeDonnéesActive: () => boolean;
   };
 };
@@ -114,15 +116,15 @@ const CINQ_MINUTES = 300;
 
 const adaptateurEnvironnement: AdaptateurEnvironnement = {
   urlBaseMSC: () => process.env.URL_BASE_MSC || '',
-  oidc: () => ({
+  oidc: {
     authentificationMultiFacteursDésactivée: () => process.env.AUTHENTIFICATION_MULTI_FACTEURS_DESACTIVEE === 'true',
     urlRedirectionApresAuthentification: () => `${process.env.URL_BASE_MSC}/oidc/apres-authentification`,
     urlRedirectionApresDeconnexion: () => `${process.env.URL_BASE_MSC}/oidc/apres-deconnexion`,
     urlBase: () => process.env.OIDC_URL_BASE || '/',
     clientId: () => process.env.OIDC_CLIENT_ID || '',
     clientSecret: () => process.env.OIDC_CLIENT_SECRET || '',
-  }),
-  serveur: () => ({
+  },
+  serveur: {
     trustProxy: () => {
       const trustProxyEnChaine = process.env.SERVEUR_TRUST_PROXY || '0';
       const trustProxyEnNombre = Number(trustProxyEnChaine);
@@ -160,20 +162,20 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       }
     },
     ipAutorisees: () => process.env.SERVEUR_ADRESSES_IP_AUTORISEES?.split(',') ?? false,
-  }),
-  sentry: () => ({
+  },
+  sentry: {
     dsn: () => process.env.SENTRY_DSN,
     environnement: () => process.env.SENTRY_ENVIRONNEMENT,
-  }),
-  crisp: () => ({
+  },
+  crisp: {
     catégorieDuBlog: () => process.env.CRISP_CHEMIN_CATEGORIE_DU_BLOG || '',
     duréeDuCacheEnSecondes: () => {
       const dureeEnChaine = process.env.CRISP_DUREE_CACHE_EN_SECONDES;
       const dureeEnNombre = Number(dureeEnChaine);
       return isNaN(dureeEnNombre) ? CINQ_MINUTES : dureeEnNombre;
     },
-  }),
-  hachage: () => ({
+  },
+  hachage: {
     tousLesSecretsDeHachage: () => {
       type VersionDeSecret = {
         version: string;
@@ -197,12 +199,12 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
         })
         .sort(({ version: version1 }, { version: version2 }) => version1 - version2);
     },
-  }),
-  maintenance: () => ({
+  },
+  maintenance: {
     actif: () => process.env.MODE_MAINTENANCE === 'true',
     detailsPreparation: () => process.env.PREPARATION_MODE_MAINTENANCE,
-  }),
-  chiffrement: () => ({
+  },
+  chiffrement: {
     cleChaCha20Hex: () => {
       const cleHex = process.env.CHIFFREMENT_CHACHA20_CLE_HEX;
       if (!cleHex) {
@@ -210,8 +212,8 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       }
       return cleHex;
     },
-  }),
-  repartition: () => ({
+  },
+  repartition: {
     nombreMinimumDeResultats: () => {
       const nombreMinimumDeResultats = Number(process.env.NOMBRE_MINIMUM_DE_RESULTATS_COMPARAISON || 50);
       if (!Number.isInteger(nombreMinimumDeResultats)) {
@@ -219,79 +221,78 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       }
       return nombreMinimumDeResultats;
     },
-  }),
-  mattermost: () => ({
+  },
+  mattermost: {
     webhookAvisUtilisateur: () => process.env.WEBHOOK_MATTERMOST_AVIS_UTILISATEUR,
     webhookRetourExperience: () => process.env.WEBHOOK_MATTERMOST_RETOURS_EXPERIENCE,
     webhookAvisMesure: () => process.env.WEBHOOK_MATTERMOST_AVIS_MESURE,
-  }),
-  grist: () => ({
+  },
+  grist: {
     baseURL: () => process.env.GRIST_BASE_URL || '',
     cleApi: () => process.env.GRIST_API_KEY || '',
-    financement: () => ({
+    financement: {
       urlTable: () => process.env.FINANCEMENTS_GRIST_URL || '',
       cleApi: () => process.env.FINANCEMENTS_GRIST_API_KEY || '',
-    }),
-    gestionGuides: () => ({
+    },
+    gestionGuides: {
       urlTable: () => process.env.GUIDES_TRAVAIL_GRIST_URL || '',
       cleApi: () => process.env.GUIDES_TRAVAIL_GRIST_API_KEY || '',
-    }),
-    guides: () => ({
+    },
+    guides: {
       urlTable: () => process.env.GUIDES_GRIST_URL || '',
       cleApi: () => process.env.GUIDES_GRIST_API_KEY || '',
-    }),
-    nis2: () => ({
+    },
+    nis2: {
       idDocument: () => process.env.NIS2_GRIST_ID_DOCUMENT || '',
       cleApi: () => process.env.NIS2_GRIST_API_KEY || process.env.GRIST_API_KEY || '',
-    }),
+    },
     dureeCacheEnSecondes: () => {
       const dureeEnChaine = process.env.GUIDES_GRIST_DUREE_CACHE_EN_SECONDES;
       const dureeEnNombre = Number(dureeEnChaine);
       return isNaN(dureeEnNombre) ? CINQ_MINUTES : dureeEnNombre;
     },
-  }),
-  urlCellar: () => {
-    const pattternURLDeBase = process.env.CELLAR_URL ?? '';
-    return {
-      guides: () =>
-        process.env.CELLAR_BUCKET_GUIDES
-          ? ajouteBarreObliqueFinale(pattternURLDeBase.replace('%BUCKET%', process.env.CELLAR_BUCKET_GUIDES))
-          : '',
-      ressourcesCyber: () =>
-        process.env.CELLAR_BUCKET_RESSOURCES_CYBER
-          ? ajouteBarreObliqueFinale(pattternURLDeBase.replace('%BUCKET%', process.env.CELLAR_BUCKET_RESSOURCES_CYBER))
-          : '',
-      visas: () =>
-        process.env.CELLAR_BUCKET_VISAS
-          ? ajouteBarreObliqueFinale(pattternURLDeBase.replace('%BUCKET%', process.env.CELLAR_BUCKET_VISAS))
-          : '',
-    };
   },
-  cellar: () => ({
+  urlCellar: {
+    guides: () =>
+      process.env.CELLAR_BUCKET_GUIDES
+        ? ajouteBarreObliqueFinale((process.env.CELLAR_URL ?? '').replace('%BUCKET%', process.env.CELLAR_BUCKET_GUIDES))
+        : '',
+    ressourcesCyber: () =>
+      process.env.CELLAR_BUCKET_RESSOURCES_CYBER
+        ? ajouteBarreObliqueFinale(
+            (process.env.CELLAR_URL ?? '').replace('%BUCKET%', process.env.CELLAR_BUCKET_RESSOURCES_CYBER)
+          )
+        : '',
+    visas: () =>
+      process.env.CELLAR_BUCKET_VISAS
+        ? ajouteBarreObliqueFinale((process.env.CELLAR_URL ?? '').replace('%BUCKET%', process.env.CELLAR_BUCKET_VISAS))
+        : '',
+  },
+  cellar: {
     region: () => process.env.CELLAR_REGION ?? '',
     url: () => process.env.CELLAR_BASE_URL ?? '',
-    gestionGuides: () => ({
+    gestionGuides: {
       nomDuBucket: () => process.env.CELLAR_BUCKET_GESTION_GUIDES ?? '',
-    }),
-  }),
-  matomo: () => ({
+    },
+  },
+  matomo: {
     idSite: () => process.env.MATOMO_ID || '',
-  }),
-  monAideCyber: () => ({
+  },
+  monAideCyber: {
     url: () => process.env.MON_AIDE_CYBER_URL_BASE ?? '',
     dureeCacheStatistiquesEnSecondes: () => {
       const dureeEnChaine = process.env.MON_AIDE_CYBER_DUREE_CACHE_STATISTIQUES_EN_SECONDES;
       const dureeEnNombre = Number(dureeEnChaine);
       return Number.isNaN(dureeEnNombre) ? CINQ_MINUTES : dureeEnNombre;
     },
-  }),
-  fonctionnalites: () => ({
-    nis2: () => ({
+  },
+  fonctionnalites: {
+    nis2: {
       afficheObservations: () => process.env.FEATURE_FLAG_NIS2_OBSERVATIONS === 'true',
       afficheCyFun23: () => process.env.FEATURE_FLAG_NIS2_CYFUN23 === 'true',
-    }),
-  }),
-  rechercheEntreprise: () => ({
+    },
+  },
+  rechercheEntreprise: {
     apiUrl: () => {
       const valeur = process.env.RECHERCHE_ENTREPRISE_API_URL;
       if (valeur === '' || !valeur) {
@@ -299,13 +300,13 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       }
       return valeur;
     },
-  }),
+  },
   nodeEnv: () => process.env.NODE_ENV,
   versionDeConstruction: () => (process.env.CC_COMMIT_ID || '1').substring(0, 8),
-  siret: () => ({
+  siret: {
     desactiveValidationStricte: () => process.env.SIRET_DESACTIVE_VALIDATION_STRICTE === 'true',
-  }),
-  secrets: () => ({
+  },
+  secrets: {
     jwt: () => {
       const valeur = process.env.SECRET_JWT;
       if (valeur === '' || !valeur) {
@@ -320,14 +321,14 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       }
       return valeur;
     },
-  }),
-  brevo: () => ({
+  },
+  brevo: {
     cléAPI: () => process.env.BREVO_CLE_API || '',
     url: () => process.env.BREVO_API_URL_BASE || '',
-  }),
-  journal: () => ({
+  },
+  journal: {
     baseDeDonnéesActive: () => process.env.BASE_DONNEES_JOURNAL_EN_MEMOIRE !== 'true',
-  }),
+  },
 };
 
 export { AdaptateurEnvironnement, adaptateurEnvironnement };

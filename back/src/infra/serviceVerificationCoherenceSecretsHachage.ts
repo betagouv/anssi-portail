@@ -56,14 +56,14 @@ export const fabriqueServiceVerificationCoherenceSecretsHachage = ({
   adaptateurEnvironnement: AdaptateurEnvironnement;
 }): ServiceCoherenceSecretsDeHachage => ({
   verifieCoherenceSecrets: async () => {
-    if (adaptateurEnvironnement.maintenance().actif()) {
+    if (adaptateurEnvironnement.maintenance.actif()) {
       // eslint-disable-next-line no-console
       console.log('🏗 Pas de vérification des sels en mode maintenance');
       return;
     }
 
     const empreintesDesSecretsAppliques = await entrepotSecretHachage.tous();
-    const tousLesSecretsDeHachageDeLaConfig = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
+    const tousLesSecretsDeHachageDeLaConfig = adaptateurEnvironnement.hachage.tousLesSecretsDeHachage();
 
     const verifications: (() => Promise<void> | void)[] = [
       () => {
@@ -71,8 +71,8 @@ export const fabriqueServiceVerificationCoherenceSecretsHachage = ({
           throw new Error('💥 Aucun secret de hachage dans la config.');
         }
       },
-      adaptateurEnvironnement.secrets().jwt,
-      adaptateurEnvironnement.secrets().cookie,
+      adaptateurEnvironnement.secrets.jwt,
+      adaptateurEnvironnement.secrets.cookie,
       async () => {
         await verifieQueChaqueSecretEstCoherent(
           tousLesSecretsDeHachageDeLaConfig,

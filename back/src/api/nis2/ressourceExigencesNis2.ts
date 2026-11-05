@@ -30,7 +30,7 @@ export const ressourceExigencesNis2 = ({ adaptateurEnvironnement, entrepotExigen
       }
 
       if (
-        !adaptateurEnvironnement.fonctionnalites().nis2().afficheCyFun23() &&
+        !adaptateurEnvironnement.fonctionnalites.nis2.afficheCyFun23() &&
         (referentielCible === 'CyFun23' || referentielSource === 'CyFun23')
       ) {
         return reponse.sendStatus(HttpStatusCode.NotFound);

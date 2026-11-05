@@ -5,7 +5,7 @@ import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
 
 export class MigrationChiffrement {
   constructor(private readonly adaptateurEnvironnement: AdaptateurEnvironnement) {
-    if (!this.adaptateurEnvironnement.maintenance().actif()) {
+    if (!this.adaptateurEnvironnement.maintenance.actif()) {
       throw new Error(`La migration de chiffrement requiert que l'application soit en mode maintenance !`);
     }
   }

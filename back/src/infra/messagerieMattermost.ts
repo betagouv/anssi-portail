@@ -18,7 +18,7 @@ export const messagerieMattermost = ({
   adaptateurEnvironnement: AdaptateurEnvironnement;
 }): MessagerieInstantanee => ({
   notifieUnRetourExperience: async (retourExperience: RetourExperience) => {
-    const urlWebhook = adaptateurEnvironnement.mattermost().webhookRetourExperience();
+    const urlWebhook = adaptateurEnvironnement.mattermost.webhookRetourExperience();
     if (urlWebhook) {
       const message = `### Retour utilisateur
 Un utilisateur a laissé un retour d’expérience suite à la non-complétion du formulaire de demande d’aide
@@ -31,7 +31,7 @@ Email de contact : ${retourExperience.emailDeContact}`;
   },
 
   notifieUnAvisUtilisateur: async (avisUtilisateur: AvisUtilisateur) => {
-    const urlWebhook = adaptateurEnvironnement.mattermost().webhookAvisUtilisateur();
+    const urlWebhook = adaptateurEnvironnement.mattermost.webhookAvisUtilisateur();
 
     if (urlWebhook) {
       const message = `### Avis utilisateur
@@ -45,7 +45,7 @@ Email de contact : ${avisUtilisateur.emailDeContact}`;
   },
 
   notifieUnAvisNegatifSurUneMesure: async (avis: AvisNegatifSurUneMesure) => {
-    const urlWebhook = adaptateurEnvironnement.mattermost().webhookAvisMesure();
+    const urlWebhook = adaptateurEnvironnement.mattermost.webhookAvisMesure();
 
     if (urlWebhook) {
       const message = `### :alert: Avis négatif sur la mesure ${avis.idMesure}
@@ -57,7 +57,7 @@ ${aseptiseMarkdown(avis.commentaire ?? '')}`;
   },
 
   notifieUnRetourNégatifSurMiniTest: async (retour: RetourNégatifSurMiniTest) => {
-    const urlWebhook = adaptateurEnvironnement.mattermost().webhookAvisUtilisateur();
+    const urlWebhook = adaptateurEnvironnement.mattermost.webhookAvisUtilisateur();
 
     const nomMiniTest = (
       {
@@ -80,7 +80,7 @@ ${aseptiseMarkdown(retour.commentaire ? `Commentaire: ${retour.commentaire}` : '
   },
 
   notifieUnRetourNégatifSurArticle: async (retour: RetourNégatifSurArticle) => {
-    const urlWebhook = adaptateurEnvironnement.mattermost().webhookAvisUtilisateur();
+    const urlWebhook = adaptateurEnvironnement.mattermost.webhookAvisUtilisateur();
 
     if (urlWebhook) {
       const message = `### Retour utilisateur Article
@@ -91,7 +91,7 @@ ${aseptiseMarkdown(retour.commentaire ? `Commentaire: ${retour.commentaire}` : '
   },
 
   notifieUnRetourNégatifSurOutil: async (retour: RetourNégatifSurOutil) => {
-    const urlWebhook = adaptateurEnvironnement.mattermost().webhookAvisUtilisateur();
+    const urlWebhook = adaptateurEnvironnement.mattermost.webhookAvisUtilisateur();
 
     if (urlWebhook) {
       const message = `### Retour utilisateur Outil

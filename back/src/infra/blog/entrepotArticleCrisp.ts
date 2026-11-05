@@ -20,18 +20,18 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
     private readonly adaptateurEnvironnement: AdaptateurEnvironnement,
     private readonly rapporteur: Rapporteur
   ) {
-    this.cacheDesRésumés = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
-    this.cacheDesArticles = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
+    this.cacheDesRésumés = new Cache({ ttl: this.adaptateurEnvironnement.crisp.duréeDuCacheEnSecondes() });
+    this.cacheDesArticles = new Cache({ ttl: this.adaptateurEnvironnement.crisp.duréeDuCacheEnSecondes() });
   }
 
   async tousLesArticlesDeBlog(): Promise<RésuméArticle[]> {
-    if (!this.adaptateurEnvironnement.crisp().catégorieDuBlog()) {
+    if (!this.adaptateurEnvironnement.crisp.catégorieDuBlog()) {
       return [];
     }
     const récupèreDepuisCrisp = async () => {
       try {
         const articlesCrisp = await this.cmsCrisp.recupereArticlesParChemin(
-          this.adaptateurEnvironnement.crisp().catégorieDuBlog()
+          this.adaptateurEnvironnement.crisp.catégorieDuBlog()
         );
         return articlesCrisp
           .filter((ac): ac is ResumeArticleCrispAvecSlug & { slug: string } => !!ac.slug)

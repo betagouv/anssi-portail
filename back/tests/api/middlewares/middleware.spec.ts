@@ -331,10 +331,10 @@ describe('Le middleware', () => {
 
   describe('sur vérification du mode maintenance', () => {
     it('affiche la page de maintenance lorsque le mode est actif', async () => {
-      adaptateurEnvironnement.maintenance = () => ({
+      adaptateurEnvironnement.maintenance = {
         actif: () => true,
         detailsPreparation: () => undefined,
-      });
+      };
 
       const pageMaintenance = vi.spyOn(fournisseurChemin.jekyll, 'pageMaintenance').mockReturnValue(ressourceFactice());
 
@@ -345,10 +345,10 @@ describe('Le middleware', () => {
     });
 
     it('appelle la suite lorsque le mode est inactif', async () => {
-      adaptateurEnvironnement.maintenance = () => ({
+      adaptateurEnvironnement.maintenance = {
         actif: () => false,
         detailsPreparation: () => undefined,
-      });
+      };
       let suiteAppelee = false;
 
       await middleware.verifieModeMaintenance(requete, reponse, () => {

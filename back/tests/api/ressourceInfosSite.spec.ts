@@ -26,10 +26,10 @@ describe('La ressource Informations du site', () => {
     });
 
     it("retourne le jour et l'heure de la maintenance en préparation", async () => {
-      adaptateurEnvironnement.maintenance = () => ({
+      adaptateurEnvironnement.maintenance = {
         actif: () => false,
         detailsPreparation: () => 'Vendredi 20 juin - 13h à 14h',
-      });
+      };
 
       const reponse = await request(serveur).get('/api/infos-site');
 
@@ -40,10 +40,10 @@ describe('La ressource Informations du site', () => {
     });
 
     it("n'est pas défini si aucune maintenance en préparation", async () => {
-      adaptateurEnvironnement.maintenance = () => ({
+      adaptateurEnvironnement.maintenance = {
         actif: () => false,
         detailsPreparation: () => undefined,
-      });
+      };
 
       const reponse = await request(serveur).get('/api/infos-site');
 

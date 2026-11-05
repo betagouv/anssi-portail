@@ -4,7 +4,7 @@ import { Rapporteur } from '../metier/rapporteur.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 
 export const initialiseSentry = (environnement: AdaptateurEnvironnement) => {
-  const config = environnement.sentry();
+  const config = environnement.sentry;
   Sentry.init({
     dsn: config.dsn(),
     environment: config.environnement(),

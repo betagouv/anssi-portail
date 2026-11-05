@@ -45,7 +45,7 @@ export class MigrationHash {
     };
     this.knexMSCJournal = knex(configDuJournal);
     this.knexMSC = knex(config);
-    if (!adaptateurEnvironnement.maintenance().actif()) {
+    if (!adaptateurEnvironnement.maintenance.actif()) {
       throw new Error(`La migration des hash requiert que l'application soit en mode maintenance !`);
     }
     this.adaptateurHachage = fabriqueAdaptateurHachage({
@@ -148,8 +148,7 @@ export class MigrationHash {
 
     console.log('Configuration des sels cohérente');
 
-    const versionPrecedenteAttendue = adaptateurEnvironnement
-      .hachage()
+    const versionPrecedenteAttendue = adaptateurEnvironnement.hachage
       .tousLesSecretsDeHachage()
       .filter(({ version: numVersion }) => numVersion !== version)
       .map(({ version: numVersion }) => `v${numVersion}`)

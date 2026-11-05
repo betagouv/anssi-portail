@@ -8,6 +8,6 @@ export interface AdaptateurJWT {
 
 export const adaptateurJWT = (adaptateurEnvironnement: AdaptateurEnvironnement): AdaptateurJWT => ({
   genereToken: (donnees: Record<string, unknown>) =>
-    jwt.sign(donnees, adaptateurEnvironnement.secrets().jwt(), { expiresIn: '1h' }),
-  decode: (token: string) => jwt.verify(token, adaptateurEnvironnement.secrets().jwt()) as JwtPayload,
+    jwt.sign(donnees, adaptateurEnvironnement.secrets.jwt(), { expiresIn: '1h' }),
+  decode: (token: string) => jwt.verify(token, adaptateurEnvironnement.secrets.jwt()) as JwtPayload,
 });

@@ -39,7 +39,7 @@ export interface AdaptateurOIDC {
   genereDemandeDeconnexion: (idToken: string) => Promise<{ url: string; state: string }>;
 }
 
-const configurationOidc = adaptateurEnvironnement.oidc();
+const configurationOidc = adaptateurEnvironnement.oidc;
 
 async function recupereClient() {
   return discovery(new URL(configurationOidc.urlBase()), configurationOidc.clientId(), {

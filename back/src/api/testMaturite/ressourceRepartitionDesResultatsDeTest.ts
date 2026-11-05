@@ -30,7 +30,7 @@ export const ressourceRepartitionDesResultatsDeTest = ({
           codeRegion,
           codeTrancheEffectif,
         });
-        if (tousLesResultats.length < adaptateurEnvironnement.repartition().nombreMinimumDeResultats()) {
+        if (tousLesResultats.length < adaptateurEnvironnement.repartition.nombreMinimumDeResultats()) {
           reponse.sendStatus(HttpStatusCode.NoContent);
           return;
         }

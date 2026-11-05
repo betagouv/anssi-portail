@@ -28,7 +28,7 @@ describe('Le rapporteur d’erreur', () => {
   it('initialise Sentry séparément du signalement', () => {
     initialiseSentry(fauxAdaptateurEnvironnement);
     expect(Sentry.init).toHaveBeenCalledWith(
-      expect.objectContaining({ dsn: fauxAdaptateurEnvironnement.sentry().dsn() })
+      expect.objectContaining({ dsn: fauxAdaptateurEnvironnement.sentry.dsn() })
     );
     expect(Sentry.setTag).toHaveBeenCalledWith('msc-source', 'backend');
   });

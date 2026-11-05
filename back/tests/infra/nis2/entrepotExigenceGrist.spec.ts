@@ -67,10 +67,10 @@ describe("L'entrepot d'exigence Grist", () => {
       clientHttp,
       adaptateurEnvironnement: {
         ...fauxAdaptateurEnvironnement,
-        grist: () => ({
-          ...fauxAdaptateurEnvironnement.grist(),
+        grist: {
+          ...fauxAdaptateurEnvironnement.grist,
           dureeCacheEnSecondes: () => 0,
-        }),
+        },
       },
     });
 

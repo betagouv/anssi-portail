@@ -96,10 +96,10 @@ describe("L'entrepôt d'article Crisp", () => {
 
     it("retourne une liste vide si la catégorie n'est pas fournie", async () => {
       cmsCrisp.recupereArticlesParChemin = vi.fn().mockResolvedValue(articlesCrisp);
-      adaptateurEnvironnement.crisp = () => ({
-        ...fauxAdaptateurEnvironnement.crisp(),
+      adaptateurEnvironnement.crisp = {
+        ...fauxAdaptateurEnvironnement.crisp,
         catégorieDuBlog: () => '',
-      });
+      };
 
       const résumés = await entrepôtArticle.tousLesArticlesDeBlog();
 
