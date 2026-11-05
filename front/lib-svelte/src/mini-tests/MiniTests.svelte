@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import { nEstPasEnvProduction } from '$plateforme/environnement';
   import { profilStore } from '../stores/profil.store';
   import BoutonsPartagePage from '../test-maturite/BoutonsPartagePage.svelte';
   import type { PropriétésFilAriane } from '../ui/filAriane';
@@ -139,22 +140,24 @@
           <LaptopAnime {survol} />
         {/snippet}
       </CarteTest>
-      <CarteTest
-        cible="Hameconnage"
-        couleurDeFond="--background-alt-pink-macaron"
-        titre="Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?"
-        href="/hameconnage"
-        réactions={donnéesPage?.réactions.Hameconnage ?? {}}
-        badge={{
-          libellé: compteursArrondis.Hameconnage ? `+${compteursArrondis.Hameconnage} tests réalisés` : undefined,
-          accent: 'pink-macaron',
-        }}
-        estimationEnMinutes={6}
-      >
-        {#snippet image(survol)}
-          <HameconnageAnime {survol} />
-        {/snippet}
-      </CarteTest>
+      {#if nEstPasEnvProduction}
+        <CarteTest
+          cible="Hameconnage"
+          couleurDeFond="--background-alt-pink-macaron"
+          titre="Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?"
+          href="/hameconnage"
+          réactions={donnéesPage?.réactions.Hameconnage ?? {}}
+          badge={{
+            libellé: compteursArrondis.Hameconnage ? `+${compteursArrondis.Hameconnage} tests réalisés` : undefined,
+            accent: 'pink-macaron',
+          }}
+          estimationEnMinutes={6}
+        >
+          {#snippet image(survol)}
+            <HameconnageAnime {survol} />
+          {/snippet}
+        </CarteTest>
+      {/if}
     </div>
     <BoutonsPartagePage cheminPartagé="/faire-le-test" sujetMail="Tests gratuits pour maîtriser les risques cyber" />
   </div>
