@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { DsfrUpload } from '@lab-anssi/ui-kit';
   import Bouton from '../../ui/Bouton.svelte';
   import type { PropriétésFilAriane } from '../../ui/filAriane';
   import HerosRiche from '../../ui/HerosRiche.svelte';
@@ -10,11 +11,12 @@
   import Thématique from './Thematique.svelte';
   import { thématiques } from './thematiques';
 
+  const TAILLE_MAX_LOGO_EN_OCTETS = 2_000_000;
   let aperçuEnCours = $state(false);
+  let téléchargementEnCours = $state(false);
+  let logoTropVolumineux = $state(false);
 
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Kit de sensibilisation interne' };
-
-  let téléchargementEnCours = $state(false);
 
   const téléchargeLeKit = async () => {
     try {
@@ -24,6 +26,12 @@
     } finally {
       téléchargementEnCours = false;
     }
+  };
+
+  const définisLeLogo = (fichiers: FileList | null) => {
+    const fichier = fichiers?.[0] ?? null;
+    logoTropVolumineux = fichier !== null && fichier.size > TAILLE_MAX_LOGO_EN_OCTETS;
+    archiveKit.définisLogo(logoTropVolumineux ? null : fichier);
   };
 
   const prévisualiser = () => {
@@ -46,22 +54,19 @@
   <div class="encart">
     <div class="section-gauche">
       <h2 class="fr-h5">6 affiches prêtes à imprimer et des courriels prêts à copier</h2>
-      <div class="choix-fichier">
-        <p>Ajouter votre logo aux affiches (facultatif)</p>
-        <p class="texte-mention-xs">
-          Format supportés&nbsp;: JPG, PNG. Poids&nbsp;: 2 Mo max. Traité dans votre navigateur, jamais envoyé.
-        </p>
-        <input
-          type="file"
-          id="couverture"
-          name="couverture"
-          accept="image/jpeg, image/png, image/jpg"
-          onchange={(e) => archiveKit.définisLogo(e.currentTarget.files?.[0] ?? null)}
-        />
-      </div>
+      <DsfrUpload
+        id="logo"
+        name="logo"
+        label="Ajouter votre logo aux affiches (facultatif)"
+        hint="Format supportés&nbsp;: JPG, PNG. Poids&nbsp;: 2 Mo max. Traité dans votre navigateur, jamais envoyé."
+        accept="image/jpeg, image/png, image/jpg"
+        status={logoTropVolumineux ? 'error' : 'default'}
+        errorMessage="Le logo dépasse la taille maximale de 2 Mo. Choisissez un fichier plus léger."
+        onvaluechanged={définisLeLogo}
+      />
       <div class="actions">
         <Bouton
-          desactive={téléchargementEnCours}
+          desactive={téléchargementEnCours || logoTropVolumineux}
           icone="download-line"
           libelle="Télécharger le kit"
           surClic={téléchargeLeKit}
@@ -130,15 +135,6 @@
 
         h2 {
           margin-bottom: 0;
-        }
-
-        .choix-fichier {
-          > :first-child {
-            margin: 0 0 0.75rem;
-          }
-          > :nth-child(2) {
-            margin: 0 0 1rem;
-          }
         }
 
         .actions {
