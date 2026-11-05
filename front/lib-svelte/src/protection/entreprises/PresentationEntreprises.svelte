@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { estEnvDémo } from '$plateforme/environnement';
   import { type PropriétésFilAriane } from '../../ui/filAriane';
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import MotEnExergue from '../../ui/MotEnExergue.svelte';
@@ -12,8 +13,9 @@
 </script>
 
 <HerosRiche
-  description="Toutes les entreprises sont exposées au risque de cyberattaques. En 2025, les TPE/PME et ETI ont notamment
-      représenté 48&nbsp;% des victimes de rançongiciels ou ransowmare représentant les premières entités visées."
+  description={estEnvDémo
+    ? 'Toutes les entreprises sont exposées au risque de cyberattaques. En 2025, les TPE/PME et ETI ont notamment représenté 48&nbsp;% des victimes de rançongiciels ou ransomware représentant les premières entités visées.'
+    : 'Toutes les entreprises sont exposées au risque de cyberattaques. En 2025, les TPE/PME et ETI ont notamment représenté 48&nbsp;% des victimes de rançongiciels ou ransowmare représentant les premières entités visées.'}
   propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
   variante="vert-clair"
 >
