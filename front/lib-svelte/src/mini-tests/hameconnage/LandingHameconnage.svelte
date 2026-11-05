@@ -12,7 +12,7 @@
     mode === 'autonome'
       ? undefined
       : {
-          feuille: 'Hameçonnage&nbsp;: saurez-vous distinguez le mail légitime du faux&nbsp;?',
+          feuille: 'Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?',
           branche: {
             nom: 'Faire le test !',
             lien: '/faire-le-test',
@@ -32,7 +32,7 @@
     {urlBase}
   >
     {#snippet titreHtml()}
-      Hame&shy;çonnage&nbsp;: saurez-vous distinguez le mail légitime du faux&nbsp;?
+      Hame&shy;çonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?
     {/snippet}
     {#snippet illustration()}
       <figure class="illustration">
