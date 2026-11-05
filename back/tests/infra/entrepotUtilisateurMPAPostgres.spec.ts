@@ -78,6 +78,7 @@ describe("L'entrepôt utilisateur MPA Postgres", () => {
       adaptateurHachage: fauxAdaptateurHachage,
       adaptateurChiffrement,
       entrepotMesure: new EntrepotMesureMemoire(),
+      rapporteurErreur: fauxRapporteurErreur,
     });
 
     const utilisateur = await entrepôt.parEmailHache('hache');
