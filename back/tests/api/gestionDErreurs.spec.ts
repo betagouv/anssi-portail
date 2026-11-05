@@ -9,14 +9,14 @@ describe('La gestion des erreurs HTTP', () => {
   it('renvoie 401 pour une IP refusée sans transmettre ni signaler l’erreur', async () => {
     const app = express();
     const controleurErreurs = vi.fn();
-    const rapporteurErreur = { erreur: vi.fn() };
+    const rapporteur = { erreur: vi.fn() };
     app.use(() => {
       throw new expressIpFilter.IpDeniedError('refus', '127.0.0.1');
     });
-    configureLaGestionDErreur(app, { ...configurationDeTestDuServeur, controleurErreurs, rapporteurErreur });
+    configureLaGestionDErreur(app, { ...configurationDeTestDuServeur, controleurErreurs, rapporteur });
     expect((await request(app).get('/')).status).toBe(401);
     expect(controleurErreurs).not.toHaveBeenCalled();
-    expect(rapporteurErreur.erreur).not.toHaveBeenCalled();
+    expect(rapporteur.erreur).not.toHaveBeenCalled();
   });
   it('transmet les erreurs au contrôleur injecté puis à Express', async () => {
     const app = express();

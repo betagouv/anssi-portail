@@ -8,7 +8,7 @@ import { creeServeur } from '../../../src/api/msc/index.js';
 import { AdaptateurCellar, CleDuBucket } from '../../../src/infra/adaptateurCellar.js';
 import { MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire.js';
-import { configurationDeTestDuServeur, fauxAdaptateurCellar, fauxRapporteurErreur } from '../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxAdaptateurCellar, fauxRapporteur } from '../fauxObjets.js';
 import { guideZeroTrust } from '../objetsPretsALEmploi.js';
 
 describe("La ressource de document d'un guide", () => {
@@ -25,7 +25,7 @@ describe("La ressource de document d'un guide", () => {
   });
 
   beforeEach(() => {
-    busEvenements = new MockBusEvenement(fauxRapporteurErreur);
+    busEvenements = new MockBusEvenement(fauxRapporteur);
     entrepotGuide = new EntrepotGuideMemoire();
     adaptateurCellar = {
       ...fauxAdaptateurCellar,

@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
 import { EntrepôtArticleCrisp } from '../../src/infra/blog/entrepotArticleCrisp.js';
 import { EntrepôtArticle } from '../../src/metier/blog/entrepotArticle.js';
-import { fauxAdaptateurEnvironnement, fauxRapporteurErreur } from '../api/fauxObjets.js';
+import { fauxAdaptateurEnvironnement, fauxRapporteur } from '../api/fauxObjets.js';
 import { MockCmsCrisp } from '../mockCmsCrisp.js';
 
 describe("L'entrepôt d'article Crisp", () => {
@@ -30,7 +30,7 @@ describe("L'entrepôt d'article Crisp", () => {
     vi.setSystemTime(new Date('2025-01-01T00:00:00Z'));
     adaptateurEnvironnement = { ...fauxAdaptateurEnvironnement };
     cmsCrisp = new MockCmsCrisp();
-    entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, adaptateurEnvironnement, fauxRapporteurErreur);
+    entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, adaptateurEnvironnement, fauxRapporteur);
   });
 
   afterEach(() => {
@@ -39,12 +39,12 @@ describe("L'entrepôt d'article Crisp", () => {
 
   it('signale un échec de lecture et retourne une liste vide', async () => {
     const erreur = new Error('Crisp indisponible');
-    const rapporteurErreur = { erreur: vi.fn() };
+    const rapporteur = { erreur: vi.fn() };
     vi.spyOn(cmsCrisp, 'recupereArticlesParChemin').mockRejectedValue(erreur);
-    const entrepôt = new EntrepôtArticleCrisp(cmsCrisp, adaptateurEnvironnement, rapporteurErreur);
+    const entrepôt = new EntrepôtArticleCrisp(cmsCrisp, adaptateurEnvironnement, rapporteur);
 
     expect(await entrepôt.tousLesArticlesDeBlog()).toEqual([]);
-    expect(rapporteurErreur.erreur).toHaveBeenCalledExactlyOnceWith(erreur, 'Erreur sur tousLesArticlesDeBlog');
+    expect(rapporteur.erreur).toHaveBeenCalledExactlyOnceWith(erreur, 'Erreur sur tousLesArticlesDeBlog');
   });
 
   describe('lors de la récupération des résumés', () => {

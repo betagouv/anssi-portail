@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/msc/index.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { MockBusEvenement } from '../bus/busPourLesTests.js';
-import { configurationDeTestDuServeur, fauxAdaptateurEmail, fauxRapporteurErreur } from './fauxObjets.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEmail, fauxRapporteur } from './fauxObjets.js';
 
 describe('La ressource d’abonnement à l’infolettre', () => {
   let serveur: Express;
@@ -16,7 +16,7 @@ describe('La ressource d’abonnement à l’infolettre', () => {
     adaptateurEmail = {
       ...fauxAdaptateurEmail,
     };
-    busEvenements = new MockBusEvenement(fauxRapporteurErreur);
+    busEvenements = new MockBusEvenement(fauxRapporteur);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements,

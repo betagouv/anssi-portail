@@ -12,11 +12,7 @@ import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesT
 import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurRechercheEntreprise,
-  fauxRapporteurErreur,
-} from '../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise, fauxRapporteur } from '../fauxObjets.js';
 import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi.js';
 
 describe('La ressource qui gère un résultat de test', () => {
@@ -33,7 +29,7 @@ describe('La ressource qui gère un résultat de test', () => {
       email: jeanneDupont.email,
       token: 'token',
     });
-    busEvenements = fabriqueBusPourLesTests(fauxRapporteurErreur);
+    busEvenements = fabriqueBusPourLesTests(fauxRapporteur);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       entrepotResultatTest,

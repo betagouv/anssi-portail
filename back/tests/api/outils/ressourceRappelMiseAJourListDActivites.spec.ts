@@ -9,7 +9,7 @@ import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js'
 import { MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';
-import { configurationDeTestDuServeur, fauxAdaptateurHorloge, fauxRapporteurErreur } from '../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxAdaptateurHorloge, fauxRapporteur } from '../fauxObjets.js';
 import { jeanneDupont } from '../objetsPretsALEmploi.js';
 
 describe('La ressource du rappel de mise à jour de la liste des activités', () => {
@@ -19,7 +19,7 @@ describe('La ressource du rappel de mise à jour de la liste des activités', ()
   let entrepotUtilisateur: EntrepotUtilisateur;
 
   beforeEach(async () => {
-    busEvenements = new MockBusEvenement(fauxRapporteurErreur);
+    busEvenements = new MockBusEvenement(fauxRapporteur);
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 
     await entrepotUtilisateur.ajoute(jeanneDupont);

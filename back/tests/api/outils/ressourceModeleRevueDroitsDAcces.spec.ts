@@ -8,7 +8,7 @@ import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js'
 import { MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';
-import { configurationDeTestDuServeur, fauxRapporteurErreur } from '../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxRapporteur } from '../fauxObjets.js';
 import { jeanneDupont } from '../objetsPretsALEmploi.js';
 
 describe('La ressource du modèle de revue des droits d’accès', () => {
@@ -19,7 +19,7 @@ describe('La ressource du modèle de revue des droits d’accès', () => {
   beforeEach(async () => {
     vi.resetAllMocks();
 
-    busEvenements = new MockBusEvenement(fauxRapporteurErreur);
+    busEvenements = new MockBusEvenement(fauxRapporteur);
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 
     await entrepotUtilisateur.ajoute(jeanneDupont);

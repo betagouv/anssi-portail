@@ -14,7 +14,7 @@ import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoi
 import { EntrepotPriseEnCompteMemoire } from '../../persistance/EntrepotPriseEnCompteMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';
-import { configurationDeTestDuServeur, fauxRapporteurErreur } from '../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxRapporteur } from '../fauxObjets.js';
 import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi.js';
 import { mesureDeTest } from './constructeurDeMesure.js';
 import { ConstructeurDeModule } from './constructeurDeModule.js';
@@ -35,7 +35,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
     entrepotMesure = new EntrepotMesureMemoire();
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     entrepôtModule = new EntrepôtModuleMémoire();
-    busEvenements = fabriqueBusPourLesTests(fauxRapporteurErreur);
+    busEvenements = fabriqueBusPourLesTests(fauxRapporteur);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       entrepotPriseEnCompte,

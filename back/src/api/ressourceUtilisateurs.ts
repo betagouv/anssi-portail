@@ -42,7 +42,7 @@ const construitLeSuiviDepuisLaRequête = (
 
 const ressourceUtilisateurs = ({
   busEvenements,
-  rapporteurErreur,
+  rapporteur,
   entrepotUtilisateur,
   adaptateurRechercheEntreprise,
   adaptateurJWT,
@@ -105,9 +105,9 @@ const ressourceUtilisateurs = ({
             return;
           }
           if (error instanceof ErreurChargementOrganisation) {
-            rapporteurErreur.erreur(error, "[AJOUT UTILISATEUR] Erreur de chargement de l'organisation");
+            rapporteur.erreur(error, "[AJOUT UTILISATEUR] Erreur de chargement de l'organisation");
           } else {
-            rapporteurErreur.erreur(error, "[AJOUT UTILISATEUR] Erreur pendant l'ajout");
+            rapporteur.erreur(error, "[AJOUT UTILISATEUR] Erreur pendant l'ajout");
           }
           reponse.sendStatus(HttpStatusCode.InternalServerError);
         }

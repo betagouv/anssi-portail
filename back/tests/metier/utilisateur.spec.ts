@@ -10,7 +10,7 @@ import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRecherc
 import { EntrepotPriseEnCompte } from '../../src/metier/entrepotPriseEnCompte.js';
 import { Module } from '../../src/metier/module.js';
 import { ErreurChargementOrganisation, Organisation, Utilisateur } from '../../src/metier/utilisateur.js';
-import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise, fauxRapporteurErreur } from '../api/fauxObjets.js';
+import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise, fauxRapporteur } from '../api/fauxObjets.js';
 import { mesureDeTest } from '../api/mesures/constructeurDeMesure.js';
 import { ConstructeurDeModule } from '../api/mesures/constructeurDeModule.js';
 import { utilisateurDeTest } from '../api/mesures/constructeurDUtilisateur.js';
@@ -249,7 +249,7 @@ describe("L'utilisateur", () => {
       utilisateurDeParcours = utilisateurDeTest().avecLEmail('utilisateur@mail.com').construis();
       entrepotPriseEnCompte = new EntrepotPriseEnCompteMemoire();
       entrepotMesure = new EntrepotMesureMemoire();
-      busEvenements = fabriqueBusPourLesTests(fauxRapporteurErreur);
+      busEvenements = fabriqueBusPourLesTests(fauxRapporteur);
       moduleCyberdépart = fabriqueModuleCyberdépart();
       paramètresPriseEnCompteDéfaut = {
         busEvenements,
@@ -264,7 +264,7 @@ describe("L'utilisateur", () => {
       it("ignore la prise en compte d'une mesure déjà prise en compte", async () => {
         await utilisateurDeParcours.prendEnCompte({
           ...paramètresPriseEnCompteDéfaut,
-          busEvenements: fabriqueBusPourLesTests(fauxRapporteurErreur),
+          busEvenements: fabriqueBusPourLesTests(fauxRapporteur),
         });
         await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
 

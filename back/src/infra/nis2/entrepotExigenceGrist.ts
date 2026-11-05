@@ -13,7 +13,7 @@ import {
   ExigenceNIS2,
   Referentiel,
 } from '../../metier/nis2/exigence.js';
-import { RapporteurErreur } from '../../metier/rapporteurErreur.js';
+import { Rapporteur } from '../../metier/rapporteur.js';
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
 import { ClientHttp } from '../clientHttp.js';
 import { EntrepotGrist } from '../entrepotGrist.js';
@@ -58,19 +58,19 @@ type Croisements = {
 export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implements EntrepotExigence {
   private readonly urlDocument: string;
   private readonly croisements: Croisements;
-  private readonly rapporteurErreur: RapporteurErreur;
+  private readonly rapporteur: Rapporteur;
   constructor({
     clientHttp = axios,
-    rapporteurErreur,
+    rapporteur,
     adaptateurEnvironnement,
   }: {
     clientHttp?: ClientHttp;
-    rapporteurErreur: RapporteurErreur;
+    rapporteur: Rapporteur;
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
     const configGrist = adaptateurEnvironnement.grist();
     super(clientHttp, '', configGrist.nis2().cleApi(), configGrist.dureeCacheEnSecondes());
-    this.rapporteurErreur = rapporteurErreur;
+    this.rapporteur = rapporteur;
     this.croisements = {
       AE: {
         table: 'AE_2690',
@@ -169,7 +169,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
     try {
       exigences = await this.appelleGrist({}, `${this.urlDocument}/sql?q=${requete}`);
     } catch (erreur) {
-      this.rapporteurErreur.erreur(erreur, "Une erreur s'est produite lors de l'appel au Grist des exigences");
+      this.rapporteur.erreur(erreur, "Une erreur s'est produite lors de l'appel au Grist des exigences");
       return [];
     }
 

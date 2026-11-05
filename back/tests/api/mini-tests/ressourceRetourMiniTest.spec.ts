@@ -6,7 +6,7 @@ import { creeServeur } from '../../../src/api/msc/index.js';
 import { RetourMiniTestDonné } from '../../../src/bus/evenements/retourMiniTestDonne.js';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement, fauxRapporteurErreur } from '../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement, fauxRapporteur } from '../fauxObjets.js';
 
 describe('La ressource retour sur les mini-tests', () => {
   describe('sur requête POST', () => {
@@ -22,7 +22,7 @@ describe('La ressource retour sur les mini-tests', () => {
       adaptateurEnvironnement = {
         ...fauxAdaptateurEnvironnement,
       };
-      busEvenements = fabriqueBusPourLesTests(fauxRapporteurErreur);
+      busEvenements = fabriqueBusPourLesTests(fauxRapporteur);
       serveur = creeServeur({
         ...configurationDeTestDuServeur,
         adaptateurEnvironnement,

@@ -2,7 +2,7 @@ import { CmsCrisp, PageHtmlCrisp, ResumeArticleCrispAvecSlug } from '@lab-anssi/
 import { Article } from '../../metier/blog/article.js';
 import { EntrepôtArticle } from '../../metier/blog/entrepotArticle.js';
 import { RésuméArticle } from '../../metier/blog/resumeArticle.js';
-import { RapporteurErreur } from '../../metier/rapporteurErreur.js';
+import { Rapporteur } from '../../metier/rapporteur.js';
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
 import { aseptiseHtml } from '../aseptisationDuHtml.js';
 import { Cache } from '../cache.js';
@@ -18,7 +18,7 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
   constructor(
     private readonly cmsCrisp: CmsCrisp,
     private readonly adaptateurEnvironnement: AdaptateurEnvironnement,
-    private readonly rapporteurErreur: RapporteurErreur
+    private readonly rapporteur: Rapporteur
   ) {
     this.cacheDesRésumés = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
     this.cacheDesArticles = new Cache({ ttl: this.adaptateurEnvironnement.crisp().duréeDuCacheEnSecondes() });
@@ -41,7 +41,7 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
             titre: ac.titre,
           }));
       } catch (erreur) {
-        this.rapporteurErreur.erreur(erreur, 'Erreur sur tousLesArticlesDeBlog');
+        this.rapporteur.erreur(erreur, 'Erreur sur tousLesArticlesDeBlog');
         return [];
       }
     };
