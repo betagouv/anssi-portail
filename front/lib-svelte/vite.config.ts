@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { createLogger, defineConfig, loadEnv } from 'vite';
+import { appEnvDepuisValeur } from './src/app-env.js';
 import { plateformePlugin } from './src/plateforme/plateforme.plugin.js';
 import { injecteNonce } from './src/utils/injecteNonce.plugin.js';
 
@@ -45,6 +46,7 @@ export default defineConfig(({ command, mode }) => {
       'import.meta.env.FEATURE_FLAG_BADGE_CYBERDEPART': JSON.stringify(
         env.FEATURE_FLAG_BADGE_CYBERDEPART ?? process.env.FEATURE_FLAG_BADGE_CYBERDEPART ?? 'false'
       ),
+      'import.meta.env.APP_ENV': JSON.stringify(appEnvDepuisValeur(env.APP_ENV)),
     },
     plugins: [
       svelte(),

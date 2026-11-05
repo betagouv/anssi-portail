@@ -1,3 +1,11 @@
+export const appEnv = ['local', 'demo', 'production'] as const;
+
+export type AppEnv = (typeof appEnv)[number];
+
+export const estAppEnv = (valeur: string): valeur is AppEnv => {
+  return (appEnv as readonly string[]).includes(valeur);
+};
+
 type AdaptateurEnvironnement = {
   urlBaseMSC: () => string;
   oidc: {
@@ -90,6 +98,7 @@ type AdaptateurEnvironnement = {
   rechercheEntreprise: {
     apiUrl: () => string;
   };
+  appEnv: () => AppEnv;
   nodeEnv: () => string | undefined;
   versionDeConstruction: () => string;
   siret: {
@@ -302,6 +311,15 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     },
   },
   nodeEnv: () => process.env.NODE_ENV,
+  appEnv: () => {
+    const valeur = process.env.APP_ENV;
+    if (!valeur) return 'production';
+
+    if (estAppEnv(valeur)) {
+      return valeur;
+    }
+    throw new Error(`💥 Valeur APP_ENV : ${valeur} non supportée`);
+  },
   versionDeConstruction: () => (process.env.CC_COMMIT_ID || '1').substring(0, 8),
   siret: {
     desactiveValidationStricte: () => process.env.SIRET_DESACTIVE_VALIDATION_STRICTE === 'true',

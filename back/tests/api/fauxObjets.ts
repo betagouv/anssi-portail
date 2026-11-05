@@ -259,6 +259,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
       afficheCyFun23: () => true,
     },
   },
+  appEnv: () => 'local',
   nodeEnv: () => 'developpement',
   rechercheEntreprise: {
     apiUrl: () => 'http://recherche-entreprise',
