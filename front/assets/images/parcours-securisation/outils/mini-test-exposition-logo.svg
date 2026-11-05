@@ -1,0 +1,42 @@
+<svg width="68" height="69" viewBox="0 0 68 69" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="BoiteOutil/Composants">
+<g id="Picto-outil">
+<g id="Picto-cyberattaque">
+<g id="Group">
+<g clip-path="url(#paint0_angular_22768_57925_clip_path)" data-figma-skip-parse="true"><g transform="matrix(-2.95052e-09 -0.03375 0.03375 -2.95052e-09 33.75 34.75)"><foreignObject x="-1059.26" y="-1059.26" width="2118.52" height="2118.52"><div xmlns="http://www.w3.org/1999/xhtml" style="background:conic-gradient(from 90deg,rgba(255, 255, 255, 0) 0deg,rgba(106, 106, 244, 1) 360deg);height:100%;width:100%;opacity:1"></div></foreignObject></g></g><path id="gradient" opacity="0.4" d="M4.67888e-06 34.75C3.04935e-06 16.1104 15.1104 0.999997 33.75 0.999995C52.3896 0.999994 67.5 16.1104 67.5 34.75C67.5 53.3896 52.3896 68.5 33.75 68.5C15.1104 68.5 6.3084e-06 53.3896 4.67888e-06 34.75Z" data-figma-gradient-fill="{&#34;type&#34;:&#34;GRADIENT_ANGULAR&#34;,&#34;stops&#34;:[{&#34;color&#34;:{&#34;r&#34;:1.0,&#34;g&#34;:1.0,&#34;b&#34;:1.0,&#34;a&#34;:0.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.41568627953529358,&#34;g&#34;:0.41568627953529358,&#34;b&#34;:0.95686274766921997,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;transform&#34;:{&#34;m00&#34;:-5.9010385484725703e-06,&#34;m01&#34;:67.499992370605469,&#34;m02&#34;:7.6293945312500000e-06,&#34;m10&#34;:-67.500007629394531,&#34;m11&#34;:-5.9010371842305176e-06,&#34;m12&#34;:68.500007629394531},&#34;opacity&#34;:1.0,&#34;blendMode&#34;:&#34;NORMAL&#34;,&#34;stopsVar&#34;:[{&#34;color&#34;:{&#34;r&#34;:1.0,&#34;g&#34;:1.0,&#34;b&#34;:1.0,&#34;a&#34;:0.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.41568627953529358,&#34;g&#34;:0.41568627953529358,&#34;b&#34;:0.95686274766921997,&#34;a&#34;:1.0},&#34;colorVar&#34;:{&#34;type&#34;:3,&#34;resolvedType&#34;:3,&#34;value&#34;:&#34;VariableID:183ef7569cf1547d24592ee0c390e88790548ea1/9551:0&#34;},&#34;position&#34;:1.0}],&#34;visible&#34;:true}"/>
+<g id="chart">
+<path d="M33.75 1L65.625 24.3954L53.4498 62.25H14.0502L1.875 24.3954L33.75 1Z" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M33.75 10.6738L56.5179 27.3848L47.8213 54.4238H19.6787L10.9821 27.3848L33.75 10.6738Z" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M33.75 20.3475L47.4107 30.3741L42.1928 46.5975H25.3072L20.0893 30.3741L33.75 20.3475Z" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M33.75 30.0213L38.3036 33.3635L36.5643 38.7713H30.9357L29.1964 33.3635L33.75 30.0213Z" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="malware">
+<circle id="malware-bg" cx="33.75" cy="11.625" r="5.625" fill="#6A6AF4" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="icon">
+<rect id="body" x="31.875" y="9.75" width="3.75" height="5" rx="1.875" fill="white" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="head" d="M35.625 11.625C34.125 11.625 33.375 11.625 31.875 11.625C31.875 10.5895 32.7145 9.75 33.75 9.75C34.7855 9.75 35.625 10.5895 35.625 11.625Z" fill="#000091"/>
+<path id="legs" d="M36.875 10.375C36.875 11.0654 36.3154 11.625 35.625 11.625M30.625 10.375C30.625 11.0654 31.1846 11.625 31.875 11.625M36.875 14.125C36.875 13.4346 36.3154 12.875 35.625 12.875M30.625 14.125C30.625 13.4346 31.1846 12.875 31.875 12.875" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="antenne" d="M35 8.5C35 9.19036 34.4404 9.75 33.75 9.75C33.0596 9.75 32.5 9.19036 32.5 8.5" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<g id="spy">
+<circle id="eye-bg" cx="8.125" cy="26.625" r="5.625" fill="#6A6AF4" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="icon_2">
+<path id="vector" d="M10.3611 25.5939C11.0123 26.1409 11.0123 27.1091 10.3611 27.6561C9.8426 28.0917 9.09723 28.5 8.125 28.5C7.15277 28.5 6.4074 28.0917 5.88888 27.6561C5.23768 27.1091 5.23768 26.1409 5.88888 25.5939C6.4074 25.1583 7.15277 24.75 8.125 24.75C9.09723 24.75 9.8426 25.1583 10.3611 25.5939Z" fill="white" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle id="vector_2" cx="8.125" cy="26.625" r="0.625" fill="#000091"/>
+</g>
+</g>
+<g id="bourse">
+<circle id="bourse-bg" cx="45.625" cy="51" r="5.625" fill="#6A6AF4" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="icon_3">
+<path id="vector_3" d="M45.6251 49.5715L44.5537 48.2037C44.5537 48.2037 45.0894 48.3405 45.6251 48.2037C46.1609 48.0669 46.6966 48.2037 46.6966 48.2037L45.6251 49.5715Z" fill="#000091" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="vector_4" d="M48.165 52.2913C48.165 53.672 47.0059 54.2144 45.6252 54.2144C44.2445 54.2144 43.165 53.672 43.165 52.2913C43.165 50.9106 44.5537 49.2144 45.6252 49.2144C46.6966 49.2144 48.165 50.9106 48.165 52.2913Z" fill="white" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="paint0_angular_22768_57925_clip_path"><path id="gradient" opacity="0.4" d="M4.67888e-06 34.75C3.04935e-06 16.1104 15.1104 0.999997 33.75 0.999995C52.3896 0.999994 67.5 16.1104 67.5 34.75C67.5 53.3896 52.3896 68.5 33.75 68.5C15.1104 68.5 6.3084e-06 53.3896 4.67888e-06 34.75Z"/></clipPath></defs>
+</svg>

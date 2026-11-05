@@ -1,0 +1,29 @@
+<svg width="54" height="73" viewBox="0 0 54 73" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="BoiteOutil/Composants">
+<g id="Picto-outil">
+<g id="picto-maturit&#195;&#169;">
+<g id="Group">
+<circle id="terre" cx="26.625" cy="50.375" r="10.625" fill="#000091" stroke="#000091" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="tige" d="M26.625 21L26.625 42.875" stroke="#000091" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"/>
+<g id="right-leaf">
+<path id="right-leaf-bg" d="M52.25 19.3894C52.25 19.3894 50.5882 28.0123 44.375 31.6343C38.1618 35.2563 29.75 33.8607 29.75 33.8607C29.75 33.8607 31.4118 25.2378 37.625 21.6158C43.8382 17.9938 52.25 19.3894 52.25 19.3894Z" fill="#8585F6"/>
+<path id="right-leaf-contour" d="M29.75 33.8607C29.75 33.8607 38.1618 35.2563 44.375 31.6343C50.5882 28.0123 52.25 19.3894 52.25 19.3894C52.25 19.3894 43.8382 17.9938 37.625 21.6158C31.4118 25.2378 29.75 33.8607 29.75 33.8607ZM29.75 33.8607L44.375 24.9553" stroke="#000091" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="left-leaf">
+<path id="left-leaf-bg" d="M1 19.3894C1 19.3894 2.6618 28.0123 8.875 31.6343C15.0882 35.2563 23.5 33.8607 23.5 33.8607C23.5 33.8607 21.8382 25.2378 15.625 21.6158C9.4118 17.9938 1 19.3894 1 19.3894Z" fill="#8585F6"/>
+<path id="left-leaf-contour" d="M23.5 33.8607C23.5 33.8607 15.0882 35.2563 8.875 31.6343C2.6618 28.0123 1 19.3894 1 19.3894C1 19.3894 9.4118 17.9938 15.625 21.6158C21.8382 25.2378 23.5 33.8607 23.5 33.8607ZM23.5 33.8607L8.875 24.9553" stroke="#000091" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="top-leaf">
+<path id="top-leaf-bg" d="M26.6249 1.00005C26.6249 1.00005 32.25 5.37505 32.25 11.625C32.25 17.875 26.625 22.25 26.625 22.25C26.625 22.25 21 17.875 21 11.625C21 5.37505 26.6249 1.00005 26.6249 1.00005Z" fill="#8585F6"/>
+<path id="top-leaf-contour" d="M26.625 9.85427L26.625 21.3647M26.6249 1.00005C26.6249 1.00005 32.25 5.37505 32.25 11.625C32.25 17.875 26.625 22.25 26.625 22.25C26.625 22.25 21 17.875 21 11.625C21 5.37505 26.6249 1.00005 26.6249 1.00005Z" stroke="#000091" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="pot">
+<path id="bottom" d="M10.0497 48.4926C9.88685 45.4397 12.3183 42.875 15.3755 42.875H37.8745C40.9317 42.875 43.3631 45.4397 43.2002 48.4926L42.2353 66.5759C42.0843 69.407 39.7447 71.625 36.9096 71.625H16.3404C13.5053 71.625 11.1657 69.407 11.0147 66.5759L10.0497 48.4926Z" fill="#E3E3FD" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect id="top" x="7.25" y="42.875" width="38.75" height="8.75" rx="4.375" fill="#E3E3FD" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<path id="deco" d="M17.875 11C17.875 6.85528 19.8049 3.36762 21.625 1.00005" stroke="#6A6AF4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</g>
+</g>
+</svg>
