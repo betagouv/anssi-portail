@@ -10,8 +10,9 @@
     labelBadge: string;
     nomIcone: string;
     titre: string;
+    vertical?: boolean;
   };
-  const { couleurBadge, description, href, labelBadge, nomIcone, titre }: Props = $props();
+  const { couleurBadge, description, href, labelBadge, nomIcone, titre, vertical = false }: Props = $props();
   const src = $derived(`/assets/images/parcours-securisation/outils/${nomIcone}-logo.svg`);
 </script>
 
@@ -23,7 +24,7 @@
     hasDescription={Boolean(description)}
     hasHeaderBadge
     {href}
-    horizontal
+    horizontal={!vertical}
     size="sm"
     title={titre}
   >
@@ -44,5 +45,10 @@
   .outil {
     display: flex;
     flex-direction: column;
+    height: 100%;
+
+    :global(> .fr-card) {
+      flex: 1;
+    }
   }
 </style>

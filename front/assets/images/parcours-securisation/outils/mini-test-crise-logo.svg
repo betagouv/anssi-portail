@@ -1,0 +1,35 @@
+<svg width="94" height="64" viewBox="0 0 94 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="BoiteOutil/Composants">
+<g id="Picto-outil">
+<g id="Picto-reflexe">
+<g id="Group">
+<g id="Laptop">
+<g id="screen">
+<path id="forme" d="M6.75 10.75C6.75 7.43629 9.43629 4.75 12.75 4.75H80.75C84.0637 4.75 86.75 7.43629 86.75 10.75V57.25H6.75V10.75Z" fill="#E3E3FD" stroke="#000091" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="forme_2" d="M9.875 9.875C9.875 8.77043 10.7704 7.875 11.875 7.875H81.625C82.7296 7.875 83.625 8.77043 83.625 9.875V54.125H9.875V9.875Z" fill="white" stroke="#000091" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="keyboard">
+<path id="forme_3" d="M0.5 58.5C0.5 57.8096 1.05964 57.25 1.75 57.25H91.75C92.4404 57.25 93 57.8096 93 58.5C93 61.2614 90.7614 63.5 88 63.5H5.5C2.73858 63.5 0.5 61.2614 0.5 58.5Z" fill="#E3E3FD" stroke="#000091" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="forme_4" d="M39.25 58.0312C39.25 57.5998 39.5998 57.25 40.0313 57.25H53.4688C53.9002 57.25 54.25 57.5998 54.25 58.0312C54.25 59.3257 53.2007 60.375 51.9062 60.375H41.5938C40.2993 60.375 39.25 59.3257 39.25 58.0312Z" fill="#CACAFB" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<g id="Apps">
+<g id="Email">
+<rect x="16.75" y="17.125" width="28" height="28" rx="8" fill="#E3E3FD"/>
+<g id="mail">
+<path id="Ic&#195;&#180;ne" fill-rule="evenodd" clip-rule="evenodd" d="M24.7497 25.125H36.7497C37.1179 25.125 37.4163 25.4235 37.4163 25.7917V36.4583C37.4163 36.8265 37.1179 37.125 36.7497 37.125H24.7497C24.3815 37.125 24.083 36.8265 24.083 36.4583V25.7917C24.083 25.4235 24.3815 25.125 24.7497 25.125ZM36.083 27.9503L30.7977 32.6837L25.4163 27.9357V35.7917H36.083V27.9503ZM25.757 26.4583L30.7903 30.8997L35.751 26.4583H25.757Z" fill="#000091"/>
+</g>
+</g>
+<g id="Agenda">
+<rect x="48.75" y="17.125" width="28" height="28" rx="8" fill="#E3E3FD"/>
+<g id="calendar-event">
+<path id="Ic&#195;&#180;ne_2" fill-rule="evenodd" clip-rule="evenodd" d="M60.7497 23.7917V25.125H64.7497V23.7917H66.083V25.125H68.7497C69.1179 25.125 69.4163 25.4235 69.4163 25.7917V36.4583C69.4163 36.8265 69.1179 37.125 68.7497 37.125H56.7497C56.3815 37.125 56.083 36.8265 56.083 36.4583V25.7917C56.083 25.4235 56.3815 25.125 56.7497 25.125H59.4163V23.7917H60.7497ZM68.083 30.4583H57.4163V35.7917H68.083V30.4583ZM62.083 31.7917V34.4583H58.7497V31.7917H62.083ZM59.4163 26.4583H57.4163V29.125H68.083V26.4583H66.083V27.7917H64.7497V26.4583H60.7497V27.7917H59.4163V26.4583Z" fill="#000091"/>
+</g>
+</g>
+</g>
+<path id="trace" d="M81.75 1H83.5C87.366 1 90.5 4.13401 90.5 8V9.75" stroke="#6A6AF4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</g>
+</g>
+</svg>
