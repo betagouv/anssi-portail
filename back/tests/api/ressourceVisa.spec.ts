@@ -7,7 +7,7 @@ import { ConfigurationServeur } from '../../src/api/configurationServeur.js';
 import { creeServeur } from '../../src/api/msc/index.js';
 import { AdaptateurCellar, CleDuBucket } from '../../src/infra/adaptateurCellar.js';
 import { MockBusEvenement } from '../bus/busPourLesTests.js';
-import { configurationDeTestDuServeur, fauxAdaptateurCellar, fauxRapporteurErreur } from './fauxObjets.js';
+import { configurationDeTestDuServeur, fauxAdaptateurCellar, fauxRapporteur } from './fauxObjets.js';
 
 describe('La ressource de visa', () => {
   let serveur: Express;
@@ -22,7 +22,7 @@ describe('La ressource de visa', () => {
   });
 
   beforeEach(() => {
-    busEvenements = new MockBusEvenement(fauxRapporteurErreur);
+    busEvenements = new MockBusEvenement(fauxRapporteur);
     adaptateurCellar = {
       ...fauxAdaptateurCellar,
       getStream: async () => construitUnFluxCellar(),

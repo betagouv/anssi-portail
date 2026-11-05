@@ -6,7 +6,7 @@ import { EntrepôtContact } from '../../metier/contacts/entrepotContact.js';
 import { EntrepotFinancement } from '../../metier/entrepotFinancement.js';
 import { EntrepotGuide } from '../../metier/entrepotGuide.js';
 import { EntrepotExigence } from '../../metier/nis2/entrepotExigence.js';
-import { RapporteurErreur } from '../../metier/rapporteurErreur.js';
+import { Rapporteur } from '../../metier/rapporteur.js';
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
 import { AdaptateurDom } from './adaptateurDom/adaptateurDom.js';
 import { AdaptateurLienCanonique } from './adaptateurDom/adaptateurLienCanonique.js';
@@ -48,7 +48,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     private readonly fournisseurDeChemin: FournisseurChemin,
     private readonly chargeursDeProps: ChargeurDeProps[],
     private readonly adaptateursDom: AdaptateurDom[],
-    private readonly rapporteurErreur: RapporteurErreur
+    private readonly rapporteur: Rapporteur
   ) {}
 
   async enrichisAvecComposants(contenuPage: string, routeDemandée: string) {
@@ -66,7 +66,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
 
       return dom.serialize();
     } catch (e) {
-      this.rapporteurErreur.erreur(e, "Erreur lors de l'injection svelte");
+      this.rapporteur.erreur(e, "Erreur lors de l'injection svelte");
       return contenuPage;
     }
   }
@@ -110,7 +110,7 @@ export const fabriqueAdaptateurEnrichissement = async (
   entrepôtFinancement: EntrepotFinancement,
   entrepôtArticle: EntrepôtArticle,
   entrepôtContact: EntrepôtContact,
-  rapporteurErreur: RapporteurErreur
+  rapporteur: Rapporteur
 ): Promise<AdaptateurEnrichissement> => {
   const résolveurDePage = new RésolveurDePage(entrepotGuide, entrepôtFinancement, entrepôtArticle);
 
@@ -148,6 +148,6 @@ export const fabriqueAdaptateurEnrichissement = async (
     fournisseurDeChemin,
     chargeursDeProps,
     adaptateursDom,
-    rapporteurErreur
+    rapporteur
   );
 };

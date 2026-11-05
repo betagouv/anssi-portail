@@ -16,7 +16,7 @@ import {
   fauxAdaptateurJWT,
   fauxFournisseurDeChemin,
   fauxMiddleware,
-  fauxRapporteurErreur,
+  fauxRapporteur,
 } from '../fauxObjets.js';
 import { jeanneDupont } from '../objetsPretsALEmploi.js';
 
@@ -35,7 +35,7 @@ describe('La ressource des services et ressources favoris', () => {
       token: 'token',
     });
     await entrepotUtilisateur.ajoute(jeanneDupont);
-    busEvenements = fabriqueBusPourLesTests(fauxRapporteurErreur);
+    busEvenements = fabriqueBusPourLesTests(fauxRapporteur);
 
     serveur = creeServeur({
       ...configurationDeTestDuServeur,

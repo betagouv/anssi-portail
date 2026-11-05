@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/node';
 import { ErrorRequestHandler } from 'express';
-import { RapporteurErreur } from '../metier/rapporteurErreur.js';
+import { Rapporteur } from '../metier/rapporteur.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 
 export const initialiseSentry = (environnement: AdaptateurEnvironnement) => {
@@ -13,7 +13,7 @@ export const initialiseSentry = (environnement: AdaptateurEnvironnement) => {
   Sentry.setTag('msc-source', 'backend');
 };
 
-export const rapporteurErreurSentry: RapporteurErreur = {
+export const rapporteurSentry: Rapporteur = {
   erreur: (erreur, message) => {
     Sentry.captureException(erreur, message === undefined ? undefined : { extra: { contexte: message } });
   },

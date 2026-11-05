@@ -12,7 +12,7 @@ import { adaptateurEmailBrevo } from '../../src/infra/adaptateurEmailBrevo.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
-import { fauxAdaptateurEnvironnement, fauxRapporteurErreur } from '../api/fauxObjets.js';
+import { fauxAdaptateurEnvironnement, fauxRapporteur } from '../api/fauxObjets.js';
 import { fabriqueClientPost, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
 
 describe('L’adaptateur email Brevo', () => {
@@ -49,7 +49,7 @@ describe('L’adaptateur email Brevo', () => {
     };
 
     brevo = adaptateurEmailBrevo({
-      rapporteurErreur: fauxRapporteurErreur,
+      rapporteur: fauxRapporteur,
       clientHttp,
       adaptateurEnvironnement: fauxAdaptateurEnvironnement,
       adaptateurHorloge,
@@ -75,7 +75,7 @@ describe('L’adaptateur email Brevo', () => {
   describe('lorsqu’une erreur se produit', () => {
     it.each(['contact', 'infolettre'])('signale et propage la même erreur (%s)', async (opération) => {
       const erreur = new AxiosError('Une erreur s’est produite');
-      const rapporteurErreur = { erreur: vi.fn() };
+      const rapporteur = { erreur: vi.fn() };
       const clientHttp = {
         ...fabriqueFauxClientHttp(),
         post: fabriqueClientPost(async () => {
@@ -86,13 +86,13 @@ describe('L’adaptateur email Brevo', () => {
         clientHttp,
         adaptateurEnvironnement: fauxAdaptateurEnvironnement,
         adaptateurHorloge,
-        rapporteurErreur,
+        rapporteur,
       });
 
       await expect(
         opération === 'contact' ? brevo.creeContactBrevo(fauxContact()) : brevo.inscrisAInfolettre('email')
       ).rejects.toBe(erreur);
-      expect(rapporteurErreur.erreur).toHaveBeenCalledExactlyOnceWith(erreur, 'Erreur API Brevo');
+      expect(rapporteur.erreur).toHaveBeenCalledExactlyOnceWith(erreur, 'Erreur API Brevo');
     });
   });
 

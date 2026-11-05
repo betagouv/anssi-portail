@@ -1,6 +1,6 @@
 import axios, { HttpStatusCode, isAxiosError } from '@anssi-portail/axios';
 import { decode } from 'html-entities';
-import { RapporteurErreur } from '../metier/rapporteurErreur.js';
+import { Rapporteur } from '../metier/rapporteur.js';
 import { adaptateurProfilAnssiVide } from './adaptateurProfilAnssiVide.js';
 
 const CONFIGURATION_AUTHENTIFICATION = {
@@ -30,7 +30,7 @@ export interface AdaptateurProfilAnssi {
   recherche: (criteres: { emails: string[] }) => Promise<ProfilAnssi[]>;
 }
 
-const adaptateurProfilAnssi = (rapporteurErreur: RapporteurErreur): AdaptateurProfilAnssi => {
+const adaptateurProfilAnssi = (rapporteur: Rapporteur): AdaptateurProfilAnssi => {
   const metsAJour = async ({ nom, prenom, email, organisation, telephone, domainesSpecialite }: ProfilAnssi) => {
     const urlProfil = `${process.env.PROFIL_ANSSI_URL_BASE}/profil/${email}`;
     await axios.put(
@@ -55,7 +55,7 @@ const adaptateurProfilAnssi = (rapporteurErreur: RapporteurErreur): AdaptateurPr
       );
     } catch (e) {
       if (isAxiosError(e) && e.response?.status !== HttpStatusCode.NotFound) {
-        rapporteurErreur.erreur(e, `Erreur API MonProfilAnssi (HTTP ${e.response?.status})`);
+        rapporteur.erreur(e, `Erreur API MonProfilAnssi (HTTP ${e.response?.status})`);
       }
       return undefined;
     }
@@ -68,7 +68,7 @@ const adaptateurProfilAnssi = (rapporteurErreur: RapporteurErreur): AdaptateurPr
       return reponse.data;
     } catch (e) {
       if (isAxiosError(e) && e.response?.status !== HttpStatusCode.NotFound) {
-        rapporteurErreur.erreur(e, `Erreur API MonProfilAnssi (HTTP ${e.response?.status})`);
+        rapporteur.erreur(e, `Erreur API MonProfilAnssi (HTTP ${e.response?.status})`);
       }
       return [];
     }
@@ -77,5 +77,5 @@ const adaptateurProfilAnssi = (rapporteurErreur: RapporteurErreur): AdaptateurPr
   return { recupere, metsAJour, recherche };
 };
 
-export const fabriqueAdaptateurProfilAnssi = (rapporteurErreur: RapporteurErreur) =>
-  process.env.PROFIL_ANSSI_URL_BASE ? adaptateurProfilAnssi(rapporteurErreur) : adaptateurProfilAnssiVide();
+export const fabriqueAdaptateurProfilAnssi = (rapporteur: Rapporteur) =>
+  process.env.PROFIL_ANSSI_URL_BASE ? adaptateurProfilAnssi(rapporteur) : adaptateurProfilAnssiVide();

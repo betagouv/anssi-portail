@@ -13,7 +13,7 @@ import {
   configurationDeTestDuServeur,
   fauxGestionnaireRequêtesComplémentaires,
   fauxMiddleware,
-  fauxRapporteurErreur,
+  fauxRapporteur,
 } from './fauxObjets.js';
 import { jeanneDupont } from './objetsPretsALEmploi.js';
 
@@ -25,7 +25,7 @@ describe("La ressource d'une page Jekyll connectée", () => {
   beforeEach(() => {
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 
-    busEvenements = fabriqueBusPourLesTests(fauxRapporteurErreur);
+    busEvenements = fabriqueBusPourLesTests(fauxRapporteur);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements,

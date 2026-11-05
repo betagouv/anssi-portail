@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import { RapporteurErreur } from '../metier/rapporteurErreur.js';
+import { Rapporteur } from '../metier/rapporteur.js';
 
-export const rapporteurErreurConsole: RapporteurErreur = {
+export const rapporteurConsole: Rapporteur = {
   erreur: (erreur, message) => {
     console.error(...(message === undefined ? [erreur] : [message, erreur]));
   },

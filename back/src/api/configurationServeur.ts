@@ -29,7 +29,7 @@ import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
 import { EntrepotReactionMiniTest } from '../metier/mini-tests/entrepotReactionMiniTest.js';
 import { EntrepôtQuestionVraieFausse } from '../metier/mini-tests/vrai-faux/entrepotQuestionVraieFausse.js';
 import { EntrepotExigence } from '../metier/nis2/entrepotExigence.js';
-import { RapporteurErreur } from '../metier/rapporteurErreur.js';
+import { Rapporteur } from '../metier/rapporteur.js';
 import { ServiceSanteGuides } from '../metier/serviceSanteGuides.js';
 import { AdaptateurJWT } from './adaptateurJWT.js';
 import { FournisseurChemin } from './fournisseurChemin.js';
@@ -44,7 +44,7 @@ import { ServiceModèleRevueDroitsDAccès } from './outils/modeleRevueDroitsDAcc
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
-  rapporteurErreur: RapporteurErreur;
+  rapporteur: Rapporteur;
   controleurErreurs: ErrorRequestHandler;
   adaptateurHachage: AdaptateurHachage;
   adaptateurHorloge: AdaptateurHorloge;

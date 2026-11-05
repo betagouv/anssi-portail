@@ -6,7 +6,7 @@ import {
   fauxAdaptateurHachage,
   fauxAdaptateurProfilAnssi,
   fauxAdaptateurRechercheEntreprise,
-  fauxRapporteurErreur,
+  fauxRapporteur,
 } from '../api/fauxObjets.js';
 import { jeanneDupont } from '../api/objetsPretsALEmploi.js';
 import { EntrepotMesureMemoire } from '../persistance/entrepotMesureMemoire.js';
@@ -46,7 +46,7 @@ describe("L'entrepôt utilisateur MPA Postgres", () => {
       adaptateurHachage: fauxAdaptateurHachage,
       adaptateurChiffrement,
       entrepotMesure: new EntrepotMesureMemoire(),
-      rapporteurErreur: fauxRapporteurErreur,
+      rapporteur: fauxRapporteur,
     });
 
     await expect(entrepôt.ajoute(jeanneDupont)).rejects.toThrow();
@@ -78,7 +78,7 @@ describe("L'entrepôt utilisateur MPA Postgres", () => {
       adaptateurHachage: fauxAdaptateurHachage,
       adaptateurChiffrement,
       entrepotMesure: new EntrepotMesureMemoire(),
-      rapporteurErreur: fauxRapporteurErreur,
+      rapporteur: fauxRapporteur,
     });
 
     const utilisateur = await entrepôt.parEmailHache('hache');

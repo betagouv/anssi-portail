@@ -18,7 +18,7 @@ import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres.js';
 import { EntrepotMesurePostgres } from '../infra/entrepotMesurePostgres.js';
 import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAPostgres.js';
 import { EntrepotExigenceGrist } from '../infra/nis2/entrepotExigenceGrist.js';
-import { rapporteurErreurConsole } from '../infra/rapporteurErreurConsole.js';
+import { rapporteurConsole } from '../infra/rapporteurConsole.js';
 import { UtilisateurBDD } from '../infra/utilisateurBDD.js';
 import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { EntrepotFavori } from '../metier/entrepotFavori.js';
@@ -51,18 +51,18 @@ export class ConsoleAdministration {
   private knexMSC: Knex.Knex;
 
   constructor() {
-    const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi(rapporteurErreurConsole);
+    const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi(rapporteurConsole);
     this.adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
     this.adaptateurHachage = fabriqueAdaptateurHachage({
       adaptateurEnvironnement,
     });
     this.adaptateurRechercheEntreprise = new AdaptateurRechercheEntrepriseGouv(
       adaptateurEnvironnement,
-      rapporteurErreurConsole
+      rapporteurConsole
     );
 
     const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
-      rapporteurErreur: rapporteurErreurConsole,
+      rapporteur: rapporteurConsole,
       adaptateurEnvironnement,
     });
     const entrepotMesure = new EntrepotMesurePostgres(entrepotExigence);
@@ -73,9 +73,9 @@ export class ConsoleAdministration {
       adaptateurChiffrement: this.adaptateurChiffrement,
       adaptateurHachage: this.adaptateurHachage,
       entrepotMesure,
-      rapporteurErreur: rapporteurErreurConsole,
+      rapporteur: rapporteurConsole,
     });
-    this.adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge, rapporteurErreurConsole);
+    this.adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge, rapporteurConsole);
     this.entrepotFavori = new EntrepotFavoriPostgres({
       adaptateurHachage: this.adaptateurHachage,
     });

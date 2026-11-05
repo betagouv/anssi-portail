@@ -51,8 +51,8 @@ import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPo
 import { GenerateurImageAvif } from './infra/generateurImage.js';
 import { messagerieMattermost } from './infra/messagerieMattermost.js';
 import { EntrepotExigenceGrist } from './infra/nis2/entrepotExigenceGrist.js';
-import { rapporteurErreurConsole } from './infra/rapporteurErreurConsole.js';
-import { controleurErreursSentry, initialiseSentry, rapporteurErreurSentry } from './infra/sentry.js';
+import { rapporteurConsole } from './infra/rapporteurConsole.js';
+import { controleurErreursSentry, initialiseSentry, rapporteurSentry } from './infra/sentry.js';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage.js';
 import { EntrepotGuide } from './metier/entrepotGuide.js';
 import { EntrepotGuideTravail } from './metier/entrepotGuideTravail.js';
@@ -64,11 +64,11 @@ import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
 const sentryConfiguré = Boolean(adaptateurEnvironnement.sentry().dsn());
 if (sentryConfiguré) initialiseSentry(adaptateurEnvironnement);
 
-const rapporteurErreur = sentryConfiguré ? rapporteurErreurSentry : rapporteurErreurConsole;
-const adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge, rapporteurErreur);
+const rapporteur = sentryConfiguré ? rapporteurSentry : rapporteurConsole;
+const adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge, rapporteur);
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
 const adaptateurJournal = fabriqueAdaptateurJournal(adaptateurEnvironnement);
-const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi(rapporteurErreur);
+const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi(rapporteur);
 const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber(adaptateurEnvironnement);
 const adaptateurHachage = fabriqueAdaptateurHachage({
   adaptateurEnvironnement,
@@ -90,7 +90,7 @@ const entrepotFinancement = new EntrepotFinancementGrist({
 const entrepôtContact = new EntrepôtContactStatique();
 const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
-const adaptateurRechercheEntreprise = new AdaptateurRechercheEntrepriseGouv(adaptateurEnvironnement, rapporteurErreur);
+const adaptateurRechercheEntreprise = new AdaptateurRechercheEntrepriseGouv(adaptateurEnvironnement, rapporteur);
 
 const entrepotGuide: EntrepotGuide = new EntrepotGuideGrist({
   adaptateurEnvironnement,
@@ -101,7 +101,7 @@ const entrepotGuideTravail: EntrepotGuideTravail = new EntrepotGuideTravailGrist
 });
 
 const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
-  rapporteurErreur,
+  rapporteur,
   adaptateurEnvironnement,
 });
 
@@ -114,7 +114,7 @@ const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
   adaptateurChiffrement,
   adaptateurHachage,
   entrepotMesure,
-  rapporteurErreur,
+  rapporteur,
 });
 
 const entrepotResultatTest = new EntrepotResultatTestPostgres({
@@ -130,7 +130,7 @@ const entrepotReactionMiniTest = new EntrepotReactionMiniTestPostgres();
 
 const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });
 
-const busEvenements = new BusEvenements(rapporteurErreur);
+const busEvenements = new BusEvenements(rapporteur);
 cableTousLesAbonnes({
   busEvenements,
   adaptateurEmail,
@@ -160,7 +160,7 @@ const cellar = adaptateurCellar(adaptateurEnvironnement);
 
 const serviceSanteGuides = fabriqueServiceSanteGuides(cellar);
 
-const entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, adaptateurEnvironnement, rapporteurErreur);
+const entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, adaptateurEnvironnement, rapporteur);
 const adaptateurEnrichissement = await fabriqueAdaptateurEnrichissement(
   adaptateurEnvironnement,
   fournisseurChemin,
@@ -169,7 +169,7 @@ const adaptateurEnrichissement = await fabriqueAdaptateurEnrichissement(
   entrepotFinancement,
   entrepôtArticle,
   entrepôtContact,
-  rapporteurErreur
+  rapporteur
 );
 
 const attributionParcours = fabriqueAttributionParcours({ entrepotUtilisateur, busEvenements });
@@ -205,7 +205,7 @@ const host = process.env.HOST;
     }),
     adaptateurOIDC,
     adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
-    rapporteurErreur,
+    rapporteur,
     controleurErreurs: sentryConfiguré ? controleurErreursSentry : (erreur, _requete, _reponse, suite) => suite(erreur),
     busEvenements,
     entrepotUtilisateur,

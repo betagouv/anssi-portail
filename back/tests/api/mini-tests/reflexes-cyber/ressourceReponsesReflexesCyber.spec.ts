@@ -8,7 +8,7 @@ import { SimulationRéflexesCyberTerminé } from '../../../../src/bus/evenements
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';
-import { configurationDeTestDuServeur, fauxRapporteurErreur } from '../../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxRapporteur } from '../../fauxObjets.js';
 import { jeanneDupont } from '../../objetsPretsALEmploi.js';
 
 describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
@@ -16,7 +16,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
   let busÉvénements: MockBusEvenement;
 
   beforeEach(async () => {
-    busÉvénements = fabriqueBusPourLesTests(fauxRapporteurErreur);
+    busÉvénements = fabriqueBusPourLesTests(fauxRapporteur);
     const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     await entrepotUtilisateur.ajoute(jeanneDupont);
     serveur = creeServeur({

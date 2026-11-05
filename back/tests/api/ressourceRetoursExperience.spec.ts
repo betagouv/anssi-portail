@@ -6,7 +6,7 @@ import { creeServeur } from '../../src/api/msc/index.js';
 import { RetourExperienceDonne } from '../../src/bus/evenements/retourExperienceDonne.js';
 import { MessagerieInstantanee, RetourExperience } from '../../src/metier/messagerieInstantanee.js';
 import { MockBusEvenement } from '../bus/busPourLesTests.js';
-import { configurationDeTestDuServeur, fausseMessagerieInstantanee, fauxRapporteurErreur } from './fauxObjets.js';
+import { configurationDeTestDuServeur, fausseMessagerieInstantanee, fauxRapporteur } from './fauxObjets.js';
 
 describe("La ressource des retours d'expérience", () => {
   let serveur: Express;
@@ -17,7 +17,7 @@ describe("La ressource des retours d'expérience", () => {
     messagerieInstantanee = {
       ...fausseMessagerieInstantanee,
     };
-    busEvenements = new MockBusEvenement(fauxRapporteurErreur);
+    busEvenements = new MockBusEvenement(fauxRapporteur);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements,

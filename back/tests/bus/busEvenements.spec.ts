@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { BusEvenements, EvenementDuBus } from '../../src/bus/busEvenements.js';
-import { fauxRapporteurErreur } from '../api/fauxObjets.js';
+import { fauxRapporteur } from '../api/fauxObjets.js';
 
 class EvenementTestA implements EvenementDuBus {
   increment: number = 0;
@@ -13,7 +13,7 @@ class EvenementTestA implements EvenementDuBus {
 class EvenementTestB implements EvenementDuBus {}
 
 describe("Le bus d'événements", () => {
-  const creeBusEvenements = () => new BusEvenements(fauxRapporteurErreur);
+  const creeBusEvenements = () => new BusEvenements(fauxRapporteur);
 
   it("permet de s'abonner à un type d'événement", async () => {
     let compteur = 0;

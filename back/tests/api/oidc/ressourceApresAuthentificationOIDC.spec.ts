@@ -17,7 +17,7 @@ import {
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
   fauxFournisseurDeChemin,
-  fauxRapporteurErreur,
+  fauxRapporteur,
   ressourceFactice,
 } from '../fauxObjets.js';
 import { utilisateurDeTest } from '../mesures/constructeurDUtilisateur.js';
@@ -37,7 +37,7 @@ describe('La ressource apres authentification OIDC', () => {
       adaptateurOIDC = { ...fauxAdaptateurOIDC };
       adaptateurJWT = fauxAdaptateurJWT;
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
-      busEvenements = new MockBusEvenement(fauxRapporteurErreur);
+      busEvenements = new MockBusEvenement(fauxRapporteur);
       const configurationServeur: ConfigurationServeur = {
         ...configurationDeTestDuServeur,
         adaptateurEnvironnement,

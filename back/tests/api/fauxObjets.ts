@@ -30,7 +30,7 @@ import { EntrepôtContactStatique } from '../../src/infra/entrepotContactStatiqu
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js';
 import { Parcours } from '../../src/metier/parcours.js';
-import { RapporteurErreur } from '../../src/metier/rapporteurErreur.js';
+import { Rapporteur } from '../../src/metier/rapporteur.js';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests.js';
 import { EntrepôtArticleMémoire } from '../persistance/entrepotArticleMemoire.js';
 import { EntrepotExigenceMemoire } from '../persistance/entrepotExigenceMemoire.js';
@@ -49,7 +49,7 @@ import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMe
 
 export const fauxControleurErreurs: ErrorRequestHandler = (erreur, _requete, _reponse, suite) => suite(erreur);
 
-export const fauxRapporteurErreur: RapporteurErreur = {
+export const fauxRapporteur: Rapporteur = {
   erreur: () => {},
 };
 
@@ -366,7 +366,7 @@ const entrepôtContact = new EntrepôtContactStatique();
 
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
-  rapporteurErreur: fauxRapporteurErreur,
+  rapporteur: fauxRapporteur,
   controleurErreurs: fauxControleurErreurs,
   adaptateurHachage: fauxAdaptateurHachage,
   adaptateurHorloge: fauxAdaptateurHorloge,
@@ -377,7 +377,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
   adaptateurStatistiqueMiniTests: new AdaptateurStatistiqueMiniTestsMémoire(),
   adaptateurStatistiqueParcours: new AdaptateurStatistiqueParcoursMémoire(),
-  busEvenements: fabriqueBusPourLesTests(fauxRapporteurErreur),
+  busEvenements: fabriqueBusPourLesTests(fauxRapporteur),
   entrepôtArticle: new EntrepôtArticleMémoire(),
   entrepotFavori: new EntrepotFavoriMemoire(),
   entrepôtContact,
