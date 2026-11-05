@@ -14,7 +14,5 @@ export const adaptateurJournalMemoire: AdaptateurJournal = {
 };
 
 export const fabriqueAdaptateurJournal = (adaptateurEnvironnement: AdaptateurEnvironnement) => {
-  return adaptateurEnvironnement.journal().baseDeDonnéesActive()
-    ? adaptateurJournalPostgres()
-    : adaptateurJournalMemoire;
+  return adaptateurEnvironnement.journal.baseDeDonnéesActive() ? adaptateurJournalPostgres() : adaptateurJournalMemoire;
 };

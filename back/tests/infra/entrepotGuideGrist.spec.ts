@@ -25,13 +25,13 @@ describe("L'entrepot de guide Grist", () => {
       },
       adaptateurEnvironnement: {
         ...fauxAdaptateurEnvironnement,
-        grist: () => ({
-          ...fauxAdaptateurEnvironnement.grist(),
-          guides: () => ({
+        grist: {
+          ...fauxAdaptateurEnvironnement.grist,
+          guides: {
             cleApi: () => '',
             urlTable: () => '',
-          }),
-        }),
+          },
+        },
       },
     });
 

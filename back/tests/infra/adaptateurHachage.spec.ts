@@ -8,9 +8,9 @@ describe("L'adaptateur de hachage", () => {
     it('hache avec un secret', async () => {
       const adaptateurEnvironnement: AdaptateurEnvironnement = {
         ...fauxAdaptateurEnvironnement,
-        hachage: () => ({
+        hachage: {
           tousLesSecretsDeHachage: () => [{ version: 1, secret: 'chut' }],
-        }),
+        },
       };
 
       const hache = fabriqueAdaptateurHachage({
@@ -23,12 +23,12 @@ describe("L'adaptateur de hachage", () => {
     it('hache avec deux secrets', async () => {
       const adaptateurEnvironnement: AdaptateurEnvironnement = {
         ...fauxAdaptateurEnvironnement,
-        hachage: () => ({
+        hachage: {
           tousLesSecretsDeHachage: () => [
             { version: 1, secret: 'chut' },
             { version: 2, secret: 'tais-toi' },
           ],
-        }),
+        },
       };
 
       const hache = fabriqueAdaptateurHachage({
@@ -41,9 +41,9 @@ describe("L'adaptateur de hachage", () => {
     it('si aucun ?', () => {
       const adaptateurEnvironnement: AdaptateurEnvironnement = {
         ...fauxAdaptateurEnvironnement,
-        hachage: () => ({
+        hachage: {
           tousLesSecretsDeHachage: () => [],
-        }),
+        },
       };
 
       const hache = fabriqueAdaptateurHachage({

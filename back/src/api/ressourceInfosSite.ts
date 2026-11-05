@@ -5,7 +5,7 @@ import { corpsVide, valideCorpsRequete } from './zod.js';
 export const ressourceInfosSite = ({ adaptateurEnvironnement }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get('/', valideCorpsRequete(corpsVide), (_, reponse) => {
-    const detailsPreparation = adaptateurEnvironnement.maintenance().detailsPreparation();
+    const detailsPreparation = adaptateurEnvironnement.maintenance.detailsPreparation();
     const maintenanceEnPreparation = detailsPreparation
       ? {
           jour: detailsPreparation.split(' - ')[0],

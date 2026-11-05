@@ -57,7 +57,7 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
   ) {
     this.enteteJSON = {
       headers: {
-        'api-key': this.adaptateurEnvironnement.brevo().cléAPI(),
+        'api-key': this.adaptateurEnvironnement.brevo.cléAPI(),
         accept: 'application/json',
         'content-type': 'application/json',
       },
@@ -67,7 +67,7 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
   private readonly récupèreContact = async (email: string): Promise<DonnéesUtilisateurBrevo> => {
     try {
       const { data } = await this.clientHttp.get<DonnéesUtilisateurBrevo>(
-        `${this.adaptateurEnvironnement.brevo().url()}/contacts/${email}`,
+        `${this.adaptateurEnvironnement.brevo.url()}/contacts/${email}`,
         this.enteteJSON
       );
 
@@ -94,11 +94,7 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
         identifiers: { email_id: email },
         ...(propriétésÀMettreÀJour && { contact_properties: propriétésÀMettreÀJour }),
       };
-      await this.clientHttp.post(
-        `${this.adaptateurEnvironnement.brevo().url()}/events`,
-        corpsDeRequête,
-        this.enteteJSON
-      );
+      await this.clientHttp.post(`${this.adaptateurEnvironnement.brevo.url()}/events`, corpsDeRequête, this.enteteJSON);
     } catch (erreur: unknown) {
       if (isAxiosError(erreur)) {
         throw new Error(messageErreur + erreur.message, { cause: erreur });
@@ -109,7 +105,7 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
 
   envoieEmailBienvenue = async ({ email, prenom }: { email: string; prenom: string }) => {
     await this.clientHttp.post(
-      `${this.adaptateurEnvironnement.brevo().url()}/smtp/email`,
+      `${this.adaptateurEnvironnement.brevo.url()}/smtp/email`,
       {
         to: [{ email }],
         templateId: parseInt(process.env.BREVO_ID_TEMPLATE_BIENVENUE || '0'),
@@ -136,7 +132,7 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
   }) => {
     try {
       await this.clientHttp.post(
-        `${this.adaptateurEnvironnement.brevo().url()}/contacts`,
+        `${this.adaptateurEnvironnement.brevo.url()}/contacts`,
         {
           updateEnabled: true,
           email,
@@ -163,7 +159,7 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
   inscrisAInfolettre = async (email: string) => {
     try {
       await this.clientHttp.post(
-        `${this.adaptateurEnvironnement.brevo().url()}/contacts`,
+        `${this.adaptateurEnvironnement.brevo.url()}/contacts`,
         {
           updateEnabled: true,
           email,
@@ -284,6 +280,6 @@ export const fabriqueAdaptateurEmail = (
   adaptateurHorloge: AdaptateurHorloge,
   rapporteur: Rapporteur
 ) =>
-  adaptateurEnvironnement.brevo().url() && adaptateurEnvironnement.brevo().cléAPI()
+  adaptateurEnvironnement.brevo.url() && adaptateurEnvironnement.brevo.cléAPI()
     ? new AdaptateurEmailBrevo(axiosSécurisé, adaptateurEnvironnement, adaptateurHorloge, rapporteur)
     : adaptateurEmailConsole();

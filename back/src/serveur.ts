@@ -61,7 +61,7 @@ import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeS
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
 
-const sentryConfiguré = Boolean(adaptateurEnvironnement.sentry().dsn());
+const sentryConfiguré = Boolean(adaptateurEnvironnement.sentry.dsn());
 if (sentryConfiguré) initialiseSentry(adaptateurEnvironnement);
 
 const rapporteur = sentryConfiguré ? rapporteurSentry : rapporteurConsole;
@@ -74,11 +74,11 @@ const adaptateurHachage = fabriqueAdaptateurHachage({
   adaptateurEnvironnement,
 });
 
-const adaptateurStatistiqueMiniTests = adaptateurEnvironnement.journal().baseDeDonnéesActive()
+const adaptateurStatistiqueMiniTests = adaptateurEnvironnement.journal.baseDeDonnéesActive()
   ? new AdaptateurStatistiqueMiniTestsPostgres()
   : new AdaptateurStatistiqueMiniTestsMémoire();
 
-const adaptateurStatistiqueParcours = adaptateurEnvironnement.journal().baseDeDonnéesActive()
+const adaptateurStatistiqueParcours = adaptateurEnvironnement.journal.baseDeDonnéesActive()
   ? new AdaptateurStatistiqueParcoursPostgres()
   : new AdaptateurStatistiqueParcoursMémoire();
 
@@ -210,13 +210,12 @@ const host = process.env.HOST;
     busEvenements,
     entrepotUtilisateur,
     reseau: {
-      trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
-      maxRequetesParMinutes: adaptateurEnvironnement.serveur().maxRequetesParMinute(),
-      maxRequetesParMinuteAPI: adaptateurEnvironnement.serveur().maxRequetesParMinuteAPI(),
-      maxRequetesParMinuteRetoursUtilisateurs: adaptateurEnvironnement
-        .serveur()
-        .maxRequetesParMinuteRetoursUtilisateurs(),
-      ipAutorisees: adaptateurEnvironnement.serveur().ipAutorisees(),
+      trustProxy: adaptateurEnvironnement.serveur.trustProxy(),
+      maxRequetesParMinutes: adaptateurEnvironnement.serveur.maxRequetesParMinute(),
+      maxRequetesParMinuteAPI: adaptateurEnvironnement.serveur.maxRequetesParMinuteAPI(),
+      maxRequetesParMinuteRetoursUtilisateurs:
+        adaptateurEnvironnement.serveur.maxRequetesParMinuteRetoursUtilisateurs(),
+      ipAutorisees: adaptateurEnvironnement.serveur.ipAutorisees(),
     },
     adaptateurRechercheEntreprise,
     adaptateurProfilAnssi,

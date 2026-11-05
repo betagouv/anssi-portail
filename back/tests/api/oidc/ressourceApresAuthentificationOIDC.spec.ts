@@ -160,10 +160,10 @@ describe('La ressource apres authentification OIDC', () => {
     });
 
     it("jette une erreur d'uthentification trop faible si la connexion ne s'est pas faite en MFA", async () => {
-      adaptateurEnvironnement.oidc = () => ({
-        ...fauxAdaptateurEnvironnement.oidc(),
+      adaptateurEnvironnement.oidc = {
+        ...fauxAdaptateurEnvironnement.oidc,
         authentificationMultiFacteursDésactivée: () => false,
-      });
+      };
       adaptateurOIDC.recupereJeton = async () => {
         return {
           idToken: 'tokenAgentConnect',

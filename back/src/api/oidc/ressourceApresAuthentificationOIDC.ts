@@ -28,7 +28,7 @@ const ressourceApresAuthentificationOIDC = ({
 
       try {
         const { accessToken, idToken, sujet, connexionAvecMFA, acr } = await adaptateurOIDC.recupereJeton(requete);
-        if (!adaptateurEnvironnement.oidc().authentificationMultiFacteursDésactivée() && !garantitUnMFA(acr)) {
+        if (!adaptateurEnvironnement.oidc.authentificationMultiFacteursDésactivée() && !garantitUnMFA(acr)) {
           return erreurAuthentificationTropFaible(reponse, fournisseurChemin);
         }
         const informationsUtilisateur = await adaptateurOIDC.recupereInformationsUtilisateur(accessToken, sujet);

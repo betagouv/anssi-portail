@@ -22,10 +22,10 @@ describe("L'entrepot de financement Grist", () => {
       clientHttp,
       adaptateurEnvironnement: {
         ...fauxAdaptateurEnvironnement,
-        grist: () => ({
-          ...fauxAdaptateurEnvironnement.grist(),
+        grist: {
+          ...fauxAdaptateurEnvironnement.grist,
           dureeCacheEnSecondes: () => 0,
-        }),
+        },
       },
     });
 

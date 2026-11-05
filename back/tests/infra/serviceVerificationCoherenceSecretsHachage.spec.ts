@@ -8,9 +8,9 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
   it('jette une erreur si un secret est invalide', async () => {
     const adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
-      hachage: () => ({
+      hachage: {
         tousLesSecretsDeHachage: () => [{ version: 1, secret: 'unAutreSecret' }],
-      }),
+      },
     };
     const entrepotSecretHachage: EntrepotSecretHachage = {
       tous: async () => [{ version: 1, empreinte: 'secret-crypte' }],
@@ -40,12 +40,12 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
   it("jette une erreur si le deuxième secret est invalide, peu importe l'ordre", async () => {
     const adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
-      hachage: () => ({
+      hachage: {
         tousLesSecretsDeHachage: () => [
           { version: 2, secret: 'unAutresecret' },
           { version: 1, secret: 'secret' },
         ],
-      }),
+      },
     };
     const entrepotSecretHachage: EntrepotSecretHachage = {
       tous: async () => [
@@ -78,12 +78,12 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
   it('ne fait rien si tous les secrets sont valides', async () => {
     const adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
-      hachage: () => ({
+      hachage: {
         tousLesSecretsDeHachage: () => [
           { version: 1, secret: 'secret' },
           { version: 2, secret: 'secret2' },
         ],
-      }),
+      },
     };
     const entrepotSecretHachage: EntrepotSecretHachage = {
       tous: async () => [
@@ -108,12 +108,12 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
   it("jette une erreur si un secret n'est pas présent dans la persistance", async () => {
     const adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
-      hachage: () => ({
+      hachage: {
         tousLesSecretsDeHachage: () => [
           { version: 1, secret: 'secret' },
           { version: 2, secret: 'secret2' },
         ],
-      }),
+      },
     };
     const entrepotSecretHachage: EntrepotSecretHachage = {
       tous: async () => [{ version: 2, empreinte: 'secret2-crypte' }],
@@ -141,9 +141,9 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
   it("jette une erreur si un secret de la persistance n'est pas présent dans la config", async () => {
     const adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
-      hachage: () => ({
+      hachage: {
         tousLesSecretsDeHachage: () => [{ version: 2, secret: 'secret2' }],
-      }),
+      },
     };
     const entrepotSecretHachage: EntrepotSecretHachage = {
       tous: async () => [
@@ -174,9 +174,9 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
   it("jette une erreur si aucun secret n'est présent dans la config", async () => {
     const adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
-      hachage: () => ({
+      hachage: {
         tousLesSecretsDeHachage: () => [],
-      }),
+      },
     };
 
     const entrepotSecretHachage: EntrepotSecretHachage = {

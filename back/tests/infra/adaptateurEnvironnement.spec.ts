@@ -2,6 +2,25 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { adaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
 
 describe("L'adaptateur environnement", () => {
+  it.each([
+    ['guides', 'CELLAR_BUCKET_GUIDES'],
+    ['ressourcesCyber', 'CELLAR_BUCKET_RESSOURCES_CYBER'],
+    ['visas', 'CELLAR_BUCKET_VISAS'],
+  ] as const)('résout les URLs Cellar %s au moment de leur lecture', (ressource, variableBucket) => {
+    vi.stubEnv('CELLAR_URL', 'https://%BUCKET%.cellar.example');
+    vi.stubEnv(variableBucket, 'premier');
+    expect(adaptateurEnvironnement.urlCellar[ressource]()).toBe('https://premier.cellar.example/');
+
+    vi.stubEnv('CELLAR_URL', 'https://cellar.example/%BUCKET%/');
+    vi.stubEnv(variableBucket, 'second');
+    expect(adaptateurEnvironnement.urlCellar[ressource]()).toBe('https://cellar.example/second/');
+
+    vi.stubEnv(variableBucket, undefined);
+    expect(adaptateurEnvironnement.urlCellar[ressource]()).toBe('');
+    vi.stubEnv(variableBucket, '');
+    expect(adaptateurEnvironnement.urlCellar[ressource]()).toBe('');
+  });
+
   beforeEach(() => {
     for (const cle of Object.keys(process.env).filter((cle) => cle.startsWith('HACHAGE_SECRET_DE_HACHAGE_'))) {
       vi.stubEnv(cle, undefined);
@@ -12,7 +31,7 @@ describe("L'adaptateur environnement", () => {
     vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_1', 'secret1');
     vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_2', 'secret2');
 
-    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
+    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage.tousLesSecretsDeHachage();
 
     expect(tousLesSecretsDeHachage).toEqual([
       { version: 1, secret: 'secret1' },
@@ -25,7 +44,7 @@ describe("L'adaptateur environnement", () => {
     vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_3', 'secret3');
     vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_2', 'secret2');
 
-    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
+    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage.tousLesSecretsDeHachage();
 
     expect(tousLesSecretsDeHachage).toEqual([
       { version: 1, secret: 'secret1' },
@@ -39,7 +58,7 @@ describe("L'adaptateur environnement", () => {
     vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_V3', 'secret3');
     vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_2', 'secret2');
 
-    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
+    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage.tousLesSecretsDeHachage();
 
     expect(tousLesSecretsDeHachage).toEqual([
       { version: 1, secret: 'secret1' },
@@ -50,7 +69,7 @@ describe("L'adaptateur environnement", () => {
   it('utilise des entiers pour les versions', () => {
     vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_1', 'secret1');
 
-    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
+    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage.tousLesSecretsDeHachage();
 
     expect(tousLesSecretsDeHachage[0].version).toBe(1);
   });
@@ -59,7 +78,7 @@ describe("L'adaptateur environnement", () => {
     vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_1', '');
 
     expect(() => {
-      adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
+      adaptateurEnvironnement.hachage.tousLesSecretsDeHachage();
     }).toThrow(
       expect.objectContaining({ message: `Le secret de hachage HACHAGE_SECRET_DE_HACHAGE_1 ne doit pas être vide` })
     );
@@ -69,7 +88,7 @@ describe("L'adaptateur environnement", () => {
     vi.stubEnv('URL_BASE', '');
     vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_1', 'ok');
 
-    const secrets = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
+    const secrets = adaptateurEnvironnement.hachage.tousLesSecretsDeHachage();
 
     expect(secrets).toHaveLength(1);
   });
@@ -78,7 +97,7 @@ describe("L'adaptateur environnement", () => {
     vi.stubEnv('SECRET_JWT', '');
 
     expect(() => {
-      adaptateurEnvironnement.secrets().jwt();
+      adaptateurEnvironnement.secrets.jwt();
     }).toThrow(expect.objectContaining({ message: '💥 Veuillez renseigner le secret JWT' }));
   });
 
@@ -86,7 +105,7 @@ describe("L'adaptateur environnement", () => {
     vi.stubEnv('SECRET_JWT', undefined);
 
     expect(() => {
-      adaptateurEnvironnement.secrets().jwt();
+      adaptateurEnvironnement.secrets.jwt();
     }).toThrow(expect.objectContaining({ message: '💥 Veuillez renseigner le secret JWT' }));
   });
 
@@ -94,7 +113,7 @@ describe("L'adaptateur environnement", () => {
     vi.stubEnv('SECRET_COOKIE', '');
 
     expect(() => {
-      adaptateurEnvironnement.secrets().cookie();
+      adaptateurEnvironnement.secrets.cookie();
     }).toThrow(expect.objectContaining({ message: '💥 Veuillez renseigner le secret COOKIE' }));
   });
 
@@ -102,7 +121,7 @@ describe("L'adaptateur environnement", () => {
     vi.stubEnv('SECRET_COOKIE', undefined);
 
     expect(() => {
-      adaptateurEnvironnement.secrets().cookie();
+      adaptateurEnvironnement.secrets.cookie();
     }).toThrow(expect.objectContaining({ message: '💥 Veuillez renseigner le secret COOKIE' }));
   });
 });

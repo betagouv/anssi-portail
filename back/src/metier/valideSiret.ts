@@ -2,7 +2,7 @@ import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
 
 export const valideSiret = (adaptateurEnvironnement: AdaptateurEnvironnement, numero: string) => {
   // by-pass de la validation Luhn (SIRET) de l'instance de test de ProConnect
-  if (adaptateurEnvironnement.siret().desactiveValidationStricte()) {
+  if (adaptateurEnvironnement.siret.desactiveValidationStricte()) {
     return true;
   }
   let somme = 0;

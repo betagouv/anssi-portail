@@ -39,7 +39,7 @@ class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
         ...(identifiantAidant && { identifiantAidant }),
         ...(siretAidant && { siretAidant }),
       };
-      await axios.post(`${this.adaptateurEnvironnement.monAideCyber().url()}/api/demandes/etre-aide`, demandeMAC);
+      await axios.post(`${this.adaptateurEnvironnement.monAideCyber.url()}/api/demandes/etre-aide`, demandeMAC);
     } catch (e: unknown | Error) {
       if (
         isAxiosError(e) &&

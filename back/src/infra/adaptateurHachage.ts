@@ -26,7 +26,7 @@ export const fabriqueAdaptateurHachage = ({
   hacheAvecUnSeulSecret,
 
   hache: (valeur: string): string => {
-    const secrets = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
+    const secrets = adaptateurEnvironnement.hachage.tousLesSecretsDeHachage();
 
     const hashFinal = secrets.reduce((acc, { secret }) => hacheAvecUnSeulSecret(acc, secret), valeur);
 

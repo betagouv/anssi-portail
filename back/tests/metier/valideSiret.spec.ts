@@ -18,7 +18,7 @@ describe('Valide les numéros SIRET', () => {
   it('retourne vrai si on désactive la vérification stricte', () => {
     const adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
-      siret: () => ({ desactiveValidationStricte: () => true }),
+      siret: { desactiveValidationStricte: () => true },
     };
     const resultat = valideSiret(adaptateurEnvironnement, '12345678901234');
 

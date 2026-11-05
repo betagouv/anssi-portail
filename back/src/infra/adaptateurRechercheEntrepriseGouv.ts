@@ -16,7 +16,7 @@ export class AdaptateurRechercheEntrepriseGouv implements AdaptateurRechercheEnt
     private readonly rapporteur: Rapporteur
   ) {
     this.cache = new Cache({ ttl: TRENTE_MINUTES });
-    this.apiUrl = adaptateurEnvironnement.rechercheEntreprise().apiUrl();
+    this.apiUrl = adaptateurEnvironnement.rechercheEntreprise.apiUrl();
   }
 
   async rechercheOrganisations(terme: string, département: string | null): Promise<ResultatRechercheEntreprise[]> {

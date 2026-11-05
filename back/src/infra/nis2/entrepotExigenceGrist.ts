@@ -68,8 +68,8 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
     rapporteur: Rapporteur;
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
-    const configGrist = adaptateurEnvironnement.grist();
-    super(clientHttp, '', configGrist.nis2().cleApi(), configGrist.dureeCacheEnSecondes());
+    const configGrist = adaptateurEnvironnement.grist;
+    super(clientHttp, '', configGrist.nis2.cleApi(), configGrist.dureeCacheEnSecondes());
     this.rapporteur = rapporteur;
     this.croisements = {
       AE: {
@@ -155,7 +155,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
         },
       },
     };
-    this.urlDocument = `${configGrist.baseURL()}/api/docs/${configGrist.nis2().idDocument()}`;
+    this.urlDocument = `${configGrist.baseURL()}/api/docs/${configGrist.nis2.idDocument()}`;
   }
 
   parReferentiel(referentiel: 'NIS2', cible?: Referentiel): Promise<ExigenceNIS2[]>;

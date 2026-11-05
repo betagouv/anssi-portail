@@ -67,5 +67,5 @@ export const fabriqueAdaptateurChiffrement: FabriqueAdaptateurChiffrement = (
   if (typeof adaptateurEnvironnementOuCle === 'string') {
     return adaptateurChiffrement(adaptateurEnvironnementOuCle);
   }
-  return adaptateurChiffrement(adaptateurEnvironnementOuCle.chiffrement().cleChaCha20Hex());
+  return adaptateurChiffrement(adaptateurEnvironnementOuCle.chiffrement.cleChaCha20Hex());
 };

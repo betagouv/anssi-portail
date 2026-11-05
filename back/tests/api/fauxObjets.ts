@@ -171,110 +171,112 @@ const CINQ_MINUTES = 300;
 
 export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   versionDeConstruction: () => '',
-  chiffrement: () => ({
+  chiffrement: {
     cleChaCha20Hex: () => 'uneCléCha20Hex',
-  }),
-  hachage: () => ({
+  },
+  hachage: {
     tousLesSecretsDeHachage: () => [{ version: 1, secret: 'secret' }],
-  }),
+  },
   urlBaseMSC: () => 'http://localhost',
-  oidc: () => ({
+  oidc: {
     authentificationMultiFacteursDésactivée: () => true,
     urlRedirectionApresAuthentification: () => '',
     urlRedirectionApresDeconnexion: () => '',
     urlBase: () => '',
     clientId: () => '',
     clientSecret: () => '',
-  }),
-  serveur: () => ({
+  },
+  serveur: {
     trustProxy: () => 0,
     maxRequetesParMinute: () => 0,
     maxRequetesParMinuteAPI: () => 200,
     maxRequetesParMinuteRetoursUtilisateurs: () => 50,
     ipAutorisees: () => false,
-  }),
-  sentry: () => ({
+  },
+  sentry: {
     dsn: () => '',
     environnement: () => '',
-  }),
-  crisp: () => ({
+  },
+  crisp: {
     catégorieDuBlog: () => 'fauxIdCatégorieBlog',
     duréeDuCacheEnSecondes: () => CINQ_MINUTES,
-  }),
-  maintenance: () => ({
+  },
+  maintenance: {
     actif: () => false,
     detailsPreparation: () => undefined,
-  }),
-  repartition: () => ({
+  },
+  repartition: {
     nombreMinimumDeResultats: () => 2,
-  }),
-  mattermost: () => ({
+  },
+  mattermost: {
     webhookAvisUtilisateur: () => '',
     webhookRetourExperience: () => '',
     webhookAvisMesure: () => '',
-  }),
-  grist: () => ({
+  },
+  grist: {
     baseURL: () => 'http://grist',
-    financement: () => ({
+    cleApi: () => 'FAUSSE_CLE_API',
+    financement: {
       urlTable: () => 'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records',
       cleApi: () => 'FAUSSE_CLE_API',
-    }),
-    gestionGuides: () => ({
+    },
+    gestionGuides: {
       urlTable: () => 'http://grist/api/docs/idDocumentGuidesTravail/tables/idTableGuidesTravail/records',
       cleApi: () => 'FAUSSE_CLE_API_GUIDES_TRAVAIL',
-    }),
-    guides: () => ({
+    },
+    guides: {
       urlTable: () => 'http://grist/api/docs/idDocumentGuides/tables/idTableGuides/records',
       cleApi: () => 'FAUSSE_CLE_API_GUIDES',
-    }),
-    nis2: () => ({
+    },
+    nis2: {
       idDocument: () => 'idDeDocumentSocle',
       cleApi: () => 'FAUSSE_CLE_API_SOCLE',
-    }),
+    },
     dureeCacheEnSecondes: () => CINQ_MINUTES,
-  }),
-  urlCellar: () => ({
+  },
+  urlCellar: {
     guides: () => 'https://guides.notre-cellar/',
     ressourcesCyber: () => 'https://ressources-cyber.notre-cellar/',
     visas: () => 'https://visas.notre-cellar/',
-  }),
-  cellar: () => ({
+  },
+  cellar: {
     region: () => '',
     url: () => 'https://notre-cellar/',
-    gestionGuides: () => ({
+    gestionGuides: {
       nomDuBucket: () => 'gestion-guides',
-    }),
-  }),
-  matomo: () => ({
+    },
+  },
+  matomo: {
     idSite: () => '227',
-  }),
-  monAideCyber: () => ({
+  },
+  monAideCyber: {
     url: () => 'https://demo.monaidecyber.fr',
     dureeCacheStatistiquesEnSecondes: () => 300,
-  }),
-  fonctionnalites: () => ({
-    nis2: () => ({
+  },
+  fonctionnalites: {
+    nis2: {
+      afficheObservations: () => false,
       afficheCyFun23: () => true,
-    }),
-  }),
+    },
+  },
   nodeEnv: () => 'developpement',
-  rechercheEntreprise: () => ({
+  rechercheEntreprise: {
     apiUrl: () => 'http://recherche-entreprise',
-  }),
-  siret: () => ({
+  },
+  siret: {
     desactiveValidationStricte: () => false,
-  }),
-  secrets: () => ({
+  },
+  secrets: {
     jwt: () => 'FAUX_SECRET_JWT',
     cookie: () => 'FAUX_SECRET_COOKIE',
-  }),
-  brevo: () => ({
+  },
+  brevo: {
     cléAPI: () => 'FAUSSE_CLE_API_BREVO',
     url: () => 'FAUSSE_URL_BREVO',
-  }),
-  journal: () => ({
+  },
+  journal: {
     baseDeDonnéesActive: () => false,
-  }),
+  },
 };
 
 const vraiMiddleware = fabriqueMiddleware({

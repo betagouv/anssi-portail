@@ -125,11 +125,11 @@ const selectionneURLCellarLecturePourUnBucket = (
 ): string => {
   switch (cleDeBucket) {
     case 'GUIDES':
-      return adaptateurEnvironnement.urlCellar().guides();
+      return adaptateurEnvironnement.urlCellar.guides();
     case 'RESSOURCES_CYBER':
-      return adaptateurEnvironnement.urlCellar().ressourcesCyber();
+      return adaptateurEnvironnement.urlCellar.ressourcesCyber();
     case 'VISAS':
-      return adaptateurEnvironnement.urlCellar().visas();
+      return adaptateurEnvironnement.urlCellar.visas();
     case 'GESTION_GUIDES':
       return '';
   }
@@ -146,10 +146,10 @@ export const selectionneConfigCellarDeposePourUnBucket = (
       throw new Error(`Interdit de déposer dans le bucket ${cleDeBucket}`);
     case 'GESTION_GUIDES':
       return {
-        nomDuBucket: adaptateurEnvironnement.cellar().gestionGuides().nomDuBucket(),
+        nomDuBucket: adaptateurEnvironnement.cellar.gestionGuides.nomDuBucket(),
         credentials: fromEnv(),
-        region: adaptateurEnvironnement.cellar().region(),
-        url: adaptateurEnvironnement.cellar().url(),
+        region: adaptateurEnvironnement.cellar.region(),
+        url: adaptateurEnvironnement.cellar.url(),
       };
   }
 };

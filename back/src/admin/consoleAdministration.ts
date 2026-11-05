@@ -385,7 +385,7 @@ export class ConsoleAdministration {
 
   async sauvegardeLesEmpreintesDesSecretsDeHachage() {
     await this.knexMSC.transaction(async (trx) => {
-      const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
+      const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage.tousLesSecretsDeHachage();
 
       const maj = tousLesSecretsDeHachage.map(async ({ version, secret }) => {
         const empreinte = await this.adaptateurHachage.hacheBCrypt(secret);

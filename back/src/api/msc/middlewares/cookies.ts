@@ -8,7 +8,7 @@ export const configureLesCookies = (app: Express, configurationServeur: Configur
     cookieSession({
       name: 'session',
       sameSite: true,
-      secret: configurationServeur.adaptateurEnvironnement.secrets().cookie(),
+      secret: configurationServeur.adaptateurEnvironnement.secrets.cookie(),
       secure: configurationServeur.adaptateurEnvironnement.nodeEnv() !== 'developpement',
       signed: configurationServeur.adaptateurEnvironnement.nodeEnv() !== 'developpement',
     })

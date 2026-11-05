@@ -136,7 +136,7 @@ export const fabriqueMiddleware = ({
             "'self'",
             'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
             'https://storage.crisp.chat',
-            adaptateurEnvironnement.urlCellar().ressourcesCyber(),
+            adaptateurEnvironnement.urlCellar.ressourcesCyber(),
             'data:',
             'blob:',
           ],
@@ -144,7 +144,7 @@ export const fabriqueMiddleware = ({
             "'self'",
             'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com',
             'https://ressources-mac.cellar-c2.services.clever-cloud.com',
-            adaptateurEnvironnement.urlCellar().ressourcesCyber(),
+            adaptateurEnvironnement.urlCellar.ressourcesCyber(),
           ],
           scriptSrc: [
             "'self'",
@@ -197,7 +197,7 @@ export const fabriqueMiddleware = ({
     };
 
   const verifieModeMaintenance = async (_requete: Request, reponse: Response, suite: NextFunction) => {
-    if (adaptateurEnvironnement.maintenance().actif()) {
+    if (adaptateurEnvironnement.maintenance.actif()) {
       await reponse
         .status(HttpStatusCode.ServiceUnavailable)
         .set('Content-Type', 'text/html')
