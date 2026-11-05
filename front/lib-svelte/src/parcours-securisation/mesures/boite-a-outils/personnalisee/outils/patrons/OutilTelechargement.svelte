@@ -1,5 +1,6 @@
 <script lang="ts">
   import RetourUtilisateurSurContenu from '../../../../../../ui/RetourUtilisateurSurContenu.svelte';
+  import IllustrationOutil from './IllustrationOutil.svelte';
 
   type Props = {
     href: string;
@@ -23,13 +24,15 @@
     {href}
     enlarge="true"
     has-badge="true"
-    {src}
     has-header-badge
     has-detail-end
     detail-end={`${typeFichier} - ${taille}`}
   >
     <div slot="headerbadges">
       <dsfr-badge label="Outil sécurisation" type="accent" accent="green-emeraude" size="sm"></dsfr-badge>
+    </div>
+    <div slot="image" class="image-outil">
+      <IllustrationOutil illustration={src} />
     </div>
   </dsfr-card>
   <RetourUtilisateurSurContenu identifiantCible={identifiant} typeDeRetour="outil" mode="carte">
@@ -38,6 +41,10 @@
 </div>
 
 <style lang="scss">
+  .image-outil {
+    height: 100%;
+  }
+
   .outil {
     display: flex;
     flex-direction: column;
