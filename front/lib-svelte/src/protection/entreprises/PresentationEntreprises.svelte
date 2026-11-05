@@ -14,8 +14,8 @@
 
 <HerosRiche
   description={estEnvDémo
-    ? 'Toutes les entreprises sont exposées au risque de cyberattaques. En 2025, les TPE/PME et ETI ont notamment représenté 48&nbsp;% des victimes de rançongiciels ou ransomware représentant les premières entités visées.'
-    : 'Toutes les entreprises sont exposées au risque de cyberattaques. En 2025, les TPE/PME et ETI ont notamment représenté 48&nbsp;% des victimes de rançongiciels ou ransowmare représentant les premières entités visées.'}
+    ? 'Toutes les entreprises sont exposées au risque de cyberattaques. En 2025, les TPE/PME et ETI ont notamment représenté 48\u00a0% des victimes de rançongiciels ou ransomware représentant les premières entités visées.'
+    : 'Toutes les entreprises sont exposées au risque de cyberattaques. En 2025, les TPE/PME et ETI ont notamment représenté 48\u00a0% des victimes de rançongiciels ou ransowmare représentant les premières entités visées.'}
   propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
   variante="vert-clair"
 >
