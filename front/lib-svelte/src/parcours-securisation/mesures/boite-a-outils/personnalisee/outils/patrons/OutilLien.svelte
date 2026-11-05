@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { DsfrBadge, DsfrCard } from '@lab-anssi/ui-kit';
   import type { CouleurDeBadge } from '../../../../../../ui/badge.type';
   import IllustrationOutil from './IllustrationOutil.svelte';
 
@@ -15,25 +16,24 @@
 </script>
 
 <div class="outil">
-  <dsfr-card
+  <DsfrCard
     blank
     {description}
-    enlarge="true"
-    has-badge="true"
-    has-description={description ? 'true' : undefined}
-    has-header-badge="true"
+    enlarge
+    hasDescription={Boolean(description)}
+    hasHeaderBadge
     {href}
-    horizontal="true"
+    horizontal
     size="sm"
     title={titre}
   >
-    <div slot="headerbadges">
-      <dsfr-badge label={labelBadge} type="accent" accent={couleurBadge} size="sm"></dsfr-badge>
+    <div slot="headerbadges" class="fr-badges-group">
+      <DsfrBadge label={labelBadge} type="accent" accent={couleurBadge} size="sm"></DsfrBadge>
     </div>
     <div slot="image" class="image-outil">
       <IllustrationOutil illustration={src} />
     </div>
-  </dsfr-card>
+  </DsfrCard>
 </div>
 
 <style lang="scss">
@@ -44,9 +44,5 @@
   .outil {
     display: flex;
     flex-direction: column;
-
-    dsfr-card {
-      min-height: auto;
-    }
   }
 </style>
