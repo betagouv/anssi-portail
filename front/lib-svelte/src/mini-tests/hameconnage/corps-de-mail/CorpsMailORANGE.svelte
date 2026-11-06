@@ -13,7 +13,8 @@
     <p>
       Bonjour,<br /><br />
       Une demande de transfert de votre numéro vers un autre opérateur a été enregistrée. Si vous n'êtes pas à l'origine de
-      cette demande, confirmez immédiatement votre identité pour l'annuler, sous peine de perdre votre ligne sous 24h.
+      cette demande, connectez-vous et renseignez votre numéro de téléphone et le code à usage unique reçu pour annuler la
+      demande.
     </p>
     <a href={lienFactice} onclick={(e) => e.preventDefault()}>Annuler la portabilité</a>
   </div>
