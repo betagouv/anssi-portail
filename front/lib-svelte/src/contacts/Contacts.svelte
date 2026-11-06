@@ -95,10 +95,13 @@
           {/if}
 
           {#if contactsRegionaux.CSIRT}
-            {@const { nom, telephone, siteWeb, adresse } = contactsRegionaux.CSIRT}
+            {@const { nom, telephone, siteWeb, adresse, email } = contactsRegionaux.CSIRT}
             <CarteContact titre={nom}>
               {#if telephone}
                 <LigneContact type="telephone" valeur={telephone} />
+              {/if}
+              {#if email}
+                <LigneContact type="email" valeur={email} />
               {/if}
               <LigneContact type="site-web" valeur={siteWeb} />
               {#if adresse}
