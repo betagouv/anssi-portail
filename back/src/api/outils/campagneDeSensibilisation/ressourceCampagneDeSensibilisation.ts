@@ -7,8 +7,8 @@ import { ConfigurationServeur } from '../../configurationServeur.js';
 import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../../zod.js';
 
-const NOM_DU_FICHIER_DANS_CELLAR = 'kit-de-sensibilisation-interne-V1.zip';
-const NOM_DU_FICHIER_TÉLÉCHARGÉ = 'ANSSI - Kit de sensibilisation interne.zip';
+const NOM_DU_FICHIER_DANS_CELLAR = 'campagne-de-sensibilisation-V1.zip';
+const NOM_DU_FICHIER_TÉLÉCHARGÉ = 'ANSSI - Campagne de sensibilisation.zip';
 
 export const ressourceCampagneDeSensibilisation = ({
   adaptateurHachage,
