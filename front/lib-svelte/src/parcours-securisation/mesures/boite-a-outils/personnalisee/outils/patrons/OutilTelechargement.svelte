@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { DsfrBadge, DsfrCard } from '@lab-anssi/ui-kit';
   import RetourUtilisateurSurContenu from '../../../../../../ui/RetourUtilisateurSurContenu.svelte';
+  import IllustrationOutil from './IllustrationOutil.svelte';
 
   type Props = {
     href: string;
@@ -15,35 +17,36 @@
 </script>
 
 <div class="outil">
-  <dsfr-card
+  <DsfrCard
     title={titre}
     size="sm"
-    horizontal="true"
-    download="true"
+    horizontal
+    download
     {href}
-    enlarge="true"
-    has-badge="true"
-    {src}
-    has-header-badge
-    has-detail-end
-    detail-end={`${typeFichier} - ${taille}`}
+    enlarge
+    hasHeaderBadge
+    hasDetailEnd
+    detailEnd={`${typeFichier} - ${taille}`}
   >
-    <div slot="headerbadges">
-      <dsfr-badge label="Outil sécurisation" type="accent" accent="green-emeraude" size="sm"></dsfr-badge>
+    <div slot="headerbadges" class="fr-badges-group">
+      <DsfrBadge label="Outil sécurisation" type="accent" accent="green-emeraude" size="sm"></DsfrBadge>
     </div>
-  </dsfr-card>
+    <div slot="image" class="image-outil">
+      <IllustrationOutil illustration={src} />
+    </div>
+  </DsfrCard>
   <RetourUtilisateurSurContenu identifiantCible={identifiant} typeDeRetour="outil" mode="carte">
     <b>Cet outil vous a-t-il aidé&nbsp;?</b>
   </RetourUtilisateurSurContenu>
 </div>
 
 <style lang="scss">
+  .image-outil {
+    height: 100%;
+  }
+
   .outil {
     display: flex;
     flex-direction: column;
-
-    dsfr-card {
-      min-height: auto;
-    }
   }
 </style>

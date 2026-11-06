@@ -1,0 +1,20 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="78.875" height="63.25" viewBox="0 0 78.875 63.25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group">
+<g id="false">
+<rect id="Rectangle 4" x="1" y="15.375" width="30" height="36.25" rx="6" fill="#E3E3FD" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector 8" d="M11 27.733L21 37.6193" stroke-width="4" stroke-miterlimit="10" stroke-linecap="round" stroke="#000091"/>
+<path id="Vector 9" d="M21 27.733L11 37.6193" stroke-width="4" stroke-miterlimit="10" stroke-linecap="round" stroke="#000091"/>
+</g>
+<g id="True">
+<rect id="Rectangle 4_2" x="47.875" y="15.375" width="30" height="36.25" rx="6" fill="#8585F6" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector 10" d="M57.2501 33.3214L61.4925 38.0833L68.9167 29.7499" stroke-width="4" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" stroke="#000091"/>
+</g>
+<g id="card">
+<rect id="Rectangle 3" x="16.625" y="4.75" width="46.25" height="57.5" rx="6" fill="white" stroke="#000091" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector 5" d="M26.6249 24.75H52.8749" stroke-width="4" stroke-miterlimit="10" stroke-linecap="round" stroke="#000091"/>
+<path id="Vector 6" d="M26.625 31.5001C25.5204 31.5001 24.625 32.3955 24.625 33.5001C24.625 34.6046 25.5204 35.5001 26.625 35.5001L26.625 33.5001L26.625 31.5001ZM52.875 35.4999C53.9796 35.4999 54.875 34.6045 54.875 33.4999C54.875 32.3953 53.9796 31.4999 52.875 31.4999L52.875 33.4999L52.875 35.4999ZM26.625 33.5001L26.625 35.5001L52.875 35.4999L52.875 33.4999L52.875 31.4999L26.625 31.5001L26.625 33.5001Z" fill="#000091"/>
+<path id="Vector 7" d="M26.6249 42.25H41.6249" stroke-width="4" stroke-miterlimit="10" stroke-linecap="round" stroke="#000091"/>
+</g>
+<path id="deco" d="M57.875 1H59.625C63.491 1 66.625 4.13401 66.625 8V9.75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#6A6AF4"/>
+</g>
+</svg>
