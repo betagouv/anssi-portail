@@ -126,15 +126,15 @@
           <div class="bloc">
             <h1>Votre identité</h1>
             <div>
-              <span class="info-label">Nom :</span>
+              <span class="info-label">Nom&nbsp;:</span>
               <span class="info-valeur">{informationsProfessionnelles.nom}</span>
             </div>
             <div>
-              <span class="info-label">Prénom :</span>
+              <span class="info-label">Prénom&nbsp;:</span>
               <span class="info-valeur">{informationsProfessionnelles.prenom}</span>
             </div>
             <div>
-              <span class="info-label">Mail professionnel :</span>
+              <span class="info-label">Mail professionnel&nbsp;:</span>
               <span class="info-valeur">{informationsProfessionnelles.email}</span>
             </div>
           </div>
@@ -142,15 +142,15 @@
             <div class="bloc">
               <h1>Votre organisation</h1>
               <div>
-                <span class="info-label">Dénomination légale :</span>
+                <span class="info-label">Dénomination légale&nbsp;:</span>
                 <span class="info-valeur">{informationsProfessionnelles.organisation.nom}</span>
               </div>
               <div>
-                <span class="info-label">SIRET :</span>
+                <span class="info-label">SIRET&nbsp;:</span>
                 <span class="info-valeur">{informationsProfessionnelles.organisation.siret}</span>
               </div>
               <div>
-                <span class="info-label">Département de votre organisation :</span>
+                <span class="info-label">Département de votre organisation&nbsp;:</span>
                 <span class="info-valeur">{informationsProfessionnelles.organisation.departement}</span>
               </div>
             </div>
@@ -186,7 +186,7 @@
             <h1>Votre identité</h1>
             <div class="telephone">
               <ChampTexte
-                aideSaisie="Ex : 0XXXXXXXXX"
+                aideSaisie="Ex&nbsp;: 0XXXXXXXXX"
                 id="telephone"
                 libelle="Téléphone"
                 messageErreur="Le numéro de téléphone doit respecter le format 0000000000."

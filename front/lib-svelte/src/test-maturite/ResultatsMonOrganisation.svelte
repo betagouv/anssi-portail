@@ -43,7 +43,7 @@
     {#if dateFormatee}
       <div class="date-realisation">Test réalisé le {dateFormatee}</div>
     {/if}
-    <h2>Niveau de maturité le plus proche : {niveau.label}</h2>
+    <h2>Niveau de maturité le plus proche&nbsp;: {niveau.label}</h2>
     <TuilesMaturite niveauCourant={niveau} {animeTuiles} {defilementAutomatique} {urlBase} />
     <div class="description-niveau">
       <h5>{niveau.label}</h5>

@@ -47,7 +47,7 @@
           <lab-anssi-icone nom="mail-line" taille="lg"></lab-anssi-icone>Abonnement à la newsletter
         </h2>
         <p class="texte-standard-md">
-          Directive NIS 2, guides de l’ANSSI : recevez gratuitement toute l’actualité de MesServicesCyber.
+          Directive NIS 2, guides de l’ANSSI&nbsp;: recevez gratuitement toute l’actualité de MesServicesCyber.
         </p>
       </hgroup>
 

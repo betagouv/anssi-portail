@@ -73,7 +73,7 @@
     </dsfr-tags-group>
   </Accordeon>
 
-  <Accordeon niveauTitre={3} libelle="2 typologies d’entités : Essentielles (EE) et Importantes (EI)">
+  <Accordeon niveauTitre={3} libelle="2 typologies d’entités&nbsp;: Essentielles (EE) et Importantes (EI)">
     <p>
       Deux types d’entités relevant des secteurs précités sont concernées par la directive NIS2, définies, selon leur
       degré de criticité, leur taille et leur chiffre d’affaires (pour les entreprises)&nbsp;:

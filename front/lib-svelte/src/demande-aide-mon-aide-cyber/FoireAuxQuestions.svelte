@@ -33,8 +33,8 @@
       </p>
       <p>
         🚫 <strong>Non, si vous êtes un particulier ou mono-salarié.</strong><br />
-        Le diagnostic n’est pas adapté à ce profil : trop de questions ne s’appliquent pas, et les aidants cyber ne sont pas
-        formés pour ce type d’accompagnement.
+        Le diagnostic n’est pas adapté à ce profil&nbsp;: trop de questions ne s’appliquent pas, et les aidants cyber ne sont
+        pas formés pour ce type d’accompagnement.
       </p>
     </div>
   </Accordeon>
@@ -49,7 +49,7 @@
           >aucune organisation n’est à l’abri</strong
         >, quelle que soit sa taille ou son secteur.<br />
         <br />
-        <strong>Les principales conséquences d’une attaque sont :</strong><br />
+        <strong>Les principales conséquences d’une attaque sont&nbsp;:</strong><br />
       </p>
       <ul>
         <li>La perte ou le vol de données (clients, finances, RH…)</li>
@@ -95,20 +95,20 @@
         de la sécurité des systèmes d’information). Pour en savoir plus, n’hésitez pas à consulter la
         <Lien href="https://monaide.cyber.gouv.fr/charte-aidant" libelle="charte de l’Aidant cyber" blank />.<br />
         <br />
-        🤝 Son rôle ? <strong>Vous accompagner bénévolement,</strong> de façon neutre, confidentielle et bienveillante,
-        pour
+        🤝 Son rôle&nbsp;? <strong>Vous accompagner bénévolement,</strong> de façon neutre, confidentielle et
+        bienveillante, pour
         <strong>évaluer la cybersécurité de votre structure</strong>
         et vous proposer des
         <strong>actions concrètes,</strong> accessibles et sans jargon technique.<br />
         <br />
-        💡 Pas besoin d’être un expert en informatique :
+        💡 Pas besoin d’être un expert en informatique&nbsp;:
         <strong> l’Aidant cyber s’adapte à votre niveau et à vos contraintes. </strong>
       </p>
     </div>
   </Accordeon>
   <Accordeon libelle="Que se passe-t-il après la demande de diagnostic&nbsp;?" niveauTitre={4}>
     <div class="corps">
-      <p>📩 Une fois votre demande envoyée :</p>
+      <p>📩 Une fois votre demande envoyée&nbsp;:</p>
       <ol>
         <li>Un aidant cyber local vous contacte (par email) sous quelques jours</li>
         <li>Vous planifiez ensemble un rendez-vous, en visio ou dans vos locaux</li>

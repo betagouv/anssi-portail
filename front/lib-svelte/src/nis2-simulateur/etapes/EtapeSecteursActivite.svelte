@@ -28,7 +28,7 @@
   <dsfr-stepper title={TitresEtapes['secteursActivite']} current-step="5" step-count="6" hide-details="true"
   ></dsfr-stepper>
 
-  <p>Dans quels secteurs d'activités votre organisation produit-elle des biens et/ou des services ?</p>
+  <p>Dans quels secteurs d'activités votre organisation produit-elle des biens et/ou des services&nbsp;?</p>
 
   <dsfr-highlight
     size="sm"

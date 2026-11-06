@@ -44,10 +44,10 @@
       class="avec-image-fond"
       badges={[{ label: '⏱️ 2 minutes', accent: 'green-bourgeon' }]}
       tailleBadges="md"
-      description="Rançongiciel, fraude au virement, espionnage, déstabilisation, cyberharcèlement : chaque attaque poursuit un but différent. En 2 minutes, situez celles qui pèsent le plus sur votre organisation."
+      description="Rançongiciel, fraude au virement, espionnage, déstabilisation, cyberharcèlement&nbsp;: chaque attaque poursuit un but différent. En 2 minutes, situez celles qui pèsent le plus sur votre organisation."
     >
       {#snippet titreHtml()}
-        Quels types de cyber&shy;attaques peuvent cibler mon organisation ?
+        Quels types de cyber&shy;attaques peuvent cibler mon organisation&nbsp;?
       {/snippet}
       {#snippet illustration()}
         <div class="illustration-du-bandeau">

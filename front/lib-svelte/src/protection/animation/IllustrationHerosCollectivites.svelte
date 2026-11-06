@@ -7,5 +7,5 @@
 
 <IllustrationAnimee
   {scènes}
-  étiquette="Des agents d'une collectivité en réunion de travail. Protection des données : accompagner les services vers la conformité."
+  étiquette="Des agents d'une collectivité en réunion de travail. Protection des données&nbsp;: accompagner les services vers la conformité."
 />

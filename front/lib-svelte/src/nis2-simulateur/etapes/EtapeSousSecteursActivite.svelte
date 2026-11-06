@@ -63,7 +63,7 @@
   <dsfr-stepper title={TitresEtapes['sousSecteursActivite']} current-step="5" step-count="6" hide-details="true"
   ></dsfr-stepper>
 
-  <p>Précisez les sous-secteurs concernés :</p>
+  <p>Précisez les sous-secteurs concernés&nbsp;:</p>
 
   {#each secteursChoisis as s (s)}
     <div>

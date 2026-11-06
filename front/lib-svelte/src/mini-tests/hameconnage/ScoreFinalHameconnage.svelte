@@ -94,7 +94,7 @@
   <dsfr-container>
     <PartageTest
       cheminPartagé="/hameconnage/test"
-      sujetMail="Hameçonnage : saurez-vous déjouer les mails piégés ?"
+      sujetMail="Hameçonnage&nbsp;: saurez-vous déjouer les mails piégés&nbsp;?"
       typeDeRetour="hameconnage"
     />
   </dsfr-container>

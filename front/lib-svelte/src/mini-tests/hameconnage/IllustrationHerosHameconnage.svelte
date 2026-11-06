@@ -12,5 +12,5 @@
 
 <IllustrationAnimee
   {scènes}
-  étiquette="Trois courriels empilés, entourés d'une alerte, d'une confirmation de courriel vérifié et de réactions : un poisson, une canne à pêche et un visage surpris."
+  étiquette="Trois courriels empilés, entourés d'une alerte, d'une confirmation de courriel vérifié et de réactions&nbsp;: un poisson, une canne à pêche et un visage surpris."
 />

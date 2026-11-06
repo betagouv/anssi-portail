@@ -209,7 +209,7 @@
   <Minuteur actif={choixEnCours} {surDécompte} surTempsÉcoulé={termineSélection(aLaisséPasserLeTemps)} />
 
   {#if statutRéflexe === 'bon'}
-    <Alerte taille="md" titre="Bon réflexe !" type="succès">
+    <Alerte taille="md" titre="Bon réflexe&nbsp;!" type="succès">
       {réflexe.conséquence.bonRéflexe}
     </Alerte>
     <CanonAConfetti lectureAutomatique />
@@ -219,8 +219,8 @@
     </Alerte>
   {:else if statutRéflexe === 'temps écoulé'}
     <Alerte taille="md" titre="Temps écoulé" type="erreur">
-      Le temps imparti est écoulé. En situation de crise, l’absence de décision laisse les impacts s’aggraver : ce tour
-      est compté comme un mauvais réflexe.
+      Le temps imparti est écoulé. En situation de crise, l’absence de décision laisse les impacts s’aggraver&nbsp;: ce
+      tour est compté comme un mauvais réflexe.
     </Alerte>
   {/if}
 

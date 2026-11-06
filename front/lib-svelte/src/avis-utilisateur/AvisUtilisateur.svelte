@@ -133,7 +133,7 @@
             </div>
           </div>
           <div class="question">
-            <p class:erreur={erreurCommentaire}>Que pouvons-nous améliorer ?</p>
+            <p class:erreur={erreurCommentaire}>Que pouvons-nous améliorer&nbsp;?</p>
             <ZoneTexte bind:valeur={commentaire} enErreur={erreurCommentaire} />
           </div>
           <p class="mis-en-avant">
@@ -141,7 +141,7 @@
           </p>
           <div class="question">
             <ChampTexte
-              aideSaisie="Ex : jean.dupont@mail.com"
+              aideSaisie="Ex&nbsp;: jean.dupont@mail.com"
               id="email-contact"
               libelle="Email de contact (facultatif)"
               messageErreur="L'email est invalide"

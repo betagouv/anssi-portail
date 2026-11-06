@@ -71,7 +71,7 @@
       <div class="role">Organisateur</div>
       <h3>Lancer une session de groupe</h3>
       <p>
-        <b> Vous organisez un atelier ou un événement autour de la cybersécurité ? </b>
+        <b> Vous organisez un atelier ou un événement autour de la cybersécurité&nbsp;? </b>
         <br /><br />
         Générez un code de session à partager avec les participants. Vous pourrez ensuite comparer les résultats obtenus.
       </p>
@@ -89,7 +89,7 @@
       <div class="role">Participant</div>
       <h3>Rejoindre une session de groupe</h3>
       <p>
-        <b>Vous participez à une session de groupe ?</b>
+        <b>Vous participez à une session de groupe&nbsp;?</b>
         <br /><br />
         Saisissez le code de session partagé par votre organisateur pour accéder au test de maturité cyber. Votre résultat
         est anonyme.

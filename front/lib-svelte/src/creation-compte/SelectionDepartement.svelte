@@ -52,7 +52,7 @@
     nom="departement"
     bind:valeur={saisie}
     oninput={() => avecTemporisation(rechercheSuggestions)}
-    aideSaisie="ex : 33, Morbihan"
+    aideSaisie="ex&nbsp;: 33, Morbihan"
     autocomplete="off"
   />
   <div class="liste-suggestions" class:visible={suggestionsVisibles} bind:this={suggestionsEl}>
