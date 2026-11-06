@@ -10,7 +10,7 @@ import { corpsVide, valideCorpsRequete } from '../../zod.js';
 const NOM_DU_FICHIER_DANS_CELLAR = 'kit-de-sensibilisation-interne-V1.zip';
 const NOM_DU_FICHIER_TÉLÉCHARGÉ = 'ANSSI - Kit de sensibilisation interne.zip';
 
-export const ressourceKitDeSensibilisationInterne = ({
+export const ressourceCampagneDeSensibilisation = ({
   adaptateurHachage,
   busEvenements,
   cellar,
@@ -32,7 +32,7 @@ export const ressourceKitDeSensibilisationInterne = ({
         return;
       }
 
-      await busEvenements.publie(new OutilTéléchargé(utilisateur.email, 'kit-de-sensibilisation-interne'));
+      await busEvenements.publie(new OutilTéléchargé(utilisateur.email, 'campagne-de-sensibilisation'));
 
       réponse.type('application/zip').attachment(NOM_DU_FICHIER_TÉLÉCHARGÉ);
       if (Number.isFinite(fluxCellar.tailleDuContenu)) {

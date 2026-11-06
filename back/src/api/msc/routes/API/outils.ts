@@ -1,6 +1,6 @@
 import { Express, RequestHandler } from 'express';
 import { ConfigurationServeur } from '../../../configurationServeur.js';
-import { ressourceKitDeSensibilisationInterne } from '../../../outils/kitDeSensibilisationInterne/ressourceKitDeSensibilisationInterne.js';
+import { ressourceCampagneDeSensibilisation } from '../../../outils/campagneDeSensibilisation/ressourceCampagneDeSensibilisation.js';
 import { ressourceModeleAnnuaireDeCrise } from '../../../outils/modeleAnnuaireDeCrise/ressourceModeleAnnuaireDeCrise.js';
 import { ressourceModeleListeDActivites } from '../../../outils/modeleListeDActivites/ressourceModeleListeDActivites.js';
 import { ressourceModeleModificationsMotsDePasse } from '../../../outils/modeleModificationMotsDePasse/ressourceModeleModificationsMotsDePasse.js';
@@ -38,5 +38,5 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
   );
   enregistreRoute('/modele-revue-droits-d-acces.xlsx', ressourceModèleRevueDroitsDAccès(configurationServeur));
 
-  enregistreRoute('/kit-de-sensibilisation-interne', ressourceKitDeSensibilisationInterne(configurationServeur));
+  enregistreRoute('/campagne-de-sensibilisation', ressourceCampagneDeSensibilisation(configurationServeur));
 };

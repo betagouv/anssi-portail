@@ -13,7 +13,7 @@ import { encodeSession } from '../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurCellar, fauxRapporteur } from '../fauxObjets.js';
 import { jeanneDupont } from '../objetsPretsALEmploi.js';
 
-describe('La ressource du kit de sensibilisation interne', () => {
+describe('La ressource du campagne de sensibilisation', () => {
   const contenuDuZip = Buffer.from('PK-contenu-factice');
   let serveur: Express;
   let busEvenements: MockBusEvenement;
@@ -49,7 +49,7 @@ describe('La ressource du kit de sensibilisation interne', () => {
     const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
     const récupèreKit = async () =>
       request(serveur)
-        .get('/api/outils/kit-de-sensibilisation-interne')
+        .get('/api/outils/campagne-de-sensibilisation')
         .set('Cookie', cookieJeanneDupont)
         .buffer(true)
         .parse((res, callback) => {
@@ -91,7 +91,7 @@ describe('La ressource du kit de sensibilisation interne', () => {
     });
 
     it('refuse un utilisateur non connecté', async () => {
-      const { status } = await request(serveur).get('/api/outils/kit-de-sensibilisation-interne');
+      const { status } = await request(serveur).get('/api/outils/campagne-de-sensibilisation');
 
       expect(status).toBe(HttpStatusCode.Unauthorized);
     });
@@ -101,7 +101,7 @@ describe('La ressource du kit de sensibilisation interne', () => {
 
       expect(busEvenements.aRecuUnEvenement(OutilTéléchargé)).toBe(true);
       const évènement = busEvenements.recupereEvenement(OutilTéléchargé);
-      expect(évènement!.outil).toBe('kit-de-sensibilisation-interne');
+      expect(évènement!.outil).toBe('campagne-de-sensibilisation');
       expect(évènement!.email).toBe(jeanneDupont.email);
     });
   });

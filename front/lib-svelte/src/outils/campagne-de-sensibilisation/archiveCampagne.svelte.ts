@@ -1,16 +1,16 @@
 import axios from 'axios';
 import { récupèreArchiveGénérique, récupèreArchivePersonnalisée } from './manipulationZip';
 
-type Kit = {
+type Campagne = {
   archive: Uint8Array<ArrayBuffer>;
   pdfs: Uint8Array<ArrayBuffer>[];
 };
 
 let logo = $state<File | null>(null);
-let promesseKit: Promise<Kit> | null = null;
+let promesseCampagne: Promise<Campagne> | null = null;
 
-const récupèreKit = async (logoÀAppliquer: File | null): Promise<Kit> => {
-  const { data } = await axios.get<ArrayBuffer>('/api/outils/kit-de-sensibilisation-interne', {
+const récupèreCampagne = async (logoÀAppliquer: File | null): Promise<Campagne> => {
+  const { data } = await axios.get<ArrayBuffer>('/api/outils/campagne-de-sensibilisation', {
     responseType: 'arraybuffer',
   });
 
@@ -22,21 +22,21 @@ const récupèreKit = async (logoÀAppliquer: File | null): Promise<Kit> => {
   return { archive: récupèreArchiveGénérique(data), pdfs: [] };
 };
 
-export const archiveKit = {
+export const archiveCampagne = {
   get logo() {
     return logo;
   },
 
   définisLogo(nouveauLogo: File | null) {
     logo = nouveauLogo;
-    promesseKit = null;
+    promesseCampagne = null;
   },
 
-  génère(): Promise<Kit> {
-    promesseKit ??= récupèreKit(logo).catch((erreur) => {
-      promesseKit = null;
+  génère(): Promise<Campagne> {
+    promesseCampagne ??= récupèreCampagne(logo).catch((erreur) => {
+      promesseCampagne = null;
       throw erreur;
     });
-    return promesseKit;
+    return promesseCampagne;
   },
 };
