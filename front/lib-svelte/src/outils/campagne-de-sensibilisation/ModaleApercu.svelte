@@ -126,22 +126,25 @@
       display: flex;
       flex: 1;
       justify-content: center;
+      align-items: flex-start;
       min-height: 0;
+      overflow-y: auto;
 
       img,
       .skeleton {
         display: block;
-        flex: 1;
         width: 100%;
-        height: 100%;
-        min-height: 0;
       }
 
       img {
-        object-fit: contain;
+        flex: none;
+        height: auto;
       }
 
       .skeleton {
+        flex: 1;
+        align-self: stretch;
+        min-height: 0;
         background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
         background-size: 200% 100%;
         animation: shimmer 1.5s infinite;
