@@ -125,7 +125,7 @@ export default defineConfig(({ command, mode }) => {
           exposition: 'src/main-exposition.ts',
           'conseils-cyber': 'src/main-conseils-cyber.ts',
           'integrer-webc': 'src/main-integrer-webc.ts',
-          'kit-de-sensibilisation-interne': 'src/main-kit-de-sensibilisation-interne.ts',
+          'campagne-de-sensibilisation': 'src/main-campagne-de-sensibilisation.ts',
         },
         output: {
           entryFileNames: `assets/[name].js`,

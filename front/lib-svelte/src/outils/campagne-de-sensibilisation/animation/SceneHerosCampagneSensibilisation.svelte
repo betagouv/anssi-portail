@@ -67,7 +67,7 @@
       id="image0_24172_39083"
       width="1200"
       height="896"
-      href="/assets/images/outils/animation/kit-sensibilisation-interne.avif"
+      href="/assets/images/outils/animation/campagne-de-sensibilisation.avif"
       preserveAspectRatio="none"
     />
   </defs>

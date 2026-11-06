@@ -7,7 +7,7 @@
 <script lang="ts">
   import Bouton from '../../ui/Bouton.svelte';
   import Modale from '../../ui/Modale.svelte';
-  import { archiveKit } from './archiveKit.svelte';
+  import { archiveCampagne } from './archiveCampagne.svelte';
 
   type Props = {
     aperçuEnCours: boolean;
@@ -39,7 +39,7 @@
   };
 
   const convertitPDFsEnImages = async () => {
-    const { pdfs } = await archiveKit.génère();
+    const { pdfs } = await archiveCampagne.génère();
     const promessesDeConversion = pdfs.map(récupèrePromesseDeConversion);
     const images = (await Promise.all(promessesDeConversion)).map((pages) => pages[0]);
     return images.map((arrayBuffer) => URL.createObjectURL(new Blob([arrayBuffer], { type: 'image/png' })));

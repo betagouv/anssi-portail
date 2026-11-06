@@ -3,7 +3,7 @@ const origineDeReferencePourValidation = 'https://origine-interne.invalid';
 export const routesPagesConnecteesStatiques = [
   'favoris',
   'gestion-guides',
-  'kit-de-sensibilisation-interne',
+  'campagne-de-sensibilisation',
   'ma-maturite',
 ] as const;
 

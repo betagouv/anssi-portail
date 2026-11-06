@@ -4,8 +4,8 @@
   import type { PropriétésFilAriane } from '../../ui/filAriane';
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import RetourUtilisateurSurContenu from '../../ui/RetourUtilisateurSurContenu.svelte';
-  import IllustrationHerosKitSensibilisation from './animation/IllustrationHerosKitSensibilisation.svelte';
-  import { archiveKit } from './archiveKit.svelte';
+  import IllustrationHerosKitSensibilisation from './animation/IllustrationHerosCampagneSensibilisation.svelte';
+  import { archiveCampagne } from './archiveCampagne.svelte';
   import { téléchargeFichierDansNavigateur } from './manipulationZip';
   import ModaleAperçu from './ModaleApercu.svelte';
   import Thématique from './Thematique.svelte';
@@ -16,12 +16,12 @@
   let téléchargementEnCours = $state(false);
   let logoTropVolumineux = $state(false);
 
-  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Kit de sensibilisation interne' };
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Campagne de sensibilisation à personnaliser' };
 
   const téléchargeLeKit = async () => {
     try {
       téléchargementEnCours = true;
-      const { archive } = await archiveKit.génère();
+      const { archive } = await archiveCampagne.génère();
       téléchargeFichierDansNavigateur(archive, 'ANSSI-kit-sensibilisation.zip');
     } finally {
       téléchargementEnCours = false;
@@ -31,7 +31,7 @@
   const définisLeLogo = (fichiers: FileList | null) => {
     const fichier = fichiers?.[0] ?? null;
     logoTropVolumineux = fichier !== null && fichier.size > TAILLE_MAX_LOGO_EN_OCTETS;
-    archiveKit.définisLogo(logoTropVolumineux ? null : fichier);
+    archiveCampagne.définisLogo(logoTropVolumineux ? null : fichier);
   };
 
   const prévisualiser = () => {
@@ -71,7 +71,7 @@
           libelle="Télécharger le kit"
           surClic={téléchargeLeKit}
         />
-        {#if archiveKit.logo}
+        {#if archiveCampagne.logo}
           <Bouton
             type="secondaire"
             icone="eye-line"
@@ -83,7 +83,7 @@
       </div>
     </div>
     <div class="section-droite">
-      <img src="/assets/images/kit-de-sensibilisation/apercu-encart.svg" alt="" />
+      <img src="/assets/images/campagne-de-sensibilisation/apercu-encart.svg" alt="" />
     </div>
   </div>
 
@@ -101,7 +101,7 @@
     </div>
   </div>
 
-  <RetourUtilisateurSurContenu identifiantCible="kit-de-sensibilisation-interne" typeDeRetour="outil">
+  <RetourUtilisateurSurContenu identifiantCible="campagne-de-sensibilisation" typeDeRetour="outil">
     <p class="texte-article-lg">Ce contenu vous a-t-il aidé&nbsp;?</p>
   </RetourUtilisateurSurContenu>
 

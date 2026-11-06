@@ -1,4 +1,4 @@
-const emplacement: string = '/assets/images/kit-de-sensibilisation';
+const emplacement: string = '/assets/images/campagne-de-sensibilisation';
 
 export const thématiques: { titre: string; cheminAperçu: string; titreEmail: string; description: string }[] = [
   {
@@ -27,7 +27,7 @@ export const thématiques: { titre: string; cheminAperçu: string; titreEmail: s
     cheminAperçu: `${emplacement}/donnees-sensibles.avif`,
     titreEmail: 'Où finissent vraiment les documents que vous partagez\u00a0?',
     description:
-      'Des modèles pour sensibiliser à l’identification, la manipulation, le stockage et le partage sécurisé des données sensibles et confidentielles. ',
+      'Des modèles pour sensibiliser à l’identification, la manipulation, le stockage et le partage sécurisé des données sensibles et confidentielles.',
   },
   {
     titre: '5. Mobilité et déplacement',
