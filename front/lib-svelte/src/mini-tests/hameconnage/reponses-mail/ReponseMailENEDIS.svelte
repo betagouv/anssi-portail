@@ -2,14 +2,14 @@
   import ReponseMailGenerique from './ReponseMailGenerique.svelte';
 </script>
 
-<ReponseMailGenerique>
-  <li>Le vrai domaine d'Enedis est enedis.fr, pas «&nbsp;enedis-exploitation-pro.com&nbsp;»</li>
+<ReponseMailGenerique
+  résumé="En résumé&nbsp;: un message qui mêle urgence et une demande de paiement, sans lien apparent avec votre organisation doit vous alerter. Réflexe&nbsp;: en cas de doute, ne vous précipitez pas et analysez."
+>
+  <li>Une demande de paiement en ligne pour confirmer une visite est très inhabituelle.</li>
+  <li>La menace de coupure sous 24 h crée un sentiment d'urgence qui peut atténuer la vigilance.</li>
   <li>
-    Enedis n'exige jamais de «&nbsp;frais de déplacement&nbsp;» payés en ligne à l'avance&nbsp;: les interventions
-    réseau standard sont gratuites, et un éventuel frais (faute du client) est toujours facturé a posteriori, jamais via
-    un lien de paiement immédiat
+    Le message ne comporte aucune information précise (ex. numéro de contrat, de site ou de technicien que vous puissiez
+    vérifier).
   </li>
-  <li>Menace de coupure d'urgence sous 24h = pression artificielle typique pour pousser au clic sans vérification</li>
-  <li>Aucun numéro de point de livraison (PDL), de contrat ou de nom de technicien vérifiable n'est mentionné</li>
-  <li>Le lien de paiement renvoie vers un domaine sans rapport avec enedis.fr</li>
+  <li>L’adresse de l’expéditeur et le lien semblent inhabituels et peuvent être suspects.</li>
 </ReponseMailGenerique>
