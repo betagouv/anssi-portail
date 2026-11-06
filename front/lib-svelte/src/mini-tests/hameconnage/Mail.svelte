@@ -27,7 +27,10 @@
         </p>
         <div class="mail-info">
           <p>de&nbsp;:</p>
-          <p><strong>{$mailOuvert?.expediteur.nom}</strong>&nbsp;&lt;{$mailOuvert?.expediteur.mail}&gt;</p>
+          <div class="mail-expediteur">
+            <p><strong>{$mailOuvert?.expediteur.nom}</strong>&nbsp;</p>
+            <p>&lt;{$mailOuvert?.expediteur.mail}&gt;</p>
+          </div>
         </div>
         <div class="mail-info">
           <p>à&nbsp;:</p>
@@ -50,6 +53,7 @@
 </div>
 
 <style lang="scss">
+  @use '../../../../assets/styles/responsive' as *;
   .mail {
     display: flex;
     flex: 1;
@@ -97,8 +101,18 @@
 
         .mail-info {
           display: grid;
-          grid-template-columns: 4rem 1fr;
+          grid-template-columns: 2rem 1fr;
           width: 100%;
+
+          @include a-partir-de('sm') {
+            grid-template-columns: 4rem 1fr;
+          }
+
+          .mail-expediteur {
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+          }
         }
       }
     }
