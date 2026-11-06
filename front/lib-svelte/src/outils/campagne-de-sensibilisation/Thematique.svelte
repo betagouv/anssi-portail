@@ -60,21 +60,21 @@
       }
     }
     &:nth-child(4) {
-      background-color: var(--background-alt-purple-glycine);
+      background-color: var(--background-alt-brown-cafe-creme);
       .aperçu > .email > .entête {
-        background-color: var(--artwork-motif-purple-glycine);
+        background-color: var(--artwork-motif-brown-cafe-creme);
       }
     }
     &:nth-child(5) {
-      background-color: var(--background-alt-beige-gris-galet);
+      background-color: var(--background-alt-pink-macaron);
       .aperçu > .email > .entête {
-        background-color: var(--artwork-motif-beige-gris-galet);
+        background-color: var(--artwork-motif-pink-macaron);
       }
     }
     &:nth-child(6) {
-      background-color: var(--background-alt-green-bourgeon);
+      background-color: var(--background-alt-brown-cafe-creme);
       .aperçu > .email > .entête {
-        background-color: var(--artwork-motif-green-bourgeon);
+        background-color: var(--artwork-motif-brown-cafe-creme);
       }
     }
 
