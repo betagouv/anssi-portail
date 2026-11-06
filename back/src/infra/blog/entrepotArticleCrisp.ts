@@ -10,7 +10,7 @@ import { Cache } from '../cache.js';
 export class EntrepôtArticleCrisp implements EntrepôtArticle {
   private static CLÉ_LISTE_RÉSUMÉS_ARTICLE = 'CLE_LISTE_RÉSUMÉS_ARTICLE';
   private static CLÉ_KIT_RELAIS = 'kit-relais';
-  private static SLUG_CRISP_KIT_RELAIS = 'le-kit-relais-messervicescyber.md';
+  private static SLUG_CRISP_KIT_RELAIS = 'le-kit-relais-messervicescyber';
 
   private cacheDesRésumés: Cache<RésuméArticle[]>;
   private cacheDesArticles: Cache<Article>;
