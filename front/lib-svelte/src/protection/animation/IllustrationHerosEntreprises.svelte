@@ -7,5 +7,5 @@
 
 <IllustrationAnimee
   {scènes}
-  étiquette="Trois collègues échangent autour d'un ordinateur portable dans un bureau. Sécurité renforcée : garantir la continuité des activités."
+  étiquette="Trois collègues échangent autour d'un ordinateur portable dans un bureau. Sécurité renforcée&nbsp;: garantir la continuité des activités."
 />

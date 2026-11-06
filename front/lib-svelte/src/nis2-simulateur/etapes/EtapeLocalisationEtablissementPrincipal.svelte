@@ -59,7 +59,7 @@
 
   <dsfr-radios-group
     value={paysDecision}
-    legend="Dans quel pays sont principalement prises les décisions relatives aux mesures de gestion des risques en matière de cybersécurité ?"
+    legend="Dans quel pays sont principalement prises les décisions relatives aux mesures de gestion des risques en matière de cybersécurité&nbsp;?"
     radios={[optionFrance('pays-decision'), optionAutre('pays-decision'), optionHorsUe('pays-decision')]}
     onvaluechanged={choisisDecision}
   ></dsfr-radios-group>
@@ -67,7 +67,7 @@
   {#if paysDecisionEstHorsUE}
     <dsfr-radios-group
       value={paysOperation}
-      legend="Dans quel pays les opérations de cybersécurité sont-elles effectuées ?"
+      legend="Dans quel pays les opérations de cybersécurité sont-elles effectuées&nbsp;?"
       radios={[optionFrance('pays-operation'), optionAutre('pays-operation'), optionHorsUe('pays-operation')]}
       onvaluechanged={choisisOperation}
     ></dsfr-radios-group>
@@ -76,7 +76,7 @@
   {#if paysOperationEstHorsUE}
     <dsfr-radios-group
       value={paysSalaries}
-      legend="Dans quel pays votre entité possède-t-elle l’établissement comptant le plus grand nombre de salariés dans l’Union Européenne ?"
+      legend="Dans quel pays votre entité possède-t-elle l’établissement comptant le plus grand nombre de salariés dans l’Union Européenne&nbsp;?"
       radios={[optionFrance('pays-autre'), optionAutre('pays-autre')]}
       onvaluechanged={choisisSalaries}
     ></dsfr-radios-group>

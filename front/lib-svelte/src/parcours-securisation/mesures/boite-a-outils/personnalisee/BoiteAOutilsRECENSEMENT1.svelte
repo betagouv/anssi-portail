@@ -44,7 +44,7 @@
 
     <ÉtapeProcédure titre="Marquez les activités prioritaires">
       <p class="texte-standard-md">
-        Marquer comme « prioritaires » les activités qui répondent Oui à au moins une de ces questions.
+        Marquer comme «&nbsp;prioritaires&nbsp;» les activités qui répondent Oui à au moins une de ces questions.
       </p>
     </ÉtapeProcédure>
 

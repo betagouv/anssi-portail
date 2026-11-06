@@ -96,9 +96,9 @@
           {/if}
         </div>
         <div class="contact">
-          <h5>📧 Une question ? Nos équipes se tiennent à votre disposition.</h5>
+          <h5>📧 Une question&nbsp;? Nos équipes se tiennent à votre disposition.</h5>
           <ChampTexte
-            aideSaisie="Ex : jean.dupont@mail.com"
+            aideSaisie="Ex&nbsp;: jean.dupont@mail.com"
             id="email-contact"
             libelle="Email de contact"
             messageErreur="L'email est invalide"
@@ -115,7 +115,7 @@
   {:else}
     <div class="contenu">
       <p>
-        Vous avez demandé à être recontacté(e) ? Notre équipe prendra contact avec vous prochainement à l’adresse
+        Vous avez demandé à être recontacté(e)&nbsp;? Notre équipe prendra contact avec vous prochainement à l’adresse
         fournie.
       </p>
     </div>

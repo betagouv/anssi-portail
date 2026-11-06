@@ -132,7 +132,7 @@
 <section class="section-diagnostic">
   <dsfr-container>
     <BlocDiagnostic
-      titre="Vous préférez échanger avec un Aidant cyber ?"
+      titre="Vous préférez échanger avec un Aidant cyber&nbsp;?"
       labelBouton="Demander un accompagnement gratuit"
       lienBouton="/cyberdepart/diagnostic-gratuit?origine=landing-parcours-cyberdepart"
     >

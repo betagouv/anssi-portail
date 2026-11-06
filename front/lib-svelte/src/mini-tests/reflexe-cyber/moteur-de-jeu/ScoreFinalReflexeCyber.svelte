@@ -91,7 +91,7 @@
 <dsfr-container class="conteneur-carte-guide">
   <dsfr-card
     class="guide-reflexes"
-    title="Organisez une session Réflexes Cyber en équipe !"
+    title="Organisez une session Réflexes Cyber en équipe&nbsp;!"
     has-detail-end
     detail-end=""
     size="lg"
@@ -109,7 +109,7 @@
 <dsfr-container>
   <PartageTest
     cheminPartagé="/reflexes-cyber-en-ligne/parcours"
-    sujetMail="Comment réagirez-vous en cas de cyberattaque ?"
+    sujetMail="Comment réagirez-vous en cas de cyberattaque&nbsp;?"
     typeDeRetour="reflexes-cyber"
   />
 </dsfr-container>

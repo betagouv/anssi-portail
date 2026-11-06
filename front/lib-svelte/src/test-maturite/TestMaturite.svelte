@@ -194,12 +194,12 @@
               {urlBase}
             />
             <SelectRegion
-              libelle="Dans quelle région / territoire se trouve votre organisation ?"
+              libelle="Dans quelle région / territoire se trouve votre organisation&nbsp;?"
               bind:region
               {urlBase}
             />
             <SelectTailleOrganisation
-              libelle="Quelle est la taille de votre organisation ?"
+              libelle="Quelle est la taille de votre organisation&nbsp;?"
               bind:tailleOrganisation
               {urlBase}
             />

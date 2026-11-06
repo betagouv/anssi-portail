@@ -41,7 +41,7 @@
       <Bouton libelle="Retourner à la liste de mails" surClic={refermeLeMail} etire />
     {/if}
   {:else}
-    <h3 class="fr-h6">Vrai ou faux mail ?</h3>
+    <h3 class="fr-h6">Vrai ou faux mail&nbsp;?</h3>
     <div class="boutons-vote">
       <BoutonDeVoteHameconnage réponse="Légitime" surVote={surVote('Légitime')} />
       <BoutonDeVoteHameconnage réponse="Hameçonnage" surVote={surVote('Hameçonnage')} />

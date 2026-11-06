@@ -29,7 +29,7 @@
   ></dsfr-stepper>
 
   <dsfr-checkboxes-group
-    legend="Dans quels états membres de l’Union Européenne fournissez-vous des services numériques ?"
+    legend="Dans quels états membres de l’Union Européenne fournissez-vous des services numériques&nbsp;?"
     hint="Fournisseur de réseaux de communications électroniques publics, ou Fournisseur de services de communications électroniques accessibles au public."
     checkboxes={[
       { label: 'France', id: 'radio-fr', value: 'france' },

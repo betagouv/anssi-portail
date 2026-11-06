@@ -23,8 +23,8 @@
 
   <ul>
     <li><strong>Rapide</strong> à mettre en place</li>
-    <li><strong>Pédagogique :</strong> on vulgarise la cyber pour vous</li>
-    <li><strong>Pratico-pratique :</strong> des outils pour vous aider</li>
+    <li><strong>Pédagogique&nbsp;:</strong> on vulgarise la cyber pour vous</li>
+    <li><strong>Pratico-pratique&nbsp;:</strong> des outils pour vous aider</li>
   </ul>
   <div class="appât fond-bleu-france-950"><strong>{libelléParcours}</strong></div>
 

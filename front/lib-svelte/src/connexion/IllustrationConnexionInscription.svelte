@@ -7,5 +7,5 @@
 
 <IllustrationAnimee
   {scènes}
-  étiquette="Deux collègues consultent MesServicesCyber sur un ordinateur portable. Bon réflexe : garder la maîtrise de son environnement numérique."
+  étiquette="Deux collègues consultent MesServicesCyber sur un ordinateur portable. Bon réflexe&nbsp;: garder la maîtrise de son environnement numérique."
 />

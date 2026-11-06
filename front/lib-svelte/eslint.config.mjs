@@ -2,6 +2,7 @@
 import svelte from 'eslint-plugin-svelte';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
+import reglesEslint from 'regles-eslint';
 import tseslint from 'typescript-eslint';
 import { createConfig } from '../../eslint.config.base.mjs';
 import svelteConfig from './svelte.config.js';
@@ -9,6 +10,7 @@ import svelteConfig from './svelte.config.js';
 export default defineConfig(
   createConfig(import.meta.dirname, { autoriseImportAxios: true }),
   ...svelte.configs.recommended,
+  { extends: [reglesEslint.configs.svelte] },
   {
     files: ['**/*.svelte.ts'],
     languageOptions: {
