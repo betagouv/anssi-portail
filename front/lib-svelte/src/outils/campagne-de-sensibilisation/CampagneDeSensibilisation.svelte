@@ -40,9 +40,9 @@
 </script>
 
 <HerosRiche
-  description="Un plan de sensibilisation avec 6 thématiques (affiches et courriels) à déployer au rythme de votre organisation. L’ordre proposé suit une progression logique."
+  description="Une campagne pour sensibiliser vos équipes pour les aider à adopter les bonnes pratiques&nbsp;! 6 affiches et emails que vous pouvez personnaliser avec votre logo et le nom de votre organisation. À déployer à votre rythme. L’ordre proposé suit une progression logique."
   {propriétésFilAriane}
-  titre="Kit de sensibilisation interne"
+  titre="Campagne de sensibilisation à personnaliser"
   variante="bleu-clair"
 >
   {#snippet illustration()}
