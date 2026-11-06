@@ -1,69 +1,69 @@
 import type { Rule } from 'eslint';
 
 /** Sous-ensemble des nœuds de svelte-eslint-parser utilisés par la règle. */
-interface SvelteNode {
+interface NœudSvelte {
   type: string;
   range: [number, number];
-  parent?: SvelteNode;
+  parent?: NœudSvelte;
 }
 
 /** Texte du template (`SvelteText`) ou valeur littérale d'un attribut (`SvelteLiteral`). */
-interface SvelteTextual extends SvelteNode {
+interface NœudTextuel extends NœudSvelte {
   type: 'SvelteText' | 'SvelteLiteral';
 }
 
-interface SvelteElement extends SvelteNode {
+interface ÉlémentSvelte extends NœudSvelte {
   type: 'SvelteElement';
   name: { name: string };
 }
 
-const isSvelteElement = (node: SvelteNode): node is SvelteElement => node.type === 'SvelteElement';
+const estÉlémentSvelte = (nœud: NœudSvelte): nœud is ÉlémentSvelte => nœud.type === 'SvelteElement';
 
-type Options = [{ ignoredTags?: string[] }?];
+type Options = [{ balisesIgnorées?: string[] }?];
 
 const NBSP = '&nbsp;';
 
-const DEFAULT_IGNORED_TAGS = ['code', 'pre', 'kbd', 'samp'];
-const IGNORED_NODE_TYPES = new Set(['SvelteScriptElement', 'SvelteStyleElement']);
+const BALISES_IGNORÉES_PAR_DÉFAUT = ['code', 'pre', 'kbd', 'samp'];
+const TYPES_NŒUDS_IGNORÉS = new Set(['SvelteScriptElement', 'SvelteStyleElement']);
 
-/** Une correction : remplace [from, to[ par une espace insécable. */
-interface Issue {
-  from: number;
-  to: number;
-  char: string;
-  where: 'avant' | 'après';
+/** Une correction : remplace [début, fin[ par une espace insécable. */
+interface Anomalie {
+  début: number;
+  fin: number;
+  caractère: string;
+  position: 'avant' | 'après';
 }
 
 /**
  * Espace normale avant : ; ! ? (si suivis d'un blanc ou de la fin du nœud),
  * ou avant » (quel que soit ce qui suit : `»`, `».`, `»,`…).
  */
-const BEFORE_PUNCTUATION_RE = / ([:;!?](?=\s|$)|»)/g;
+const AVANT_PONCTUATION_RE = / ([:;!?](?=\s|$)|»)/g;
 
 /** » collé au mot précédent (`«texte»`) : on insère un &nbsp; devant. */
-const GLUED_CLOSING_RE = /(?<=\S)(?<!&nbsp;)»/g;
+const GUILLEMET_FERMANT_COLLÉ_RE = /(?<=\S)(?<!&nbsp;)»/g;
 
 /** Après « : espace normale (ou rien), sauf si &nbsp; est déjà là. */
-const AFTER_OPENING_RE = /«( ?)(?!&nbsp;)(?=\S|$)/g;
+const APRES_GUILLEMET_OUVRANT_RE = /«( ?)(?!&nbsp;)(?=\S|$)/g;
 
-function* findIssues(text: string, offset: number): Generator<Issue> {
-  for (const m of text.matchAll(BEFORE_PUNCTUATION_RE)) {
-    const from = offset + m.index;
-    yield { from, to: from + 1, char: m[1]!, where: 'avant' };
+function* trouverAnomalies(texte: string, décalage: number): Generator<Anomalie> {
+  for (const correspondance of texte.matchAll(AVANT_PONCTUATION_RE)) {
+    const début = décalage + correspondance.index;
+    yield { début, fin: début + 1, caractère: correspondance[1]!, position: 'avant' };
   }
 
-  for (const m of text.matchAll(GLUED_CLOSING_RE)) {
-    const from = offset + m.index;
-    yield { from, to: from, char: '»', where: 'avant' }; // insertion pure
+  for (const correspondance of texte.matchAll(GUILLEMET_FERMANT_COLLÉ_RE)) {
+    const début = décalage + correspondance.index;
+    yield { début, fin: début, caractère: '»', position: 'avant' }; // insertion pure
   }
 
-  for (const m of text.matchAll(AFTER_OPENING_RE)) {
-    const from = offset + m.index + 1;
-    yield { from, to: from + m[1]!.length, char: '«', where: 'après' };
+  for (const correspondance of texte.matchAll(APRES_GUILLEMET_OUVRANT_RE)) {
+    const début = décalage + correspondance.index + 1;
+    yield { début, fin: début + correspondance[1]!.length, caractère: '«', position: 'après' };
   }
 }
 
-const rule: Rule.RuleModule = {
+const règle: Rule.RuleModule = {
   meta: {
     type: 'layout',
     fixable: 'whitespace',
@@ -71,58 +71,58 @@ const rule: Rule.RuleModule = {
       {
         type: 'object',
         properties: {
-          ignoredTags: { type: 'array', items: { type: 'string' } },
+          balisesIgnorées: { type: 'array', items: { type: 'string' } },
         },
         additionalProperties: false,
       },
     ],
     messages: {
-      useNbsp: 'Utiliser une espace insécable {{where}} « {{char}} ».',
+      utiliserNbsp: 'Utiliser une espace insécable {{position}} « {{caractère}} ».',
     },
   },
 
   create(context) {
     const { sourceCode } = context;
     const [options] = context.options as Options;
-    const ignoredTags = new Set(options?.ignoredTags ?? DEFAULT_IGNORED_TAGS);
+    const balisesIgnorées = new Set(options?.balisesIgnorées ?? BALISES_IGNORÉES_PAR_DÉFAUT);
 
     /** Vrai si le texte est dans <script>, <style> ou une balise ignorée. */
-    function isIgnored(node: SvelteNode): boolean {
-      for (let current = node.parent; current; current = current.parent) {
-        if (IGNORED_NODE_TYPES.has(current.type)) return true;
-        if (isSvelteElement(current) && ignoredTags.has(current.name.name)) return true;
+    function estIgnoré(nœud: NœudSvelte): boolean {
+      for (let courant = nœud.parent; courant; courant = courant.parent) {
+        if (TYPES_NŒUDS_IGNORÉS.has(courant.type)) return true;
+        if (estÉlémentSvelte(courant) && balisesIgnorées.has(courant.name.name)) return true;
       }
       return false;
     }
 
-    function check(node: SvelteTextual) {
-      if (isIgnored(node)) return;
+    function vérifier(nœud: NœudTextuel) {
+      if (estIgnoré(nœud)) return;
 
-      const [from, to] = node.range;
-      const text = sourceCode.text.slice(from, to);
+      const [début, fin] = nœud.range;
+      const texte = sourceCode.text.slice(début, fin);
 
-      for (const issue of findIssues(text, from)) {
+      for (const anomalie of trouverAnomalies(texte, début)) {
         context.report({
           loc: {
-            start: sourceCode.getLocFromIndex(Math.max(issue.from - 1, from)),
-            end: sourceCode.getLocFromIndex(Math.min(issue.to + 1, to)),
+            start: sourceCode.getLocFromIndex(Math.max(anomalie.début - 1, début)),
+            end: sourceCode.getLocFromIndex(Math.min(anomalie.fin + 1, fin)),
           },
-          messageId: 'useNbsp',
-          data: { char: issue.char, where: issue.where },
-          fix: (fixer) => fixer.replaceTextRange([issue.from, issue.to], NBSP),
+          messageId: 'utiliserNbsp',
+          data: { caractère: anomalie.caractère, position: anomalie.position },
+          fix: (fixer) => fixer.replaceTextRange([anomalie.début, anomalie.fin], NBSP),
         });
       }
     }
 
     // `unknown` : SvelteText et SvelteLiteral n'existent pas dans les types de listeners d'ESLint
     return {
-      SvelteText: (node: unknown) => check(node as SvelteTextual),
+      SvelteText: (nœud: unknown) => vérifier(nœud as NœudTextuel),
       // Valeurs d'attributs (`résumé="…"`), pas des directives ni des expressions `{…}`
-      SvelteLiteral: (node: unknown) => {
-        if ((node as SvelteTextual).parent?.type === 'SvelteAttribute') check(node as SvelteTextual);
+      SvelteLiteral: (nœud: unknown) => {
+        if ((nœud as NœudTextuel).parent?.type === 'SvelteAttribute') vérifier(nœud as NœudTextuel);
       },
     };
   },
 };
 
-export default rule;
+export default règle;
