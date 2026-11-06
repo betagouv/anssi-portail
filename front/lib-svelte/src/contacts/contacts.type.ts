@@ -6,6 +6,7 @@ export type ContactsRegionaux = {
     siteWeb: string;
     adresse?: string;
     telephone?: string;
+    email?: string;
   };
   COT?: {
     nom: string;
