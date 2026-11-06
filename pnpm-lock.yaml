@@ -536,6 +536,9 @@ importers:
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
+      regles-eslint:
+        specifier: workspace:^
+        version: link:../../regles-eslint
     devDependencies:
       '@sentry/vite-plugin':
         specifier: ^5.4.0
