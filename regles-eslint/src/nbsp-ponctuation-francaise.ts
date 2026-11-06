@@ -7,8 +7,9 @@ interface SvelteNode {
   parent?: SvelteNode;
 }
 
-interface SvelteText extends SvelteNode {
-  type: 'SvelteText';
+/** Texte du template (`SvelteText`) ou valeur littérale d'un attribut (`SvelteLiteral`). */
+interface SvelteTextual extends SvelteNode {
+  type: 'SvelteText' | 'SvelteLiteral';
 }
 
 interface SvelteElement extends SvelteNode {
@@ -94,26 +95,31 @@ const rule: Rule.RuleModule = {
       return false;
     }
 
+    function check(node: SvelteTextual) {
+      if (isIgnored(node)) return;
+
+      const [from, to] = node.range;
+      const text = sourceCode.text.slice(from, to);
+
+      for (const issue of findIssues(text, from)) {
+        context.report({
+          loc: {
+            start: sourceCode.getLocFromIndex(Math.max(issue.from - 1, from)),
+            end: sourceCode.getLocFromIndex(Math.min(issue.to + 1, to)),
+          },
+          messageId: 'useNbsp',
+          data: { char: issue.char, where: issue.where },
+          fix: (fixer) => fixer.replaceTextRange([issue.from, issue.to], NBSP),
+        });
+      }
+    }
+
+    // `unknown` : SvelteText et SvelteLiteral n'existent pas dans les types de listeners d'ESLint
     return {
-      // `unknown` : SvelteText n'existe pas dans les types de listeners d'ESLint
-      SvelteText(rawNode: unknown) {
-        const node = rawNode as SvelteText;
-        if (isIgnored(node)) return;
-
-        const [from, to] = node.range;
-        const text = sourceCode.text.slice(from, to);
-
-        for (const issue of findIssues(text, from)) {
-          context.report({
-            loc: {
-              start: sourceCode.getLocFromIndex(Math.max(issue.from - 1, from)),
-              end: sourceCode.getLocFromIndex(Math.min(issue.to + 1, to)),
-            },
-            messageId: 'useNbsp',
-            data: { char: issue.char, where: issue.where },
-            fix: (fixer) => fixer.replaceTextRange([issue.from, issue.to], NBSP),
-          });
-        }
+      SvelteText: (node: unknown) => check(node as SvelteTextual),
+      // Valeurs d'attributs (`résumé="…"`), pas des directives ni des expressions `{…}`
+      SvelteLiteral: (node: unknown) => {
+        if ((node as SvelteTextual).parent?.type === 'SvelteAttribute') check(node as SvelteTextual);
       },
     };
   },
