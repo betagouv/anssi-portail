@@ -22,7 +22,7 @@
     try {
       téléchargementEnCours = true;
       const { archive } = await archiveCampagne.génère();
-      téléchargeFichierDansNavigateur(archive, 'ANSSI-kit-sensibilisation.zip');
+      téléchargeFichierDansNavigateur(archive, 'ANSSI-Campagne-de-sensibilisation.zip');
     } finally {
       téléchargementEnCours = false;
     }
