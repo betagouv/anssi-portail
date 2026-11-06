@@ -68,7 +68,7 @@ describe('La ressource du campagne de sensibilisation', () => {
       const { headers } = await récupèreKit();
 
       expect(headers['content-type']).toBe('application/zip');
-      expect(headers['content-disposition']).toBe('attachment; filename="ANSSI - Kit de sensibilisation interne.zip"');
+      expect(headers['content-disposition']).toBe('attachment; filename="ANSSI - Campagne de sensibilisation.zip"');
       expect(headers['content-length']).toBe(String(contenuDuZip.length));
     });
 
@@ -77,7 +77,7 @@ describe('La ressource du campagne de sensibilisation', () => {
 
       expect(body).toEqual(contenuDuZip);
       expect(demandes).toEqual([
-        { nomDuFichier: 'kit-de-sensibilisation-interne-V1.zip', cleDuBucket: 'RESSOURCES_CYBER' },
+        { nomDuFichier: 'campagne-de-sensibilisation-V1.zip', cleDuBucket: 'RESSOURCES_CYBER' },
       ]);
     });
 
