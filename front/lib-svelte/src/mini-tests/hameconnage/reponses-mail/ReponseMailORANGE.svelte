@@ -3,13 +3,16 @@
 </script>
 
 <ReponseMailGenerique
-  résumé="En résumé&nbsp;: cette technique détourne un mécanisme réel (la portabilité du numéro) pour créer une urgence crédible. Réflexe&nbsp;: toute alerte sur sa ligne se vérifie en se connectant soi-même sur orange.fr, jamais via un lien reçu par email."
+  résumé="En résumé&nbsp;: une tentative de hameçonnage peut avoir pour objectif d'usurper l'accès à vos comptes professionnels ou personnels. Réflexe&nbsp;: ne communiquez jamais ces informations via un lien, connectez-vous directement à votre espace client."
 >
-  <li>Le vrai domaine d'Orange est orange.fr, pas «&nbsp;orange-mobile-service.com&nbsp;»</li>
   <li>
-    Une vraie demande de portabilité ne s'annule jamais via un lien email&nbsp;: elle se gère depuis l'Espace Client
-    officiel ou par appel au service client, avec le RIO en main
+    Jamais une organisation légitime ne vous demandera par mail de renseigner votre numéro de téléphone et un code à
+    usage unique. Il s'agit d'une tentative d'usurpation de l'accès à l'un de vos comptes (ex. mail, espace client).
   </li>
-  <li>Le scénario joue sur la peur de perdre son numéro pour pousser à saisir ses identifiants dans l'urgence</li>
-  <li>Aucune référence de dossier de portabilité n'est fournie</li>
+  <li>L’adresse de l’expéditeur et le lien ne semblent pas correspondre aux coordonnées officielles d’Orange.</li>
+  <li>
+    Le lien commence par «&nbsp;http&nbsp;» et non «&nbsp;https&nbsp;», ce qui signifie que la connexion n’est pas
+    sécurisée.
+  </li>
+  <li>Aucune référence de dossier ne vous permet de vérifier l'information communiquée.</li>
 </ReponseMailGenerique>

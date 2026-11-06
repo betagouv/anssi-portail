@@ -3,19 +3,19 @@
 </script>
 
 <ReponseMailGenerique
-  résumé="En résumé&nbsp;: la fraude au CPF est l'une des arnaques les plus répandues en France. Les droits CPF ne se gèrent que depuis moncompteformation.gouv.fr, en se connectant soi-même via FranceConnect, jamais via un lien ou un QR code reçu."
+  résumé="En résumé&nbsp;: ne scannez pas un QR code reçu par mail. Réflexe&nbsp;: accédez au service en saisissant vous-même l’adresse ou via votre application."
 >
   <li>
-    Le QR code permet de contourner les filtres de sécurité qui analysent les liens texte dans les emails
-    («&nbsp;quishing&nbsp;»)
+    L'adresse d'expédition «&nbsp;moncompteformation-securite.net&nbsp;» est suspecte&nbsp;: elle usurpe un domaine
+    public légitime en «&nbsp;.gouv.fr&nbsp;».
   </li>
   <li>
-    Le domaine d'expédition «&nbsp;moncompteformation-securite.net&nbsp;» est différent du site officiel
-    moncompteformation.gouv.fr
+    Le QR code cache l’adresse de destination et ne peut pas être vérifié par les filtres de vos boîtes mails. Recevoir
+    un QR code par mail est, par ailleurs, inhabituel.
   </li>
   <li>
-    Un discours d'urgence sur l'expiration de droits CPF est l'un des scénarios de fraude les plus signalés en France, y
-    compris par SMS
+    La menace d'expiration imminente de droits crée du stress et peut atténuer votre vigilance. L'expiration de droits
+    CPF est l'un des scénarios de fraude les plus signalés en France, y compris par SMS.
   </li>
-  <li>Aucune référence à un dossier de formation en cours, ni à une action initiée par vous</li>
+  <li>Le message ne comporte aucune information précise vérifiable (numéro de dossier, etc.).</li>
 </ReponseMailGenerique>
