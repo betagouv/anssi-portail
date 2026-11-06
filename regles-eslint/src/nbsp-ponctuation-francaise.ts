@@ -20,11 +20,47 @@ const isSvelteElement = (node: SvelteNode): node is SvelteElement => node.type =
 
 type Options = [{ ignoredTags?: string[] }?];
 
+const NBSP = '&nbsp;';
+
 const DEFAULT_IGNORED_TAGS = ['code', 'pre', 'kbd', 'samp'];
 const IGNORED_NODE_TYPES = new Set(['SvelteScriptElement', 'SvelteStyleElement']);
 
-const NBSP = '&nbsp;';
-const PUNCTUATION_RE = / ([:;!?])(?=\s|$)/g;
+/** Une correction : remplace [from, to[ par une espace insécable. */
+interface Issue {
+  from: number;
+  to: number;
+  char: string;
+  where: 'avant' | 'après';
+}
+
+/**
+ * Espace normale avant : ; ! ? (si suivis d'un blanc ou de la fin du nœud),
+ * ou avant » (quel que soit ce qui suit : `»`, `».`, `»,`…).
+ */
+const BEFORE_PUNCTUATION_RE = / ([:;!?](?=\s|$)|»)/g;
+
+/** » collé au mot précédent (`«texte»`) : on insère un &nbsp; devant. */
+const GLUED_CLOSING_RE = /(?<=\S)(?<!&nbsp;)»/g;
+
+/** Après « : espace normale (ou rien), sauf si &nbsp; est déjà là. */
+const AFTER_OPENING_RE = /«( ?)(?!&nbsp;)(?=\S|$)/g;
+
+function* findIssues(text: string, offset: number): Generator<Issue> {
+  for (const m of text.matchAll(BEFORE_PUNCTUATION_RE)) {
+    const from = offset + m.index;
+    yield { from, to: from + 1, char: m[1]!, where: 'avant' };
+  }
+
+  for (const m of text.matchAll(GLUED_CLOSING_RE)) {
+    const from = offset + m.index;
+    yield { from, to: from, char: '»', where: 'avant' }; // insertion pure
+  }
+
+  for (const m of text.matchAll(AFTER_OPENING_RE)) {
+    const from = offset + m.index + 1;
+    yield { from, to: from + m[1]!.length, char: '«', where: 'après' };
+  }
+}
 
 const rule: Rule.RuleModule = {
   meta: {
@@ -40,7 +76,7 @@ const rule: Rule.RuleModule = {
       },
     ],
     messages: {
-      useNbsp: 'Utiliser une espace insécable avant « {{char}} ».',
+      useNbsp: 'Utiliser une espace insécable {{where}} « {{char}} ».',
     },
   },
 
@@ -67,18 +103,15 @@ const rule: Rule.RuleModule = {
         const [from, to] = node.range;
         const text = sourceCode.text.slice(from, to);
 
-        for (const match of text.matchAll(PUNCTUATION_RE)) {
-          const char = match[1];
-          const start = from + match.index;
-
+        for (const issue of findIssues(text, from)) {
           context.report({
             loc: {
-              start: sourceCode.getLocFromIndex(start),
-              end: sourceCode.getLocFromIndex(start + 2),
+              start: sourceCode.getLocFromIndex(Math.max(issue.from - 1, from)),
+              end: sourceCode.getLocFromIndex(Math.min(issue.to + 1, to)),
             },
             messageId: 'useNbsp',
-            data: { char },
-            fix: (fixer) => fixer.replaceTextRange([start, start + 1], NBSP),
+            data: { char: issue.char, where: issue.where },
+            fix: (fixer) => fixer.replaceTextRange([issue.from, issue.to], NBSP),
           });
         }
       },
