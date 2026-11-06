@@ -45,7 +45,7 @@
     }
 
     return {
-      résumé: '🎯 À risque — entraînez-vous\u00a0!',
+      résumé: '🎯 À risque\u00a0: entraînez-vous\u00a0!',
       conseil: conseils[3],
       couleur: 'rouge',
     };
