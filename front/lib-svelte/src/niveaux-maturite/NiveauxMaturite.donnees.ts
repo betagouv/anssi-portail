@@ -90,7 +90,7 @@ export const niveauxMaturite: NiveauMaturite[] = [
     pilotage:
       "Un plan d'action cyber complet est établi et ses objectifs prioritaires sont intégrés dans la stratégie globale de l'organisation.",
     ressourcesHumaines:
-      "L’organisation dispose d'un(e) directeur(ice) cyber siégeant au CODIR et d'une ou plusieurs équipes cyber.",
+      "L’organisation dispose d'un directeur ou d'une directrice cyber siégeant au CODIR et d'une ou plusieurs équipes cyber.",
     budget:
       "La ligne dédiée à la cybersécurité est supérieure ou égale à 10% du budget informatique de l'organisation.",
     adoptionSolutions:

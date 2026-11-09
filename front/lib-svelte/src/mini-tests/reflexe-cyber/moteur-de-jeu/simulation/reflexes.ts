@@ -165,7 +165,7 @@ export const réflexesParRôle: RéflexesParRôle = {
   communication: [
     {
       proposition: {
-        bonRéflexe: 'Partager aux usagers qu’un incident est en cours via les réseaux sociaux',
+        bonRéflexe: 'Informer les usagers qu’un incident est en cours via les réseaux sociaux',
         mauvaisRéflexe: 'Autoriser les responsables à piloter eux-mêmes la communication de crise',
       },
       conséquence: {
@@ -317,7 +317,7 @@ export const réflexesParRôle: RéflexesParRôle = {
     },
     {
       proposition: {
-        bonRéflexe: 'Partager aux collaborateurs les consignes de conduite à tenir',
+        bonRéflexe: 'Partager avec les collaborateurs les consignes de conduite à tenir',
         mauvaisRéflexe: 'Recevoir en entretien le collaborateur à l’origine de la négligence',
       },
       conséquence: {

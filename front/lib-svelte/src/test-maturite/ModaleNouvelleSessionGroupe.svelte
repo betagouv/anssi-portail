@@ -45,8 +45,8 @@
 <Modale bind:estOuverte={modaleEstOuverte} titre="Nouvelle session de groupe" icone="team-fill">
   <div class="information">
     <p>
-      Partagez ce code ou le QR code aux participants pour leur permettre d’accéder à la session de test de maturité
-      cyber. Ce code est unique et valable pour cette session uniquement.
+      Partagez ce code ou le QR code avec les participants pour leur permettre d’accéder à la session de test de
+      maturité cyber. Ce code est unique et valable pour cette session uniquement.
     </p>
   </div>
   <div class="qrcode">

@@ -276,7 +276,7 @@ export function paragraphesInsight(id: IdMenace, reponses: ReponsesExposition): 
 
   if (id === 'subco') {
     return [
-      "L'ANSSI documente une proportion croissante de cyberattaques impliquant la compromission préalable d'un sous-traitant ou d'un prestataire pour atteindre une cible finale. Infogéreur, prestataire Cloud, éditeurs logiciel peuvent constituer une porte d'entrée vers vos données ou vos systèmes d'information.",
+      "L'ANSSI documente une proportion croissante de cyberattaques impliquant la compromission préalable d'un sous-traitant ou d'un prestataire pour atteindre une cible finale. Infogéreur, prestataire Cloud, éditeurs de logiciels peuvent constituer une porte d'entrée vers vos données ou vos systèmes d'information.",
       "Par ailleurs, une violation de données subie par un partenaire, un fournisseur ou un service tiers que vous utilisez peut, même sans compromission directe de vos propres systèmes, exposer indirectement des informations vous concernant (identité, coordonnées, données bancaires) et alimenter des attaques secondaires contre votre organisation : hameçonnage ciblé, fraude au virement, usurpation d'identité.",
     ];
   }
