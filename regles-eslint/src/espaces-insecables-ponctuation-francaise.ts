@@ -6,7 +6,7 @@ import { analyserSvelte } from './espaces-insecables-ponctuation-francaise/svelt
 const règle: Rule.RuleModule = {
   meta,
   create(context) {
-    return context.filename.endsWith('.html') ? analyserHtml(context) : analyserSvelte(context);
+    return /\.(?:html|md)$/.test(context.filename) ? analyserHtml(context) : analyserSvelte(context);
   },
 };
 

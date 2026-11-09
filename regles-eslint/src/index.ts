@@ -1,6 +1,7 @@
 import * as htmlParser from '@html-eslint/parser';
 import type { TSESLint } from '@typescript-eslint/utils';
 import espacesInsécablesPonctuationFrancaise from './espaces-insecables-ponctuation-francaise.js';
+import { markdown } from './espaces-insecables-ponctuation-francaise/markdown.js';
 import routeSansValidation from './route-sans-validation.js';
 
 const rules: Record<string, TSESLint.LooseRuleDefinition> = {
@@ -12,7 +13,7 @@ const plugin: TSESLint.FlatConfig.Plugin = {
   rules,
 };
 
-const configs: Record<'all' | 'svelte' | 'html', TSESLint.FlatConfig.ConfigArray> = {
+const configs: Record<'all' | 'svelte' | 'html' | 'markdown', TSESLint.FlatConfig.ConfigArray> = {
   all: [
     {
       languageOptions: {
@@ -38,6 +39,18 @@ const configs: Record<'all' | 'svelte' | 'html', TSESLint.FlatConfig.ConfigArray
       rules: {
         'regles-eslint/espaces-insécables-ponctuation-francaise': 'warn',
       },
+    },
+  ],
+  markdown: [
+    {
+      files: ['**/*.md'],
+      processor: markdown,
+      languageOptions: {
+        parser: htmlParser,
+        parserOptions: { templateEngineSyntax: { '{{': '}}', '{%': '%}' } },
+      },
+      plugins: { 'regles-eslint': plugin },
+      rules: { 'regles-eslint/espaces-insécables-ponctuation-francaise': 'warn' },
     },
   ],
   html: [

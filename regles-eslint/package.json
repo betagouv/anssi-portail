@@ -18,7 +18,8 @@
   "dependencies": {
     "@html-eslint/parser": "^0.67.0",
     "@typescript-eslint/utils": "^8.68.0",
-    "entities": "catalog:"
+    "entities": "catalog:",
+    "mdast-util-from-markdown": "^2.1.0"
   },
   "devDependencies": {
     "eslint-plugin-svelte": "^3.23.1",
