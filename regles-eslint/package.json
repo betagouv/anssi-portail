@@ -11,9 +11,17 @@
     "build": "tsc",
     "lint:fix": "eslint . --fix",
     "lint": "eslint .",
+    "pretest": "pnpm typecheck && pnpm lint",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@typescript-eslint/utils": "^8.68.0"
+    "@typescript-eslint/utils": "^8.68.0",
+    "entities": "catalog:"
+  },
+  "devDependencies": {
+    "eslint-plugin-svelte": "^3.23.1",
+    "svelte": "catalog:",
+    "vitest": "catalog:"
   }
 }
