@@ -1,10 +1,10 @@
 ---
 layout: service
 typologie: outil
-nom: La Malette Cyber
-titreHtml: La Malette Cyber
+nom: La Mallette Cyber
+titreHtml: La Mallette Cyber
 description: Mener des actions de sensibilisation
-illustration: malette-cyber/malette-cyber.avif
+illustration: mallette-cyber/mallette-cyber.avif
 lien: https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/lancement-mallette-cyber-inclusion-numerique
 droitsAcces:
   - ACCES_LIBRE
