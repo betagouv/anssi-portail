@@ -51,10 +51,10 @@ export const Precisions: Record<PointsAttentionPrecis, { titre: string; texte: s
       Au titre de votre activité de fournisseur de réseaux de communications
       électroniques publics et/ou de fournisseur de services de communications
       électroniques accessibles au public, votre entité relève, pour lesdites
-      activités, de l'ensemble des Etats membres de l'Union
-      Européenne (dont la France) dans lesquels vos services sont fournis et
+      activités, de l'ensemble des États membres de l'Union
+      européenne (dont la France) dans lesquels vos services sont fournis et
       devra se conformer aux réglementations NIS&nbsp;2 en vigueur dans ces
-      Etats membres-ci.
+      États membres-ci.
     `,
   },
   TelecomAutresEMdelUEUniquement: {
@@ -63,9 +63,9 @@ export const Precisions: Record<PointsAttentionPrecis, { titre: string; texte: s
       Au titre de votre activité de fournisseur de réseaux de communications
       électroniques publics et/ou de fournisseur de services de communications
       électroniques accessibles au public, votre entité relève, pour lesdites
-      activités, de l'ensemble des Etats membres de l'Union
-      Européenne dans lesquels vos services sont fournis et devra se conformer
-      aux réglementations NIS 2 en vigueur dans ces Etats membres-ci.
+      activités, de l'ensemble des États membres de l'Union
+      européenne dans lesquels vos services sont fournis et devra se conformer
+      aux réglementations NIS 2 en vigueur dans ces États membres-ci.
     `,
   },
   ResilienceEntiteCritique: {
@@ -90,8 +90,8 @@ export const Precisions: Record<PointsAttentionPrecis, { titre: string; texte: s
       numérique&nbsp;», «&nbsp;Gestion des services TIC&nbsp;» et/ou
       «&nbsp;Fournisseurs numériques&nbsp;» pour lesquelles
       l'établissement principal au sens de la directive NIS&nbsp;2 est
-      dans l'Union Européenne, hors de France. Pour ces activités-ci,
-      votre entité dépend de l'Etat membre de l'Union Européenne
+      dans l'Union européenne, hors de France. Pour ces activités-ci,
+      votre entité dépend de l'État membre de l'Union européenne
       dans lequel se trouve votre établissement principal, et, à ce titre,
       nous vous invitons à vous rapprocher de l'autorité nationale
       compétente NIS&nbsp;2 associée.
@@ -112,7 +112,7 @@ export const Precisions: Record<PointsAttentionPrecis, { titre: string; texte: s
         le règlement (UE) DORA 2022/2554
       </a>
       pour la Résilience Opérationnelle Numérique, qui sera applicable en
-      l'état dans tous les pays de l'Union Européenne à partir du 17
+      l'état dans tous les pays de l'Union européenne à partir du 17
       janvier 2025.
       <br />
       Pour ces entités, les obligations de la directive DORA en matière de

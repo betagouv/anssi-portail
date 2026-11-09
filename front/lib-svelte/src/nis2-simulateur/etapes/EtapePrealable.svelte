@@ -31,7 +31,7 @@
   <dsfr-highlight
     text="Cet outil est un simulateur qui permet d'obtenir une estimation du
           statut d'une entité, conformément aux textes actuellement en vigueur. Ce service ne permet pas de s'acquitter de la future obligation d'enregistrement
-          qui incomberont aux entités concernées par la directive NIS&nbsp;2 en France."
+          qui incombera aux entités concernées par la directive NIS&nbsp;2 en France."
   ></dsfr-highlight>
 
   <dsfr-highlight

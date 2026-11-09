@@ -51,7 +51,7 @@ export const listeDescriptionsActivites: Record<Activite, DescriptionActivite[]>
         "habituel ou actuel pour réagir aux signaux du marché, y compris à des variations de prix de l'électricité en " +
         "fonction du moment ou des incitations financières, ou pour réagir à l'acceptation de l'offre du client final de vendre, " +
         "seul ou par le biais de l'agrégation, une réduction ou une augmentation de la demande à un prix déterminé sur un marché " +
-        "organisé tel qu'il est défini à l'article 2, point 4), du règlement d'exécution (UE) n° 1348/2014 de la Commission Européenne.",
+        "organisé tel qu'il est défini à l'article 2, point 4), du règlement d'exécution (UE) n° 1348/2014 de la Commission européenne.",
     },
     {
       titre: "Stockage d'énergie",
@@ -126,7 +126,7 @@ export const listeDescriptionsActivites: Record<Activite, DescriptionActivite[]>
     {
       titre: 'Port',
       description:
-        "Toute étendue déterminée de terre et d'eau, dont le périmètre est défini par les États membres dans lequel " +
+        "Toute étendue déterminée de terre et d'eau, dont le périmètre est défini par l’État membre dans lequel " +
         'le port est situé, comprenant des infrastructures et équipements destinés à faciliter les opérations de transport maritime commercial',
     },
     {
@@ -417,7 +417,7 @@ export const listeDescriptionsActivites: Record<Activite, DescriptionActivite[]>
       titre: 'Système de noms de domaines, ou « DNS »',
       description:
         'Un système hiérarchique et distribué d’affectation de noms qui permet l’identification des services et ' +
-        "des ressources internet, ce qui rend possible l'utilisation services de routage et de connectivité internet " +
+        "des ressources internet, ce qui rend possible l'utilisation de services de routage et de connectivité internet " +
         'par les dispositifs des utilisateurs finaux pour accéder à ces services et ressources.',
     },
   ],
@@ -682,7 +682,7 @@ export const listeDescriptionsActivites: Record<Activite, DescriptionActivite[]>
     {
       titre: 'Service du contrôle de la circulation aérienne',
       description:
-        "Un service assuré dans le but d’empêcher les abordages entre aéronefs, les collisions (sur l'aire de manoeuvre, entre les aéronefs et des obstacles) et d'accélérer et de régulariser la circulation aérienne.",
+        "Un service assuré dans le but d’empêcher les abordages entre aéronefs, les collisions (sur l'aire de manœuvre, entre les aéronefs et des obstacles) et d'accélérer et de régulariser la circulation aérienne.",
     },
   ],
   societeTransportEaux: [

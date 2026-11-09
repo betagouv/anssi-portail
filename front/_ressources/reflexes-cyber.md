@@ -56,7 +56,7 @@ liens:
 </p>
 
 <p>
-  🚀 <strong>Clé-en-main, accessible aux non spécialistes et utilisable en autonomie, RÉFLEXES CYBER va permettre à votre organisation de</strong>
+  🚀 <strong>Clé en main, accessible aux non-spécialistes et utilisable en autonomie, RÉFLEXES CYBER va permettre à votre organisation de</strong>
 </p>
 
 <ul>
@@ -66,7 +66,7 @@ liens:
   <li>
     <strong>Initier une démarche plus structurée de préparation face aux crises d’origine cyber</strong>,
     en adaptant les procédures de gestion de crise à l’hypothèse de la survenue d’une cyberattaque
-    et à s’engager dans une démarche d’entraînement régulière.
+    et de s’engager dans une démarche d’entraînement régulière.
   </li>
 </ul>
 
@@ -80,7 +80,7 @@ liens:
     <ul>
       <li>des évènements partagés tout au long de la session&#8239;;</li>
       <li>des «&nbsp;cartes actions&nbsp;» pour aider la prise de décision de chacun(e)&#8239;;</li>
-      <li>une évaluation clé-en main en fin de session.</li>
+      <li>une évaluation clé en main en fin de session.</li>
     </ul>
   </li>
   <li>
@@ -88,7 +88,7 @@ liens:
     <ul>
       <li>plus d’autonomie dans la prise de décisions (sans «&nbsp;cartes actions&nbsp;»)&#8239;;</li>
       <li>des évènements individualisés, adressés à chaque participant(e)&#8239;;</li>
-      <li>une fonction et une grille d’observation permettant d’échanger de manière plus approfondie sur la crise et en tirer des enseignements.</li>
+      <li>une fonction et une grille d’observation permettant d’échanger de manière plus approfondie sur la crise et d’en tirer des enseignements.</li>
     </ul>
   </li>
 </ul>
@@ -106,7 +106,7 @@ liens:
 
 <ol>
   <li><strong>Téléchargez</strong> ci-dessous la version correspondant au scénario de votre choix.</li>
-  <li><strong>Choisissez la variante de votre choix</strong>&nbsp;: initial ou plus.</li>
+  <li><strong>Choisissez la variante de votre choix</strong>&nbsp;: initiale ou plus.</li>
   <li><strong>Imprimez RÉFLEXES CYBER</strong> et découpez, si besoin, les cartes actions.</li>
   <li><strong>Organisez votre session et déclarez son organisation sur MesServicesCyber&#8239;!</strong></li>
 </ol>

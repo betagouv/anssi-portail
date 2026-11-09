@@ -28,7 +28,7 @@ DemainSpécialisteCyber est un dispositif créé par le laboratoire d’innovati
 
 L’enjeu&nbsp;: le développement de la formation en matière de cybersécurité est essentiel à l’émergence des spécialistes cyber de demain. La pénurie de compétences en la matière est, en effet, estimée aujourd’hui à plusieurs dizaines de milliers de postes vacants et devrait s’aggraver à l’avenir.
 
-Former au plus tôt les jeunes aux enjeux de la cybersécurité et susciter des vocations pour ce domaine est donc prioritaire pour la sécurité de la Nation. C’est notamment particulièrement vrai s’agissant des femmes encore sous représentées dans la filière.
+Former au plus tôt les jeunes aux enjeux de la cybersécurité et susciter des vocations pour ce domaine est donc prioritaire pour la sécurité de la Nation. C’est notamment particulièrement vrai s’agissant des femmes encore sous-représentées dans la filière.
 
 La solution&nbsp;: DemainSpécialisteCyber propose des informations et ressources pour
 

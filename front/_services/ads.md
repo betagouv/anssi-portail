@@ -15,11 +15,11 @@ sources:
   - CERT-FR
 modifiéLe: 2025-09-15
 cible: |
-  Le service ADS n’est accessible qu’aux entités publiques et aux entités régulées (opérateur d’importance vitale et opérateur de service essentiel, …) après inscription sur le portail Club SSI. **A terme, les entités assujetties à NIS2 auront accès au service lorsqu’elles se seront enregistrées comme telles auprès de l’ANSSI.**
+  Le service ADS n’est accessible qu’aux entités publiques et aux entités régulées (opérateur d’importance vitale et opérateur de service essentiel, …) après inscription sur le portail Club SSI. **À terme, les entités assujetties à NIS2 auront accès au service lorsqu’elles se seront enregistrées comme telles auprès de l’ANSSI.**
 
   Le service ADS peut être utile :
   <ul>
-  <li>A la chaine SSI, en offrant une vue globale et synthétique du niveau de sécurité, à travers des tableaux de bord et des indicateurs associés.
+  <li>À la chaine SSI, en offrant une vue globale et synthétique du niveau de sécurité, à travers des tableaux de bord et des indicateurs associés.
   </li>
   <li>Aux équipes d’exploitation grâce aux recommandations à appliquer et à un accompagnement dans le pilotage de leurs équipes techniques et/ou de leurs prestataires.
   </li>
@@ -35,7 +35,7 @@ L’annuaire Active Directory est, en effet, un élément critique permettant la
 Le service ADS vous permet de :
 
 <ul>
-<li> Quantifier le niveau de sécurité de l’annuaire grâce à une échelle de 1 à 5, d’un score et des recommandations pour corriger les vulnérabilités identifiées&#8239;;
+<li> Quantifier le niveau de sécurité de l’annuaire grâce à une échelle de 1 à 5, à un score et à des recommandations pour corriger les vulnérabilités identifiées&#8239;;
 </li>
 <li> Vous accompagner progressivement vers un niveau de sécurité à l’état de l’art.
 </li>

@@ -57,7 +57,7 @@
   <p>Quelles sont les caractéristiques clés de votre entité</p>
 
   <dsfr-radios-group
-    legend="Nombre d’employés (équivalents temps pleins)"
+    legend="Nombre d’employés (équivalents temps plein)"
     radios={[
       { label: '1 à 49', name: 'radios-a', id: 'radio-a-1', value: 'petit' },
       { label: '50 à 249', name: 'radios-a', id: 'radio-a-2', value: 'moyen' },

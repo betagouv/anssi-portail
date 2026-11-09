@@ -71,7 +71,7 @@
     {#if menace.renforce}
       <p class="texte-standard-md niveau-risque">
         <strong>Niveau de risque</strong>
-        <dsfr-badge label="Renforcée" type="status" status="warning" size="sm"></dsfr-badge>
+        <dsfr-badge label="Renforcé" type="status" status="warning" size="sm"></dsfr-badge>
       </p>
     {/if}
 

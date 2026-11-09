@@ -192,7 +192,7 @@
                 messageErreur="Le numéro de téléphone doit respecter le format 0000000000."
                 modele={modeleTelephone}
                 nom="telephone"
-                sousTitre="Pour bénéficier d'un accompagement personnalisé"
+                sousTitre="Pour bénéficier d'un accompagnement personnalisé"
                 bind:valeur={formulaireInscription.telephone}
               />
             </div>

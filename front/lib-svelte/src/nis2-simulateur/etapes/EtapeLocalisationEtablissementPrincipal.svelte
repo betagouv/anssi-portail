@@ -76,7 +76,7 @@
   {#if paysOperationEstHorsUE}
     <dsfr-radios-group
       value={paysSalaries}
-      legend="Dans quel pays votre entité possède-t-elle l’établissement comptant le plus grand nombre de salariés dans l’Union Européenne&#8239;?"
+      legend="Dans quel pays votre entité possède-t-elle l’établissement comptant le plus grand nombre de salariés dans l’Union européenne&#8239;?"
       radios={[optionFrance('pays-autre'), optionAutre('pays-autre')]}
       onvaluechanged={choisisSalaries}
     ></dsfr-radios-group>

@@ -74,7 +74,7 @@
   <h3>Ajout d'un nouveau document</h3>
   {#if succes}
     <Alerte type="succès" taille="sm" titre="Document en cours d'ajout" estRejetable>
-      L'opération peut prendre quelques secondes, vous pouvez rafraichir la page pour vous assurer que le document ait
+      L'opération peut prendre quelques secondes, vous pouvez rafraichir la page pour vous assurer que le document a
       bien été ajouté.
     </Alerte>
   {:else if erreur}

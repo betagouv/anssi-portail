@@ -9,13 +9,13 @@ export const optionFrance = (contexte: string) => ({
 });
 
 export const optionAutre = (contexte: string) => ({
-  label: "Autres états membres de l'Union Européenne",
+  label: "Autres États membres de l'Union européenne",
   name: `radios-${contexte}`,
   id: `radio-${contexte}-autre`,
   value: 'autre',
 });
 export const optionHorsUe = (contexte: string) => ({
-  label: 'Autres états hors Union Européenne',
+  label: 'Autres États hors Union européenne',
   name: `radios-${contexte}`,
   id: `radio-${contexte}-horsue`,
   value: 'horsue',

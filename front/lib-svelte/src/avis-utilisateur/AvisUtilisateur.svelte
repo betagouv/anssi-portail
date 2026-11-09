@@ -94,7 +94,7 @@
   <div class="avis-utilisateur-cta" transition:fly={{ duration: 1000, x: 140, opacity: 1 }}>
     <button class="zone-cliquable" use:clic={surCliqueCTA} tabindex={null}>
       <div class="illustration">
-        <img src="/assets/images/dragon-coeur.svg" width="98" height="113" alt="Dragon coeur" />
+        <img src="/assets/images/dragon-coeur.svg" width="98" height="113" alt="Dragon cœur" />
       </div>
       <p class="texte">Votre avis<br /> nous intéresse&#8239;!</p>
     </button>

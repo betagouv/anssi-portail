@@ -56,9 +56,9 @@ export const questions: Question[] = [
     propositions: [
       'Aucun.',
       'Des dépenses occasionnelles sur la cybersécurité sont autorisées.',
-      'Une part du budget informatique est alloué à la cybersécurité.',
+      'Une part du budget informatique est allouée à la cybersécurité.',
       'Une ligne budgétaire est dédiée à la cybersécurité.',
-      "La ligne dédiée à la cybersécurité est égale > ou = à 10% du budget informatique de l'organisation.",
+      "La ligne dédiée à la cybersécurité est supérieure ou égale à 10% du budget informatique de l'organisation.",
     ],
   },
   {

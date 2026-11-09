@@ -5,9 +5,9 @@ export const niveauxMaturite: NiveauMaturite[] = [
     id: 'insuffisant',
     label: 'Insuffisant',
     description:
-      "Une conscience insuffisante des risques cyber pesant sur l'organisation. Pas ou peu de mesures spécifiques mises en oeuvre en matière de cybersécurité.",
+      "Une conscience insuffisante des risques cyber pesant sur l'organisation. Pas ou peu de mesures spécifiques mises en œuvre en matière de cybersécurité.",
     priorite:
-      "Prendre la mesure des risques cyber pour l'organisation et des impacts qu'entraîneraient une cyberattaque.",
+      "Prendre la mesure des risques cyber pour l'organisation et des impacts qu'entraînerait une cyberattaque.",
     priseEnCompteRisque:
       "Les responsables considèrent que l'organisation n'est pas concernée par le risque de cyberattaques.",
     posture: "Le renforcement de la cybersécurité de l'organisation n'est pas une priorité.",
@@ -25,12 +25,12 @@ export const niveauxMaturite: NiveauMaturite[] = [
     description:
       "Une prise de conscience de l'existence de risques cyber pour l'organisation et une volonté de mettre en place des premières mesures cyber pertinentes.",
     priorite:
-      'Identifier les mesures de cybersécurité prioritaires et rapides à mettre en oeuvre pour corriger les principales vulnérabilités.',
+      'Identifier les mesures de cybersécurité prioritaires et rapides à mettre en œuvre pour corriger les principales vulnérabilités.',
     priseEnCompteRisque:
       "Les responsables ont conscience que l’organisation pourrait être victime de cyberattaques sans mesurer l'ampleur du risque.",
     posture: "Les responsables de l'organisation perçoivent le sujet comme avant tout technique.",
     pilotage:
-      "Des actions en matière de cybersécurité sont parfois mises en oeuvre mais sans réelle priorisation et sans plan d'action structuré.",
+      "Des actions en matière de cybersécurité sont parfois mises en œuvre mais sans réelle priorisation et sans plan d'action structuré.",
     ressourcesHumaines:
       'Une personne est identifiée comme référente pour les enjeux cyber en plus de ses missions actuelles.',
     budget: 'Des dépenses dédiées à la cybersécurité peuvent être occasionnellement autorisées.',
@@ -47,10 +47,10 @@ export const niveauxMaturite: NiveauMaturite[] = [
       'Les données et les processus à protéger en priorité contre les risques cyber les plus courants ont été identifiés.',
     posture:
       'Les responsables manifestent un réel intérêt pour le renforcement de la cybersécurité et les directions métiers sont sensibilisées.',
-    pilotage: "Un premier plan d'action avec des actions prioritaires à mettre en oeuvre a été établi et est suivi.",
+    pilotage: "Un premier plan d'action avec des actions prioritaires à mettre en œuvre a été établi et est suivi.",
     ressourcesHumaines:
       "La personne référente dispose d'un temps dédié au suivi des enjeux cyber et peut compter sur des soutiens ponctuels.",
-    budget: 'Une part du budget informatique est alloué à la cybersécurité.',
+    budget: 'Une part du budget informatique est allouée à la cybersécurité.',
     adoptionSolutions:
       'L’organisation dispose de plusieurs solutions adaptées aux actions prioritaires identifiées dans le plan d’action.',
     niveauSecurite:
@@ -74,7 +74,7 @@ export const niveauxMaturite: NiveauMaturite[] = [
     adoptionSolutions:
       "Un audit de sécurité approfondi a été réalisé et l'organisation commence à disposer de produits et de services en matière de cyberdéfense.",
     niveauSecurite:
-      "L'organisation a mis en oeuvre des mesures efficaces contre les risques cyber les plus courants et dispose d'un niveau de préparation satisfaisant face à une crise d'origine cyber, mais demeure vulnérable à des attaques plus élaborées.",
+      "L'organisation a mis en œuvre des mesures efficaces contre les risques cyber les plus courants et dispose d'un niveau de préparation satisfaisant face à une crise d'origine cyber, mais demeure vulnérable à des attaques plus élaborées.",
   },
   {
     id: 'optimal',
@@ -91,11 +91,12 @@ export const niveauxMaturite: NiveauMaturite[] = [
       "Un plan d'action cyber complet est établi et ses objectifs prioritaires sont intégrés dans la stratégie globale de l'organisation.",
     ressourcesHumaines:
       "L’organisation dispose d'un(e) directeur(ice) cyber siégeant au CODIR et d'une ou plusieurs équipes cyber.",
-    budget: "La ligne dédiée à la cybersécurité est égale > ou = à 10% du budget informatique de l'organisation.",
+    budget:
+      "La ligne dédiée à la cybersécurité est supérieure ou égale à 10% du budget informatique de l'organisation.",
     adoptionSolutions:
       "L'organisation dispose d'un panel complet de services, outils et d'assurance cyber et réalise des audits réguliers.",
     niveauSecurite:
-      "L'organisation a mis en oeuvre des mesures lui permettant de se protéger contre des attaques élaborées et est parfaitement préparée à réagir à une crise d'origine cyber.",
+      "L'organisation a mis en œuvre des mesures lui permettant de se protéger contre des attaques élaborées et est parfaitement préparée à réagir à une crise d'origine cyber.",
   },
 ];
 

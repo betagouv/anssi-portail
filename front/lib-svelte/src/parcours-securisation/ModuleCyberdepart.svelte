@@ -99,7 +99,7 @@
       <BasculeParcoursComplet />
     {:else if badgeDebloque && !parcoursTermine}
       <Alerte type="information" taille="md" titre="">
-        Complétez votre progression et accéder à des mesures plus avancées pour renforcer vos pratiques, mieux
+        Complétez votre progression et accédez à des mesures plus avancées pour renforcer vos pratiques, mieux
         structurer vos actions et améliorer votre protection dans la durée.
       </Alerte>
     {/if}

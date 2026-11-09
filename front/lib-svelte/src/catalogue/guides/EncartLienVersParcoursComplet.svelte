@@ -18,7 +18,7 @@
 
   <ul>
     <li>58 mesures pour vous protéger des 5 risques cyber les plus courants</li>
-    <li>Basées sur ReCyF et simplifiée pour faciliter votre démarche de mise en conformité NIS 2</li>
+    <li>Basées sur ReCyF et simplifiées pour faciliter votre démarche de mise en conformité NIS 2</li>
     <li>Évaluez votre progression et partagez vos résultats</li>
   </ul>
 

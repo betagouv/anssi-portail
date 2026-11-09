@@ -55,4 +55,4 @@ Par son approche innovante, CyberEnJeux permet aux élèves de s’approprier le
 
 Testé en 2022 auprès de 300 élèves dans 10 établissements puis déployé nationalement en 2023 dans le cadre de la campagne DemainSpécialisteCyber, CyberEnJeux a déjà séduit plus de 600 enseignantes et enseignants et permis de former en quelques mois près de 100 000 élèves.
 
-En 2025, afin de former d’avantage d’élèves, CyberEnJeux évolue en se dotant d’un service numérique permettant de faire connaître le dispositif à d’avantage d’enseignants, de les accompagner dans la mise en place du dispositif dans leur classe ou à l’échelle de leur établissement et de valoriser en retour les jeux créés par les élèves grâce à leur publication sur internet.
+En 2025, afin de former davantage d’élèves, CyberEnJeux évolue en se dotant d’un service numérique permettant de faire connaître le dispositif à davantage d’enseignants, de les accompagner dans la mise en place du dispositif dans leur classe ou à l’échelle de leur établissement et de valoriser en retour les jeux créés par les élèves grâce à leur publication sur internet.

@@ -36,4 +36,4 @@ Définis par le centre de formation (CFSSI) de l’ANSSI et validés par des exp
   <li>Module 4&nbsp;: sécurité du poste de travail et nomadisme</li>
 </ul>
 
-Grâce SecNumAcadémie, découvrez et assimilez les notions de base de la sécurité des systèmes d’information (SSI) utiles au travail comme à la maison&#8239;!
+Grâce à SecNumAcadémie, découvrez et assimilez les notions de base de la sécurité des systèmes d’information (SSI) utiles au travail comme à la maison&#8239;!

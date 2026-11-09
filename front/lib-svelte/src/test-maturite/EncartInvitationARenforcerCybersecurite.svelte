@@ -6,7 +6,7 @@
     <hgroup class="preambule">
       <h1>Renforcez votre cybersécurité dès maintenant</h1>
       <p>
-        Votre organisation n’est pas suffisamment protégée face aux cyber menaces. L’ANSSI vous recommande de
+        Votre organisation n’est pas suffisamment protégée face aux cybermenaces. L’ANSSI vous recommande de
         <b>mettre en place des premières mesures simples</b> pour vous protéger rapidement.
       </p>
     </hgroup>
