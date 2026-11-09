@@ -59,6 +59,18 @@ describe('La ressource page Service', () => {
     }
   );
 
+  it.each(['', '/', '.html', '.html/'])('redirige la mallette depuis le suffixe %s', async (suffixe) => {
+    const reponse = await request(serveur).get('/ressources/malette-cyber' + suffixe);
+    expect(reponse.status).toBe(HttpStatusCode.MovedPermanently);
+    expect(reponse.headers.location).toBe('/ressources/mallette-cyber');
+  });
+  it('sert la nouvelle page de la mallette', async () => {
+    const ressource = vi.spyOn(fournisseurChemin.jekyll, 'ressource').mockReturnValue(ressourceFactice());
+    const reponse = await request(serveur).get('/ressources/mallette-cyber');
+    expect(reponse.status).toBe(HttpStatusCode.Ok);
+    expect(ressource).toHaveBeenCalledWith('mallette-cyber');
+  });
+
   it('retourne une erreur 404 si la page n’est pas trouvée', async () => {
     fournisseurChemin.jekyll.ressource = (_id: string) => {
       throw new FichierInconnu('');

@@ -47,7 +47,7 @@
       explication: 'Sensibilisez les dirigeants et les salariés aux risques cyber et aux bonnes pratiques.',
       items: versMesItems([
         '/ressources/risques-cyber',
-        '/ressources/malette-cyber',
+        '/ressources/mallette-cyber',
         '/guides/attaques-par-rancongiciels-tous-concernes',
         '/ressources/panorama',
       ]),

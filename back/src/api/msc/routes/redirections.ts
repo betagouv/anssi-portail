@@ -3,6 +3,8 @@ import { Express, NextFunction, Request, Response } from 'express';
 
 export const enregistreLesRedirections = (app: Express) => {
   [
+    ['/ressources/malette-cyber', '/ressources/mallette-cyber'],
+    ['/ressources/malette-cyber.html', '/ressources/mallette-cyber'],
     ['/aPropos', '/a-propos'],
     ['/directive-nis2', '/nis2'],
     ['/guides', '/catalogue'],
