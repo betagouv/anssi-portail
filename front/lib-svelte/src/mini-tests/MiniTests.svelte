@@ -1,7 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { nEstPasEnvProduction } from '$plateforme/environnement';
+  import { estEnvProduction } from '$plateforme/environnement';
   import { profilStore } from '../stores/profil.store';
   import BoutonsPartagePage from '../test-maturite/BoutonsPartagePage.svelte';
   import type { PropriétésFilAriane } from '../ui/filAriane';
@@ -140,7 +140,7 @@
           <LaptopAnime {survol} />
         {/snippet}
       </CarteTest>
-      {#if nEstPasEnvProduction}
+      {#if !estEnvProduction}
         <CarteTest
           cible="Hameconnage"
           couleurDeFond="--background-alt-pink-macaron"
