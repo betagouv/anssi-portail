@@ -30,10 +30,10 @@ Ce nouveau support de cours en ligne (MooC) a pour objectif de sensibiliser les 
 Définis par le centre de formation (CFSSI) de l’ANSSI et validés par des experts techniques de l’agence, les contenus du MOOC SecNumacadémie sont répartis en 4 modules de 5 unités.
 
 <ul>
-  <li>Module 1 : panorama de la SSI</li>
-  <li>Module 2 : sécurité de l’authentification</li>
-  <li>Module 3 : sécurité sur Internet</li>
-  <li>Module 4 : sécurité du poste de travail et nomadisme</li>
+  <li>Module 1&nbsp;: panorama de la SSI</li>
+  <li>Module 2&nbsp;: sécurité de l’authentification</li>
+  <li>Module 3&nbsp;: sécurité sur Internet</li>
+  <li>Module 4&nbsp;: sécurité du poste de travail et nomadisme</li>
 </ul>
 
-Grâce SecNumAcadémie, découvrez et assimilez les notions de base de la sécurité des systèmes d’information (SSI) utiles au travail comme à la maison&nbsp;!
+Grâce SecNumAcadémie, découvrez et assimilez les notions de base de la sécurité des systèmes d’information (SSI) utiles au travail comme à la maison&#8239;!

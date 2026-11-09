@@ -28,7 +28,7 @@ modifiéLe: 2025-11-27
 
 Imaginé par le laboratoire d’innovation de L’ANSSI et co-construit avec le ministère de l’Education nationale et l’association Open Serious Game, CyberEnJeux est un dispositif pédagogique innovant permettant de former des élèves à la cybersécurité dans le cadre de leurs enseignements… par la création de jeux par les élèves eux-mêmes.
 
-CyberEnJeux c’est :
+CyberEnJeux c’est&nbsp;:
 
 1/ Pour les enseignants
 
@@ -44,11 +44,11 @@ CyberEnJeux c’est :
   <li>13 cartes objectifs cyber</li>
 </ul>
 
-CyberEnJeux s’articule autour de deux temps :
+CyberEnJeux s’articule autour de deux temps&nbsp;:
 
 <ul>
   <li>Un temps de formation des élèves à la cybersécurité</li>
-  <li>Un temps de conception de prototypes de jeux « physiques ».</li>
+  <li>Un temps de conception de prototypes de jeux «&nbsp;physiques&nbsp;».</li>
 </ul>
 
 Par son approche innovante, CyberEnJeux permet aux élèves de s’approprier les connaissances et compétences acquises au travers de la création de leur propre jeu et dans le cadre d’un travail en équipe.

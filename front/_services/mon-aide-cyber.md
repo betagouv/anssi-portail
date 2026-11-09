@@ -25,14 +25,14 @@ liens:
     illustration: mac/mac-diag.avif
 ---
 
-Vous souhaitez protéger votre organisation contre les cyberattaques mais ne savez pas par quoi commencer ?
+Vous souhaitez protéger votre organisation contre les cyberattaques mais ne savez pas par quoi commencer&#8239;?
 
 Prenez votre cyberdépart en vous faisant accompagner gratuitement et en une fois par un Aidant cyber pour commencer à renforcer rapidement le niveau de cybersécurité de votre organisation.
 
 <ul>
-  <li>Sans effort : votre Aidant cyber se déplace dans vos locaux (peut être réalisé en visio)</li>
-  <li>Rapide : 1h30 seulement pour obtenir des recommandations personnalisées.</li>
-  <li>Anonyme : Un diagnostic pensé pour vous, rien que pour vous.</li>
+  <li>Sans effort&nbsp;: votre Aidant cyber se déplace dans vos locaux (peut être réalisé en visio)</li>
+  <li>Rapide&nbsp;: 1h30 seulement pour obtenir des recommandations personnalisées.</li>
+  <li>Anonyme&nbsp;: Un diagnostic pensé pour vous, rien que pour vous.</li>
 </ul>
 
 Un dispositif public
@@ -48,5 +48,5 @@ Un dispositif public
   <li>Entrez en relation avec un Aidant cyber et convenez d'un jour et d'une heure pour que la réalisation d’un diagnostic cyber avec vous dans vos locaux (peut être réalisé en visio).</li>
   <li>Le jour J, pendant 1h, échangez avec votre Aidant cyber, grâce à un questionnaire simple proposé par l'Etat.</li>
   <li>Découvrez 6 recommandations pour améliorer rapidement et simplement la cybersécurité de votre organisation.</li>
-  <li>Retrouvez vos résultats sur votre espace connecté MesServicesCyber et découvrez les autres ressources et services pour vous aider à poursuivre vos efforts !</li>
+  <li>Retrouvez vos résultats sur votre espace connecté MesServicesCyber et découvrez les autres ressources et services pour vous aider à poursuivre vos efforts&#8239;!</li>
 </ul>

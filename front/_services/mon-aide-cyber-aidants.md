@@ -32,9 +32,9 @@ liens:
     illustration: mac/mac.avif
 ---
 
-MonAideCyber est un service numérique proposé par le laboratoire d’innovation de l’ANSSI pour aider l’ensemble des entités publiques et privées peu matures sur les enjeux de cybersécurité mais souhaitant passer à l’action !
+MonAideCyber est un service numérique proposé par le laboratoire d’innovation de l’ANSSI pour aider l’ensemble des entités publiques et privées peu matures sur les enjeux de cybersécurité mais souhaitant passer à l’action&#8239;!
 
-L’objectif de MonAideCyber est de fédérer une communauté d’Aidants cyber volontaires, issus du secteur public ou associatifs souhaitant aider des entités publiques, privées et associatives à passer à l’action cyber !
+L’objectif de MonAideCyber est de fédérer une communauté d’Aidants cyber volontaires, issus du secteur public ou associatifs souhaitant aider des entités publiques, privées et associatives à passer à l’action cyber&#8239;!
 
 MonAideCyber propose aux Aidants cyber sélectionnés de réaliser des diagnostics cyber de premier niveau durant 1h30 au bénéfice d’entreprises privées, collectivités, associations qui en font la demande. Construit par l’ANSSI, le diagnostic est accessible depuis un service numérique dédié.
 
@@ -42,9 +42,9 @@ Le diagnostic permet de générer une liste personnalisée de 6 recommandations 
 
 Les Aidants cyber sont référencés sur l’annuaire en ligne, et peuvent être mis en relation avec les entités qui font des demandes d’aide via le dispositif et s’engagent à réaliser au moins 2 diagnostics par an.
 
-MonAideCyber est un service numérique proposé par le laboratoire d'innovation de l’ANSSI pour aider l’ensemble des entités publiques et privées peu matures sur les enjeux de cybersécurité mais souhaitant passer à l’action&nbsp;!
+MonAideCyber est un service numérique proposé par le laboratoire d'innovation de l’ANSSI pour aider l’ensemble des entités publiques et privées peu matures sur les enjeux de cybersécurité mais souhaitant passer à l’action&#8239;!
 
-Avec MonAideCyber, faites-vous accompagner par un “Aidant cyber” :
+Avec MonAideCyber, faites-vous accompagner par un “Aidant cyber”&nbsp;:
 
 <ul>
   <li> Bénéficiez d’un 1er diagnostic de la cybersécurité de votre organisation, en moins de 2h dans vos locaux ou en visio </li>
@@ -55,4 +55,4 @@ Accessible gratuitement, MonAideCyber vous propose un espace de confiance pour �
 
 Alors n’attendez pas et trouvez un Aidant Cyber près de chez vous pour bénéficier immédiatement du diagnostic MonAideCyber.
 
-Vous souhaitez devenir Aidant cyber&nbsp;? Contactez notre équipe&nbsp;!
+Vous souhaitez devenir Aidant cyber&#8239;? Contactez notre équipe&#8239;!
