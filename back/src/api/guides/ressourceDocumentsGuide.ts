@@ -151,7 +151,7 @@ const ressourceDocumentsGuide = ({
       const document = guide.listeDocuments.find((doc) => doc.nomFichier === requete.params.nomFichier);
       if (!document) {
         return reponse.status(HttpStatusCode.NotFound).json({
-          erreur: `Le document "${requete.params.nomFichier}" n'existe pas"`,
+          erreur: `Le document "${requete.params.nomFichier}" n'existe pas`,
         });
       }
 

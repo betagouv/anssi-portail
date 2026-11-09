@@ -15,7 +15,7 @@ sources:
   - CERT-FR
 modifiéLe: 2025-02-12
 cible: |
-  Le service SILENE n’est accessible qu’aux entités publiques et aux entités régulées (opérateur d’importance vitale et opérateur de service essentiel, …) après inscription sur le portail Club SSI. A terme, les entités assujetties à NIS2 auront accès au service lorsqu’elles se seront enregistrées comme telles auprès de l’ANSSI.
+  Le service SILENE n’est accessible qu’aux entités publiques et aux entités régulées (opérateur d’importance vitale et opérateur de service essentiel, …) après inscription sur le portail Club SSI. À terme, les entités assujetties à NIS2 auront accès au service lorsqu’elles se seront enregistrées comme telles auprès de l’ANSSI.
 ---
 
 L’ANSSI met à disposition de la sphère publique et des entités régulées une capacité de cartographie de leur surface d’exposition sur Internet au travers du service SILENE.

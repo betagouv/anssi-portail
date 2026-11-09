@@ -16,7 +16,7 @@ modifiéLe: 2025-06-16
 cible: |
   Pour devenir Aidant cyber vous devez :
   <ul>
-  <li>Représenter ou faire partie au titre de son activité professionnelle ou associative d’un service de l’État, d’une administration, d’une réserve citoyenne ou d’une entité morale à but non lucratif</li>
+  <li>Représenter ou faire partie au titre de votre activité professionnelle ou associative d’un service de l’État, d’une administration, d’une réserve citoyenne ou d’une entité morale à but non lucratif</li>
   <li>Être dans une démarche non lucrative tout au long du dispositif
   <li>Participer à un atelier Devenir Aidant MonAideCyber dispensé par l’ANSSI</li>
   </ul>
@@ -34,7 +34,7 @@ liens:
 
 MonAideCyber est un service numérique proposé par le laboratoire d’innovation de l’ANSSI pour aider l’ensemble des entités publiques et privées peu matures sur les enjeux de cybersécurité mais souhaitant passer à l’action&#8239;!
 
-L’objectif de MonAideCyber est de fédérer une communauté d’Aidants cyber volontaires, issus du secteur public ou associatifs souhaitant aider des entités publiques, privées et associatives à passer à l’action cyber&#8239;!
+L’objectif de MonAideCyber est de fédérer une communauté d’Aidants cyber volontaires, issus du secteur public ou associatif souhaitant aider des entités publiques, privées et associatives à passer à l’action cyber&#8239;!
 
 MonAideCyber propose aux Aidants cyber sélectionnés de réaliser des diagnostics cyber de premier niveau durant 1h30 au bénéfice d’entreprises privées, collectivités, associations qui en font la demande. Construit par l’ANSSI, le diagnostic est accessible depuis un service numérique dédié.
 
@@ -51,7 +51,7 @@ Avec MonAideCyber, faites-vous accompagner par un “Aidant cyber”&nbsp;:
   <li>Recevez les recommandations de l’ANSSI sur des premières actions faciles et rapides à mettre en place permettant de réduire les vulnérabilités de votre organisation face au risque de cyberattaques.</li>
 </ul>
 
-Accessible gratuitement, MonAideCyber vous propose un espace de confiance pour échanger et identifier ensemble des actions concrètes, faciles et rapides à mettre en oeuvre.
+Accessible gratuitement, MonAideCyber vous propose un espace de confiance pour échanger et identifier ensemble des actions concrètes, faciles et rapides à mettre en œuvre.
 
 Alors n’attendez pas et trouvez un Aidant Cyber près de chez vous pour bénéficier immédiatement du diagnostic MonAideCyber.
 

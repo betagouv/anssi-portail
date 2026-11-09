@@ -15,7 +15,7 @@ sources:
 modifiéLe: 2025-06-17
 cible: |
   <ul>
-  <li> En accès libre, le diagnostic cyber gratuit est destiné aux entités publiques et privées en France souhaitant mettre en oeuvre une première démarche de cybersécurité. Le diagnostic n'est pas adapté aux particuliers et aux entreprises mono-salariées. </li>
+  <li> En accès libre, le diagnostic cyber gratuit est destiné aux entités publiques et privées en France souhaitant mettre en œuvre une première démarche de cybersécurité. Le diagnostic n'est pas adapté aux particuliers et aux entreprises mono-salariées. </li>
   <li>Les prestataires privés travaillant au profit d’entités publiques.</li>
   </ul>
 liens:
@@ -38,7 +38,7 @@ Prenez votre cyberdépart en vous faisant accompagner gratuitement et en une foi
 Un dispositif public
 
 <ul>
-  <li>🇫🇷 Proposé par l'Etat et son Agence nationale de la sécurité des systèmes d'information (ANSSI). Une #InnovationANSSI </li>
+  <li>🇫🇷 Proposé par l'État et son Agence nationale de la sécurité des systèmes d'information (ANSSI). Une #InnovationANSSI </li>
   <li>🚀 Propulsé par une communauté d'Aidants cyber de confiance de la communauté MonAideCyber, issus du secteur public ou d'associations engagées dans le renforcement de la confiance numérique.</li>
 </ul>
 
@@ -46,7 +46,7 @@ Un dispositif public
 
 <ul>
   <li>Entrez en relation avec un Aidant cyber et convenez d'un jour et d'une heure pour que la réalisation d’un diagnostic cyber avec vous dans vos locaux (peut être réalisé en visio).</li>
-  <li>Le jour J, pendant 1h, échangez avec votre Aidant cyber, grâce à un questionnaire simple proposé par l'Etat.</li>
+  <li>Le jour J, pendant 1h, échangez avec votre Aidant cyber, grâce à un questionnaire simple proposé par l'État.</li>
   <li>Découvrez 6 recommandations pour améliorer rapidement et simplement la cybersécurité de votre organisation.</li>
   <li>Retrouvez vos résultats sur votre espace connecté MesServicesCyber et découvrez les autres ressources et services pour vous aider à poursuivre vos efforts&#8239;!</li>
 </ul>

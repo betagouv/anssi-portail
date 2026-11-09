@@ -22,7 +22,7 @@
       </p>
       <p class="texte-detail-sm explication">
         Utilisez notre modèle d’annuaire de crise&nbsp;: il propose déjà des contacts pré-identifiés selon votre région
-        et des exemples de rôles à adapter . A vous de le compléter avec les rôles et les personnes propres à votre
+        et des exemples de rôles à adapter. À vous de le compléter avec les rôles et les personnes propres à votre
         organisation.
       </p>
       <OutilModèleAnnuaireDeCrise />

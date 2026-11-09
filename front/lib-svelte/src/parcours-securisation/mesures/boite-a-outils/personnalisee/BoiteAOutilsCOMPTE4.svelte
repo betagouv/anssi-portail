@@ -43,7 +43,7 @@
 
     <ÉtapeProcédure titre="Conservez une trace de votre revue.">
       <p class="texte-standard-md">
-        Garder une trace de votre travail. date, périmètre, participants, anomalies relevées, actions correctives.
+        Garder une trace de votre travail&nbsp;: date, périmètre, participants, anomalies relevées, actions correctives.
       </p>
       <p class="texte-detail-sm explication">Pour vous aider, utilisez notre modèle de compte rendu prêt à remplir.</p>
       <OutilModèleRevueComptesUtilisateurs />

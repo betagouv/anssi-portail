@@ -44,8 +44,8 @@
     </ÉtapeProcédure>
     <ÉtapeProcédure titre="Structurez et outillez la gestion de crise de votre organisation">
       <p class="texte-standard-md">
-        Votre organisation est prête à aller plus loin&#8239;? Il est maintenant est nécessaire de préparer et
-        d’outiller la gestion de crise cyber de votre organisation, notamment en&nbsp;:
+        Votre organisation est prête à aller plus loin&#8239;? Il est maintenant nécessaire de préparer et d’outiller la
+        gestion de crise cyber de votre organisation, notamment en&nbsp;:
       </p>
       <ul class="enumeration">
         <li>

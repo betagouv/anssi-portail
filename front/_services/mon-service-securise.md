@@ -41,13 +41,13 @@ Avec MonServiceSécurisé
 <li>Obtenez une liste de mesures de sécurité personnalisée, adaptée aux besoins identifiés.</li>
 <li>Construisez un plan d’action cyber de manière  collaborative et consultez l’historique des modifications</li>
 <li>Obtenez une évaluation indicative du niveau de sécurité du service grâce à l’indice cyber proposé par l’ANSSI</li>
-<li>Pilotez l’homologation du service grâce à un parcours et des documents clés-en-main.</li>
+<li>Pilotez l’homologation du service grâce à un parcours et des documents clés en main.</li>
 </ul>
 
 Depuis votre tableau de bord&nbsp;:
 
 <ul>
-<li>Supervisez l’ensemble de vos services&nbsp;: leurs besoins, leur indice cyber, leur statut d’homologation les prochaines actions à mener.</li>
+<li>Supervisez l’ensemble de vos services&nbsp;: leurs besoins, leur indice cyber, leur statut d’homologation et les prochaines actions à mener.</li>
 <li>Consultez vos notifications et les recommandations de l’ANSSI</li>
 <li>Téléchargez, dupliquez, partagez à volonté&#8239;!</li>
 </ul>

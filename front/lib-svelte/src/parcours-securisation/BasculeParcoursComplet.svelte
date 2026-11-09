@@ -10,7 +10,7 @@
 </script>
 
 <dsfr-callout
-  text="Passer au niveau supérieur et continuez à progresser avec des mesures plus avancées pour renforcer vos pratiques,
+  text="Passez au niveau supérieur et continuez à progresser avec des mesures plus avancées pour renforcer vos pratiques,
     mieux structurer vos actions et protéger votre organisation dans la durée."
   title="Protégez votre organisation dans la durée"
   title-markup="h4"

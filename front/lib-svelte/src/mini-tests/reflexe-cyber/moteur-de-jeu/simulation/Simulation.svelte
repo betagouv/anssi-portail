@@ -141,7 +141,7 @@
 <dsfr-container class="simulation-contenu">
   <div class="alerte-mobile">
     <Alerte type="information" taille="sm" estRejetable>
-      Expérimentez une simulation plus immersive sur ordinateur. Messages en directs, effets sonores...
+      Expérimentez une simulation plus immersive sur ordinateur. Messages en direct, effets sonores...
     </Alerte>
   </div>
 

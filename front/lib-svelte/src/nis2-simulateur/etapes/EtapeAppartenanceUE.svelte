@@ -26,21 +26,21 @@
   ></dsfr-stepper>
 
   <dsfr-radios-group
-    legend="Dans quel état membre de l’Union Européenne êtes-vous établi&#8239;?"
+    legend="Dans quel État membre de l’Union européenne êtes-vous établi&#8239;?"
     hint="Pour votre entreprise filiale si celle-ci fait partie d’un groupe,
             ou pour le groupe si celui-ci mène une activité économique.
-            Ce sujet pourra être précisé par la Commission Européenne."
+            Ce sujet pourra être précisé par la Commission européenne."
     radios={[
       { label: 'France', name: 'radios', id: 'radio-fr', value: 'france' },
       {
-        label: "Autres états membres de l'Union Européenne",
+        label: "Autres États membres de l'Union européenne",
         name: 'radios',
         id: 'radio-autre',
         value: 'autre',
         disabled: true,
       },
       {
-        label: 'Autres états hors Union Européenne',
+        label: 'Autres États hors Union européenne',
         name: 'radios',
         id: 'radio-horsue',
         value: 'horsue',
@@ -51,7 +51,7 @@
   ></dsfr-radios-group>
 
   <dsfr-highlight
-    text="Le test est dans un premier temps focalisé sur les entités établies en France, il sera par la suite disponible pour les entités établies dans les autres États de l'Union Européenne et dans les États hors Union Européenne."
+    text="Le test est dans un premier temps focalisé sur les entités établies en France, il sera par la suite disponible pour les entités établies dans les autres États de l'Union européenne et dans les États hors Union européenne."
   ></dsfr-highlight>
 
   <PrecedentSuivant message="Sélectionnez une réponse" onsuivant={valide} suivantdisabled={reponse === undefined} />

@@ -74,7 +74,7 @@
   class="carrousel"
   class:en-pause={figé}
   role="img"
-  aria-label="Cinq niveaux de maturité cyber, de insuffisant à optimal, illustrés par une plante qui pousse."
+  aria-label="Cinq niveaux de maturité cyber, d’insuffisant à optimal, illustrés par une plante qui pousse."
 >
   <div class="decor"><Decor /></div>
 

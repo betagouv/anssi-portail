@@ -75,7 +75,7 @@
 
   <Accordeon niveauTitre={3} libelle="2 typologies d’entités&nbsp;: Essentielles (EE) et Importantes (EI)">
     <p>
-      Deux types d’entités relevant des secteurs précités sont concernées par la directive NIS2, définies, selon leur
+      Deux types d’entités relevant des secteurs précités sont concernés par la directive NIS2, définis, selon leur
       degré de criticité, leur taille et leur chiffre d’affaires (pour les entreprises)&nbsp;:
     </p>
     <ul>
@@ -124,7 +124,7 @@
       Afin de les aider, l'ANSSI a conçu le <Lien libelle="Référentiel Cyber France" href="/nis2#exigences" neutre /> (ReCyF)
       qui liste les mesures recommandées par l’ANSSI pour atteindre les objectifs de sécurité fixés par NIS 2. Compte tenu
       du niveau de la menace cybercriminelle, et pour permettre aux organisations d’initier dès à présent une démarche de
-      sécurisation cohérente avec NIS 2, l’ANSSI a décidé de rendre public <Lien
+      sécurisation cohérente avec NIS 2, l’ANSSI a décidé de rendre publique <Lien
         libelle="une version de travail du Référentiel Cyber France"
         neutre
         href="/documents-ressources/20260317_NIS_V2_ReCyF_v2.5.pdf"

@@ -33,7 +33,7 @@
       #stack(
         dir: ttb,
         spacing: 8pt,
-        text(size: 12pt, weight: "bold", fill: texte-principal)[MesServiceCyber],
+        text(size: 12pt, weight: "bold", fill: texte-principal)[MesServicesCyber],
         text(size: 10pt, weight: "regular", fill: texte-principal)[Innovation ANSSI],
       )
     ],

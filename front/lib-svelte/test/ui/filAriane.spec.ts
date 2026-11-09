@@ -209,7 +209,7 @@ describe('La fabrique du fil d’Ariane', () => {
           titre: 'Activer la vérification en deux étapes ou un aut...',
           phraseAccroche: 'Empêchez qu’un compte soit utilisé, même si le mot de passe a fuité 💨',
           explications: '<p>Un mot de passe seul ne suffit pas toujours à protéger un...',
-          actionPrioritaire: '<p>Mettre en oeuvre la vérification en deux étapes sur les...',
+          actionPrioritaire: '<p>Mettre en œuvre la vérification en deux étapes sur les...',
           actionFacileAFaire: 'Dans les principales suites collaboratives (La Suite Numérique...',
           ordre: 10,
           risques: [],

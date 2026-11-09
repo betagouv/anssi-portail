@@ -57,7 +57,7 @@
     </div>
 
     <dsfr-callout
-      text="Ce lundi matin, dernier lundi de février, vous démarrez la réunion de direction hebdomadaire à 9h. Vous ne le savez pas encore, mais la journée ne va pas se dérouler comme prévue..."
+      text="Ce lundi matin, dernier lundi de février, vous démarrez la réunion de direction hebdomadaire à 9h. Vous ne le savez pas encore, mais la journée ne va pas se dérouler comme prévu..."
       accent="purple-glycine"
     ></dsfr-callout>
 

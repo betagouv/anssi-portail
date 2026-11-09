@@ -54,7 +54,7 @@
       <h4 slot="etape-titre">{etape.titre}</h4>
       {#if index === 2}
         <p slot="etape-description">
-          Mettez en oeuvre <Lien
+          Mettez en œuvre <Lien
             libelle="les exigences de sécurité"
             href="/nis2#exigences"
             surClic={retourEnHautDePage}

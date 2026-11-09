@@ -22,7 +22,7 @@
   {:else}
     <div class="panneau">
       <p class="texte-detail-sm">
-        Ouvrez un à un les emails et tentez de determinez lesquels sont légitimes et lesquels ne le sont pas
+        Ouvrez un à un les emails et tentez de déterminer lesquels sont légitimes et lesquels ne le sont pas
       </p>
     </div>
   {/if}

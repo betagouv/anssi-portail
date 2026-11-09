@@ -15,7 +15,7 @@
   <ÉtapesProcédure>
     <ÉtapeProcédure titre="Organisez une revue annuelle.">
       <p class="texte-standard-md">
-        Fixer une date récurrente et réunissez les personnes concernées&nbsp;: le dirigeant (ou son délégué), le
+        Fixez une date récurrente et réunissez les personnes concernées&nbsp;: le dirigeant (ou son délégué), le
         responsable IT (interne ou prestataire) et les responsables métiers concernés.
       </p>
       <p class="texte-detail-sm explication">

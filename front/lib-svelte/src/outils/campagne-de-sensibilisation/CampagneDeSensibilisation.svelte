@@ -58,7 +58,7 @@
         id="logo"
         name="logo"
         label="Ajouter votre logo aux affiches (facultatif)"
-        hint="Format supportés&nbsp;: JPG, PNG. Poids&nbsp;: 2 Mo max. Traité dans votre navigateur, jamais envoyé."
+        hint="Formats supportés&nbsp;: JPG, PNG. Poids&nbsp;: 2 Mo max. Traité dans votre navigateur, jamais envoyé."
         accept="image/jpeg, image/png, image/jpg"
         status={logoTropVolumineux ? 'error' : 'default'}
         errorMessage="Le logo dépasse la taille maximale de 2 Mo. Choisissez un fichier plus léger."
