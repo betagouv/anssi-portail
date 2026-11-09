@@ -81,14 +81,14 @@ script: /scripts/service.js
     <summary>
       <div class="entete-filtres">
         <img class="menu" src="/assets/images/icone-menu-lateral.svg" width="16" height="16" alt="" />
-        <span id="section-active" class="titre-menu">De quoi s'agit-il&nbsp;?</span>
+        <span id="section-active" class="titre-menu">De quoi s'agit-il&#8239;?</span>
         <img class="chevron" src="/assets/images/icone-chevron-bas.svg" width="16" height="16" alt="" />
       </div>
     </summary>
 
     <ul>
-      <li class="actif"><a href="#explication">De quoi s'agit-il&nbsp;?</a></li>
-      <li><a href="#cible">Qui peut utiliser ce service&nbsp;?</a></li>
+      <li class="actif"><a href="#explication">De quoi s'agit-il&#8239;?</a></li>
+      <li><a href="#cible">Qui peut utiliser ce service&#8239;?</a></li>
       {% if page.ressources.size > 0 %}
       <li><a href="#ressources">Les ressources associées</a></li>
       {%endif%}
@@ -100,8 +100,8 @@ script: /scripts/service.js
   <div class="contenu-section">
     <div class="sommaire sommaire-deplie">
       <ul>
-        <li class="actif"><a href="#explication">De quoi s'agit-il&nbsp;?</a></li>
-        <li><a href="#cible">Qui peut utiliser ce service&nbsp;?</a></li>
+        <li class="actif"><a href="#explication">De quoi s'agit-il&#8239;?</a></li>
+        <li><a href="#cible">Qui peut utiliser ce service&#8239;?</a></li>
         {% if page.ressources.size > 0 %}
         <li><a href="#ressources">Les ressources associées</a></li>
         {%endif%}
@@ -122,7 +122,7 @@ script: /scripts/service.js
           </script>
           {% include composant-svelte.html id="bouton-favori" %}
         </div>
-        <h2>De quoi s'agit-il&nbsp;?</h2>
+        <h2>De quoi s'agit-il&#8239;?</h2>
         <div>{{ page.content }}</div>
         {% if page.lien %}
         <msc-lien classe="lien-externe-produit" href="{{page.lien}}" blank apparence="bouton" source="Page produit" cible="{{page.nom}}" libelle="Accéder au service" taille="lg"></msc-lien>
@@ -130,7 +130,7 @@ script: /scripts/service.js
       </section>
 
       <section class="cible" id="cible">
-        <h2>Qui peut utiliser ce service&nbsp;?</h2>
+        <h2>Qui peut utiliser ce service&#8239;?</h2>
         <span>{{ page.cible }}</span>
 
         <div class="cartes">
