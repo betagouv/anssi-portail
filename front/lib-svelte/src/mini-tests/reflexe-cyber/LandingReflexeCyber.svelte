@@ -22,7 +22,7 @@
   tailleBadges="md"
 >
   {#snippet titreHtml()}
-    Comment réagirez-vous en cas de cyber&shy;attaque&nbsp;?
+    Comment réagirez-vous en cas de cyber&shy;attaque&#8239;?
   {/snippet}
   {#snippet illustration()}
     <figure class="illustration">

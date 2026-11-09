@@ -100,13 +100,13 @@
         <label class="libelle" for="entite">Recherchez votre organisation</label>
         <SelectionOrganisation bind:valeur={entite} filtreDepartement={undefined} {urlBase} />
         {#if entite}
-          <div>Votre entreprise : {entite.nom} ({entite.departement})</div>
+          <div>Votre entreprise&nbsp;: {entite.nom} ({entite.departement})</div>
         {/if}
       </div>
 
       <div class="champ email">
         <ChampTexte
-          aideSaisie="Ex : jean.dupont@mail.com"
+          aideSaisie="Ex&nbsp;: jean.dupont@mail.com"
           id="email"
           libelle="Email de contact"
           messageErreur="Le format du mail est invalide"

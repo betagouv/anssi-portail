@@ -66,7 +66,7 @@
   {#if etape === 'formulaire'}
     <Formulaire id="formulaire-sortie-diagnostic" surFormulaireValide={soumetsLeFormulaire}>
       <div class="contenu">
-        <h5>🤔 Pourquoi n’avez-vous pas finalisé votre demande&nbsp;?</h5>
+        <h5>🤔 Pourquoi n’avez-vous pas finalisé votre demande&#8239;?</h5>
         {#if erreurRaison}
           <lab-anssi-alerte type="erreur" description="Veuillez sélectionner une réponse." fermable={false}
           ></lab-anssi-alerte>
@@ -96,9 +96,9 @@
           {/if}
         </div>
         <div class="contact">
-          <h5>📧 Une question ? Nos équipes se tiennent à votre disposition.</h5>
+          <h5>📧 Une question&#8239;? Nos équipes se tiennent à votre disposition.</h5>
           <ChampTexte
-            aideSaisie="Ex : jean.dupont@mail.com"
+            aideSaisie="Ex&nbsp;: jean.dupont@mail.com"
             id="email-contact"
             libelle="Email de contact"
             messageErreur="L'email est invalide"
@@ -115,7 +115,7 @@
   {:else}
     <div class="contenu">
       <p>
-        Vous avez demandé à être recontacté(e) ? Notre équipe prendra contact avec vous prochainement à l’adresse
+        Vous avez demandé à être recontacté(e)&#8239;? Notre équipe prendra contact avec vous prochainement à l’adresse
         fournie.
       </p>
     </div>

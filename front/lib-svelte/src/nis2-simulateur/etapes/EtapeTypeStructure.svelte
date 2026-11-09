@@ -41,7 +41,10 @@
   <dsfr-stepper title={TitresEtapes['typeStructure']} current-step="3" step-count="6" hide-details="true"
   ></dsfr-stepper>
 
-  <dsfr-radios-group legend="Quel type de structure qualifie votre entité ?" radios={options} onvaluechanged={choisis}
+  <dsfr-radios-group
+    legend="Quel type de structure qualifie votre entité&#8239;?"
+    radios={options}
+    onvaluechanged={choisis}
   ></dsfr-radios-group>
 
   <dsfr-highlight

@@ -22,7 +22,10 @@
     <div class="suivi">
       <p class="numero">N° du colis 5M23778449079</p>
       <div class="progression">
-        <img src="{dossierImages}/colissimo-suivi.avif" alt="Étapes du colis : préparé, transit, livraison, livré" />
+        <img
+          src="{dossierImages}/colissimo-suivi.avif"
+          alt="Étapes du colis&nbsp;: préparé, transit, livraison, livré"
+        />
       </div>
       <p class="etat">Votre colis est en transit</p>
     </div>

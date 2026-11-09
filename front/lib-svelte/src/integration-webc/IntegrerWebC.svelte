@@ -20,7 +20,7 @@
 
 <dsfr-container>
   <div class="accordeons">
-    <Accordeon libelle="Test • Quelle est la maturité cyber de votre organisation&nbsp;?">
+    <Accordeon libelle="Test • Quelle est la maturité cyber de votre organisation&#8239;?">
       <SectionWebCAccordeon
         fichierPhp="mini-test-maturite.php"
         lienDémo="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/demo/mini-test-maturite.php"
@@ -28,7 +28,7 @@
         nomDuWebComponent="lab-anssi-mini-test-maturite"
       />
     </Accordeon>
-    <Accordeon libelle="Test • Cyber&ZeroWidthSpace;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?">
+    <Accordeon libelle="Test • Cyber&ZeroWidthSpace;attaques&nbsp;: saurez-vous démêler le vrai du faux&#8239;?">
       <SectionWebCAccordeon
         fichierPhp="mini-test-vrai-faux.php"
         lienDémo="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/demo/mini-test-vrai-faux.php"
@@ -36,7 +36,7 @@
         nomDuWebComponent="lab-anssi-mini-test-vrai-faux"
       />
     </Accordeon>
-    <Accordeon libelle="Test • Quels types de cyber&ZeroWidthSpace;attaques peuvent cibler mon organisation&nbsp;?">
+    <Accordeon libelle="Test • Quels types de cyber&ZeroWidthSpace;attaques peuvent cibler mon organisation&#8239;?">
       <SectionWebCAccordeon
         fichierPhp="mini-test-expostion.php"
         lienDémo="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/demo/ini-test-expostion.php"
@@ -44,7 +44,7 @@
         nomDuWebComponent="lab-anssi-mini-test-expostion"
       />
     </Accordeon>
-    <Accordeon libelle="Test • Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?">
+    <Accordeon libelle="Test • Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&#8239;?">
       <SectionWebCAccordeon
         fichierPhp="mini-test-hameconnage.php"
         lienDémo="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/demo/mini-test-hameconnage.php"
@@ -67,7 +67,7 @@
     </Accordeon>
   </div>
   <div class="contactez-nous">
-    <p>Vous rencontrez des difficultés&nbsp;?&nbsp;</p>
+    <p>Vous rencontrez des difficultés&#8239;?&nbsp;</p>
     <Lien href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert" libelle="contactez-nous" />
   </div>
 </dsfr-container>

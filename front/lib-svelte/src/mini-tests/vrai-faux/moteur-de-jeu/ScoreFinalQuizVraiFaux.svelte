@@ -94,7 +94,7 @@
   <dsfr-container>
     <PartageTest
       cheminPartagé="/vrai-faux/quiz"
-      sujetMail="Cyber­attaques : saurez-vous démêler le vrai du faux ?"
+      sujetMail="Cyber­attaques&nbsp;: saurez-vous démêler le vrai du faux&#8239;?"
       typeDeRetour="vrai-faux"
     />
   </dsfr-container>

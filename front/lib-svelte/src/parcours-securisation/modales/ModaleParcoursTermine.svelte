@@ -9,7 +9,7 @@
   let { estOuverte = $bindable() }: Props = $props();
 </script>
 
-<Modale bind:estOuverte titre="Félicitations&nbsp;!">
+<Modale bind:estOuverte titre="Félicitations&#8239;!">
   <div class="corps">
     <p class="texte-standard-md">Vous avez pris en compte l’ensemble des mesures proposées dans ce parcours.</p>
     <img src="/assets/images/cotillons-100-pourcents.svg" alt="félicitations" width="524" height="188" />
@@ -18,9 +18,9 @@
       <strong>Ce parcours est terminé mais votre sécurisation continue&nbsp;:</strong>
     </p>
     <ul>
-      <li>Revoir régulièrement les mesures&nbsp;;</li>
-      <li>Vérifier certaines mesures critiques&nbsp;;</li>
-      <li>Refaire un point dans 6 ou 12 mois&nbsp;;</li>
+      <li>Revoir régulièrement les mesures&#8239;;</li>
+      <li>Vérifier certaines mesures critiques&#8239;;</li>
+      <li>Refaire un point dans 6 ou 12 mois&#8239;;</li>
       <li>Suivre les nouvelles recommandations de l’ANSSI.</li>
     </ul>
   </div>

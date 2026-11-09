@@ -115,7 +115,7 @@
       {@render children()}
     {:else}
       <p class="texte-article-lg">
-        <b>Ce contenu vous a-t-il aidé&nbsp;?</b>
+        <b>Ce contenu vous a-t-il aidé&#8239;?</b>
       </p>
     {/if}
   </div>
@@ -158,7 +158,7 @@
   {/if}
   {#if etat === 'Soumis'}
     <div class="alerte-soumission">
-      <Alerte type="succès" taille="sm">Merci&nbsp;! Vos retours sont précieux. ✨</Alerte>
+      <Alerte type="succès" taille="sm">Merci&#8239;! Vos retours sont précieux. ✨</Alerte>
     </div>
   {/if}
 </div>

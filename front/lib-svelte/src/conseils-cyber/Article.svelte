@@ -55,7 +55,7 @@
       <div class="contenu-partage">
         <div class="retour">
           <RetourUtilisateurSurContenu identifiantCible={slugArticle} typeDeRetour="article">
-            <p class="texte-article-lg">Cet article vous a-t-il aidé&nbsp;?</p>
+            <p class="texte-article-lg">Cet article vous a-t-il aidé&#8239;?</p>
           </RetourUtilisateurSurContenu>
         </div>
         <BoutonsPartagePage cheminPartagé={`/conseils-cyber/${slugArticle}`} sujetMail={article.titre} />

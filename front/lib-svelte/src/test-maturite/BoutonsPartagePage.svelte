@@ -37,7 +37,7 @@
       icone="linkedin-box-line"
     />
     <Lien
-      href={`mailto:?subject=${sujetMail}&body=Lien : ${lienPage}`}
+      href={`mailto:?subject=${sujetMail}&body=Lien\u00a0: ${lienPage}`}
       libelle="Partager par email"
       apparence="bouton"
       type="tertiaire"

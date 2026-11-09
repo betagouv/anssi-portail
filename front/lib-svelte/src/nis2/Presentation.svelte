@@ -12,7 +12,7 @@
 
 <dsfr-container id="presentation">
   <div class="introduction">
-    <h2>Qu’est-ce que NIS&nbsp;2&nbsp;?</h2>
+    <h2>Qu’est-ce que NIS&nbsp;2&#8239;?</h2>
     <p>
       La directive NIS 2 permet d’élever le niveau global de cybersécurité par l’application de règles harmonisées et
       simplifiées. Face à une cybermenace qui s’accroît, NIS 2 relève le défi d’une meilleure sécurisation des tissus

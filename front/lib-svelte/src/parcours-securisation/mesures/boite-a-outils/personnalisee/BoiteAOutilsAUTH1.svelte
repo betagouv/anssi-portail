@@ -25,8 +25,8 @@
     </ÉtapeProcédure>
     <ÉtapeProcédure titre="Retrouver les identifiants d'origine">
       <ul class="enumeration">
-        <li>étiquette collée sous l'appareil ou au dos&nbsp;;</li>
-        <li>documentation ou notice du fabricant&nbsp;;</li>
+        <li>étiquette collée sous l'appareil ou au dos&#8239;;</li>
+        <li>documentation ou notice du fabricant&#8239;;</li>
         <li>
           site du constructeur (attention&nbsp;: ces mots de passe sont souvent publiés en ligne, c'est bien là le
           problème).
@@ -43,9 +43,9 @@
       <ul class="enumeration">
         <li>
           changer aussi le nom du compte quand c'est possible (éviter «&nbsp;admin&nbsp;», «&nbsp;root&nbsp;»,
-          «&nbsp;user&nbsp;»)&nbsp;;
+          «&nbsp;user&nbsp;»)&#8239;;
         </li>
-        <li>choisir un mot de passe long, unique pour chaque équipement, jamais réutilisé ailleurs&nbsp;;</li>
+        <li>choisir un mot de passe long, unique pour chaque équipement, jamais réutilisé ailleurs&#8239;;</li>
         <li>ne pas se contenter d'ajouter un chiffre au mot de passe d'usine.</li>
       </ul>
     </ÉtapeProcédure>

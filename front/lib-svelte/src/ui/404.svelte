@@ -4,7 +4,7 @@
 
 <dsfr-container>
   <div class="contenu-section">
-    <h2>Oups&nbsp;! Cette page est introuvable.</h2>
+    <h2>Oups&#8239;! Cette page est introuvable.</h2>
     <p class="texte-chapo-xl">Nous sommes désolés, la page que vous recherchez n'existe pas.</p>
     <div class="action">
       <Lien apparence="bouton" href="/" libelle="Revenir à la page d’accueil" />

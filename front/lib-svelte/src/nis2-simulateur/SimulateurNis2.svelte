@@ -42,7 +42,7 @@
   format="banniere"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
   theme="clair"
-  titre="Mon entité est-elle concernée&nbsp;?"
+  titre="Mon entité est-elle concernée&#8239;?"
 />
 
 <dsfr-container>

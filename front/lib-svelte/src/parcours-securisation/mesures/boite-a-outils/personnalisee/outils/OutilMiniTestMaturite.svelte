@@ -4,7 +4,7 @@
 
 <OutilLien
   vertical
-  titre="Quelle est la maturité cyber de votre organisation&nbsp;?"
+  titre="Quelle est la maturité cyber de votre organisation&#8239;?"
   href="/ma-maturite"
   nomIcone="mini-test-maturite"
   labelBadge="Faire le test"

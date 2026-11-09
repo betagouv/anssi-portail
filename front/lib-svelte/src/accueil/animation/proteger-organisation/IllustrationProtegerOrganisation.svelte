@@ -14,7 +14,7 @@
 
 <IllustrationAnimee
   {scènes}
-  étiquette="Trois étapes du parcours : sécuriser les accès aux comptes, contrôler les accès aux locaux, définir les contacts et les procédures."
+  étiquette="Trois étapes du parcours&nbsp;: sécuriser les accès aux comptes, contrôler les accès aux locaux, définir les contacts et les procédures."
   {enPause}
 >
   {#snippet décor(index)}

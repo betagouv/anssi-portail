@@ -58,7 +58,7 @@
 
 <div>
   <HeroLandingPage
-    description="12 mesures pensées pour les non-spécialistes, applicables en quelques minutes pour commencer à renforcer votre cybersécurité et prendre votre Cyberdépart&nbsp;!"
+    description="12 mesures pensées pour les non-spécialistes, applicables en quelques minutes pour commencer à renforcer votre cybersécurité et prendre votre Cyberdépart&#8239;!"
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
     tag={`+${organisationsAccompagnées} organisations déjà accompagnées 🚀`}
     class="hero-landing-page"
@@ -132,7 +132,7 @@
 <section class="section-diagnostic">
   <dsfr-container>
     <BlocDiagnostic
-      titre="Vous préférez échanger avec un Aidant cyber ?"
+      titre="Vous préférez échanger avec un Aidant cyber&#8239;?"
       labelBouton="Demander un accompagnement gratuit"
       lienBouton="/cyberdepart/diagnostic-gratuit?origine=landing-parcours-cyberdepart"
     >
@@ -143,7 +143,7 @@
         </p>
         <ul class="texte-standard-md">
           <li>Réunissez votre direction, les services compétents et votre prestataire informatique.</li>
-          <li>Échangez et impulsez une dynamique interne&nbsp;!</li>
+          <li>Échangez et impulsez une dynamique interne&#8239;!</li>
         </ul>
       {/snippet}
     </BlocDiagnostic>

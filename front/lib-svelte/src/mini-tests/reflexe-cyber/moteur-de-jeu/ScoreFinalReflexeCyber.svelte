@@ -91,14 +91,14 @@
 <dsfr-container class="conteneur-carte-guide">
   <dsfr-card
     class="guide-reflexes"
-    title="Organisez une session Réflexes Cyber en équipe !"
+    title="Organisez une session Réflexes Cyber en équipe&#8239;!"
     has-detail-end
     detail-end=""
     size="lg"
     horizontal
     horizontal-proportion="tier"
     has-description="true"
-    description="Avec RÉFLEXES CYBER faites vivre à votre CODIR/COMEX ou à vos équipes une première simulation de crise d’origine cyber. Tout au long de la simulation, avec l’aide d’une personne chargée d’animer la séquence, les participant(e)s sont confronté(e)s à des évènements imprévus et doivent prendre des décisions&nbsp;: qui adoptera les bons ou les mauvais réflexes&nbsp;?&nbsp;😉"
+    description="Avec RÉFLEXES CYBER faites vivre à votre CODIR/COMEX ou à vos équipes une première simulation de crise d’origine cyber. Tout au long de la simulation, avec l’aide d’une personne chargée d’animer la séquence, les participant(e)s sont confronté(e)s à des évènements imprévus et doivent prendre des décisions&nbsp;: qui adoptera les bons ou les mauvais réflexes&#8239;?&nbsp;😉"
     src="/assets/images/illustrations-services/reflexes-cyber/RC-home.png"
     href="/ressources/reflexes-cyber"
     enlarge="true"
@@ -109,7 +109,7 @@
 <dsfr-container>
   <PartageTest
     cheminPartagé="/reflexes-cyber-en-ligne/parcours"
-    sujetMail="Comment réagirez-vous en cas de cyberattaque ?"
+    sujetMail="Comment réagirez-vous en cas de cyberattaque&#8239;?"
     typeDeRetour="reflexes-cyber"
   />
 </dsfr-container>

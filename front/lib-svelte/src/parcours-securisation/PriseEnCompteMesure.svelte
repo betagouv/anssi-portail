@@ -53,7 +53,7 @@
     >
       <dsfr-button label="infobulle" preset="tooltip"></dsfr-button>
     </dsfr-tooltip>
-    <p class="texte-article-lg">Cette mesure est-elle prise en compte ?</p>
+    <p class="texte-article-lg">Cette mesure est-elle prise en compte&#8239;?</p>
     <div class="action">
       <Bouton
         desactive={priseEnCompteEnCours}

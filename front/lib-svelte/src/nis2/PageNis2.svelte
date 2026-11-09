@@ -58,7 +58,7 @@
 <Notice
   description="Restez informé des dernières actualités de la directive NIS 2 et autres actualités."
   estRejetable
-  titre="Newsletter MesServicesCyber :"
+  titre="Newsletter MesServicesCyber&nbsp;:"
   lien={{
     libelle: 'S’abonner',
     titre: 'S’abonner à la newsletter',

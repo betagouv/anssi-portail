@@ -40,7 +40,7 @@
 </script>
 
 <HerosRiche
-  description="Une campagne pour sensibiliser vos équipes pour les aider à adopter les bonnes pratiques&nbsp;! 6 affiches et emails que vous pouvez personnaliser avec votre logo et le nom de votre organisation. À déployer à votre rythme. L’ordre proposé suit une progression logique."
+  description="Une campagne pour sensibiliser vos équipes pour les aider à adopter les bonnes pratiques&#8239;! 6 affiches et emails que vous pouvez personnaliser avec votre logo et le nom de votre organisation. À déployer à votre rythme. L’ordre proposé suit une progression logique."
   {propriétésFilAriane}
   titre="Campagne de sensibilisation à personnaliser"
   variante="bleu-clair"
@@ -102,7 +102,7 @@
   </div>
 
   <RetourUtilisateurSurContenu identifiantCible="campagne-de-sensibilisation" typeDeRetour="outil">
-    <p class="texte-article-lg">Ce contenu vous a-t-il aidé&nbsp;?</p>
+    <p class="texte-article-lg">Ce contenu vous a-t-il aidé&#8239;?</p>
   </RetourUtilisateurSurContenu>
 
   <ModaleAperçu bind:aperçuEnCours></ModaleAperçu>

@@ -36,7 +36,7 @@
     </div>
   </dsfr-card>
   <RetourUtilisateurSurContenu identifiantCible={identifiant} typeDeRetour="outil" mode="carte">
-    <b>Cet outil vous a-t-il aidé&nbsp;?</b>
+    <b>Cet outil vous a-t-il aidé&#8239;?</b>
   </RetourUtilisateurSurContenu>
 </div>
 

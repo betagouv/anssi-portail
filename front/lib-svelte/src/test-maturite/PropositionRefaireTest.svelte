@@ -6,7 +6,7 @@
 {#if $profilStore}
   <dsfr-container class="refaire-test">
     <p>
-      Vous avez mené un plan d'action cyber et souhaitez mesurer vos progrès ?
+      Vous avez mené un plan d'action cyber et souhaitez mesurer vos progrès&#8239;?
       <Lien href="/test-maturite" libelle="Refaire le test" />
     </p>
   </dsfr-container>

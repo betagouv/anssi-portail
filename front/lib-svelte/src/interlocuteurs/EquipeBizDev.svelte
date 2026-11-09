@@ -6,7 +6,7 @@
   <dsfr-card
     title="Notre équipe est à votre écoute"
     has-description
-    description="Une question sur MesServicesCyber, le parcours de sécurisation ou un autre sujet ? Notre équipe vous répond et vous aide à identifier les prochaines étapes pour protéger votre entité."
+    description="Une question sur MesServicesCyber, le parcours de sécurisation ou un autre sujet&#8239;? Notre équipe vous répond et vous aide à identifier les prochaines étapes pour protéger votre entité."
     href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert"
     enlarge
     no-icon

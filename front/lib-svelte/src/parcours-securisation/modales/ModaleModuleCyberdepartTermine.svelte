@@ -17,7 +17,7 @@
   });
 </script>
 
-<Modale bind:estOuverte titre="🎉 Bravo !">
+<Modale bind:estOuverte titre="🎉 Bravo&#8239;!">
   <div class="corps">
     <p class="texte-standard-md">
       Vous avez appliqué les 12 mesures du Cyberdépart. Vous avez posé les bases de votre cybersécurité.

@@ -70,7 +70,7 @@
   >
     {#snippet titreHtml()}
       Quelle est la <MotEnExergue motif="vague" couleur="macaron" {urlBase}>matu&shy;rité</MotEnExergue>
-      <MotEnExergue motif="vague" couleur="macaron" petit {urlBase}>cyber</MotEnExergue> de votre organisa&shy;tion ?
+      <MotEnExergue motif="vague" couleur="macaron" petit {urlBase}>cyber</MotEnExergue> de votre organisa&shy;tion&#8239;?
     {/snippet}
     {#snippet illustration()}
       <div class="illustration-du-bandeau">

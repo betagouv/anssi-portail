@@ -85,7 +85,7 @@
          L {secteur.premierPointInterieur.x} {secteur.premierPointInterieur.y}
          A {rayonInterieur} {rayonInterieur} 0 {secteur.arcLarge ? 1 : 0} 0 {secteur.secondPointInterieur.x} {secteur
         .secondPointInterieur.y}
-         Z"><title>{`${serie[index].libelle} : ${valeurSerieAffichee}`}</title></path
+         Z"><title>{`${serie[index].libelle}\u00a0: ${valeurSerieAffichee}`}</title></path
     >
   {/each}
 </svg>

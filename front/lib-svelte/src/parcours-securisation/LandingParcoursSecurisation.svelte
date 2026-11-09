@@ -128,8 +128,8 @@
 
 <section class="section-parcours-basique">
   <EncartPromotionParcoursBasique
-    titre="La cybersécurité est étrangère à votre organisation ?"
-    description="Accédez à 12 mesures simples pour protéger dès maintenant votre organisation contre les cyberattaques et prendre votre Cyberdépart ! 🚀"
+    titre="La cybersécurité est étrangère à votre organisation&#8239;?"
+    description="Accédez à 12 mesures simples pour protéger dès maintenant votre organisation contre les cyberattaques et prendre votre Cyberdépart&#8239;! 🚀"
   >
     {#snippet tags()}
       <dsfr-tags-group tags={enPropriétéWebC(tagsParcoursBasique)}></dsfr-tags-group>
@@ -140,7 +140,7 @@
 <section class="section-diagnostic">
   <dsfr-container>
     <BlocDiagnostic
-      titre="Vous préférez échanger avec un Aidant cyber ?"
+      titre="Vous préférez échanger avec un Aidant cyber&#8239;?"
       labelBouton="Demander un accompagnement gratuit"
       lienBouton="/cyberdepart/diagnostic-gratuit?origine=landing-parcours-securisation"
     >
@@ -151,7 +151,7 @@
         </p>
         <ul class="texte-standard-md">
           <li>Réunissez votre direction, les services compétents et votre prestataire informatique.</li>
-          <li>Échangez et impulsez une dynamique interne&nbsp;!</li>
+          <li>Échangez et impulsez une dynamique interne&#8239;!</li>
         </ul>
       {/snippet}
     </BlocDiagnostic>
@@ -160,7 +160,7 @@
 
 <section class="section-parcours-complet">
   <EncartPromotionParcoursComplet
-    titre="Votre organisation agit déjà pour sa cybersécurité ?"
+    titre="Votre organisation agit déjà pour sa cybersécurité&#8239;?"
     description="Accédez à 58 mesures pour vous protéger contre les 5 risques cyber les plus courants."
   >
     {#snippet tags()}

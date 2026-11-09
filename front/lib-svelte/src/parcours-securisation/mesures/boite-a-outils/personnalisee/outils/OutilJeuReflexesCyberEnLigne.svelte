@@ -4,7 +4,7 @@
 
 <OutilLien
   href="/reflexes-cyber-en-ligne"
-  titre="Aurez-vous les bons réflexes ?"
+  titre="Aurez-vous les bons réflexes&#8239;?"
   nomIcone="jeu-reflexes-cyber-en-ligne"
   labelBadge="faire le test"
   couleurBadge="brown-caramel"

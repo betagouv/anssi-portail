@@ -4,7 +4,7 @@
 <div class="fluide">
   <dsfr-container>
     <div class="et-maintenant">
-      <h4>Et maintenant ?</h4>
+      <h4>Et maintenant&#8239;?</h4>
       <p>La prochaine étape est de vous déclarer auprès de l&apos;ANSSI en pré-enregistrant votre organisation</p>
 
       <dsfr-button

@@ -13,7 +13,7 @@
   <div class="contenu-section">
     <div class="retour">
       <RetourUtilisateurSurContenu {typeDeRetour}>
-        <p class="texte-article-lg">Ce test vous a-t-il aidé&nbsp;?</p>
+        <p class="texte-article-lg">Ce test vous a-t-il aidé&#8239;?</p>
       </RetourUtilisateurSurContenu>
     </div>
     <BoutonsPartagePage {cheminPartagé} {sujetMail} />

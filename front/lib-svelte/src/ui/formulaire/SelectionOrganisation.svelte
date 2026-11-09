@@ -94,7 +94,7 @@
     nom="organisation"
     bind:valeur={saisie}
     oninput={() => avecTemporisation(rechercheSuggestions)}
-    aideSaisie="ex : 13261762000010, Agglomération de Mansart, Société Y"
+    aideSaisie="ex&nbsp;: 13261762000010, Agglomération de Mansart, Société Y"
     autocomplete="off"
   />
   <div class="liste-suggestions" class:visible={suggestionsVisibles}>

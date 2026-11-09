@@ -36,7 +36,7 @@
       <h2 class="fr-h2">Mise en situation</h2>
       <div class="tags">
         <dsfr-tag
-          label={`Scénario : ${scénario.titre}`}
+          label={`Scénario\u00a0: ${scénario.titre}`}
           type="clickable"
           size="md"
           href="#"
@@ -45,7 +45,7 @@
           use:clic={modifieScénario}
         ></dsfr-tag>
         <dsfr-tag
-          label={`Rôle : ${rôle.nom}`}
+          label={`Rôle\u00a0: ${rôle.nom}`}
           type="clickable"
           size="md"
           href="#"
@@ -64,7 +64,7 @@
     <Bouton libelle="Lancer la simulation" taille="lg" surClic={surLancement} />
 
     <div class="comment-jouer">
-      <h3 class="fr-h6">Comment jouer&nbsp;?</h3>
+      <h3 class="fr-h6">Comment jouer&#8239;?</h3>
       <ul>
         <li>
           <strong>6 événements clés&nbsp;:</strong>&nbsp;lisez attentivement chaque situation pour identifier le bon
