@@ -44,11 +44,11 @@ Avec MonServiceSécurisé
 <li>Pilotez l’homologation du service grâce à un parcours et des documents clés-en-main.</li>
 </ul>
 
-Depuis votre tableau de bord :
+Depuis votre tableau de bord&nbsp;:
 
 <ul>
-<li>Supervisez l’ensemble de vos services : leurs besoins, leur indice cyber, leur statut d’homologation les prochaines actions à mener.</li>
+<li>Supervisez l’ensemble de vos services&nbsp;: leurs besoins, leur indice cyber, leur statut d’homologation les prochaines actions à mener.</li>
 <li>Consultez vos notifications et les recommandations de l’ANSSI</li>
-<li>Téléchargez, dupliquez, partagez à volonté&nbsp;!</li>
+<li>Téléchargez, dupliquez, partagez à volonté&#8239;!</li>
 </ul>
-Avec MonServiceSécurisé renforcez le niveau de sécurité de vos services publics numériques et mettez-vous en conformité avec la réglementation&nbsp;!
+Avec MonServiceSécurisé renforcez le niveau de sécurité de vos services publics numériques et mettez-vous en conformité avec la réglementation&#8239;!

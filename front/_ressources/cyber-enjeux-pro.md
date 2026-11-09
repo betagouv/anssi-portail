@@ -34,27 +34,27 @@ liens:
 modifiéLe: 2025-11-27
 ---
 
-Dispositif innovant créé par le laboratoire d’innovation de l’Agence nationale de la sécurité des systèmes d’information (ANSSI), CyberEnJeux Pro permet de sensibiliser vos agents ou salariés aux risques de cyberattaques et aux bonnes pratiques à l’occasion de sessions de création de jeux sérieux sur la cybersécurité !
+Dispositif innovant créé par le laboratoire d’innovation de l’Agence nationale de la sécurité des systèmes d’information (ANSSI), CyberEnJeux Pro permet de sensibiliser vos agents ou salariés aux risques de cyberattaques et aux bonnes pratiques à l’occasion de sessions de création de jeux sérieux sur la cybersécurité&#8239;!
 
-En résumé, avec CyberEnJeuxPro, organisez un hackathon de création de jeux cyber avec vos équipes !
+En résumé, avec CyberEnJeuxPro, organisez un hackathon de création de jeux cyber avec vos équipes&#8239;!
 
-CyberEnJeux Pro permet également d’acculturer aux différents enjeux de la cybersécurité, au-delà de la sensibilisation, en commençant à se former aux concepts et réalités sous-jacentes de la cybersécurité : la cryptographie, la réglementation, les enjeux de paix et de sécurité internationale du cyberespace, etc.
+CyberEnJeux Pro permet également d’acculturer aux différents enjeux de la cybersécurité, au-delà de la sensibilisation, en commençant à se former aux concepts et réalités sous-jacentes de la cybersécurité&nbsp;: la cryptographie, la réglementation, les enjeux de paix et de sécurité internationale du cyberespace, etc.
 
-CyberEnJeux Pro prend appui sur “CyberEnJeux”, dispositif pédagogique innovant créé avec le ministère de l’Éducation nationale, de la Jeunesse (MENJ) et ayant permis de former plusieurs dizaines de milliers d’élèves au collège et au lycée en 1 an seulement !
+CyberEnJeux Pro prend appui sur “CyberEnJeux”, dispositif pédagogique innovant créé avec le ministère de l’Éducation nationale, de la Jeunesse (MENJ) et ayant permis de former plusieurs dizaines de milliers d’élèves au collège et au lycée en 1 an seulement&#8239;!
 
-CyberEnJeux Pro inclut :
+CyberEnJeux Pro inclut&nbsp;:
 
-Pour les personnes participant :
+Pour les personnes participant&nbsp;:
 
 <ul>
-<li>Un livret « Se former à la cybersécurité » incluant 13 fiches thématiques sur la cybersécurité. </li>
+<li>Un livret «&nbsp;Se former à la cybersécurité&nbsp;» incluant 13 fiches thématiques sur la cybersécurité. </li>
 <li> 13 cartes objectifs cyber pour orienter les thèmes des jeux. </li>
-<li>Un livret « Créer un jeu ». </li>
+<li>Un livret «&nbsp;Créer un jeu&nbsp;». </li>
 </ul>
 
-Pour les personnes assurant l’animation :
+Pour les personnes assurant l’animation&nbsp;:
 
 <ul>
-<li>Un livret « accompagner la création de jeux ». </li>
+<li>Un livret «&nbsp;accompagner la création de jeux&nbsp;». </li>
 <li>Une présentation (format diapositives) des 13 fiches thématiques sur la cybersécurité.</li>
 </ul>

@@ -35,7 +35,7 @@ L’annuaire Active Directory est, en effet, un élément critique permettant la
 Le service ADS vous permet de :
 
 <ul>
-<li> Quantifier le niveau de sécurité de l’annuaire grâce à une échelle de 1 à 5, d’un score et des recommandations pour corriger les vulnérabilités identifiées ;
+<li> Quantifier le niveau de sécurité de l’annuaire grâce à une échelle de 1 à 5, d’un score et des recommandations pour corriger les vulnérabilités identifiées&#8239;;
 </li>
 <li> Vous accompagner progressivement vers un niveau de sécurité à l’état de l’art.
 </li>

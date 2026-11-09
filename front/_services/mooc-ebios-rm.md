@@ -27,9 +27,9 @@ cible: |
 
 Le MooC (Massive Open Online Course) “Introduction à la méthode EBIOS Risk Manager” a été conçu conjointement par l’ANSSI et le Club EBIOS.
 Il vise à vous familiariser avec les principes de base d’une analyse de risques, et à fournir les outils nécessaires pour identifier, évaluer et gérer les risques cyber au sein de votre organisation.
-Ce MooC ne se substitue pas à une formation complète à la méthode EBIOS Risk Manager : il en présente les fondamentaux.
+Ce MooC ne se substitue pas à une formation complète à la méthode EBIOS Risk Manager&nbsp;: il en présente les fondamentaux.
 
-Les objectifs de la formation :
+Les objectifs de la formation&nbsp;:
 
 <ul>
 <li>Identifier les valeurs à protéger dans votre entreprise et évaluer les conséquences en cas d’attaque</li>

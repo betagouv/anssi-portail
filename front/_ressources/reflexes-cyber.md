@@ -52,7 +52,7 @@ liens:
 ---
 
 <p>
-  Avec <strong>RÉFLEXES CYBER</strong> faites vivre à votre <strong>CODIR/COMEX</strong> ou à vos équipes une première simulation de crise d’origine cyber. Tout au long de la simulation, avec l’aide d’une personne chargée d’animer la séquence, les participant(e)s sont confronté(e)s à des évènements imprévus et doivent prendre des décisions : <strong>qui adoptera les bons ou les mauvais réflexes ?</strong> 😉
+  Avec <strong>RÉFLEXES CYBER</strong> faites vivre à votre <strong>CODIR/COMEX</strong> ou à vos équipes une première simulation de crise d’origine cyber. Tout au long de la simulation, avec l’aide d’une personne chargée d’animer la séquence, les participant(e)s sont confronté(e)s à des évènements imprévus et doivent prendre des décisions&nbsp;: <strong>qui adoptera les bons ou les mauvais réflexes&#8239;?</strong> 😉
 </p>
 
 <p>
@@ -71,23 +71,23 @@ liens:
 </ul>
 
 <p>
-  📍 <strong>Créé par l’Agence nationale de la sécurité des systèmes d’information (ANSSI), RÉFLEXES CYBER se décline en 2 versions :</strong>
+  📍 <strong>Créé par l’Agence nationale de la sécurité des systèmes d’information (ANSSI), RÉFLEXES CYBER se décline en 2 versions&nbsp;:</strong>
 </p>
 
 <ul>
   <li>
-    <strong>RÉFLEXES CYBER : format standard court et ludique</strong> (environ 1 heure) pour découvrir et tester en autonomie ses réflexes face à une crise d’origine cyber, en testant vos réflexes grâce à
+    <strong>RÉFLEXES CYBER&nbsp;: format standard court et ludique</strong> (environ 1 heure) pour découvrir et tester en autonomie ses réflexes face à une crise d’origine cyber, en testant vos réflexes grâce à
     <ul>
-      <li>des évènements partagés tout au long de la session ;</li>
-      <li>des « cartes actions » pour aider la prise de décision de chacun(e) ;</li>
+      <li>des évènements partagés tout au long de la session&#8239;;</li>
+      <li>des «&nbsp;cartes actions&nbsp;» pour aider la prise de décision de chacun(e)&#8239;;</li>
       <li>une évaluation clé-en main en fin de session.</li>
     </ul>
   </li>
   <li>
-    <strong>RÉFLEXES CYBER + : variante plus longue et plus poussée</strong> (2h à 3h) avec
+    <strong>RÉFLEXES CYBER +&nbsp;: variante plus longue et plus poussée</strong> (2h à 3h) avec
     <ul>
-      <li>plus d’autonomie dans la prise de décisions (sans « cartes actions ») ;</li>
-      <li>des évènements individualisés, adressés à chaque participant(e) ;</li>
+      <li>plus d’autonomie dans la prise de décisions (sans «&nbsp;cartes actions&nbsp;»)&#8239;;</li>
+      <li>des évènements individualisés, adressés à chaque participant(e)&#8239;;</li>
       <li>une fonction et une grille d’observation permettant d’échanger de manière plus approfondie sur la crise et en tirer des enseignements.</li>
     </ul>
   </li>
@@ -98,21 +98,21 @@ liens:
 </p>
 
 <ul>
-  <li>🏭 <strong>Scénario « entreprises »</strong></li>
-  <li>🏫 <strong>Scénario « collectivités »</strong></li>
+  <li>🏭 <strong>Scénario «&nbsp;entreprises&nbsp;»</strong></li>
+  <li>🏫 <strong>Scénario «&nbsp;collectivités&nbsp;»</strong></li>
 </ul>
 
 <p><strong>Pour utiliser RÉFLEXES CYBER</strong></p>
 
 <ol>
   <li><strong>Téléchargez</strong> ci-dessous la version correspondant au scénario de votre choix.</li>
-  <li><strong>Choisissez la variante de votre choix</strong> : initial ou plus.</li>
+  <li><strong>Choisissez la variante de votre choix</strong>&nbsp;: initial ou plus.</li>
   <li><strong>Imprimez RÉFLEXES CYBER</strong> et découpez, si besoin, les cartes actions.</li>
-  <li><strong>Organisez votre session et déclarez son organisation sur MesServicesCyber !</strong></li>
+  <li><strong>Organisez votre session et déclarez son organisation sur MesServicesCyber&#8239;!</strong></li>
 </ol>
 
 <p>
-  💡 <strong>Découvrez aussi les “Fiches Réflexes Cyber” (Beta) :</strong>
+  💡 <strong>Découvrez aussi les “Fiches Réflexes Cyber” (Beta)&nbsp;:</strong>
 </p>
 
 <ul>
