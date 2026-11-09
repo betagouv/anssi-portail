@@ -8,7 +8,7 @@
   },
   "scripts": {
     "prelint": "pnpm -F regles-eslint build",
-    "lint": "eslint '**/*.html'",
+    "lint": "eslint '**/*.{html,md}'",
     "lint:fix": "pnpm lint --fix",
     "pretest": "pnpm lint",
     "test": "vitest --run"
