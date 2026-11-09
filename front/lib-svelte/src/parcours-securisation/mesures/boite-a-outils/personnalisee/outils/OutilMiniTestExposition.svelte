@@ -4,7 +4,7 @@
 
 <OutilLien
   vertical
-  titre="Quelles cyberattaques peuvent cibler votre organisation&nbsp;?"
+  titre="Quelles cyberattaques peuvent cibler votre organisation&#8239;?"
   href="/exposition"
   nomIcone="mini-test-exposition"
   labelBadge="Faire le test"

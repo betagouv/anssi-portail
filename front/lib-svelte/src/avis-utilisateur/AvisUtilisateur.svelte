@@ -96,7 +96,7 @@
       <div class="illustration">
         <img src="/assets/images/dragon-coeur.svg" width="98" height="113" alt="Dragon coeur" />
       </div>
-      <p class="texte">Votre avis<br /> nous intéresse&nbsp;!</p>
+      <p class="texte">Votre avis<br /> nous intéresse&#8239;!</p>
     </button>
     <button use:clic={surFermetureCTA} tabindex={null} aria-label="Fermer" class="fermer">
       <lab-anssi-icone nom="close-line" taille="sm"></lab-anssi-icone>
@@ -116,7 +116,7 @@
             ></lab-anssi-alerte>
           {/if}
           <div class="question">
-            <p class:erreur={erreurSatisfaction}>Le service MesServicesCyber répond-il à vos attentes&nbsp;?</p>
+            <p class:erreur={erreurSatisfaction}>Le service MesServicesCyber répond-il à vos attentes&#8239;?</p>
             <div class="satisfaction">
               <div class="niveaux-satisfaction">
                 {#each niveauxSatisfaction as niveau (niveau.valeur)}
@@ -133,15 +133,15 @@
             </div>
           </div>
           <div class="question">
-            <p class:erreur={erreurCommentaire}>Que pouvons-nous améliorer ?</p>
+            <p class:erreur={erreurCommentaire}>Que pouvons-nous améliorer&#8239;?</p>
             <ZoneTexte bind:valeur={commentaire} enErreur={erreurCommentaire} />
           </div>
           <p class="mis-en-avant">
-            Échangez avec nous sur votre expérience et participez aux futures évolutions de la plateforme&nbsp;!
+            Échangez avec nous sur votre expérience et participez aux futures évolutions de la plateforme&#8239;!
           </p>
           <div class="question">
             <ChampTexte
-              aideSaisie="Ex : jean.dupont@mail.com"
+              aideSaisie="Ex&nbsp;: jean.dupont@mail.com"
               id="email-contact"
               libelle="Email de contact (facultatif)"
               messageErreur="L'email est invalide"

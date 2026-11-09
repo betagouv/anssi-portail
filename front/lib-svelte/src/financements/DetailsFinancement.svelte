@@ -200,7 +200,7 @@
         {/if}
         <div class="fiche">
           <div class="financePar">
-            <p>Financé par : <strong>{financement.financeur}</strong></p>
+            <p>Financé par&nbsp;: <strong>{financement.financeur}</strong></p>
           </div>
           <SectionDetailsFinancement ancre="objectifs" titre="Objectifs" detail={financement.objectifs} />
           <SectionDetailsFinancement

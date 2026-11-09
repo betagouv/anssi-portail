@@ -22,10 +22,10 @@
     <ÉtapeProcédure titre="Vérifiez chaque compte.">
       <p class="texte-standard-md">Pour chaque compte, vérifier&nbsp;:</p>
       <ul>
-        <li>l’existence d'un utilisateur ou d'un processus rattaché&nbsp;;</li>
-        <li>le rattachement nominatif (sauf comptes de service justifiés)&nbsp;;</li>
-        <li>la dernière connexion (les comptes inactifs depuis longtemps doivent être désactivés)&nbsp;;</li>
-        <li>le statut RH (toujours en poste ou parti)&nbsp;;</li>
+        <li>l’existence d'un utilisateur ou d'un processus rattaché&#8239;;</li>
+        <li>le rattachement nominatif (sauf comptes de service justifiés)&#8239;;</li>
+        <li>la dernière connexion (les comptes inactifs depuis longtemps doivent être désactivés)&#8239;;</li>
+        <li>le statut RH (toujours en poste ou parti)&#8239;;</li>
         <li>la cohérence avec la mission actuelle.</li>
       </ul>
     </ÉtapeProcédure>

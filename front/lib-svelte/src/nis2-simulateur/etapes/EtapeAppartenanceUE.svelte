@@ -26,7 +26,7 @@
   ></dsfr-stepper>
 
   <dsfr-radios-group
-    legend="Dans quel état membre de l’Union Européenne êtes-vous établi ?"
+    legend="Dans quel état membre de l’Union Européenne êtes-vous établi&#8239;?"
     hint="Pour votre entreprise filiale si celle-ci fait partie d’un groupe,
             ou pour le groupe si celui-ci mène une activité économique.
             Ce sujet pourra être précisé par la Commission Européenne."

@@ -7,5 +7,5 @@
 
 <IllustrationAnimee
   {scènes}
-  étiquette="Des bénévoles d'une association réunis en cercle. Bon réflexe : protéger les adhérents et les bénévoles."
+  étiquette="Des bénévoles d'une association réunis en cercle. Bon réflexe&nbsp;: protéger les adhérents et les bénévoles."
 />

@@ -13,7 +13,7 @@
         <lab-anssi-icone nom="mail-line" taille="lg"></lab-anssi-icone>Abonnement à la newsletter
       </h2>
     </hgroup>
-    <Alerte type="succès" taille="sm" titre="Merci&nbsp;!">
+    <Alerte type="succès" taille="sm" titre="Merci&#8239;!">
       Votre inscription à la newsletter MesServicesCyber a bien été prise en compte.
     </Alerte>
     <img src="/assets/images/dragon-coeur-entier.svg" width="340" height="255" alt="Le dragon vous remercie" />

@@ -32,19 +32,19 @@
       </p>
       <p class="texte-standard-md">Pour chaque élément, posez-vous les quatre questions suivantes&nbsp;:</p>
       <ul>
-        <li>Faut-il étendre le périmètre (nouveaux systèmes apparus dans l'année)&nbsp;?</li>
-        <li>Faut-il revoir l'exposition du système aux risques&nbsp;?</li>
-        <li>Faut-il affiner certaines parties (responsables, fournisseurs, dépendances)&nbsp;?</li>
-        <li>Quels sont les délais pour les prochaines évolutions identifiées&nbsp;?</li>
+        <li>Faut-il étendre le périmètre (nouveaux systèmes apparus dans l'année)&#8239;?</li>
+        <li>Faut-il revoir l'exposition du système aux risques&#8239;?</li>
+        <li>Faut-il affiner certaines parties (responsables, fournisseurs, dépendances)&#8239;?</li>
+        <li>Quels sont les délais pour les prochaines évolutions identifiées&#8239;?</li>
       </ul>
     </ÉtapeProcédure>
 
     <ÉtapeProcédure titre="Mise à jour événementielle.">
       <p class="texte-standard-md">Mettez à jour la liste sans attendre la revue dès qu'un événement survient&nbsp;:</p>
       <ul>
-        <li>mise en service ou arrêt d'un système&nbsp;;</li>
-        <li>changement de prestataire, d'hébergeur ou d'éditeur&nbsp;;</li>
-        <li>évolution majeure de l'activité (nouveau site, nouvelle gamme, fusion-acquisition)&nbsp;;</li>
+        <li>mise en service ou arrêt d'un système&#8239;;</li>
+        <li>changement de prestataire, d'hébergeur ou d'éditeur&#8239;;</li>
+        <li>évolution majeure de l'activité (nouveau site, nouvelle gamme, fusion-acquisition)&#8239;;</li>
         <li>incident ayant révélé une lacune dans la liste.</li>
       </ul>
     </ÉtapeProcédure>

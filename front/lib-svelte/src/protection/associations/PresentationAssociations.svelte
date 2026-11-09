@@ -10,7 +10,7 @@
 
 <HerosRiche
   description="Les associations sont aussi concernées par le risque de cyberattaques. Elles peuvent être la cible de campagnes de
-        hameçonnage / phishing ou de rançongiciels / ransomwares. Il n'est pas trop tard pour agir et des solutions existent&nbsp;!"
+        hameçonnage / phishing ou de rançongiciels / ransomwares. Il n'est pas trop tard pour agir et des solutions existent&#8239;!"
   {propriétésFilAriane}
   variante="vert-clair"
 >

@@ -33,7 +33,7 @@
     {#if modeWebc === 'autonome'}
       <EnteteAutonome {urlBase} />
     {/if}
-    <h1 class="fr-h6">Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?</h1>
+    <h1 class="fr-h6">Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&#8239;?</h1>
     <div class="conteneur">
       <PanneauLateral {urlBase} />
       {#if $mailOuvert}

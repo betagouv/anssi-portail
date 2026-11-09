@@ -65,7 +65,7 @@
     nom="guide"
     bind:valeur={saisieEnCours}
     oninput={() => avecTemporisation(rechercheSuggestions)}
-    aideSaisie="ex : guide-pour-une-formation-sur-la-cybersecurite-des-systemes-industriels"
+    aideSaisie="ex&nbsp;: guide-pour-une-formation-sur-la-cybersecurite-des-systemes-industriels"
     autocomplete="off"
   />
   <div class="liste-suggestions" class:visible={suggestionsVisibles}>

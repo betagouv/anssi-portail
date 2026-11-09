@@ -39,7 +39,7 @@
         <MachineAEcrireRotative {phrasesAnimées} préfixe="Je protège " {enPause} />
       </div>
       <h1 class="alternatif-md">
-        Agissez pour votre <Surlignage>cyber&shy;sécurité&nbsp;!</Surlignage>
+        Agissez pour votre <Surlignage>cyber&shy;sécurité&#8239;!</Surlignage>
       </h1>
       <div class="action">
         <Lien

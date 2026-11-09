@@ -33,18 +33,18 @@
       <ul>
         <li>
           un arrêt de cette activité perturberait-il fortement, voire stopperait-il, l'organisation (impact sur la
-          disponibilité)&nbsp;?
+          disponibilité)&#8239;?
         </li>
         <li>
           un incident sur cette activité entraînerait-il une perte, une fuite ou une altération de données sensibles
-          (clients, techniques, bancaires)&nbsp;?
+          (clients, techniques, bancaires)&#8239;?
         </li>
       </ul>
     </ÉtapeProcédure>
 
     <ÉtapeProcédure titre="Marquez les activités prioritaires">
       <p class="texte-standard-md">
-        Marquer comme « prioritaires » les activités qui répondent Oui à au moins une de ces questions.
+        Marquer comme «&nbsp;prioritaires&nbsp;» les activités qui répondent Oui à au moins une de ces questions.
       </p>
     </ÉtapeProcédure>
 

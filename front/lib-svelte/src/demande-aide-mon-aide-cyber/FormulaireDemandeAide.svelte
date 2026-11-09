@@ -72,7 +72,7 @@
     <label class="libelle" for="entite">Recherchez votre organisation</label>
     <SelectionOrganisation bind:valeur={entite} filtreDepartement={undefined} />
     {#if entite}
-      <div>Votre entreprise : {entite.nom} ({entite.departement})</div>
+      <div>Votre entreprise&nbsp;: {entite.nom} ({entite.departement})</div>
     {/if}
   </div>
 
@@ -82,7 +82,7 @@
     </div>
     <div class="champ">
       <ChampTexte
-        aideSaisie="Ex : jean.dupont@mail.com"
+        aideSaisie="Ex&nbsp;: jean.dupont@mail.com"
         id="email"
         libelle="Email de contact"
         messageErreur="Le format du mail est invalide"
@@ -96,7 +96,7 @@
     <div class="champ champ-radios">
       <ControleFormulaire
         requis
-        libelle="Êtes-vous déjà en contact avec un Aidant cyber ou un prestataire ayant proposé de vous accompagner dans la réalisation de ce diagnostic ?"
+        libelle="Êtes-vous déjà en contact avec un Aidant cyber ou un prestataire ayant proposé de vous accompagner dans la réalisation de ce diagnostic&#8239;?"
       >
         <div>
           <label>

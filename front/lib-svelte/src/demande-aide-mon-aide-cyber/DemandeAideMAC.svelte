@@ -86,7 +86,7 @@
     { label: 'Rapide (1h)', accent: 'purple-glycine' },
     { label: 'Dans vos locaux ou en visio', accent: 'purple-glycine' },
   ]}
-  description="Prenez votre cyberdépart&nbsp;! Profitez d’un premier diagnostic cyber gratuit accompagné par un Aidant cyber et recevez 6 recommandations prioritaires à mettre en place pour améliorer la cybersécurité de votre organisation."
+  description="Prenez votre cyberdépart&#8239;! Profitez d’un premier diagnostic cyber gratuit accompagné par un Aidant cyber et recevez 6 recommandations prioritaires à mettre en place pour améliorer la cybersécurité de votre organisation."
   propriétésFilAriane={{ feuille: 'Diagnostic cyberdépart' }}
   variante="cafe-creme"
 >
@@ -126,7 +126,7 @@
 <Separateur />
 <dsfr-container>
   <div class="contactez-nous">
-    <p>Vous souhaitez intégrer notre demande de diagnostic cyber directement sur votre site&nbsp;?&nbsp;</p>
+    <p>Vous souhaitez intégrer notre demande de diagnostic cyber directement sur votre site&#8239;?&nbsp;</p>
     <Lien href="/integrer-webc" libelle="Découvrez comment l'intégrer" neutre />
   </div>
 </dsfr-container>

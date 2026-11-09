@@ -3,7 +3,7 @@
 </script>
 
 <OutilLien
-  titre="Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?"
+  titre="Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&#8239;?"
   href="/hameconnage"
   nomIcone="mini-test-hameconnage"
   labelBadge="Faire le test"

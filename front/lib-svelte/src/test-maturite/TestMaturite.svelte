@@ -189,17 +189,17 @@
         {:else}
           <div class="informations-complementaires">
             <SelectSecteurActivite
-              libelle="Quel est le secteur d’activité de votre organisation&nbsp;?"
+              libelle="Quel est le secteur d’activité de votre organisation&#8239;?"
               bind:secteur
               {urlBase}
             />
             <SelectRegion
-              libelle="Dans quelle région / territoire se trouve votre organisation ?"
+              libelle="Dans quelle région / territoire se trouve votre organisation&#8239;?"
               bind:region
               {urlBase}
             />
             <SelectTailleOrganisation
-              libelle="Quelle est la taille de votre organisation ?"
+              libelle="Quelle est la taille de votre organisation&#8239;?"
               bind:tailleOrganisation
               {urlBase}
             />

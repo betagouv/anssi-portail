@@ -47,7 +47,7 @@
   };
 </script>
 
-<lab-anssi-marelle titre="NIS&nbsp;2&nbsp;: Comment se lancer&nbsp;?">
+<lab-anssi-marelle titre="NIS&nbsp;2&nbsp;: Comment se lancer&#8239;?">
   {#each etapesMarelle as etape, index (index)}
     <lab-anssi-marelle-etape {index}>
       <img slot="etape-illustration" src={etape.illustration.lien} alt={etape.illustration.alt} />

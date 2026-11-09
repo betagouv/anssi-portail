@@ -92,7 +92,7 @@
           <li>Un mail par mois couvrant les thèmes suivants&nbsp;: mot de passe, phishing, sauvegardes…</li>
           <li>
             Un test de hameçonnage (phishing) tous les 2 ou 3 mois, à intervalle irrégulier (un test prévisible perd
-            toute valeur)&nbsp;;
+            toute valeur)&#8239;;
           </li>
           <li>
             En cas de clic&nbsp;: pas de sanction, mais demander de suivre les modules SecNumAcadémie correspondants.

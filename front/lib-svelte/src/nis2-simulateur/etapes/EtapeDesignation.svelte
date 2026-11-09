@@ -36,7 +36,7 @@
   ></dsfr-stepper>
 
   <dsfr-radios-group
-    legend="Avez-vous été désigné opérateur de services essentiels (OSE) au titre de NIS 1 ?"
+    legend="Avez-vous été désigné opérateur de services essentiels (OSE) au titre de NIS 1&#8239;?"
     radios={options}
     onvaluechanged={choisis}
   >

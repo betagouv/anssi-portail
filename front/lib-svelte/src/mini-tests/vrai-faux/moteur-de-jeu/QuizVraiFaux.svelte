@@ -82,7 +82,7 @@
     {#if modeWebc === 'autonome'}
       <EnteteAutonome {urlBase} />
     {/if}
-    <h1 class="fr-h6">Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?</h1>
+    <h1 class="fr-h6">Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&#8239;?</h1>
 
     {#if idéeReçueCourante}
       {#if mode === 'question'}

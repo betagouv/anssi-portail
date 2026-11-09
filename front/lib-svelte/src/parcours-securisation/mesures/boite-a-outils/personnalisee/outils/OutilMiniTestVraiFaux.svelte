@@ -3,7 +3,7 @@
 </script>
 
 <OutilLien
-  titre="Cybersécurité&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?"
+  titre="Cybersécurité&nbsp;: saurez-vous démêler le vrai du faux&#8239;?"
   href="/vrai-faux"
   nomIcone="mini-test-vrai-faux"
   labelBadge="Faire le test"

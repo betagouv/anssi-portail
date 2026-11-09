@@ -72,7 +72,7 @@
 <Etape>
   <dsfr-stepper title={TitresEtapes['activites']} current-step="6" step-count="6" hide-details="true"></dsfr-stepper>
 
-  <p>Quelles sont les activités pratiquées dans les secteurs sélectionnés&nbsp;?</p>
+  <p>Quelles sont les activités pratiquées dans les secteurs sélectionnés&#8239;?</p>
 
   <dsfr-highlight
     size="sm"

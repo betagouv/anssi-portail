@@ -32,7 +32,7 @@
     {urlBase}
   >
     {#snippet titreHtml()}
-      Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux ?
+      Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&#8239;?
     {/snippet}
     {#snippet illustration()}
       <figure class="illustration">

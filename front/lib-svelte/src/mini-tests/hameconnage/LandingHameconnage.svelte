@@ -32,7 +32,7 @@
     {urlBase}
   >
     {#snippet titreHtml()}
-      Hame&shy;çonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?
+      Hame&shy;çonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&#8239;?
     {/snippet}
     {#snippet illustration()}
       <figure class="illustration">

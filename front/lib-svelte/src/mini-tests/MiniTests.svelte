@@ -111,7 +111,7 @@
       <CarteTest
         cible="Exposition"
         couleurDeFond="--background-alt-blue-ecume"
-        titre="Quels types de cyberattaques peuvent cibler mon organisation&nbsp;?"
+        titre="Quels types de cyberattaques peuvent cibler mon organisation&#8239;?"
         href="/exposition"
         réactions={donnéesPage?.réactions.Exposition ?? {}}
         badge={{
@@ -127,7 +127,7 @@
       <CarteTest
         cible="ReflexesCyber"
         couleurDeFond="--background-alt-purple-glycine"
-        titre="Comment réagirez-vous en cas de cyberattaque&nbsp;?"
+        titre="Comment réagirez-vous en cas de cyberattaque&#8239;?"
         href="/reflexes-cyber-en-ligne"
         réactions={donnéesPage?.réactions.ReflexesCyber ?? {}}
         badge={{
@@ -144,7 +144,7 @@
         <CarteTest
           cible="Hameconnage"
           couleurDeFond="--background-alt-pink-macaron"
-          titre="Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&nbsp;?"
+          titre="Hameçonnage&nbsp;: saurez-vous distinguer le mail légitime du faux&#8239;?"
           href="/hameconnage"
           réactions={donnéesPage?.réactions.Hameconnage ?? {}}
           badge={{
@@ -165,7 +165,7 @@
 <Separateur />
 <dsfr-container>
   <div class="contactez-nous">
-    <p>Vous souhaitez intégrer nos tests cyber directement sur votre site&nbsp;?&nbsp;</p>
+    <p>Vous souhaitez intégrer nos tests cyber directement sur votre site&#8239;?&nbsp;</p>
     <Lien href="/integrer-webc" libelle="Découvrez comment les intégrer" neutre />
   </div>
 </dsfr-container>

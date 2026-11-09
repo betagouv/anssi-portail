@@ -21,9 +21,9 @@
     <ÉtapeProcédure titre="Faites vérifier les droits par les responsables concernés.">
       <p class="texte-standard-md">Transmettez la liste au responsable de chaque ressource, pour validation&nbsp;:</p>
       <ul>
-        <li>cet utilisateur a-t-il toujours besoin de ce droit&nbsp;?</li>
-        <li>le niveau de droit est-il adapté&nbsp;?</li>
-        <li>faut-il retirer / ajouter quelque chose&nbsp;?</li>
+        <li>cet utilisateur a-t-il toujours besoin de ce droit&#8239;?</li>
+        <li>le niveau de droit est-il adapté&#8239;?</li>
+        <li>faut-il retirer / ajouter quelque chose&#8239;?</li>
       </ul>
     </ÉtapeProcédure>
 

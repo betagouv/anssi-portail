@@ -46,7 +46,7 @@
 <section class="section-parcours-basique">
   <EncartPromotionParcoursBasique
     titre="12 mesures simples pour protéger votre organisation contre les cyberattaques"
-    description="Accédez à 12 mesures simples pour protéger dès maintenant votre organisation contre les cyberattaques et prendre votre Cyberdépart ! 🚀"
+    description="Accédez à 12 mesures simples pour protéger dès maintenant votre organisation contre les cyberattaques et prendre votre Cyberdépart&#8239;! 🚀"
     {mode}
     {urlBase}
   >
@@ -59,14 +59,14 @@
 {#if mode !== 'autonome'}
   <PartageTest
     cheminPartagé="/exposition"
-    sujetMail="Mon organisation est-elle exposée aux cyberattaques ?"
+    sujetMail="Mon organisation est-elle exposée aux cyberattaques&#8239;?"
     typeDeRetour="exposition"
   />
 {/if}
 
 <dsfr-container class="note-source">
   <p class="texte-mention-xs">
-    Sources : Panorama de la cybermenace 2025 — ANSSI (CERTFR-2026-CTI-002) ; Rapport d'activité 2025 —
+    Sources&nbsp;: Panorama de la cybermenace 2025 — ANSSI (CERTFR-2026-CTI-002)&#8239;; Rapport d'activité 2025 —
     Cybermalveillance.gouv.fr (GIP ACYMA), fondé sur les signalements et demandes d'assistance de professionnels reçus
     en 2025.<br />
     <br />

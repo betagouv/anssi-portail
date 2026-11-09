@@ -31,9 +31,9 @@
     <ÉtapeProcédure titre="Identifiez les axes d’améliorations">
       <p class="texte-standard-md">
         À la fin de l’exercice, notez les difficultés rencontrées et les actions à mettre en place pour être mieux
-        préparés en cas de véritable incident, par exemple&nbsp;: qui alerter en premier&nbsp;? Qui prend les
-        décisions&nbsp;? Comment continuer à travailler&nbsp;? Comment informer les salariés, clients ou
-        partenaires&nbsp;? Où trouver les contacts d’urgence&nbsp;?
+        préparés en cas de véritable incident, par exemple&nbsp;: qui alerter en premier&#8239;? Qui prend les
+        décisions&#8239;? Comment continuer à travailler&#8239;? Comment informer les salariés, clients ou
+        partenaires&#8239;? Où trouver les contacts d’urgence&#8239;?
       </p>
 
       <Lien
@@ -44,22 +44,22 @@
     </ÉtapeProcédure>
     <ÉtapeProcédure titre="Structurez et outillez la gestion de crise de votre organisation">
       <p class="texte-standard-md">
-        Votre organisation est prête à aller plus loin ? Il est maintenant est nécessaire de préparer et d’outiller la
-        gestion de crise cyber de votre organisation, notamment en&nbsp;:
+        Votre organisation est prête à aller plus loin&#8239;? Il est maintenant est nécessaire de préparer et
+        d’outiller la gestion de crise cyber de votre organisation, notamment en&nbsp;:
       </p>
       <ul class="enumeration">
         <li>
-          Formalisant le dispositif de gestion de crises cyber (gouvernance, rôles, outils, procédures, etc.)&nbsp;;
+          Formalisant le dispositif de gestion de crises cyber (gouvernance, rôles, outils, procédures, etc.)&#8239;;
         </li>
         <li>
           Établissant un plan de continuité d’activité (PCA) robuste aux cyberattaques et un plan de reprise d’activité
-          (PRA)&nbsp;;
+          (PRA)&#8239;;
         </li>
         <li>
           S’assurant de disposer des capacités de réponse à incident, notamment en cas de perte des moyens informatiques
-          et de communication&nbsp;;
+          et de communication&#8239;;
         </li>
-        <li>Se dotant d’une stratégie de communication en cas de crise cyber&nbsp;;</li>
+        <li>Se dotant d’une stratégie de communication en cas de crise cyber&#8239;;</li>
         <li>
           Si possible, en contractualisant, avec un prestataire de réponse à incident et en souscrivant à une assurance
           cyber.

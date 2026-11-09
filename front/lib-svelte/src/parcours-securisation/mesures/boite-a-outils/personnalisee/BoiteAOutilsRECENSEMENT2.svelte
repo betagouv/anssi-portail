@@ -38,16 +38,16 @@
       </p>
       <ul>
         <li>
-          <b>D (Disponibilité)&nbsp;:</b> Si ce système ne fonctionne plus, mon activité est-elle perturbée ou interrompue&nbsp;?
+          <b>D (Disponibilité)&nbsp;:</b> Si ce système ne fonctionne plus, mon activité est-elle perturbée ou interrompue&#8239;?
           (Oui ou non)
         </li>
         <li>
           <b>I (Intégrité)&nbsp;:</b> Si ses informations sont modifiées à mon insu, cela peut-il avoir des conséquences sur
-          mon activité&nbsp;? (Oui ou non)
+          mon activité&#8239;? (Oui ou non)
         </li>
         <li>
           <b>C (Confidentialité)&nbsp;:</b> Si ses informations sont divulguées, cela peut-il poser un problème (données personnelles,
-          secret commercial, etc.)&nbsp;? (Oui ou non)
+          secret commercial, etc.)&#8239;? (Oui ou non)
         </li>
       </ul>
     </ÉtapeProcédure>
