@@ -7,6 +7,10 @@
     "node": ">=26.0.0"
   },
   "scripts": {
+    "prelint": "pnpm -F regles-eslint build",
+    "lint": "eslint '**/*.html'",
+    "lint:fix": "pnpm lint --fix",
+    "pretest": "pnpm lint",
     "test": "vitest --run"
   },
   "private": true,
@@ -21,5 +25,7 @@
     "svelte": "catalog:",
     "uuid": "catalog:"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "regles-eslint": "workspace:^"
+  }
 }
