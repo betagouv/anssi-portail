@@ -165,8 +165,8 @@ settings:
 catalogs:
   default:
     '@lab-anssi/ui-kit':
-      specifier: 2.1.0
-      version: 2.1.0
+      specifier: 2.1.1
+      version: 2.1.1
     '@types/node':
       specifier: ^26.0.0
       version: 26.6.5
@@ -512,7 +512,7 @@ importers:
         version: link:../../contacts-sectoriels
       '@lab-anssi/ui-kit':
         specifier: 'catalog:'
-        version: 2.1.0(svelte@5.57.1(@typescript-eslint/types@8.72.1))
+        version: 2.1.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))
       '@pdfme/pdf-lib':
         specifier: ^6.2.8
         version: 6.2.8
@@ -1548,9 +1548,9 @@ packages:
     peerDependencies:
       express: ~5.2.1
 
-  '@lab-anssi/ui-kit@2.1.0':
-    resolution: {integrity: sha512-hTHoJNhbECf4/MynD617Lq9oBSYcXBqPU3K1vfJP6Us8V1kGzfMj8Kynv8G8Pr+2cY8aNgYjH2C0zd/Eu8yjWA==}
-    engines: {node: '>=24.22.2'}
+  '@lab-anssi/ui-kit@2.1.1':
+    resolution: {integrity: sha512-m5PONLNKQGnWecWa8ectxe28FUWXznr2UBJ0k+wQzrwaU3qHwf+5Av4Vt5nABRdTyjMHTTBmmibjLq7lKFKhCA==}
+    engines: {node: '>=26.13.0'}
     peerDependencies:
       svelte: ^5.57.3
 
@@ -5735,7 +5735,7 @@ snapshots:
       - debug
       - supports-color
 
-  '@lab-anssi/ui-kit@2.1.0(svelte@5.57.1(@typescript-eslint/types@8.72.1))':
+  '@lab-anssi/ui-kit@2.1.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))':
     dependencies:
       svelte: 5.57.1(@typescript-eslint/types@8.72.1)
 
