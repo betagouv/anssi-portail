@@ -39,7 +39,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(middleware.ajouteMethodeEnrichissement);
   app.use(middleware.positionneLesCsp());
   app.use(middleware.interdisLaMiseEnCache);
-  app.use(middleware.verifieModeMaintenance);
 
   configureLeRateLimit(app, configurationServeur);
   configureLesCookies(app, configurationServeur);
@@ -47,6 +46,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreLesRedirections(app);
   enregistreLAuthentification(app, configurationServeur);
   enregistreLesFichiersStatiques(app, fournisseurChemin);
+  app.use(middleware.verifieModeMaintenance); // doit être après les fichiers statiques
   enregistreLesRoutesAPI(app, configurationServeur);
   enregistreLesRoutesStatiques(app, configurationServeur);
   enregistreLesVisas(app, configurationServeur);
