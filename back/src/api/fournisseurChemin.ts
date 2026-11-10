@@ -68,6 +68,11 @@ const construisCheminVersArtefactJekyll = (...morceauxChemin: string[]): string 
   return chemin;
 };
 
+const cheminBackDepuisSrc = (...paths: string[]) => join(process.cwd(), 'back', 'src', ...paths);
+const cheminBackDepuisApi = (...paths: string[]) => cheminBackDepuisSrc('api', ...paths);
+const cheminBackDepuisMesures = (...paths: string[]) => cheminBackDepuisApi('mesures', ...paths);
+const cheminBackDepuisOutils = (...paths: string[]) => cheminBackDepuisApi('outils', ...paths);
+
 export const fournisseurChemin: FournisseurChemin = {
   front: {
     sitemapXml: () => join(process.cwd(), 'front', 'assets', 'sitemap.xml'),
@@ -75,56 +80,19 @@ export const fournisseurChemin: FournisseurChemin = {
   },
   back: {
     csvNis2Simulateur: () =>
-      join(process.cwd(), 'back', 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
+      cheminBackDepuisSrc('metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
     attestationTypCyberdepart: () =>
-      join(
-        process.cwd(),
-        'back',
-        'src',
-        'api',
-        'mesures',
-        'ressourceRecompensesCyberDepart',
-        'attestation',
-        'attestation.typ'
-      ),
-    badgePngRécompenseCyberdepart: () =>
-      join(process.cwd(), 'back', 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'badge.png'),
-    banniereSvgRécompenseCyberdepart: () =>
-      join(process.cwd(), 'back', 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'banniere.svg'),
-    modèleAnnuaireDeCrise: () =>
-      join(process.cwd(), 'back', 'src', 'api', 'outils', 'modeleAnnuaireDeCrise', 'modele-annuaire-de-crise.xlsx'),
-    modèleListeDActivités: () =>
-      join(process.cwd(), 'back', 'src', 'api', 'outils', 'modeleListeDActivites', 'modele-liste-d-activites.xlsx'),
+      cheminBackDepuisMesures('ressourceRecompensesCyberDepart', 'attestation', 'attestation.typ'),
+    badgePngRécompenseCyberdepart: () => cheminBackDepuisMesures('ressourceRecompensesCyberDepart', 'badge.png'),
+    banniereSvgRécompenseCyberdepart: () => cheminBackDepuisMesures('ressourceRecompensesCyberDepart', 'banniere.svg'),
+    modèleAnnuaireDeCrise: () => cheminBackDepuisOutils('modeleAnnuaireDeCrise', 'modele-annuaire-de-crise.xlsx'),
+    modèleListeDActivités: () => cheminBackDepuisOutils('modeleListeDActivites', 'modele-liste-d-activites.xlsx'),
     modèleModificationsMotsDePasse: () =>
-      join(
-        process.cwd(),
-        'back',
-        'src',
-        'api',
-        'outils',
-        'modeleModificationMotsDePasse',
-        'modele-modifications-mots-de-passe.xlsx'
-      ),
+      cheminBackDepuisOutils('modeleModificationMotsDePasse', 'modele-modifications-mots-de-passe.xlsx'),
     modèleRevueComptesUtilisateurs: () =>
-      join(
-        process.cwd(),
-        'back',
-        'src',
-        'api',
-        'outils',
-        'modeleRevueComptesUtilisateurs',
-        'modele-revue-comptes-utilisateurs.xlsx'
-      ),
+      cheminBackDepuisOutils('modeleRevueComptesUtilisateurs', 'modele-revue-comptes-utilisateurs.xlsx'),
     modèleRevueDroitsDAccès: () =>
-      join(
-        process.cwd(),
-        'back',
-        'src',
-        'api',
-        'outils',
-        'modeleRevueDroitsDAcces',
-        'modele-revue-droits-d-acces.xlsx'
-      ),
+      cheminBackDepuisOutils('modeleRevueDroitsDAcces', 'modele-revue-droits-d-acces.xlsx'),
   },
   jekyll: {
     page403: () => construisCheminVersArtefactJekyll('403.html'),
