@@ -9,6 +9,7 @@
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
   import Heros from '../../ui/Heros.svelte';
   import RetourUtilisateurSurContenu from '../../ui/RetourUtilisateurSurContenu.svelte';
+  import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
   import InterlocuteursParcoursSecurisation from './../InterlocuteursParcoursSecurisation.svelte';
   import type { Mesure } from './../mesure';
   import PriseEnCompteMesure from './../PriseEnCompteMesure.svelte';
@@ -176,6 +177,7 @@
       </div>
     </dsfr-container>
     <InterlocuteursParcoursSecurisation />
+    <RetourUtilisateurSurParcours />
   {/if}
 {:catch}
   <Page404 />

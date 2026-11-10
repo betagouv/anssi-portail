@@ -14,6 +14,7 @@
   import ModaleParcoursTermine from './modales/ModaleParcoursTermine.svelte';
   import type { ModuleRéponseApi } from './moduleReponseApi';
   import Progression from './Progression.svelte';
+  import RetourUtilisateurSurParcours from './RetourUtilisateurSurParcours.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -98,6 +99,7 @@
 
 <MesuresDeModule mesures={module.mesures} />
 <InterlocuteursParcoursSecurisation />
+<RetourUtilisateurSurParcours />
 
 <style lang="scss">
   .progression {
