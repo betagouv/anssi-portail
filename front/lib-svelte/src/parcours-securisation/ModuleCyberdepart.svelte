@@ -17,6 +17,7 @@
   import ModaleModuleCyberdepartTermine from './modales/ModaleModuleCyberdepartTermine.svelte';
   import type { ModuleRéponseApi } from './moduleReponseApi';
   import Progression from './Progression.svelte';
+  import RetourUtilisateurSurParcours from './RetourUtilisateurSurParcours.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -112,6 +113,7 @@
     {/if}
   </div>
 </dsfr-container>
+<RetourUtilisateurSurParcours />
 
 <MesuresDeModule mesures={module.mesures} />
 <InterlocuteursParcoursSecurisation />
