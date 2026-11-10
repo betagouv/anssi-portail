@@ -9,6 +9,7 @@
   import Lien from '../../ui/Lien.svelte';
   import type { Mesure, Module } from '../mesure';
   import Progression from '../Progression.svelte';
+  import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
   import VueListeMesures from './VueListeMesures.svelte';
   import VueModule from './VueModule.svelte';
 
@@ -93,6 +94,8 @@
     <VueModule {modules} />
   {/if}
 </dsfr-container>
+
+<RetourUtilisateurSurParcours />
 
 <style lang="scss">
   @use '../../../../assets/styles/responsive' as *;
