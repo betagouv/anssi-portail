@@ -23,6 +23,7 @@ import { ressourceExigencesNis2 } from '../../../nis2/ressourceExigencesNis2.js'
 import { ressourceExigencesNis2Csv } from '../../../nis2/ressourceExigencesNis2Csv.js';
 import { ressourceSimulateurNis2 } from '../../../nis2/ressourceSimulateurNis2.js';
 import { ressourceAbonnementInfolettre } from '../../../ressourceAbonnementInfolettre.js';
+import { ressourceAvisParcours } from '../../../ressourceAvisParcours.js';
 import { ressourceAvisUtilisateur } from '../../../ressourceAvisUtilisateur.js';
 import { ressourceContacts } from '../../../ressourceContacts.js';
 import { ressourceFinancement } from '../../../ressourceFinancement.js';
@@ -92,6 +93,8 @@ export const enregistreLesRoutesAPI = (app: Express, configurationServeur: Confi
   enregistreRoute('/repartition-resultats-test', ressourceRepartitionDesResultatsDeTest(configurationServeur));
 
   enregistreRoute('/avis-utilisateur', ressourceAvisUtilisateur(configurationServeur));
+
+  enregistreRoute('/avis-parcours', ressourceAvisParcours(configurationServeur));
 
   enregistreRoute('/contacts', ressourceContacts(configurationServeur));
 

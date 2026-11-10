@@ -1,6 +1,7 @@
 import { MiniTest } from './mini-tests/mini-test.js';
-import { NiveauDeSatisfaction } from './niveauDeSatisfaction.js';
+import { NiveauDeSatisfaction, NiveauDUtilité } from './niveauDeSatisfaction.js';
 import { Outil } from './outils/outils.js';
+import { Parcours } from './parcours.js';
 
 export type RetourExperience = {
   raison: string;
@@ -12,6 +13,16 @@ export type AvisUtilisateur = {
   niveauDeSatisfaction: NiveauDeSatisfaction;
   commentaire: string;
   emailDeContact?: string;
+  pageSource?: string;
+};
+
+export type AvisParcours = {
+  niveauDUtilité: NiveauDUtilité;
+  recommandationAutreOrganisation: 'oui' | 'non' | 'peut-être';
+  commentaireAmélioration: string;
+  souhaiteÊtreRecontacté: boolean;
+  parcours: Parcours;
+  emailDeContact: string;
   pageSource?: string;
 };
 
@@ -38,6 +49,7 @@ export type RetourNégatifSurOutil = {
 
 export interface MessagerieInstantanee {
   notifieUnAvisUtilisateur(avisUtilisateur: AvisUtilisateur): Promise<void>;
+  notifieUnAvisParcours(avisParcours: AvisParcours): Promise<void>;
   notifieUnRetourExperience(retourExperience: RetourExperience): Promise<void>;
   notifieUnAvisNegatifSurUneMesure(avis: AvisNegatifSurUneMesure): Promise<void>;
   notifieUnRetourNégatifSurMiniTest(retour: RetourNégatifSurMiniTest): Promise<void>;
