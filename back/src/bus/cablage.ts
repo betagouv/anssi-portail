@@ -6,6 +6,7 @@ import { EntrepotFavori } from '../metier/entrepotFavori.js';
 import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
 import { BusEvenements } from './busEvenements.js';
 import { consigneRetourAvisMesureDonneDansJournal } from './consigneAvisMesureDonneDansJournal.js';
+import { consigneAvisParcoursDonnéDansJournal } from './consigneAvisParcoursDonneDansJournal.js';
 import { consigneAvisUtilisateurDonneDansJournal } from './consigneAvisUtilisateurDonneDansJournal.js';
 import { consigneBadgeCyberdépartDébloquéDansJournal } from './consigneBadgeCyberdepartDebloqueDansJournal.js';
 import { consigneCompteCreeDansJournal } from './consigneCompteCreeDansJournal.js';
@@ -36,6 +37,7 @@ import { consigneUtilisateurConnecteDansJournal } from './consigneUtilisateurCon
 import { creeContactBrevo } from './creeContactBrevo.js';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte.js';
 import { AvisMesureDonne } from './evenements/avisMesureDonne.js';
+import { AvisParcoursDonné } from './evenements/avisParcoursDonne.js';
 import { AvisUtilisateurDonne } from './evenements/avisUtilisateurDonne.js';
 import { BadgeCyberdépartDébloqué } from './evenements/badgeCyberdepartDebloque.js';
 import { CompteCree } from './evenements/compteCree.js';
@@ -285,4 +287,9 @@ export const cableTousLesAbonnes = ({
     consigneRetourOutilDonnéDansJournal({ adaptateurJournal, adaptateurHorloge }),
     notifieUnRetourNégatifSurOutil({ messagerieInstantanee }),
   ]);
+
+  busEvenements.abonne(
+    AvisParcoursDonné,
+    consigneAvisParcoursDonnéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage })
+  );
 };
