@@ -1,6 +1,7 @@
 import axios from '@anssi-portail/axios';
 import {
   AvisNegatifSurUneMesure,
+  AvisParcours,
   AvisUtilisateur,
   MessagerieInstantanee,
   RetourExperience,
@@ -40,6 +41,29 @@ Niveau de satisfaction : ${avisUtilisateur.niveauDeSatisfaction}
 Commentaire : ${aseptiseMarkdown(avisUtilisateur.commentaire ?? '')}
 Page source : ${aseptiseMarkdown(avisUtilisateur.pageSource ?? '')}
 Email de contact : ${avisUtilisateur.emailDeContact}`;
+      await axios.post(urlWebhook, { text: message });
+    }
+  },
+
+  notifieUnAvisParcours: async (avisParcours: AvisParcours) => {
+    const urlWebhook = adaptateurEnvironnement.mattermost.webhookAvisUtilisateur();
+    const labelParcours = (() => {
+      switch (avisParcours.parcours) {
+        case 'allégé':
+          return 'Cyberdépart';
+        case 'complet':
+          return 'complet';
+      }
+    })();
+
+    if (urlWebhook) {
+      const message = `### Avis utilisateur sur le parcours ${labelParcours}
+Niveau d'utilité perçu du parcours : ${avisParcours.niveauDUtilité}
+Recommandation à une autre organisation: ${avisParcours.recommandationAutreOrganisation}
+Commentaire d'amélioration : ${aseptiseMarkdown(avisParcours.commentaireAmélioration ?? '')}
+Page source : ${aseptiseMarkdown(avisParcours.pageSource ?? '')}
+${avisParcours.souhaiteÊtreRecontacté ? `Souhaite être recontacté: ${avisParcours.emailDeContact}` : 'Ne souhaite pas être recontacté'}`;
+
       await axios.post(urlWebhook, { text: message });
     }
   },
