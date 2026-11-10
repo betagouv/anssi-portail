@@ -314,6 +314,7 @@ const fauxGenerateurCodeSessionDeGroupe = {
 export const fausseMessagerieInstantanee: MessagerieInstantanee = {
   notifieUnRetourExperience: async () => {},
   notifieUnAvisUtilisateur: async () => {},
+  notifieUnAvisParcours: async () => {},
   notifieUnAvisNegatifSurUneMesure: async () => {},
   notifieUnRetourNégatifSurMiniTest: async () => {},
   notifieUnRetourNégatifSurArticle: async () => {},
