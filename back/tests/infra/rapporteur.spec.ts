@@ -8,6 +8,7 @@ vi.mock('@sentry/node', () => ({
   init: vi.fn(),
   setTag: vi.fn(),
   captureException: vi.fn(),
+  expressIntegration: vi.fn(),
   getAutoPerformanceIntegrations: () => [],
 }));
 
