@@ -1,4 +1,5 @@
 import { AvisMesureDonne } from '../bus/evenements/avisMesureDonne.js';
+import { AvisParcoursDonné } from '../bus/evenements/avisParcoursDonne.js';
 import { MesureConsultee } from '../bus/evenements/mesureConsultee.js';
 import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
@@ -31,6 +32,7 @@ export type DonneesEvenement =
   | DonneesSimulationNis2Terminee
   | DonneesMesureConsultee
   | DonneesAvisMesureDonne
+  | DonnéesAvisParcoursDonné
   | DonneesMesurePriseEnCompte
   | DonneesModuleTerminé
   | DonnéesBadgeCyberdépartDébloqué
@@ -131,6 +133,11 @@ export type DonneesSimulationNis2Terminee = Evenement<'SIMULATION_NIS2_TERMINEE'
 type DonneesMesureConsultee = Evenement<'MESURE_CONSULTEE', Omit<MesureConsultee, 'email'> & { idUtilisateur: string }>;
 
 type DonneesAvisMesureDonne = Evenement<'AVIS_MESURE_DONNE', Omit<AvisMesureDonne, 'commentaire'>>;
+
+type DonnéesAvisParcoursDonné = Evenement<
+  'AVIS_PARCOURS_DONNE',
+  Omit<AvisParcoursDonné, 'emailDeContact'> & { idUtilisateur: string | undefined }
+>;
 
 type DonneesMesurePriseEnCompte = Evenement<
   'MESURE_PRISE_EN_COMPTE',
