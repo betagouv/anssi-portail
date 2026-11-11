@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Component } from 'svelte';
-  import type { Mesure } from '../../mesure';
+  import type { Mesure } from '../mesure';
   import Procedure from './Procedure.svelte';
 
   const { mesure }: { mesure: Mesure } = $props();

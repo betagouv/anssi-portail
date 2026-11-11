@@ -1,6 +1,6 @@
 <script lang="ts">
   import CarteMesure from './CarteMesure.svelte';
-  import type { Mesure } from './mesure';
+  import type { Mesure } from './mesures/mesure';
 
   interface Props {
     mesures: Mesure[];
