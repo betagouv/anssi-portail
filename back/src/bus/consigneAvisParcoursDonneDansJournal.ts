@@ -17,6 +17,7 @@ export const consigneAvisParcoursDonnéDansJournal = ({
     await adaptateurJournal.consigneEvenement({
       donnees: {
         idUtilisateur,
+        typeDeRetour: évènement.typeDeRetour,
         niveauDUtilité: évènement.niveauDUtilité,
         recommandationAutreOrganisation: évènement.recommandationAutreOrganisation,
         commentaireAmélioration: évènement.commentaireAmélioration,

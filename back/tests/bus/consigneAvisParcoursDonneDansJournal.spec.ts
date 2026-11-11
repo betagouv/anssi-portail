@@ -13,6 +13,7 @@ describe("L'abonnement qui consigne le don d'un avis sur un parcours dans le jou
 
   const unAvis = (surcharge: Partial<ConstructorParameters<typeof AvisParcoursDonné>[0]> = {}) =>
     new AvisParcoursDonné({
+      typeDeRetour: 'spontané',
       niveauDUtilité: 4,
       recommandationAutreOrganisation: 'oui',
       commentaireAmélioration: 'Un commentaire libre',
@@ -41,6 +42,7 @@ describe("L'abonnement qui consigne le don d'un avis sur un parcours dans le jou
       type: 'AVIS_PARCOURS_DONNE',
       donnees: {
         idUtilisateur: 'jean@dupont.fr-hache',
+        typeDeRetour: 'spontané',
         niveauDUtilité: 4,
         recommandationAutreOrganisation: 'oui',
         commentaireAmélioration: 'Un commentaire libre',

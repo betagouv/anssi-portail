@@ -9,9 +9,10 @@
 
   type Props = {
     estOuverte: boolean;
+    typeDeRetour: 'spontané';
   };
 
-  let { estOuverte = $bindable() }: Props = $props();
+  let { estOuverte = $bindable(), typeDeRetour }: Props = $props();
 
   const niveauxDUtilité = [
     { valeur: 1, libellé: 'Pas du tout utile', emoji: '😠' },
@@ -58,6 +59,7 @@
       await axios.post(
         '/api/avis-parcours',
         {
+          typeDeRetour,
           niveauDUtilité,
           recommandationAutreOrganisation,
           commentaireAmélioration: commentaireAmélioration.trim(),

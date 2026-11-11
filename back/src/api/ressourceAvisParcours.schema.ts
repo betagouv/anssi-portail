@@ -2,6 +2,7 @@ import z from 'zod';
 import { NiveauDUtilité } from '../metier/niveauDeSatisfaction.js';
 
 export const schemaRessourceAvisParcours = z.strictObject({
+  typeDeRetour: z.literal('spontané'),
   niveauDUtilité: z
     .int()
     .min(1, 'Le niveau de satisfaction est invalide')
