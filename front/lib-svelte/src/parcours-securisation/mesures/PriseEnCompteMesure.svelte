@@ -3,6 +3,7 @@
   import { untrack } from 'svelte';
   import { profilStore } from '../../stores/profil.store';
   import Bouton from '../../ui/Bouton.svelte';
+  import { évènementsDuParcours } from '../evenementsDuParcours';
   import type { Mesure, PriseEnCompteRéponseApi } from './mesure';
 
   type Props = {
@@ -16,24 +17,24 @@
     try {
       priseEnCompteEnCours = true;
       const reponse = await axios.put<PriseEnCompteRéponseApi>(`/api/mesures/${mesure.id}/prise-en-compte`);
-      sessionStorage.setItem('mesure-prise-en-compte', 'true');
+      évènementsDuParcours.publieMesurePriseEnCompte();
       if (reponse.data.nombreTotalMesuresPrisesEnCompte === 1) {
-        sessionStorage.setItem('premiere-mesure-prise-en-compte', 'true');
+        évènementsDuParcours.publiePremièreMesurePriseEnCompte();
       }
       if (
         $profilStore?.parcoursSecurisation.parcoursActuel === 'complet' &&
         reponse.data.nombreTotalMesuresPrisesEnCompte === 10
       ) {
-        sessionStorage.setItem('10-mesures-prises-en-compte', 'true');
+        évènementsDuParcours.publieDixMesuresPrisesEnCompteParcoursComplet();
       }
       if (reponse.data.badgeCyberdépartDebloqué) {
-        sessionStorage.setItem('badge-cyberdepart-debloque', 'true');
+        évènementsDuParcours.publieBadgeCyberdépartDébloqué();
       }
       if (reponse.data.parcoursCompletTerminé) {
-        sessionStorage.setItem('parcours-complet-termine', 'true');
+        évènementsDuParcours.publieParcoursCompletTerminé();
       }
       if (reponse.data.moduleTerminé) {
-        sessionStorage.setItem('module-termine', 'true');
+        évènementsDuParcours.publieModuleTerminé();
       }
       const requete = new URLSearchParams(window.location.search);
       const nouvelleUrl =
