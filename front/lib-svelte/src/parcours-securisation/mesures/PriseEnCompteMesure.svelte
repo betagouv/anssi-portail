@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { untrack } from 'svelte';
+  import { profilStore } from '../../stores/profil.store';
   import Bouton from '../../ui/Bouton.svelte';
   import type { Mesure, PriseEnCompteRéponseApi } from './mesure';
 
@@ -18,6 +19,12 @@
       sessionStorage.setItem('mesure-prise-en-compte', 'true');
       if (reponse.data.nombreTotalMesuresPrisesEnCompte === 1) {
         sessionStorage.setItem('premiere-mesure-prise-en-compte', 'true');
+      }
+      if (
+        $profilStore?.parcoursSecurisation.parcoursActuel === 'complet' &&
+        reponse.data.nombreTotalMesuresPrisesEnCompte === 10
+      ) {
+        sessionStorage.setItem('10-mesures-prises-en-compte', 'true');
       }
       if (reponse.data.badgeCyberdépartDebloqué) {
         sessionStorage.setItem('badge-cyberdepart-debloque', 'true');
