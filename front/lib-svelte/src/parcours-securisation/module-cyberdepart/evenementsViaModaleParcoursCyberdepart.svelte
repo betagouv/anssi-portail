@@ -6,6 +6,7 @@
   type Props = { peutOuvrir: boolean };
   let { peutOuvrir }: Props = $props();
   let modaleRetourMiParcoursOuverte = $state(false);
+  let modaleParcoursCyberdépartTerminéOuverte = $state(false);
   let badgeCyberdépartDebloqué = $state(false);
   let moduleTerminé = $state(false);
   $effect(() => {
@@ -29,4 +30,11 @@
 />
 <ModaleRetourUtilisateurSurParcours bind:estOuverte={modaleRetourMiParcoursOuverte} typeDeRetour="mi-parcours" />
 
-<ModaleModuleCyberdepartTermine bind:estOuverte={moduleTerminé} />
+<ModaleModuleCyberdepartTermine bind:estOuverte={modaleParcoursCyberdépartTerminéOuverte} />
+<ModaleRetourUtilisateurSurParcours
+  bind:estOuverte={moduleTerminé}
+  typeDeRetour="parcours terminé"
+  surFermeture={() => {
+    modaleParcoursCyberdépartTerminéOuverte = true;
+  }}
+/>
