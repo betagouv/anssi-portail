@@ -18,6 +18,7 @@ describe('La ressource avis parcours', () => {
   let entrepotUtilisateur: EntrepotUtilisateurMemoire;
 
   const avisParcoursValide = {
+    typeDeRetour: 'spontané',
     niveauDUtilité: 2,
     recommandationAutreOrganisation: 'oui',
     commentaireAmélioration: 'Super',
@@ -41,6 +42,7 @@ describe('La ressource avis parcours', () => {
     const cookie = encodeSession({ email: 'jeanne.dupont@mail.com', token: 'valide' });
     it("retourne une erreur 401 si l'utilisateur n'est pas connecté", async () => {
       const réponse = await request(serveur).post('/api/avis-parcours').send({
+        typeDeRetour: 'spontané',
         niveauDUtilité: 1,
       });
 
@@ -49,6 +51,7 @@ describe('La ressource avis parcours', () => {
 
     describe('retourne une erreur 400', () => {
       const avisValide = {
+        typeDeRetour: 'spontané',
         niveauDUtilité: 3,
         recommandationAutreOrganisation: 'oui',
         commentaireAmélioration: 'Bonjour !',
@@ -143,6 +146,7 @@ describe('La ressource avis parcours', () => {
       await request(serveur).post('/api/avis-parcours').set('Cookie', cookie).send(avisParcoursValide);
 
       expect(avisParcoursEnvoyé).toEqual({
+        typeDeRetour: 'spontané',
         niveauDUtilité: 2,
         recommandationAutreOrganisation: 'oui',
         commentaireAmélioration: 'Super',
@@ -165,6 +169,7 @@ describe('La ressource avis parcours', () => {
       const evenement = busEvenements.recupereEvenement(AvisParcoursDonné);
 
       expect(evenement).toEqual({
+        typeDeRetour: 'spontané',
         niveauDUtilité: 2,
         recommandationAutreOrganisation: 'oui',
         commentaireAmélioration: 'Super',
