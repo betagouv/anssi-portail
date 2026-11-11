@@ -31,7 +31,6 @@ jobs:
           persist-credentials: false
 
       - name: (TOUS) Installe les dépendances
-        id: pnpm-setup
         uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
         with:
           require-lockfile: true
@@ -87,11 +86,9 @@ jobs:
           CLEVER_SECRET: ${{ secrets.CLEVER_CLOUD_SECRET }}
           CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
           ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
-          NODE_VERSION: ${{ steps.pnpm-setup.outputs.runtime-version }}
         run: |
           git config --global user.email "contact@messervicescyber.beta.gouv.fr"
           git config --global user.name "MesServicesCyber"
           git add --force front/_site
           git commit -m "Ajoute le site généré"
-          pnpm exec clever env set CC_NODE_VERSION "$NODE_VERSION"
           pnpm exec clever deploy --force --same-commit-policy=rebuild
