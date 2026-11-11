@@ -1,7 +1,7 @@
 <script lang="ts">
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import Lien from '../../../ui/Lien.svelte';
-  import type { Procédure } from '../../mesure';
+  import type { Procédure } from '../mesure';
   import EtapeProcedure from './EtapeProcedure.svelte';
   import EtapesProcedure from './EtapesProcedure.svelte';
 

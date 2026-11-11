@@ -9,12 +9,12 @@
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
   import Heros from '../../ui/Heros.svelte';
   import RetourUtilisateurSurContenu from '../../ui/RetourUtilisateurSurContenu.svelte';
+  import InterlocuteursParcoursSecurisation from '../InterlocuteursParcoursSecurisation.svelte';
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
-  import InterlocuteursParcoursSecurisation from './../InterlocuteursParcoursSecurisation.svelte';
-  import type { Mesure } from './../mesure';
-  import PriseEnCompteMesure from './../PriseEnCompteMesure.svelte';
   import BoiteAOutils from './boite-a-outils/BoiteAOutils.svelte';
   import CartesLiensProcédures from './CartesLiensProcédures.svelte';
+  import type { Mesure } from './mesure';
+  import PriseEnCompteMesure from './PriseEnCompteMesure.svelte';
 
   let mesure: Mesure | undefined = $state();
   let indexOngletActif: 0 | 1 = $state(0);

@@ -1,7 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { untrack } from 'svelte';
-  import Bouton from '../ui/Bouton.svelte';
+  import Bouton from '../../ui/Bouton.svelte';
   import type { Mesure } from './mesure';
 
   type Props = {
@@ -67,7 +67,7 @@
 {/if}
 
 <style lang="scss">
-  @use '../../../assets/styles/responsive' as *;
+  @use '../../../../assets/styles/responsive' as *;
 
   :global(dsfr-footer) {
     margin-bottom: 192px;

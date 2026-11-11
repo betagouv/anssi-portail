@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import type { Mesure } from '../../src/parcours-securisation/mesure';
+import type { Mesure } from '../../src/parcours-securisation/mesures/mesure';
 import { fabriqueFilAriane, type PropriétésFilAriane } from '../../src/ui/filAriane';
 
 describe('La fabrique du fil d’Ariane', () => {
