@@ -67,6 +67,7 @@ describe('La ressource avis parcours', () => {
       };
 
       it.each([
+        ['typeDeRetour', 'absent'],
         ['niveauDUtilité', 'absent'],
         ['recommandationAutreOrganisation', 'absente'],
         ['commentaireAmélioration', 'absent'],
@@ -122,6 +123,18 @@ describe('La ressource avis parcours', () => {
 
         expect(réponse.status).toBe(HttpStatusCode.BadRequest);
       });
+    });
+
+    it('accepte un avis intermédiaire sans recommandation', async () => {
+      const utilisateur = utilisateurDeTest().avecLEmail('intermediaire@yopmail.com').construis();
+      await utilisateur.rejoinsParcours('allégé', busEvenements, 'visite-page-mesure');
+      await entrepotUtilisateur.ajoute(utilisateur);
+      const { recommandationAutreOrganisation: _, ...avis } = avisParcoursValide;
+      const réponse = await request(serveur)
+        .post('/api/avis-parcours')
+        .set('Cookie', encodeSession({ email: utilisateur.email, token: 'valide' }))
+        .send({ ...avis, typeDeRetour: 'mi-parcours' });
+      expect(réponse.statusCode).toBe(HttpStatusCode.Created);
     });
 
     it("retourne une erreur 500 si l'utilisateur n'a pas de parcours", async () => {

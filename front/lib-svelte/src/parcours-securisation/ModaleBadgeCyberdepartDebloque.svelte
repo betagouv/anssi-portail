@@ -7,13 +7,14 @@
 
   type Props = {
     estOuverte: boolean;
+    surFermeture?: () => void;
   };
 
-  let { estOuverte = $bindable() }: Props = $props();
+  let { estOuverte = $bindable(), surFermeture }: Props = $props();
   const sujet = afficheBadgeCyberdépart ? 'Ce badge' : 'Cette étape';
 </script>
 
-<Modale bind:estOuverte titre="🎉 Bravo, vous avez pris votre Cyberdépart">
+<Modale bind:estOuverte {surFermeture} titre="🎉 Bravo, vous avez pris votre Cyberdépart">
   <div class="corps">
     <img
       src="/assets/images/parcours-securisation/visuel-cyberdepart.svg"
@@ -28,7 +29,14 @@
   </div>
   {#snippet actions()}
     <BoutonPartageBadgeCyberdepart typeDuBouton="primaire" />
-    <Bouton libelle="Continuer ma progression" type="secondaire" surClic={() => (estOuverte = false)} />
+    <Bouton
+      libelle="Continuer ma progression"
+      type="secondaire"
+      surClic={() => {
+        estOuverte = false;
+        surFermeture?.();
+      }}
+    />
   {/snippet}
 </Modale>
 

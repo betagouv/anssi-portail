@@ -11,11 +11,14 @@
   import InterlocuteursParcoursSecurisation from '../InterlocuteursParcoursSecurisation.svelte';
   import MesuresDeModule from '../MesuresDeModule.svelte';
   import ModaleBadgeCyberdepartDebloque from '../ModaleBadgeCyberdepartDebloque.svelte';
+  import ModaleRetourUtilisateurSurParcours from '../ModaleRetourUtilisateurSurParcours.svelte';
   import type { ModuleRéponseApi } from '../moduleReponseApi';
   import Progression from '../Progression.svelte';
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
   import BasculeParcoursComplet from './BasculeParcoursComplet.svelte';
   import ModaleModuleCyberdepartTermine from './ModaleModuleCyberdepartTermine.svelte';
+
+  let modaleRetourMiParcoursOuverte = $state(false);
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -70,7 +73,13 @@
   {/snippet}
 </Heros>
 
-<ModaleBadgeCyberdepartDebloque bind:estOuverte={badgeCyberdépartDebloqué} />
+<ModaleBadgeCyberdepartDebloque
+  bind:estOuverte={badgeCyberdépartDebloqué}
+  surFermeture={() => {
+    modaleRetourMiParcoursOuverte = true;
+  }}
+/>
+<ModaleRetourUtilisateurSurParcours bind:estOuverte={modaleRetourMiParcoursOuverte} typeDeRetour="mi-parcours" />
 
 <ModaleModuleCyberdepartTermine bind:estOuverte={moduleTerminé} />
 

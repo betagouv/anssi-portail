@@ -5,7 +5,7 @@ import { Parcours } from '../../metier/parcours.js';
 export class AvisParcoursDonné {
   typeDeRetour: TypeDeRetour;
   niveauDUtilité: NiveauDUtilité;
-  recommandationAutreOrganisation: 'oui' | 'non' | 'peut-être';
+  recommandationAutreOrganisation?: 'oui' | 'non' | 'peut-être';
   commentaireAmélioration: string;
   souhaiteÊtreRecontacté: boolean;
   parcours: Parcours;
@@ -24,7 +24,7 @@ export class AvisParcoursDonné {
   }: {
     typeDeRetour: TypeDeRetour;
     niveauDUtilité: NiveauDUtilité;
-    recommandationAutreOrganisation: 'oui' | 'non' | 'peut-être';
+    recommandationAutreOrganisation?: 'oui' | 'non' | 'peut-être';
     commentaireAmélioration: string;
     souhaiteÊtreRecontacté: boolean;
     parcours: Parcours;

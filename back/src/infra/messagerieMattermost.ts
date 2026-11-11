@@ -59,7 +59,7 @@ Email de contact : ${avisUtilisateur.emailDeContact}`;
     if (urlWebhook) {
       const message = `### Avis utilisateur ${avisParcours.typeDeRetour} sur le parcours ${labelParcours}
 Niveau d'utilité perçu du parcours : ${avisParcours.niveauDUtilité}
-Recommandation à une autre organisation: ${avisParcours.recommandationAutreOrganisation}
+${avisParcours.recommandationAutreOrganisation ? `Recommandation à une autre organisation: ${avisParcours.recommandationAutreOrganisation}\n` : ''}
 Commentaire d'amélioration : ${aseptiseMarkdown(avisParcours.commentaireAmélioration ?? '')}
 Page source : ${aseptiseMarkdown(avisParcours.pageSource ?? '')}
 ${avisParcours.souhaiteÊtreRecontacté ? `Souhaite être recontacté: ${avisParcours.emailDeContact}` : 'Ne souhaite pas être recontacté'}`;
