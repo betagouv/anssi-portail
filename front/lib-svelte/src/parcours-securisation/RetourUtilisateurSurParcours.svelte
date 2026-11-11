@@ -1,6 +1,9 @@
 <script lang="ts">
   import { profilStore } from '../stores/profil.store';
   import Bouton from '../ui/Bouton.svelte';
+  import ModaleRetourUtilisateurSurParcours from './ModaleRetourUtilisateurSurParcours.svelte';
+
+  let afficheDialogue = $state(false);
 
   const parcoursUtilisateur = $derived($profilStore?.parcoursSecurisation?.parcoursActuel);
   const labelParcours = $derived.by(() => {
@@ -72,11 +75,12 @@
       <div class={['panneau', parcoursUtilisateur]}>
         <h2 class="fr-h6">Que pensez-vous du parcours{labelParcours}&#8239;?</h2>
         <p class="texte-detail-sm">Votre retour peut rendre ce parcours plus utile à tous 🙏.</p>
-        <Bouton libelle="Partager mon ressenti" type="primaire" taille="md" surClic={() => {}} />
+        <Bouton libelle="Partager mon ressenti" type="primaire" taille="md" surClic={() => (afficheDialogue = true)} />
       </div>
     </div>
   </div>
 </aside>
+<ModaleRetourUtilisateurSurParcours bind:estOuverte={afficheDialogue} />
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
