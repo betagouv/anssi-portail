@@ -1,20 +1,20 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { profilStore } from '../stores/profil.store';
-  import BadgeBeta from '../ui/BadgeBeta.svelte';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
-  import Heros from '../ui/Heros.svelte';
-  import { toasterStore } from '../ui/toasts/toaster.store';
-  import Toaster from '../ui/toasts/Toaster.svelte';
-  import InterlocuteursParcoursSecurisation from './InterlocuteursParcoursSecurisation.svelte';
-  import LienRetourAuxModules from './LienRetourAuxModules.svelte';
-  import MesuresDeModule from './MesuresDeModule.svelte';
-  import ModaleModuleTermine from './modales/ModaleModuleTermine.svelte';
-  import ModaleParcoursTermine from './modales/ModaleParcoursTermine.svelte';
-  import type { ModuleRéponseApi } from './moduleReponseApi';
-  import Progression from './Progression.svelte';
-  import RetourUtilisateurSurParcours from './RetourUtilisateurSurParcours.svelte';
+  import { profilStore } from '../../stores/profil.store';
+  import BadgeBeta from '../../ui/BadgeBeta.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
+  import Heros from '../../ui/Heros.svelte';
+  import { toasterStore } from '../../ui/toasts/toaster.store';
+  import Toaster from '../../ui/toasts/Toaster.svelte';
+  import InterlocuteursParcoursSecurisation from '../InterlocuteursParcoursSecurisation.svelte';
+  import LienRetourAuxModules from '../LienRetourAuxModules.svelte';
+  import MesuresDeModule from '../MesuresDeModule.svelte';
+  import type { ModuleRéponseApi } from '../moduleReponseApi';
+  import Progression from '../Progression.svelte';
+  import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
+  import ModaleModuleTermine from './ModaleModuleTermine.svelte';
+  import ModaleParcoursTermine from './ModaleParcoursTermine.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
