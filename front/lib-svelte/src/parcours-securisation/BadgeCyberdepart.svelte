@@ -40,7 +40,7 @@
 </div>
 
 <style lang="scss">
-  @use '../../../../assets/styles/responsive' as *;
+  @use '../../../assets/styles/responsive' as *;
   .badge {
     display: flex;
     flex-direction: column;
