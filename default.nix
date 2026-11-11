@@ -3,15 +3,6 @@
   sources ? import ./npins,
 }:
 let
-  # Utilise .nvmrc comme source de vérité pour la version majeure de Node.js.
-  nodeVersion = pkgs.lib.strings.trim (builtins.readFile ./.nvmrc);
-  nodejs =
-    pkgs."nodejs_${nodeVersion}" or (throw "Unsupported Node.js version in .nvmrc: ${nodeVersion}");
-  nodejs-slim =
-    pkgs."nodejs-slim_${nodeVersion}"
-      or (throw "Unsupported Node.js version in .nvmrc: ${nodeVersion}");
-  pnpm = pkgs.pnpm_12.override { inherit nodejs-slim; };
-
   # Utilise .ruby-version comme source de vérité pour la version majeure et mineure de Ruby.
   rubyVersion = pkgs.lib.strings.trim (builtins.readFile ./.ruby-version);
   rubyAttribute = "ruby_${
@@ -45,8 +36,8 @@ in
 {
   shell = pkgs.mkShell {
     packages = with pkgs; [
-      nodejs
-      pnpm
+      nodejs_26
+      pnpm_12
       uv
       ruby
       rubyLspSerena
@@ -71,7 +62,7 @@ in
       export UV_CACHE_DIR="$PWD/.uv-cache"
       export UV_TOOL_DIR="$PWD/.uv-tools"
       export UV_PYTHON_INSTALL_DIR="$PWD/.uv-python"
-      export PATH="${pnpm}/bin:${rubyLspSerena}/bin:$GEM_HOME/bin:$PATH"
+      export PATH="${rubyLspSerena}/bin:$GEM_HOME/bin:$PATH"
 
       mkdir -p "$GEM_HOME" "$UV_CACHE_DIR" "$UV_TOOL_DIR" "$UV_PYTHON_INSTALL_DIR"
     '';
