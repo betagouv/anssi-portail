@@ -14,6 +14,7 @@
   import type { ModuleRéponseApi } from '../moduleReponseApi';
   import Progression from '../Progression.svelte';
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
+  import EvenementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
   import ModaleModuleTermine from './ModaleModuleTermine.svelte';
   import ModaleParcoursTermine from './ModaleParcoursTermine.svelte';
 
@@ -98,6 +99,9 @@
 
 <MesuresDeModule mesures={module.mesures} />
 <InterlocuteursParcoursSecurisation />
+<EvenementsViaModaleParcoursComplet
+  peutOuvrir={module.nom !== '' && !badgeCyberdépartDebloqué && !moduleTerminé && !parcoursTerminé}
+/>
 <RetourUtilisateurSurParcours />
 
 <style lang="scss">
