@@ -7,9 +7,10 @@
 
   type Props = {
     estOuverte: boolean;
+    surFermeture?: () => void;
   };
 
-  let { estOuverte = $bindable() }: Props = $props();
+  let { estOuverte = $bindable(), surFermeture }: Props = $props();
   let pageSource = $state('');
 
   onMount(() => {
@@ -17,7 +18,7 @@
   });
 </script>
 
-<Modale bind:estOuverte titre="🎉 Bravo&#8239;!">
+<Modale bind:estOuverte {surFermeture} titre="🎉 Bravo&#8239;!">
   <div class="corps">
     <p class="texte-standard-md">
       Vous avez appliqué les 12 mesures du Cyberdépart. Vous avez posé les bases de votre cybersécurité.
@@ -35,7 +36,14 @@
       iconeADroite
       icone="arrow-right-circle-line"
     />
-    <Bouton libelle="Plus tard" type="secondaire" surClic={() => (estOuverte = false)} />
+    <Bouton
+      libelle="Plus tard"
+      type="secondaire"
+      surClic={() => {
+        estOuverte = false;
+        surFermeture?.();
+      }}
+    />
   {/snippet}
 </Modale>
 

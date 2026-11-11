@@ -9,7 +9,7 @@
 
   type Props = {
     estOuverte: boolean;
-    typeDeRetour: 'spontané' | 'mi-parcours';
+    typeDeRetour: 'spontané' | 'mi-parcours' | 'parcours terminé';
     surFermeture?: () => void;
   };
 
@@ -21,6 +21,8 @@
     switch (typeDeRetour) {
       case 'mi-parcours':
         return 'Jusqu’ici ce parcours vous est-il utile\u202f?';
+      case 'parcours terminé':
+        return 'Avez-vous trouvé le parcours utile\u202f?';
       case 'spontané':
         return 'Trouvez-vous le parcours utile\u202f?';
     }
@@ -179,7 +181,7 @@
     {#if étatEnvoi === 'succès'}
       <Bouton libelle="Terminer" type="tertiaire-sans-bordure" surClic={ferme} />
     {:else}
-      {#if typeDeRetour === 'mi-parcours'}
+      {#if typeDeRetour !== 'spontané'}
         <Bouton libelle="Plus tard" type="secondaire" surClic={ferme} />
       {/if}
       <Bouton

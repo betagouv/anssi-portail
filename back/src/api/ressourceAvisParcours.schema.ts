@@ -3,7 +3,7 @@ import { NiveauDUtilité } from '../metier/niveauDeSatisfaction.js';
 
 export const schemaRessourceAvisParcours = z
   .strictObject({
-    typeDeRetour: z.enum(['spontané', 'mi-parcours']),
+    typeDeRetour: z.enum(['spontané', 'mi-parcours', 'parcours terminé']),
     niveauDUtilité: z
       .int()
       .min(1, 'Le niveau de satisfaction est invalide')
