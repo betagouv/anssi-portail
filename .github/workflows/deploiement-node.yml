@@ -35,7 +35,6 @@ jobs:
         uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
         with:
           require-lockfile: true
-          node-version-file: '.nvmrc'
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@de492cf36cbab201753d720ce4f4e336cd688c94 # v1.336.0
