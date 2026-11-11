@@ -4,7 +4,7 @@
   "description": "",
   "main": "serveur.ts",
   "engines": {
-    "node": ">=26.0.0"
+    "node": "26.13.1"
   },
   "scripts": {
     "preadmin": "pnpm --filter @anssi-portail/axios build",
@@ -53,7 +53,7 @@
     },
     "runtime": {
       "name": "node",
-      "version": "26",
+      "version": "26.13.1",
       "onFail": "download"
     }
   }
