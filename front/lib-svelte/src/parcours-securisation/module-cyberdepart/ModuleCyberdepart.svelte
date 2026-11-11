@@ -19,6 +19,7 @@
   import ModaleModuleCyberdepartTermine from './ModaleModuleCyberdepartTermine.svelte';
 
   let modaleRetourMiParcoursOuverte = $state(false);
+  let modaleParcoursCyberdépartTerminéOuverte = $state(false);
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -81,7 +82,14 @@
 />
 <ModaleRetourUtilisateurSurParcours bind:estOuverte={modaleRetourMiParcoursOuverte} typeDeRetour="mi-parcours" />
 
-<ModaleModuleCyberdepartTermine bind:estOuverte={moduleTerminé} />
+<ModaleModuleCyberdepartTermine bind:estOuverte={modaleParcoursCyberdépartTerminéOuverte} />
+<ModaleRetourUtilisateurSurParcours
+  bind:estOuverte={moduleTerminé}
+  typeDeRetour="parcours terminé"
+  surFermeture={() => {
+    modaleParcoursCyberdépartTerminéOuverte = true;
+  }}
+/>
 
 <dsfr-container>
   <div class="progression">

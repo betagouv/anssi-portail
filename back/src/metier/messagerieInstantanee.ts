@@ -16,7 +16,7 @@ export type AvisUtilisateur = {
   pageSource?: string;
 };
 
-export type TypeDeRetour = 'spontané' | 'mi-parcours';
+export type TypeDeRetour = 'spontané' | 'mi-parcours' | 'parcours terminé';
 
 export type AvisParcours = {
   typeDeRetour: TypeDeRetour;
