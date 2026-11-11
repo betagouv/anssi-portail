@@ -4,12 +4,13 @@
 
   type Props = {
     estOuverte: boolean;
+    surFermeture?: () => void;
   };
 
-  let { estOuverte = $bindable() }: Props = $props();
+  let { estOuverte = $bindable(), surFermeture }: Props = $props();
 </script>
 
-<Modale bind:estOuverte titre="Félicitations&#8239;!">
+<Modale bind:estOuverte {surFermeture} titre="Félicitations&#8239;!">
   <div class="corps">
     <p class="texte-standard-md">Vous avez pris en compte l’ensemble des mesures proposées dans ce parcours.</p>
     <img src="/assets/images/cotillons-100-pourcents.svg" alt="félicitations" width="524" height="188" />
