@@ -7,6 +7,7 @@
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
   import Heros from '../../ui/Heros.svelte';
   import Lien from '../../ui/Lien.svelte';
+  import EvenementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
   import type { Mesure, Module } from '../mesures/mesure';
   import Progression from '../Progression.svelte';
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
@@ -95,6 +96,7 @@
   {/if}
 </dsfr-container>
 
+<EvenementsViaModaleParcoursComplet peutOuvrir={modules.length > 0} />
 <RetourUtilisateurSurParcours />
 
 <style lang="scss">

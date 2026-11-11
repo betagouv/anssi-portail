@@ -7,6 +7,7 @@
   import Heros from '../../ui/Heros.svelte';
   import { toasterStore } from '../../ui/toasts/toaster.store';
   import Toaster from '../../ui/toasts/Toaster.svelte';
+  import EvenementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
   import InterlocuteursParcoursSecurisation from '../InterlocuteursParcoursSecurisation.svelte';
   import LienRetourAuxModules from '../LienRetourAuxModules.svelte';
   import MesuresDeModule from '../MesuresDeModule.svelte';
@@ -99,6 +100,7 @@
 
 <MesuresDeModule mesures={module.mesures} />
 <InterlocuteursParcoursSecurisation />
+<EvenementsViaModaleParcoursComplet peutOuvrir={module.nom !== '' && !moduleTerminé && !parcoursTerminé} />
 <RetourUtilisateurSurParcours />
 
 <style lang="scss">
