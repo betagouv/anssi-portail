@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "enabledManagers": ["github-actions", "npm", "nvm", "bundler"],
+  "enabledManagers": ["github-actions", "npm", "bundler"],
   "useBaseBranchConfig": "merge",
   "commitMessagePrefix": "[RENOVATE]",
   "prHourlyLimit": 10,
@@ -10,11 +10,6 @@
       "description": "Version 11 supportant à minina un backend Sentry en version 26.4.2. Backend actuel: 25.9.0",
       "matchPackageNames": ["@sentry/node", "@sentry/browser", "@sentry/vite-plugin"],
       "allowedVersions": "<11.0.0"
-    },
-    {
-      "description": "@types/node reste aligné sur la version majeure 26 définie dans .nvmrc",
-      "matchPackageNames": ["@types/node"],
-      "allowedVersions": "<27.0.0"
     },
     {
       "description": "Regroupe les mises à jour des dépendances AWS SDK utilisées pour S3",
@@ -49,6 +44,12 @@
     {
       "matchPackageNames": ["@lab-anssi/ui-kit"],
       "enabled": false
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["node", "@types/node"],
+      "allowedVersions": "<27.0.0",
+      "groupName": "Node.js"
     }
   ]
 }
