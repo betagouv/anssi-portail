@@ -141,7 +141,7 @@
     </div>
   </div>
 </aside>
-<ModaleRetourUtilisateurSurParcours bind:estOuverte={afficheDialogue} />
+<ModaleRetourUtilisateurSurParcours bind:estOuverte={afficheDialogue} typeDeRetour="spontané" />
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;

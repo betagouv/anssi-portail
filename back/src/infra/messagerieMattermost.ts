@@ -57,7 +57,7 @@ Email de contact : ${avisUtilisateur.emailDeContact}`;
     })();
 
     if (urlWebhook) {
-      const message = `### Avis utilisateur sur le parcours ${labelParcours}
+      const message = `### Avis utilisateur ${avisParcours.typeDeRetour} sur le parcours ${labelParcours}
 Niveau d'utilité perçu du parcours : ${avisParcours.niveauDUtilité}
 Recommandation à une autre organisation: ${avisParcours.recommandationAutreOrganisation}
 Commentaire d'amélioration : ${aseptiseMarkdown(avisParcours.commentaireAmélioration ?? '')}

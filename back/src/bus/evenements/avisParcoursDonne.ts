@@ -1,7 +1,9 @@
+import { TypeDeRetour } from '../../metier/messagerieInstantanee.js';
 import { NiveauDUtilité } from '../../metier/niveauDeSatisfaction.js';
 import { Parcours } from '../../metier/parcours.js';
 
 export class AvisParcoursDonné {
+  typeDeRetour: TypeDeRetour;
   niveauDUtilité: NiveauDUtilité;
   recommandationAutreOrganisation: 'oui' | 'non' | 'peut-être';
   commentaireAmélioration: string;
@@ -11,6 +13,7 @@ export class AvisParcoursDonné {
   pageSource?: string;
 
   constructor({
+    typeDeRetour,
     niveauDUtilité,
     recommandationAutreOrganisation,
     commentaireAmélioration,
@@ -19,6 +22,7 @@ export class AvisParcoursDonné {
     emailDeContact,
     pageSource,
   }: {
+    typeDeRetour: TypeDeRetour;
     niveauDUtilité: NiveauDUtilité;
     recommandationAutreOrganisation: 'oui' | 'non' | 'peut-être';
     commentaireAmélioration: string;
@@ -27,6 +31,7 @@ export class AvisParcoursDonné {
     emailDeContact: string | undefined;
     pageSource?: string;
   }) {
+    this.typeDeRetour = typeDeRetour;
     this.niveauDUtilité = niveauDUtilité;
     this.recommandationAutreOrganisation = recommandationAutreOrganisation;
     this.commentaireAmélioration = commentaireAmélioration;
