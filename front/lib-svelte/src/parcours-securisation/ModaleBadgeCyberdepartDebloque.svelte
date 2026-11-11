@@ -1,8 +1,8 @@
 <script lang="ts">
   import { afficheBadgeCyberdépart } from '$plateforme/environnement';
-  import Bouton from '../../ui/Bouton.svelte';
-  import CanonAConfetti from '../../ui/CanonAConfetti.svelte';
-  import Modale from '../../ui/Modale.svelte';
+  import Bouton from '../ui/Bouton.svelte';
+  import CanonAConfetti from '../ui/CanonAConfetti.svelte';
+  import Modale from '../ui/Modale.svelte';
   import BoutonPartageBadgeCyberdepart from './BoutonPartageBadgeCyberdepart.svelte';
 
   type Props = {

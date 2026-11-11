@@ -1,22 +1,20 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { profilStore } from '../../stores/profil.store';
   import Alerte from '../../ui/Alerte.svelte';
   import BadgeBeta from '../../ui/BadgeBeta.svelte';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
   import Heros from '../../ui/Heros.svelte';
   import { toasterStore } from '../../ui/toasts/toaster.store';
   import Toaster from '../../ui/toasts/Toaster.svelte';
+  import BadgeCyberdepart from '../BadgeCyberdepart.svelte';
   import InterlocuteursParcoursSecurisation from '../InterlocuteursParcoursSecurisation.svelte';
-  import LienRetourAuxModules from '../LienRetourAuxModules.svelte';
   import MesuresDeModule from '../MesuresDeModule.svelte';
+  import ModaleBadgeCyberdepartDebloque from '../ModaleBadgeCyberdepartDebloque.svelte';
   import type { ModuleRéponseApi } from '../moduleReponseApi';
   import Progression from '../Progression.svelte';
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
-  import BadgeCyberdepart from './BadgeCyberdepart.svelte';
   import BasculeParcoursComplet from './BasculeParcoursComplet.svelte';
-  import ModaleBadgeCyberdepartDebloque from './ModaleBadgeCyberdepartDebloque.svelte';
   import ModaleModuleCyberdepartTermine from './ModaleModuleCyberdepartTermine.svelte';
 
   let module = $state<ModuleRéponseApi>({
@@ -51,24 +49,7 @@
   const progressionActuelle = $derived(module.mesures.filter((module) => module.estPriseEnCompte).length);
   const badgeDebloque = $derived(totalMesures > 0 && progressionActuelle >= (module.cibleBadge ?? 0));
   const parcoursTermine = $derived(totalMesures > 0 && progressionActuelle === totalMesures);
-  const parcoursComplet = $derived($profilStore?.parcoursSecurisation.parcoursActuel === 'complet');
-  const propriétésFilAriane: PropriétésFilAriane = $derived(
-    parcoursComplet
-      ? [
-          {
-            nom: 'Protéger mon organisation',
-            lien: '/parcours-complet',
-          },
-          {
-            nom: module.nom,
-          },
-        ]
-      : [
-          {
-            nom: 'Protéger mon organisation',
-          },
-        ]
-  );
+  const propriétésFilAriane: PropriétésFilAriane = [{ nom: 'Protéger mon organisation' }];
 </script>
 
 <Toaster />
@@ -95,8 +76,7 @@
 
 <dsfr-container>
   <div class="progression">
-    <LienRetourAuxModules />
-    {#if parcoursTermine && !parcoursComplet}
+    {#if parcoursTermine}
       <BasculeParcoursComplet />
     {:else if badgeDebloque && !parcoursTermine}
       <Alerte type="information" taille="md" titre="">

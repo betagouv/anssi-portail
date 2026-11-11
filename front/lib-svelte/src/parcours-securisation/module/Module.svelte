@@ -1,15 +1,16 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { profilStore } from '../../stores/profil.store';
   import BadgeBeta from '../../ui/BadgeBeta.svelte';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
   import Heros from '../../ui/Heros.svelte';
   import { toasterStore } from '../../ui/toasts/toaster.store';
   import Toaster from '../../ui/toasts/Toaster.svelte';
+  import BadgeCyberdepart from '../BadgeCyberdepart.svelte';
   import InterlocuteursParcoursSecurisation from '../InterlocuteursParcoursSecurisation.svelte';
   import LienRetourAuxModules from '../LienRetourAuxModules.svelte';
   import MesuresDeModule from '../MesuresDeModule.svelte';
+  import ModaleBadgeCyberdepartDebloque from '../ModaleBadgeCyberdepartDebloque.svelte';
   import type { ModuleRéponseApi } from '../moduleReponseApi';
   import Progression from '../Progression.svelte';
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
@@ -21,6 +22,7 @@
     description: '',
     mesures: [],
   });
+  let badgeCyberdépartDebloqué = $state(false);
   let moduleTerminé = $state(false);
   let parcoursTerminé = $state(false);
   const totalMesures = $derived(module.mesures.length);
@@ -36,6 +38,10 @@
       animeProgression = true;
     }
 
+    if (module.cibleBadge !== undefined && sessionStorage.getItem('badge-cyberdepart-debloque') === 'true') {
+      badgeCyberdépartDebloqué = true;
+      sessionStorage.removeItem('badge-cyberdepart-debloque');
+    }
     if (sessionStorage.getItem('parcours-complet-termine') === 'true') {
       parcoursTerminé = true;
       sessionStorage.removeItem('parcours-complet-termine');
@@ -48,23 +54,13 @@
 
   const progressionActuelle = $derived(module.mesures.filter((m) => m.estPriseEnCompte).length);
 
-  const propriétésFilAriane: PropriétésFilAriane = $derived(
-    $profilStore?.parcoursSecurisation.parcoursActuel === 'allégé'
-      ? [
-          {
-            nom: 'Protéger mon organisation',
-          },
-        ]
-      : [
-          {
-            nom: 'Protéger mon organisation',
-            lien: '/parcours-complet',
-          },
-          {
-            nom: module.nom,
-          },
-        ]
+  const badgeDebloque = $derived(
+    module.cibleBadge !== undefined && totalMesures > 0 && progressionActuelle >= module.cibleBadge
   );
+  const propriétésFilAriane: PropriétésFilAriane = $derived([
+    { nom: 'Protéger mon organisation', lien: '/parcours-complet' },
+    { nom: module.nom },
+  ]);
 </script>
 
 <Toaster />
@@ -85,6 +81,8 @@
   {/snippet}
 </Heros>
 
+<ModaleBadgeCyberdepartDebloque bind:estOuverte={badgeCyberdépartDebloqué} />
+
 <ModaleModuleTermine bind:estOuverte={moduleTerminé} />
 <ModaleParcoursTermine bind:estOuverte={parcoursTerminé} />
 
@@ -94,6 +92,7 @@
     {#if module.nom !== ''}
       <Progression actuel={progressionActuelle} max={totalMesures} cible={module.cibleBadge} anime={animeProgression} />
     {/if}
+    {#if badgeDebloque}<BadgeCyberdepart />{/if}
   </div>
 </dsfr-container>
 

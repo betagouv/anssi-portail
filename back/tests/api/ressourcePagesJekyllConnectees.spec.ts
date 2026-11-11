@@ -2,6 +2,7 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
+import { fabriqueAttributionParcours } from '../../src/api/middlewares/attributionParcours.js';
 import { fabriquePublieMesureConsultée } from '../../src/api/middlewares/publieMesureConsultee.js';
 import { creeServeur } from '../../src/api/msc/index.js';
 import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
@@ -14,7 +15,9 @@ import {
   fauxGestionnaireRequêtesComplémentaires,
   fauxMiddleware,
   fauxRapporteur,
+  ressourceFactice,
 } from './fauxObjets.js';
+import { ConstructeurDUtilisateur } from './mesures/constructeurDUtilisateur.js';
 import { jeanneDupont } from './objetsPretsALEmploi.js';
 
 describe("La ressource d'une page Jekyll connectée", () => {
@@ -105,6 +108,56 @@ describe("La ressource d'une page Jekyll connectée", () => {
 
       expect(reponse.status).toBe(HttpStatusCode.Ok);
       busEvenements.naPasRecuDEvenement(MesureConsultee);
+    });
+  });
+  describe('sur demande d’un module', () => {
+    it.each([
+      [null, '/modules/1', 'module-cyberdepart', 'allégé'],
+      ['allégé', '/modules/1', 'module-cyberdepart', 'allégé'],
+      ['complet', '/modules/1', 'modules', 'complet'],
+      [null, '/modules/2', 'modules', 'complet'],
+      ['allégé', '/modules/2', 'modules', 'complet'],
+      ['complet', '/modules/2', 'modules', 'complet'],
+    ] as const)('sert la bonne page pour %s sur %s', async (parcours, url, page, parcoursAttendu) => {
+      const constructeur = new ConstructeurDUtilisateur().avecLEmail('module@test.fr');
+      if (parcours) constructeur.avecLeParcours(parcours);
+      const utilisateur = constructeur.construis();
+      await entrepotUtilisateur.ajoute(utilisateur);
+      let pageServie = '';
+      serveur = creeServeur({
+        ...configurationDeTestDuServeur,
+        entrepotUtilisateur,
+        fournisseurChemin: {
+          ...configurationDeTestDuServeur.fournisseurChemin,
+          jekyll: {
+            ...configurationDeTestDuServeur.fournisseurChemin.jekyll,
+            page: (nom) => {
+              pageServie = nom;
+              return ressourceFactice();
+            },
+          },
+        },
+        middleware: {
+          ...fauxMiddleware,
+          ajouteUtilisateurARequete: () => async (requête, _réponse, suite) => {
+            requête.utilisateur = utilisateur;
+            suite();
+          },
+        },
+        gestionnairesRequêtesComplémentaires: {
+          ...fauxGestionnaireRequêtesComplémentaires,
+          attributionParcours: fabriqueAttributionParcours({ entrepotUtilisateur, busEvenements }),
+        },
+      });
+      const réponse = await request(serveur).get(url);
+      expect(réponse.status).toBe(HttpStatusCode.Ok);
+      expect(pageServie).toBe(page);
+      expect(utilisateur.parcoursActuel()).toBe(parcoursAttendu);
+    });
+    it('redirige l’ancienne URL Cyberdépart', async () => {
+      const réponse = await request(serveur).get('/module-cyberdepart');
+      expect(réponse.status).toBe(HttpStatusCode.SeeOther);
+      expect(réponse.headers.location).toBe('/modules/1');
     });
   });
 });

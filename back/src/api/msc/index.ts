@@ -10,6 +10,7 @@ import { ressourcePageRessource } from '../ressourcePageRessource.js';
 import { ressourcePageService } from '../ressourcePageService.js';
 import { ressourcePagesJekyll } from '../ressourcePagesJekyll.js';
 import { ressourcePagesJekyllConnectees } from '../ressourcePagesJekyllConnectees.js';
+import { ressourcePagesJekyllModule1 } from '../ressourcePagesJekyllModule1.js';
 import { ressourceRobotsTxt } from '../ressourceRobotsTxt.js';
 import { ressourceSitemapXml } from '../ressourceSitemapXml.js';
 import { routesPagesConnecteesStatiques } from '../routesPagesConnectees.js';
@@ -76,10 +77,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreRoute('/documents-ressources', ressourceDocumentRessource(configurationServeur));
 
   enregistreRoute('/module-cyberdepart', (_, reponse) => reponse.redirect(HttpStatusCode.SeeOther, '/modules/1'));
-  enregistreRoute(
-    '/modules/1',
-    ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart', [attributionParcours('allégé')])
-  );
+  enregistreRoute('/modules/1', ressourcePagesJekyllModule1(configurationServeur));
   enregistreRoute(
     '/modules/:id',
     ressourcePagesJekyllConnectees(configurationServeur, 'modules', [attributionParcours('complet')])
