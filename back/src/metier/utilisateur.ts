@@ -177,11 +177,13 @@ export class Utilisateur {
     mesure: Mesure;
     module: Module;
   }): Promise<{
+    nombreTotalMesuresPrisesEnCompte: number;
     badgeCyberdépartDebloqué: boolean;
     moduleTerminé: boolean;
     parcoursCompletTerminé: boolean;
   }> {
     const nouvelEtatModule = {
+      nombreTotalMesuresPrisesEnCompte: this.mesuresPrisesEnCompte.length,
       badgeCyberdépartDebloqué: false,
       moduleTerminé: false,
       parcoursCompletTerminé: false,
@@ -201,6 +203,7 @@ export class Utilisateur {
     );
 
     this.mesuresPrisesEnCompte.push(mesure);
+    nouvelEtatModule.nombreTotalMesuresPrisesEnCompte = this.mesuresPrisesEnCompte.length;
     if (this.nombreDeMesuresPrisesEnCompte(module) === module.nombreDeMesures()) {
       await busEvenements.publie(new ModuleTermine(this.email, module.id, module.nom, this.parcours ?? undefined));
       if (this.parcours === 'allégé') {

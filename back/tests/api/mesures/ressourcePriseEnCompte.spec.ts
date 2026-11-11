@@ -86,6 +86,18 @@ describe("La ressource de prise en compte d'une mesure", () => {
         expect(body.parcoursCompletTerminé).toBe(true);
       });
 
+      it('conserve le total lors de la répétition d’une prise en compte', async () => {
+        await putPriseEnCompteConnecte();
+        const { body } = await putPriseEnCompteConnecte();
+        expect(body.nombreTotalMesuresPrisesEnCompte).toBe(1);
+      });
+
+      it('compte aussi les mesures prises en compte dans les autres modules', async () => {
+        utilisateurParcours.mesuresPrisesEnCompte = [mesureDeTest().avecLId('AUTRE.1').construis()];
+        const { body } = await putPriseEnCompteConnecte();
+        expect(body.nombreTotalMesuresPrisesEnCompte).toBe(2);
+      });
+
       it('ajoute une prise en compte', async () => {
         await putPriseEnCompteConnecte();
 
