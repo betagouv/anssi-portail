@@ -7,6 +7,7 @@
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
   import Heros from '../../ui/Heros.svelte';
   import Lien from '../../ui/Lien.svelte';
+  import EvenementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
   import type { Mesure, Module } from '../mesures/mesure';
   import Progression from '../Progression.svelte';
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
@@ -22,6 +23,8 @@
     nombreMesuresPrisesEnCompte: number;
     mesures: Mesure[];
   };
+
+  let avisCompletOuvert = $state(false);
 
   let modules: ModulePrésentation[] = $state([]);
 
@@ -95,7 +98,8 @@
   {/if}
 </dsfr-container>
 
-<RetourUtilisateurSurParcours peutOuvrirAutomatiquement={modules.length > 0} />
+<EvenementsViaModaleParcoursComplet peutOuvrir={modules.length > 0} bind:estOuverte={avisCompletOuvert} />
+<RetourUtilisateurSurParcours peutOuvrirAutomatiquement={modules.length > 0 && !avisCompletOuvert} />
 
 <style lang="scss">
   @use '../../../../assets/styles/responsive' as *;

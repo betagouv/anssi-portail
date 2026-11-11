@@ -14,8 +14,11 @@
   import type { ModuleRéponseApi } from '../moduleReponseApi';
   import Progression from '../Progression.svelte';
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
+  import EvenementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
   import ModaleModuleTermine from './ModaleModuleTermine.svelte';
   import ModaleParcoursTermine from './ModaleParcoursTermine.svelte';
+
+  let avisCompletOuvert = $state(false);
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -98,8 +101,16 @@
 
 <MesuresDeModule mesures={module.mesures} />
 <InterlocuteursParcoursSecurisation />
+<EvenementsViaModaleParcoursComplet
+  peutOuvrir={module.nom !== '' && !badgeCyberdépartDebloqué && !moduleTerminé && !parcoursTerminé}
+  bind:estOuverte={avisCompletOuvert}
+/>
 <RetourUtilisateurSurParcours
-  peutOuvrirAutomatiquement={module.nom !== '' && !badgeCyberdépartDebloqué && !moduleTerminé && !parcoursTerminé}
+  peutOuvrirAutomatiquement={module.nom !== '' &&
+    !badgeCyberdépartDebloqué &&
+    !moduleTerminé &&
+    !parcoursTerminé &&
+    !avisCompletOuvert}
 />
 
 <style lang="scss">
