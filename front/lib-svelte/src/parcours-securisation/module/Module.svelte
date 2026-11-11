@@ -16,7 +16,6 @@
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
   import EvenementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
   import ModaleModuleTermine from './ModaleModuleTermine.svelte';
-  import ModaleParcoursTermine from './ModaleParcoursTermine.svelte';
 
   let avisCompletOuvert = $state(false);
 
@@ -27,7 +26,6 @@
   });
   let badgeCyberdépartDebloqué = $state(false);
   let moduleTerminé = $state(false);
-  let parcoursTerminé = $state(false);
   const totalMesures = $derived(module.mesures.length);
   let animeProgression = $state(false);
 
@@ -46,8 +44,6 @@
       sessionStorage.removeItem('badge-cyberdepart-debloque');
     }
     if (sessionStorage.getItem('parcours-complet-termine') === 'true') {
-      parcoursTerminé = true;
-      sessionStorage.removeItem('parcours-complet-termine');
       sessionStorage.removeItem('module-termine');
     } else if (sessionStorage.getItem('module-termine') === 'true') {
       moduleTerminé = true;
@@ -87,7 +83,6 @@
 <ModaleBadgeCyberdepartDebloque bind:estOuverte={badgeCyberdépartDebloqué} />
 
 <ModaleModuleTermine bind:estOuverte={moduleTerminé} />
-<ModaleParcoursTermine bind:estOuverte={parcoursTerminé} />
 
 <dsfr-container>
   <div class="progression">
@@ -102,15 +97,11 @@
 <MesuresDeModule mesures={module.mesures} />
 <InterlocuteursParcoursSecurisation />
 <EvenementsViaModaleParcoursComplet
-  peutOuvrir={module.nom !== '' && !badgeCyberdépartDebloqué && !moduleTerminé && !parcoursTerminé}
+  peutOuvrir={module.nom !== '' && !badgeCyberdépartDebloqué && !moduleTerminé}
   bind:estOuverte={avisCompletOuvert}
 />
 <RetourUtilisateurSurParcours
-  peutOuvrirAutomatiquement={module.nom !== '' &&
-    !badgeCyberdépartDebloqué &&
-    !moduleTerminé &&
-    !parcoursTerminé &&
-    !avisCompletOuvert}
+  peutOuvrirAutomatiquement={module.nom !== '' && !badgeCyberdépartDebloqué && !moduleTerminé && !avisCompletOuvert}
 />
 
 <style lang="scss">
