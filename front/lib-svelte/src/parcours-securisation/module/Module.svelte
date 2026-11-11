@@ -7,6 +7,7 @@
   import Heros from '../../ui/Heros.svelte';
   import { toasterStore } from '../../ui/toasts/toaster.store';
   import Toaster from '../../ui/toasts/Toaster.svelte';
+  import { évènementsDuParcours } from '../evenementsDuParcours';
   import EvenementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
   import InterlocuteursParcoursSecurisation from '../InterlocuteursParcoursSecurisation.svelte';
   import LienRetourAuxModules from '../LienRetourAuxModules.svelte';
@@ -29,18 +30,14 @@
     const idDuModule = new URL(window.location.href).pathname.split('/').pop();
     const reponse = await axios.get<ModuleRéponseApi>(`/api/modules/${idDuModule}`);
     module = reponse.data;
-    if (sessionStorage.getItem('mesure-prise-en-compte') === 'true') {
+    évènementsDuParcours.traiteMesurePriseEnCompte(() => {
       toasterStore.succes('Mesure déclarée prise en compte', 'Votre progression a été mise à jour.');
-      sessionStorage.removeItem('mesure-prise-en-compte');
       animeProgression = true;
-    }
+    });
 
-    if (sessionStorage.getItem('parcours-complet-termine') === 'true') {
-      sessionStorage.removeItem('module-termine');
-    } else if (sessionStorage.getItem('module-termine') === 'true') {
+    évènementsDuParcours.traiteModuleTerminé(() => {
       moduleTerminé = true;
-      sessionStorage.removeItem('module-termine');
-    }
+    });
   });
 
   const progressionActuelle = $derived(module.mesures.filter((m) => m.estPriseEnCompte).length);
