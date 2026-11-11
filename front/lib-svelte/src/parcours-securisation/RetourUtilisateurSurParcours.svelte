@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { profilStore } from '../stores/profil.store';
   import Bouton from '../ui/Bouton.svelte';
+  import { évènementsDuParcours } from './evenementsDuParcours';
   import ModaleRetourUtilisateurSurParcours from './ModaleRetourUtilisateurSurParcours.svelte';
 
   const tempsdAttenteAvantAffichageEnMs = 350;
@@ -30,18 +31,18 @@
 
   $effect(() => {
     if (!pageChargée || !parcoursUtilisateur) return;
-    if (sessionStorage.getItem('premiere-mesure-prise-en-compte') !== 'true') return;
-    sessionStorage.removeItem('premiere-mesure-prise-en-compte');
-    minuteurOuverture = setTimeout(() => {
-      minuteurOuverture = undefined;
-      panneauOuvert = true;
-      if (!estSurvolé && !encart?.contains(document.activeElement)) {
-        minuteurFermeture = setTimeout(() => {
-          panneauOuvert = false;
-          minuteurFermeture = undefined;
-        }, tempsdAffichageAutomatiqueEnMs);
-      }
-    }, tempsdAttenteAvantAffichageEnMs);
+    évènementsDuParcours.traitePremièreMesurePriseEnCompte(() => {
+      minuteurOuverture = setTimeout(() => {
+        minuteurOuverture = undefined;
+        panneauOuvert = true;
+        if (!estSurvolé && !encart?.contains(document.activeElement)) {
+          minuteurFermeture = setTimeout(() => {
+            panneauOuvert = false;
+            minuteurFermeture = undefined;
+          }, tempsdAffichageAutomatiqueEnMs);
+        }
+      }, tempsdAttenteAvantAffichageEnMs);
+    });
   });
 
   let afficheDialogue = $state(false);

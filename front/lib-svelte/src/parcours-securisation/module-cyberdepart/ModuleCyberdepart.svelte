@@ -8,6 +8,7 @@
   import { toasterStore } from '../../ui/toasts/toaster.store';
   import Toaster from '../../ui/toasts/Toaster.svelte';
   import BadgeCyberdepart from '../BadgeCyberdepart.svelte';
+  import { évènementsDuParcours } from '../evenementsDuParcours';
   import InterlocuteursParcoursSecurisation from '../InterlocuteursParcoursSecurisation.svelte';
   import MesuresDeModule from '../MesuresDeModule.svelte';
   import type { ModuleRéponseApi } from '../moduleReponseApi';
@@ -28,11 +29,10 @@
   onMount(async () => {
     const reponse = await axios.get<ModuleRéponseApi>(`/api/modules/1`);
     module = reponse.data;
-    if (sessionStorage.getItem('mesure-prise-en-compte') === 'true') {
+    évènementsDuParcours.traiteMesurePriseEnCompte(() => {
       toasterStore.succes('Mesure déclarée prise en compte', 'Votre progression a été mise à jour.');
-      sessionStorage.removeItem('mesure-prise-en-compte');
       animeProgression = true;
-    }
+    });
   });
 
   const progressionActuelle = $derived(module.mesures.filter((module) => module.estPriseEnCompte).length);

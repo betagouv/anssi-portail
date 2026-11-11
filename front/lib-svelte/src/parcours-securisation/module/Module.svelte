@@ -7,6 +7,8 @@
   import { toasterStore } from '../../ui/toasts/toaster.store';
   import Toaster from '../../ui/toasts/Toaster.svelte';
   import BadgeCyberdepart from '../BadgeCyberdepart.svelte';
+  import { évènementsDuParcours } from '../evenementsDuParcours';
+  import EvenementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
   import InterlocuteursParcoursSecurisation from '../InterlocuteursParcoursSecurisation.svelte';
   import LienRetourAuxModules from '../LienRetourAuxModules.svelte';
   import MesuresDeModule from '../MesuresDeModule.svelte';
@@ -14,7 +16,6 @@
   import type { ModuleRéponseApi } from '../moduleReponseApi';
   import Progression from '../Progression.svelte';
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
-  import EvenementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
   import ModaleModuleTermine from './ModaleModuleTermine.svelte';
 
   let module = $state<ModuleRéponseApi>({
@@ -31,22 +32,19 @@
     const idDuModule = new URL(window.location.href).pathname.split('/').pop();
     const reponse = await axios.get<ModuleRéponseApi>(`/api/modules/${idDuModule}`);
     module = reponse.data;
-    if (sessionStorage.getItem('mesure-prise-en-compte') === 'true') {
+    évènementsDuParcours.traiteMesurePriseEnCompte(() => {
       toasterStore.succes('Mesure déclarée prise en compte', 'Votre progression a été mise à jour.');
-      sessionStorage.removeItem('mesure-prise-en-compte');
       animeProgression = true;
-    }
+    });
 
-    if (module.cibleBadge !== undefined && sessionStorage.getItem('badge-cyberdepart-debloque') === 'true') {
-      badgeCyberdépartDebloqué = true;
-      sessionStorage.removeItem('badge-cyberdepart-debloque');
+    if (module.cibleBadge !== undefined) {
+      évènementsDuParcours.traiteBadgeCyberdépartDébloqué(() => {
+        badgeCyberdépartDebloqué = true;
+      });
     }
-    if (sessionStorage.getItem('parcours-complet-termine') === 'true') {
-      sessionStorage.removeItem('module-termine');
-    } else if (sessionStorage.getItem('module-termine') === 'true') {
+    évènementsDuParcours.traiteModuleTerminé(() => {
       moduleTerminé = true;
-      sessionStorage.removeItem('module-termine');
-    }
+    });
   });
 
   const progressionActuelle = $derived(module.mesures.filter((m) => m.estPriseEnCompte).length);
