@@ -1,4 +1,4 @@
-import type { ExigenceNis2 } from '../nis2/exigence.type';
+import type { ExigenceNis2 } from '../../nis2/exigence.type';
 
 export type Risque = {
   libelle: string;

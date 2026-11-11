@@ -1,6 +1,6 @@
 <script lang="ts">
   import GrilleCartesMesures from './GrilleCartesMesures.svelte';
-  import type { Mesure } from './mesure';
+  import type { Mesure } from './mesures/mesure';
 
   const { mesures }: { mesures: Mesure[] } = $props();
 

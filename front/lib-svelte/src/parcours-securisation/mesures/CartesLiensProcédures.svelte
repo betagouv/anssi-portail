@@ -1,6 +1,6 @@
 <script lang="ts">
   import { clic } from '../../directives/actions.svelte';
-  import type { Mesure } from './../mesure';
+  import type { Mesure } from './mesure';
 
   const { mesure, surSélectionProcédure }: { mesure: Mesure; surSélectionProcédure: () => void } = $props();
   const aDesProcédures: boolean = $derived(mesure.procédures.length > 0);

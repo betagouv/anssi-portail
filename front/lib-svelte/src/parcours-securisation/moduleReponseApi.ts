@@ -1,4 +1,4 @@
-import type { Mesure } from './mesure';
+import type { Mesure } from './mesures/mesure';
 
 export type ModuleRéponseApi = {
   nom: string;

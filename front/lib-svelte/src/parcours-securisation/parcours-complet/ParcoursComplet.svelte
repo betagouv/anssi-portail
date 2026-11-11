@@ -7,7 +7,7 @@
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
   import Heros from '../../ui/Heros.svelte';
   import Lien from '../../ui/Lien.svelte';
-  import type { Mesure, Module } from '../mesure';
+  import type { Mesure, Module } from '../mesures/mesure';
   import Progression from '../Progression.svelte';
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
   import VueListeMesures from './VueListeMesures.svelte';
