@@ -9,10 +9,26 @@
 
   type Props = {
     estOuverte: boolean;
-    typeDeRetour: 'spontané';
+    typeDeRetour: 'spontané' | 'mi-parcours';
+    surFermeture?: () => void;
   };
 
-  let { estOuverte = $bindable(), typeDeRetour }: Props = $props();
+  let { estOuverte = $bindable(), typeDeRetour, surFermeture }: Props = $props();
+
+  const avecRecommandation = $derived(typeDeRetour !== 'mi-parcours');
+
+  const questionUtilité = $derived.by(() => {
+    switch (typeDeRetour) {
+      case 'mi-parcours':
+        return 'Jusqu’ici ce parcours vous est-il utile\u202f?';
+      case 'spontané':
+        return 'Trouvez-vous le parcours utile\u202f?';
+    }
+  });
+  const ferme = () => {
+    estOuverte = false;
+    surFermeture?.();
+  };
 
   const niveauxDUtilité = [
     { valeur: 1, libellé: 'Pas du tout utile', emoji: '😠' },
@@ -41,7 +57,7 @@
   let confirmation: HTMLDivElement | undefined = $state();
 
   const erreurUtilité = $derived(soumissionTentée && !niveauDUtilité);
-  const erreurRecommandation = $derived(soumissionTentée && !recommandationAutreOrganisation);
+  const erreurRecommandation = $derived(soumissionTentée && avecRecommandation && !recommandationAutreOrganisation);
   const erreurCommentaire = $derived(soumissionTentée && !commentaireAmélioration.trim());
   const titre = $derived(
     étatEnvoi === 'succès'
@@ -61,7 +77,7 @@
         {
           typeDeRetour,
           niveauDUtilité,
-          recommandationAutreOrganisation,
+          ...(avecRecommandation ? { recommandationAutreOrganisation } : {}),
           commentaireAmélioration: commentaireAmélioration.trim(),
           souhaiteÊtreRecontacté,
         },
@@ -76,7 +92,7 @@
   };
 </script>
 
-<Modale bind:estOuverte {titre}>
+<Modale bind:estOuverte {titre} {surFermeture}>
   {#if étatEnvoi === 'succès'}
     <div class="confirmation" bind:this={confirmation} tabindex="-1">
       <p>Si vous avez accepté d’échanger sur votre expérience, nous vous recontacterons très prochainement.</p>
@@ -98,7 +114,7 @@
           class:erreur={erreurUtilité}
           aria-describedby={erreurUtilité ? 'erreurs-avis-parcours' : undefined}
         >
-          <legend>Trouvez-vous le parcours utile&#8239;?</legend>
+          <legend>{questionUtilité}</legend>
           <div class="niveaux-utilite">
             {#each niveauxDUtilité as niveau (niveau.valeur)}
               <div class="niveau">
@@ -122,19 +138,21 @@
           </div>
         </fieldset>
 
-        <div class="recommandation">
-          <DsfrRadiosGroup
-            id="recommandation-parcours"
-            name="recommandation-parcours"
-            legend="Recommanderiez-vous ce parcours à une autre organisation&#8239;?"
-            inline
-            radios={recommandations}
-            value={recommandationAutreOrganisation}
-            status={erreurRecommandation ? 'error' : 'default'}
-            errorMessage="Sélectionnez une réponse."
-            onvaluechanged={(valeur) => (recommandationAutreOrganisation = valeur as Recommandation)}
-          />
-        </div>
+        {#if avecRecommandation}
+          <div class="recommandation">
+            <DsfrRadiosGroup
+              id="recommandation-parcours"
+              name="recommandation-parcours"
+              legend="Recommanderiez-vous ce parcours à une autre organisation&#8239;?"
+              inline
+              radios={recommandations}
+              value={recommandationAutreOrganisation}
+              status={erreurRecommandation ? 'error' : 'default'}
+              errorMessage="Sélectionnez une réponse."
+              onvaluechanged={(valeur) => (recommandationAutreOrganisation = valeur as Recommandation)}
+            />
+          </div>
+        {/if}
 
         <ChampTexte
           id="commentaire-avis-parcours"
@@ -159,8 +177,11 @@
 
   {#snippet actions()}
     {#if étatEnvoi === 'succès'}
-      <Bouton libelle="Terminer" type="tertiaire-sans-bordure" surClic={() => (estOuverte = false)} />
+      <Bouton libelle="Terminer" type="tertiaire-sans-bordure" surClic={ferme} />
     {:else}
+      {#if typeDeRetour === 'mi-parcours'}
+        <Bouton libelle="Plus tard" type="secondaire" surClic={ferme} />
+      {/if}
       <Bouton
         libelle="Envoyer mes commentaires"
         taille="md"

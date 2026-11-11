@@ -16,8 +16,8 @@
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
   import BadgeCyberdepart from './BadgeCyberdepart.svelte';
   import BasculeParcoursComplet from './BasculeParcoursComplet.svelte';
-  import ModaleBadgeCyberdepartDebloque from './ModaleBadgeCyberdepartDebloque.svelte';
-  import ModaleModuleCyberdepartTermine from './ModaleModuleCyberdepartTermine.svelte';
+  import EvenementsViaModaleParcoursComplet from './evenementsViaModaleParcoursComplet.svelte';
+  import EvenementsViaModaleParcoursCyberdepart from './evenementsViaModaleParcoursCyberdepart.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -26,8 +26,6 @@
     cibleBadge: 0,
   });
   const totalMesures = $derived(module.mesures.length);
-  let badgeCyberdépartDebloqué = $state(false);
-  let moduleTerminé = $state(false);
   let animeProgression = $state(false);
 
   onMount(async () => {
@@ -38,19 +36,12 @@
       sessionStorage.removeItem('mesure-prise-en-compte');
       animeProgression = true;
     }
-    if (sessionStorage.getItem('badge-cyberdepart-debloque') === 'true') {
-      badgeCyberdépartDebloqué = true;
-      sessionStorage.removeItem('badge-cyberdepart-debloque');
-    }
-    if (sessionStorage.getItem('module-termine') === 'true') {
-      moduleTerminé = true;
-      sessionStorage.removeItem('module-termine');
-    }
   });
 
   const progressionActuelle = $derived(module.mesures.filter((module) => module.estPriseEnCompte).length);
   const badgeDebloque = $derived(totalMesures > 0 && progressionActuelle >= (module.cibleBadge ?? 0));
   const parcoursTermine = $derived(totalMesures > 0 && progressionActuelle === totalMesures);
+  const parcoursCyberDépart = $derived($profilStore?.parcoursSecurisation.parcoursActuel === 'allégé');
   const parcoursComplet = $derived($profilStore?.parcoursSecurisation.parcoursActuel === 'complet');
   const propriétésFilAriane: PropriétésFilAriane = $derived(
     parcoursComplet
@@ -89,9 +80,11 @@
   {/snippet}
 </Heros>
 
-<ModaleBadgeCyberdepartDebloque bind:estOuverte={badgeCyberdépartDebloqué} />
-
-<ModaleModuleCyberdepartTermine bind:estOuverte={moduleTerminé} />
+{#if parcoursCyberDépart}
+  <EvenementsViaModaleParcoursCyberdepart peutOuvrir={module.nom !== ''} />
+{:else if parcoursComplet}
+  <EvenementsViaModaleParcoursComplet peutOuvrir={module.nom !== ''} />
+{/if}
 
 <dsfr-container>
   <div class="progression">
