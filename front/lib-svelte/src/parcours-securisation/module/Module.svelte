@@ -15,7 +15,6 @@
   import Progression from '../Progression.svelte';
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
   import ModaleModuleTermine from './ModaleModuleTermine.svelte';
-  import ModaleParcoursTermine from './ModaleParcoursTermine.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -23,7 +22,6 @@
     mesures: [],
   });
   let moduleTerminé = $state(false);
-  let parcoursTerminé = $state(false);
   const totalMesures = $derived(module.mesures.length);
   let animeProgression = $state(false);
 
@@ -38,8 +36,6 @@
     }
 
     if (sessionStorage.getItem('parcours-complet-termine') === 'true') {
-      parcoursTerminé = true;
-      sessionStorage.removeItem('parcours-complet-termine');
       sessionStorage.removeItem('module-termine');
     } else if (sessionStorage.getItem('module-termine') === 'true') {
       moduleTerminé = true;
@@ -87,7 +83,6 @@
 </Heros>
 
 <ModaleModuleTermine bind:estOuverte={moduleTerminé} />
-<ModaleParcoursTermine bind:estOuverte={parcoursTerminé} />
 
 <dsfr-container>
   <div class="progression">
@@ -100,7 +95,7 @@
 
 <MesuresDeModule mesures={module.mesures} />
 <InterlocuteursParcoursSecurisation />
-<EvenementsViaModaleParcoursComplet peutOuvrir={module.nom !== '' && !moduleTerminé && !parcoursTerminé} />
+<EvenementsViaModaleParcoursComplet peutOuvrir={module.nom !== '' && !moduleTerminé} />
 <RetourUtilisateurSurParcours />
 
 <style lang="scss">
