@@ -16,12 +16,12 @@ export type AvisUtilisateur = {
   pageSource?: string;
 };
 
-export type TypeDeRetour = 'spontané';
+export type TypeDeRetour = 'spontané' | 'mi-parcours';
 
 export type AvisParcours = {
   typeDeRetour: TypeDeRetour;
   niveauDUtilité: NiveauDUtilité;
-  recommandationAutreOrganisation: 'oui' | 'non' | 'peut-être';
+  recommandationAutreOrganisation?: 'oui' | 'non' | 'peut-être';
   commentaireAmélioration: string;
   souhaiteÊtreRecontacté: boolean;
   parcours: Parcours;
