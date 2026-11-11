@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { profilStore } from '../stores/profil.store';
+  import { évènementsDuParcours } from './evenementsDuParcours';
   import ModaleRetourUtilisateurSurParcours from './ModaleRetourUtilisateurSurParcours.svelte';
   import ModaleParcoursTermine from './module/ModaleParcoursTermine.svelte';
 
@@ -10,17 +10,13 @@
   let modaleParcoursCompletTerminéOuverte = $state(false);
 
   $effect(() => {
-    if (!peutOuvrir || $profilStore?.parcoursSecurisation.parcoursActuel !== 'complet') return;
-    if (sessionStorage.getItem('parcours-complet-termine') === 'true') {
-      sessionStorage.removeItem('parcours-complet-termine');
-      sessionStorage.removeItem('module-termine');
-      sessionStorage.removeItem('10-mesures-prises-en-compte');
+    if (!peutOuvrir) return;
+    évènementsDuParcours.traiteParcoursCompletTerminé(() => {
       modaleParcoursCompletTerminéOuverte = true;
-      return;
-    }
-    if (sessionStorage.getItem('10-mesures-prises-en-compte') !== 'true') return;
-    sessionStorage.removeItem('10-mesures-prises-en-compte');
-    modaleRetourMiParcoursOuverte = true;
+    });
+    évènementsDuParcours.traiteDixMesuresPrisesEnCompteParcoursComplet(() => {
+      modaleRetourMiParcoursOuverte = true;
+    });
   });
 </script>
 

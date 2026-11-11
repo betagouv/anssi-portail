@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { évènementsDuParcours } from '../evenementsDuParcours';
   import ModaleRetourUtilisateurSurParcours from '../ModaleRetourUtilisateurSurParcours.svelte';
   import ModaleBadgeCyberdepartDebloque from './ModaleBadgeCyberdepartDebloque.svelte';
   import ModaleModuleCyberdepartTermine from './ModaleModuleCyberdepartTermine.svelte';
@@ -11,14 +12,12 @@
   let moduleTerminé = $state(false);
   $effect(() => {
     if (!peutOuvrir) return;
-    if (sessionStorage.getItem('badge-cyberdepart-debloque') === 'true') {
+    évènementsDuParcours.traiteBadgeCyberdépartDébloqué(() => {
       badgeCyberdépartDebloqué = true;
-      sessionStorage.removeItem('badge-cyberdepart-debloque');
-    }
-    if (sessionStorage.getItem('module-termine') === 'true') {
+    });
+    évènementsDuParcours.traiteModuleTerminé(() => {
       moduleTerminé = true;
-      sessionStorage.removeItem('module-termine');
-    }
+    });
   });
 </script>
 
