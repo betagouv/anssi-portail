@@ -95,7 +95,7 @@
   {/if}
 </dsfr-container>
 
-<RetourUtilisateurSurParcours />
+<RetourUtilisateurSurParcours peutOuvrirAutomatiquement={modules.length > 0} />
 
 <style lang="scss">
   @use '../../../../assets/styles/responsive' as *;

@@ -113,7 +113,9 @@
     {/if}
   </div>
 </dsfr-container>
-<RetourUtilisateurSurParcours />
+<RetourUtilisateurSurParcours
+  peutOuvrirAutomatiquement={module.nom !== '' && !badgeCyberdépartDebloqué && !moduleTerminé}
+/>
 
 <MesuresDeModule mesures={module.mesures} />
 <InterlocuteursParcoursSecurisation />

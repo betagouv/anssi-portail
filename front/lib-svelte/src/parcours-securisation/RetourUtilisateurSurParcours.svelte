@@ -1,7 +1,51 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { profilStore } from '../stores/profil.store';
   import Bouton from '../ui/Bouton.svelte';
   import ModaleRetourUtilisateurSurParcours from './ModaleRetourUtilisateurSurParcours.svelte';
+
+  type Props = {
+    peutOuvrirAutomatiquement?: boolean;
+  };
+
+  const { peutOuvrirAutomatiquement = false }: Props = $props();
+  let pageChargée = $state(false);
+  let encart: HTMLElement | undefined = $state();
+  let minuteurOuverture: ReturnType<typeof setTimeout> | undefined;
+  let minuteurFermeture: ReturnType<typeof setTimeout> | undefined;
+
+  const annuleMinuteursAutomatiques = () => {
+    clearTimeout(minuteurOuverture);
+    minuteurOuverture = undefined;
+    clearTimeout(minuteurFermeture);
+    minuteurFermeture = undefined;
+  };
+
+  onMount(() => {
+    const surChargement = () => (pageChargée = true);
+    pageChargée = document.readyState === 'complete';
+    if (!pageChargée) window.addEventListener('load', surChargement, { once: true });
+    return () => {
+      window.removeEventListener('load', surChargement);
+      annuleMinuteursAutomatiques();
+    };
+  });
+
+  $effect(() => {
+    if (!pageChargée || !peutOuvrirAutomatiquement || !parcoursUtilisateur) return;
+    if (sessionStorage.getItem('premiere-mesure-prise-en-compte') !== 'true') return;
+    sessionStorage.removeItem('premiere-mesure-prise-en-compte');
+    minuteurOuverture = setTimeout(() => {
+      minuteurOuverture = undefined;
+      panneauOuvert = true;
+      if (!estSurvolé && !encart?.contains(document.activeElement)) {
+        minuteurFermeture = setTimeout(() => {
+          panneauOuvert = false;
+          minuteurFermeture = undefined;
+        }, 3500);
+      }
+    }, 350);
+  });
 
   let afficheDialogue = $state(false);
 
@@ -24,6 +68,7 @@
   const estLg = () => window.matchMedia('(min-width: 992px)').matches;
 
   const surEntréeSouris = () => {
+    annuleMinuteursAutomatiques();
     if (!estLg()) return;
     estSurvolé = true;
     panneauOuvert = true;
@@ -35,6 +80,7 @@
   };
 
   const surEntréeFocus = (e: FocusEvent) => {
+    annuleMinuteursAutomatiques();
     if (estLg() && e.target instanceof HTMLElement && e.target.matches(':focus-visible')) panneauOuvert = true;
   };
 
@@ -43,13 +89,17 @@
   };
 
   const surToucheEnfoncée = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') panneauOuvert = false;
+    if (e.key === 'Escape') {
+      annuleMinuteursAutomatiques();
+      panneauOuvert = false;
+    }
   };
 </script>
 
 <svelte:window onkeydown={surToucheEnfoncée} />
 
 <aside
+  bind:this={encart}
   class="retour-utilisateur-sur-parcours"
   aria-label="Votre avis"
   onmouseenter={surEntréeSouris}
@@ -62,7 +112,10 @@
     type="button"
     aria-expanded={panneauOuvert}
     aria-controls={idPanneau}
-    onclick={() => (panneauOuvert = !panneauOuvert)}
+    onclick={() => {
+      annuleMinuteursAutomatiques();
+      panneauOuvert = !panneauOuvert;
+    }}
   >
     <span class="illustration">
       <img src="/assets/images/dragon-coeur.svg" alt="" width="52" height="60" />
@@ -75,7 +128,15 @@
       <div class={['panneau', parcoursUtilisateur]}>
         <h2 class="fr-h6">Que pensez-vous du parcours{labelParcours}&#8239;?</h2>
         <p class="texte-detail-sm">Votre retour peut rendre ce parcours plus utile à tous 🙏.</p>
-        <Bouton libelle="Partager mon ressenti" type="primaire" taille="md" surClic={() => (afficheDialogue = true)} />
+        <Bouton
+          libelle="Partager mon ressenti"
+          type="primaire"
+          taille="md"
+          surClic={() => {
+            annuleMinuteursAutomatiques();
+            afficheDialogue = true;
+          }}
+        />
       </div>
     </div>
   </div>

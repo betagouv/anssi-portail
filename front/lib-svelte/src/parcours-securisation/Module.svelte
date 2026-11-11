@@ -99,7 +99,7 @@
 
 <MesuresDeModule mesures={module.mesures} />
 <InterlocuteursParcoursSecurisation />
-<RetourUtilisateurSurParcours />
+<RetourUtilisateurSurParcours peutOuvrirAutomatiquement={module.nom !== '' && !moduleTerminé && !parcoursTerminé} />
 
 <style lang="scss">
   .progression {
