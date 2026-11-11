@@ -2,7 +2,7 @@
   import axios from 'axios';
   import { untrack } from 'svelte';
   import Bouton from '../../ui/Bouton.svelte';
-  import type { Mesure } from './mesure';
+  import type { Mesure, PriseEnCompteRéponseApi } from './mesure';
 
   type Props = {
     mesure: Mesure;
@@ -14,8 +14,11 @@
   const prendEnCompte = async () => {
     try {
       priseEnCompteEnCours = true;
-      const reponse = await axios.put(`/api/mesures/${mesure.id}/prise-en-compte`);
+      const reponse = await axios.put<PriseEnCompteRéponseApi>(`/api/mesures/${mesure.id}/prise-en-compte`);
       sessionStorage.setItem('mesure-prise-en-compte', 'true');
+      if (reponse.data.nombreTotalMesuresPrisesEnCompte === 1) {
+        sessionStorage.setItem('premiere-mesure-prise-en-compte', 'true');
+      }
       if (reponse.data.badgeCyberdépartDebloqué) {
         sessionStorage.setItem('badge-cyberdepart-debloque', 'true');
       }

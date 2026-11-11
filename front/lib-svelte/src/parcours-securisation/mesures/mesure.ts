@@ -45,3 +45,10 @@ export type Module = {
   cibleBadge?: number;
   mesures: Mesure[];
 };
+
+export type PriseEnCompteRéponseApi = {
+  nombreTotalMesuresPrisesEnCompte: number;
+  badgeCyberdépartDebloqué: boolean;
+  moduleTerminé: boolean;
+  parcoursCompletTerminé: boolean;
+};
