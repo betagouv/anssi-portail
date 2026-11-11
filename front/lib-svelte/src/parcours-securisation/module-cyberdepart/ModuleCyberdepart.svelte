@@ -10,16 +10,13 @@
   import BadgeCyberdepart from '../BadgeCyberdepart.svelte';
   import InterlocuteursParcoursSecurisation from '../InterlocuteursParcoursSecurisation.svelte';
   import MesuresDeModule from '../MesuresDeModule.svelte';
-  import ModaleBadgeCyberdepartDebloque from '../ModaleBadgeCyberdepartDebloque.svelte';
-  import ModaleRetourUtilisateurSurParcours from '../ModaleRetourUtilisateurSurParcours.svelte';
   import type { ModuleRéponseApi } from '../moduleReponseApi';
   import Progression from '../Progression.svelte';
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
   import BasculeParcoursComplet from './BasculeParcoursComplet.svelte';
-  import ModaleModuleCyberdepartTermine from './ModaleModuleCyberdepartTermine.svelte';
+  import EvenementsViaModaleParcoursCyberdepart from './evenementsViaModaleParcoursCyberdepart.svelte';
 
-  let modaleRetourMiParcoursOuverte = $state(false);
-  let modaleParcoursCyberdépartTerminéOuverte = $state(false);
+  let modaleOuverte = $state(false);
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -28,8 +25,6 @@
     cibleBadge: 0,
   });
   const totalMesures = $derived(module.mesures.length);
-  let badgeCyberdépartDebloqué = $state(false);
-  let moduleTerminé = $state(false);
   let animeProgression = $state(false);
 
   onMount(async () => {
@@ -39,14 +34,6 @@
       toasterStore.succes('Mesure déclarée prise en compte', 'Votre progression a été mise à jour.');
       sessionStorage.removeItem('mesure-prise-en-compte');
       animeProgression = true;
-    }
-    if (sessionStorage.getItem('badge-cyberdepart-debloque') === 'true') {
-      badgeCyberdépartDebloqué = true;
-      sessionStorage.removeItem('badge-cyberdepart-debloque');
-    }
-    if (sessionStorage.getItem('module-termine') === 'true') {
-      moduleTerminé = true;
-      sessionStorage.removeItem('module-termine');
     }
   });
 
@@ -74,22 +61,7 @@
   {/snippet}
 </Heros>
 
-<ModaleBadgeCyberdepartDebloque
-  bind:estOuverte={badgeCyberdépartDebloqué}
-  surFermeture={() => {
-    modaleRetourMiParcoursOuverte = true;
-  }}
-/>
-<ModaleRetourUtilisateurSurParcours bind:estOuverte={modaleRetourMiParcoursOuverte} typeDeRetour="mi-parcours" />
-
-<ModaleModuleCyberdepartTermine bind:estOuverte={modaleParcoursCyberdépartTerminéOuverte} />
-<ModaleRetourUtilisateurSurParcours
-  bind:estOuverte={moduleTerminé}
-  typeDeRetour="parcours terminé"
-  surFermeture={() => {
-    modaleParcoursCyberdépartTerminéOuverte = true;
-  }}
-/>
+<EvenementsViaModaleParcoursCyberdepart peutOuvrir={module.nom !== ''} bind:estOuverte={modaleOuverte} />
 
 <dsfr-container>
   <div class="progression">
@@ -110,13 +82,7 @@
     {/if}
   </div>
 </dsfr-container>
-<RetourUtilisateurSurParcours
-  peutOuvrirAutomatiquement={module.nom !== '' &&
-    !badgeCyberdépartDebloqué &&
-    !moduleTerminé &&
-    !modaleRetourMiParcoursOuverte &&
-    !modaleParcoursCyberdépartTerminéOuverte}
-/>
+<RetourUtilisateurSurParcours peutOuvrirAutomatiquement={module.nom !== '' && !modaleOuverte} />
 
 <MesuresDeModule mesures={module.mesures} />
 <InterlocuteursParcoursSecurisation />
