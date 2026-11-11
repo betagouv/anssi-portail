@@ -125,7 +125,13 @@ describe('La ressource avis parcours', () => {
       });
     });
 
-    it('accepte un avis intermédiaire sans recommandation', async () => {
+    it.each([
+      ['mi-parcours', undefined, HttpStatusCode.Created],
+      ['spontané', undefined, HttpStatusCode.BadRequest],
+      ['parcours terminé', undefined, HttpStatusCode.BadRequest],
+      ['parcours terminé', 'oui', HttpStatusCode.Created],
+      ['inconnu', 'oui', HttpStatusCode.BadRequest],
+    ])('valide le statut %s avec recommandation %s', async (typeDeRetour, recommandation, statut) => {
       const utilisateur = utilisateurDeTest().avecLEmail('intermediaire@yopmail.com').construis();
       await utilisateur.rejoinsParcours('allégé', busEvenements, 'visite-page-mesure');
       await entrepotUtilisateur.ajoute(utilisateur);
@@ -133,8 +139,14 @@ describe('La ressource avis parcours', () => {
       const réponse = await request(serveur)
         .post('/api/avis-parcours')
         .set('Cookie', encodeSession({ email: utilisateur.email, token: 'valide' }))
-        .send({ ...avis, typeDeRetour: 'mi-parcours' });
-      expect(réponse.statusCode).toBe(HttpStatusCode.Created);
+        .send({
+          ...avis,
+          typeDeRetour,
+          ...(recommandation ? { recommandationAutreOrganisation: recommandation } : {}),
+        });
+      expect(réponse.statusCode).toBe(statut);
+      if (statut === HttpStatusCode.Created)
+        expect(busEvenements.recupereEvenement(AvisParcoursDonné)?.typeDeRetour).toBe(typeDeRetour);
     });
 
     it("retourne une erreur 500 si l'utilisateur n'a pas de parcours", async () => {
