@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Bouton, { type Props as PropsDuBouton } from '../ui/Bouton.svelte';
+  import Bouton, { type Props as PropsDuBouton } from '../../ui/Bouton.svelte';
 
   type Props = {
     typeDuBouton: PropsDuBouton['type'];

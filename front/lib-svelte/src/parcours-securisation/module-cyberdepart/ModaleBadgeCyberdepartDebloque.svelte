@@ -3,7 +3,7 @@
   import Bouton from '../../ui/Bouton.svelte';
   import CanonAConfetti from '../../ui/CanonAConfetti.svelte';
   import Modale from '../../ui/Modale.svelte';
-  import BoutonPartageBadgeCyberdepart from '../BoutonPartageBadgeCyberdepart.svelte';
+  import BoutonPartageBadgeCyberdepart from './BoutonPartageBadgeCyberdepart.svelte';
 
   type Props = {
     estOuverte: boolean;
