@@ -20,13 +20,8 @@
   import ÉvènementsViaModaleParcoursComplet from './evenementsViaModaleParcoursComplet.svelte';
   import ÉvènementsViaModaleParcoursCyberdepart from './evenementsViaModaleParcoursCyberdepart.svelte';
 
-  let module = $state<ModuleRéponseApi>({
-    nom: '',
-    description: '',
-    mesures: [],
-    cibleBadge: 0,
-  });
-  const totalMesures = $derived(module.mesures.length);
+  let module = $state<ModuleRéponseApi | undefined>(undefined);
+  const totalMesures = $derived(module?.mesures.length ?? 0);
   let animeProgression = $state(false);
 
   onMount(async () => {
@@ -38,8 +33,8 @@
     });
   });
 
-  const progressionActuelle = $derived(module.mesures.filter((module) => module.estPriseEnCompte).length);
-  const badgeDebloqué = $derived(totalMesures > 0 && progressionActuelle >= (module.cibleBadge ?? 0));
+  const progressionActuelle = $derived(module?.mesures.filter((module) => module.estPriseEnCompte).length ?? 0);
+  const badgeDebloqué = $derived(totalMesures > 0 && progressionActuelle >= (module?.cibleBadge ?? 0));
   const parcoursTerminé = $derived(totalMesures > 0 && progressionActuelle === totalMesures);
   const parcoursCyberDépart = $derived($profilStore?.parcoursSecurisation.parcoursActuel === 'allégé');
   const parcoursComplet = $derived($profilStore?.parcoursSecurisation.parcoursActuel === 'complet');
@@ -51,7 +46,7 @@
             lien: '/parcours-complet',
           },
           {
-            nom: module.nom,
+            nom: module?.nom ?? '',
           },
         ]
       : [
@@ -67,11 +62,11 @@
   cacheActions={true}
   cacheIllustration={true}
   cacheTags={true}
-  description={module.description}
+  description={module?.description ?? ''}
   format="banniere"
   illustrationAlt=""
   illustrationSource=""
-  titre={module.nom}
+  titre={module?.nom ?? ''}
   theme="pastel"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
 >
@@ -81,9 +76,9 @@
 </Héros>
 
 {#if parcoursCyberDépart}
-  <ÉvènementsViaModaleParcoursCyberdepart peutOuvrir={module.nom !== ''} />
+  <ÉvènementsViaModaleParcoursCyberdepart peutOuvrir={!!module} />
 {:else if parcoursComplet}
-  <ÉvènementsViaModaleParcoursComplet peutOuvrir={module.nom !== ''} />
+  <ÉvènementsViaModaleParcoursComplet peutOuvrir={!!module} />
 {/if}
 
 <dsfr-container>
@@ -97,7 +92,7 @@
         structurer vos actions et améliorer votre protection dans la durée.
       </Alerte>
     {/if}
-    {#if module.nom !== ''}
+    {#if module}
       <Progression actuel={progressionActuelle} max={totalMesures} cible={module.cibleBadge} anime={animeProgression}
       ></Progression>
     {/if}
@@ -108,7 +103,7 @@
 </dsfr-container>
 <RetourUtilisateurSurParcours />
 
-<MesuresDeModule mesures={module.mesures} />
+<MesuresDeModule mesures={module?.mesures ?? []} />
 <InterlocuteursParcoursSecurisation />
 
 <style lang="scss">
