@@ -13,6 +13,7 @@ import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from '../../src/api/outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from '../../src/api/outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleModificationMotsDePasse } from '../../src/api/outils/modeleModificationMotsDePasse/serviceModeleModificationMotsDePasse.js';
+import { ServiceModèleRACI } from '../../src/api/outils/modeleRaci/serviceModeleRaci.js';
 import { ServiceModèleRevueComptesUtilisateurs } from '../../src/api/outils/modeleRevueComptesUtilisateurs/serviceModeleRevueComptesUtilisateurs.js';
 import { ServiceModèleRevueDroitsDAccès } from '../../src/api/outils/modeleRevueDroitsDAcces/serviceModeleRevueDroitsDAcces.js';
 import { AdaptateurCellar } from '../../src/infra/adaptateurCellar.js';
@@ -82,6 +83,7 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
       ),
     modèleListeDActivités: () =>
       join(process.cwd(), 'src', 'api', 'outils', 'modeleListeDActivites', 'modele-liste-d-activites.xlsx'),
+    modèleRACI: () => join(process.cwd(), 'src', 'api', 'outils', 'modeleRaci', 'modele-raci.xlsx'),
     modèleRevueComptesUtilisateurs: () =>
       join(
         process.cwd(),
@@ -403,6 +405,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
     fauxAdaptateurHorloge
   ),
   serviceModèleListeDActivités: new ServiceModèleListeDActivités(fauxFournisseurDeChemin, fauxAdaptateurHorloge),
+  serviceModèleRACI: new ServiceModèleRACI(fauxFournisseurDeChemin, fauxAdaptateurHorloge),
   serviceModèleModificationMotsDePasse: new ServiceModèleModificationMotsDePasse(
     fauxFournisseurDeChemin,
     fauxAdaptateurHorloge

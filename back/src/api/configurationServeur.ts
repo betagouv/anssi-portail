@@ -39,6 +39,7 @@ import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from './outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from './outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleModificationMotsDePasse } from './outils/modeleModificationMotsDePasse/serviceModeleModificationMotsDePasse.js';
+import { ServiceModèleRACI } from './outils/modeleRaci/serviceModeleRaci.js';
 import { ServiceModèleRevueComptesUtilisateurs } from './outils/modeleRevueComptesUtilisateurs/serviceModeleRevueComptesUtilisateurs.js';
 import { ServiceModèleRevueDroitsDAccès } from './outils/modeleRevueDroitsDAcces/serviceModeleRevueDroitsDAcces.js';
 
@@ -87,6 +88,7 @@ export type ConfigurationServeur = {
   serviceRécompensesCyberDépart: ServiceRécompensesCyberDépart;
   serviceModeleAnnuaireDeCrise: ServiceModeleAnnuaireDeCrise;
   serviceModèleListeDActivités: ServiceModèleListeDActivités;
+  serviceModèleRACI: ServiceModèleRACI;
   serviceModèleModificationMotsDePasse: ServiceModèleModificationMotsDePasse;
   serviceModèleRevueComptesUtilisateurs: ServiceModèleRevueComptesUtilisateurs;
   serviceModèleRevueDroitsDAccès: ServiceModèleRevueDroitsDAccès;

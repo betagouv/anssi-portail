@@ -3,6 +3,7 @@ const outils = [
   'rappel-mise-a-jour-annuaire-contacts.ics',
   'modele-modifications-mots-de-passe.xlsx',
   'modele-liste-d-activites.xlsx',
+  'modele-raci.xlsx',
   'rappel-mise-a-jour-liste-d-activites.ics',
   'modele-revue-comptes-utilisateurs.xlsx',
   'modele-revue-droits-d-acces.xlsx',
