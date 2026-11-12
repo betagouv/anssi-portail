@@ -14,7 +14,6 @@
     /^\/cyberdepart\/diagnostic-gratuit/,
     /^\/conseils-cyber/,
     /^\/parcours-complet/,
-    /^\/module-cyberdepart/,
     /^\/mesures/,
     /^\/modules/,
   ];
