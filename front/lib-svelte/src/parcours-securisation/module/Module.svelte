@@ -17,13 +17,9 @@
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
   import ModaleModuleTerminé from './ModaleModuleTermine.svelte';
 
-  let module = $state<ModuleRéponseApi>({
-    nom: '',
-    description: '',
-    mesures: [],
-  });
+  let module = $state<ModuleRéponseApi | undefined>(undefined);
   let moduleTerminé = $state(false);
-  const totalMesures = $derived(module.mesures.length);
+  const totalMesures = $derived(module?.mesures.length ?? 0);
   let animeProgression = $state(false);
 
   onMount(async () => {
@@ -40,7 +36,7 @@
     });
   });
 
-  const progressionActuelle = $derived(module.mesures.filter((m) => m.estPriseEnCompte).length);
+  const progressionActuelle = $derived(module?.mesures.filter((m) => m.estPriseEnCompte).length ?? 0);
 
   const propriétésFilAriane: PropriétésFilAriane = $derived(
     $profilStore?.parcoursSecurisation.parcoursActuel === 'allégé'
@@ -55,7 +51,7 @@
             lien: '/parcours-complet',
           },
           {
-            nom: module.nom,
+            nom: module?.nom ?? '',
           },
         ]
   );
@@ -66,11 +62,11 @@
   cacheActions={true}
   cacheIllustration={true}
   cacheTags={true}
-  description={module.description}
+  description={module?.description ?? ''}
   format="banniere"
   illustrationAlt=""
   illustrationSource=""
-  titre={module.nom}
+  titre={module?.nom ?? ''}
   theme="clair"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
 >
@@ -84,15 +80,15 @@
 <dsfr-container>
   <div class="progression">
     <LienRetourAuxModules />
-    {#if module.nom !== ''}
+    {#if module}
       <Progression actuel={progressionActuelle} max={totalMesures} cible={module.cibleBadge} anime={animeProgression} />
     {/if}
   </div>
 </dsfr-container>
 
-<MesuresDeModule mesures={module.mesures} />
+<MesuresDeModule mesures={module?.mesures ?? []} />
 <InterlocuteursParcoursSecurisation />
-<ÉvènementsViaModaleParcoursComplet peutOuvrir={module.nom !== '' && !moduleTerminé} />
+<ÉvènementsViaModaleParcoursComplet peutOuvrir={!!module && !moduleTerminé} />
 <RetourUtilisateurSurParcours />
 
 <style lang="scss">
