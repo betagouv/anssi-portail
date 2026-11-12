@@ -127,6 +127,7 @@ describe('La ressource avis parcours', () => {
 
     it.each([
       ['mi-parcours', undefined, HttpStatusCode.Created],
+      ['mi-parcours', 'oui', HttpStatusCode.BadRequest],
       ['spontané', undefined, HttpStatusCode.BadRequest],
       ['parcours terminé', undefined, HttpStatusCode.BadRequest],
       ['parcours terminé', 'oui', HttpStatusCode.Created],

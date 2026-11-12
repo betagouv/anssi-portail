@@ -11,7 +11,7 @@ describe("L'abonnement qui consigne le don d'un avis sur un parcours dans le jou
   let adaptateurHorloge: AdaptateurHorloge;
   let adaptateurHachage: AdaptateurHachage;
 
-  const unAvis = (surcharge: Partial<ConstructorParameters<typeof AvisParcoursDonné>[0]> = {}) =>
+  const unAvis = () =>
     new AvisParcoursDonné({
       typeDeRetour: 'spontané',
       niveauDUtilité: 4,
@@ -21,7 +21,6 @@ describe("L'abonnement qui consigne le don d'un avis sur un parcours dans le jou
       parcours: 'complet',
       emailDeContact: 'jean@dupont.fr',
       pageSource: '/parcours-securisation',
-      ...surcharge,
     });
 
   beforeEach(() => {
