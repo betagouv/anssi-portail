@@ -173,17 +173,10 @@
   </div>
   {#snippet actions()}
     {#if étape === 'formulaire'}
-      <Bouton
-        etire
-        libelle="Envoyer"
-        type="primaire"
-        taille="md"
-        boutonSoumission={true}
-        idFormulaire="formulaire-avis-utilisateur"
-      />
+      <Bouton etire libelle="Envoyer" taille="md" boutonSoumission={true} idFormulaire="formulaire-avis-utilisateur" />
       <Bouton etire type="secondaire" libelle="Fermer sans répondre" surClic={fermeDialogue} />
     {:else}
-      <Bouton etire libelle="Terminer" type="tertiaire-sans-bordure" taille="md" surClic={fermeDialogue} />
+      <Bouton etire libelle="Terminer" taille="md" surClic={fermeDialogue} />
     {/if}
   {/snippet}
 </Modale>

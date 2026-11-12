@@ -179,11 +179,8 @@
 
   {#snippet actions()}
     {#if étatEnvoi === 'succès'}
-      <Bouton libelle="Terminer" type="tertiaire-sans-bordure" surClic={ferme} />
+      <Bouton libelle="Terminer" surClic={ferme} />
     {:else}
-      {#if typeDeRetour !== 'spontané'}
-        <Bouton libelle="Plus tard" type="secondaire" surClic={ferme} />
-      {/if}
       <Bouton
         libelle="Envoyer mes commentaires"
         taille="md"
@@ -191,6 +188,9 @@
         idFormulaire="formulaire-avis-parcours"
         desactive={étatEnvoi === 'envoi'}
       />
+      {#if typeDeRetour !== 'spontané'}
+        <Bouton libelle="Plus tard" type="secondaire" surClic={ferme} />
+      {/if}
     {/if}
   {/snippet}
 </Modale>
