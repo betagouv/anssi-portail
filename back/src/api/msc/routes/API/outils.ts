@@ -4,6 +4,7 @@ import { ressourceCampagneDeSensibilisation } from '../../../outils/campagneDeSe
 import { ressourceModeleAnnuaireDeCrise } from '../../../outils/modeleAnnuaireDeCrise/ressourceModeleAnnuaireDeCrise.js';
 import { ressourceModeleListeDActivites } from '../../../outils/modeleListeDActivites/ressourceModeleListeDActivites.js';
 import { ressourceModeleModificationsMotsDePasse } from '../../../outils/modeleModificationMotsDePasse/ressourceModeleModificationsMotsDePasse.js';
+import { ressourceModèleRaci } from '../../../outils/modeleRaci/ressourceModeleRaci.js';
 import { ressourceModèleRevueComptesUtilisateurs } from '../../../outils/modeleRevueComptesUtilisateurs/ressourceModeleRevueComptesUtilisateurs.js';
 import { ressourceModèleRevueDroitsDAccès } from '../../../outils/modeleRevueDroitsDAcces/ressourceModeleRevueDroitsDAcces.js';
 import { ressourceRappelMiseAJourAnnuaireContacts } from '../../../outils/ressourceRappelMiseAJourAnnuaireContacts.js';
@@ -27,6 +28,7 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
     ressourceRappelMiseAJourAnnuaireContacts(configurationServeur)
   );
   enregistreRoute('/modele-liste-d-activites.xlsx', ressourceModeleListeDActivites(configurationServeur));
+  enregistreRoute('/modele-raci.xlsx', ressourceModèleRaci(configurationServeur));
   enregistreRoute(
     '/rappel-mise-a-jour-liste-d-activites.ics',
     ressourceRappelMiseAJourListeDActivités(configurationServeur)

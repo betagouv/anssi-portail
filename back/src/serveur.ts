@@ -13,6 +13,7 @@ import { adaptateurOIDC } from './api/oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from './api/outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from './api/outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleModificationMotsDePasse } from './api/outils/modeleModificationMotsDePasse/serviceModeleModificationMotsDePasse.js';
+import { ServiceModèleRACI } from './api/outils/modeleRaci/serviceModeleRaci.js';
 import { ServiceModèleRevueComptesUtilisateurs } from './api/outils/modeleRevueComptesUtilisateurs/serviceModeleRevueComptesUtilisateurs.js';
 import { ServiceModèleRevueDroitsDAccès } from './api/outils/modeleRevueDroitsDAcces/serviceModeleRevueDroitsDAcces.js';
 import { BusEvenements } from './bus/busEvenements.js';
@@ -250,6 +251,7 @@ const host = process.env.HOST;
       adaptateurHorloge
     ),
     serviceModèleListeDActivités: new ServiceModèleListeDActivités(fournisseurChemin, adaptateurHorloge),
+    serviceModèleRACI: new ServiceModèleRACI(fournisseurChemin, adaptateurHorloge),
     serviceModèleModificationMotsDePasse: new ServiceModèleModificationMotsDePasse(
       fournisseurChemin,
       adaptateurHorloge
