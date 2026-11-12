@@ -1,5 +1,5 @@
 <script lang="ts">
-  import CanonAConfetti from '../../ui/CanonAConfetti.svelte';
+  import CanonÀConfetti from '../../ui/CanonAConfetti.svelte';
   import Modale from '../../ui/Modale.svelte';
 
   type Props = {
@@ -27,7 +27,7 @@
   </div>
 </Modale>
 
-<CanonAConfetti lectureAutomatique={estOuverte} />
+<CanonÀConfetti lectureAutomatique={estOuverte} />
 
 <style lang="scss">
   .corps {

@@ -2,20 +2,20 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { profilStore } from '../../stores/profil.store';
-  import BadgeBeta from '../../ui/BadgeBeta.svelte';
+  import BadgeBêta from '../../ui/BadgeBeta.svelte';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
-  import Heros from '../../ui/Heros.svelte';
+  import Héros from '../../ui/Heros.svelte';
   import { toasterStore } from '../../ui/toasts/toaster.store';
   import Toaster from '../../ui/toasts/Toaster.svelte';
   import { évènementsDuParcours } from '../evenementsDuParcours';
-  import EvenementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
+  import ÉvènementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
   import InterlocuteursParcoursSecurisation from '../InterlocuteursParcoursSecurisation.svelte';
   import LienRetourAuxModules from '../LienRetourAuxModules.svelte';
   import MesuresDeModule from '../MesuresDeModule.svelte';
   import type { ModuleRéponseApi } from '../moduleReponseApi';
   import Progression from '../Progression.svelte';
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
-  import ModaleModuleTermine from './ModaleModuleTermine.svelte';
+  import ModaleModuleTerminé from './ModaleModuleTermine.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -28,8 +28,8 @@
 
   onMount(async () => {
     const idDuModule = new URL(window.location.href).pathname.split('/').pop();
-    const reponse = await axios.get<ModuleRéponseApi>(`/api/modules/${idDuModule}`);
-    module = reponse.data;
+    const réponse = await axios.get<ModuleRéponseApi>(`/api/modules/${idDuModule}`);
+    module = réponse.data;
     évènementsDuParcours.traiteMesurePriseEnCompte(() => {
       toasterStore.succes('Mesure déclarée prise en compte', 'Votre progression a été mise à jour.');
       animeProgression = true;
@@ -62,7 +62,7 @@
 </script>
 
 <Toaster />
-<Heros
+<Héros
   cacheActions={true}
   cacheIllustration={true}
   cacheTags={true}
@@ -75,11 +75,11 @@
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
 >
   {#snippet tags()}
-    <BadgeBeta />
+    <BadgeBêta />
   {/snippet}
-</Heros>
+</Héros>
 
-<ModaleModuleTermine bind:estOuverte={moduleTerminé} />
+<ModaleModuleTerminé bind:estOuverte={moduleTerminé} />
 
 <dsfr-container>
   <div class="progression">
@@ -92,7 +92,7 @@
 
 <MesuresDeModule mesures={module.mesures} />
 <InterlocuteursParcoursSecurisation />
-<EvenementsViaModaleParcoursComplet peutOuvrir={module.nom !== '' && !moduleTerminé} />
+<ÉvènementsViaModaleParcoursComplet peutOuvrir={module.nom !== '' && !moduleTerminé} />
 <RetourUtilisateurSurParcours />
 
 <style lang="scss">

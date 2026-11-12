@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import CanonAConfetti from '../../ui/CanonAConfetti.svelte';
+  import CanonÀConfetti from '../../ui/CanonAConfetti.svelte';
   import Lien from '../../ui/Lien.svelte';
   import Modale from '../../ui/Modale.svelte';
 
@@ -27,7 +27,7 @@
   {/snippet}
 </Modale>
 
-<CanonAConfetti lectureAutomatique={estOuverte} />
+<CanonÀConfetti lectureAutomatique={estOuverte} />
 
 <style lang="scss">
   .corps {

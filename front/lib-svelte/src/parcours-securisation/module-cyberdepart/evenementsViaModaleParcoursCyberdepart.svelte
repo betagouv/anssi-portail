@@ -1,8 +1,8 @@
 <script lang="ts">
   import { évènementsDuParcours } from '../evenementsDuParcours';
   import ModaleRetourUtilisateurSurParcours from '../ModaleRetourUtilisateurSurParcours.svelte';
-  import ModaleBadgeCyberdepartDebloque from './ModaleBadgeCyberdepartDebloque.svelte';
-  import ModaleModuleCyberdepartTermine from './ModaleModuleCyberdepartTermine.svelte';
+  import ModaleBadgeCyberdépartDebloqué from './ModaleBadgeCyberdepartDebloque.svelte';
+  import ModaleModuleCyberdepartTerminé from './ModaleModuleCyberdepartTermine.svelte';
 
   type Props = { peutOuvrir: boolean };
   let { peutOuvrir }: Props = $props();
@@ -21,7 +21,7 @@
   });
 </script>
 
-<ModaleBadgeCyberdepartDebloque
+<ModaleBadgeCyberdépartDebloqué
   bind:estOuverte={badgeCyberdépartDebloqué}
   surFermeture={() => {
     modaleRetourMiParcoursOuverte = true;
@@ -29,7 +29,7 @@
 />
 <ModaleRetourUtilisateurSurParcours bind:estOuverte={modaleRetourMiParcoursOuverte} typeDeRetour="mi-parcours" />
 
-<ModaleModuleCyberdepartTermine bind:estOuverte={modaleParcoursCyberdépartTerminéOuverte} />
+<ModaleModuleCyberdepartTerminé bind:estOuverte={modaleParcoursCyberdépartTerminéOuverte} />
 <ModaleRetourUtilisateurSurParcours
   bind:estOuverte={moduleTerminé}
   typeDeRetour="parcours terminé"
