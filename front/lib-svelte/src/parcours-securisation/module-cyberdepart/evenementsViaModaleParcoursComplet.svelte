@@ -1,8 +1,8 @@
 <script lang="ts">
   import { évènementsDuParcours } from '../evenementsDuParcours';
-  import EvenementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
-  import ModaleModuleCyberdepartTermine from './ModaleModuleCyberdepartTermine.svelte';
-  import ModaleBadgeCyberdepartDebloque from './ModaleBadgeCyberdepartDebloque.svelte';
+  import ÉvènementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
+  import ModaleBadgeCyberdepartDebloqué from './ModaleBadgeCyberdepartDebloque.svelte';
+  import ModaleModuleCyberdepartTerminé from './ModaleModuleCyberdepartTermine.svelte';
 
   type Props = { peutOuvrir: boolean };
   let { peutOuvrir }: Props = $props();
@@ -21,8 +21,8 @@
   });
 </script>
 
-<ModaleBadgeCyberdepartDebloque bind:estOuverte={badgeCyberdépartDebloqué} />
-<ModaleModuleCyberdepartTermine bind:estOuverte={moduleTerminé} />
-<EvenementsViaModaleParcoursComplet
+<ModaleBadgeCyberdepartDebloqué bind:estOuverte={badgeCyberdépartDebloqué} />
+<ModaleModuleCyberdepartTerminé bind:estOuverte={moduleTerminé} />
+<ÉvènementsViaModaleParcoursComplet
   peutOuvrir={peutOuvrir && événementsTraités && !badgeCyberdépartDebloqué && !moduleTerminé}
 />

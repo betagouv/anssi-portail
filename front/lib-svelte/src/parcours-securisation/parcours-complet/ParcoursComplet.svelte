@@ -1,13 +1,13 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import ControleSegmente from '../../navigation/ControleSegmente.svelte';
-  import { creeLeFragmentDeNavigation } from '../../navigation/fragmentDeNavigation.svelte';
-  import BadgeBeta from '../../ui/BadgeBeta.svelte';
+  import ContrôleSegmenté from '../../navigation/ControleSegmente.svelte';
+  import { creeLeFragmentDeNavigation as créeLeFragmentDeNavigation } from '../../navigation/fragmentDeNavigation.svelte';
+  import BadgeBêta from '../../ui/BadgeBeta.svelte';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
-  import Heros from '../../ui/Heros.svelte';
+  import Héros from '../../ui/Heros.svelte';
   import Lien from '../../ui/Lien.svelte';
-  import EvenementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
+  import ÉvènementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
   import type { Mesure, Module } from '../mesures/mesure';
   import Progression from '../Progression.svelte';
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
@@ -40,14 +40,14 @@
     modules.reduce((total, { nombreMesuresPrisesEnCompte }) => (total += nombreMesuresPrisesEnCompte), 0)
   );
 
-  let fragmentDeNavigation = creeLeFragmentDeNavigation();
+  let fragmentDeNavigation = créeLeFragmentDeNavigation();
 
   let vueCourante = $derived(fragmentDeNavigation.section);
 
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Protéger mon organisation' };
 </script>
 
-<Heros
+<Héros
   cacheActions={true}
   cacheIllustration={true}
   cacheTags={true}
@@ -60,23 +60,23 @@
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
 >
   {#snippet tags()}
-    <BadgeBeta />
+    <BadgeBêta />
   {/snippet}
-</Heros>
+</Héros>
 <dsfr-container>
   <div class="progression-totale">
     <Progression actuel={totalMesuresPrisesEnCompte} max={totalMesures} />
   </div>
 
   <div class="conteneur-controle-segmente">
-    <ControleSegmente
+    <ContrôleSegmenté
       elements={[
         { id: 'modules', titre: 'Modules', icone: 'layout-grid-line', ancre: 'modules' },
         { id: 'mesures', titre: 'Liste des mesures', icone: 'list-check', ancre: 'mesures' },
       ]}
       bind:idÉlémentSélectionné={vueCourante}
       {fragmentDeNavigation}
-    ></ControleSegmente>
+    ></ContrôleSegmenté>
 
     {#if vueCourante === 'mesures'}
       <Lien
@@ -96,7 +96,7 @@
   {/if}
 </dsfr-container>
 
-<EvenementsViaModaleParcoursComplet peutOuvrir={modules.length > 0} />
+<ÉvènementsViaModaleParcoursComplet peutOuvrir={modules.length > 0} />
 <RetourUtilisateurSurParcours />
 
 <style lang="scss">

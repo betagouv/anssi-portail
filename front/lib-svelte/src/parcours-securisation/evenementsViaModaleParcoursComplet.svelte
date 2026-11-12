@@ -1,7 +1,7 @@
 <script lang="ts">
   import { évènementsDuParcours } from './evenementsDuParcours';
   import ModaleRetourUtilisateurSurParcours from './ModaleRetourUtilisateurSurParcours.svelte';
-  import ModaleParcoursTermine from './module/ModaleParcoursTermine.svelte';
+  import ModaleParcoursTerminé from './module/ModaleParcoursTermine.svelte';
 
   type Props = { peutOuvrir: boolean };
   let { peutOuvrir }: Props = $props();
@@ -22,7 +22,7 @@
 
 <ModaleRetourUtilisateurSurParcours bind:estOuverte={modaleRetourMiParcoursOuverte} typeDeRetour="mi-parcours" />
 
-<ModaleParcoursTermine
+<ModaleParcoursTerminé
   bind:estOuverte={modaleParcoursCompletTerminéOuverte}
   surFermeture={() => {
     modaleRetourParcoursTerminéOuverte = true;
