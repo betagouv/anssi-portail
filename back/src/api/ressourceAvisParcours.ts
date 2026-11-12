@@ -28,13 +28,6 @@ export const ressourceAvisParcours = ({
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     filetRouteAsynchrone(
       async (requête: CorpsDeRequeteTypee<z.output<typeof schemaRessourceAvisParcours>>, réponse: Response) => {
-        const {
-          typeDeRetour,
-          niveauDUtilité,
-          recommandationAutreOrganisation,
-          commentaireAmélioration,
-          souhaiteÊtreRecontacté,
-        } = requête.body;
         const utilisateur = requête.utilisateur as Utilisateur;
         const parcours = utilisateur?.parcoursActuel();
 
@@ -49,11 +42,7 @@ export const ressourceAvisParcours = ({
         }
         const pageSource = requête.query.pageSource as string | undefined;
         const contenu: AvisParcours = {
-          typeDeRetour,
-          niveauDUtilité,
-          recommandationAutreOrganisation,
-          commentaireAmélioration,
-          souhaiteÊtreRecontacté,
+          ...requête.body,
           pageSource,
           emailDeContact: utilisateur.email,
           parcours,
