@@ -1,5 +1,5 @@
 import { expectTypeOf, it } from 'vitest';
-import { AvisParcours } from '../../src/metier/messagerieInstantanee.js';
+import { AvisParcours } from '../../src/metier/avisParcours.js';
 
 it('exige une recommandation sauf pour un avis de mi-parcours', () => {
   type AvisMiParcours = Extract<AvisParcours, { typeDeRetour: 'mi-parcours' }>;
