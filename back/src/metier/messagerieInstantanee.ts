@@ -1,7 +1,7 @@
+import { AvisParcours } from './avisParcours.js';
 import { MiniTest } from './mini-tests/mini-test.js';
-import { NiveauDeSatisfaction, NiveauDUtilité } from './niveauDeSatisfaction.js';
+import { NiveauDeSatisfaction } from './niveauDeSatisfaction.js';
 import { Outil } from './outils/outils.js';
-import { Parcours } from './parcours.js';
 
 export type RetourExperience = {
   raison: string;
@@ -15,20 +15,6 @@ export type AvisUtilisateur = {
   emailDeContact?: string;
   pageSource?: string;
 };
-
-export type TypeDeRetour = 'spontané' | 'mi-parcours' | 'parcours terminé';
-
-export type AvisParcours = {
-  niveauDUtilité: NiveauDUtilité;
-  commentaireAmélioration: string;
-  souhaiteÊtreRecontacté: boolean;
-  parcours: Parcours;
-  emailDeContact: string;
-  pageSource?: string;
-} & (
-  | { typeDeRetour: 'mi-parcours'; recommandationAutreOrganisation?: never }
-  | { typeDeRetour: Exclude<TypeDeRetour, 'mi-parcours'>; recommandationAutreOrganisation: 'oui' | 'non' | 'peut-être' }
-);
 
 export type AvisNegatifSurUneMesure = {
   idMesure: string;

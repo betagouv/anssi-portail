@@ -1,7 +1,7 @@
 import axios from '@anssi-portail/axios';
+import { AvisParcours } from '../metier/avisParcours.js';
 import {
   AvisNegatifSurUneMesure,
-  AvisParcours,
   AvisUtilisateur,
   MessagerieInstantanee,
   RetourExperience,

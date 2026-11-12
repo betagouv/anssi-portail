@@ -1,16 +1,14 @@
-import { TypeDeRetour } from '../../metier/messagerieInstantanee.js';
-import { NiveauDUtilité } from '../../metier/niveauDeSatisfaction.js';
-import { Parcours } from '../../metier/parcours.js';
+import { AvisParcours } from '../../metier/avisParcours.js';
 
 export class AvisParcoursDonné {
-  typeDeRetour: TypeDeRetour;
-  niveauDUtilité: NiveauDUtilité;
-  recommandationAutreOrganisation?: 'oui' | 'non' | 'peut-être';
-  commentaireAmélioration: string;
-  souhaiteÊtreRecontacté: boolean;
-  parcours: Parcours;
-  emailDeContact: string | undefined;
-  pageSource?: string;
+  typeDeRetour: AvisParcours['typeDeRetour'];
+  niveauDUtilité: AvisParcours['niveauDUtilité'];
+  recommandationAutreOrganisation?: AvisParcours['recommandationAutreOrganisation'];
+  commentaireAmélioration: AvisParcours['commentaireAmélioration'];
+  souhaiteÊtreRecontacté: AvisParcours['souhaiteÊtreRecontacté'];
+  parcours: AvisParcours['parcours'];
+  emailDeContact: AvisParcours['emailDeContact'] | undefined;
+  pageSource?: AvisParcours['pageSource'];
 
   constructor({
     typeDeRetour,
@@ -21,16 +19,7 @@ export class AvisParcoursDonné {
     parcours,
     emailDeContact,
     pageSource,
-  }: {
-    typeDeRetour: TypeDeRetour;
-    niveauDUtilité: NiveauDUtilité;
-    recommandationAutreOrganisation?: 'oui' | 'non' | 'peut-être';
-    commentaireAmélioration: string;
-    souhaiteÊtreRecontacté: boolean;
-    parcours: Parcours;
-    emailDeContact: string | undefined;
-    pageSource?: string;
-  }) {
+  }: AvisParcours) {
     this.typeDeRetour = typeDeRetour;
     this.niveauDUtilité = niveauDUtilité;
     this.recommandationAutreOrganisation = recommandationAutreOrganisation;
