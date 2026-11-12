@@ -1,12 +1,10 @@
 import { Express, RequestHandler } from 'express';
+import { Outil } from '../../../../metier/outils/outils.js';
 import { ConfigurationServeur } from '../../../configurationServeur.js';
 import { ressourceCampagneDeSensibilisation } from '../../../outils/campagneDeSensibilisation/ressourceCampagneDeSensibilisation.js';
 import { ressourceModeleAnnuaireDeCrise } from '../../../outils/modeleAnnuaireDeCrise/ressourceModeleAnnuaireDeCrise.js';
-import { ressourceModeleListeDActivites } from '../../../outils/modeleListeDActivites/ressourceModeleListeDActivites.js';
-import { ressourceModeleModificationsMotsDePasse } from '../../../outils/modeleModificationMotsDePasse/ressourceModeleModificationsMotsDePasse.js';
-import { ressourceModèleRaci } from '../../../outils/modeleRaci/ressourceModeleRaci.js';
-import { ressourceModèleRevueComptesUtilisateurs } from '../../../outils/modeleRevueComptesUtilisateurs/ressourceModeleRevueComptesUtilisateurs.js';
-import { ressourceModèleRevueDroitsDAccès } from '../../../outils/modeleRevueDroitsDAcces/ressourceModeleRevueDroitsDAcces.js';
+import { ressourceModèleXslxGénérique } from '../../../outils/modeleXslxGenerique/ressourceModeleXslx.js';
+import { ServiceModèleXslx } from '../../../outils/modeleXslxGenerique/serviceModeleXslx.js';
 import { ressourceRappelMiseAJourAnnuaireContacts } from '../../../outils/ressourceRappelMiseAJourAnnuaireContacts.js';
 import { ressourceRappelMiseAJourListeDActivités } from '../../../outils/ressourceRappelMiseÀJourListeDActivites.js';
 import { ressourceRetoursSurOutil } from '../../../outils/ressourceRetoursSurOutil.js';
@@ -18,27 +16,30 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
 
   enregistreRoute('/retours', ressourceRetoursSurOutil(configurationServeur));
 
+  /// OUTILS XSLX
   enregistreRoute('/modele-annuaire-de-crise.xlsx', ressourceModeleAnnuaireDeCrise(configurationServeur));
-  enregistreRoute(
-    '/modele-modifications-mots-de-passe.xlsx',
-    ressourceModeleModificationsMotsDePasse(configurationServeur)
-  );
+  (
+    [
+      ['modele-liste-d-activites.xlsx', configurationServeur.serviceModèleListeDActivités],
+      ['modele-modifications-mots-de-passe.xlsx', configurationServeur.serviceModèleModificationMotsDePasse],
+      ['modele-raci.xlsx', configurationServeur.serviceModèleRACI],
+      ['modele-revue-comptes-utilisateurs.xlsx', configurationServeur.serviceModèleRevueComptesUtilisateurs],
+      ['modele-revue-droits-d-acces.xlsx', configurationServeur.serviceModèleRevueDroitsDAccès],
+    ] satisfies [Outil, ServiceModèleXslx][]
+  ).forEach(([outil, serviceXslx]) => {
+    enregistreRoute(`/${outil}`, ressourceModèleXslxGénérique(configurationServeur, serviceXslx, outil));
+  });
+
+  /// OUTILS ICS
   enregistreRoute(
     '/rappel-mise-a-jour-annuaire-contacts.ics',
     ressourceRappelMiseAJourAnnuaireContacts(configurationServeur)
   );
-  enregistreRoute('/modele-liste-d-activites.xlsx', ressourceModeleListeDActivites(configurationServeur));
-  enregistreRoute('/modele-raci.xlsx', ressourceModèleRaci(configurationServeur));
   enregistreRoute(
     '/rappel-mise-a-jour-liste-d-activites.ics',
     ressourceRappelMiseAJourListeDActivités(configurationServeur)
   );
 
-  enregistreRoute(
-    '/modele-revue-comptes-utilisateurs.xlsx',
-    ressourceModèleRevueComptesUtilisateurs(configurationServeur)
-  );
-  enregistreRoute('/modele-revue-droits-d-acces.xlsx', ressourceModèleRevueDroitsDAccès(configurationServeur));
-
+  /// OUTILS AUTRE
   enregistreRoute('/campagne-de-sensibilisation', ressourceCampagneDeSensibilisation(configurationServeur));
 };
