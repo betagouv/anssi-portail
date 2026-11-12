@@ -1,4 +1,5 @@
 import axiosSécurisé, { isAxiosError } from '@anssi-portail/axios';
+import { Telephone } from '@lab-anssi/lib';
 import { decode } from 'html-entities';
 import { BadgeCyberdépartDébloqué } from '../bus/evenements/badgeCyberdepartDebloque.js';
 import { MesureConsultee } from '../bus/evenements/mesureConsultee.js';
@@ -11,7 +12,6 @@ import { ParcoursRejoint } from '../bus/evenements/parcoursRejoint.js';
 import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { Parcours } from '../metier/parcours.js';
 import { Rapporteur } from '../metier/rapporteur.js';
-import { Telephone } from '../metier/telephone.js';
 import { adaptateurEmailConsole } from './adaptateurEmailConsole.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { AdaptateurHorloge } from './adaptateurHorloge.js';
