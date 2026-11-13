@@ -8,6 +8,7 @@
   import Formulaire from '../ui/Formulaire.svelte';
   import Modale from '../ui/Modale.svelte';
   import ZoneTexte from '../ui/ZoneTexte.svelte';
+  import { stockageDeSession } from '../utils/stockageDeSession';
   import { entrepotNavigateurAvisUtilisateur } from './ControleAvisUtilisateur';
 
   const ROUTES_À_EXCLURE: RegExp[] = [
@@ -46,7 +47,7 @@
   let commentaire = $state('');
   let erreurCommentaire = $state(false);
   let emailDeContact: string | undefined = $state();
-  const pageSource = sessionStorage.getItem('pageSource');
+  const pageSource = stockageDeSession.getItem('pageSource');
 
   $effect(() => {
     if (satisfaction) erreurSatisfaction = false;

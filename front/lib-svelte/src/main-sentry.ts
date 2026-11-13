@@ -3,9 +3,28 @@ import * as Sentry from '@sentry/browser';
 const dsn = document?.getElementById('script-sentry')?.dataset.dsn;
 const environment = document?.getElementById('script-sentry')?.dataset.environnement;
 
+const URL_EXTENSION_NAVIGATEUR = /^(chrome|moz|safari|safari-web)-extension:\/\//;
+
+// Messages d'erreurs d'extensions qui remontent sans stack trace exploitable
+const MESSAGES_EXTENSIONS_NAVIGATEUR = [/Invalid call to runtime\.sendMessage/, /Tab not found/];
+
+const estUneFrameDExtension = (frame: Sentry.StackFrame) => URL_EXTENSION_NAVIGATEUR.test(frame.filename ?? '');
+
+const estUnMessageDExtension = (message = '') => MESSAGES_EXTENSIONS_NAVIGATEUR.some((motif) => motif.test(message));
+
+const estUneExceptionDExtension = ({ stacktrace, value }: Sentry.Exception) =>
+  Boolean(stacktrace?.frames?.some(estUneFrameDExtension)) || estUnMessageDExtension(value);
+
+const provientDUneExtensionNavigateur = (evenement: Sentry.ErrorEvent) =>
+  Boolean(evenement.exception?.values?.some(estUneExceptionDExtension));
+
 // Voir l'issue https://github.com/axios/axios/issues/6209#issuecomment-2299747509
 const avantEnvoiSentry = (evenement: Sentry.ErrorEvent, detail: Sentry.EventHint) => {
-  const originalException = detail?.originalException as { code: string; message: string } | undefined;
+  if (provientDUneExtensionNavigateur(evenement)) {
+    return null;
+  }
+
+  const originalException = detail?.originalException as { code: string | number; message: string } | undefined;
   if (originalException?.code === 'ECONNABORTED') {
     return null;
   }
@@ -14,6 +33,15 @@ const avantEnvoiSentry = (evenement: Sentry.ErrorEvent, detail: Sentry.EventHint
     return null;
   }
   if (evenement.exception?.values?.[0]?.value?.includes('Object Not Found Matching Id')) {
+    return null;
+  }
+  // Rejet d'objet brut émis par un provider de portefeuille crypto (EIP-1193, window.ethereum)
+  if (
+    typeof originalException === 'object' &&
+    !(originalException instanceof Error) &&
+    originalException?.code === -32603 &&
+    originalException?.message === 'Internal JSON-RPC error.'
+  ) {
     return null;
   }
 
