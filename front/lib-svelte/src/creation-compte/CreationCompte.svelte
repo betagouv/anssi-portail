@@ -11,6 +11,7 @@
   import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
   import type { Departement, Organisation } from '../ui/formulaire/SelectionOrganisation.types.js';
   import Lien from '../ui/Lien.svelte';
+  import { stockageDeSession } from '../utils/stockageDeSession';
   import type { FormulaireInscription, InformationsProfessionnelles } from './creationCompte';
   import SelectionDepartement from './SelectionDepartement.svelte';
   import SelectionDomaineSpecialite from './SelectionDomaineSpecialite.svelte';
@@ -27,9 +28,9 @@
   let departements: Departement[] = $state([]);
 
   let token: string | undefined = $state();
-  const redirectUrl = sessionStorage.getItem('pagePostConnexion');
-  const pageSource = sessionStorage.getItem('pageSource');
-  const campagne = sessionStorage.getItem('campagne');
+  const redirectUrl = stockageDeSession.getItem('pagePostConnexion');
+  const pageSource = stockageDeSession.getItem('pageSource');
+  const campagne = stockageDeSession.getItem('campagne');
 
   onMount(async () => {
     token = new URLSearchParams(window.location.search).get('token') ?? undefined;
