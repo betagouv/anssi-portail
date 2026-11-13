@@ -1,13 +1,14 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { créeÉvènementsDuParcours } from '../../src/parcours-securisation/evenementsDuParcours';
+import { stockageDeSession } from '../../src/utils/stockageDeSession';
 
 describe('les évènements du parcours', () => {
   beforeEach(() => {
-    sessionStorage.clear();
+    stockageDeSession.efface();
   });
 
   it('traite un module terminé', () => {
-    const événements = créeÉvènementsDuParcours(() => sessionStorage);
+    const événements = créeÉvènementsDuParcours(() => stockageDeSession);
     const surModuleTerminé = vi.fn();
 
     événements.publieModuleTerminé();
@@ -17,7 +18,7 @@ describe('les évènements du parcours', () => {
   });
 
   it('ne traite pas de module terminé si un parcours terminé est publié en premier', () => {
-    const événements = créeÉvènementsDuParcours(() => sessionStorage);
+    const événements = créeÉvènementsDuParcours(() => stockageDeSession);
     const surModuleTerminé = vi.fn();
 
     événements.publieParcoursCompletTerminé();
@@ -28,7 +29,7 @@ describe('les évènements du parcours', () => {
   });
 
   it('ne traite pas de module terminé si un parcours terminé est publié ensuite', () => {
-    const événements = créeÉvènementsDuParcours(() => sessionStorage);
+    const événements = créeÉvènementsDuParcours(() => stockageDeSession);
     const surModuleTerminé = vi.fn();
 
     événements.publieModuleTerminé();

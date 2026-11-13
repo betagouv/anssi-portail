@@ -1,22 +1,23 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { profilStore } from '../stores/profil.store';
+  import { stockageDeSession } from '../utils/stockageDeSession';
 
   let redirectionParDéfaut = $state(false);
 
   onMount(() => {
-    const pagePostConnexion = sessionStorage.getItem('pagePostConnexion');
-    sessionStorage.removeItem('pagePostConnexion');
+    const pagePostConnexion = stockageDeSession.getItem('pagePostConnexion');
+    stockageDeSession.supprimeItem('pagePostConnexion');
 
     try {
       if (pagePostConnexion) {
         const urlPostConnexion = new URL(pagePostConnexion, window.location.origin);
         if (urlPostConnexion.origin === window.location.origin) {
-          const pageSource = sessionStorage.getItem('pageSource');
+          const pageSource = stockageDeSession.getItem('pageSource');
           if (!urlPostConnexion.searchParams.get('pageSource') && pageSource) {
             urlPostConnexion.searchParams.set('pageSource', pageSource);
           }
-          const campagne = sessionStorage.getItem('campagne');
+          const campagne = stockageDeSession.getItem('campagne');
           if (campagne) {
             urlPostConnexion.searchParams.set('campagne', campagne);
           }
