@@ -1,4 +1,5 @@
-type Stockage = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
+import { stockageDeSession, type StockageDeSession } from '../utils/stockageDeSession';
+
 type Traitement = () => void;
 
 const clés = {
@@ -13,8 +14,8 @@ const clés = {
 type Clé = (typeof clés)[keyof typeof clés];
 
 export const créeÉvènementsDuParcours = (
-  fournitStockage: () => Stockage | undefined = () =>
-    typeof window === 'undefined' ? undefined : window.sessionStorage
+  fournitStockage: () => StockageDeSession | undefined = () =>
+    typeof window === 'undefined' ? undefined : stockageDeSession
 ) => {
   const publie = (clé: Clé) => {
     try {
@@ -28,7 +29,7 @@ export const créeÉvènementsDuParcours = (
     try {
       const stockage = fournitStockage();
       if (!stockage || stockage.getItem(clé) !== 'true') return;
-      stockage.removeItem(clé);
+      stockage.supprimeItem(clé);
     } catch {
       return;
     }
@@ -64,7 +65,7 @@ export const créeÉvènementsDuParcours = (
         const stockage = fournitStockage();
         if (!stockage) return;
         stockage.setItem(clés.parcoursCompletTerminé, 'true');
-        stockage.removeItem(clés.moduleTerminé);
+        stockage.supprimeItem(clés.moduleTerminé);
       } catch {
         return;
       }
