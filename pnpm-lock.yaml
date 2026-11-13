@@ -237,7 +237,7 @@ importers:
         version: 8.72.1(eslint@10.14.0(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
 
   axios:
     dependencies:
@@ -250,7 +250,7 @@ importers:
         version: 26.6.5
       vitest:
         specifier: 'catalog:'
-        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
 
   back:
     dependencies:
@@ -431,7 +431,7 @@ importers:
         version: 4.23.15
       vitest:
         specifier: 'catalog:'
-        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@31.0.0(@napi-rs/canvas@1.1.0)(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@31.0.0(@napi-rs/canvas@1.1.0)(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
 
   comparaison-grist:
     dependencies:
@@ -459,7 +459,7 @@ importers:
         version: 26.6.5
       vitest:
         specifier: 'catalog:'
-        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
 
   demande-diag:
     dependencies:
@@ -469,7 +469,7 @@ importers:
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^7.0.0
-        version: 7.3.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+        version: 7.3.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
       '@tsconfig/svelte':
         specifier: ^5.0.8
         version: 5.0.8
@@ -478,13 +478,13 @@ importers:
         version: 9.9.0(postcss@8.5.32)
       sass:
         specifier: ^1.98.0
-        version: 1.107.1
+        version: 1.108.0
       svelte:
         specifier: 'catalog:'
         version: 5.57.1(@typescript-eslint/types@8.72.1)
       vite:
         specifier: ^8.2.1
-        version: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15)
+        version: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15)
 
   front:
     dependencies:
@@ -552,7 +552,7 @@ importers:
         version: 5.4.1(rollup@4.59.0)(supports-color@10.2.2)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^7.0.0
-        version: 7.3.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+        version: 7.3.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
       '@tsconfig/svelte':
         specifier: ^5.0.8
         version: 5.0.8
@@ -576,7 +576,7 @@ importers:
         version: 4.1.1(prettier@3.9.9)(svelte@5.57.1(@typescript-eslint/types@8.72.1))
       sass:
         specifier: ^1.102.0
-        version: 1.107.1
+        version: 1.108.0
       svelte:
         specifier: 'catalog:'
         version: 5.57.1(@typescript-eslint/types@8.72.1)
@@ -585,13 +585,13 @@ importers:
         version: 4.7.8(picomatch@4.0.7)(svelte@5.57.1(@typescript-eslint/types@8.72.1))(typescript@6.0.3)
       vite:
         specifier: ^8.2.1
-        version: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15)
+        version: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
       vitest-localstorage-mock:
         specifier: ^0.1.2
-        version: 0.1.3(vitest@5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15)))
+        version: 0.1.3(vitest@5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15)))
 
   mise-a-jour-financements:
     dependencies:
@@ -616,7 +616,7 @@ importers:
         version: 4.23.15
       vitest:
         specifier: 'catalog:'
-        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
 
   regles-eslint:
     dependencies:
@@ -641,7 +641,7 @@ importers:
         version: 5.57.1(@typescript-eslint/types@8.72.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+        version: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
 
   webc-externes/mini-test-exposition:
     dependencies:
@@ -651,7 +651,7 @@ importers:
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^7.3.0
-        version: 7.3.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+        version: 7.3.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
       '@tsconfig/svelte':
         specifier: ^5.0.8
         version: 5.0.8
@@ -660,13 +660,13 @@ importers:
         version: 9.9.0(postcss@8.5.32)
       sass:
         specifier: ^1.104.0
-        version: 1.107.1
+        version: 1.108.0
       svelte:
         specifier: 'catalog:'
         version: 5.57.1(@typescript-eslint/types@8.72.1)
       vite:
         specifier: ^8.2.2
-        version: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15)
+        version: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15)
 
   webc-externes/mini-test-hameconnage:
     dependencies:
@@ -676,7 +676,7 @@ importers:
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^7.3.0
-        version: 7.3.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+        version: 7.3.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
       '@tsconfig/svelte':
         specifier: ^5.0.8
         version: 5.0.8
@@ -685,13 +685,13 @@ importers:
         version: 9.9.0(postcss@8.5.32)
       sass:
         specifier: ^1.104.0
-        version: 1.107.1
+        version: 1.108.0
       svelte:
         specifier: 'catalog:'
         version: 5.57.1(@typescript-eslint/types@8.72.1)
       vite:
         specifier: ^8.2.2
-        version: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15)
+        version: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15)
 
   webc-externes/mini-test-maturite:
     dependencies:
@@ -701,7 +701,7 @@ importers:
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^7.3.0
-        version: 7.3.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+        version: 7.3.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
       '@tsconfig/svelte':
         specifier: ^5.0.8
         version: 5.0.8
@@ -710,13 +710,13 @@ importers:
         version: 9.9.0(postcss@8.5.32)
       sass:
         specifier: ^1.104.0
-        version: 1.107.1
+        version: 1.108.0
       svelte:
         specifier: 'catalog:'
         version: 5.57.1(@typescript-eslint/types@8.72.1)
       vite:
         specifier: ^8.2.2
-        version: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15)
+        version: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15)
 
   webc-externes/mini-test-vrai-faux:
     dependencies:
@@ -726,7 +726,7 @@ importers:
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^7.3.0
-        version: 7.3.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+        version: 7.3.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
       '@tsconfig/svelte':
         specifier: ^5.0.8
         version: 5.0.8
@@ -735,13 +735,13 @@ importers:
         version: 9.9.0(postcss@8.5.32)
       sass:
         specifier: ^1.104.0
-        version: 1.107.1
+        version: 1.108.0
       svelte:
         specifier: 'catalog:'
         version: 5.57.1(@typescript-eslint/types@8.72.1)
       vite:
         specifier: ^8.2.2
-        version: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15)
+        version: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15)
 
 packages:
 
@@ -4663,8 +4663,8 @@ packages:
     resolution: {integrity: sha512-2X5lC8fYla8YaT8g73Nj+HcLWXan5dLyCWLgVvaOmfw7JI78IRsyNtIDytTHdn7hBQbIkCah7Zbmd5jabzeDig==}
     engines: {node: '>=22.12.0'}
 
-  sass@1.107.1:
-    resolution: {integrity: sha512-aJ1/LvxOOb04YhmiBjzZn3jVwdHKol+OVhoMV6fFl02fF9T3i+5Mg9l/CnzqtM+NX5Jn5o3lAbs/ZJivTCLHfQ==}
+  sass@1.108.0:
+    resolution: {integrity: sha512-9HwnefouIfwY+XuA1rS5xOhALH5vsoe3SzYICG3MEwpkMbE7tpuh5ytZFRXUKPYkxY7lKdIbqxl+DxQGo8jwQQ==}
     engines: {node: '>=20.19.0'}
     hasBin: true
 
@@ -6609,14 +6609,14 @@ snapshots:
 
   '@sveltejs/load-config@0.2.3': {}
 
-  '@sveltejs/vite-plugin-svelte@7.3.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))':
+  '@sveltejs/vite-plugin-svelte@7.3.1(svelte@5.57.1(@typescript-eslint/types@8.72.1))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))':
     dependencies:
       deepmerge: 4.3.1
       magic-string: 1.2.3
       obug: 2.1.4
       svelte: 5.57.1(@typescript-eslint/types@8.72.1)
-      vite: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15)
-      vitefu: 1.1.2(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+      vite: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15)
+      vitefu: 1.1.2(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
 
   '@tsconfig/svelte@5.0.8': {}
 
@@ -6855,14 +6855,14 @@ snapshots:
       '@typescript-eslint/types': 8.72.1
       eslint-visitor-keys: 5.0.1
 
-  '@vitest/mocker@5.0.2(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))':
+  '@vitest/mocker@5.0.2(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       '@vitest/spy': 5.0.2
       estree-walker: 3.0.3
       magic-string: 1.2.3
     optionalDependencies:
-      vite: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15)
+      vite: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15)
 
   '@vitest/spy@5.0.2': {}
 
@@ -8958,7 +8958,7 @@ snapshots:
       parse-srcset: 1.0.2
       postcss: 8.5.32
 
-  sass@1.107.1:
+  sass@1.108.0:
     dependencies:
       chokidar: 5.0.0
       immutable: 5.1.9
@@ -9377,7 +9377,7 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15):
+  vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15):
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.7
@@ -9388,21 +9388,21 @@ snapshots:
       '@types/node': 26.6.5
       esbuild: 0.28.2
       fsevents: 2.3.3
-      sass: 1.107.1
+      sass: 1.108.0
       tsx: 4.23.15
 
-  vitefu@1.1.2(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15)):
+  vitefu@1.1.2(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15)):
     optionalDependencies:
-      vite: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15)
+      vite: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15)
 
-  vitest-localstorage-mock@0.1.3(vitest@5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))):
+  vitest-localstorage-mock@0.1.3(vitest@5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))):
     dependencies:
-      vitest: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+      vitest: 5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
 
-  vitest@5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15)):
+  vitest@5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@30.1.3(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15)):
     dependencies:
       '@types/chai': 5.2.3
-      '@vitest/mocker': 5.0.2(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+      '@vitest/mocker': 5.0.2(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
       chai: 6.2.2
       es-module-lexer: 2.3.2
       expect-type: 1.4.0
@@ -9413,7 +9413,7 @@ snapshots:
       tinybench: 6.1.4
       tinyexec: 1.3.0
       tinyglobby: 0.2.17
-      vite: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15)
+      vite: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15)
       why-is-node-running: 3.2.2
     optionalDependencies:
       '@opentelemetry/api': 1.9.1
@@ -9422,10 +9422,10 @@ snapshots:
     transitivePeerDependencies:
       - msw
 
-  vitest@5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@31.0.0(@napi-rs/canvas@1.1.0)(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15)):
+  vitest@5.0.2(@opentelemetry/api@1.9.1)(@types/node@26.6.5)(jsdom@31.0.0(@napi-rs/canvas@1.1.0)(@noble/hashes@1.8.0))(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15)):
     dependencies:
       '@types/chai': 5.2.3
-      '@vitest/mocker': 5.0.2(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15))
+      '@vitest/mocker': 5.0.2(vite@8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15))
       chai: 6.2.2
       es-module-lexer: 2.3.2
       expect-type: 1.4.0
@@ -9436,7 +9436,7 @@ snapshots:
       tinybench: 6.1.4
       tinyexec: 1.3.0
       tinyglobby: 0.2.17
-      vite: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.107.1)(tsx@4.23.15)
+      vite: 8.3.6(@types/node@26.6.5)(esbuild@0.28.2)(sass@1.108.0)(tsx@4.23.15)
       why-is-node-running: 3.2.2
     optionalDependencies:
       '@opentelemetry/api': 1.9.1
