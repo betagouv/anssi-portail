@@ -24,7 +24,7 @@ const avantEnvoiSentry = (evenement: Sentry.ErrorEvent, detail: Sentry.EventHint
     return null;
   }
 
-  const originalException = detail?.originalException as { code: string; message: string } | undefined;
+  const originalException = detail?.originalException as { code: string | number; message: string } | undefined;
   if (originalException?.code === 'ECONNABORTED') {
     return null;
   }
@@ -33,6 +33,15 @@ const avantEnvoiSentry = (evenement: Sentry.ErrorEvent, detail: Sentry.EventHint
     return null;
   }
   if (evenement.exception?.values?.[0]?.value?.includes('Object Not Found Matching Id')) {
+    return null;
+  }
+  // Rejet d'objet brut émis par un provider de portefeuille crypto (EIP-1193, window.ethereum)
+  if (
+    typeof originalException === 'object' &&
+    !(originalException instanceof Error) &&
+    originalException?.code === -32603 &&
+    originalException?.message === 'Internal JSON-RPC error.'
+  ) {
     return null;
   }
 
