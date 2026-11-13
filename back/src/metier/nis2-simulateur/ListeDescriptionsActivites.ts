@@ -35,7 +35,7 @@ export const listeDescriptionsActivites: Record<Activite, DescriptionActivite[]>
       description:
         'Toute personne physique ou morale qui produit, achète ou vend des services liés à l’électricité, ' +
         "qui participe à l'agrégation ou qui est un gestionnaire de la participation active de la demande " +
-        "ou aux services de stockage de l'énergie, y compris la passation d'ordres, sur un ou plusieurs marchés " +
+        "ou qui participe aux services de stockage de l'énergie, y compris la passation d'ordres, sur un ou plusieurs marchés " +
         "de l'électricité, y compris des marchés de l'énergie d’équilibrage.",
     },
     {
