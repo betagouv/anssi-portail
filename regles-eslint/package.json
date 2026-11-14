@@ -16,7 +16,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@html-eslint/parser": "^0.67.0",
+    "@html-eslint/parser": "^0.68.0",
     "@typescript-eslint/utils": "^8.68.0",
     "entities": "catalog:",
     "mdast-util-from-markdown": "^2.1.0"
