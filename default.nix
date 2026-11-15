@@ -29,7 +29,7 @@ let
       version
       ;
     src = sources."playwright-cli";
-    npmDepsHash = "sha256-mGD7a/v1cx/xPGZo8nN3WA40mYGgF/KzMKiGbvUeX4E=";
+    npmDepsHash = "sha256-MWBo2GleWToU5Z7c6njOIWaWzcmokY5wf6FRxHqw4H4=";
     dontNpmBuild = true;
   };
 in
