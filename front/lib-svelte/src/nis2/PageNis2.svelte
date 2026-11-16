@@ -13,7 +13,7 @@
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
 
-  const { itemsCyber, featureFlagNis2CyFun23 = false, exigences = undefined, guides = undefined } = $props();
+  const { itemsCyber, exigences = undefined, guides = undefined } = $props();
 
   const liens = [
     { label: 'Présentation NIS 2', fragment: '#presentation' },
@@ -74,7 +74,7 @@
   <Presentation />
 {/if}
 {#if estServeur || lienActif === '#exigences'}
-  <ExigencesNis2 {featureFlagNis2CyFun23} {exigences} />
+  <ExigencesNis2 {exigences} />
 {/if}
 {#if estServeur || lienActif === '#solutions'}
   <Solutions {itemsCyber} {guides} />

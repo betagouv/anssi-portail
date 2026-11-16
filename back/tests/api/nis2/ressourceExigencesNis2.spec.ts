@@ -18,10 +18,8 @@ describe('La ressource des Exigences NIS 2', () => {
   let serveur: Express;
   let entrepotExigence: EntrepotExigenceMemoire;
   let adaptateurEnvironnement: AdaptateurEnvironnement;
-  let afficheCyFun23: boolean;
 
   beforeEach(() => {
-    afficheCyFun23 = true;
     entrepotExigence = new EntrepotExigenceMemoire();
     adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
@@ -29,7 +27,6 @@ describe('La ressource des Exigences NIS 2', () => {
         ...fauxAdaptateurEnvironnement.fonctionnalites,
         nis2: {
           ...fauxAdaptateurEnvironnement.fonctionnalites.nis2,
-          afficheCyFun23: () => afficheCyFun23,
         },
       },
     };
@@ -49,14 +46,6 @@ describe('La ressource des Exigences NIS 2', () => {
 
     it('renvoie une 404 si NIS2 ne figure ni dans la cible, ni dans la source', async () => {
       const { status } = await request(serveur).get('/api/exigences-nis2').query({ source: 'ISO', cible: 'ISO' });
-
-      expect(status).toBe(HttpStatusCode.NotFound);
-    });
-
-    it('renvoie une 404 si une comparaison avec CyFun23 est demandée, et que le FF est désactivé', async () => {
-      afficheCyFun23 = false;
-
-      const { status } = await request(serveur).get('/api/exigences-nis2').query({ cible: 'CyFun23' });
 
       expect(status).toBe(HttpStatusCode.NotFound);
     });

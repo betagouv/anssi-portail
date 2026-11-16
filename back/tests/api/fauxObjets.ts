@@ -258,7 +258,6 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   fonctionnalites: {
     nis2: {
       afficheObservations: () => false,
-      afficheCyFun23: () => true,
     },
   },
   appEnv: () => 'local',

@@ -9,7 +9,6 @@
     sensComparaison: 'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2';
     referentielSelectionne: ReferentielSelectionne | '';
     langueSelectionnee: 'FR' | 'EN';
-    featureFlagNis2CyFun23: boolean;
   };
 
   let {
@@ -17,7 +16,6 @@
     sensComparaison = $bindable(),
     referentielSelectionne = $bindable(),
     langueSelectionnee = $bindable('FR'),
-    featureFlagNis2CyFun23,
   }: Props = $props();
 
   const inverseComparaison = () => {
@@ -27,7 +25,7 @@
   const optionsReferentiels = $derived([
     { label: 'ISO 2700x', value: 'ISO' },
     { label: 'Annexe au Règlement d’exécution 2024/2690', value: 'AE' },
-    ...(featureFlagNis2CyFun23 ? [{ label: 'CyberFundamentals Framework 2023 (Belgique)', value: 'CyFun23' }] : []),
+    { label: 'CyberFundamentals Framework 2023 (Belgique)', value: 'CyFun23' },
   ]);
 
   const optionsLangues = [

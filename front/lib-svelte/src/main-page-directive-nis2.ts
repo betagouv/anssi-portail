@@ -9,16 +9,9 @@ const { itemsCyber } = JSON.parse(donnees) as {
   itemsCyber: ItemCyber[];
 };
 
-const donneesNis2 = document.getElementById('donnees-nis2')!.textContent ?? '';
-
-const { featureFlagNis2CyFun23 } = JSON.parse(donneesNis2) as {
-  featureFlagNis2CyFun23: boolean;
-};
-
 hydrate(Page, {
   target: document.getElementById('page-directive-nis2')!,
   props: {
     itemsCyber,
-    featureFlagNis2CyFun23,
   },
 });
