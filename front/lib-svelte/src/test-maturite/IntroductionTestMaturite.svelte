@@ -42,12 +42,8 @@
     mode === 'autonome'
       ? undefined
       : {
-          branche: {
-            nom: 'Faire le test !',
-            lien: '/faire-le-test',
-          },
+          parents: [{ nom: 'Faire le test !', lien: '/faire-le-test' }],
           feuille: 'Test de maturité cyber',
-          fondSombre: false,
         }
   );
 </script>

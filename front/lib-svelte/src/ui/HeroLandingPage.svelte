@@ -29,12 +29,13 @@
     illustration,
     class: className,
   }: Props = $props();
+  const segmentsFilAriane = $derived(fabriqueFilAriane(propriétésFilAriane));
 </script>
 
-<div class={['section-hero', className]} class:avecFilAriane={!!propriétésFilAriane}>
+<div class={['section-hero', className]} class:avecFilAriane={!!segmentsFilAriane?.length}>
   <dsfr-container>
-    {#if propriétésFilAriane}
-      <FilAriane segments={fabriqueFilAriane(propriétésFilAriane)} />
+    {#if segmentsFilAriane?.length}
+      <FilAriane segments={segmentsFilAriane} />
     {/if}
 
     <div class="conteneur">

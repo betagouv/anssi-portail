@@ -1,9 +1,8 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
   import { récupèreArticle, type ArticleAPI } from '../passerelles/blog/articles';
-  import { profilStore } from '../stores/profil.store';
   import BoutonsPartagePage from '../test-maturite/BoutonsPartagePage.svelte';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import type { PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
   import RetourUtilisateurSurContenu from '../ui/RetourUtilisateurSurContenu.svelte';
   import { Article } from './article.type';
@@ -20,10 +19,10 @@
     untrack(() => (articlePréchargé ? new Article(articlePréchargé) : undefined))
   );
 
-  const propriétésFilAriane: PropriétésFilAriane = $derived([
-    { nom: 'Conseils cyber', lien: '/conseils-cyber' },
-    { nom: article ? article.titre : '' },
-  ]);
+  const propriétésFilAriane: PropriétésFilAriane = $derived({
+    parents: [{ nom: 'Conseils cyber', lien: '/conseils-cyber' }],
+    feuille: article ? article.titre : '',
+  });
 
   onMount(async () => {
     if (slugArticle) {
@@ -37,7 +36,7 @@
   <Heros
     description={article.description}
     format="banniere"
-    segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+    {propriétésFilAriane}
     theme="clair"
     titre={article.titre}
   />

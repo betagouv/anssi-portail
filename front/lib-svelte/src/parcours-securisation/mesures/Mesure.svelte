@@ -3,10 +3,10 @@
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { enPropriétéWebC } from '$plateforme/webComponent';
   import CelluleExigenceNis2 from '../../nis2/tableaux/CelluleExigenceNis2.svelte';
-  import { profilStore } from '../../stores/profil.store';
+  import { profilStore, type Profil } from '../../stores/profil.store';
   import Page404 from '../../ui/404.svelte';
   import Accordeon from '../../ui/Accordeon.svelte';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
+  import type { PropriétésFilAriane } from '../../ui/filAriane';
   import Heros from '../../ui/Heros.svelte';
   import RetourUtilisateurSurContenu from '../../ui/RetourUtilisateurSurContenu.svelte';
   import InterlocuteursParcoursSecurisation from '../InterlocuteursParcoursSecurisation.svelte';
@@ -40,29 +40,22 @@
 
   const titre = $derived(mesure ? mesure.phraseAccroche || mesure.titre : '');
   const description = $derived(mesure && mesure.phraseAccroche ? mesure.titre : '');
-  const propriétésFilAriane: PropriétésFilAriane = $derived(
-    mesure
-      ? [
-          {
-            nom: 'Protéger mon organisation',
-            lien:
-              $profilStore?.parcoursSecurisation.parcoursActuel === 'allégé'
-                ? `/modules/${mesure.idModule}`
-                : '/parcours-complet',
-          },
-          ...($profilStore?.parcoursSecurisation.parcoursActuel === 'allégé'
-            ? [] // pas de sous-branche en parcours allégé
-            : [
-                {
-                  nom: mesure.nomModule,
-                  lien: `/modules/${mesure.idModule}`,
-                },
-              ]),
-          {
-            nom: titre,
-          },
-        ]
-      : []
+  const fabriquePropriétésFilArianeMesure = (
+    mesure: Mesure,
+    parcoursActuel: Profil['parcoursSecurisation']['parcoursActuel'] | undefined
+  ): PropriétésFilAriane => ({
+    parents: [
+      {
+        nom: 'Protéger mon organisation',
+        lien: parcoursActuel === 'allégé' ? `/modules/${mesure.idModule}` : '/parcours-complet',
+      },
+      // Pas de sous-branche en parcours allégé.
+      ...(parcoursActuel === 'allégé' ? [] : [{ nom: mesure.nomModule, lien: `/modules/${mesure.idModule}` }]),
+    ],
+    feuille: mesure.phraseAccroche || mesure.titre,
+  });
+  const propriétésFilAriane = $derived(
+    mesure ? fabriquePropriétésFilArianeMesure(mesure, $profilStore?.parcoursSecurisation.parcoursActuel) : undefined
   );
 
   const surSélectionProcédure = () => {
@@ -82,7 +75,7 @@
       format="details"
       {titre}
       theme="clair"
-      segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
+      {propriétésFilAriane}
     />
 
     <dsfr-container bind:this={divConteneur}>

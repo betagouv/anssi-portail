@@ -3,7 +3,7 @@
   import { estServeur } from '$plateforme/environnement';
   import { réécritFragmentDepuis } from '../navigation/fragmentDeNavigation.svelte';
   import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
-  import { type PropriétésFilAriane } from '../ui/filAriane';
+  import type { PropriétésFilAriane } from '../ui/filAriane';
   import HerosRiche from '../ui/HerosRiche.svelte';
   import Lien from '../ui/Lien.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
@@ -22,7 +22,7 @@
     { label: 'Documentation et FAQ', fragment: '#documentation' },
   ];
   let lienActif = $state('#presentation');
-  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Directive NIS 2', fondSombre: true };
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Directive NIS 2' };
 
   onMount(() => {
     const fragments = liens.map((lien) => lien.fragment);
@@ -32,7 +32,7 @@
 
 <HerosRiche
   description="Préparez-vous et renforcez dès à présent le niveau de cybersécurité de votre organisation."
-  propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
+  {propriétésFilAriane}
   variante="bleu-clair"
 >
   {#snippet titreHtml()}

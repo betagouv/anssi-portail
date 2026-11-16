@@ -69,7 +69,7 @@
     <FilAriane
       segments={fabriqueFilAriane({
         feuille: 'Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?',
-        branche: { nom: 'Faire le test !', lien: '/faire-le-test' },
+        parents: [{ nom: 'Faire le test !', lien: '/faire-le-test' }],
       })}
     />
   </dsfr-container>

@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { type PropriétésFilAriane } from '../../ui/filAriane';
+  import type { PropriétésFilAriane } from '../../ui/filAriane';
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import MotEnExergue from '../../ui/MotEnExergue.svelte';
   import IllustrationHerosAssociations from '../animation/IllustrationHerosAssociations.svelte';
   import Proteger from '../Proteger.svelte';
 
-  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Protéger mon association', fondSombre: true };
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Protéger mon association' };
 </script>
 
 <HerosRiche

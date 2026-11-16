@@ -6,7 +6,7 @@
   import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
   import { profilStore } from '../stores/profil.store';
   import ChampRecherche from '../ui/ChampRecherche.svelte';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import type { PropriétésFilAriane } from '../ui/filAriane';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Heros from '../ui/Heros.svelte';
@@ -129,14 +129,13 @@
     }
     return idÉlémentSélectionné === 'guides' ? $guidesFiltres.resultats : $catalogueFiltre.resultats;
   });
-  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Guides et ressources', fondSombre: true };
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Guides et ressources' };
 </script>
 
 <Heros
-  cacheFilAriane={!!$profilStore}
   description="Trouvez les services et les ressources adaptés à vos besoins."
   format="banniere"
-  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  {propriétésFilAriane}
   theme="clair"
   titre="Les services et ressources cyber"
 />

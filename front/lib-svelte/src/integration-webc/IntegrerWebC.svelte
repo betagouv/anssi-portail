@@ -1,7 +1,6 @@
 <script lang="ts">
-  import { profilStore } from '../stores/profil.store';
   import Accordeon from '../ui/Accordeon.svelte';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import type { PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
   import Lien from '../ui/Lien.svelte';
   import BlocDeCode from './BlocDeCode.svelte';
@@ -13,7 +12,7 @@
 <Heros
   description="Enrichissez votre site avec des outils et services cyber gratuits, simples à intégrer et accessibles à tous."
   format="banniere"
-  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  {propriétésFilAriane}
   theme="clair"
   titre="Intégrer nos dispositifs"
 />

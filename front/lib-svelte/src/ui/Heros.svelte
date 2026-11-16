@@ -1,13 +1,12 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { enPropriétéWebC } from '$plateforme/webComponent';
-  import type { Segment } from './filAriane';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from './filAriane';
 
   type Props = {
     format: 'banniere' | 'heros' | 'heros-centre' | 'details';
     theme: 'sombre' | 'clair' | 'pastel'; // inversé / clair
-    segmentsFilAriane?: Segment[];
-    cacheFilAriane?: boolean;
+    propriétésFilAriane?: PropriétésFilAriane;
     tags?: Snippet;
     cacheTags?: boolean;
     titre: string;
@@ -23,8 +22,7 @@
   let {
     format,
     theme = 'sombre',
-    segmentsFilAriane = [],
-    cacheFilAriane = false,
+    propriétésFilAriane,
     tags,
     cacheTags = false,
     titre,
@@ -46,6 +44,7 @@
   }
 
   const ficheCatalogue = $derived(format === 'details');
+  const segmentsFilAriane = $derived(fabriqueFilAriane(propriétésFilAriane));
 </script>
 
 <lab-anssi-bandeau-page
@@ -54,25 +53,27 @@
   inverse={theme === 'clair' || theme === 'pastel'}
   class:pastel={theme === 'pastel'}
   avecBadges={!cacheTags}
-  avecFilAriane={!cacheFilAriane}
+  avecFilAriane={!!segmentsFilAriane.length}
   liensFilAriane={enPropriétéWebC(segmentsFilAriane)}
   {titre}
   {description}
   sansImage={cacheIllustration}
   urlImage={illustrationSource}
 >
-  <ol slot="seo">
-    {#each segmentsFilAriane as segment, index (segment.id)}
-      {@const isLast = index === segmentsFilAriane.length - 1}
-      <li>
-        {#if isLast}
-          <span>{segment.label}</span>
-        {:else}
-          <a href={segment.href}>{segment.label}</a>
-        {/if}
-      </li>
-    {/each}
-  </ol>
+  {#if segmentsFilAriane.length}
+    <ol slot="seo">
+      {#each segmentsFilAriane as segment, index (segment.id)}
+        {@const isLast = index === segmentsFilAriane.length - 1}
+        <li>
+          {#if isLast}
+            <span>{segment.label}</span>
+          {:else}
+            <a href={segment.href}>{segment.label}</a>
+          {/if}
+        </li>
+      {/each}
+    </ol>
+  {/if}
   {#if tags}
     <div slot="badgesgroup">
       {@render tags()}

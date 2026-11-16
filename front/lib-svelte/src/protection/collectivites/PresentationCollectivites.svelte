@@ -3,7 +3,7 @@
   import { estServeur } from '$plateforme/environnement';
   import { réécritFragmentDepuis } from '../../navigation/fragmentDeNavigation.svelte';
   import NavigationTertiaire from '../../navigation/NavigationTertiaire.svelte';
-  import { type PropriétésFilAriane } from '../../ui/filAriane';
+  import type { PropriétésFilAriane } from '../../ui/filAriane';
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import MotEnExergue from '../../ui/MotEnExergue.svelte';
   import IllustrationHerosCollectivites from '../animation/IllustrationHerosCollectivites.svelte';
@@ -28,12 +28,12 @@
     réécritFragmentDepuis(fragments, '&');
   });
 
-  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Protéger ma collectivité', fondSombre: true };
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Protéger ma collectivité' };
 </script>
 
 <HerosRiche
   description="Toutes les collectivités sont exposées au risque de cyberattaques. En 2025, elles ont notamment représenté 11&nbsp;% des victimes de rançongiciels ou ransomware."
-  propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
+  {propriétésFilAriane}
   variante="vert-clair"
 >
   {#snippet titreHtml()}

@@ -12,7 +12,7 @@
   let { mode, urlBase = '' }: { mode?: 'autonome'; urlBase?: string } = $props();
 
   const propriétésFilAriane: PropriétésFilAriane = {
-    branche: { nom: 'Faire le test !', lien: '/faire-le-test/' },
+    parents: [{ nom: 'Faire le test !', lien: '/faire-le-test/' }],
     feuille: 'Mon organisation est-elle exposée aux cyberattaques ?',
   };
 

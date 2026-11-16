@@ -4,7 +4,7 @@
   import ContrôleSegmenté from '../../navigation/ControleSegmente.svelte';
   import { creeLeFragmentDeNavigation as créeLeFragmentDeNavigation } from '../../navigation/fragmentDeNavigation.svelte';
   import BadgeBêta from '../../ui/BadgeBeta.svelte';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
+  import type { PropriétésFilAriane } from '../../ui/filAriane';
   import Héros from '../../ui/Heros.svelte';
   import Lien from '../../ui/Lien.svelte';
   import ÉvènementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
@@ -57,7 +57,7 @@
   illustrationSource=""
   titre="Parcours de sécurisation"
   theme="pastel"
-  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
+  {propriétésFilAriane}
 >
   {#snippet tags()}
     <BadgeBêta />

@@ -1,7 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount, tick, untrack } from 'svelte';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import type { PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
   import Lien from '../ui/Lien.svelte';
   import BadgeTypeFinancement from './BadgeTypeFinancement.svelte';
@@ -130,18 +130,18 @@
     }
   });
 
-  const propriétésFilAriane: PropriétésFilAriane = $derived(
+  const propriétésFilAriane: PropriétésFilAriane | undefined = $derived(
     financement
-      ? [
-          {
-            nom: 'Financements cyber',
-            lien: '/financements',
-          },
-          {
-            nom: financement.nom,
-          },
-        ]
-      : []
+      ? {
+          parents: [
+            {
+              nom: 'Financements cyber',
+              lien: '/financements',
+            },
+          ],
+          feuille: financement.nom,
+        }
+      : undefined
   );
 </script>
 
@@ -151,7 +151,7 @@
   titre={financement ? financement.nom : ''}
   theme="clair"
   description={`Zone géographique éligible pour cette aide\u00a0: ${financement?.perimetresGeographiques}`}
-  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
+  {propriétésFilAriane}
 >
   {#snippet tags()}
     {#if financement}

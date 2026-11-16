@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { profilStore } from '../stores/profil.store';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import type { PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
   import EtapeActivites from './etapes/EtapeActivites.svelte';
   import EtapeAppartenanceUE from './etapes/EtapeAppartenanceUE.svelte';
@@ -32,15 +31,14 @@
 
   const propriétésFilAriane: PropriétésFilAriane = {
     feuille: 'Simulateur',
-    branche: { nom: 'Directive NIS 2', lien: '/nis2' },
-    fondSombre: true,
+    parents: [{ nom: 'Directive NIS 2', lien: '/nis2' }],
   };
 </script>
 
 <Heros
   description="Déterminez si votre entité est régulée par la directive NIS&nbsp;2."
   format="banniere"
-  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  {propriétésFilAriane}
   theme="clair"
   titre="Mon entité est-elle concernée&#8239;?"
 />

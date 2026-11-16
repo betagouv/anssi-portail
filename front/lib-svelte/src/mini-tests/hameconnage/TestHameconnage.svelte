@@ -20,7 +20,7 @@
     <FilAriane
       segments={fabriqueFilAriane({
         feuille: 'Hameçonnage : saurez-vous distinguer le mail légitime du faux&nbsp;?',
-        branche: { nom: 'Faire le test !', lien: '/faire-le-test' },
+        parents: [{ nom: 'Faire le test !', lien: '/faire-le-test' }],
       })}
     />
   </dsfr-container>

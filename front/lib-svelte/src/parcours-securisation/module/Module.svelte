@@ -3,7 +3,7 @@
   import { onMount } from 'svelte';
   import { profilStore } from '../../stores/profil.store';
   import BadgeBêta from '../../ui/BadgeBeta.svelte';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
+  import type { PropriétésFilAriane } from '../../ui/filAriane';
   import Héros from '../../ui/Heros.svelte';
   import { toasterStore } from '../../ui/toasts/toaster.store';
   import Toaster from '../../ui/toasts/Toaster.svelte';
@@ -40,20 +40,11 @@
 
   const propriétésFilAriane: PropriétésFilAriane = $derived(
     $profilStore?.parcoursSecurisation.parcoursActuel === 'allégé'
-      ? [
-          {
-            nom: 'Protéger mon organisation',
-          },
-        ]
-      : [
-          {
-            nom: 'Protéger mon organisation',
-            lien: '/parcours-complet',
-          },
-          {
-            nom: module?.nom ?? '',
-          },
-        ]
+      ? { parents: [], feuille: 'Protéger mon organisation' }
+      : {
+          parents: [{ nom: 'Protéger mon organisation', lien: '/parcours-complet' }],
+          feuille: module?.nom ?? '',
+        }
   );
 </script>
 
@@ -68,7 +59,7 @@
   illustrationSource=""
   titre={module?.nom ?? ''}
   theme="clair"
-  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
+  {propriétésFilAriane}
 >
   {#snippet tags()}
     <BadgeBêta />

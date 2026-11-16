@@ -3,8 +3,7 @@
   import { onMount } from 'svelte';
   import { couleursDeNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
-  import { profilStore } from '../stores/profil.store';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import type { PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import Lien from '../ui/Lien.svelte';
@@ -59,19 +58,20 @@
     };
   });
   const propriétésFilAriane: PropriétésFilAriane = {
-    branche: {
-      nom: 'Test de maturité cyber',
-      lien: '/test-maturite/',
-    },
+    parents: [
+      {
+        nom: 'Test de maturité cyber',
+        lien: '/test-maturite/',
+      },
+    ],
     feuille: 'Session de groupe',
-    fondSombre: true,
   };
 </script>
 
 <Heros
   description="Ce résultat nous permet de vous guider et de vous fournir les informations et les outils essentiels pour agir sur votre maturité cyber."
   format="banniere"
-  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  {propriétésFilAriane}
   theme="clair"
   titre="Résultat de maturité cyber"
 />
