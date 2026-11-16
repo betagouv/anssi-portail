@@ -212,6 +212,37 @@ describe('La ressource qui gère le dernier résultat de test', () => {
           });
         });
       });
+
+      describe("en cas de réponse incorrecte de l'API", () => {
+        it('sans données de test préalables', async () => {
+          const résultat = await ajouteResultatDeTestPourJeanne();
+          résultat.region = undefined;
+          résultat.secteur = undefined;
+          résultat.tailleOrganisation = undefined;
+          adaptateurRechercheEntreprise.rechercheOrganisations = async () => [];
+
+          const réponse = await requeteGET();
+
+          expect(réponse.status).toBe(HttpStatusCode.Ok);
+          expect(réponse.body.organisation).toBeUndefined();
+        });
+
+        it('avec données de test préalables', async () => {
+          await ajouteResultatDeTestPourJeanne({
+            region: 'FR-20R',
+            secteur: 'C',
+            tailleOrganisation: '12',
+          });
+          adaptateurRechercheEntreprise.rechercheOrganisations = async () => [];
+
+          const réponse = await requeteGET();
+
+          expect(réponse.status).toBe(HttpStatusCode.Ok);
+          expect(réponse.body.organisation.region.code).toBe('FR-20R');
+          expect(réponse.body.organisation.secteur.code).toBe('C');
+          expect(réponse.body.organisation.trancheEffectif.code).toBe('12');
+        });
+      });
     });
 
     describe('pour un utilisateur non connecté', () => {
