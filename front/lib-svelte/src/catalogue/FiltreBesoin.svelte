@@ -3,22 +3,12 @@
   import { BesoinCyber } from './Catalogue.types';
   import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
 
-  interface Props {
-    filtreTousVisible?: boolean;
-  }
-
-  let { filtreTousVisible = true }: Props = $props();
-
   const filtres: { libelle: string; valeur: string; icone: string }[] = $derived([
-    ...(filtreTousVisible
-      ? [
-          {
-            libelle: 'Tous les besoins',
-            valeur: BesoinCyber.TOUS,
-            icone: '<img src="/assets/images/illustration-filtre-besoins-tous.svg" alt="" width="56" height="56" />',
-          },
-        ]
-      : []),
+    {
+      libelle: 'Tous les besoins',
+      valeur: BesoinCyber.TOUS,
+      icone: '<img src="/assets/images/illustration-filtre-besoins-tous.svg" alt="" width="56" height="56" />',
+    },
     {
       libelle: 'Être sensibilisé',
       valeur: BesoinCyber.ETRE_SENSIBILISE,
