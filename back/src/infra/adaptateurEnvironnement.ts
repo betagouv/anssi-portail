@@ -89,11 +89,7 @@ type AdaptateurEnvironnement = {
     url: () => string;
     dureeCacheStatistiquesEnSecondes: () => number;
   };
-  fonctionnalites: {
-    nis2: {
-      afficheObservations: () => boolean;
-    };
-  };
+  fonctionnalites: undefined;
   rechercheEntreprise: {
     apiUrl: () => string;
   };
@@ -294,11 +290,7 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       return Number.isNaN(dureeEnNombre) ? CINQ_MINUTES : dureeEnNombre;
     },
   },
-  fonctionnalites: {
-    nis2: {
-      afficheObservations: () => process.env.FEATURE_FLAG_NIS2_OBSERVATIONS === 'true',
-    },
-  },
+  fonctionnalites: undefined,
   rechercheEntreprise: {
     apiUrl: () => {
       const valeur = process.env.RECHERCHE_ENTREPRISE_API_URL;

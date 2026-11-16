@@ -255,11 +255,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     url: () => 'https://demo.monaidecyber.fr',
     dureeCacheStatistiquesEnSecondes: () => 300,
   },
-  fonctionnalites: {
-    nis2: {
-      afficheObservations: () => false,
-    },
-  },
+  fonctionnalites: undefined,
   appEnv: () => 'local',
   nodeEnv: () => 'developpement',
   rechercheEntreprise: {

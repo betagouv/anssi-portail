@@ -23,12 +23,6 @@ describe('La ressource des Exigences NIS 2', () => {
     entrepotExigence = new EntrepotExigenceMemoire();
     adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
-      fonctionnalites: {
-        ...fauxAdaptateurEnvironnement.fonctionnalites,
-        nis2: {
-          ...fauxAdaptateurEnvironnement.fonctionnalites.nis2,
-        },
-      },
     };
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
