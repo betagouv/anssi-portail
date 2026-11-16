@@ -3,7 +3,7 @@
   import { onMount, untrack } from 'svelte';
   import { clic } from '../directives/actions.svelte';
   import { profilStore } from '../stores/profil.store';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import type { PropriétésFilAriane } from '../ui/filAriane';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Heros from '../ui/Heros.svelte';
@@ -59,14 +59,14 @@
       financementsStore.initialise(financements ?? []);
     }
   });
-  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Financements cyber', fondSombre: true };
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Financements cyber' };
 </script>
 
 <Heros
   titre="Financements cyber"
   description="Bénéficiez d'accompagnements financés ou de subventions pour renforcer la maturité cyber de votre organisation."
   format="banniere"
-  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  {propriétésFilAriane}
   theme="clair"
 />
 

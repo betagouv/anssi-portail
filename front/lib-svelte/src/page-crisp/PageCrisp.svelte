@@ -1,7 +1,7 @@
 <script lang="ts">
   import { estServeur } from '$plateforme/environnement';
   import { enPropriétéWebC } from '$plateforme/webComponent';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import type { PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
   import type { PageHtmlCrisp } from './pageCrisp.type';
 
@@ -13,14 +13,8 @@
 
   let tableDesMatières = $derived(pageCrisp ? pageCrisp.tableDesMatières.filter((e) => e.profondeur === 2) : []);
 
-  const propriétésFilAriane: PropriétésFilAriane = $derived(
-    pageCrisp
-      ? [
-          {
-            nom: pageCrisp.titre,
-          },
-        ]
-      : []
+  const propriétésFilAriane: PropriétésFilAriane | undefined = $derived(
+    pageCrisp ? { parents: [], feuille: pageCrisp.titre } : undefined
   );
 
   const propsTableDesMatières = $derived({
@@ -32,7 +26,7 @@
   <Heros
     titre={pageCrisp.titre}
     description={pageCrisp.description ?? ''}
-    segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
+    {propriétésFilAriane}
     theme="clair"
     format="banniere"
   />

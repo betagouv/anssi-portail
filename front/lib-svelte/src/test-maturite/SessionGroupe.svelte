@@ -2,7 +2,7 @@
   import axios from 'axios';
   import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import type { PropriétésFilAriane } from '../ui/filAriane';
   import Formulaire from '../ui/Formulaire.svelte';
   import Heros from '../ui/Heros.svelte';
   import ModaleNouvelleSessionGroupe from './ModaleNouvelleSessionGroupe.svelte';
@@ -42,19 +42,16 @@
     if (codeSession !== codeFormate) codeSession = codeFormate;
   });
 
-  const propriétésFilAriane: PropriétésFilAriane = [
-    {
-      nom: 'Faire le test !',
-      lien: '/faire-le-test',
-    },
-    {
-      nom: 'Test de maturité cyber',
-      lien: '/test-maturite',
-    },
-    {
-      nom: 'Session de groupe',
-    },
-  ];
+  const propriétésFilAriane: PropriétésFilAriane = {
+    parents: [
+      { nom: 'Faire le test !', lien: '/faire-le-test' },
+      {
+        nom: 'Test de maturité cyber',
+        lien: '/test-maturite',
+      },
+    ],
+    feuille: 'Session de groupe',
+  };
 </script>
 
 <Heros
@@ -62,7 +59,7 @@
   description="Déterminez la maturité cyber de votre organisation en 5 minutes."
   format="banniere"
   theme="clair"
-  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
+  {propriétésFilAriane}
 />
 
 <dsfr-container>

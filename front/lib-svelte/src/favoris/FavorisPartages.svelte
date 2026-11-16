@@ -7,7 +7,7 @@
   import { chargeGuidesDansLeStore, guidesStore } from '../catalogue/stores/guides/guides.store';
   import { listeItemsFavoris } from '../catalogue/stores/itemsCatalogueEnFavori';
   import { profilStore } from '../stores/profil.store';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import type { PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import ContenuFavoris from './ContenuFavoris.svelte';
@@ -35,13 +35,13 @@
       itemsCyberPartages = [];
     }
   });
-  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Services et ressources partagés', fondSombre: true };
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Services et ressources partagés' };
 </script>
 
 <Heros
   description={`Cette liste de services et ressources est partagée par ${prenom}`}
   format="banniere"
-  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  {propriétésFilAriane}
   theme="clair"
   titre="Services et ressources partagés"
 />

@@ -3,7 +3,7 @@
   import { untrack } from 'svelte';
   import { creeLeFragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
   import { profilStore } from '../stores/profil.store';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import type { PropriétésFilAriane } from '../ui/filAriane';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Heros from '../ui/Heros.svelte';
@@ -50,13 +50,13 @@
     fragmentDeNavigation.actualise();
   });
 
-  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Contacts cyber', fondSombre: true };
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Contacts cyber' };
 </script>
 
 <Heros
   description="Des contacts cyber de proximité pour vous orienter et répondre à vos questions."
   format="banniere"
-  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  {propriétésFilAriane}
   theme="clair"
   titre="Contacts cyber"
 />

@@ -43,16 +43,17 @@
   $effect(() => {
     conteneur?.style.setProperty('--url-image-de-fond', urlImageDeFond);
   });
+  const segmentsFilAriane = $derived(fabriqueFilAriane(propriétésFilAriane));
 </script>
 
 <dsfr-container
   bind:this={conteneur}
   class={['conteneur', variante, className]}
   class:avecMentionAdditionnelle={!!mentionAdditionnelle}
-  class:avecFilAriane={!!propriétésFilAriane}
+  class:avecFilAriane={!!segmentsFilAriane?.length}
 >
-  {#if propriétésFilAriane}
-    <FilAriane segments={fabriqueFilAriane(propriétésFilAriane)} />
+  {#if segmentsFilAriane?.length}
+    <FilAriane segments={segmentsFilAriane} />
   {/if}
   <div class="contenu-heros">
     <div class="contenu">

@@ -5,7 +5,7 @@
   import { clic } from '../../directives/actions.svelte';
   import BoutonFavori from '../../favoris/BoutonFavori.svelte';
   import { profilStore } from '../../stores/profil.store';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
+  import type { PropriétésFilAriane } from '../../ui/filAriane';
   import Heros from '../../ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '../../ui/IllustrationDragonPasDeResultat.svelte';
   import Lien from '../../ui/Lien.svelte';
@@ -65,8 +65,7 @@
   const descriptionAspetisee = $derived(aseptiseHtml(guide?.description ?? ''));
   const propriétésFilAriane: PropriétésFilAriane = $derived({
     feuille: guide?.nom ?? '',
-    branche: { nom: 'Guides et ressources', lien: '/catalogue#guides' },
-    fondSombre: false,
+    parents: [{ nom: 'Guides et ressources', lien: '/catalogue#guides' }],
   });
 
   let itemsMenu = $derived([
@@ -119,10 +118,9 @@
 {#if guide}
   <Heros
     titre={decodeEntitesHtml(guide.nom)}
-    cacheFilAriane={!!$profilStore}
     description=""
     format="details"
-    segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+    propriétésFilAriane={!!$profilStore ? undefined : propriétésFilAriane}
     theme="clair"
     illustrationSource={guide.illustration.grande}
     cacheActions={guide.documents.length !== 1}

@@ -4,7 +4,7 @@
   import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import { profilStore } from '../stores/profil.store';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import type { PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
   import ComparaisonTest from './ComparaisonTest.svelte';
   import HistoriqueTests from './HistoriqueTests.svelte';
@@ -56,19 +56,15 @@
     { label: 'Comparaison avec d’autres entités', fragment: '#comparaison' },
   ];
   const propriétésFilAriane: PropriétésFilAriane = {
-    branche: {
-      nom: 'Faire le test !',
-      lien: '/faire-le-test',
-    },
+    parents: [{ nom: 'Faire le test !', lien: '/faire-le-test' }],
     feuille: 'Test de maturité cyber',
   };
 </script>
 
 <Heros
-  cacheFilAriane={mode === 'autonome'}
   description="Votre résultat vous permet de situer votre niveau de maturité cyber actuel et de suivre son évolution au fil de vos actions."
   format="banniere"
-  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
+  propriétésFilAriane={mode === 'autonome' ? undefined : propriétésFilAriane}
   theme="clair"
   titre="Maturité cyber de votre organisation"
 ></Heros>

@@ -17,9 +17,7 @@
 
   const estConnecté = $derived(!!$profilStore);
 
-  const propriétésFilAriane: PropriétésFilAriane = {
-    feuille: 'Faire le test !',
-  };
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Faire le test !' };
 
   const réactionsInitiales = { '❤️': 0, '👍': 0, '🔥': 0 };
   const donnéesInitiales = {

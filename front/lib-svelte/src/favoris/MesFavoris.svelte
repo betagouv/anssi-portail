@@ -4,7 +4,6 @@
   import { itemsCatalogueEnFavori } from '../catalogue/stores/itemsCatalogueEnFavori';
   import { profilStore } from '../stores/profil.store';
   import Bouton from '../ui/Bouton.svelte';
-  import { fabriqueFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import Lien from '../ui/Lien.svelte';
@@ -25,7 +24,7 @@
   description="Retrouvez tous vos contenus cyber à partager."
   format="banniere"
   theme="clair"
-  segmentsFilAriane={fabriqueFilAriane({ feuille: 'Favoris' }, !!$profilStore)}
+  propriétésFilAriane={{ feuille: 'Favoris' }}
 />
 
 <dsfr-container>

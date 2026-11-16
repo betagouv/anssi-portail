@@ -20,5 +20,5 @@
   inverse={fondSombre}
   buttonLabel="Voir le fil d'Ariane"
   buttonAriaLabel="Fil d’Ariane"
-  {segments}
+  segments={segments.map((segment) => ({ ...segment, id: `${id}-${segment.id}` }))}
 />

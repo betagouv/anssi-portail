@@ -1,8 +1,7 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
   import { récupèreRésumésDArticle, type RésuméArticleAPI } from '../passerelles/blog/articles';
-  import { profilStore } from '../stores/profil.store';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import type { PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
 
   type Props = {
@@ -22,7 +21,7 @@
 <Heros
   description="Tous nos conseils pour renforcer la cybersécurité de votre organisation."
   format="banniere"
-  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  {propriétésFilAriane}
   theme="clair"
   titre="Conseils cyber"
 />
