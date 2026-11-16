@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { enPropriétéWebC } from '$plateforme/webComponent';
+  import { FiltresCatalogue } from '@lab-anssi/ui-kit';
   import { BesoinCyber } from './Catalogue.types';
   import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
 
@@ -9,12 +9,12 @@
 
   let { filtreTousVisible = true }: Props = $props();
 
-  const filtres = $derived([
+  const filtres: { libelle: string; valeur: string; icone: string }[] = $derived([
     ...(filtreTousVisible
       ? [
           {
             libelle: 'Tous les besoins',
-            valeur: null,
+            valeur: BesoinCyber.TOUS,
             icone: '<img src="/assets/images/illustration-filtre-besoins-tous.svg" alt="" width="56" height="56" />',
           },
         ]
@@ -43,11 +43,13 @@
 </script>
 
 <div class="conteneur-filtres">
-  <lab-anssi-filtres
-    filtres={enPropriétéWebC(filtres)}
-    valeur={$rechercheParBesoin}
-    onvaleurachangee={(e: CustomEvent<string>) => ($rechercheParBesoin = (e.detail as BesoinCyber) ?? null)}
-  ></lab-anssi-filtres>
+  <FiltresCatalogue
+    {filtres}
+    elementActif={$rechercheParBesoin ?? BesoinCyber.TOUS}
+    onvaleurachangee={(valeur) => {
+      $rechercheParBesoin = valeur === BesoinCyber.TOUS ? null : (valeur as BesoinCyber);
+    }}
+  ></FiltresCatalogue>
 </div>
 
 <style>
