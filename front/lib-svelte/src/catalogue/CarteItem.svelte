@@ -82,7 +82,7 @@
     </div>
 
     {#if image}
-      <img src={image} alt={altImage} slot="image" class="illustration" width="311" height="150" />
+      <img loading="lazy" src={image} alt={altImage} slot="image" class="illustration" width="311" height="150" />
     {/if}
 
     <div slot="seo">
