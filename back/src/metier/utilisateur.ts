@@ -139,11 +139,11 @@ export class Utilisateur {
 
   async organisation(): Promise<Organisation> {
     if (!this._organisation) {
-      const organisations = await this.adaptateurRechercheEntreprise.rechercheOrganisations(this.siretEntite, null);
-      if (!organisations.length) {
+      const organisation = await this.adaptateurRechercheEntreprise.rechercheOrganisation(this.siretEntite, null);
+      if (!organisation) {
         throw new ErreurChargementOrganisation();
       }
-      this._organisation = new Organisation(organisations[0]);
+      this._organisation = new Organisation(organisation);
     }
     return this._organisation;
   }

@@ -7,7 +7,7 @@ import {
   AdaptateurRechercheEntreprise,
   ResultatRechercheEntreprise,
 } from '../../src/infra/adaptateurRechercheEntreprise.js';
-import { configurationDeTestDuServeur } from './fauxObjets.js';
+import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise } from './fauxObjets.js';
 
 describe('quand requête GET sur `/api/annuaire/organisations`', () => {
   let serveur: Express;
@@ -31,6 +31,7 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
     let termeCherche;
     let departementCherche;
     const unAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
+      ...fauxAdaptateurRechercheEntreprise,
       rechercheOrganisations: async (
         terme: string,
         departement: string | null

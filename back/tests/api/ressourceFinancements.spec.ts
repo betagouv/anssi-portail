@@ -93,7 +93,7 @@ describe('La ressource Financements', () => {
       });
 
       it("renvoie une liste de financements préfiltrés sur la région de l'organisation de l'utilisateur", async () => {
-        adaptateurRechercheEntreprise.rechercheOrganisations = async () => [resultatRechercheEntreprise];
+        adaptateurRechercheEntreprise.rechercheOrganisation = async () => resultatRechercheEntreprise;
 
         await entrepotFinancement.ajoute({
           ...financementCyberPME,
@@ -107,9 +107,11 @@ describe('La ressource Financements', () => {
       });
 
       it('renvoie une liste de financements concernant les TPE uniquement', async () => {
-        adaptateurRechercheEntreprise.rechercheOrganisations = async () => [
-          { ...resultatRechercheEntreprise, codeTrancheEffectif: '11' },
-        ];
+        adaptateurRechercheEntreprise.rechercheOrganisation = async () => ({
+          ...resultatRechercheEntreprise,
+          codeTrancheEffectif: '11',
+        });
+
         await entrepotFinancement.ajoute({
           ...financementCyberPME,
           id: 2,
@@ -132,9 +134,11 @@ describe('La ressource Financements', () => {
       });
 
       it('renvoie une liste de financements concernant les PME uniquement', async () => {
-        adaptateurRechercheEntreprise.rechercheOrganisations = async () => [
-          { ...resultatRechercheEntreprise, codeTrancheEffectif: '12' },
-        ];
+        adaptateurRechercheEntreprise.rechercheOrganisation = async () => ({
+          ...resultatRechercheEntreprise,
+          codeTrancheEffectif: '12',
+        });
+
         await entrepotFinancement.ajoute({
           ...financementCyberPME,
           id: 2,
@@ -147,9 +151,11 @@ describe('La ressource Financements', () => {
       });
 
       it('renvoie une liste de financements concernant les ETI uniquement', async () => {
-        adaptateurRechercheEntreprise.rechercheOrganisations = async () => [
-          { ...resultatRechercheEntreprise, codeTrancheEffectif: '32' },
-        ];
+        adaptateurRechercheEntreprise.rechercheOrganisation = async () => ({
+          ...resultatRechercheEntreprise,
+          codeTrancheEffectif: '32',
+        });
+
         await entrepotFinancement.ajoute({
           ...financementCyberPME,
           id: 2,
@@ -162,9 +168,10 @@ describe('La ressource Financements', () => {
       });
 
       it('renvoie une liste de financements concernant les Entreprises uniquement', async () => {
-        adaptateurRechercheEntreprise.rechercheOrganisations = async () => [
-          { ...resultatRechercheEntreprise, codeTrancheEffectif: '52' },
-        ];
+        adaptateurRechercheEntreprise.rechercheOrganisation = async () => ({
+          ...resultatRechercheEntreprise,
+          codeTrancheEffectif: '52',
+        });
         await entrepotFinancement.ajoute({
           ...financementCyberPME,
           id: 2,
@@ -187,9 +194,11 @@ describe('La ressource Financements', () => {
       });
 
       it('renvoie une liste de financements concernant les collectivités uniquement', async () => {
-        adaptateurRechercheEntreprise.rechercheOrganisations = async () => [
-          { ...resultatRechercheEntreprise, estCollectivite: true },
-        ];
+        adaptateurRechercheEntreprise.rechercheOrganisation = async () => ({
+          ...resultatRechercheEntreprise,
+          estCollectivite: true,
+        });
+
         await entrepotFinancement.ajoute({
           ...financementCyberPME,
           id: 2,
@@ -212,9 +221,11 @@ describe('La ressource Financements', () => {
       });
 
       it('renvoie une liste de financements concernant les associations uniquement', async () => {
-        adaptateurRechercheEntreprise.rechercheOrganisations = async () => [
-          { ...resultatRechercheEntreprise, estAssociation: true },
-        ];
+        adaptateurRechercheEntreprise.rechercheOrganisation = async () => ({
+          ...resultatRechercheEntreprise,
+          estAssociation: true,
+        });
+
         await entrepotFinancement.ajoute({
           ...financementCyberPME,
           id: 2,

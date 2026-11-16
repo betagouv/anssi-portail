@@ -123,22 +123,20 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
         beforeEach(async () => {
           resultatTestMaturite = await ajouteResultatDeTestPourJeanne();
-          adaptateurRechercheEntreprise.rechercheOrganisations = async (terme) => {
+          adaptateurRechercheEntreprise.rechercheOrganisation = async (terme) => {
             return terme === '13000766900018'
-              ? [
-                  {
-                    departement: 'Nord',
-                    nom: 'Friterie',
-                    siret: '13000766900018',
-                    codeTrancheEffectif: codeTrancheEffectifRenvoyeParRechercheEntreprise,
-                    codeSecteur: codeSecteurRenvoyeParRechercheEntreprise,
-                    codeRegion: codeRegionRenvoyeParRechercheEntreprise,
-                    estCollectivite: false,
-                    estAssociation: false,
-                    codeActivite: '62.01Z',
-                  },
-                ]
-              : [];
+              ? {
+                  departement: 'Nord',
+                  nom: 'Friterie',
+                  siret: '13000766900018',
+                  codeTrancheEffectif: codeTrancheEffectifRenvoyeParRechercheEntreprise,
+                  codeSecteur: codeSecteurRenvoyeParRechercheEntreprise,
+                  codeRegion: codeRegionRenvoyeParRechercheEntreprise,
+                  estCollectivite: false,
+                  estAssociation: false,
+                  codeActivite: '62.01Z',
+                }
+              : undefined;
           };
         });
 
@@ -219,7 +217,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
           résultat.region = undefined;
           résultat.secteur = undefined;
           résultat.tailleOrganisation = undefined;
-          adaptateurRechercheEntreprise.rechercheOrganisations = async () => [];
+          adaptateurRechercheEntreprise.rechercheOrganisation = async () => undefined;
 
           const réponse = await requeteGET();
 
@@ -233,7 +231,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
             secteur: 'C',
             tailleOrganisation: '12',
           });
-          adaptateurRechercheEntreprise.rechercheOrganisations = async () => [];
+          adaptateurRechercheEntreprise.rechercheOrganisation = async () => undefined;
 
           const réponse = await requeteGET();
 

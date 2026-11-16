@@ -12,4 +12,5 @@ export type ResultatRechercheEntreprise = {
 
 export interface AdaptateurRechercheEntreprise {
   rechercheOrganisations(terme: string, departement: string | null): Promise<ResultatRechercheEntreprise[]>;
+  rechercheOrganisation(terme: string, departement: string | null): Promise<ResultatRechercheEntreprise | undefined>;
 }

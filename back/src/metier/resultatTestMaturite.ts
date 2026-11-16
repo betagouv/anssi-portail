@@ -62,9 +62,8 @@ export class ResultatTestMaturite {
 
   async revendiquePropriete(utilisateur: Utilisateur, adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise) {
     this.utilisateur = utilisateur;
-    const { codeRegion, codeSecteur, codeTrancheEffectif } = (
-      await adaptateurRechercheEntreprise.rechercheOrganisations(utilisateur.siretEntite, null)
-    )[0];
+    const { codeRegion, codeSecteur, codeTrancheEffectif } =
+      (await adaptateurRechercheEntreprise.rechercheOrganisation(utilisateur.siretEntite, null)) ?? {};
     this.region = this.region ?? (estCodeRegion(codeRegion) ? codeRegion : undefined);
     this.secteur = this.secteur ?? (estCodeSecteur(codeSecteur) ? codeSecteur : undefined);
     this.tailleOrganisation = this.tailleOrganisation ?? trancheEffectifParCode(codeTrancheEffectif)?.code;

@@ -145,18 +145,26 @@ export const fauxAdaptateurEnrichissement: AdaptateurEnrichissement = {
   enrichisAvecComposants: async (contenuPage) => contenuPage,
 };
 
+const fausseOrganisation = {
+  nom: '',
+  departement: '86',
+  codeSecteur: 'A',
+  codeRegion: 'FR-971',
+  codeTrancheEffectif: '11',
+  estAssociation: false,
+  estCollectivite: false,
+  codeActivite: '84.11Z',
+};
+
 export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
+  rechercheOrganisation: async (siret: string, __: string | null) => ({
+    ...fausseOrganisation,
+    siret,
+  }),
   rechercheOrganisations: async (siret: string, __: string | null) => [
     {
+      ...fausseOrganisation,
       siret,
-      nom: '',
-      departement: '86',
-      codeSecteur: 'A',
-      codeRegion: 'FR-971',
-      codeTrancheEffectif: '11',
-      estAssociation: false,
-      estCollectivite: false,
-      codeActivite: '84.11Z',
     },
   ],
 };

@@ -74,7 +74,10 @@ describe("L'entrepôt utilisateur MPA Postgres", () => {
           organisation: { nom: 'Mon organisation', siret: '12345678901234', departement: '33' },
         }),
       },
-      adaptateurRechercheEntreprise: { rechercheOrganisations: async () => [] },
+      adaptateurRechercheEntreprise: {
+        ...fauxAdaptateurRechercheEntreprise,
+        rechercheOrganisation: async () => undefined,
+      },
       adaptateurHachage: fauxAdaptateurHachage,
       adaptateurChiffrement,
       entrepotMesure: new EntrepotMesureMemoire(),

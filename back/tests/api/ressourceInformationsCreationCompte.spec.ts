@@ -70,19 +70,17 @@ describe("La ressource d'informations de création de compte", () => {
           siret: '1234',
         });
         adaptateurProfilAnssi.recupere = async () => undefined;
-        adaptateurRechercheEntreprise.rechercheOrganisations = async (terme: string) => [
-          {
-            siret: terme,
-            departement: '75',
-            nom: 'MonOrganisation',
-            codeTrancheEffectif: '01',
-            codeRegion: 'FR-ARA',
-            codeSecteur: 'D',
-            estAssociation: false,
-            estCollectivite: false,
-            codeActivite: '62.01Z',
-          },
-        ];
+        adaptateurRechercheEntreprise.rechercheOrganisation = async (terme: string) => ({
+          siret: terme,
+          departement: '75',
+          nom: 'MonOrganisation',
+          codeTrancheEffectif: '01',
+          codeRegion: 'FR-ARA',
+          codeSecteur: 'D',
+          estAssociation: false,
+          estCollectivite: false,
+          codeActivite: '62.01Z',
+        });
 
         const reponse = await request(serveur).get('/api/informations-creation-compte?token=unBonToken');
         expect(reponse.body.organisation).toEqual({
@@ -97,9 +95,8 @@ describe("La ressource d'informations de création de compte", () => {
         });
         adaptateurProfilAnssi.recupere = async () => undefined;
         let rechercheEntrepriseAppelee = false;
-        adaptateurRechercheEntreprise.rechercheOrganisations = async () => {
+        adaptateurRechercheEntreprise.rechercheOrganisation = async () => {
           rechercheEntrepriseAppelee = true;
-          return [];
         };
 
         const reponse = await request(serveur).get('/api/informations-creation-compte?token=unBonToken');
