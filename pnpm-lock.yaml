@@ -181,7 +181,7 @@ catalogs:
       version: 4.7.0
     pdfjs-dist:
       specifier: ^6.2.108
-      version: 6.4.299
+      version: 6.5.438
     prettier:
       specifier: 3.9.10
       version: 3.9.10
@@ -355,7 +355,7 @@ importers:
         version: 5.7.0
       pdfjs-dist:
         specifier: 'catalog:'
-        version: 6.4.299
+        version: 6.5.438
       pg:
         specifier: ^8.20.0
         version: 8.23.1
@@ -542,7 +542,7 @@ importers:
         version: 4.7.0(@napi-rs/canvas@1.1.0)(@noble/hashes@1.8.0)
       pdfjs-dist:
         specifier: 'catalog:'
-        version: 6.4.299
+        version: 6.5.438
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
@@ -4224,8 +4224,8 @@ packages:
   path-to-regexp@8.4.2:
     resolution: {integrity: sha512-qRcuIdP69NPm4qbACK+aDogI5CBDMi1jKe0ry5rSQJz8JVLsC7jV8XpiJjGRLLol3N+R5ihGYcrPLTno6pAdBA==}
 
-  pdfjs-dist@6.4.299:
-    resolution: {integrity: sha512-AVl138zALtfaAPvADulE0PZThbYzCBS79nL4pOSL/6Sm/4AH5A21BD9VHt97OlCuzJuCpmeZtAtkinisF4Vb1g==}
+  pdfjs-dist@6.5.438:
+    resolution: {integrity: sha512-vg8Pw1x+AFKy4AMDvhuWl5cOYV8d698UoEANoFFhc79hqXDnZQqnOXoxw3HG907WHOg1JYOvLhP756boddFxpA==}
     engines: {node: '>=22.13.0 || >=24'}
 
   pg-cloudflare@1.4.1:
@@ -8310,7 +8310,7 @@ snapshots:
 
   path-to-regexp@8.4.2: {}
 
-  pdfjs-dist@6.4.299:
+  pdfjs-dist@6.5.438:
     optionalDependencies:
       '@napi-rs/canvas': 1.1.0
 
