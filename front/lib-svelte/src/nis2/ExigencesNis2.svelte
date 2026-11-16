@@ -14,10 +14,9 @@
   import TableauExigencesSimple from './tableaux/TableauExigencesSimple.svelte';
 
   type Props = {
-    featureFlagNis2CyFun23: boolean;
     exigences?: Exigence[];
   };
-  const { featureFlagNis2CyFun23, exigences: exigencesExternes }: Props = $props();
+  const { exigences: exigencesExternes }: Props = $props();
   const exigencesInitiales = untrack(() => exigencesExternes);
   if (exigencesInitiales) {
     exigencesStore.initialise(exigencesInitiales);
@@ -134,7 +133,6 @@
       bind:langueSelectionnee
       bind:sensComparaison
       estBureau={rendu.estBureau}
-      {featureFlagNis2CyFun23}
     />
   </div>
   {#if mode === 'LISTE'}

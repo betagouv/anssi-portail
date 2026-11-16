@@ -14,7 +14,7 @@ import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideRequete } from '../zod.js';
 import { schemaRessourceExigencesNis2 } from './ressourceExigencesNis2.schema.js';
 
-export const ressourceExigencesNis2 = ({ adaptateurEnvironnement, entrepotExigence }: ConfigurationServeur) => {
+export const ressourceExigencesNis2 = ({ entrepotExigence }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get(
@@ -26,13 +26,6 @@ export const ressourceExigencesNis2 = ({ adaptateurEnvironnement, entrepotExigen
       const referentielSource = versReferentiel(source);
       const referentielCible = versReferentiel(cible);
       if (referentielCible !== 'NIS2' && referentielSource !== 'NIS2') {
-        return reponse.sendStatus(HttpStatusCode.NotFound);
-      }
-
-      if (
-        !adaptateurEnvironnement.fonctionnalites.nis2.afficheCyFun23() &&
-        (referentielCible === 'CyFun23' || referentielSource === 'CyFun23')
-      ) {
         return reponse.sendStatus(HttpStatusCode.NotFound);
       }
 

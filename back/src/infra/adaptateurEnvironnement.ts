@@ -92,7 +92,6 @@ type AdaptateurEnvironnement = {
   fonctionnalites: {
     nis2: {
       afficheObservations: () => boolean;
-      afficheCyFun23: () => boolean;
     };
   };
   rechercheEntreprise: {
@@ -298,7 +297,6 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
   fonctionnalites: {
     nis2: {
       afficheObservations: () => process.env.FEATURE_FLAG_NIS2_OBSERVATIONS === 'true',
-      afficheCyFun23: () => process.env.FEATURE_FLAG_NIS2_CYFUN23 === 'true',
     },
   },
   rechercheEntreprise: {

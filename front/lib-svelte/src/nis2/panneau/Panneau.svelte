@@ -13,7 +13,6 @@
     source: Referentiel;
     referentielSelectionne: ReferentielSelectionne | '';
     langueSelectionnee: 'FR' | 'EN';
-    featureFlagNis2CyFun23: boolean;
   };
 
   let {
@@ -22,7 +21,6 @@
     sensComparaison = $bindable(),
     referentielSelectionne = $bindable(),
     langueSelectionnee = $bindable('FR'),
-    featureFlagNis2CyFun23,
   }: Props = $props();
 
   const explications: string | undefined = $derived.by(() => {
@@ -37,13 +35,7 @@
 
 <div class="panneau" class:bureau={estBureau}>
   {#if estBureau}
-    <PanneauComparaison
-      bind:sensComparaison
-      bind:referentielSelectionne
-      estBureau={true}
-      {featureFlagNis2CyFun23}
-      bind:langueSelectionnee
-    />
+    <PanneauComparaison bind:sensComparaison bind:referentielSelectionne estBureau={true} bind:langueSelectionnee />
     {#if explications}
       <p class="texte-detail-sm">{explications}</p>
     {/if}
@@ -58,13 +50,7 @@
       use:clic={() => ($etatPanneau.menuComparaisonAffiche = true)}
     ></dsfr-button>
     <Modale bind:estOuverte={$etatPanneau.menuComparaisonAffiche} titre="Comparer">
-      <PanneauComparaison
-        bind:sensComparaison
-        bind:referentielSelectionne
-        bind:langueSelectionnee
-        estBureau={false}
-        {featureFlagNis2CyFun23}
-      />
+      <PanneauComparaison bind:sensComparaison bind:referentielSelectionne bind:langueSelectionnee estBureau={false} />
       {#snippet actions()}
         <dsfr-button
           label="Afficher le tableau"
