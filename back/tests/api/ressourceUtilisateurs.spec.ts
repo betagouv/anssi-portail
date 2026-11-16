@@ -10,7 +10,7 @@ import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRecherc
 import { ErreurChargementOrganisation } from '../../src/metier/utilisateur.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
-import { configurationDeTestDuServeur, fauxRapporteur } from './fauxObjets.js';
+import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise, fauxRapporteur } from './fauxObjets.js';
 
 const { JsonWebTokenError } = jsonwebtoken;
 
@@ -39,7 +39,8 @@ describe('La ressource utilisateur', () => {
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     busEvenements = fabriqueBusPourLesTests(fauxRapporteur);
     adaptateurRechercheEntreprise = {
-      rechercheOrganisations: async (_: string, __: string | null) => [],
+      ...fauxAdaptateurRechercheEntreprise,
+      rechercheOrganisation: async (_: string, __: string | null) => undefined,
     };
     adaptateurJWT = {
       decode: (token) => JSON.parse(token.slice(0, -5)),
@@ -63,19 +64,17 @@ describe('La ressource utilisateur', () => {
     });
 
     it("ajoute un utilisateur à l'entrepot", async () => {
-      adaptateurRechercheEntreprise.rechercheOrganisations = async () => [
-        {
-          nom: '',
-          departement: '',
-          siret: '13000766900018',
-          codeTrancheEffectif: '01',
-          codeRegion: 'FR-ARA',
-          codeSecteur: 'D',
-          estAssociation: false,
-          estCollectivite: false,
-          codeActivite: '62.01Z',
-        },
-      ];
+      adaptateurRechercheEntreprise.rechercheOrganisation = async () => ({
+        nom: '',
+        departement: '',
+        siret: '13000766900018',
+        codeTrancheEffectif: '01',
+        codeRegion: 'FR-ARA',
+        codeSecteur: 'D',
+        estAssociation: false,
+        estCollectivite: false,
+        codeActivite: '62.01Z',
+      });
 
       await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
 
@@ -113,19 +112,17 @@ describe('La ressource utilisateur', () => {
     });
 
     it('utilise le SIRET du token en priorité', async () => {
-      adaptateurRechercheEntreprise.rechercheOrganisations = async (siret) => [
-        {
-          nom: '',
-          departement: '',
-          siret,
-          codeTrancheEffectif: '01',
-          codeRegion: 'FR-ARA',
-          codeSecteur: 'D',
-          estAssociation: false,
-          estCollectivite: false,
-          codeActivite: '62.01Z',
-        },
-      ];
+      adaptateurRechercheEntreprise.rechercheOrganisation = async (siret) => ({
+        nom: '',
+        departement: '',
+        siret,
+        codeTrancheEffectif: '01',
+        codeRegion: 'FR-ARA',
+        codeSecteur: 'D',
+        estAssociation: false,
+        estCollectivite: false,
+        codeActivite: '62.01Z',
+      });
 
       await request(serveur)
         .post('/api/utilisateurs')

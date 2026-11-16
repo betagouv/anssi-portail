@@ -18,6 +18,13 @@ export class AdaptateurRechercheEntrepriseGouv implements AdaptateurRechercheEnt
     this.cache = new Cache({ ttl: TRENTE_MINUTES });
     this.apiUrl = adaptateurEnvironnement.rechercheEntreprise.apiUrl();
   }
+  async rechercheOrganisation(
+    terme: string,
+    departement: string | null
+  ): Promise<ResultatRechercheEntreprise | undefined> {
+    const organisations = await this.rechercheOrganisations(terme, departement);
+    return organisations.at(0);
+  }
 
   async rechercheOrganisations(terme: string, département: string | null): Promise<ResultatRechercheEntreprise[]> {
     return this.cache.get(`${terme}-${département}`, () => {

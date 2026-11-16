@@ -64,21 +64,24 @@ export const ressourceFinancements = ({
         let financements = await entrepotFinancement.tous();
 
         if (requete.utilisateur) {
-          const resultatRechercheOrga = await adaptateurRechercheEntreprise.rechercheOrganisations(
+          const resultatRechercheOrga = await adaptateurRechercheEntreprise.rechercheOrganisation(
             requete.utilisateur.siretEntite,
             null
           );
-          const { codeRegion, codeTrancheEffectif, estCollectivite, estAssociation } = resultatRechercheOrga[0];
 
-          financements = financements
-            .filter(
-              construitFiltreFinancementParEntite({
-                estAssociation,
-                estCollectivite,
-                codeTrancheEffectif,
-              })
-            )
-            .filter(construitFiltreFinancementParRegion(codeRegion));
+          if (resultatRechercheOrga) {
+            const { codeRegion, codeTrancheEffectif, estCollectivite, estAssociation } = resultatRechercheOrga;
+
+            financements = financements
+              .filter(
+                construitFiltreFinancementParEntite({
+                  estAssociation,
+                  estCollectivite,
+                  codeTrancheEffectif,
+                })
+              )
+              .filter(construitFiltreFinancementParRegion(codeRegion));
+          }
         }
         reponse.send(
           financements.map((financement) => ({

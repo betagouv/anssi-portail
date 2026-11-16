@@ -59,21 +59,20 @@ describe("L'utilisateur", () => {
     it("ne recherche qu'une seule fois dans l’API entreprise", async () => {
       let nombreRecherchesEntreprise = 0;
       const rechercheEntreprise: AdaptateurRechercheEntreprise = {
-        rechercheOrganisations: async (_: string, __: string | null) => {
+        ...fauxAdaptateurRechercheEntreprise,
+        rechercheOrganisation: async (_: string, __: string | null) => {
           nombreRecherchesEntreprise++;
-          return [
-            {
-              nom: 'tif',
-              departement: '01',
-              siret: '98',
-              codeTrancheEffectif: '01',
-              codeRegion: 'FR-ARA',
-              codeSecteur: 'D',
-              estAssociation: false,
-              estCollectivite: false,
-              codeActivite: '62.01Z',
-            },
-          ];
+          return {
+            nom: 'tif',
+            departement: '01',
+            siret: '98',
+            codeTrancheEffectif: '01',
+            codeRegion: 'FR-ARA',
+            codeSecteur: 'D',
+            estAssociation: false,
+            estCollectivite: false,
+            codeActivite: '62.01Z',
+          };
         },
       };
       const utilisateur = new Utilisateur(
@@ -95,7 +94,8 @@ describe("L'utilisateur", () => {
     });
     it("jette une erreur si aucune organisation n'est trouvée", async () => {
       const rechercheEntreprise: AdaptateurRechercheEntreprise = {
-        rechercheOrganisations: async () => [],
+        ...fauxAdaptateurRechercheEntreprise,
+        rechercheOrganisation: async () => undefined,
       };
 
       const utilisateur = new Utilisateur(infosUtilisateur, rechercheEntreprise, fauxAdaptateurHachage);

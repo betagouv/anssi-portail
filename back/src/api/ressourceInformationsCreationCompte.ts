@@ -26,9 +26,7 @@ const ressourceInformationsCreationCompte = ({
         const profilAnssi = await adaptateurProfilAnssi.recupere(informationsUtilisateur.email);
 
         if (!profilAnssi && informationsUtilisateur.siret) {
-          organisation = (
-            await adaptateurRechercheEntreprise.rechercheOrganisations(informationsUtilisateur.siret, null)
-          )[0];
+          organisation = await adaptateurRechercheEntreprise.rechercheOrganisation(informationsUtilisateur.siret, null);
         }
 
         reponse.send({

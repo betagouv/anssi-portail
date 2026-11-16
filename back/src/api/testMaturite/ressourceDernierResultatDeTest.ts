@@ -67,7 +67,7 @@ const ressourceDernierResultatDeTest = ({
         return;
       }
 
-      const resultatRechercheOrga = await adaptateurRechercheEntreprise.rechercheOrganisations(
+      const resultatRechercheOrga = await adaptateurRechercheEntreprise.rechercheOrganisation(
         requete.utilisateur.siretEntite,
         null
       );
@@ -76,7 +76,7 @@ const ressourceDernierResultatDeTest = ({
         reponses: resultatTest.reponses,
         dateRealisation: resultatTest.dateRealisation,
         idNiveau: resultatTest.niveau(),
-        organisation: présentationOrganisation(resultatTest, resultatRechercheOrga.at(0)),
+        organisation: présentationOrganisation(resultatTest, resultatRechercheOrga),
       });
     })
   );

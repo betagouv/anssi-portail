@@ -436,7 +436,7 @@ export class ConsoleAdministration {
             return Promise.resolve();
           }
           const { codeRegion, codeSecteur, codeTrancheEffectif } =
-            (await this.adaptateurRechercheEntreprise.rechercheOrganisations(utilisateur.siretEntite, null))[0] ?? {};
+            (await this.adaptateurRechercheEntreprise.rechercheOrganisation(utilisateur.siretEntite, null)) ?? {};
           return trx('resultats_test')
             .where({ id })
             .update({

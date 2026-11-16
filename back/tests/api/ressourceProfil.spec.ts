@@ -8,7 +8,11 @@ import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur.js';
 import { Utilisateur } from '../../src/metier/utilisateur.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from './cookie.js';
-import { configurationDeTestDuServeur, fauxAdaptateurHachage } from './fauxObjets.js';
+import {
+  configurationDeTestDuServeur,
+  fauxAdaptateurHachage,
+  fauxAdaptateurRechercheEntreprise,
+} from './fauxObjets.js';
 import { ConstructeurDUtilisateur } from './mesures/constructeurDUtilisateur.js';
 import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi.js';
 
@@ -53,19 +57,18 @@ describe('La ressource Profil', () => {
 
     it("déduit la région du département si elle n'est valorisée", async () => {
       const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
-        rechercheOrganisations: async (siret: string) => [
-          {
-            siret,
-            nom: '',
-            departement: '33',
-            codeSecteur: 'A',
-            codeRegion: undefined,
-            codeTrancheEffectif: '11',
-            estAssociation: false,
-            estCollectivite: false,
-            codeActivite: '1234',
-          },
-        ],
+        ...fauxAdaptateurRechercheEntreprise,
+        rechercheOrganisation: async (siret: string) => ({
+          siret,
+          nom: '',
+          departement: '33',
+          codeSecteur: 'A',
+          codeRegion: undefined,
+          codeTrancheEffectif: '11',
+          estAssociation: false,
+          estCollectivite: false,
+          codeActivite: '1234',
+        }),
       };
       const jeanMartin = new Utilisateur(
         {

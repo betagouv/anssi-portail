@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
 import { IdNiveauMaturite, ReponsesTestMaturite, ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
+import { fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets.js';
 import { jeanneDupont } from '../api/objetsPretsALEmploi.js';
 
 const reponsesParDefaut: ReponsesTestMaturite = {
@@ -100,23 +101,22 @@ describe('Le résultat du test de maturité', () => {
 
   describe('sur revendication de la propriété', () => {
     const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
-      rechercheOrganisations: async (terme: string) => {
+      ...fauxAdaptateurRechercheEntreprise,
+      rechercheOrganisation: async (terme: string) => {
         if (terme === jeanneDupont.siretEntite) {
-          return [
-            {
-              codeRegion: 'FR-ARA',
-              codeSecteur: 'U',
-              codeTrancheEffectif: '31',
-              nom: '',
-              departement: '',
-              siret: jeanneDupont.siretEntite,
-              estAssociation: false,
-              estCollectivite: false,
-              codeActivite: '62.01Z',
-            },
-          ];
+          return {
+            codeRegion: 'FR-ARA',
+            codeSecteur: 'U',
+            codeTrancheEffectif: '31',
+            nom: '',
+            departement: '',
+            siret: jeanneDupont.siretEntite,
+            estAssociation: false,
+            estCollectivite: false,
+            codeActivite: '62.01Z',
+          };
         }
-        return [];
+        return;
       },
     };
     it('on recopie les informations de la recherche entreprise', async () => {
