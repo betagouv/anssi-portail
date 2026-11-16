@@ -19,9 +19,11 @@ export const tranchesEffectifEtablissement = [
 
 export const codesTranchesEffectif = tranchesEffectifEtablissement.map((t) => t.code);
 
+export type TrancheEffectif = (typeof tranchesEffectifEtablissement)[number];
+
 export type CodeTrancheEffectif = (typeof codesTranchesEffectif)[number];
 
-export const trancheEffectifParCode = (code: string | undefined): (typeof tranchesEffectifEtablissement)[number] => {
+export const trancheEffectifParCode = (code: string | undefined): TrancheEffectif => {
   const trancheTrouvee = tranchesEffectifEtablissement.find((tranche) => tranche.code === code);
   return trancheTrouvee ?? tranchesEffectifEtablissement[0];
 };
