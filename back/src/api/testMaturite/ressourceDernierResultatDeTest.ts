@@ -1,11 +1,51 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
-import { estCodeRegion, regionParCode } from '../../metier/referentielRegions.js';
-import { secteurParCode } from '../../metier/referentielSecteurs.js';
-import { trancheEffectifParCode } from '../../metier/referentielTranchesEffectifEtablissement.js';
+import { ResultatRechercheEntreprise } from '../../infra/adaptateurRechercheEntreprise.js';
+import { CodeRégion, estCodeRegion, regionParCode } from '../../metier/referentielRegions.js';
+import { Secteur, secteurParCode } from '../../metier/referentielSecteurs.js';
+import { TrancheEffectif, trancheEffectifParCode } from '../../metier/referentielTranchesEffectifEtablissement.js';
+import { ResultatTestMaturite } from '../../metier/resultatTestMaturite.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
+
+type PrésentationOrganisation = {
+  region?: {
+    libelle: string;
+    code: CodeRégion;
+  };
+  secteur?: Secteur;
+  trancheEffectif?: TrancheEffectif;
+};
+
+const présentationOrganisation = (
+  résulatTest: ResultatTestMaturite,
+  résultatRechercheOrganisation?: ResultatRechercheEntreprise
+): PrésentationOrganisation | undefined => {
+  const codeTrancheEffectif = résultatRechercheOrganisation?.codeTrancheEffectif ?? résulatTest.tailleOrganisation;
+  const codeRegion = résultatRechercheOrganisation?.codeRegion ?? résulatTest.region;
+  const codeSecteur = résultatRechercheOrganisation?.codeSecteur ?? résulatTest.secteur;
+
+  const trancheEffectif = codeTrancheEffectif ? trancheEffectifParCode(codeTrancheEffectif) : undefined;
+  const region = estCodeRegion(codeRegion)
+    ? {
+        code: codeRegion,
+        libelle: regionParCode(codeRegion).nom,
+      }
+    : undefined;
+
+  const secteur = secteurParCode(codeSecteur);
+
+  if (!region && !trancheEffectif && !secteur) {
+    return undefined;
+  }
+
+  return {
+    region,
+    secteur,
+    trancheEffectif,
+  };
+};
 
 const ressourceDernierResultatDeTest = ({
   entrepotResultatTest,
@@ -32,31 +72,11 @@ const ressourceDernierResultatDeTest = ({
         null
       );
 
-      const {
-        codeRegion = resultatTest.region,
-        codeSecteur = resultatTest.secteur,
-        codeTrancheEffectif = resultatTest.tailleOrganisation,
-      } = resultatRechercheOrga[0];
-
-      const trancheEffectif = codeTrancheEffectif ? trancheEffectifParCode(codeTrancheEffectif) : undefined;
-      const region = estCodeRegion(codeRegion)
-        ? {
-            code: codeRegion,
-            libelle: regionParCode(codeRegion).nom,
-          }
-        : undefined;
-
-      const secteur = secteurParCode(codeSecteur);
-
       reponse.send({
         reponses: resultatTest.reponses,
         dateRealisation: resultatTest.dateRealisation,
         idNiveau: resultatTest.niveau(),
-        organisation: {
-          trancheEffectif,
-          secteur,
-          region,
-        },
+        organisation: présentationOrganisation(resultatTest, resultatRechercheOrga.at(0)),
       });
     })
   );
