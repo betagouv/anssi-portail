@@ -282,8 +282,8 @@ importers:
         specifier: ^1.0.5
         version: 1.1.0
       '@office-kit/xlsx':
-        specifier: ^0.26.0
-        version: 0.26.1
+        specifier: ^0.27.0
+        version: 0.27.0
       '@sentry/node':
         specifier: ^10.0.0
         version: 10.78.0(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(supports-color@10.2.2)
@@ -1672,8 +1672,8 @@ packages:
     resolution: {integrity: sha512-jCs9ldd7NwzpgXDIf6P3+NrHh9/sD6CQdxHyjQI+h/6rDNo88ypBxxz45UDuZHz9r3tNz7N/VInSVoVdtXEI4A==}
     engines: {node: ^14.21.3 || >=16}
 
-  '@office-kit/xlsx@0.26.1':
-    resolution: {integrity: sha512-f+7p0PHHiNtBcBmj4sBp8RnzKBQEMeh6RnEOj2aerwgzfqcf7s48PdAIbTWQoq7t9A123+UVQlUlYSOQ+uY3Mg==}
+  '@office-kit/xlsx@0.27.0':
+    resolution: {integrity: sha512-WdLi8BzWe3Z4SypAT7l7kOnNWJtDS+krB1W395XpMew/VRErcE5ltxEhSqESps7Aycyg7tjlexTWy7fK53n5VA==}
     engines: {node: '>=22.0.0'}
 
   '@opentelemetry/api-logs@0.220.0':
@@ -5926,7 +5926,7 @@ snapshots:
 
   '@noble/hashes@1.8.0': {}
 
-  '@office-kit/xlsx@0.26.1':
+  '@office-kit/xlsx@0.27.0':
     dependencies:
       fflate: 0.8.3
       saxes: 6.0.0
