@@ -3,7 +3,10 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import request from 'supertest';
 import { describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/msc/index.js';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
+import { encodeSession } from './cookie.js';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets.js';
+import { jeanneDupont } from './objetsPretsALEmploi.js';
 
 describe('La configuration de notre serveur', () => {
   it('compresse les réponses', async () => {
@@ -26,12 +29,27 @@ describe('La configuration de notre serveur', () => {
     expect(entetes['vary']).toBe('Accept-Encoding');
   });
 
-  it('sert correctement le chemin racine', async () => {
-    const serveur = creeServeur(configurationDeTestDuServeur);
+  describe('pour le chemin racine', () => {
+    it('sert correctement le chemin racine', async () => {
+      const serveur = creeServeur(configurationDeTestDuServeur);
 
-    const réponse = await request(serveur).get('/');
+      const réponse = await request(serveur).get('/');
 
-    expect(réponse.statusCode).toBe(HttpStatusCode.Ok);
+      expect(réponse.statusCode).toBe(HttpStatusCode.Ok);
+    });
+
+    it('redirige vers tableau de bord pour un utilisateur connecté', async () => {
+      const entrepôtUtilisateur = new EntrepotUtilisateurMemoire();
+      await entrepôtUtilisateur.ajoute(jeanneDupont);
+
+      const serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotUtilisateur: entrepôtUtilisateur });
+
+      const cookie = encodeSession({ email: jeanneDupont.email, token: 'token' });
+      const réponse = await request(serveur).get('/').set('Cookie', [cookie]).send();
+
+      expect(réponse.statusCode).toBe(HttpStatusCode.Found);
+      expect(réponse.headers.location).toBe('/tableau-de-bord');
+    });
   });
 
   it('redirige correctement le chemin racine', async () => {

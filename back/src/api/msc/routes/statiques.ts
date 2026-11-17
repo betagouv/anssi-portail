@@ -4,7 +4,6 @@ import { ressourcePagesJekyll } from '../../ressourcePagesJekyll.js';
 import { enregistreRouteDansExpress } from '../enregistreRoutes.js';
 
 export const routesStatiques = [
-  '',
   'catalogue',
   'test-maturite',
   'niveaux-maturite',
