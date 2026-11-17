@@ -1,6 +1,6 @@
 <script lang="ts">
   import { BandeauPage } from '@lab-anssi/ui-kit';
-  import type { Snippet } from 'svelte';
+  import type { ComponentProps, Snippet } from 'svelte';
   import { fabriqueFilAriane, type PropriétésFilAriane } from './filAriane';
 
   type Props = {
@@ -43,7 +43,13 @@
     cacheMentions = true;
   }
 
-  const ficheCatalogue = $derived(format === 'details');
+  const typeParFormat: Record<Props['format'], NonNullable<ComponentProps<typeof BandeauPage>['type']>> = {
+    banniere: 'simple',
+    details: 'fiche',
+    heros: 'default',
+    'heros-centre': 'default',
+  };
+  const type = $derived(typeParFormat[format]);
   const segmentsFilAriane = $derived(fabriqueFilAriane(propriétésFilAriane));
   const avecActions = $derived(!cacheActions && !!actions);
   const avecMentions = $derived(!cacheMentions && !!children);
@@ -51,7 +57,7 @@
 
 <div class="heros" class:pastel={theme === 'pastel'} class:sans-contenu-additionnel={!avecActions && !avecMentions}>
   <BandeauPage
-    type={format === 'banniere' ? 'simple' : ficheCatalogue ? 'fiche' : 'default'}
+    {type}
     theme={theme === 'sombre' ? 'sombre' : 'clair'}
     avecFilAriane={!!segmentsFilAriane.length}
     liensFilAriane={segmentsFilAriane}
@@ -77,7 +83,7 @@
     </svelte:fragment>
     <svelte:fragment slot="media">
       {#if !cacheIllustration}
-        <picture class={['illustration', ficheCatalogue ? 'ombre' : '']}>
+        <picture class={['illustration', format === 'details' ? 'ombre' : '']}>
           <img src={illustrationSource} width="588" height="330" alt={illustrationAlt} />
         </picture>
       {/if}
