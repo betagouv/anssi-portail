@@ -7,6 +7,7 @@ import { ressourceModèleXslxGénérique } from '../../../outils/modeleXslxGener
 import { ServiceModèleXslx } from '../../../outils/modeleXslxGenerique/serviceModeleXslx.js';
 import { ressourceRappelMiseAJourAnnuaireContacts } from '../../../outils/ressourceRappelMiseAJourAnnuaireContacts.js';
 import { ressourceRappelMiseAJourListeDActivités } from '../../../outils/ressourceRappelMiseÀJourListeDActivites.js';
+import { ressourceRappelMiseAJourListePrestatairesEtFournisseurs } from '../../../outils/ressourceRappelMiseAJourListePrestatairesEtFournisseurs.js';
 import { ressourceRetoursSurOutil } from '../../../outils/ressourceRetoursSurOutil.js';
 import { enregistreRouteDansExpress } from '../../enregistreRoutes.js';
 
@@ -42,6 +43,10 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
   enregistreRoute(
     '/rappel-mise-a-jour-liste-d-activites.ics',
     ressourceRappelMiseAJourListeDActivités(configurationServeur)
+  );
+  enregistreRoute(
+    '/rappel-mise-a-jour-liste-prestataires-et-fournisseurs.ics',
+    ressourceRappelMiseAJourListePrestatairesEtFournisseurs(configurationServeur)
   );
 
   /// OUTILS AUTRE
