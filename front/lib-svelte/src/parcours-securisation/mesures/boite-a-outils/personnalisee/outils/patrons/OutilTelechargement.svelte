@@ -8,9 +8,10 @@
     identifiant: string;
     taille: string;
     titre: string;
+    description?: string;
     typeFichier: 'ICS' | 'XLSX';
   };
-  const { identifiant, href, taille, titre, typeFichier }: Props = $props();
+  const { identifiant, href, taille, titre, typeFichier, description }: Props = $props();
   const src = $derived(
     `/assets/images/parcours-securisation/outils/icone-telechargement-${typeFichier.toLowerCase()}.svg`
   );
@@ -26,6 +27,8 @@
     enlarge
     hasHeaderBadge
     hasDetailEnd
+    hasDescription={!!description}
+    {description}
     detailEnd={`${typeFichier} - ${taille}`}
   >
     <div slot="headerbadges" class="fr-badges-group">
