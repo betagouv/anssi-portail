@@ -5,6 +5,7 @@ import { ConfigurationServeur } from '../configurationServeur.js';
 import { ressourceDocumentGuide } from '../guides/ressourceDocumentGuide.js';
 import { ressourceDocumentRessource } from '../ressourceDocumentRessource.js';
 import { ressourceLlmsTxt } from '../ressourceLlmsTxt.js';
+import { ressourcePageAccueil } from '../ressourcePageAccueil.js';
 import { ressourcePageContact } from '../ressourcePageContact.js';
 import { ressourcePageRessource } from '../ressourcePageRessource.js';
 import { ressourcePageService } from '../ressourcePageService.js';
@@ -48,11 +49,13 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreLesFichiersStatiques(app, fournisseurChemin);
   app.use(middleware.verifieModeMaintenance); // doit être après les fichiers statiques
   enregistreLesRoutesAPI(app, configurationServeur);
+
+  const enregistreRoute = enregistreRouteDansExpress(app);
+
+  enregistreRoute('/', ressourcePageAccueil(configurationServeur));
   enregistreLesRoutesStatiques(app, configurationServeur);
   enregistreLesVisas(app, configurationServeur);
   enregistreLesFinancements(app, configurationServeur);
-
-  const enregistreRoute = enregistreRouteDansExpress(app);
 
   enregistreRoute('/favoris-partages/:id', ressourcePagesJekyll(configurationServeur, 'favoris-partages'));
 
