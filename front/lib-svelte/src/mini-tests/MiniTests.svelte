@@ -46,7 +46,7 @@
   });
 
   const seuil = 1000;
-  const appliqueArrondisAuSeuil = (valeur: number) => (valeur > seuil ? Math.round(valeur / 100) * 100 : 0);
+  const appliqueArrondisAuSeuil = (valeur: number) => (valeur >= seuil ? Math.round(valeur / 100) * 100 : 0);
 
   const compteursArrondis = $derived({
     MaturitéCyber: appliqueArrondisAuSeuil(donnéesPage.compteurs.MaturiteCyber),
