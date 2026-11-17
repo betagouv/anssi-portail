@@ -39,6 +39,8 @@
 </div>
 
 <style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
+
   .conteneur {
     padding: 4.5rem 0;
     background-color: var(--background-alt-beige-gris-galet, #f9f6f2);
@@ -49,6 +51,11 @@
     flex-direction: column;
     gap: 1rem;
 
+    @include a-partir-de(sm) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
     .image-carte {
       display: grid;
       place-items: center;
@@ -56,9 +63,9 @@
 
       &.guides-ressources {
         background-color: var(--background-flat-blue-france);
-        padding: 1rem 0;
         img {
           width: 80%;
+          scale: 0.9;
         }
       }
 
