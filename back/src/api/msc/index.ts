@@ -12,7 +12,7 @@ import { ressourcePagesJekyll } from '../ressourcePagesJekyll.js';
 import { ressourcePagesJekyllConnectees } from '../ressourcePagesJekyllConnectees.js';
 import { ressourceRobotsTxt } from '../ressourceRobotsTxt.js';
 import { ressourceSitemapXml } from '../ressourceSitemapXml.js';
-import { routesPagesConnecteesStatiques } from '../routesPagesConnectees.js';
+import { routesPagesConnectéesStatiques } from '../routesPagesConnectees.js';
 import { enregistreRouteDansExpress } from './enregistreRoutes.js';
 import { configureLesCookies } from './middlewares/cookies.js';
 import { configureLaGestionDErreur } from './middlewares/gestionDErreurs.js';
@@ -62,7 +62,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute('/conseils-cyber/:slug', ressourcePagesJekyll(configurationServeur, 'conseils-cyber'));
 
-  routesPagesConnecteesStatiques.forEach((page) =>
+  routesPagesConnectéesStatiques.forEach((page) =>
     enregistreRoute(`/${page}`, ressourcePagesJekyllConnectees(configurationServeur, page))
   );
 

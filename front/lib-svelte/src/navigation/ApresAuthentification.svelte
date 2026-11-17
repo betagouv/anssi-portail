@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { espaceConnectéActivé } from '$plateforme/environnement';
   import { profilStore } from '../stores/profil.store';
   import { stockageDeSession } from '../utils/stockageDeSession';
 
@@ -37,6 +38,11 @@
 
     const profil = $profilStore;
     if (!profil) return;
+
+    if (espaceConnectéActivé) {
+      window.location.href = '/tableau-de-bord';
+      return;
+    }
 
     const parcours = profil.parcoursSecurisation.parcoursActuel;
     const urlRedirection = (() => {
