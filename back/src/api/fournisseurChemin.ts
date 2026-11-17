@@ -24,6 +24,7 @@ export interface FournisseurChemin {
     modèleModificationsMotsDePasse: () => string;
     modèleRevueComptesUtilisateurs: () => string;
     modèleRevueDroitsDAccès: () => string;
+    modèleListeDesPrestatairesEtFournisseurs: () => string;
   };
   jekyll: {
     page403: () => string;
@@ -95,6 +96,8 @@ export const fournisseurChemin: FournisseurChemin = {
       cheminBackDepuisOutils('modeleRevueComptesUtilisateurs', 'modele-revue-comptes-utilisateurs.xlsx'),
     modèleRevueDroitsDAccès: () =>
       cheminBackDepuisOutils('modeleRevueDroitsDAcces', 'modele-revue-droits-d-acces.xlsx'),
+    modèleListeDesPrestatairesEtFournisseurs: () =>
+      cheminBackDepuisOutils('modeleListePrestatairesEtFournisseurs', 'modele-liste-prestataires-et-fournisseurs.xlsx'),
   },
   jekyll: {
     page403: () => construisCheminVersArtefactJekyll('403.html'),

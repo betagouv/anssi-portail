@@ -25,6 +25,10 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
       ['modele-raci.xlsx', configurationServeur.serviceModèleRACI],
       ['modele-revue-comptes-utilisateurs.xlsx', configurationServeur.serviceModèleRevueComptesUtilisateurs],
       ['modele-revue-droits-d-acces.xlsx', configurationServeur.serviceModèleRevueDroitsDAccès],
+      [
+        'modele-liste-prestataires-et-fournisseurs.xlsx',
+        configurationServeur.serviceModeleListePrestatairesEtFournisseurs,
+      ],
     ] satisfies [Outil, ServiceModèleXslx][]
   ).forEach(([outil, serviceXslx]) => {
     enregistreRoute(`/${outil}`, ressourceModèleXslxGénérique(configurationServeur, serviceXslx, outil));
