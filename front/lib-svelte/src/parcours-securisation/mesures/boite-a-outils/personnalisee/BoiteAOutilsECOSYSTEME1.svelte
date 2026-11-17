@@ -1,16 +1,14 @@
 <script lang="ts">
   import ÉtapeProcédure from '../EtapeProcedure.svelte';
   import ÉtapesProcédure from '../EtapesProcedure.svelte';
+  import NoteProcedure from '../NoteProcedure.svelte';
   import OutilModèleListePrestatairesEtFournisseurs from './outils/OutilModeleListePrestatairesEtFournisseurs.svelte';
   import OutilRappelMiseÀJourListePrestatairesEtFournisseurs from './outils/OutilRappelMiseAJourListePrestatairesEtFournisseurs.svelte';
 </script>
 
 <div>
   <h2>Créez et tenez à jour votre annuaire de contacts informatiques</h2>
-  <p class="texte-mention-xs">
-    Cette démarche est proposée à titre indicatif. Vous êtes libre de l’adapter à votre contexte et de mobiliser les
-    outils et méthodes de votre choix.
-  </p>
+  <NoteProcedure />
 
   <ÉtapesProcédure>
     <ÉtapeProcédure titre="Recensez vos prestataires et fournisseurs informatiques">
@@ -68,10 +66,6 @@
 </div>
 
 <style lang="scss">
-  .texte-mention-xs {
-    font-style: italic;
-  }
-
   .contenu-etape {
     display: flex;
     flex-direction: column;

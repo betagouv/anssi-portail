@@ -2,6 +2,7 @@
   import Lien from '../../../../ui/Lien.svelte';
   import ÉtapeProcédure from '../EtapeProcedure.svelte';
   import ÉtapesProcédure from '../EtapesProcedure.svelte';
+  import NoteProcedure from '../NoteProcedure.svelte';
   import OutilCampagneDeSensibilisation from './outils/OutilCampagneDeSensibilisation.svelte';
   import OutilMiniTestExposition from './outils/OutilMiniTestExposition.svelte';
   import OutilMiniTestHameconnage from './outils/OutilMiniTestHameconnage.svelte';
@@ -12,10 +13,7 @@
 
 <div>
   <h2>Sensibiliser ses collaborateurs (TPE/PME)</h2>
-  <p class="texte-mention-xs mention">
-    Cette démarche est proposée à titre indicatif. Vous êtes libre de l’adapter à votre contexte et de mobiliser les
-    outils et méthodes de votre choix.
-  </p>
+  <NoteProcedure />
 
   <ÉtapesProcédure>
     <ÉtapeProcédure titre="Sensibilisez vos équipes dirigeantes aux risques cyber">
@@ -118,10 +116,6 @@
 </div>
 
 <style lang="scss">
-  .mention {
-    font-style: italic;
-  }
-
   .contenu-etape {
     display: flex;
     flex-direction: column;
