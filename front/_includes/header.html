@@ -6,10 +6,12 @@
 
 {% include composant-svelte.html id="badge-agent-anssi" genere-div=false %}
 {% include composant-svelte.html id="identification" genere-div=false %}
-{% include composant-svelte.html id="navigation" genere-div=false %}
+{% if page.sansNavigation != true %}
+  {% include composant-svelte.html id="navigation" genere-div=false %}
+{% endif %}
 <dsfr-header
   id="haut-de-page"
-  class="fr-header__brand"
+  class="fr-header__brand {% if page.sansNavigation == true %} sans-navigation {% endif %}"
   brand-link-href="/"
   brand-link-title="Retour à l'accueil du site MesServicesCyber - République Française"
   has-brand-operator
@@ -33,5 +35,7 @@
   <div slot="beforenavbarbuttons">
     <lab-anssi-bouton-suite-cyber-navigation sourceutm="MesServicesCyber"></lab-anssi-bouton-suite-cyber-navigation>
   </div>
-  <div slot="navigation" id="navigation"></div>
+  {% if page.sansNavigation != true %}
+    <div slot="navigation" id="navigation"></div>
+  {% endif %}
 </dsfr-header>

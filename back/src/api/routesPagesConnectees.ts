@@ -1,14 +1,15 @@
 const origineDeReferencePourValidation = 'https://origine-interne.invalid';
 
-export const routesPagesConnecteesStatiques = [
+export const routesPagesConnectéesStatiques = [
   'favoris',
   'gestion-guides',
   'campagne-de-sensibilisation',
   'ma-maturite',
+  'tableau-de-bord',
 ] as const;
 
 const cheminsPagesConnecteesStatiques = new Set([
-  ...routesPagesConnecteesStatiques.map((page) => `/${page}`),
+  ...routesPagesConnectéesStatiques.map((page) => `/${page}`),
   '/parcours-complet',
 ]);
 const cheminsPagesConnectéesAvecParamètres = ['/modules/', '/mesures/'];
