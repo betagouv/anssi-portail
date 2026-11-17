@@ -63,6 +63,7 @@ jobs:
               -e '^SENTRY_DSN=' \
               -e '^URL_BASE_MSC=' \
               -e '^APP_ENV=' \
+              -e '^FEATURE_FLAG_ESPACE_CONNECTE=' \
               -e '^SENTRY_ENVIRONNEMENT=' |
             tr -d '"' | while IFS='=' read -r key value; do
               echo "::add-mask::$value"
