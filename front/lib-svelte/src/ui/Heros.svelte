@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { BandeauPage } from '@lab-anssi/ui-kit';
   import type { Snippet } from 'svelte';
-  import { enPropriétéWebC } from '$plateforme/webComponent';
   import { fabriqueFilAriane, type PropriétésFilAriane } from './filAriane';
 
   type Props = {
@@ -45,67 +45,57 @@
 
   const ficheCatalogue = $derived(format === 'details');
   const segmentsFilAriane = $derived(fabriqueFilAriane(propriétésFilAriane));
+  const avecActions = $derived(!cacheActions && !!actions);
+  const avecMentions = $derived(!cacheMentions && !!children);
 </script>
 
-<lab-anssi-bandeau-page
-  simple={format === 'banniere'}
-  {ficheCatalogue}
-  inverse={theme === 'clair' || theme === 'pastel'}
-  class:pastel={theme === 'pastel'}
-  avecBadges={!cacheTags}
-  avecFilAriane={!!segmentsFilAriane.length}
-  liensFilAriane={enPropriétéWebC(segmentsFilAriane)}
-  {titre}
-  {description}
-  sansImage={cacheIllustration}
-  urlImage={illustrationSource}
->
-  {#if segmentsFilAriane.length}
-    <ol slot="seo">
-      {#each segmentsFilAriane as segment, index (segment.id)}
-        {@const isLast = index === segmentsFilAriane.length - 1}
-        <li>
-          {#if isLast}
-            <span>{segment.label}</span>
-          {:else}
-            <a href={segment.href}>{segment.label}</a>
-          {/if}
-        </li>
-      {/each}
-    </ol>
-  {/if}
-  {#if tags}
-    <div slot="badgesgroup">
-      {@render tags()}
-    </div>
-  {/if}
-  <h1 slot="seo">{titre}</h1>
-  <p slot="seo">{description}</p>
-  {#if !cacheActions && actions}
-    <div slot="buttonsgroup">
-      {@render actions()}
-    </div>
-  {/if}
-  {#if !cacheMentions && children}
-    <div slot="seo">
-      {@render children()}
-    </div>
-  {/if}
-  {#if !cacheIllustration}
-    <picture class={['illustration', ficheCatalogue ? 'ombre' : '']} slot="media">
-      <img src={illustrationSource} width="588" height="330" alt={illustrationAlt} />
-    </picture>
-  {/if}
-</lab-anssi-bandeau-page>
+<div class="heros" class:pastel={theme === 'pastel'} class:sans-contenu-additionnel={!avecActions && !avecMentions}>
+  <BandeauPage
+    type={format === 'banniere' ? 'simple' : ficheCatalogue ? 'fiche' : 'default'}
+    theme={theme === 'sombre' ? 'sombre' : 'clair'}
+    avecFilAriane={!!segmentsFilAriane.length}
+    liensFilAriane={segmentsFilAriane}
+    {titre}
+    {description}
+    sansImage={cacheIllustration}
+    urlImage={illustrationSource}
+  >
+    <svelte:fragment slot="badgesgroup">
+      {#if !cacheTags && tags}
+        {@render tags()}
+      {/if}
+    </svelte:fragment>
+    <svelte:fragment slot="buttonsgroup">
+      {#if !cacheActions && actions}
+        {@render actions()}
+      {/if}
+    </svelte:fragment>
+    <svelte:fragment slot="mention">
+      {#if !cacheMentions && children}
+        {@render children()}
+      {/if}
+    </svelte:fragment>
+    <svelte:fragment slot="media">
+      {#if !cacheIllustration}
+        <picture class={['illustration', ficheCatalogue ? 'ombre' : '']}>
+          <img src={illustrationSource} width="588" height="330" alt={illustrationAlt} />
+        </picture>
+      {/if}
+    </svelte:fragment>
+  </BandeauPage>
+</div>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
-  lab-anssi-bandeau-page {
-    overflow: hidden;
-
+  .heros {
     &.pastel {
       --background-color: var(--yellow-moutarde-975-75);
+    }
+
+    &.sans-contenu-additionnel :global(.lab-anssi-bandeau-page) {
+      // Les slots existent même lorsque leur contenu conditionnel est vide.
+      --description-margin-block: 0;
     }
   }
 
