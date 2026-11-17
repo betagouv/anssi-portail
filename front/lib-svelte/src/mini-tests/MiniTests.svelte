@@ -46,13 +46,14 @@
   });
 
   const seuil = 1000;
-  const arrondis = (valeur: number) => Math.round(valeur / 100) * 100;
+  const appliqueArrondisAuSeuil = (valeur: number) => (valeur > seuil ? Math.round(valeur / 100) * 100 : 0);
+
   const compteursArrondis = $derived({
-    MaturitéCyber: donnéesPage.compteurs.MaturiteCyber > seuil ? arrondis(donnéesPage.compteurs.MaturiteCyber) : 0,
-    VraiFaux: donnéesPage.compteurs.VraiFaux > seuil ? arrondis(donnéesPage.compteurs.VraiFaux) : 0,
-    Exposition: donnéesPage.compteurs.Exposition > seuil ? arrondis(donnéesPage.compteurs.Exposition) : 0,
-    ReflexesCyber: donnéesPage.compteurs.ReflexesCyber > seuil ? arrondis(donnéesPage.compteurs.ReflexesCyber) : 0,
-    Hameconnage: donnéesPage.compteurs.Hameconnage > seuil ? arrondis(donnéesPage.compteurs.Hameconnage) : 0,
+    MaturitéCyber: appliqueArrondisAuSeuil(donnéesPage.compteurs.MaturiteCyber),
+    VraiFaux: appliqueArrondisAuSeuil(donnéesPage.compteurs.VraiFaux),
+    Exposition: appliqueArrondisAuSeuil(donnéesPage.compteurs.Exposition),
+    ReflexesCyber: appliqueArrondisAuSeuil(donnéesPage.compteurs.ReflexesCyber),
+    Hameconnage: appliqueArrondisAuSeuil(donnéesPage.compteurs.Hameconnage),
   });
 </script>
 
