@@ -89,7 +89,9 @@ type AdaptateurEnvironnement = {
     url: () => string;
     dureeCacheStatistiquesEnSecondes: () => number;
   };
-  fonctionnalites: undefined;
+  fonctionnalites: {
+    espaceConnecté: () => boolean;
+  };
   rechercheEntreprise: {
     apiUrl: () => string;
   };
@@ -290,7 +292,12 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       return Number.isNaN(dureeEnNombre) ? CINQ_MINUTES : dureeEnNombre;
     },
   },
-  fonctionnalites: undefined,
+  fonctionnalites: {
+    espaceConnecté: () => {
+      const espaceConnectéActif = process.env.FEATURE_FLAG_ESPACE_CONNECTE;
+      return espaceConnectéActif === 'true';
+    },
+  },
   rechercheEntreprise: {
     apiUrl: () => {
       const valeur = process.env.RECHERCHE_ENTREPRISE_API_URL;
