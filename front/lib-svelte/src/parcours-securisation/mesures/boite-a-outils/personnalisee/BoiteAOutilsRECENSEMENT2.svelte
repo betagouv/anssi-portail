@@ -2,14 +2,12 @@
   import Lien from '../../../../ui/Lien.svelte';
   import ÉtapeProcédure from '../EtapeProcedure.svelte';
   import ÉtapesProcédure from '../EtapesProcedure.svelte';
+  import NoteProcedure from '../NoteProcedure.svelte';
 </script>
 
 <div>
   <h2>Identifier les systèmes non exposés aux risques</h2>
-  <p class="texte-mention-xs">
-    Cette démarche est proposée à titre indicatif. Vous êtes libre de l’adapter à votre contexte et de mobiliser les
-    outils et méthodes de votre choix.
-  </p>
+  <NoteProcedure />
 
   <ÉtapesProcédure>
     <ÉtapeProcédure titre="Faites évoluer votre liste d’activités et de systèmes.">
@@ -77,10 +75,6 @@
 </div>
 
 <style lang="scss">
-  .texte-mention-xs {
-    font-style: italic;
-  }
-
   ul {
     list-style-type: disc;
     padding-left: 1.5rem;

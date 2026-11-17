@@ -2,15 +2,13 @@
   import Lien from '../../../../ui/Lien.svelte';
   import ÉtapeProcédure from '../EtapeProcedure.svelte';
   import ÉtapesProcédure from '../EtapesProcedure.svelte';
+  import NoteProcedure from '../NoteProcedure.svelte';
   import OutilRappelMiseÀJourActivités from './outils/OutilRappelMiseAJourActivites.svelte';
 </script>
 
 <div>
   <h2>Réexaminer la liste des activités et systèmes</h2>
-  <p class="texte-mention-xs">
-    Cette démarche est proposée à titre indicatif. Vous êtes libre de l’adapter à votre contexte et de mobiliser les
-    outils et méthodes de votre choix.
-  </p>
+  <NoteProcedure />
 
   <ÉtapesProcédure>
     <ÉtapeProcédure titre="Organisez une revue annuelle.">
@@ -82,7 +80,6 @@
 </div>
 
 <style lang="scss">
-  .texte-mention-xs,
   .explication {
     font-style: italic;
   }

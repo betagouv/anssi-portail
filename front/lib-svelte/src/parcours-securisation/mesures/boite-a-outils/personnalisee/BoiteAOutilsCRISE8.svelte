@@ -1,16 +1,14 @@
 <script lang="ts">
   import ÉtapeProcédure from '../EtapeProcedure.svelte';
   import ÉtapesProcédure from '../EtapesProcedure.svelte';
+  import NoteProcedure from '../NoteProcedure.svelte';
   import OutilModèleAnnuaireDeCrise from './outils/OutilModeleAnnuaireDeCrise.svelte';
   import OutilRappelMiseÀJourAnnuaire from './outils/OutilRappelMiseAJourAnnuaire.svelte';
 </script>
 
 <div>
   <h2>Établissez votre annuaire de crise à imprimer</h2>
-  <p class="texte-mention-xs">
-    Cette démarche est proposée à titre indicatif. Vous êtes libre de l’adapter à votre contexte et de mobiliser les
-    outils et méthodes de votre choix.
-  </p>
+  <NoteProcedure />
 
   <ÉtapesProcédure>
     <ÉtapeProcédure titre="Identifiez les rôles et les contacts à mobiliser en cas de cyberattaque">
@@ -58,7 +56,6 @@
 </div>
 
 <style lang="scss">
-  .texte-mention-xs,
   .explication {
     font-style: italic;
   }
