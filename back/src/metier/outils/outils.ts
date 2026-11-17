@@ -9,6 +9,7 @@ const outils = [
   'modele-revue-droits-d-acces.xlsx',
   'campagne-de-sensibilisation',
   'modele-liste-prestataires-et-fournisseurs.xlsx',
+  'rappel-mise-a-jour-liste-prestataires-et-fournisseurs.ics',
 ] as const;
 export type Outil = (typeof outils)[number];
 
