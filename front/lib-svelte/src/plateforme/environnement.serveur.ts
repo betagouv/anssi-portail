@@ -6,3 +6,4 @@ export const appEnv: AppEnv = appEnvDepuisValeur(process.env.APP_ENV);
 export const estEnvProduction = appEnv === 'production';
 
 export const afficheBadgeCyberdépart = process.env.FEATURE_FLAG_BADGE_CYBERDEPART === 'true';
+export const espaceConnectéActivé = process.env.FEATURE_FLAG_ESPACE_CONNECTE === 'true';

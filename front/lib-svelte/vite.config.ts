@@ -46,6 +46,10 @@ export default defineConfig(({ command, mode }) => {
       'import.meta.env.FEATURE_FLAG_BADGE_CYBERDEPART': JSON.stringify(
         env.FEATURE_FLAG_BADGE_CYBERDEPART ?? process.env.FEATURE_FLAG_BADGE_CYBERDEPART ?? 'false'
       ),
+      'import.meta.env.FEATURE_FLAG_ESPACE_CONNECTE': JSON.stringify(
+        env.FEATURE_FLAG_ESPACE_CONNECTE ?? process.env.FEATURE_FLAG_ESPACE_CONNECTE ?? 'false'
+      ),
+
       'import.meta.env.APP_ENV': JSON.stringify(appEnvDepuisValeur(env.APP_ENV)),
     },
     plugins: [

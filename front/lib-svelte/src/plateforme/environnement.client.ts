@@ -6,3 +6,4 @@ export const appEnv: AppEnv = import.meta.env.APP_ENV;
 export const estEnvProduction = appEnv === 'production';
 
 export const afficheBadgeCyberdépart = import.meta.env.FEATURE_FLAG_BADGE_CYBERDEPART === 'true';
+export const espaceConnectéActivé = import.meta.env.FEATURE_FLAG_ESPACE_CONNECTE === 'true';
