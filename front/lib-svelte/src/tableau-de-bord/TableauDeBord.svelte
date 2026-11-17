@@ -1,6 +1,8 @@
 <script lang="ts">
   import { DsfrCard, DsfrContainer } from '@lab-anssi/ui-kit';
   import { profilStore } from '../stores/profil.store';
+
+  const estMdEtPlus = $derived(window.matchMedia('(min-width: 768px)').matches);
 </script>
 
 <div class="conteneur">
@@ -12,6 +14,7 @@
 
       <div class="cartes">
         <DsfrCard
+          horizontal={estMdEtPlus}
           title="Guides et ressources"
           hasDescription
           description="Retrouvez l’ensemble des guides de l’ANSSI et les services et les ressources adaptés à vos besoins."
@@ -23,6 +26,7 @@
           </div>
         </DsfrCard>
         <DsfrCard
+          horizontal={estMdEtPlus}
           title="NIS 2"
           hasDescription
           description="Vérifiez si votre organisation est concernée par la directive NIS 2 et et renforcez dès à présent le niveau de cybersécurité de votre organisation."
@@ -73,6 +77,22 @@
         background-color: var(--background-contrast-blue-france);
         img {
           height: 70%;
+        }
+      }
+
+      @include a-partir-de(md) {
+        aspect-ratio: unset;
+        height: 100%;
+
+        &.guides-ressources {
+          img {
+            width: 100%;
+            scale: 1;
+
+            object-fit: cover;
+            object-position: center;
+            height: 100%;
+          }
         }
       }
     }
