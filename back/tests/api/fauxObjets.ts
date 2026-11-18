@@ -380,7 +380,7 @@ export const fauxGestionnaireRequêtesComplémentaires: GestionnaireRequêtesCom
 };
 
 export const fauxAdaptateurHorloge: AdaptateurHorloge = {
-  maintenant: () => new Date(),
+  maintenant: () => Temporal.Now.instant(),
 };
 
 const entrepôtContact = new EntrepôtContactStatique();

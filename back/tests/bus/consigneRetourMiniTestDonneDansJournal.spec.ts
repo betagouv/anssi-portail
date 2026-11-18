@@ -18,7 +18,7 @@ describe("L'abonnement qui consigne l'évènement de retour de test de maturité
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     await consigneRetourMiniTestDonnéDansJournal({
@@ -29,7 +29,7 @@ describe("L'abonnement qui consigne l'évènement de retour de test de maturité
     expect(évènementReçu).toEqual({
       type: expected.type,
       donnees: { retour: 'NEGATIF', commentaire: 'un commentaire' },
-      date: new Date('2025-03-10'),
+      date: Temporal.Instant.from('2025-03-10T00:00:00Z'),
     });
   });
 });

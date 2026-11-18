@@ -13,7 +13,7 @@ describe("L'abonnement qui consigne un avis sur une mesure dans le journal", () 
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     await consigneRetourAvisMesureDonneDansJournal({
@@ -40,7 +40,7 @@ describe("L'abonnement qui consigne un avis sur une mesure dans le journal", () 
         titreMesure:
           'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes',
       },
-      date: new Date('2025-03-10'),
+      date: Temporal.Instant.from('2025-03-10T00:00:00Z'),
     });
   });
 });

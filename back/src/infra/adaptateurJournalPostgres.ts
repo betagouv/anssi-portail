@@ -22,7 +22,7 @@ export const adaptateurJournalPostgres = (): AdaptateurJournal => {
         id: uuidv7(),
         type,
         donnees,
-        date: new Date(date).toISOString(),
+        date: date.toString({ fractionalSecondDigits: 3 }),
       });
     },
   };

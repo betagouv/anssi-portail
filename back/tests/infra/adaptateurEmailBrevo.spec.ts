@@ -31,7 +31,7 @@ describe('L’adaptateur email Brevo', () => {
   });
 
   const adaptateurHorloge: AdaptateurHorloge = {
-    maintenant: () => new Date('2025-03-10'),
+    maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
   };
 
   beforeEach(() => {
@@ -105,7 +105,7 @@ describe('L’adaptateur email Brevo', () => {
         event_name: 'mesure_consultee',
         identifiers: { email_id: 'mesure.consultee@mail.com' },
         contact_properties: {
-          DATE_DERNIERE_CONSULTATION_MESURE: new Date('2025-03-10'),
+          DATE_DERNIERE_CONSULTATION_MESURE: '2025-03-10T00:00:00.000Z',
         },
       });
     });
@@ -118,7 +118,7 @@ describe('L’adaptateur email Brevo', () => {
         event_name: 'mesure_consultee',
         identifiers: { email_id: 'mesure.consultee@mail.com' },
         contact_properties: {
-          DATE_DERNIERE_CONSULTATION_MESURE: new Date('2025-03-10'),
+          DATE_DERNIERE_CONSULTATION_MESURE: '2025-03-10T00:00:00.000Z',
           PARCOURS: 'allégé',
         },
       });
@@ -142,7 +142,7 @@ describe('L’adaptateur email Brevo', () => {
         event_name: 'mesure_prise_en_compte',
         identifiers: { email_id: 'mesure.prise.en.compte@mail.com' },
         contact_properties: {
-          DATE_DERNIERE_PRISE_EN_COMPTE_MESURE: new Date('2025-03-10'),
+          DATE_DERNIERE_PRISE_EN_COMPTE_MESURE: '2025-03-10T00:00:00.000Z',
           NOMBRE_MESURES_PRISES_EN_COMPTE: 3,
         },
       });
@@ -165,7 +165,7 @@ describe('L’adaptateur email Brevo', () => {
         event_name: 'module_termine',
         identifiers: { email_id: 'module.termine@mail.com' },
         contact_properties: {
-          DATE_DERNIERE_COMPLETION_MODULE: new Date('2025-03-10'),
+          DATE_DERNIERE_COMPLETION_MODULE: '2025-03-10T00:00:00.000Z',
           NOMBRE_MODULES_TERMINES: 3,
         },
       });
@@ -179,7 +179,7 @@ describe('L’adaptateur email Brevo', () => {
         event_name: 'badge_cyberdepart_debloque',
         identifiers: { email_id: 'badge.debloque@mail.com' },
         contact_properties: {
-          DATE_DEBLOCAGE_BADGE_CYBERDEPART: new Date('2025-03-10'),
+          DATE_DEBLOCAGE_BADGE_CYBERDEPART: '2025-03-10T00:00:00.000Z',
         },
       });
     });

@@ -13,7 +13,7 @@ describe("L'abonnement qui consigne le téléchargement d'un outil dans le journ
   let adaptateurHachage: AdaptateurHachage;
 
   beforeEach(() => {
-    adaptateurHorloge = { maintenant: () => new Date() };
+    adaptateurHorloge = { maintenant: () => Temporal.Now.instant() };
     adaptateurHachage = {
       ...fauxAdaptateurHachage,
       hache: (valeur) => `${valeur}-hacheHMAC`,
@@ -28,7 +28,7 @@ describe("L'abonnement qui consigne le téléchargement d'un outil dans le journ
       },
     };
     adaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     await consigneOutilTéléchargéDansJournal({

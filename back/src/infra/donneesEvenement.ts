@@ -58,7 +58,7 @@ export type DonneesEvenement =
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
   type: Type;
-  date: Date;
+  date: Temporal.Instant;
 };
 
 type DonneesEvenementNouvelUtilisateur = Evenement<

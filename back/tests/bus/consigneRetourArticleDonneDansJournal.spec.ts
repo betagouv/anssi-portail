@@ -11,7 +11,7 @@ describe("L'abonnement qui consigne l'évènement de retour d'un article", () =>
     };
     const consigneEvenement = vi.spyOn(adaptateurJournal, 'consigneEvenement');
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     await consigneRetourArticleDonnéDansJournal({
@@ -22,7 +22,7 @@ describe("L'abonnement qui consigne l'évènement de retour d'un article", () =>
     expect(consigneEvenement).toHaveBeenCalledExactlyOnceWith({
       type: 'RETOUR_ARTICLE_DONNE',
       donnees: { slug: 'un-article', retour: 'NEGATIF', commentaire: 'un commentaire' },
-      date: new Date('2025-03-10'),
+      date: Temporal.Instant.from('2025-03-10T00:00:00Z'),
     });
   });
 });

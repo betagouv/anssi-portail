@@ -15,7 +15,7 @@ describe("L'abonnement qui consigne l'événement de complétion du parcours com
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     const adaptateurHachage: AdaptateurHachage = {
@@ -32,7 +32,7 @@ describe("L'abonnement qui consigne l'événement de complétion du parcours com
     expect(evenementRecu).toEqual({
       type: 'PARCOURS_COMPLET_TERMINÉ',
       donnees: { idUtilisateur: 'test@email-hacheHMAC' },
-      date: new Date('2025-03-10'),
+      date: Temporal.Instant.from('2025-03-10T00:00:00Z'),
     });
   });
 });

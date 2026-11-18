@@ -14,7 +14,7 @@ describe("L'abonnement qui consigne la fin du test d'hameçonnage dans le journa
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     await consigneTestHameconnageTermineDansJournal({
@@ -42,7 +42,7 @@ describe("L'abonnement qui consigne la fin du test d'hameçonnage dans le journa
         codeTrancheEffectif: '00',
         parcours: 'allégé',
       },
-      date: new Date('2025-03-10'),
+      date: Temporal.Instant.from('2025-03-10T00:00:00Z'),
     });
   });
 
@@ -54,7 +54,7 @@ describe("L'abonnement qui consigne la fin du test d'hameçonnage dans le journa
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     await consigneTestHameconnageTermineDansJournal({
@@ -72,7 +72,7 @@ describe("L'abonnement qui consigne la fin du test d'hameçonnage dans le journa
       donnees: {
         idCorrélation: 'id-correlation',
       },
-      date: new Date('2025-03-10'),
+      date: Temporal.Instant.from('2025-03-10T00:00:00Z'),
     });
   });
 });

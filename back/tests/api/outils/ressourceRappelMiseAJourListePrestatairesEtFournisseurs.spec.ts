@@ -99,13 +99,26 @@ describe('La ressource du rappel de mise à jour de la liste des prestataires et
     });
 
     it('renvoi un évènement qui a lieu dans un an, de 9h à 9h30', async () => {
-      adaptateurHorloge.maintenant = () => new Date('2026-10-14');
+      adaptateurHorloge.maintenant = () => Temporal.Instant.from('2026-10-14T00:00:00Z');
 
       const { text } = await récupèrelÉvènement();
 
       const lignes = text.split('\r\n');
       expect(lignes[11]).toBe('DTSTART:20271014T090000Z');
       expect(lignes[12]).toBe('DTEND:20271014T093000Z');
+    });
+
+    it.each([
+      ['Europe/Paris', '20250228'],
+      ['America/Los_Angeles', '20250301'],
+    ])('calcule le rappel selon la date locale en année bissextile (%s)', async (fuseau, jourAttendu) => {
+      vi.spyOn(Temporal.Now, 'timeZoneId').mockReturnValue(fuseau);
+      adaptateurHorloge.maintenant = () => Temporal.Instant.from('2024-02-28T23:30:00Z');
+
+      const { text } = await récupèrelÉvènement();
+
+      expect(text).toContain(`DTSTART:${jourAttendu}T083000Z`);
+      expect(text).toContain(`DTEND:${jourAttendu}T090000Z`);
     });
 
     it('refuse un utilisateur non connecté', async () => {

@@ -96,7 +96,7 @@ describe("La ressource du rappel de mise à jour de l'annuaire des contacts", ()
     });
 
     it('renvoi un évènement qui a lieu dans un an', async () => {
-      const fauxMaintenant = new Date('2026-10-14');
+      const fauxMaintenant = Temporal.Instant.from('2026-10-14T00:00:00Z');
       adaptateurHorloge.maintenant = () => fauxMaintenant;
 
       const { text } = await récupèrelÉvènement();
@@ -104,6 +104,19 @@ describe("La ressource du rappel de mise à jour de l'annuaire des contacts", ()
       const lignes = text.split('\r\n');
       expect(lignes[11]).toBe('DTSTART:20271014T090000Z');
       expect(lignes[12]).toBe('DTEND:20271014T093000Z');
+    });
+
+    it.each([
+      ['Europe/Paris', '20250228'],
+      ['America/Los_Angeles', '20250301'],
+    ])('calcule le rappel selon la date locale en année bissextile (%s)', async (fuseau, jourAttendu) => {
+      vi.spyOn(Temporal.Now, 'timeZoneId').mockReturnValue(fuseau);
+      adaptateurHorloge.maintenant = () => Temporal.Instant.from('2024-02-28T23:30:00Z');
+
+      const { text } = await récupèrelÉvènement();
+
+      expect(text).toContain(`DTSTART:${jourAttendu}T083000Z`);
+      expect(text).toContain(`DTEND:${jourAttendu}T090000Z`);
     });
 
     it('refuse un utilisateur non connecté', async () => {

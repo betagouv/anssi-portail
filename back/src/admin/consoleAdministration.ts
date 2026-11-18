@@ -240,7 +240,7 @@ export class ConsoleAdministration {
           idUtilisateur: this.adaptateurHachage.hache(evenement.utilisateur.email),
           listeIdFavoris: await constitueListeIdFavorisUtilisateur(evenement.utilisateur),
         },
-        date: new Date(),
+        date: adaptateurHorloge.maintenant(),
       });
 
     const afficheErreur = (evenement: MiseAJourFavorisUtilisateur) => `Erreur pour ${evenement.utilisateur.email}`;
@@ -268,7 +268,7 @@ export class ConsoleAdministration {
         donnees: {
           idUtilisateur: this.adaptateurHachage.hache(evenement.email),
         },
-        date: new Date(),
+        date: adaptateurHorloge.maintenant(),
       });
 
     const afficheErreur = (evenement: CompteCree) => `Erreur pour ${evenement.email}`;
@@ -499,7 +499,9 @@ export class ConsoleAdministration {
             secteur,
             tailleOrganisation: taille_organisation,
           },
-          date: date_realisation ?? new Date(),
+          date: date_realisation
+            ? Temporal.Instant.fromEpochMilliseconds(date_realisation.getTime())
+            : adaptateurHorloge.maintenant(),
         });
       }
     );

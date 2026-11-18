@@ -15,7 +15,7 @@ describe("L'abonnement qui consigne la consultation d'une mesure par un utilisat
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     const adaptateurHachage: AdaptateurHachage = {
@@ -35,7 +35,7 @@ describe("L'abonnement qui consigne la consultation d'une mesure par un utilisat
         idUtilisateur: 'u1@example.com-hacheHMAC',
         idMesure: 'AUTH.5',
       },
-      date: new Date('2025-03-10'),
+      date: Temporal.Instant.from('2025-03-10T00:00:00Z'),
     });
   });
 });

@@ -13,7 +13,7 @@ describe("L'abonnement qui consigne la réalisation d'un test dans le journal", 
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     consigneTestRealiseDansJournal({
@@ -35,7 +35,7 @@ describe("L'abonnement qui consigne la réalisation d'un test dans le journal", 
     expect(evenementRecu!.donnees.reponses).toEqual({ pilotage: 2 });
     expect(evenementRecu!.donnees.secteur).toBe('A');
     expect(evenementRecu!.donnees.tailleOrganisation).toBe('00');
-    expect(evenementRecu!.date).toEqual(new Date('2025-03-10'));
+    expect(evenementRecu!.date).toEqual(Temporal.Instant.from('2025-03-10T00:00:00Z'));
     expect(evenementRecu!.donnees.idResultatTest).toBe('ef3dc8c7-beed-4bd7-a475-409515c28a0c');
   });
 });

@@ -32,7 +32,7 @@ describe("L'abonnement qui consigne une simulation NIS2 terminée dans le journa
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2026-03-24'),
+      maintenant: () => Temporal.Instant.from('2026-03-24T00:00:00Z'),
     };
 
     await consigneSimulationNis2TermineeDansJournal({
@@ -81,7 +81,7 @@ describe("L'abonnement qui consigne une simulation NIS2 terminée dans le journa
           specificationsRetenues: ['R1370'],
         },
       },
-      date: new Date('2026-03-24'),
+      date: Temporal.Instant.from('2026-03-24T00:00:00Z'),
     });
   });
 });
