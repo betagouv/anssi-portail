@@ -69,7 +69,12 @@ describe('La ressource qui gère les guides', () => {
       it("expose les dates d'un guide", async () => {
         const reponse = await request(serveur).get('/api/guides');
 
-        expect(reponse.body[0].dateMiseAJour).toBe(new Date(2025, 5, 20).toISOString());
+        expect(reponse.body[0].dateMiseAJour).toBe(
+          Temporal.PlainDate.from('2025-06-20')
+            .toZonedDateTime(Temporal.Now.timeZoneId())
+            .toInstant()
+            .toString({ fractionalSecondDigits: 3 })
+        );
       });
 
       it("renvoie un 500 si l'entrepot renvoie une erreur", async () => {

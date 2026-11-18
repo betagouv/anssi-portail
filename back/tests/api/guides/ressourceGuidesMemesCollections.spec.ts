@@ -24,7 +24,7 @@ describe('La ressource des guides de mêmes collections', () => {
           langue: 'FR',
           collections: [],
           listeDocuments: [],
-          dateMiseAJour: new Date(),
+          dateMiseAJour: Temporal.Now.instant(),
           thematique: '',
           besoins: [],
         })

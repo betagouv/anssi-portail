@@ -1,8 +1,28 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { guideZeroTrust } from '../api/objetsPretsALEmploi.js';
 import { EntrepotGuideTravailMemoire } from '../persistance/entrepotGuideTravailMemoire.js';
 
 describe('Le guide', () => {
+  describe('la date de publication', () => {
+    beforeEach(() => {
+      vi.useFakeTimers({ toFake: ['Temporal'] });
+      vi.setSystemTime(Temporal.Instant.from('2026-01-01T12:00:00Z'));
+    });
+
+    afterEach(() => vi.useRealTimers());
+
+    it.each([
+      ['2026-01-01T11:59:59.999999999Z', true],
+      ['2026-01-01T12:00:00Z', true],
+      ['2026-01-01T12:00:00.000000001Z', false],
+    ])('détermine la publication à partir de l’instant %s', (date, publié) => {
+      const guide = guideZeroTrust();
+      guide.dateMiseAJour = Temporal.Instant.from(date);
+
+      expect(guide.estPublie()).toBe(publié);
+    });
+  });
+
   describe("lorsqu'on sauvegarde", () => {
     const guideOriginal = guideZeroTrust();
     let fauxEntrepot = new EntrepotGuideTravailMemoire();

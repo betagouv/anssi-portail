@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { GuideGrist } from '../../src/infra/entrepotGuideGrist.js';
 import { EntrepotGuideTravailGrist } from '../../src/infra/entrepotGuideTravailGrist.js';
@@ -7,6 +7,24 @@ import { ConstructeurGuideGrist } from '../api/guides/constructeurGuideGrist.js'
 import { fabriqueClientGet, fabriqueClientPut, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
 
 describe("L'entrepot de gestion de guide Grist", () => {
+  afterEach(() => vi.useRealTimers());
+
+  it.each([
+    [1.234567, '1970-01-01T00:00:01.234Z'],
+    [null, '2026-01-01T12:00:00Z'],
+    [0, '2026-01-01T12:00:00Z'],
+  ])('convertit la date Grist %s en instant', async (secondes, dateAttendue) => {
+    vi.useFakeTimers({ toFake: ['Temporal'] });
+    vi.setSystemTime(Temporal.Instant.from('2026-01-01T12:00:00Z'));
+    const enregistrement = new ConstructeurGuideGrist().avecLIdentifiant('guide1').construis();
+    enregistrement.fields.Date_de_mise_a_jour_s_ = secondes;
+    const entrepôt = prepareEntrepotGristAvecEnregistrements([enregistrement]);
+
+    const guide = await entrepôt.parId('guide1');
+
+    expect(guide?.dateMiseAJour.toString()).toBe(dateAttendue);
+  });
+
   function prepareEntrepotGristAvecEnregistrements(records: GuideGrist[]) {
     const donneesDansGrist = [...records];
     const clientHttp: ClientHttp = {

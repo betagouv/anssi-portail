@@ -3,6 +3,7 @@ import { Guide } from '../../metier/guide.js';
 
 export const guidePresentation = (adaptateurEnvironnement: AdaptateurEnvironnement) => (guide: Guide) => ({
   ...guide,
+  dateMiseAJour: guide.dateMiseAJour.toString({ fractionalSecondDigits: 3 }),
   nomImage: undefined,
   image: {
     petite: `/documents-guides/${guide.id}/588.avif`,

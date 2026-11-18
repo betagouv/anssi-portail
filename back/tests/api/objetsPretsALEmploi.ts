@@ -72,7 +72,7 @@ export const guideZeroTrust = () =>
         nomFichier: 'anssi-fondamentaux-zero-trust-v1.0.pdf',
       },
     ],
-    dateMiseAJour: new Date(2025, 5, 20),
+    dateMiseAJour: Temporal.PlainDate.from('2025-06-20').toZonedDateTime(Temporal.Now.timeZoneId()).toInstant(),
     thematique: 'Les essentiels',
     besoins: ['REAGIR', 'SE_FORMER'],
     lienCourt: 'https://cyber.gouv.fr/fondamentaux-zero-trust',
@@ -92,12 +92,12 @@ export const guideDevsecops = () =>
         nomFichier: 'anssi_essentiels_devsecops_v1.0.pdf',
       },
     ],
-    dateMiseAJour: new Date(2024, 2, 13),
+    dateMiseAJour: Temporal.PlainDate.from('2024-03-13').toZonedDateTime(Temporal.Now.timeZoneId()).toInstant(),
     thematique: 'Les essentiels',
     besoins: ['SECURISER'],
   });
 
-const aujourdhui = new Date();
+const aujourdhui = Temporal.Now.plainDateISO();
 
 export const guidePublieDemain = () =>
   new Guide({
@@ -113,7 +113,7 @@ export const guidePublieDemain = () =>
         nomFichier: 'anssi_essentiels_devsecops_v1.0.pdf',
       },
     ],
-    dateMiseAJour: new Date(aujourdhui.getFullYear(), aujourdhui.getMonth(), aujourdhui.getDate() + 1),
+    dateMiseAJour: aujourdhui.add({ days: 1 }).toZonedDateTime(Temporal.Now.timeZoneId()).toInstant(),
     thematique: 'Les essentiels',
     besoins: ['SECURISER'],
   });
