@@ -37,6 +37,10 @@ export const détecteRendu = () => {
   });
 
   return {
+    get estMobile() {
+      return affichage === 'mobile';
+    },
+
     get estPlusPetitQueBureau() {
       return ['mobile', 'tablette'].includes(affichage);
     },

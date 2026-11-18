@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { profilStore } from '../stores/profil.store';
   import Bouton from '../ui/Bouton.svelte';
+  import { détecteRendu } from '../utils/rendu.svelte';
   import { évènementsDuParcours } from './evenementsDuParcours';
   import ModaleRetourUtilisateurSurParcours from './ModaleRetourUtilisateurSurParcours.svelte';
 
@@ -63,27 +64,28 @@
   let panneauOuvert = $state(false);
   let estSurvolé = false;
 
-  const estLg = () => window.matchMedia('(min-width: 992px)').matches;
+  const rendu = détecteRendu();
 
   const surEntréeSouris = () => {
     annuleMinuteursAutomatiques();
-    if (!estLg()) return;
+    if (!rendu.estBureau) return;
     estSurvolé = true;
     panneauOuvert = true;
   };
 
   const surSortieSouris = (e: MouseEvent & { currentTarget: HTMLElement }) => {
     estSurvolé = false;
-    if (estLg() && !e.currentTarget.querySelector(':focus-visible')) panneauOuvert = false;
+    if (rendu.estBureau && !e.currentTarget.querySelector(':focus-visible')) panneauOuvert = false;
   };
 
   const surEntréeFocus = (e: FocusEvent) => {
     annuleMinuteursAutomatiques();
-    if (estLg() && e.target instanceof HTMLElement && e.target.matches(':focus-visible')) panneauOuvert = true;
+    if (rendu.estBureau && e.target instanceof HTMLElement && e.target.matches(':focus-visible')) panneauOuvert = true;
   };
 
   const surSortieFocus = (e: FocusEvent & { currentTarget: HTMLElement }) => {
-    if (estLg() && !estSurvolé && !e.currentTarget.contains(e.relatedTarget as Node | null)) panneauOuvert = false;
+    if (rendu.estBureau && !estSurvolé && !e.currentTarget.contains(e.relatedTarget as Node | null))
+      panneauOuvert = false;
   };
 
   const surToucheEnfoncée = (e: KeyboardEvent) => {
