@@ -1,7 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { type Express } from 'express';
 import request from 'supertest';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
 import { OutilTéléchargé } from '../../../src/bus/evenements/outilTelecharge.js';
 import { AdaptateurHorloge } from '../../../src/infra/adaptateurHorloge.js';
@@ -33,6 +33,10 @@ describe('La ressource du rappel de mise à jour de la liste des prestataires et
       busEvenements,
       entrepotUtilisateur,
     });
+    vi.stubEnv('TZ', 'UTC');
+  });
+  afterEach(async () => {
+    vi.unstubAllEnvs();
   });
 
   describe('sur une requête GET', () => {
@@ -71,27 +75,27 @@ describe('La ressource du rappel de mise à jour de la liste des prestataires et
       expect(lignes[6]).toBe('BEGIN:VEVENT');
       expect(lignes[8]).toBe('SUMMARY:MesServicesCyber - Mettre à jour la liste des prestataires et fourn');
       expect(lignes[9]).toBe('\tisseurs');
-      expect(lignes[12]).toBe('DESCRIPTION:Il y a un an\\, vous avez constitué la liste de vos prestataires');
-      expect(lignes[13]).toBe("\t et fournisseurs informatiques avec leurs coordonnées. En cas d'incident\\,");
-      expect(lignes[14]).toBe("\t c'est cette liste qui vous permettra de joindre rapidement les bonnes per");
-      expect(lignes[15]).toBe("\tsonnes.\\n\\nPour qu'elle reste fiable\\, prenez quelques minutes pour la vér");
-      expect(lignes[16]).toBe('\tifier :\\n\\n- Vos prestataires et fournisseurs ont-ils changé (nouveau pres');
-      expect(lignes[17]).toBe('\ttataire\\, fin de contrat) ?\\n\\n- Les contacts opérationnels et les contact');
-      expect(lignes[18]).toBe('\ts de secours sont-ils toujours les mêmes (départ\\, arrivée\\, changement de');
-      expect(lignes[19]).toBe("\t poste) ?\\n\\n- Les numéros de téléphone\\, adresses e-mail et modalités d'a");
-      expect(lignes[20]).toBe('\tstreinte sont-ils toujours valides ?\\n\\nPensez ensuite à dater la nouvelle');
-      expect(lignes[21]).toBe('\t version et à remplacer les anciens exemplaires\\, y compris ceux conservés');
-      expect(lignes[22]).toBe('\t hors du bureau.\\n\\n- Retrouvez le modèle et la mesure sur MesServicesCybe');
-      expect(lignes[23]).toBe('\tr : https://messervices.cyber.gouv.fr');
-      expect(lignes[24]).toBe('RRULE:FREQ=YEARLY');
-      expect(lignes[25]).toBe('BEGIN:VALARM');
-      expect(lignes[26]).toBe('ACTION:DISPLAY');
-      expect(lignes[27]).toBe('DESCRIPTION:RAPPEL : mettre à jour la liste de vos prestataires et fourniss');
-      expect(lignes[28]).toBe('\teurs');
-      expect(lignes[29]).toBe('TRIGGER:-PT');
-      expect(lignes[30]).toBe('END:VALARM');
-      expect(lignes[31]).toBe('END:VEVENT');
-      expect(lignes[32]).toBe('END:VCALENDAR');
+      expect(lignes[13]).toBe('DESCRIPTION:Il y a un an\\, vous avez constitué la liste de vos prestataires');
+      expect(lignes[14]).toBe("\t et fournisseurs informatiques avec leurs coordonnées. En cas d'incident\\,");
+      expect(lignes[15]).toBe("\t c'est cette liste qui vous permettra de joindre rapidement les bonnes per");
+      expect(lignes[16]).toBe("\tsonnes.\\n\\nPour qu'elle reste fiable\\, prenez quelques minutes pour la vér");
+      expect(lignes[17]).toBe('\tifier :\\n\\n- Vos prestataires et fournisseurs ont-ils changé (nouveau pres');
+      expect(lignes[18]).toBe('\ttataire\\, fin de contrat) ?\\n\\n- Les contacts opérationnels et les contact');
+      expect(lignes[19]).toBe('\ts de secours sont-ils toujours les mêmes (départ\\, arrivée\\, changement de');
+      expect(lignes[20]).toBe("\t poste) ?\\n\\n- Les numéros de téléphone\\, adresses e-mail et modalités d'a");
+      expect(lignes[21]).toBe('\tstreinte sont-ils toujours valides ?\\n\\nPensez ensuite à dater la nouvelle');
+      expect(lignes[22]).toBe('\t version et à remplacer les anciens exemplaires\\, y compris ceux conservés');
+      expect(lignes[23]).toBe('\t hors du bureau.\\n\\n- Retrouvez le modèle et la mesure sur MesServicesCybe');
+      expect(lignes[24]).toBe('\tr : https://messervices.cyber.gouv.fr');
+      expect(lignes[25]).toBe('RRULE:FREQ=YEARLY');
+      expect(lignes[26]).toBe('BEGIN:VALARM');
+      expect(lignes[27]).toBe('ACTION:DISPLAY');
+      expect(lignes[28]).toBe('DESCRIPTION:RAPPEL : mettre à jour la liste de vos prestataires et fourniss');
+      expect(lignes[29]).toBe('\teurs');
+      expect(lignes[30]).toBe('TRIGGER:-PT');
+      expect(lignes[31]).toBe('END:VALARM');
+      expect(lignes[32]).toBe('END:VEVENT');
+      expect(lignes[33]).toBe('END:VCALENDAR');
     });
 
     it('renvoi un évènement qui a lieu dans un an, de 9h à 9h30', async () => {
@@ -100,7 +104,8 @@ describe('La ressource du rappel de mise à jour de la liste des prestataires et
       const { text } = await récupèrelÉvènement();
 
       const lignes = text.split('\r\n');
-      expect(lignes[11]).toBe('DTSTART;VALUE=DATE:20271014');
+      expect(lignes[11]).toBe('DTSTART:20271014T090000Z');
+      expect(lignes[12]).toBe('DTEND:20271014T093000Z');
     });
 
     it('refuse un utilisateur non connecté', async () => {
