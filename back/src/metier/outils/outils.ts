@@ -11,6 +11,7 @@ const outils = [
   'modele-liste-prestataires-et-fournisseurs.xlsx',
   'modele-liste-interconnexions.xlsx',
   'rappel-mise-a-jour-liste-prestataires-et-fournisseurs.ics',
+  'rappel-mise-a-jour-liste-interconnexions.ics',
 ] as const;
 export type Outil = (typeof outils)[number];
 
