@@ -8,7 +8,7 @@
   let conteneur = $state<SVGSVGElement>();
   const àLÉcran = suitLaVisibilité(() => conteneur);
 
-  const animée = $derived(survol || (rendu.estMobile && àLÉcran.visible));
+  const animée = $derived(survol || (rendu.estPlusPetitQueBureau && àLÉcran.visible));
 </script>
 
 <svg

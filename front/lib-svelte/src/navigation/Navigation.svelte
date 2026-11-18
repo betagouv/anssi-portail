@@ -26,7 +26,7 @@
   );
   const lienParcoursSécurisation = $derived(estConnecte() ? lienParcoursUtilisateur : '/parcours-securisation');
   const menu = $derived([
-    ...(rendu.estMobile ? [itemDeMenu('Accueil', '/', cheminRelatif === '/')] : []),
+    ...(rendu.estPlusPetitQueBureau ? [itemDeMenu('Accueil', '/', cheminRelatif === '/')] : []),
 
     itemDeMenu(
       '🚀 Protéger mon organisation',
@@ -78,7 +78,7 @@
       ],
     },
 
-    ...(rendu.estMobile ? [itemDeMenu('Directive NIS 2', '/nis2', cheminRelatif === '/nis2')] : []),
+    ...(rendu.estPlusPetitQueBureau ? [itemDeMenu('Directive NIS 2', '/nis2', cheminRelatif === '/nis2')] : []),
   ]);
 </script>
 

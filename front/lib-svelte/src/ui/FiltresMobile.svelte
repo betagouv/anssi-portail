@@ -12,7 +12,7 @@
   const rendu = détecteRendu();
 </script>
 
-{#if rendu.estMobile}
+{#if rendu.estPlusPetitQueBureau}
   <div class="sommaire sommaire-replie">
     <details>
       <summary>
