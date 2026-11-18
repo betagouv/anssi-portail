@@ -1,4 +1,4 @@
-type Affichage = 'mobile' | 'tablette' | 'bureau';
+export type Affichage = 'mobile' | 'tablette' | 'bureau';
 
 const seuilMd = '767px';
 const seuilLg = '992px';
@@ -37,6 +37,10 @@ export const détecteRendu = () => {
   });
 
   return {
+    get affichageCourant() {
+      return affichage;
+    },
+
     get estMobile() {
       return affichage === 'mobile';
     },
