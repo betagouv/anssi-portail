@@ -20,13 +20,13 @@
 
     <ÉtapeProcédure titre="Formalisez un RACI simple sur les principales activités">
       <p class="texte-standard-md">
-        Concernez au minimum les sauvegardes, la gestion des incidents, la sensibilisation, le contrôle d’accès et la
-        revue de conformité. Pour chaque activité, indiquez qui est Responsable, qui Approuve, qui est Consulté et qui
-        est Informé.
+        Pour chacune des principales activités (sauvegardes, gestion des incidents, sensibilisation, contrôle d’accès,
+        revue de conformité), indiquez qui est <strong>Responsable</strong> (il réalise), qui <strong>Approuve</strong>
+        (il décide), qui est <strong>Consulté</strong> et qui est <strong>Informé</strong>.
       </p>
       <p class="texte-detail-sm explication">
-        Pour vous aider à démarrer, notre modèle propose ces activités en colonnes, les acteurs en lignes, des listes
-        déroulantes et un exemple déjà rempli. Vous pouvez ajouter vos propres activités et acteurs&nbsp;:
+        Pour vous aider à démarrer, voici notre modèle de RACI, auquel vous pouvez ajouter vos propres activités et
+        acteurs&nbsp;:
       </p>
       <OutilModèleRACI />
     </ÉtapeProcédure>
