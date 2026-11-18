@@ -51,6 +51,8 @@ export class QuestionnaireVraiFaux {
     );
 
     if (idQuestion === this.questions.at(-1)?.idQuestion)
+      // TODO: sauvegarder chez nous si utilisateur présent
+
       await busÉvénements.publie(
         new QuestionnaireVraiFauxTerminé({
           idCorrélation,

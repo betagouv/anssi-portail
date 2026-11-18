@@ -18,6 +18,13 @@ import { ressourceParcoursComplet } from '../../../mesures/ressourceParcoursComp
 import { ressourcePriseEnCompte } from '../../../mesures/ressourcePriseEnCompte.js';
 import { ressourceRécompensesCyberDépart } from '../../../mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepart.js';
 import { ressourceRécompensesCyberDépartSansBadge } from '../../../mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepartSansBadge.js';
+import { ressourceDernierResultatDeTest } from '../../../mini-tests/maturite-cyber/ressourceDernierResultatDeTest.js';
+import { ressourceRepartitionDesResultatsDeTest } from '../../../mini-tests/maturite-cyber/ressourceRepartitionDesResultatsDeTest.js';
+import { ressourceResultatDeTest } from '../../../mini-tests/maturite-cyber/ressourceResultatDeTest.js';
+import { ressourceResultatsDeTest } from '../../../mini-tests/maturite-cyber/ressourceResultatsDeTest.js';
+import { ressourceResultatsSessionDeGroupe } from '../../../mini-tests/maturite-cyber/ressourceResultatsSessionDeGroupe.js';
+import { ressourceSessionDeGroupe } from '../../../mini-tests/maturite-cyber/ressourceSessionDeGroupe.js';
+import { ressourceSessionsDeGroupe } from '../../../mini-tests/maturite-cyber/ressourceSessionsDeGroupe.js';
 import { ressourceDemandesAide } from '../../../mon-aide-cyber/ressourceDemandesAide.js';
 import { ressourceExigencesNis2 } from '../../../nis2/ressourceExigencesNis2.js';
 import { ressourceExigencesNis2Csv } from '../../../nis2/ressourceExigencesNis2Csv.js';
@@ -36,13 +43,6 @@ import { ressourceRetoursExperience } from '../../../ressourceRetoursExperience.
 import { ressourceSanteGuides } from '../../../ressourceSanteGuides.js';
 import { ressourceStatistiques } from '../../../ressourceStatistiques.js';
 import { ressourceUtilisateurs } from '../../../ressourceUtilisateurs.js';
-import { ressourceDernierResultatDeTest } from '../../../testMaturite/ressourceDernierResultatDeTest.js';
-import { ressourceRepartitionDesResultatsDeTest } from '../../../testMaturite/ressourceRepartitionDesResultatsDeTest.js';
-import { ressourceResultatDeTest } from '../../../testMaturite/ressourceResultatDeTest.js';
-import { ressourceResultatsDeTest } from '../../../testMaturite/ressourceResultatsDeTest.js';
-import { ressourceResultatsSessionDeGroupe } from '../../../testMaturite/ressourceResultatsSessionDeGroupe.js';
-import { ressourceSessionDeGroupe } from '../../../testMaturite/ressourceSessionDeGroupe.js';
-import { ressourceSessionsDeGroupe } from '../../../testMaturite/ressourceSessionsDeGroupe.js';
 import { enregistreRouteDansExpress } from '../../enregistreRoutes.js';
 import { enregistreLesAnnuaires } from './annuaire.js';
 import { enregistreLesMiniTests } from './miniTests.js';

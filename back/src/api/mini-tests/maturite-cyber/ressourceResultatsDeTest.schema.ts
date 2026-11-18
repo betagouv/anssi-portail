@@ -1,5 +1,5 @@
 import z from 'zod';
-import { schemas } from '../schemas.js';
+import { schemas } from '../../schemas.js';
 
 const clesReponsesValides = [
   'prise-en-compte-risque',

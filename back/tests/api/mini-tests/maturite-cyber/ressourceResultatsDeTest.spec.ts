@@ -2,17 +2,17 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../../src/api/msc/index.js';
-import { ProprieteTestRevendiquee } from '../../../src/bus/evenements/proprieteTestRevendiquee.js';
-import { TestRealise } from '../../../src/bus/evenements/testRealise.js';
-import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite.js';
-import { Utilisateur } from '../../../src/metier/utilisateur.js';
-import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
-import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire.js';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
-import { encodeSession } from '../cookie.js';
-import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise, fauxRapporteur } from '../fauxObjets.js';
-import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi.js';
+import { creeServeur } from '../../../../src/api/msc/index.js';
+import { ProprieteTestRevendiquee } from '../../../../src/bus/evenements/proprieteTestRevendiquee.js';
+import { TestRealise } from '../../../../src/bus/evenements/testRealise.js';
+import { ResultatTestMaturite } from '../../../../src/metier/resultatTestMaturite.js';
+import { Utilisateur } from '../../../../src/metier/utilisateur.js';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
+import { EntrepotResultatTestMemoire } from '../../../persistance/entrepotResultatTestMemoire.js';
+import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
+import { encodeSession } from '../../cookie.js';
+import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise, fauxRapporteur } from '../../fauxObjets.js';
+import { hectorDurant, jeanneDupont } from '../../objetsPretsALEmploi.js';
 
 const REGEX_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 

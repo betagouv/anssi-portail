@@ -1,12 +1,12 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
-import { estCodeRegion } from '../../metier/referentielRegions.js';
-import { estCodeSecteur } from '../../metier/referentielSecteurs.js';
-import { trancheEffectifParCode } from '../../metier/referentielTranchesEffectifEtablissement.js';
-import { RepartitionResultatsTest } from '../../metier/repartitionResultatsTest.js';
-import { ConfigurationServeur } from '../configurationServeur.js';
-import { filetRouteAsynchrone } from '../middlewares/middleware.js';
-import { corpsVide, valideCorpsRequete } from '../zod.js';
+import { estCodeRegion } from '../../../metier/referentielRegions.js';
+import { estCodeSecteur } from '../../../metier/referentielSecteurs.js';
+import { trancheEffectifParCode } from '../../../metier/referentielTranchesEffectifEtablissement.js';
+import { RepartitionResultatsTest } from '../../../metier/repartitionResultatsTest.js';
+import { ConfigurationServeur } from '../../configurationServeur.js';
+import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
+import { corpsVide, valideCorpsRequete } from '../../zod.js';
 
 export const ressourceRepartitionDesResultatsDeTest = ({
   entrepotResultatTest,
