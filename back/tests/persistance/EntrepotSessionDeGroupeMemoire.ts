@@ -1,5 +1,5 @@
-import { EntrepotSessionDeGroupe } from '../../src/metier/entrepotSessionDeGroupe.js';
-import { SessionDeGroupe } from '../../src/metier/sessionDeGroupe.js';
+import { EntrepotSessionDeGroupe } from '../../src/metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
+import { SessionDeGroupe } from '../../src/metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
 import { EntrepotMemoire } from './entrepotMemoire.js';
 
 export class EntrepotSessionDeGroupeMemoire

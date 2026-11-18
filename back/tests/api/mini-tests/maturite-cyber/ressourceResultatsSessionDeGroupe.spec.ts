@@ -3,13 +3,13 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc/index.js';
-import { EntrepotResultatTest } from '../../../../src/metier/entrepotResultatTest.js';
-import { EntrepotSessionDeGroupe } from '../../../../src/metier/entrepotSessionDeGroupe.js';
+import { EntrepotResultatTest } from '../../../../src/metier/mini-tests/maturite-cyber/entrepotResultatTest.js';
+import { EntrepotSessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
 import {
   DonneesCreationResultatTestMaturite,
   ResultatTestMaturite,
-} from '../../../../src/metier/resultatTestMaturite.js';
-import { SessionDeGroupe } from '../../../../src/metier/sessionDeGroupe.js';
+} from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { SessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
 import { EntrepotResultatTestMemoire } from '../../../persistance/entrepotResultatTestMemoire.js';
 import { EntrepotSessionDeGroupeMemoire } from '../../../persistance/EntrepotSessionDeGroupeMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';

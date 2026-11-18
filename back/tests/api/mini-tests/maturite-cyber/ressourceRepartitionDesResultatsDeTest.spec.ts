@@ -3,8 +3,8 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc/index.js';
-import { ResultatTestMaturite } from '../../../../src/metier/resultatTestMaturite.js';
-import { ResultatTestMaturiteCreateur } from '../../../metier/ResultatTestMaturiteCreateur.js';
+import { ResultatTestMaturite } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { ResultatTestMaturiteCreateur } from '../../../metier/mini-tests/maturite-cyber/ResultatTestMaturiteCreateur.js';
 import { EntrepotResultatTestMemoire } from '../../../persistance/entrepotResultatTestMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
 

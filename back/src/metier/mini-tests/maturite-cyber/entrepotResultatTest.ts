@@ -1,8 +1,8 @@
-import { CodeRégion } from './referentielRegions.js';
-import { CodeSecteur } from './referentielSecteurs.js';
-import { CodeTrancheEffectif } from './referentielTranchesEffectifEtablissement.js';
+import { CodeRégion } from '../../referentielRegions.js';
+import { CodeSecteur } from '../../referentielSecteurs.js';
+import { CodeTrancheEffectif } from '../../referentielTranchesEffectifEtablissement.js';
+import { Utilisateur } from '../../utilisateur.js';
 import { ResultatTestMaturite } from './resultatTestMaturite.js';
-import { Utilisateur } from './utilisateur.js';
 
 export type FiltreResultatsTest = {
   codeSecteur?: CodeSecteur;

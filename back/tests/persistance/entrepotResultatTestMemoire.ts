@@ -1,5 +1,8 @@
-import { EntrepotResultatTest, FiltreResultatsTest } from '../../src/metier/entrepotResultatTest.js';
-import { ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
+import {
+  EntrepotResultatTest,
+  FiltreResultatsTest,
+} from '../../src/metier/mini-tests/maturite-cyber/entrepotResultatTest.js';
+import { ResultatTestMaturite } from '../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { Utilisateur } from '../../src/metier/utilisateur.js';
 import { EntrepotMemoire } from './entrepotMemoire.js';
 

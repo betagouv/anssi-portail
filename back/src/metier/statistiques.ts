@@ -1,8 +1,8 @@
-import { AdaptateurStatistiqueMiniTests } from './adaptateurStatistiqueMiniTests.js';
 import { AdaptateurStatistiqueParcours } from './adaptateurStatistiqueParcours.js';
-import { EntrepotResultatTest } from './entrepotResultatTest.js';
 import { EntrepotUtilisateur } from './entrepotUtilisateur.js';
-import { IdNiveauMaturite } from './resultatTestMaturite.js';
+import { AdaptateurStatistiqueMiniTests } from './mini-tests/adaptateurStatistiqueMiniTests.js';
+import { EntrepotResultatTest } from './mini-tests/maturite-cyber/entrepotResultatTest.js';
+import { IdNiveauMaturite } from './mini-tests/maturite-cyber/resultatTestMaturite.js';
 
 const NOMBRES_DE_DIAGNOSTIC_CYBER = 7130;
 const SATISFACTION_UTILISATEUR = 92;

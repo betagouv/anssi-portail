@@ -4,14 +4,14 @@ import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc/index.js';
 import { AdaptateurRechercheEntreprise } from '../../../../src/infra/adaptateurRechercheEntreprise.js';
-import { CodeRégion } from '../../../../src/metier/referentielRegions.js';
-import { CodeSecteur } from '../../../../src/metier/referentielSecteurs.js';
-import { CodeTrancheEffectif } from '../../../../src/metier/referentielTranchesEffectifEtablissement.js';
 import {
   DonneesCreationResultatTestMaturite,
   ResultatTestMaturite,
-} from '../../../../src/metier/resultatTestMaturite.js';
-import { ResultatTestMaturiteCreateur } from '../../../metier/ResultatTestMaturiteCreateur.js';
+} from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { CodeRégion } from '../../../../src/metier/referentielRegions.js';
+import { CodeSecteur } from '../../../../src/metier/referentielSecteurs.js';
+import { CodeTrancheEffectif } from '../../../../src/metier/referentielTranchesEffectifEtablissement.js';
+import { ResultatTestMaturiteCreateur } from '../../../metier/mini-tests/maturite-cyber/ResultatTestMaturiteCreateur.js';
 import { EntrepotResultatTestMemoire } from '../../../persistance/entrepotResultatTestMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';

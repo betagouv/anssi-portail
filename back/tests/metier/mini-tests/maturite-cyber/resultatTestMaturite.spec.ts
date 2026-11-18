@@ -1,8 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
-import { IdNiveauMaturite, ReponsesTestMaturite, ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
-import { fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets.js';
-import { jeanneDupont } from '../api/objetsPretsALEmploi.js';
+import { AdaptateurRechercheEntreprise } from '../../../../src/infra/adaptateurRechercheEntreprise.js';
+import {
+  IdNiveauMaturite,
+  ReponsesTestMaturite,
+  ResultatTestMaturite,
+} from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { fauxAdaptateurRechercheEntreprise } from '../../../api/fauxObjets.js';
+import { jeanneDupont } from '../../../api/objetsPretsALEmploi.js';
 
 const reponsesParDefaut: ReponsesTestMaturite = {
   'prise-en-compte-risque': 5,

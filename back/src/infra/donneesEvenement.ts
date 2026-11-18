@@ -11,13 +11,13 @@ import { SimulationRéflexesCyberTerminé } from '../bus/evenements/simulationRe
 import { TestHameçonnageRéponseSoumise } from '../bus/evenements/testHameconnageReponseSoumise.js';
 import { TestHameçonnageTerminé } from '../bus/evenements/testHameconnageTermine.js';
 import { FacteurAggravant, Secteur, TypeOrganisation } from '../metier/mini-tests/exposition/exposition.js';
+import { ReponsesTestMaturite } from '../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { ReponsesEtResultatAvecAnalyse } from '../metier/nis2-simulateur/questionnaire/calculEligibilite.js';
 import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction.js';
 import { MotifChangementParcours, Parcours } from '../metier/parcours.js';
 import { CodeRégion } from '../metier/referentielRegions.js';
 import { CodeSecteur } from '../metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement.js';
-import { ReponsesTestMaturite } from '../metier/resultatTestMaturite.js';
 import { Suivi } from '../metier/suivi.js';
 
 export type DonneesEvenement =
