@@ -23,7 +23,7 @@ export const ressourceRappelMiseAJourListeDActivités = ({
 
       const maintenant = adaptateurHorloge.maintenant();
       const fuseauHoraire = Temporal.Now.timeZoneId();
-      const dansUnAn = maintenant.toTemporalInstant().toZonedDateTimeISO(fuseauHoraire).add({ years: 1 });
+      const dansUnAn = maintenant.toZonedDateTimeISO(fuseauHoraire).add({ years: 1 });
       const dansUnAnÀNeufHeures = dansUnAn.add({ hours: 9 }).epochMilliseconds;
       const dansUnAnÀNeufHeuresTrente = dansUnAn.add({ hours: 9, minutes: 30 }).epochMilliseconds;
 

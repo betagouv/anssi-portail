@@ -12,7 +12,7 @@ import { fauxFournisseurDeChemin } from '../fauxObjets.js';
 
 describe("Le service du modèle de l'annuaire de crise", () => {
   const fauxAdaptateurHorloge: AdaptateurHorloge = {
-    maintenant: () => new Date(2018, 10, 17),
+    maintenant: () => Temporal.PlainDate.from('2018-11-17').toZonedDateTime(Temporal.Now.timeZoneId()).toInstant(),
   };
   const récupèreModèleExcel = async ({
     codeActivité,

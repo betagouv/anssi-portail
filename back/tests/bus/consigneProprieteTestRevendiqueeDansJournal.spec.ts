@@ -21,7 +21,7 @@ describe("L'abonnement qui consigne la revendication de la propriété d'un test
   };
 
   beforeEach(() => {
-    adaptateurHorloge = { maintenant: () => new Date() };
+    adaptateurHorloge = { maintenant: () => Temporal.Now.instant() };
     adaptateurHachage = {
       ...fauxAdaptateurHachage,
       hache: (valeur) => `${valeur}-hacheHMAC`,
@@ -36,7 +36,7 @@ describe("L'abonnement qui consigne la revendication de la propriété d'un test
       },
     };
     adaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     await consigneEvenementDansJournal()(
@@ -49,7 +49,7 @@ describe("L'abonnement qui consigne la revendication de la propriété d'un test
     expect(evenementRecu).toBeDefined();
     expect(evenementRecu!.type).toBe('PROPRIETE_TEST_REVENDIQUEE');
     expect(evenementRecu!.donnees.idResultatTest).toBe('12345');
-    expect(evenementRecu!.date).toEqual(new Date('2025-03-10'));
+    expect(evenementRecu!.date).toEqual(Temporal.Instant.from('2025-03-10T00:00:00Z'));
   });
 
   it("hache l'email de l'utilisateur", async () => {

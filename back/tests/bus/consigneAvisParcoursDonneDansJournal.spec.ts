@@ -25,7 +25,7 @@ describe("L'abonnement qui consigne le don d'un avis sur un parcours dans le jou
 
   beforeEach(() => {
     adaptateurJournal = { consigneEvenement: async () => {} };
-    adaptateurHorloge = { maintenant: () => new Date('2025-03-10') };
+    adaptateurHorloge = { maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z') };
     adaptateurHachage = fauxAdaptateurHachage;
   });
 
@@ -49,7 +49,7 @@ describe("L'abonnement qui consigne le don d'un avis sur un parcours dans le jou
         parcours: 'complet',
         pageSource: '/parcours-securisation',
       },
-      date: new Date('2025-03-10'),
+      date: Temporal.Instant.from('2025-03-10T00:00:00Z'),
     });
   });
 });

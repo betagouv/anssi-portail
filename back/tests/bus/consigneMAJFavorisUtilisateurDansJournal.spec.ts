@@ -17,7 +17,7 @@ describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-04-16'),
+      maintenant: () => Temporal.Instant.from('2025-04-16T00:00:00Z'),
     };
 
     const adaptateurHachage: AdaptateurHachage = {
@@ -50,6 +50,6 @@ describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur
     expect(evenementRecu!.type).toBe('MISE_A_JOUR_FAVORIS_UTILISATEUR');
     expect(evenementRecu!.donnees.idUtilisateur).toBe('jeanne.dupont@user.com-hacheHMAC');
     expect(evenementRecu!.donnees.listeIdFavoris).toHaveLength(2);
-    expect(evenementRecu!.date).toEqual(new Date('2025-04-16'));
+    expect(evenementRecu!.date).toEqual(Temporal.Instant.from('2025-04-16T00:00:00Z'));
   });
 });

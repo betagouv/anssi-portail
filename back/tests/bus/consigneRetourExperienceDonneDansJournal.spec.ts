@@ -20,7 +20,7 @@ describe("L'abonnement qui consigne le don d'un retour d’expérience dans le j
   };
 
   beforeEach(() => {
-    adaptateurHorloge = { maintenant: () => new Date() };
+    adaptateurHorloge = { maintenant: () => Temporal.Now.instant() };
     adaptateurHachage = {
       ...fauxAdaptateurHachage,
       hache: (valeur) => `${valeur}-hacheHMAC`,
@@ -35,7 +35,7 @@ describe("L'abonnement qui consigne le don d'un retour d’expérience dans le j
       },
     };
     adaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     await consigneEvenementDansJournal()(
@@ -48,7 +48,7 @@ describe("L'abonnement qui consigne le don d'un retour d’expérience dans le j
     expect(evenementRecu).toBeDefined();
     expect(evenementRecu!.type).toBe('RETOUR_EXPERIENCE_DONNE');
     expect(evenementRecu!.donnees.raison).toBe('pas-besoin');
-    expect(evenementRecu!.date).toEqual(new Date('2025-03-10'));
+    expect(evenementRecu!.date).toEqual(Temporal.Instant.from('2025-03-10T00:00:00Z'));
   });
 
   it("hache l'email de l'utilisateur", async () => {

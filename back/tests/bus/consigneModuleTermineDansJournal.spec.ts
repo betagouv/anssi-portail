@@ -15,7 +15,7 @@ describe("L'abonnement qui consigne la complétion d'un module par un utilisateu
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     const adaptateurHachage: AdaptateurHachage = {
@@ -37,7 +37,7 @@ describe("L'abonnement qui consigne la complétion d'un module par un utilisateu
         nomModule: 'Cyberdépart',
         parcours: 'allégé',
       },
-      date: new Date('2025-03-10'),
+      date: Temporal.Instant.from('2025-03-10T00:00:00Z'),
     });
   });
 });

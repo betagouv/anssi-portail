@@ -14,7 +14,7 @@ describe("L'abonnement qui consigne une réponse au test d'hameçonnage dans le 
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     await consigneTestHameconnageReponseSoumiseDansJournal({
@@ -46,7 +46,7 @@ describe("L'abonnement qui consigne une réponse au test d'hameçonnage dans le 
         codeTrancheEffectif: '00',
         parcours: 'allégé',
       },
-      date: new Date('2025-03-10'),
+      date: Temporal.Instant.from('2025-03-10T00:00:00Z'),
     });
   });
 
@@ -58,7 +58,7 @@ describe("L'abonnement qui consigne une réponse au test d'hameçonnage dans le 
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
     await consigneTestHameconnageReponseSoumiseDansJournal({
       adaptateurJournal,
@@ -79,7 +79,7 @@ describe("L'abonnement qui consigne une réponse au test d'hameçonnage dans le 
         idMail: 'ENEDIS',
         réponseCorrecte: false,
       },
-      date: new Date('2025-03-10'),
+      date: Temporal.Instant.from('2025-03-10T00:00:00Z'),
     });
   });
 });

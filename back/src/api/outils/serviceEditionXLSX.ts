@@ -46,7 +46,12 @@ export class ÉditeurFeuilleXLSX {
   ) {}
 
   définisLibelléÀLaVersionDuJour() {
-    const dateFormattée = this.adaptateurHorloge.maintenant().toLocaleDateString('fr-FR').replace(/\//g, '-');
+    const dateFormattée = this.adaptateurHorloge
+      .maintenant()
+      .toZonedDateTimeISO(Temporal.Now.timeZoneId())
+      .toPlainDate()
+      .toLocaleString('fr-FR')
+      .replace(/\//g, '-');
     this.feuille.title = `Version du ${dateFormattée}`;
   }
 

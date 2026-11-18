@@ -20,10 +20,10 @@ import { ClientHttp } from './clientHttp.js';
 export type DonnéesUtilisateurBrevo = {
   email: string;
   attributes: {
-    DATE_DEBLOCAGE_BADGE_CYBERDEPART?: Date;
-    DATE_DERNIERE_COMPLETION_MODULE?: Date;
-    DATE_DERNIERE_CONSULTATION_MESURE?: Date;
-    DATE_DERNIERE_PRISE_EN_COMPTE_MESURE?: Date;
+    DATE_DEBLOCAGE_BADGE_CYBERDEPART?: string;
+    DATE_DERNIERE_COMPLETION_MODULE?: string;
+    DATE_DERNIERE_CONSULTATION_MESURE?: string;
+    DATE_DERNIERE_PRISE_EN_COMPTE_MESURE?: string;
     NOMBRE_MESURES_PRISES_EN_COMPTE?: number;
     NOMBRE_MODULES_TERMINES?: number;
     PARCOURS: Parcours;
@@ -184,7 +184,7 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
       email: événement.email,
       nomÉvénement: 'mesure_consultee',
       propriétésÀMettreÀJour: {
-        DATE_DERNIERE_CONSULTATION_MESURE: this.adaptateurHorloge.maintenant(),
+        DATE_DERNIERE_CONSULTATION_MESURE: this.adaptateurHorloge.maintenant().toString({ fractionalSecondDigits: 3 }),
         ...(événement.parcours && { PARCOURS: événement.parcours }),
       },
       messageErreur: "Erreur lors de la mise à jour d'une mesure consultée sur Brévo : ",
@@ -198,7 +198,9 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
       email: événement.email,
       nomÉvénement: 'mesure_prise_en_compte',
       propriétésÀMettreÀJour: {
-        DATE_DERNIERE_PRISE_EN_COMPTE_MESURE: this.adaptateurHorloge.maintenant(),
+        DATE_DERNIERE_PRISE_EN_COMPTE_MESURE: this.adaptateurHorloge
+          .maintenant()
+          .toString({ fractionalSecondDigits: 3 }),
         NOMBRE_MESURES_PRISES_EN_COMPTE: (donnéesUtilisateur.attributes.NOMBRE_MESURES_PRISES_EN_COMPTE ?? 0) + 1,
       },
       messageErreur: "Erreur lors de la mise à jour d'une mesure prise en compte sur Brévo : ",
@@ -212,7 +214,7 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
       email: événement.email,
       nomÉvénement: 'module_termine',
       propriétésÀMettreÀJour: {
-        DATE_DERNIERE_COMPLETION_MODULE: this.adaptateurHorloge.maintenant(),
+        DATE_DERNIERE_COMPLETION_MODULE: this.adaptateurHorloge.maintenant().toString({ fractionalSecondDigits: 3 }),
         NOMBRE_MODULES_TERMINES: (donnéesUtilisateur.attributes.NOMBRE_MODULES_TERMINES ?? 0) + 1,
       },
       messageErreur: "Erreur lors de la mise à jour d'une complétion de module sur Brévo : ",
@@ -223,7 +225,9 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
     await this.envoieÉvénement({
       email: événement.email,
       nomÉvénement: 'badge_cyberdepart_debloque',
-      propriétésÀMettreÀJour: { DATE_DEBLOCAGE_BADGE_CYBERDEPART: this.adaptateurHorloge.maintenant() },
+      propriétésÀMettreÀJour: {
+        DATE_DEBLOCAGE_BADGE_CYBERDEPART: this.adaptateurHorloge.maintenant().toString({ fractionalSecondDigits: 3 }),
+      },
       messageErreur: 'Erreur lors de la mise à jour du déblocage du badge CyberDépart sur Brévo : ',
     });
   };

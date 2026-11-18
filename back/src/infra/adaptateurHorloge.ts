@@ -1,7 +1,7 @@
 export type AdaptateurHorloge = {
-  maintenant: () => Date;
+  maintenant: () => Temporal.Instant;
 };
 
-export const adaptateurHorloge = {
-  maintenant: () => new Date(),
+export const adaptateurHorloge: AdaptateurHorloge = {
+  maintenant: () => Temporal.Now.instant(),
 };

@@ -20,7 +20,7 @@ describe("L'abonnement qui consigne le don d'un avis utilisateur dans le journal
   };
 
   beforeEach(() => {
-    adaptateurHorloge = { maintenant: () => new Date() };
+    adaptateurHorloge = { maintenant: () => Temporal.Now.instant() };
     adaptateurHachage = {
       ...fauxAdaptateurHachage,
       hache: (valeur) => `${valeur}-hacheHMAC`,
@@ -35,7 +35,7 @@ describe("L'abonnement qui consigne le don d'un avis utilisateur dans le journal
       },
     };
     adaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     await consigneEvenementDansJournal()(
@@ -48,7 +48,7 @@ describe("L'abonnement qui consigne le don d'un avis utilisateur dans le journal
     expect(evenementRecu).toBeDefined();
     expect(evenementRecu!.type).toBe('AVIS_UTILISATEUR_DONNE');
     expect(evenementRecu!.donnees.niveauDeSatisfaction).toBe(2);
-    expect(evenementRecu!.date).toEqual(new Date('2025-03-10'));
+    expect(evenementRecu!.date).toEqual(Temporal.Instant.from('2025-03-10T00:00:00Z'));
   });
 
   it("hache l'email de l'utilisateur", async () => {

@@ -15,7 +15,7 @@ describe('L’abonnement qui consigne une réponse à une question de la simulat
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
     const adaptateurHachage: AdaptateurHachage = {
       ...fauxAdaptateurHachage,
@@ -53,7 +53,7 @@ describe('L’abonnement qui consigne une réponse à une question de la simulat
         codeSecteur: 'A',
         codeTrancheEffectif: '00',
       },
-      date: new Date('2025-03-10'),
+      date: Temporal.Instant.from('2025-03-10T00:00:00Z'),
     });
   });
 
@@ -65,7 +65,7 @@ describe('L’abonnement qui consigne une réponse à une question de la simulat
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     await consigneRéflexesCyberReponseSoumiseDansJournal({
@@ -91,7 +91,7 @@ describe('L’abonnement qui consigne une réponse à une question de la simulat
         numéroÉvènement: 1,
         réflexe: 'bon',
       },
-      date: new Date('2025-03-10'),
+      date: Temporal.Instant.from('2025-03-10T00:00:00Z'),
     });
   });
 });

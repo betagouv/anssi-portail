@@ -15,7 +15,7 @@ describe("L'abonnement qui consigne l'évènement de changement de parcours dans
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
     const suivi = {
       campagne: 'campagne_2026_NA',
@@ -42,7 +42,7 @@ describe("L'abonnement qui consigne l'évènement de changement de parcours dans
         motif: 'prise-en-compte-mesure',
         suivi,
       },
-      date: new Date('2025-03-10'),
+      date: Temporal.Instant.from('2025-03-10T00:00:00Z'),
     });
   });
 });

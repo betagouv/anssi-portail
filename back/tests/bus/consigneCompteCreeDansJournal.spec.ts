@@ -15,7 +15,7 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     const adaptateurHachage: AdaptateurHachage = {
@@ -40,7 +40,7 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
     expect(évènementReçu).toBeDefined();
     expect(évènementReçu!.type).toBe('NOUVEL_UTILISATEUR_INSCRIT');
     expect(évènementReçu!.donnees?.idUtilisateur).toBe('u1@mail.com-hacheHMAC');
-    expect(évènementReçu!.date).toEqual(new Date('2025-03-10'));
+    expect(évènementReçu!.date).toEqual(Temporal.Instant.from('2025-03-10T00:00:00Z'));
   });
 
   it("consigne un évènement avec la provenance de l'utilisateur", async () => {
@@ -51,7 +51,7 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
       },
     };
     const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => new Date('2025-03-10'),
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
     };
 
     const adaptateurHachage: AdaptateurHachage = {
