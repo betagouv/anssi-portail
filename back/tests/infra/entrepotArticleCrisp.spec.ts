@@ -26,8 +26,8 @@ describe("L'entrepôt d'article Crisp", () => {
   let adaptateurEnvironnement: AdaptateurEnvironnement;
 
   beforeEach(() => {
-    vi.useFakeTimers({ toFake: ['Date'] });
-    vi.setSystemTime(new Date('2025-01-01T00:00:00Z'));
+    vi.useFakeTimers({ toFake: ['Temporal'] });
+    vi.setSystemTime(Temporal.Instant.from('2025-01-01T00:00:00Z'));
     adaptateurEnvironnement = { ...fauxAdaptateurEnvironnement };
     cmsCrisp = new MockCmsCrisp();
     entrepôtArticle = new EntrepôtArticleCrisp(cmsCrisp, adaptateurEnvironnement, fauxRapporteur);

@@ -8,8 +8,8 @@ const DEUX_HEURES = Temporal.Duration.from({ hours: 2 });
 
 describe("L'entrepôt Grist générique", () => {
   beforeEach(() => {
-    vi.useFakeTimers({ toFake: ['Date'] });
-    vi.setSystemTime(new Date('2025-01-01T00:00:00Z'));
+    vi.useFakeTimers({ toFake: ['Temporal'] });
+    vi.setSystemTime(Temporal.Instant.from('2025-01-01T00:00:00Z'));
   });
 
   afterEach(() => {
