@@ -37,7 +37,7 @@
   const rendu = détecteRendu();
 
   onMount(() => {
-    if (rendu.estMobile && mode !== 'autonome') {
+    if (rendu.estPlusPetitQueBureau && mode !== 'autonome') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });

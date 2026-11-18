@@ -8,7 +8,7 @@
   let conteneur = $state<HTMLElement>();
   const àLÉcran = suitLaVisibilité(() => conteneur);
 
-  const animée = $derived(survol || (rendu.estMobile && àLÉcran.visible));
+  const animée = $derived(survol || (rendu.estPlusPetitQueBureau && àLÉcran.visible));
 </script>
 
 <div bind:this={conteneur}>

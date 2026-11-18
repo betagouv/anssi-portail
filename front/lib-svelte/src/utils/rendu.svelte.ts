@@ -1,27 +1,48 @@
+type Affichage = 'mobile' | 'tablette' | 'bureau';
+
+const seuilMd = '767px';
+const seuilLg = '992px';
+
+const requêteMédiaEstMobile = window.matchMedia(`(width < ${seuilMd})`);
+const requêteMédiaEstTablette = window.matchMedia(`(${seuilMd} <= width < ${seuilLg})`);
+const requêteMédiaEstBureauEtPlus = window.matchMedia(`(width >= ${seuilLg})`);
+
 export const détecteRendu = () => {
-  let mobile = $state(false);
+  let affichage: Affichage = $state('bureau');
 
   $effect(() => {
-    const média = window.matchMedia('(max-width: 992px)');
-    mobile = média.matches;
+    affichage = requêteMédiaEstMobile.matches ? 'mobile' : requêteMédiaEstTablette.matches ? 'tablette' : 'bureau';
 
-    const surChangement = (évènement: MediaQueryListEvent) => {
-      mobile = évènement.matches;
+    const surChangementMédiaMobile = (évènement: MediaQueryListEvent) => {
+      if (évènement.matches) affichage = 'mobile';
     };
-    média.addEventListener('change', surChangement);
+
+    const surChangementMédiaTablette = (évènement: MediaQueryListEvent) => {
+      if (évènement.matches) affichage = 'tablette';
+    };
+
+    const surChangementMédiaBureau = (évènement: MediaQueryListEvent) => {
+      if (évènement.matches) affichage = 'bureau';
+    };
+
+    requêteMédiaEstMobile.addEventListener('change', surChangementMédiaMobile);
+    requêteMédiaEstTablette.addEventListener('change', surChangementMédiaTablette);
+    requêteMédiaEstBureauEtPlus.addEventListener('change', surChangementMédiaBureau);
 
     return () => {
-      média.removeEventListener('change', surChangement);
+      requêteMédiaEstMobile.removeEventListener('change', surChangementMédiaMobile);
+      requêteMédiaEstTablette.removeEventListener('change', surChangementMédiaTablette);
+      requêteMédiaEstBureauEtPlus.removeEventListener('change', surChangementMédiaBureau);
     };
   });
 
   return {
-    get estMobile() {
-      return mobile;
+    get estPlusPetitQueBureau() {
+      return ['mobile', 'tablette'].includes(affichage);
     },
 
     get estBureau() {
-      return !mobile;
+      return affichage === 'bureau';
     },
   };
 };
