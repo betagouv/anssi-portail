@@ -140,6 +140,7 @@
     .encart-actions {
       display: flex;
       border: 1px solid var(--border-default-grey);
+      background-color: var(--background-default-grey);
       border-top-width: 0;
     }
   }
