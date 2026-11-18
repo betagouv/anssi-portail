@@ -64,8 +64,8 @@ export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements Ent
       listeDocuments: JSON.parse(guideGrist.fields.Liste_documents || '[]'),
       nomsAnciensDocuments: JSON.parse(guideGrist.fields.Anciens_documents || '[]'),
       dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour_s_
-        ? new Date(guideGrist.fields.Date_de_mise_a_jour_s_ * 1000)
-        : new Date(),
+        ? Temporal.Instant.fromEpochMilliseconds(Math.trunc(guideGrist.fields.Date_de_mise_a_jour_s_ * 1000))
+        : Temporal.Now.instant(),
       thematique: guideGrist.fields.Thematique ?? '',
       besoins: aseptiseListeGrist(guideGrist.fields.Besoins_cyber)
         .map(this.convertiBesoin)

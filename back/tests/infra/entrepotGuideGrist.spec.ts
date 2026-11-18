@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { EntrepotGuideGrist, GuideGrist } from '../../src/infra/entrepotGuideGrist.js';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
@@ -6,6 +6,24 @@ import { ConstructeurGuideGrist } from '../api/guides/constructeurGuideGrist.js'
 import { fabriqueClientGet, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
 
 describe("L'entrepot de guide Grist", () => {
+  afterEach(() => vi.useRealTimers());
+
+  it.each([
+    [1.234567, '1970-01-01T00:00:01.234Z'],
+    [null, '2026-01-01T12:00:00Z'],
+    [0, '2026-01-01T12:00:00Z'],
+  ])('convertit la date Grist %s en instant', async (secondes, dateAttendue) => {
+    vi.useFakeTimers({ toFake: ['Temporal'] });
+    vi.setSystemTime(Temporal.Instant.from('2026-01-01T12:00:00Z'));
+    const enregistrement = new ConstructeurGuideGrist().avecLIdentifiant('guide1').construis();
+    enregistrement.fields.Date_de_mise_a_jour_s_ = secondes;
+    const entrepôt = prepareEntrepotGristAvecEnregistrements([enregistrement]);
+
+    const guide = await entrepôt.parId('guide1');
+
+    expect(guide?.dateMiseAJour.toString()).toBe(dateAttendue);
+  });
+
   function prepareEntrepotGristAvecEnregistrements(records: GuideGrist[]) {
     const clientHttp: ClientHttp = {
       ...fabriqueFauxClientHttp(),
@@ -144,13 +162,13 @@ describe("L'entrepot de guide Grist", () => {
     const entrepotGuideGrist = prepareEntrepotGristAvecEnregistrements([
       new ConstructeurGuideGrist()
         .avecLIdentifiant('guide1')
-        .avecLaDateDeMiseAJour(new Date(2024, 10, 12).getTime() / 1000)
+        .avecLaDateDeMiseAJour(Temporal.Instant.from('2024-11-12T00:00:00Z').epochMilliseconds / 1000)
         .construis(),
     ]);
 
     const guide1 = await entrepotGuideGrist.parId('guide1');
 
-    expect(guide1!.dateMiseAJour.getTime()).toBe(new Date(2024, 10, 12).getTime());
+    expect(guide1!.dateMiseAJour.toString()).toBe('2024-11-12T00:00:00Z');
   });
 
   it('sait récupérer les thématiques', async () => {

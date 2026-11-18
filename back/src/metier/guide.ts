@@ -10,7 +10,7 @@ export class Guide {
   collections: string[];
   listeDocuments: DocumentGuide[];
   nomsAnciensDocuments: string[];
-  dateMiseAJour: Date;
+  dateMiseAJour: Temporal.Instant;
   thematique: string;
   besoins: BesoinCyber[];
   lienCourt?: string;
@@ -23,7 +23,7 @@ export class Guide {
     collections: string[];
     listeDocuments: DocumentGuide[];
     nomsAnciensDocuments?: string[];
-    dateMiseAJour: Date;
+    dateMiseAJour: Temporal.Instant;
     thematique: string;
     besoins: BesoinCyber[];
     lienCourt?: string;
@@ -45,7 +45,7 @@ export class Guide {
     return (await entrepotGuide.parCollections(this.collections)).filter((guide) => guide.id !== this.id);
   }
 
-  estPublie = (): boolean => this.dateMiseAJour <= new Date();
+  estPublie = (): boolean => Temporal.Instant.compare(this.dateMiseAJour, Temporal.Now.instant()) <= 0;
 
   possedeLeDocument = (nomFichier: string): boolean => {
     return this.listeDocuments.some((document) => document.nomFichier === nomFichier);

@@ -9,7 +9,7 @@ import { corpsVide, valideCorpsRequete } from './zod.js';
 
 interface LienSitemap {
   url: string;
-  modifiéLe?: Date | undefined;
+  modifiéLe?: string;
 }
 
 const récupèreLiens = (pages: string[], { fournisseurChemin }: ConfigurationServeur): LienSitemap[] => {
@@ -39,7 +39,7 @@ const récupèreLiens = (pages: string[], { fournisseurChemin }: ConfigurationSe
     const données = matter(fs.readFileSync(cheminOriginel, 'utf-8')).data;
     return {
       url: page,
-      modifiéLe: données.modifiéLe ? new Date(données.modifiéLe) : undefined,
+      modifiéLe: données.modifiéLe ? new Date(données.modifiéLe).toISOString() : undefined,
     };
   });
 };
@@ -55,7 +55,7 @@ export const ressourceSitemapXml = (pagesStatiques: string[], configurationServe
     liensStatiques.forEach((lien) => {
       sitemapStream.write({
         url: lien.url,
-        lastmod: lien.modifiéLe?.toISOString(),
+        lastmod: lien.modifiéLe,
       });
     });
 
@@ -63,7 +63,7 @@ export const ressourceSitemapXml = (pagesStatiques: string[], configurationServe
       liensDynamiques.forEach((lien: LienSitemap) => {
         sitemapStream.write({
           url: lien.url,
-          lastmod: lien.modifiéLe?.toISOString(),
+          lastmod: lien.modifiéLe,
         });
       });
 
@@ -103,7 +103,7 @@ const construitRoutesDynamiques = async ({
 
   const liensGuides = (await entrepotGuide.tous()).map((guide): LienSitemap => ({
     url: `/guides/${guide.id}`,
-    modifiéLe: guide.dateMiseAJour,
+    modifiéLe: guide.dateMiseAJour.toString({ fractionalSecondDigits: 3 }),
   }));
 
   const liensArticlesBlog = (await entrepôtArticle.tousLesArticlesDeBlog()).map((résuméDArticle) => ({
@@ -124,7 +124,7 @@ const construitRoutesDynamiques = async ({
     .map((f): LienSitemap => {
       const cheminOriginel = f.replace('/_site/ressources/', '/_ressources/').replace('.html', '.md');
       const données = matter(fs.readFileSync(cheminOriginel, 'utf-8')).data;
-      return { url: `/ressources/${basename(f, '.html')}`, modifiéLe: new Date(données.modifiéLe) };
+      return { url: `/ressources/${basename(f, '.html')}`, modifiéLe: new Date(données.modifiéLe).toISOString() };
     });
 
   const liensServices = siteFront
@@ -136,7 +136,7 @@ const construitRoutesDynamiques = async ({
     .map((f): LienSitemap => {
       const cheminOriginel = f.replace('/_site/services/', '/_services/').replace('.html', '.md');
       const données = matter(fs.readFileSync(cheminOriginel, 'utf-8')).data;
-      return { url: `/services/${basename(f, '.html')}`, modifiéLe: new Date(données.modifiéLe) };
+      return { url: `/services/${basename(f, '.html')}`, modifiéLe: new Date(données.modifiéLe).toISOString() };
     });
 
   const liensContactsRégionaux = Object.keys(await entrepôtContact.régionaux()).map((codeRegion): LienSitemap => ({
