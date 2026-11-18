@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { RepartitionResultatsTest } from '../../src/metier/repartitionResultatsTest.js';
-import { ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
+import { RepartitionResultatsTest } from '../../../../src/metier/mini-tests/maturite-cyber/repartitionResultatsTest.js';
+import { ResultatTestMaturite } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { ResultatTestMaturiteCreateur } from './ResultatTestMaturiteCreateur.js';
 
 describe('Les répartitions des résultats de test', () => {

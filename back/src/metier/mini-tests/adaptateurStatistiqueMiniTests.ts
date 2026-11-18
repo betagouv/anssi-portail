@@ -1,4 +1,4 @@
-import { Statistiques } from './statistiques.js';
+import { Statistiques } from '../statistiques.js';
 
 export interface AdaptateurStatistiqueMiniTests {
   nombreDeMiniTestsRéalisés(): Promise<Statistiques['miniTests']>;

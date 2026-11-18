@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc/index.js';
 import { ProprieteTestRevendiquee } from '../../../../src/bus/evenements/proprieteTestRevendiquee.js';
 import { TestRealise } from '../../../../src/bus/evenements/testRealise.js';
-import { ResultatTestMaturite } from '../../../../src/metier/resultatTestMaturite.js';
+import { ResultatTestMaturite } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { Utilisateur } from '../../../../src/metier/utilisateur.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepotResultatTestMemoire } from '../../../persistance/entrepotResultatTestMemoire.js';

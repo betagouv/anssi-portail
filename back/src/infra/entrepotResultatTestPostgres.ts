@@ -1,7 +1,7 @@
 import Knex from 'knex';
 import config from '../../knexfile.js';
-import { EntrepotResultatTest, FiltreResultatsTest } from '../metier/entrepotResultatTest.js';
-import { ResultatTestMaturite } from '../metier/resultatTestMaturite.js';
+import { EntrepotResultatTest, FiltreResultatsTest } from '../metier/mini-tests/maturite-cyber/entrepotResultatTest.js';
+import { ResultatTestMaturite } from '../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { Utilisateur } from '../metier/utilisateur.js';
 import { AdaptateurHachage } from './adaptateurHachage.js';
 import { EntrepotUtilisateurMPAPostgres } from './entrepotUtilisateurMPAPostgres.js';

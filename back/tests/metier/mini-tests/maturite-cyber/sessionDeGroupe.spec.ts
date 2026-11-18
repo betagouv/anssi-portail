@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { ReponsesTestMaturite, ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
-import { SessionDeGroupe } from '../../src/metier/sessionDeGroupe.js';
-import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire.js';
+import {
+  ReponsesTestMaturite,
+  ResultatTestMaturite,
+} from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { SessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
+import { EntrepotResultatTestMemoire } from '../../../persistance/entrepotResultatTestMemoire.js';
 
 const resultatAvecReponses = (reponses: ReponsesTestMaturite, codeSession: string) =>
   new ResultatTestMaturite({

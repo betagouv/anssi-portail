@@ -1,10 +1,14 @@
-import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest.js';
-import { CodeRégion } from '../../src/metier/referentielRegions.js';
-import { CodeSecteur } from '../../src/metier/referentielSecteurs.js';
-import { CodeTrancheEffectif } from '../../src/metier/referentielTranchesEffectifEtablissement.js';
-import { IdNiveauMaturite, ReponsesTestMaturite, ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
-import { Utilisateur } from '../../src/metier/utilisateur.js';
-import { fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets.js';
+import { EntrepotResultatTest } from '../../../../src/metier/mini-tests/maturite-cyber/entrepotResultatTest.js';
+import {
+  IdNiveauMaturite,
+  ReponsesTestMaturite,
+  ResultatTestMaturite,
+} from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { CodeRégion } from '../../../../src/metier/referentielRegions.js';
+import { CodeSecteur } from '../../../../src/metier/referentielSecteurs.js';
+import { CodeTrancheEffectif } from '../../../../src/metier/referentielTranchesEffectifEtablissement.js';
+import { Utilisateur } from '../../../../src/metier/utilisateur.js';
+import { fauxAdaptateurRechercheEntreprise } from '../../../api/fauxObjets.js';
 
 export class ResultatTestMaturiteCreateur {
   private reponses: ReponsesTestMaturite = {

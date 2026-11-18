@@ -1,4 +1,4 @@
-import { AdaptateurStatistiqueMiniTests } from '../metier/adaptateurStatistiqueMiniTests.js';
+import { AdaptateurStatistiqueMiniTests } from '../metier/mini-tests/adaptateurStatistiqueMiniTests.js';
 
 export class AdaptateurStatistiqueMiniTestsMémoire implements AdaptateurStatistiqueMiniTests {
   async nombreDeMiniTestsRéalisés() {

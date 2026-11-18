@@ -60,7 +60,7 @@ import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serv
 import { EntrepotGuide } from './metier/entrepotGuide.js';
 import { EntrepotGuideTravail } from './metier/entrepotGuideTravail.js';
 import { EntrepotMesure } from './metier/entrepotMesure.js';
-import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe.js';
+import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/mini-tests/maturite-cyber/generateurCodeSessionDeGroupe.js';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
 
