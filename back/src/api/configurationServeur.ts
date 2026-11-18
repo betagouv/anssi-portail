@@ -38,6 +38,7 @@ import { GestionnaireRequêtesComplémentaires, Middleware } from './middlewares
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from './outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from './outils/modeleListeDActivites/serviceModeleListeDActivites.js';
+import { ServiceModèleListeDesInterconnexions } from './outils/modeleListeInterconnexions/serviceModeleListeInterconnexions.js';
 import { ServiceModèleListeDesPrestatairesEtFournisseurs } from './outils/modeleListePrestatairesEtFournisseurs/serviceModeleListePrestatairesEtFournisseurs.js';
 import { ServiceModèleModificationMotsDePasse } from './outils/modeleModificationMotsDePasse/serviceModeleModificationMotsDePasse.js';
 import { ServiceModèleRACI } from './outils/modeleRaci/serviceModeleRaci.js';
@@ -94,6 +95,7 @@ export type ConfigurationServeur = {
   serviceModèleRevueComptesUtilisateurs: ServiceModèleRevueComptesUtilisateurs;
   serviceModèleRevueDroitsDAccès: ServiceModèleRevueDroitsDAccès;
   serviceModeleListePrestatairesEtFournisseurs: ServiceModèleListeDesPrestatairesEtFournisseurs;
+  serviceModeleListeInterconnexions: ServiceModèleListeDesInterconnexions;
   adaptateurEmail: AdaptateurEmail;
   generateurImage: GenerateurImage;
   adaptateurCompression: AdaptateurCompression;
