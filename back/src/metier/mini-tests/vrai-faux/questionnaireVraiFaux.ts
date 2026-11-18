@@ -5,23 +5,28 @@ import { CodeRégion } from '../../referentielRegions.js';
 import { CodeSecteur } from '../../referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../referentielTranchesEffectifEtablissement.js';
 import { Utilisateur } from '../../utilisateur.js';
+import { EntrepôtRésultatTestVraiFaux } from './entrepotResultatTestVraiFaux.js';
 import { QuestionVraieFausse } from './questionVraieFausse.js';
 
 export class QuestionnaireVraiFaux {
   constructor(private readonly questions: QuestionVraieFausse[]) {}
 
   évalueRéponse = async ({
+    entrepôtRésultatTestVraiFaux,
     busÉvénements,
     idCorrélation,
     idQuestion,
     réponseUtilisateur,
     utilisateur,
+    score,
   }: {
+    entrepôtRésultatTestVraiFaux: EntrepôtRésultatTestVraiFaux;
     busÉvénements: BusEvenements;
     idCorrélation: string;
     idQuestion: string;
     réponseUtilisateur: boolean;
     utilisateur?: Utilisateur;
+    score: string;
   }) => {
     const question = this.questions.find((q) => q.idQuestion === idQuestion);
     if (!question) {
@@ -38,6 +43,7 @@ export class QuestionnaireVraiFaux {
       codeSecteur = await utilisateur.codeSecteur();
       codeTrancheEffectif = await utilisateur.codeTrancheEffectif();
     }
+
     await busÉvénements.publie(
       new QuestionnaireVraiFauxRéponseSoumise({
         idCorrélation,
@@ -50,8 +56,13 @@ export class QuestionnaireVraiFaux {
       })
     );
 
-    if (idQuestion === this.questions.at(-1)?.idQuestion)
-      // TODO: sauvegarder chez nous si utilisateur présent
+    if (idQuestion === this.questions.at(-1)?.idQuestion) {
+      if (utilisateur) {
+        await entrepôtRésultatTestVraiFaux.ajoute({
+          utilisateur,
+          score,
+        });
+      }
 
       await busÉvénements.publie(
         new QuestionnaireVraiFauxTerminé({
@@ -62,5 +73,6 @@ export class QuestionnaireVraiFaux {
           codeTrancheEffectif,
         })
       );
+    }
   };
 }

@@ -4,4 +4,5 @@ export const schemaPostRéponsesVraiFaux = z.strictObject({
   idQuestion: z.string().max(100),
   réponseUtilisateur: z.boolean(),
   idCorrélation: z.uuidv7(),
+  score: z.string().max(3),
 });

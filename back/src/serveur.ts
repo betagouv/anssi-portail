@@ -62,6 +62,10 @@ import { EntrepotGuide } from './metier/entrepotGuide.js';
 import { EntrepotGuideTravail } from './metier/entrepotGuideTravail.js';
 import { EntrepotMesure } from './metier/entrepotMesure.js';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/mini-tests/maturite-cyber/generateurCodeSessionDeGroupe.js';
+import {
+  EntrepôtRésultatTestVraiFaux,
+  RésultatTestVraiFaux,
+} from './metier/mini-tests/vrai-faux/entrepotResultatTestVraiFaux.js';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
 
@@ -184,6 +188,11 @@ const attributionParcoursMesure = fabriqueAttributionParcoursMesure({
 });
 const publieMesureConsultée = fabriquePublieMesureConsultée({ busEvenements });
 
+const entrepôtRésultatTestVraiFaux: EntrepôtRésultatTestVraiFaux = {
+  taille: async () => 0,
+  ajoute: async (_entité: RésultatTestVraiFaux) => {},
+};
+
 const port = Number(process.env.PORT ?? 3000);
 const host = process.env.HOST;
 
@@ -243,6 +252,7 @@ const host = process.env.HOST;
     entrepotReactionMiniTest,
     entrepôtModule,
     entrepôtQuestionVraieFausse: entrepôtQuestionVraieFausseStatique,
+    entrepôtRésultatTestVraiFaux: entrepôtRésultatTestVraiFaux,
     cellar,
     serviceSanteGuides,
     adaptateurEmail,

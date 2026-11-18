@@ -7,6 +7,7 @@ import { QuestionnaireVraiFauxRéponseSoumise } from '../../../../src/bus/evenem
 import { QuestionnaireVraiFauxTerminé } from '../../../../src/bus/evenements/questionnaireVraiFauxTermine.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepôtQuestionVraieFausseMémoire } from '../../../persistance/entrepotQuestionVraieFausseMemoire.js';
+import { EntrepôtRésultatTestVraiFauxMémoire } from '../../../persistance/entrepotResultatTestVraiFauxMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';
 import { configurationDeTestDuServeur, fauxRapporteur } from '../../fauxObjets.js';
@@ -17,10 +18,12 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
   let serveur: Express;
   let busÉvénements: MockBusEvenement;
   let entrepôtQuestionVraieFausse: EntrepôtQuestionVraieFausseMémoire;
+  let entrepôtRésultatTestVraiFaux: EntrepôtRésultatTestVraiFauxMémoire;
 
   beforeEach(async () => {
     busÉvénements = fabriqueBusPourLesTests(fauxRapporteur);
     entrepôtQuestionVraieFausse = new EntrepôtQuestionVraieFausseMémoire();
+    entrepôtRésultatTestVraiFaux = new EntrepôtRésultatTestVraiFauxMémoire();
     await entrepôtQuestionVraieFausse.ajoute(
       questionVraieFausseDeTest().avecLIdQuestion('idQuestion1').avecIdéeReçueEstVraie(true).construis()
     );
@@ -30,6 +33,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
       ...configurationDeTestDuServeur,
       busEvenements: busÉvénements,
       entrepôtQuestionVraieFausse,
+      entrepôtRésultatTestVraiFaux,
       entrepotUtilisateur,
     });
   });
@@ -39,6 +43,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
       idQuestion: 'idQuestion1',
       réponseUtilisateur: true,
       idCorrélation: '01a0a561-2416-726f-84c5-7566d613ce98',
+      score: '3/6',
     });
   };
 
@@ -75,6 +80,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
         idQuestion: 'idQuestion1',
         réponseUtilisateur: true,
         idCorrélation: '01a0a561-2416-726f-84c5-7566d613ce98',
+        score: '3/6',
       });
 
       const événement = busÉvénements.recupereEvenement(QuestionnaireVraiFauxRéponseSoumise);
@@ -82,11 +88,24 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
       expect(événement?.codeRegion).toBe('FR-971');
     });
 
+    it('entrepose le résultat de l’utilisateur avec le score', async () => {
+      const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'token' });
+      await request(serveur).post('/api/mini-tests/vrai-faux/reponses').set('Cookie', [cookieJeanneDupont]).send({
+        idQuestion: 'idQuestion1',
+        réponseUtilisateur: true,
+        idCorrélation: '01a0a561-2416-726f-84c5-7566d613ce98',
+        score: '3/6',
+      });
+
+      expect((await entrepôtRésultatTestVraiFaux.tous())[0].score).toEqual('3/6');
+    });
+
     describe('répond un 400', () => {
-      it("si auncun identifiant de question n'est fourni", async () => {
+      it("si aucun identifiant de question n'est fourni", async () => {
         const reponse = await request(serveur).post('/api/mini-tests/vrai-faux/reponses').send({
           réponseUtilisateur: true,
           idCorrélation: '01a0a561-2416-726f-84c5-7566d613ce98',
+          score: '3/6',
         });
 
         expect(reponse.status).toBe(HttpStatusCode.BadRequest);
@@ -99,24 +118,27 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
             idQuestion: new Array(101).fill('a'),
             réponseUtilisateur: true,
             idCorrélation: '01a0a561-2416-726f-84c5-7566d613ce98',
+            score: '3/6',
           });
 
         expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });
 
-      it("si auncune réponse utilisateur n'est fournie", async () => {
+      it("si aucune réponse utilisateur n'est fournie", async () => {
         const reponse = await request(serveur).post('/api/mini-tests/vrai-faux/reponses').send({
           idQuestion: 'idQuestion1',
           idCorrélation: '01a0a561-2416-726f-84c5-7566d613ce98',
+          score: '3/6',
         });
 
         expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });
 
-      it("si auncun identifiant de corrélation n'est fourni", async () => {
+      it("si aucun identifiant de corrélation n'est fourni", async () => {
         const reponse = await request(serveur).post('/api/mini-tests/vrai-faux/reponses').send({
           idQuestion: 'idQuestion1',
           réponseUtilisateur: true,
+          score: '3/6',
         });
 
         expect(reponse.status).toBe(HttpStatusCode.BadRequest);
@@ -129,7 +151,19 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
             idQuestion: 'idQuestion1',
             réponseUtilisateur: true,
             idCorrélation: new Array(36).fill('a'),
+            score: '3/6',
           });
+
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+      });
+
+      it('si un score est trop long', async () => {
+        const reponse = await request(serveur).post('/api/mini-tests/vrai-faux/reponses').send({
+          idQuestion: 'idQuestion1',
+          réponseUtilisateur: true,
+          idCorrélation: '01a0a561-2416-726f-84c5-7566d613ce98',
+          score: '1234',
+        });
 
         expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });

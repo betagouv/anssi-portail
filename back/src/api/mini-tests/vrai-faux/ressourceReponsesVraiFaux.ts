@@ -13,6 +13,7 @@ import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 export const ressourceRéponsesVraiFaux = ({
   busEvenements,
   entrepôtQuestionVraieFausse,
+  entrepôtRésultatTestVraiFaux,
   middleware,
   entrepotUtilisateur,
   adaptateurHachage,
@@ -29,11 +30,13 @@ export const ressourceRéponsesVraiFaux = ({
 
       const questionnaire = new QuestionnaireVraiFaux(toutesLesQuestions);
       await questionnaire.évalueRéponse({
+        entrepôtRésultatTestVraiFaux,
         busÉvénements: busEvenements,
         idCorrélation: requête.body.idCorrélation,
         idQuestion: requête.body.idQuestion,
         réponseUtilisateur: requête.body.réponseUtilisateur,
         utilisateur: requête.utilisateur,
+        score: requête.body.score,
       });
 
       return reponse.sendStatus(HttpStatusCode.Created);
