@@ -3,14 +3,14 @@ export type Affichage = 'mobile' | 'tablette' | 'bureau';
 const seuilMd = '767px';
 const seuilLg = '992px';
 
-const requêteMédiaEstMobile = window.matchMedia(`(width < ${seuilMd})`);
-const requêteMédiaEstTablette = window.matchMedia(`(${seuilMd} <= width < ${seuilLg})`);
-const requêteMédiaEstBureauEtPlus = window.matchMedia(`(width >= ${seuilLg})`);
-
 export const détecteRendu = () => {
   let affichage: Affichage = $state('bureau');
 
   $effect(() => {
+    const requêteMédiaEstMobile = window.matchMedia(`(width < ${seuilMd})`);
+    const requêteMédiaEstTablette = window.matchMedia(`(${seuilMd} <= width < ${seuilLg})`);
+    const requêteMédiaEstBureauEtPlus = window.matchMedia(`(width >= ${seuilLg})`);
+
     affichage = requêteMédiaEstMobile.matches ? 'mobile' : requêteMédiaEstTablette.matches ? 'tablette' : 'bureau';
 
     const surChangementMédiaMobile = (évènement: MediaQueryListEvent) => {
