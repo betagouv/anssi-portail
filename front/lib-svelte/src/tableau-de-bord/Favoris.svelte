@@ -5,27 +5,86 @@
   import { chargeGuidesDansLeStore } from '../catalogue/stores/guides/guides.store';
   import { itemsCatalogueEnFavori } from '../catalogue/stores/itemsCatalogueEnFavori';
   import Lien from '../ui/Lien.svelte';
+  import { détecteRendu } from '../utils/rendu.svelte';
 
   onMount(chargeGuidesDansLeStore);
+
+  const rendu = détecteRendu();
+  const nombreMaxDeCartesAffichées = $derived({ mobile: 1, tablette: 2, bureau: 3 }[rendu.affichageCourant]);
+  const nombreDeCartesAffichées = $derived(Math.min($itemsCatalogueEnFavori.length, nombreMaxDeCartesAffichées));
 </script>
 
-<div>
-  <h2 class="fr-h4"><span><Icone nom="heart-line" taille="lg" /></span>Favoris</h2>
+{#if nombreDeCartesAffichées > 0}
+  <div class="favoris">
+    <h2 class="fr-h4"><span><Icone nom="heart-line" taille="lg" /></span>Favoris</h2>
 
-  {#if $itemsCatalogueEnFavori.length}
-    <CarteItem item={$itemsCatalogueEnFavori[0]} avecBoutonFavori={true} />
-  {/if}
+    <div class="cartes">
+      {#each { length: nombreDeCartesAffichées }, i}
+        <CarteItem item={$itemsCatalogueEnFavori[i]} avecBoutonFavori={true} />
+      {/each}
+    </div>
 
-  <Lien href="/favoris" libelle="Accéder à tous mes favoris" icone="arrow-right-line" iconeADroite />
-</div>
+    <div class="lien">
+      <Lien href="/favoris" libelle="Accéder à tous mes favoris" icone="arrow-right-line" iconeADroite />
+    </div>
+  </div>
+{/if}
 
 <style lang="scss">
-  h2 {
-    display: flex;
-    gap: 0.5rem;
+  @use '../../../assets/styles/responsive' as *;
 
-    span {
-      color: var(--artwork-minor-blue-france);
+  .favoris {
+    display: grid;
+    grid-template-areas:
+      'titre'
+      'cartes'
+      'lien';
+
+    @include a-partir-de(md) {
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        'titre lien'
+        'cartes cartes';
+    }
+
+    h2 {
+      grid-area: titre;
+      display: flex;
+      gap: 0.5rem;
+
+      span {
+        color: var(--artwork-minor-blue-france);
+      }
+    }
+
+    .cartes {
+      --nombre-cartes: 1;
+
+      @include a-partir-de(md) {
+        --nombre-cartes: 2;
+      }
+
+      @include a-partir-de(lg) {
+        --nombre-cartes: 3;
+      }
+
+      display: grid;
+      grid-template-columns: repeat(var(--nombre-cartes), 1fr);
+      grid-area: cartes;
+      gap: 1rem;
+
+      :global(dsfr-card) {
+        min-height: unset;
+      }
+    }
+
+    .lien {
+      grid-area: lien;
+
+      @include a-partir-de(md) {
+        margin-bottom: 1.5rem;
+        align-self: end;
+      }
     }
   }
 </style>
