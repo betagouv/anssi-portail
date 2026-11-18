@@ -12,6 +12,7 @@ import { creeServeur } from './api/msc/index.js';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from './api/outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from './api/outils/modeleListeDActivites/serviceModeleListeDActivites.js';
+import { ServiceModèleListeDesInterconnexions } from './api/outils/modeleListeInterconnexions/serviceModeleListeInterconnexions.js';
 import { ServiceModèleListeDesPrestatairesEtFournisseurs } from './api/outils/modeleListePrestatairesEtFournisseurs/serviceModeleListePrestatairesEtFournisseurs.js';
 import { ServiceModèleModificationMotsDePasse } from './api/outils/modeleModificationMotsDePasse/serviceModeleModificationMotsDePasse.js';
 import { ServiceModèleRACI } from './api/outils/modeleRaci/serviceModeleRaci.js';
@@ -266,6 +267,7 @@ const host = process.env.HOST;
       fournisseurChemin,
       adaptateurHorloge
     ),
+    serviceModeleListeInterconnexions: new ServiceModèleListeDesInterconnexions(fournisseurChemin, adaptateurHorloge),
     adaptateurCompression,
     gestionnairesRequêtesComplémentaires: {
       attributionParcours,

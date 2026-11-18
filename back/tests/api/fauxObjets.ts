@@ -12,6 +12,7 @@ import {
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC.js';
 import { ServiceModeleAnnuaireDeCrise } from '../../src/api/outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from '../../src/api/outils/modeleListeDActivites/serviceModeleListeDActivites.js';
+import { ServiceModèleListeDesInterconnexions } from '../../src/api/outils/modeleListeInterconnexions/serviceModeleListeInterconnexions.js';
 import { ServiceModèleListeDesPrestatairesEtFournisseurs } from '../../src/api/outils/modeleListePrestatairesEtFournisseurs/serviceModeleListePrestatairesEtFournisseurs.js';
 import { ServiceModèleModificationMotsDePasse } from '../../src/api/outils/modeleModificationMotsDePasse/serviceModeleModificationMotsDePasse.js';
 import { ServiceModèleRACI } from '../../src/api/outils/modeleRaci/serviceModeleRaci.js';
@@ -105,6 +106,8 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
         'modeleListePrestatairesEtFournisseurs',
         'modele-liste-prestataires-et-fournisseurs.xlsx'
       ),
+    modèleListeDesInterconnexions: () =>
+      join(process.cwd(), 'src', 'api', 'outils', 'modeleListeInterconnexions', 'modele-liste-interconnexions.xlsx'),
   },
   jekyll: {
     page403: () => ressourceFactice(),
@@ -431,6 +434,10 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   ),
   serviceModèleRevueDroitsDAccès: new ServiceModèleRevueDroitsDAccès(fauxFournisseurDeChemin, fauxAdaptateurHorloge),
   serviceModeleListePrestatairesEtFournisseurs: new ServiceModèleListeDesPrestatairesEtFournisseurs(
+    fauxFournisseurDeChemin,
+    fauxAdaptateurHorloge
+  ),
+  serviceModeleListeInterconnexions: new ServiceModèleListeDesInterconnexions(
     fauxFournisseurDeChemin,
     fauxAdaptateurHorloge
   ),
