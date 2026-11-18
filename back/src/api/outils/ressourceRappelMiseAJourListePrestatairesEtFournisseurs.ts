@@ -22,15 +22,14 @@ export const ressourceRappelMiseAJourListePrestatairesEtFournisseurs = ({
       const utilisateur = requête.utilisateur as Utilisateur;
 
       const maintenant = adaptateurHorloge.maintenant();
-      const dansUnAn: [number, number, number] = [
-        maintenant.getFullYear() + 1,
-        maintenant.getMonth() + 1,
-        maintenant.getDate(),
-      ];
+      const fuseauHoraire = Temporal.Now.timeZoneId();
+      const dansUnAn = maintenant.toTemporalInstant().toZonedDateTimeISO(fuseauHoraire).add({ years: 1 });
+      const dansUnAnÀNeufHeures = dansUnAn.add({ hours: 9 }).epochMilliseconds;
+      const dansUnAnÀNeufHeuresTrente = dansUnAn.add({ hours: 9, minutes: 30 }).epochMilliseconds;
 
       const configurationÉvènement: EventAttributes = {
-        start: dansUnAn,
-        end: dansUnAn,
+        start: dansUnAnÀNeufHeures,
+        end: dansUnAnÀNeufHeuresTrente,
         title: 'MesServicesCyber - Mettre à jour la liste des prestataires et fournisseurs',
         description: [
           "Il y a un an, vous avez constitué la liste de vos prestataires et fournisseurs informatiques avec leurs coordonnées. En cas d'incident, c'est cette liste qui vous permettra de joindre rapidement les bonnes personnes.",

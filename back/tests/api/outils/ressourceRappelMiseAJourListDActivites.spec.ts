@@ -1,7 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { type Express } from 'express';
 import request from 'supertest';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
 import { OutilTéléchargé } from '../../../src/bus/evenements/outilTelecharge.js';
 import { AdaptateurHorloge } from '../../../src/infra/adaptateurHorloge.js';
@@ -33,6 +33,10 @@ describe('La ressource du rappel de mise à jour de la liste des activités', ()
       busEvenements,
       entrepotUtilisateur,
     });
+    vi.stubEnv('TZ', 'UTC');
+  });
+  afterEach(async () => {
+    vi.unstubAllEnvs();
   });
 
   describe('sur une requête GET', () => {
@@ -68,37 +72,38 @@ describe('La ressource du rappel de mise à jour de la liste des activités', ()
       expect(lignes[5]).toBe('X-PUBLISHED-TTL:PT1H');
       expect(lignes[6]).toBe('BEGIN:VEVENT');
       expect(lignes[8]).toBe("SUMMARY:MesServicesCyber - Mettre à jour la liste d'activités");
-      expect(lignes[11]).toBe('DESCRIPTION:Il y a un an\\, vous avez recensé les activités et les systèmes ');
-      expect(lignes[12]).toBe('\tà protéger en priorité. C’est ce document\\, tenu à jour\\, qui vous permet ');
-      expect(lignes[13]).toBe('\tde savoir ce qui doit être sécurisé et remis en marche en premier en cas d');
-      expect(lignes[14]).toBe('\t’attaque.\\n\\n\\n\\nPour qu’il reste fiable\\, prenez quelques minutes pour le');
-      expect(lignes[15]).toBe('\t vérifier :\\n\\n- Les activités prioritaires sont-elles toujours les mêmes ');
-      expect(lignes[16]).toBe('\t(nouvelle activité\\, activité arrêtée ou devenue critique) ?\\n\\n- Les resp');
-      expect(lignes[17]).toBe('\tonsables de chaque activité ont-ils changé (départ\\, arrivée\\, changement ');
-      expect(lignes[18]).toBe('\tde poste) ?\\n\\n- Les outils\\, logiciels\\, équipements et services numériqu');
-      expect(lignes[19]).toBe('\tes utilisés sont-ils toujours les mêmes (nouvel outil\\, ancien serveur ou ');
-      expect(lignes[20]).toBe('\téquipement oublié\\, changement de prestataire) ?\\n\\n\\n\\nPensez ensuite à d');
-      expect(lignes[21]).toBe('\tater la nouvelle version et à remplacer l’ancienne\\, y compris les exempla');
-      expect(lignes[22]).toBe('\tires partagés avec vos collaborateurs.\\n\\n\\n\\nRetrouvez le modèle et la me');
-      expect(lignes[23]).toBe('\tsure sur MesServicesCyber : [https://messervicescyber.beta.gouv.fr](https:');
-      expect(lignes[24]).toBe('\t//messervicescyber.beta.gouv.fr)');
-      expect(lignes[25]).toBe('RRULE:FREQ=YEARLY');
-      expect(lignes[26]).toBe('BEGIN:VALARM');
-      expect(lignes[27]).toBe('ACTION:DISPLAY');
-      expect(lignes[28]).toBe("DESCRIPTION:RAPPEL : mettre à jour la liste d'activités");
-      expect(lignes[29]).toBe('TRIGGER:-PT');
-      expect(lignes[30]).toBe('END:VALARM');
-      expect(lignes[31]).toBe('END:VEVENT');
-      expect(lignes[32]).toBe('END:VCALENDAR');
+      expect(lignes[12]).toBe('DESCRIPTION:Il y a un an\\, vous avez recensé les activités et les systèmes ');
+      expect(lignes[13]).toBe('\tà protéger en priorité. C’est ce document\\, tenu à jour\\, qui vous permet ');
+      expect(lignes[14]).toBe('\tde savoir ce qui doit être sécurisé et remis en marche en premier en cas d');
+      expect(lignes[15]).toBe('\t’attaque.\\n\\n\\n\\nPour qu’il reste fiable\\, prenez quelques minutes pour le');
+      expect(lignes[16]).toBe('\t vérifier :\\n\\n- Les activités prioritaires sont-elles toujours les mêmes ');
+      expect(lignes[17]).toBe('\t(nouvelle activité\\, activité arrêtée ou devenue critique) ?\\n\\n- Les resp');
+      expect(lignes[18]).toBe('\tonsables de chaque activité ont-ils changé (départ\\, arrivée\\, changement ');
+      expect(lignes[19]).toBe('\tde poste) ?\\n\\n- Les outils\\, logiciels\\, équipements et services numériqu');
+      expect(lignes[20]).toBe('\tes utilisés sont-ils toujours les mêmes (nouvel outil\\, ancien serveur ou ');
+      expect(lignes[21]).toBe('\téquipement oublié\\, changement de prestataire) ?\\n\\n\\n\\nPensez ensuite à d');
+      expect(lignes[22]).toBe('\tater la nouvelle version et à remplacer l’ancienne\\, y compris les exempla');
+      expect(lignes[23]).toBe('\tires partagés avec vos collaborateurs.\\n\\n\\n\\nRetrouvez le modèle et la me');
+      expect(lignes[24]).toBe('\tsure sur MesServicesCyber : [https://messervicescyber.beta.gouv.fr](https:');
+      expect(lignes[25]).toBe('\t//messervicescyber.beta.gouv.fr)');
+      expect(lignes[26]).toBe('RRULE:FREQ=YEARLY');
+      expect(lignes[27]).toBe('BEGIN:VALARM');
+      expect(lignes[28]).toBe('ACTION:DISPLAY');
+      expect(lignes[29]).toBe("DESCRIPTION:RAPPEL : mettre à jour la liste d'activités");
+      expect(lignes[30]).toBe('TRIGGER:-PT');
+      expect(lignes[31]).toBe('END:VALARM');
+      expect(lignes[32]).toBe('END:VEVENT');
+      expect(lignes[33]).toBe('END:VCALENDAR');
     });
 
-    it('renvoi un évènement qui a lieu dans un an', async () => {
+    it('renvoi un évènement qui a lieu dans un an entre 9h et 9h30', async () => {
       adaptateurHorloge.maintenant = () => new Date('2026-10-14');
 
       const { text } = await récupèrelÉvènement();
 
       const lignes = text.split('\r\n');
-      expect(lignes[10]).toBe('DTSTART;VALUE=DATE:20271014');
+      expect(lignes[10]).toBe('DTSTART:20271014T090000Z');
+      expect(lignes[11]).toBe('DTEND:20271014T093000Z');
     });
 
     it('refuse un utilisateur non connecté', async () => {

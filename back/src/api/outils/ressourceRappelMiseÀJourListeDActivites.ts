@@ -22,15 +22,14 @@ export const ressourceRappelMiseAJourListeDActivités = ({
       const utilisateur = requête.utilisateur as Utilisateur;
 
       const maintenant = adaptateurHorloge.maintenant();
-      const dansUnAn: [number, number, number] = [
-        maintenant.getFullYear() + 1,
-        maintenant.getMonth() + 1,
-        maintenant.getDate(),
-      ];
+      const fuseauHoraire = Temporal.Now.timeZoneId();
+      const dansUnAn = maintenant.toTemporalInstant().toZonedDateTimeISO(fuseauHoraire).add({ years: 1 });
+      const dansUnAnÀNeufHeures = dansUnAn.add({ hours: 9 }).epochMilliseconds;
+      const dansUnAnÀNeufHeuresTrente = dansUnAn.add({ hours: 9, minutes: 30 }).epochMilliseconds;
 
       const configurationÉvènement: EventAttributes = {
-        start: dansUnAn,
-        end: dansUnAn,
+        start: dansUnAnÀNeufHeures,
+        end: dansUnAnÀNeufHeuresTrente,
         title: "MesServicesCyber - Mettre à jour la liste d'activités",
         description: `Il y a un an, vous avez recensé les activités et les systèmes à protéger en priorité. C’est ce document, tenu à jour, qui vous permet de savoir ce qui doit être sécurisé et remis en marche en premier en cas d’attaque.\n
 \n

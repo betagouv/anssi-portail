@@ -22,15 +22,14 @@ export const ressourceRappelMiseAJourAnnuaireContacts = ({
       const utilisateur = requête.utilisateur as Utilisateur;
 
       const maintenant = adaptateurHorloge.maintenant();
-      const dansUnAn: [number, number, number] = [
-        maintenant.getFullYear() + 1,
-        maintenant.getMonth() + 1,
-        maintenant.getDate(),
-      ];
+      const fuseauHoraire = Temporal.Now.timeZoneId();
+      const dansUnAn = maintenant.toTemporalInstant().toZonedDateTimeISO(fuseauHoraire).add({ years: 1 });
+      const dansUnAnÀNeufHeures = dansUnAn.add({ hours: 9 }).epochMilliseconds;
+      const dansUnAnÀNeufHeuresTrente = dansUnAn.add({ hours: 9, minutes: 30 }).epochMilliseconds;
 
       const configurationÉvènement: EventAttributes = {
-        start: dansUnAn,
-        end: dansUnAn,
+        start: dansUnAnÀNeufHeures,
+        end: dansUnAnÀNeufHeuresTrente,
         title: "MesServicesCyber - Mettre à jour l'annuaire de contacts en cas de crise cyber",
         description: `Il y a un an, vous avez constitué votre annuaire de crise cyber. En cas d'attaque, c'est ce document, imprimé et lisible sans réseau, qui vous permettra de joindre les bonnes personnes rapidement.\n
 Pour qu'il reste fiable, prenez quelques minutes pour le vérifier :\n

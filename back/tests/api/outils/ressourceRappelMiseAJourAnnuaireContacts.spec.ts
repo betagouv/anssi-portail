@@ -1,7 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { type Express } from 'express';
 import request from 'supertest';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
 import { OutilTéléchargé } from '../../../src/bus/evenements/outilTelecharge.js';
 import { AdaptateurHorloge } from '../../../src/infra/adaptateurHorloge.js';
@@ -33,6 +33,10 @@ describe("La ressource du rappel de mise à jour de l'annuaire des contacts", ()
       busEvenements,
       entrepotUtilisateur,
     });
+    vi.stubEnv('TZ', 'UTC');
+  });
+  afterEach(async () => {
+    vi.unstubAllEnvs();
   });
 
   describe('sur une requête GET', () => {
@@ -69,35 +73,37 @@ describe("La ressource du rappel de mise à jour de l'annuaire des contacts", ()
       expect(lignes[6]).toBe('BEGIN:VEVENT');
       expect(lignes[8]).toBe("SUMMARY:MesServicesCyber - Mettre à jour l'annuaire de contacts en cas de c");
       expect(lignes[9]).toBe('\trise cyber');
-      expect(lignes[12]).toBe('DESCRIPTION:Il y a un an\\, vous avez constitué votre annuaire de crise cybe');
-      expect(lignes[13]).toBe("\tr. En cas d'attaque\\, c'est ce document\\, imprimé et lisible sans réseau\\,");
-      expect(lignes[14]).toBe('\t qui vous permettra de joindre les bonnes personnes rapidement.\\n\\nPour qu');
-      expect(lignes[15]).toBe("\t'il reste fiable\\, prenez quelques minutes pour le vérifier :\\n\\n- Les per");
-      expect(lignes[16]).toBe('\tsonnes ont-elles changé (départ\\, arrivée\\, changement de poste) ?\\n\\n- Vo');
-      expect(lignes[17]).toBe('\ts prestataires et leurs contacts (informatique\\, hébergeur\\, assureur\\, ba');
-      expect(lignes[18]).toBe('\tnque) sont-ils toujours les mêmes ?\\n\\n- Les numéros et adresses e-mail so');
-      expect(lignes[19]).toBe('\tnt-ils toujours valides ?\\n\\n\\n\\nPensez ensuite à dater la nouvelle versio');
-      expect(lignes[20]).toBe('\tn\\, à réimprimer le document et à remplacer les anciens exemplaires\\, y co');
-      expect(lignes[21]).toBe('\tmpris ceux conservés hors du bureau.\\n\\n- Retrouvez le modèle et la mesure');
-      expect(lignes[22]).toBe('\t sur MesServicesCyber : https://messervices.cyber.gouv.fr');
-      expect(lignes[23]).toBe('RRULE:FREQ=YEARLY');
-      expect(lignes[24]).toBe('BEGIN:VALARM');
-      expect(lignes[25]).toBe('ACTION:DISPLAY');
-      expect(lignes[26]).toBe("DESCRIPTION:RAPPEL : mettre à jour l'annuaire de contacts en cas de crise c");
-      expect(lignes[27]).toBe('\tyber');
-      expect(lignes[28]).toBe('TRIGGER:-PT');
-      expect(lignes[29]).toBe('END:VALARM');
-      expect(lignes[30]).toBe('END:VEVENT');
-      expect(lignes[31]).toBe('END:VCALENDAR');
+      expect(lignes[13]).toBe('DESCRIPTION:Il y a un an\\, vous avez constitué votre annuaire de crise cybe');
+      expect(lignes[14]).toBe("\tr. En cas d'attaque\\, c'est ce document\\, imprimé et lisible sans réseau\\,");
+      expect(lignes[15]).toBe('\t qui vous permettra de joindre les bonnes personnes rapidement.\\n\\nPour qu');
+      expect(lignes[16]).toBe("\t'il reste fiable\\, prenez quelques minutes pour le vérifier :\\n\\n- Les per");
+      expect(lignes[17]).toBe('\tsonnes ont-elles changé (départ\\, arrivée\\, changement de poste) ?\\n\\n- Vo');
+      expect(lignes[18]).toBe('\ts prestataires et leurs contacts (informatique\\, hébergeur\\, assureur\\, ba');
+      expect(lignes[19]).toBe('\tnque) sont-ils toujours les mêmes ?\\n\\n- Les numéros et adresses e-mail so');
+      expect(lignes[20]).toBe('\tnt-ils toujours valides ?\\n\\n\\n\\nPensez ensuite à dater la nouvelle versio');
+      expect(lignes[21]).toBe('\tn\\, à réimprimer le document et à remplacer les anciens exemplaires\\, y co');
+      expect(lignes[22]).toBe('\tmpris ceux conservés hors du bureau.\\n\\n- Retrouvez le modèle et la mesure');
+      expect(lignes[23]).toBe('\t sur MesServicesCyber : https://messervices.cyber.gouv.fr');
+      expect(lignes[24]).toBe('RRULE:FREQ=YEARLY');
+      expect(lignes[25]).toBe('BEGIN:VALARM');
+      expect(lignes[26]).toBe('ACTION:DISPLAY');
+      expect(lignes[27]).toBe("DESCRIPTION:RAPPEL : mettre à jour l'annuaire de contacts en cas de crise c");
+      expect(lignes[28]).toBe('\tyber');
+      expect(lignes[29]).toBe('TRIGGER:-PT');
+      expect(lignes[30]).toBe('END:VALARM');
+      expect(lignes[31]).toBe('END:VEVENT');
+      expect(lignes[32]).toBe('END:VCALENDAR');
     });
 
     it('renvoi un évènement qui a lieu dans un an', async () => {
-      adaptateurHorloge.maintenant = () => new Date('2026-10-14');
+      const fauxMaintenant = new Date('2026-10-14');
+      adaptateurHorloge.maintenant = () => fauxMaintenant;
 
       const { text } = await récupèrelÉvènement();
 
       const lignes = text.split('\r\n');
-      expect(lignes[11]).toBe('DTSTART;VALUE=DATE:20271014');
+      expect(lignes[11]).toBe('DTSTART:20271014T090000Z');
+      expect(lignes[12]).toBe('DTEND:20271014T093000Z');
     });
 
     it('refuse un utilisateur non connecté', async () => {
