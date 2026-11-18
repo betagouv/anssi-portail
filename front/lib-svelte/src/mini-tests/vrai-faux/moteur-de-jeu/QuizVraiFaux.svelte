@@ -38,11 +38,14 @@
     const réponseCorrecte = idéeReçueCourante.idéeReçueEstVraie === réponseDonnée;
     mode = réponseCorrecte ? 'bonne-réponse' : 'mauvaise-réponse';
     réponses.push(réponseCorrecte);
+    const nombreDeBonnesRéponses = réponses.filter((r) => r).length;
+
     await publieRéponseQuestionnaireVraiFaux(
       {
         idCorrélation,
         idQuestion: idéeReçueCourante.idQuestion,
         réponseUtilisateur: réponseDonnée,
+        score: `${nombreDeBonnesRéponses}/6`,
       },
       urlBase ? { urlBase } : undefined
     );

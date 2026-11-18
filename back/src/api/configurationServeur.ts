@@ -28,6 +28,7 @@ import { EntrepotResultatTest } from '../metier/mini-tests/maturite-cyber/entrep
 import { EntrepotSessionDeGroupe } from '../metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
 import { GenerateurCodeSessionDeGroupe } from '../metier/mini-tests/maturite-cyber/generateurCodeSessionDeGroupe.js';
 import { EntrepôtQuestionVraieFausse } from '../metier/mini-tests/vrai-faux/entrepotQuestionVraieFausse.js';
+import { EntrepôtRésultatTestVraiFaux } from '../metier/mini-tests/vrai-faux/entrepotResultatTestVraiFaux.js';
 import { EntrepotExigence } from '../metier/nis2/entrepotExigence.js';
 import { Rapporteur } from '../metier/rapporteur.js';
 import { ServiceSanteGuides } from '../metier/serviceSanteGuides.js';
@@ -74,6 +75,7 @@ export type ConfigurationServeur = {
   entrepotReactionMiniTest: EntrepotReactionMiniTest;
   entrepôtModule: EntrepôtModule;
   entrepôtQuestionVraieFausse: EntrepôtQuestionVraieFausse;
+  entrepôtRésultatTestVraiFaux: EntrepôtRésultatTestVraiFaux;
   fournisseurChemin: FournisseurChemin;
   generateurCodeSessionDeGroupe: GenerateurCodeSessionDeGroupe;
   messagerieInstantanee: MessagerieInstantanee;

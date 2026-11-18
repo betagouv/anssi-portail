@@ -6,6 +6,7 @@ export const publieRéponseQuestionnaireVraiFaux = async (
     idCorrélation: string;
     idQuestion: string;
     réponseUtilisateur: boolean;
+    score: string;
   },
   options?: { urlBase?: string }
 ): Promise<void> => {

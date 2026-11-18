@@ -47,6 +47,7 @@ import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnComp
 import { EntrepôtQuestionVraieFausseMémoire } from '../persistance/entrepotQuestionVraieFausseMemoire.js';
 import { EntrepotReactionMiniTestMemoire } from '../persistance/entrepotReactionMiniTestMemoire.js';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire.js';
+import { EntrepôtRésultatTestVraiFauxMémoire } from '../persistance/entrepotResultatTestVraiFauxMemoire.js';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 
@@ -416,6 +417,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   entrepotReactionMiniTest: new EntrepotReactionMiniTestMemoire(),
   entrepôtModule: new EntrepôtModuleMémoire(),
   entrepôtQuestionVraieFausse: new EntrepôtQuestionVraieFausseMémoire(),
+  entrepôtRésultatTestVraiFaux: new EntrepôtRésultatTestVraiFauxMémoire(),
   serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(fauxFournisseurDeChemin),
   serviceModeleAnnuaireDeCrise: new ServiceModeleAnnuaireDeCrise(
     fauxFournisseurDeChemin,
