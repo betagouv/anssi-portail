@@ -7,7 +7,7 @@
   const { mesure }: { mesure: Mesure } = $props();
   const boitesÀOutils = import.meta.glob<{ default: Component } | undefined>('./personnalisee/BoiteAOutils*.svelte');
 
-  const boîtesÀOutilsPersonnaliséesÀNePasAfficher = estEnvProduction ? ['ROLE.3', 'ECOSYSTEME.1'] : [];
+  const boîtesÀOutilsPersonnaliséesÀNePasAfficher = estEnvProduction ? ['ECOSYSTEME.1'] : [];
 
   const chargeBoiteÀOutilsPersonnalisée = $derived.by(async () => {
     if (boîtesÀOutilsPersonnaliséesÀNePasAfficher.includes(mesure.id)) return;
