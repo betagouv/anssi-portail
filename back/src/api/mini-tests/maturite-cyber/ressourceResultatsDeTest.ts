@@ -2,12 +2,12 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import cors from 'cors';
 import { Request, Response, Router } from 'express';
 import z from 'zod';
-import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestRevendiquee.js';
-import { TestRealise } from '../../bus/evenements/testRealise.js';
-import { ResultatTestMaturite } from '../../metier/resultatTestMaturite.js';
-import { ConfigurationServeur } from '../configurationServeur.js';
-import { filetRouteAsynchrone } from '../middlewares/middleware.js';
-import { corpsVide, valideCorpsRequete } from '../zod.js';
+import { ProprieteTestRevendiquee } from '../../../bus/evenements/proprieteTestRevendiquee.js';
+import { TestRealise } from '../../../bus/evenements/testRealise.js';
+import { ResultatTestMaturite } from '../../../metier/resultatTestMaturite.js';
+import { ConfigurationServeur } from '../../configurationServeur.js';
+import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
+import { corpsVide, valideCorpsRequete } from '../../zod.js';
 import { schemaRessourceResultatsDeTest } from './ressourceResultatsDeTest.schema.js';
 
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;

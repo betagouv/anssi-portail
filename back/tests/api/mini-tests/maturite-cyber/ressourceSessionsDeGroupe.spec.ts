@@ -2,12 +2,12 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../../src/api/msc/index.js';
-import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
-import { EntrepotSessionDeGroupe } from '../../../src/metier/entrepotSessionDeGroupe.js';
-import { GenerateurCodeSessionDeGroupe } from '../../../src/metier/generateurCodeSessionDeGroupe.js';
-import { EntrepotSessionDeGroupeMemoire } from '../../persistance/EntrepotSessionDeGroupeMemoire.js';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
+import { creeServeur } from '../../../../src/api/msc/index.js';
+import { AdaptateurEnvironnement } from '../../../../src/infra/adaptateurEnvironnement.js';
+import { EntrepotSessionDeGroupe } from '../../../../src/metier/entrepotSessionDeGroupe.js';
+import { GenerateurCodeSessionDeGroupe } from '../../../../src/metier/generateurCodeSessionDeGroupe.js';
+import { EntrepotSessionDeGroupeMemoire } from '../../../persistance/EntrepotSessionDeGroupeMemoire.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../../fauxObjets.js';
 
 describe('La ressource qui gère les sessions de groupe', () => {
   let serveur: Express;
