@@ -1,15 +1,16 @@
 <script lang="ts">
   import { DsfrCard } from '@lab-anssi/ui-kit';
+  import { détecteRendu } from '../utils/rendu.svelte';
 
-  const estMdEtPlus = $derived(window.matchMedia('(min-width: 768px)').matches);
+  const rendu = détecteRendu();
+  const estBureau = $derived(rendu.estBureau);
 </script>
 
 <div>
   <h2 class="fr-h6">Autres ressources</h2>
-
   <div class="cartes">
     <DsfrCard
-      horizontal={estMdEtPlus}
+      horizontal={estBureau}
       title="Guides et ressources"
       hasDescription
       description="Retrouvez l’ensemble des guides de l’ANSSI et les services et les ressources adaptés à vos besoins."
@@ -21,7 +22,7 @@
       </div>
     </DsfrCard>
     <DsfrCard
-      horizontal={estMdEtPlus}
+      horizontal={estBureau}
       title="NIS 2"
       hasDescription
       description="Vérifiez si votre organisation est concernée par la directive NIS 2 et et renforcez dès à présent le niveau de cybersécurité de votre organisation."
@@ -68,7 +69,7 @@
         }
       }
 
-      @include a-partir-de(md) {
+      @include a-partir-de(lg) {
         aspect-ratio: unset;
         height: 100%;
 
