@@ -92,7 +92,7 @@
               },
               {
                 id: 'boite-à-outils',
-                label: 'Boite à outils',
+                label: 'Boîte à outils',
               },
             ])}
             active-tab-index={indexOngletActif}
