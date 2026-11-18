@@ -1,7 +1,5 @@
 import { FournisseurHorloge } from './fournisseurHorloge.js';
 
-const maintenant = () => Temporal.Instant.fromEpochMilliseconds(FournisseurHorloge.maintenant().getTime());
-
 type EntreeDeCache<T> = {
   expiration?: Temporal.Instant;
   valeur: T;
@@ -21,7 +19,7 @@ export class Cache<T> {
   async get(clefCache: string, fonction: () => Promise<T>): Promise<T> {
     if (this.cache.has(clefCache)) {
       const { valeur, expiration } = this.cache.get(clefCache)!;
-      if (expiration && Temporal.Instant.compare(maintenant(), expiration) > 0) {
+      if (expiration && Temporal.Instant.compare(FournisseurHorloge.maintenant(), expiration) > 0) {
         return await this.metsEnCache(fonction, clefCache);
       }
       return valeur;
@@ -41,7 +39,7 @@ export class Cache<T> {
         this.cache.set(clefCache, {
           valeur: resultat,
           ...(this.configuration && {
-            expiration: maintenant().add(this.configuration.ttl),
+            expiration: FournisseurHorloge.maintenant().add(this.configuration.ttl),
           }),
         });
         return resultat;

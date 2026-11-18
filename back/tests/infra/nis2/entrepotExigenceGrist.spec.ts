@@ -8,8 +8,8 @@ const VINGT_SECONDES = Temporal.Duration.from({ seconds: 20 });
 
 describe("L'entrepot d'exigence Grist", () => {
   beforeEach(() => {
-    vi.useFakeTimers({ toFake: ['Date'] });
-    vi.setSystemTime(new Date('2025-01-01T00:00:00Z'));
+    vi.useFakeTimers({ toFake: ['Temporal'] });
+    vi.setSystemTime(Temporal.Instant.from('2025-01-01T00:00:00Z'));
   });
 
   afterEach(() => {

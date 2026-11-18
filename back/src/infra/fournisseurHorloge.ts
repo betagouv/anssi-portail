@@ -1,3 +1,3 @@
 export class FournisseurHorloge {
-  static maintenant = (): Date => new Date();
+  static maintenant = (): Temporal.Instant => Temporal.Now.instant();
 }
