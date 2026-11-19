@@ -422,12 +422,14 @@ export class ConsoleAdministration {
       "Rattrapage des résultats de tests ayant un utilisateur mais sans informations d'organisation\n"
     );
     await this.knexMSC.transaction(async (trx) => {
-      const resultatsAvecUneInfoManquante = await trx('resultats_test').whereRaw(
-        `email_utilisateur_hache IS NOT NULL
+      const resultatsAvecUneInfoManquante = await trx('resultats_test')
+        .where({ type_test: 'maturité cyber' })
+        .whereRaw(
+          `email_utilisateur_hache IS NOT NULL
         AND (region IS NULL
           OR secteur IS NULL
           OR taille_organisation IS NULL)`
-      );
+        );
 
       process.stdout.write(`...${resultatsAvecUneInfoManquante.length} résultats à rattraper...\n`);
 
@@ -476,7 +478,7 @@ export class ConsoleAdministration {
     };
 
     const resultats: DonneesResultatPourRattrapage[] = (await this.knexMSC.transaction(async (trx) => {
-      return trx('resultats_test');
+      return trx('resultats_test').where({ type_test: 'maturité cyber' });
     }))!;
 
     if (!resultats) {

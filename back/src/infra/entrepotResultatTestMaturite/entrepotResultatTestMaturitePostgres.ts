@@ -94,6 +94,7 @@ export class EntrepôtRésultatTestMaturitéPostgres implements EntrepôtRésult
     const { utilisateur, tailleOrganisation, codeSessionGroupe, dateRealisation, ...reste } = resultatTest;
     await this.tableRésultatsTest().insert({
       ...reste,
+      type_test: 'maturité cyber',
       taille_organisation: tailleOrganisation,
       code_session_groupe: codeSessionGroupe,
       email_utilisateur_hache: utilisateur ? this.adaptateurHachage.hache(utilisateur.email) : null,
