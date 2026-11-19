@@ -2,7 +2,14 @@
   import { publieRéponseTestHameçonnage } from '../../passerelles/mini-tests/publicationRéponses';
   import Bouton from '../../ui/Bouton.svelte';
   import BoutonDeVoteHameconnage, { type Réponse } from './BoutonDeVoteHameconnage.svelte';
-  import { idCorrélation, mailOuvert, scoreFinalAffiché, tousLesMails } from './hameconnage.store';
+  import {
+    idCorrélation,
+    mailOuvert,
+    nombreDeBonnesRéponses,
+    nombreDeQuestions,
+    scoreFinalAffiché,
+    tousLesMails,
+  } from './hameconnage.store';
 
   let { mode, urlBase = '' }: { mode: 'mobile' | 'bureau'; urlBase?: string } = $props();
 
@@ -24,6 +31,7 @@
         idMail,
         réponse: réponseUtilisateur,
         numéroRéponse: $tousLesMails.filter((mail) => mail.réponseUtilisateur).length,
+        score: `${$nombreDeBonnesRéponses}/${$nombreDeQuestions}`,
       },
       { urlBase }
     );
