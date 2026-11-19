@@ -7,7 +7,7 @@ export type DonnéesCréationRésultatTestVraiFaux = {
 } & DonnéesCréationRésultatTest;
 
 export class RésultatTestVraiFaux extends RésultatTest {
-  declare public readonly utilisateur: Utilisateur;
+  declare public utilisateur: Utilisateur;
   public readonly score: string;
 
   constructor({ id, dateRealisation, utilisateur, score }: DonnéesCréationRésultatTestVraiFaux) {
