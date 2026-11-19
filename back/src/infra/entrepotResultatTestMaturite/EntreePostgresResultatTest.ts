@@ -19,3 +19,12 @@ export type EntréePostgresRésultatTestMaturité = {
   reponses: ReponsesTestMaturite | null;
   code_session_groupe: string | null;
 } & EntréePostgresRésultatTestCommune;
+
+export type TypeTest = EntréePostgresRésultatTest['type_test'];
+
+export type EntréePostgresDuType<Type extends TypeTest> = Extract<EntréePostgresRésultatTest, { type_test: Type }>;
+
+export const estUneEntréeDuType = <Type extends TypeTest>(
+  entrée: EntréePostgresRésultatTest,
+  typeTest: Type
+): entrée is EntréePostgresDuType<Type> => entrée.type_test === typeTest;
