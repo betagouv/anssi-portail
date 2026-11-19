@@ -48,7 +48,7 @@ import { EntrepotMesurePostgres } from './infra/entrepotMesurePostgres.js';
 import { EntrepotPriseEnComptePostgres } from './infra/entrepotPriseEnComptePostgres.js';
 import { EntrepôtQuestionVraieFausseStatique } from './infra/entrepotQuestionVraieFausseStatique.js';
 import { EntrepotReactionMiniTestPostgres } from './infra/entrepotReactionMiniTestPostgres.js';
-import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres.js';
+import { EntrepôtRésultatTestMaturitéPostgres } from './infra/entrepotResultatTestMaturitePostgres.js';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres.js';
 import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres.js';
 import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPostgres.js';
@@ -123,7 +123,7 @@ const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
   rapporteur,
 });
 
-const entrepôtRésultatTestMaturité = new EntrepotResultatTestPostgres({
+const entrepôtRésultatTestMaturité = new EntrepôtRésultatTestMaturitéPostgres({
   adaptateurHachage,
   entrepotUtilisateur,
 });
