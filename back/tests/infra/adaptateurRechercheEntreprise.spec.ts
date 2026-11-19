@@ -10,6 +10,7 @@ describe('La recherche entreprise', () => {
     matching_etablissements: [{ commune: '92026', siret: '18008001200248', liste_enseignes: [] }],
     complements: { est_association: false, collectivite_territoriale: null },
     activite_principale: '84.13Z',
+    activite_principale_naf25: '84.13Y',
   });
 
   describe('avec cache', () => {
@@ -29,9 +30,20 @@ describe('La recherche entreprise', () => {
           codeTrancheEffectif: undefined,
           estAssociation: false,
           estCollectivite: false,
-          codeActivite: '84.13Z',
+          codeActivite: '84.13Y',
         },
       ]);
+    });
+
+    it("retourne un code d'activité indéfini quand le code NAF 2025 est absent", async () => {
+      vi.spyOn(axios, 'get').mockResolvedValue({
+        data: { results: [{ ...resultatSirene(), activite_principale_naf25: null }] },
+      });
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteur);
+
+      const resultats = await adaptateur.rechercheOrganisations('Organisation', '92');
+
+      expect(resultats[0].codeActivite).toBeUndefined();
     });
 
     it('ne rappelle pas la recherche entreprise deux fois', async () => {

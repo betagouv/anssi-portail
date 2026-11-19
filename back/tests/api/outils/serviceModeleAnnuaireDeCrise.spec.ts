@@ -101,7 +101,7 @@ describe("Le service du modèle de l'annuaire de crise", () => {
   describe('gère les contacts sectoriels', () => {
     it("en les ajoutant dans les bonnes lignes lorsqu'ils existent", async () => {
       const LigneDeContactSectoriel = 66;
-      const codeActivité = '84.22Z';
+      const codeActivité = '84.22Y';
 
       const feuille = await récupèreModèleExcel({ codeActivité });
 
@@ -131,7 +131,7 @@ describe("Le service du modèle de l'annuaire de crise", () => {
 
     it("en ne modfiant rien lorsqu'ils n'existent pas", async () => {
       const LigneDeContactSectoriel = 66;
-      const codeActivité = '01.00B';
+      const codeActivité = '01.11Y';
 
       const feuille = await récupèreModèleExcel({ codeActivité });
 

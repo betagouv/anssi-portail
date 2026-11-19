@@ -101,7 +101,7 @@ const extraisInfosÉtablissement = (
     codeTrancheEffectif: resultat.tranche_effectif_salarie ?? undefined,
     estAssociation: resultat.complements.est_association,
     estCollectivite: Boolean(resultat.complements.collectivite_territoriale),
-    codeActivite: resultat.activite_principale,
+    codeActivite: resultat.activite_principale_naf25 ?? undefined,
   };
 };
 
@@ -126,5 +126,5 @@ type RésultatSirene = {
     } | null;
     est_association: boolean;
   };
-  activite_principale: string;
+  activite_principale_naf25: string | null;
 };
