@@ -44,15 +44,18 @@ jobs:
           require-lockfile: true
 
       - name: Récupérer la version
+        env:
+          NOM_PACKAGE: ${{ inputs.package }}
         run: |
-          echo "release_version=$(pnpm -F '${{ inputs.package }}' exec node -p "require('./package.json').version")" >> "$GITHUB_ENV"
+          echo "release_version=$(pnpm -F "$NOM_PACKAGE" exec node -p "require('./package.json').version")" >> "$GITHUB_ENV"
 
       - name: Construire la lib
         env:
+          NOM_PACKAGE: ${{ inputs.package }}
           VERSION: ${{ env.release_version }}
         run: |
-          pnpm --filter '${{ inputs.package }}' build:demo
-          pnpm --filter '${{ inputs.package }}' build:prod
+          pnpm --filter "$NOM_PACKAGE" build:demo
+          pnpm --filter "$NOM_PACKAGE" build:prod
 
       - name: Envoyer les fichiers en démo
         env:
