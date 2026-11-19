@@ -9,6 +9,11 @@ import { fauxFournisseurDeChemin } from '../fauxObjets.js';
 describe('Le service du modèle de revue des droits d’accès', () => {
   const fauxAdaptateurHorloge: AdaptateurHorloge = {
     maintenant: () => Temporal.PlainDate.from('2018-11-17').toZonedDateTime(Temporal.Now.timeZoneId()).toInstant(),
+    maintenantZoné: () =>
+      Temporal.PlainDate.from('2018-11-17')
+        .toZonedDateTime(Temporal.Now.timeZoneId())
+        .toInstant()
+        .toZonedDateTimeISO(Temporal.Now.timeZoneId()),
   };
   const récupèreModèleExcel = async () => {
     const service = new ServiceModèleRevueDroitsDAccès(fauxFournisseurDeChemin, fauxAdaptateurHorloge);

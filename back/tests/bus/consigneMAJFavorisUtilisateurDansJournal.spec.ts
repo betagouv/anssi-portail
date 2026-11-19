@@ -18,6 +18,7 @@ describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur
     };
     const adaptateurHorloge: AdaptateurHorloge = {
       maintenant: () => Temporal.Instant.from('2025-04-16T00:00:00Z'),
+      maintenantZoné: () => Temporal.Instant.from('2025-04-16T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
     };
 
     const adaptateurHachage: AdaptateurHachage = {

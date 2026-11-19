@@ -13,7 +13,10 @@ describe("L'abonnement qui consigne le téléchargement d'un outil dans le journ
   let adaptateurHachage: AdaptateurHachage;
 
   beforeEach(() => {
-    adaptateurHorloge = { maintenant: () => Temporal.Now.instant() };
+    adaptateurHorloge = {
+      maintenant: () => Temporal.Now.instant(),
+      maintenantZoné: () => Temporal.Now.instant().toZonedDateTimeISO(Temporal.Now.timeZoneId()),
+    };
     adaptateurHachage = {
       ...fauxAdaptateurHachage,
       hache: (valeur) => `${valeur}-hacheHMAC`,
@@ -29,6 +32,7 @@ describe("L'abonnement qui consigne le téléchargement d'un outil dans le journ
     };
     adaptateurHorloge = {
       maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
+      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
     };
 
     await consigneOutilTéléchargéDansJournal({

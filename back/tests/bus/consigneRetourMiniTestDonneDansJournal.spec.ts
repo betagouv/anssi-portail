@@ -19,6 +19,7 @@ describe("L'abonnement qui consigne l'évènement de retour de test de maturité
     };
     const adaptateurHorloge: AdaptateurHorloge = {
       maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
+      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
     };
 
     await consigneRetourMiniTestDonnéDansJournal({

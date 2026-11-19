@@ -25,7 +25,10 @@ describe("L'abonnement qui consigne le don d'un avis sur un parcours dans le jou
 
   beforeEach(() => {
     adaptateurJournal = { consigneEvenement: async () => {} };
-    adaptateurHorloge = { maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z') };
+    adaptateurHorloge = {
+      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
+      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
+    };
     adaptateurHachage = fauxAdaptateurHachage;
   });
 
