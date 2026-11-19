@@ -1,6 +1,4 @@
+import { EntrepôtRésultatTest } from '../resultat-test/entrepotResultatTest.js';
 import { RésultatTestVraiFaux } from './resultatTestVraiFaux.js';
 
-export interface EntrepôtRésultatTestVraiFaux {
-  ajoute(entité: RésultatTestVraiFaux): Promise<void>;
-  taille(): Promise<number>;
-}
+export type EntrepôtRésultatTestVraiFaux = EntrepôtRésultatTest<RésultatTestVraiFaux>;
