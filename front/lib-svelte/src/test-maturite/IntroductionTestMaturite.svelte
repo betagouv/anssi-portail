@@ -50,7 +50,7 @@
 
 {#snippet herosRiche()}
   <HerosRiche
-    description="Obtenez en 6 questions une évaluation indicative de la maturité cyber de votre organisation."
+    description="La maturité cyber d’une organisation désigne son niveau global de prise en compte des risques cyber. Obtenez en 6 questions une évaluation indicative de la maturité cyber de votre organisation."
     {propriétésFilAriane}
     variante="cafe-creme"
     badges={[
