@@ -1,13 +1,14 @@
 import Knex from 'knex';
-import config from '../../knexfile.js';
+import config from '../../../knexfile.js';
 import {
   EntrepôtRésultatTestMaturité,
   FiltreResultatsTest,
-} from '../metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
-import { RésultatTestMaturité } from '../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
-import { Utilisateur } from '../metier/utilisateur.js';
-import { AdaptateurHachage } from './adaptateurHachage.js';
-import { EntrepotUtilisateurMPAPostgres } from './entrepotUtilisateurMPAPostgres.js';
+} from '../../metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
+import { RésultatTestMaturité } from '../../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { Utilisateur } from '../../metier/utilisateur.js';
+import { AdaptateurHachage } from '../adaptateurHachage.js';
+import { EntrepotUtilisateurMPAPostgres } from '../entrepotUtilisateurMPAPostgres.js';
+import type { EntréePostgresRésultatTest } from './EntreePostgresResultatTest.js';
 
 export class EntrepôtRésultatTestMaturitéPostgres implements EntrepôtRésultatTestMaturité {
   knex: Knex.Knex;
@@ -26,40 +27,51 @@ export class EntrepôtRésultatTestMaturitéPostgres implements EntrepôtRésult
     this.entrepotUtilisateur = entrepotUtilisateur;
   }
 
+  private tableRésultatsTest() {
+    return this.knex<EntréePostgresRésultatTest>('resultats_test');
+  }
+
   async ceuxDeSessionGroupe(code: string): Promise<RésultatTestMaturité[]> {
-    const donnees = await this.knex('resultats_test').where({
+    const donnees = await this.tableRésultatsTest().where({
       code_session_groupe: code,
     });
     return Promise.all(donnees.map((donnees) => this.traduitEnResultatTestMaturite(donnees)));
   }
 
   private async traduitEnResultatTestMaturite(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    donneesTestMaturite: any,
+    donneesTestMaturite: EntréePostgresRésultatTest,
     avecUtilisateur: boolean = true
   ) {
+    const { reponses } = donneesTestMaturite;
+    if (reponses === null) {
+      throw new Error(`Réponses manquantes pour le résultat de test ${donneesTestMaturite.id}`);
+    }
+
     const utilisateur: Utilisateur | undefined =
       avecUtilisateur && donneesTestMaturite.email_utilisateur_hache
         ? await this.entrepotUtilisateur.parEmailHache(donneesTestMaturite.email_utilisateur_hache)
         : undefined;
 
     const resultat = new RésultatTestMaturité({
-      ...donneesTestMaturite,
-      tailleOrganisation: donneesTestMaturite.taille_organisation,
-      codeSessionGroupe: donneesTestMaturite.code_session_groupe,
-      dateRealisation: donneesTestMaturite.date_realisation,
+      id: donneesTestMaturite.id,
+      region: donneesTestMaturite.region ?? undefined,
+      secteur: donneesTestMaturite.secteur ?? undefined,
+      tailleOrganisation: donneesTestMaturite.taille_organisation ?? undefined,
+      reponses,
+      codeSessionGroupe: donneesTestMaturite.code_session_groupe ?? undefined,
+      dateRealisation: donneesTestMaturite.date_realisation ?? undefined,
     });
     resultat.utilisateur = utilisateur;
     return resultat;
   }
 
   async parId(id: string): Promise<RésultatTestMaturité | undefined> {
-    const donnees = await this.knex('resultats_test').where({ id }).first();
+    const donnees = await this.tableRésultatsTest().where({ id }).first();
     return donnees ? this.traduitEnResultatTestMaturite(donnees) : undefined;
   }
 
   async dernierPourUtilisateur(utilisateur: Utilisateur): Promise<RésultatTestMaturité | undefined> {
-    const donnees = await this.knex('resultats_test')
+    const donnees = await this.tableRésultatsTest()
       .where({
         email_utilisateur_hache: this.adaptateurHachage.hache(utilisateur.email),
       })
@@ -69,7 +81,7 @@ export class EntrepôtRésultatTestMaturitéPostgres implements EntrepôtRésult
   }
 
   async metsÀjour(resultatTest: RésultatTestMaturité): Promise<void> {
-    await this.knex('resultats_test')
+    await this.tableRésultatsTest()
       .where({ id: resultatTest.id })
       .update({
         email_utilisateur_hache: resultatTest.utilisateur
@@ -80,7 +92,7 @@ export class EntrepôtRésultatTestMaturitéPostgres implements EntrepôtRésult
 
   async ajoute(resultatTest: RésultatTestMaturité): Promise<void> {
     const { utilisateur, tailleOrganisation, codeSessionGroupe, dateRealisation, ...reste } = resultatTest;
-    await this.knex('resultats_test').insert({
+    await this.tableRésultatsTest().insert({
       ...reste,
       taille_organisation: tailleOrganisation,
       code_session_groupe: codeSessionGroupe,
@@ -90,17 +102,17 @@ export class EntrepôtRésultatTestMaturitéPostgres implements EntrepôtRésult
   }
 
   async taille() {
-    const resultat = await this.knex('resultats_test').count({ count: '*' });
+    const resultat = await this.tableRésultatsTest().count({ count: '*' });
     return Number(resultat[0].count);
   }
 
   async tousEnOmettantUtilisateur(): Promise<RésultatTestMaturité[]> {
-    const resultats = await this.knex('resultats_test');
+    const resultats = await this.tableRésultatsTest();
     return Promise.all(resultats.map((resultat) => this.traduitEnResultatTestMaturite(resultat, false)));
   }
 
   async pourUtilisateur(utilisateur: Utilisateur): Promise<RésultatTestMaturité[]> {
-    const resultats = await this.knex('resultats_test').where({
+    const resultats = await this.tableRésultatsTest().where({
       email_utilisateur_hache: this.adaptateurHachage.hache(utilisateur.email),
     });
     return Promise.all(resultats.map((resultat) => this.traduitEnResultatTestMaturite(resultat)));
@@ -111,7 +123,7 @@ export class EntrepôtRésultatTestMaturitéPostgres implements EntrepôtRésult
     codeRegion,
     codeTrancheEffectif,
   }: FiltreResultatsTest): Promise<RésultatTestMaturité[]> {
-    const resultats = await this.knex('resultats_test').where((builder) => {
+    const resultats = await this.tableRésultatsTest().where((builder) => {
       if (codeSecteur) builder = builder.where('secteur', codeSecteur);
       if (codeRegion) builder = builder.where('region', codeRegion);
       if (codeTrancheEffectif) builder = builder.where('taille_organisation', codeTrancheEffectif);
