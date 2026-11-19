@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { derived, writable } from 'svelte/store';
 import { v7 as uuidv7 } from 'uuid';
 import type { MailHameçonnage } from './hameconnage';
 
@@ -106,3 +106,8 @@ export const tousLesMails = writable<MailHameçonnage[]>([
     type: 'Hameçonnage',
   },
 ]);
+export const réponses = derived(tousLesMails, ($tousLesMails) =>
+  $tousLesMails.map((mail) => mail.réponseUtilisateur === 'bonne')
+);
+export const nombreDeQuestions = derived(réponses, ($réponses) => $réponses.length);
+export const nombreDeBonnesRéponses = derived(réponses, ($réponses) => $réponses.filter((r) => r).length);

@@ -3,9 +3,9 @@
   import TagProgrammeGratuit from '../../parcours-securisation/TagProgrammeGratuit.svelte';
   import PartageTest from '../../test-maturite/PartageTest.svelte';
   import EnteteAutonome from '../../ui/EnteteAutonome.svelte';
+  import { nombreDeBonnesRéponses, nombreDeQuestions, réponses } from './hameconnage.store';
 
   type Props = {
-    réponses: boolean[];
     urlBase?: string;
     mode?: 'autonome';
   };
@@ -17,26 +17,24 @@
     "Plusieurs hameçonnages vous ont échappé. Retenez les indices clés\u00a0: domaine exact de l'expéditeur, urgence artificielle, isolement, demandes inhabituelles. Ce n'est pas une fatalité\u00a0: l'ANSSI propose un parcours de sécurisation, à commencer par le Cyberdépart — un point d'entrée adapté aux dirigeants de petites structures.",
   ];
 
-  const { réponses, urlBase = '', mode }: Props = $props();
+  const { urlBase = '', mode }: Props = $props();
 
-  const nombreDeQuestions = $derived(réponses.length);
-  const nombreDeBonnesRéponses = $derived(réponses.filter((r) => r).length);
   const { résumé, conseil, couleur } = $derived.by(() => {
-    if (nombreDeBonnesRéponses === nombreDeQuestions) {
+    if ($nombreDeBonnesRéponses === $nombreDeQuestions) {
       return {
         résumé: '🛡️ Vigilance exemplaire\u00a0!',
         conseil: conseils[0],
         couleur: 'vert',
       };
     }
-    if (nombreDeBonnesRéponses >= nombreDeQuestions - 2) {
+    if ($nombreDeBonnesRéponses >= $nombreDeQuestions - 2) {
       return {
         résumé: '👍 Bon niveau de vigilance',
         conseil: conseils[1],
         couleur: 'bleu',
       };
     }
-    if (nombreDeBonnesRéponses >= nombreDeQuestions - 3) {
+    if ($nombreDeBonnesRéponses >= $nombreDeQuestions - 3) {
       return {
         résumé: '⚠️ Vigilance à améliorer',
         conseil: conseils[2],
@@ -53,7 +51,7 @@
   const sourceIllustration = (réponseCorrecte: boolean) =>
     réponseCorrecte ? `${urlBase}/assets/icones/coche-verte.svg` : `${urlBase}/assets/icones/croix-rouge.svg`;
   const commentaireIllustration = (réponseCorrecte: boolean, positionQuestion: number) =>
-    `${réponseCorrecte ? 'bonne' : 'mauvaise'} réponse donnée à la question ${positionQuestion} sur ${nombreDeQuestions}`;
+    `${réponseCorrecte ? 'bonne' : 'mauvaise'} réponse donnée à la question ${positionQuestion} sur ${$nombreDeQuestions}`;
 </script>
 
 <dsfr-container>
@@ -62,9 +60,9 @@
   {/if}
   <div class={['encart-score', couleur]}>
     <p class="texte-mention-xs">Score</p>
-    <p class="alternatif-xs">{nombreDeBonnesRéponses}/{nombreDeQuestions}</p>
+    <p class="alternatif-xs">{$nombreDeBonnesRéponses}/{$nombreDeQuestions}</p>
     <div class="coches">
-      {#each réponses as réponse, index (index)}
+      {#each $réponses as réponse, index (index)}
         {@const src = sourceIllustration(réponse)}
         {@const alt = commentaireIllustration(réponse, index + 1)}
         <img {src} {alt} />
