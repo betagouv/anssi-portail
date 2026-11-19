@@ -1,3 +1,4 @@
+import { validate as uuidValidate } from 'uuid';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { QuestionnaireVraiFauxRéponseSoumise } from '../../../../src/bus/evenements/questionnaireVraiFauxReponseSoumise.js';
 import { QuestionnaireVraiFauxTerminé } from '../../../../src/bus/evenements/questionnaireVraiFauxTermine.js';
@@ -178,6 +179,7 @@ describe('Un questionnaire vrai-faux', () => {
         expect(résultatDeTest).toBeDefined();
         expect(résultatDeTest.utilisateur).toEqual(jeanneDupont);
         expect(résultatDeTest.score).toEqual('1/6');
+        expect(uuidValidate(résultatDeTest.id)).toBeTruthy();
       });
     });
   });

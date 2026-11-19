@@ -1,9 +1,4 @@
-import { Utilisateur } from '../../utilisateur.js';
-
-export type RésultatTestVraiFaux = {
-  utilisateur: Utilisateur;
-  score: string;
-};
+import { RésultatTestVraiFaux } from './resultatTestVraiFaux.js';
 
 export interface EntrepôtRésultatTestVraiFaux {
   ajoute(entité: RésultatTestVraiFaux): Promise<void>;

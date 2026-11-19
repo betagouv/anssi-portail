@@ -7,6 +7,7 @@ import { CodeTrancheEffectif } from '../../referentielTranchesEffectifEtablissem
 import { Utilisateur } from '../../utilisateur.js';
 import { EntrepôtRésultatTestVraiFaux } from './entrepotResultatTestVraiFaux.js';
 import { QuestionVraieFausse } from './questionVraieFausse.js';
+import { RésultatTestVraiFaux } from './resultatTestVraiFaux.js';
 
 export class QuestionnaireVraiFaux {
   constructor(private readonly questions: QuestionVraieFausse[]) {}
@@ -58,10 +59,12 @@ export class QuestionnaireVraiFaux {
 
     if (idQuestion === this.questions.at(-1)?.idQuestion) {
       if (utilisateur) {
-        await entrepôtRésultatTestVraiFaux.ajoute({
-          utilisateur,
-          score,
-        });
+        await entrepôtRésultatTestVraiFaux.ajoute(
+          new RésultatTestVraiFaux({
+            utilisateur,
+            score,
+          })
+        );
       }
 
       await busÉvénements.publie(

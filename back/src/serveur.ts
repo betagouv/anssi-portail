@@ -62,10 +62,8 @@ import { EntrepotGuide } from './metier/entrepotGuide.js';
 import { EntrepotGuideTravail } from './metier/entrepotGuideTravail.js';
 import { EntrepotMesure } from './metier/entrepotMesure.js';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/mini-tests/maturite-cyber/generateurCodeSessionDeGroupe.js';
-import {
-  EntrepôtRésultatTestVraiFaux,
-  RésultatTestVraiFaux,
-} from './metier/mini-tests/vrai-faux/entrepotResultatTestVraiFaux.js';
+import { EntrepôtRésultatTestVraiFaux } from './metier/mini-tests/vrai-faux/entrepotResultatTestVraiFaux.js';
+import { RésultatTestVraiFaux } from './metier/mini-tests/vrai-faux/resultatTestVraiFaux.js';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
 
