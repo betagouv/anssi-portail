@@ -48,6 +48,7 @@ import { EntrepotPriseEnComptePostgres } from './infra/entrepotPriseEnComptePost
 import { EntrepôtQuestionVraieFausseStatique } from './infra/entrepotQuestionVraieFausseStatique.js';
 import { EntrepotReactionMiniTestPostgres } from './infra/entrepotReactionMiniTestPostgres.js';
 import { EntrepôtRésultatTestMaturitéPostgres } from './infra/entrepotResultatTestMaturite/entrepotResultatTestMaturitePostgres.js';
+import { EntrepôtRésultatTestVraiFauxPostgres } from './infra/entrepotResultatTestMaturite/entrepotResultatTestVraiFauxPostgres.js';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres.js';
 import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres.js';
 import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPostgres.js';
@@ -61,8 +62,6 @@ import { EntrepotGuide } from './metier/entrepotGuide.js';
 import { EntrepotGuideTravail } from './metier/entrepotGuideTravail.js';
 import { EntrepotMesure } from './metier/entrepotMesure.js';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/mini-tests/maturite-cyber/generateurCodeSessionDeGroupe.js';
-import { EntrepôtRésultatTestVraiFaux } from './metier/mini-tests/vrai-faux/entrepotResultatTestVraiFaux.js';
-import { RésultatTestVraiFaux } from './metier/mini-tests/vrai-faux/resultatTestVraiFaux.js';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
 
@@ -185,10 +184,10 @@ const attributionParcoursMesure = fabriqueAttributionParcoursMesure({
 });
 const publieMesureConsultée = fabriquePublieMesureConsultée({ busEvenements });
 
-const entrepôtRésultatTestVraiFaux: EntrepôtRésultatTestVraiFaux = {
-  taille: async () => 0,
-  ajoute: async (_entité: RésultatTestVraiFaux) => {},
-};
+const entrepôtRésultatTestVraiFaux = new EntrepôtRésultatTestVraiFauxPostgres({
+  adaptateurHachage,
+  entrepotUtilisateur,
+});
 
 const port = Number(process.env.PORT ?? 3000);
 const host = process.env.HOST;
