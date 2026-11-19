@@ -47,7 +47,7 @@ import { EntrepotMesurePostgres } from './infra/entrepotMesurePostgres.js';
 import { EntrepotPriseEnComptePostgres } from './infra/entrepotPriseEnComptePostgres.js';
 import { EntrepôtQuestionVraieFausseStatique } from './infra/entrepotQuestionVraieFausseStatique.js';
 import { EntrepotReactionMiniTestPostgres } from './infra/entrepotReactionMiniTestPostgres.js';
-import { EntrepôtRésultatTestMaturitéPostgres } from './infra/entrepotResultatTestMaturitePostgres.js';
+import { EntrepôtRésultatTestMaturitéPostgres } from './infra/entrepotResultatTestMaturite/entrepotResultatTestMaturitePostgres.js';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres.js';
 import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres.js';
 import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPostgres.js';
