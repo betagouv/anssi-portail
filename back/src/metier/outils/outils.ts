@@ -10,6 +10,7 @@ const outils = [
   'campagne-de-sensibilisation',
   'modele-liste-prestataires-et-fournisseurs.xlsx',
   'modele-liste-interconnexions.xlsx',
+  'modele-inventaire-composants-obsoletes.xlsx',
   'rappel-mise-a-jour-liste-prestataires-et-fournisseurs.ics',
   'rappel-mise-a-jour-liste-interconnexions.ics',
 ] as const;

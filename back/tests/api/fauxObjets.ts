@@ -10,6 +10,7 @@ import {
   Middleware,
 } from '../../src/api/middlewares/middleware.js';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC.js';
+import { ServiceModèleInventaireDesComposantsObsolètes } from '../../src/api/outils/modele-inventaire-composants-obsoletes/serviceModeleInventaireComposantsObsoletes.js';
 import { ServiceModeleAnnuaireDeCrise } from '../../src/api/outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from '../../src/api/outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleListeDesInterconnexions } from '../../src/api/outils/modeleListeInterconnexions/serviceModeleListeInterconnexions.js';
@@ -108,6 +109,15 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
       ),
     modèleListeDesInterconnexions: () =>
       join(process.cwd(), 'src', 'api', 'outils', 'modeleListeInterconnexions', 'modele-liste-interconnexions.xlsx'),
+    modèleInventaireDesComposantsObsolètes: () =>
+      join(
+        process.cwd(),
+        'src',
+        'api',
+        'outils',
+        'modele-inventaire-composants-obsoletes',
+        'modele-inventaire-composants-obsoletes.xlsx'
+      ),
   },
   jekyll: {
     page403: () => ressourceFactice(),
@@ -436,6 +446,10 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
     fauxAdaptateurHorloge
   ),
   serviceModeleListeInterconnexions: new ServiceModèleListeDesInterconnexions(
+    fauxFournisseurDeChemin,
+    fauxAdaptateurHorloge
+  ),
+  serviceModeleInventaireComposantsObsoletes: new ServiceModèleInventaireDesComposantsObsolètes(
     fauxFournisseurDeChemin,
     fauxAdaptateurHorloge
   ),
