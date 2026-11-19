@@ -4,14 +4,13 @@
   import { fabriqueFilAriane } from '../../ui/filAriane';
   import FilAriane from '../../ui/FilAriane.svelte';
   import BoiteMail from './BoiteMail.svelte';
-  import { mailOuvert, scoreFinalAffiché, tousLesMails } from './hameconnage.store';
+  import { mailOuvert, scoreFinalAffiché } from './hameconnage.store';
   import Mail from './Mail.svelte';
   import PanneauActionsMail from './PanneauActionsMail.svelte';
   import PanneauLateral from './PanneauLateral.svelte';
   import ScoreFinalHameconnage from './ScoreFinalHameconnage.svelte';
 
   const réponseUtilisateur = $derived($mailOuvert?.réponseUtilisateur);
-  const réponses = $derived($tousLesMails.map((mail) => mail.réponseUtilisateur === 'bonne'));
   let { urlBase = '', mode: modeWebc }: { urlBase?: string; mode?: 'autonome' } = $props();
 </script>
 
@@ -27,7 +26,7 @@
 {/if}
 
 {#if $scoreFinalAffiché}
-  <ScoreFinalHameconnage {réponses} {urlBase} mode={modeWebc} />
+  <ScoreFinalHameconnage {urlBase} mode={modeWebc} />
 {:else}
   <dsfr-container class={['zone-test', `${réponseUtilisateur}-reponse`]}>
     {#if modeWebc === 'autonome'}
