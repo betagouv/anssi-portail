@@ -1,5 +1,5 @@
-import { v7 as uuidv7 } from 'uuid';
 import { AdaptateurRechercheEntreprise } from '../../../infra/adaptateurRechercheEntreprise.js';
+import { DonnéesCréationRésultatTest, RésultatTest } from '../resultatTest.js';
 import { CodeRégion, estCodeRegion } from './../../referentielRegions.js';
 import { CodeSecteur, estCodeSecteur } from './../../referentielSecteurs.js';
 import { CodeTrancheEffectif, trancheEffectifParCode } from './../../referentielTranchesEffectifEtablissement.js';
@@ -12,10 +12,8 @@ export type DonneesCreationResultatTestMaturite = {
   secteur: CodeSecteur | undefined;
   tailleOrganisation: CodeTrancheEffectif | undefined;
   reponses: ReponsesTestMaturite;
-  id?: string;
   codeSessionGroupe?: string;
-  dateRealisation?: Date;
-};
+} & DonnéesCréationRésultatTest;
 
 export const tousLesIdNiveauMaturite = ['insuffisant', 'emergent', 'intermediaire', 'confirme', 'optimal'] as const;
 
@@ -32,16 +30,12 @@ export const tousLesIdRubrique = [
 
 export type IdRubrique = (typeof tousLesIdRubrique)[number];
 
-export class ResultatTestMaturite {
-  id: string;
-  dateRealisation: Date;
-
+export class ResultatTestMaturite extends RésultatTest {
   region: CodeRégion | undefined;
   secteur: CodeSecteur | undefined;
   tailleOrganisation: CodeTrancheEffectif | undefined;
   reponses: ReponsesTestMaturite;
   codeSessionGroupe?: string;
-  utilisateur: Utilisateur | undefined;
 
   constructor({
     id,
@@ -52,8 +46,8 @@ export class ResultatTestMaturite {
     reponses,
     codeSessionGroupe,
   }: DonneesCreationResultatTestMaturite) {
-    this.id = id ?? uuidv7();
-    this.dateRealisation = dateRealisation ?? new Date();
+    super({ id, dateRealisation });
+
     this.region = region;
     this.secteur = secteur;
     this.tailleOrganisation = tailleOrganisation;
