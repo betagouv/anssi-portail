@@ -97,7 +97,7 @@ describe("La ressource du rappel de mise à jour de l'annuaire des contacts", ()
 
     it('renvoi un évènement qui a lieu dans un an entre 9h et 9h30', async () => {
       const fauxMaintenant = Temporal.Instant.from('2026-10-14T07:00:00Z');
-      adaptateurHorloge.maintenant = () => fauxMaintenant;
+      adaptateurHorloge.maintenantZoné = () => fauxMaintenant.toZonedDateTimeISO(Temporal.Now.timeZoneId());
 
       const { text } = await récupèrelÉvènement();
 
@@ -111,7 +111,8 @@ describe("La ressource du rappel de mise à jour de l'annuaire des contacts", ()
       ['America/Los_Angeles', '20250228T170000Z', '20250228T173000Z'],
     ])('calcule le rappel selon la date locale en année bissextile (%s)', async (fuseau, horaireDébut, horaireFin) => {
       vi.spyOn(Temporal.Now, 'timeZoneId').mockReturnValue(fuseau);
-      adaptateurHorloge.maintenant = () => Temporal.Instant.from('2024-02-28T23:30:00Z');
+      adaptateurHorloge.maintenantZoné = () =>
+        Temporal.Instant.from('2024-02-28T23:30:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId());
 
       const { text } = await récupèrelÉvènement();
 

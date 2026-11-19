@@ -21,9 +21,7 @@ export const ressourceRappelMiseAJourListePrestatairesEtFournisseurs = ({
     async (requête: Request, réponse: Response) => {
       const utilisateur = requête.utilisateur as Utilisateur;
 
-      const maintenant = adaptateurHorloge.maintenant();
-      const fuseauHoraire = Temporal.Now.timeZoneId();
-      const dansUnAn = maintenant.toZonedDateTimeISO(fuseauHoraire).add({ years: 1 });
+      const dansUnAn = adaptateurHorloge.maintenantZoné().add({ years: 1 });
       const dansUnAnÀNeufHeures = dansUnAn.with({ hour: 9, minute: 0, second: 0 }).epochMilliseconds;
       const dansUnAnÀNeufHeuresTrente = dansUnAn.with({ hour: 9, minute: 30, second: 0 }).epochMilliseconds;
 
