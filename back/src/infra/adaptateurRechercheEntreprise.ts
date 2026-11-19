@@ -7,7 +7,7 @@ export type ResultatRechercheEntreprise = {
   codeRegion: string | undefined;
   estCollectivite: boolean;
   estAssociation: boolean;
-  codeActivite: string;
+  codeActivite: string | undefined; // code NAF 2025
 };
 
 export interface AdaptateurRechercheEntreprise {

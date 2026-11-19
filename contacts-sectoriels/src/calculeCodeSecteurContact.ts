@@ -1,8 +1,8 @@
 import { type CodeSecteurContact } from './codesSecteurContact.js';
 
 const codeSecteurContactParCodeNAF = new Map<string, CodeSecteurContact>([
-  ['25.40Z', 'defense'],
-  ['84.22Z', 'defense'],
+  ['25.30Y', 'defense'],
+  ['84.22Y', 'defense'],
 
   ['84.12', 'sante'],
   ['86', 'sante'],
@@ -12,7 +12,7 @@ const codeSecteurContactParCodeNAF = new Map<string, CodeSecteurContact>([
   ['42.91', 'maritime'],
   ['50', 'maritime'],
   ['52.22', 'maritime'],
-  ['52.24A', 'maritime'],
+  ['52.24G', 'maritime'],
   ['77.34', 'maritime'],
 
   ['72.1', 'enseignement-recherche'],
