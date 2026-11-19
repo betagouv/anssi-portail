@@ -9,7 +9,7 @@ import { Utilisateur } from '../metier/utilisateur.js';
 import { AdaptateurHachage } from './adaptateurHachage.js';
 import { EntrepotUtilisateurMPAPostgres } from './entrepotUtilisateurMPAPostgres.js';
 
-export class EntrepotResultatTestPostgres implements EntrepôtRésultatTestMaturité {
+export class EntrepôtRésultatTestMaturitéPostgres implements EntrepôtRésultatTestMaturité {
   knex: Knex.Knex;
   entrepotUtilisateur: EntrepotUtilisateurMPAPostgres;
   private adaptateurHachage: AdaptateurHachage;
