@@ -9,10 +9,10 @@ import { AdaptateurStatistiqueParcoursMémoire } from '../../src/infra/adaptateu
 import { AdaptateurStatistiqueParcours } from '../../src/metier/adaptateurStatistiqueParcours.js';
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur.js';
 import { AdaptateurStatistiqueMiniTests } from '../../src/metier/mini-tests/adaptateurStatistiqueMiniTests.js';
-import { EntrepotResultatTest } from '../../src/metier/mini-tests/maturite-cyber/entrepotResultatTest.js';
+import { EntrepôtRésultatTestMaturité } from '../../src/metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
 import { Statistiques } from '../../src/metier/statistiques.js';
 import { ResultatTestMaturiteCreateur } from '../metier/mini-tests/maturite-cyber/ResultatTestMaturiteCreateur.js';
-import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire.js';
+import { EntrepôtRésultatTestMaturitéMémoire } from '../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { configurationDeTestDuServeur } from './fauxObjets.js';
 import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi.js';
@@ -21,7 +21,7 @@ describe('La ressource Statistiques', () => {
   describe('sur demande GET', () => {
     let serveur: Express;
     let entrepotUtilisateur: EntrepotUtilisateur;
-    let entrepotResultatTest: EntrepotResultatTest;
+    let entrepôtRésultatTestMaturité: EntrepôtRésultatTestMaturité;
     let adaptateurStatistiqueMiniTests: AdaptateurStatistiqueMiniTests;
     let adaptateurStatistiqueParcours: AdaptateurStatistiqueParcours;
     let monAideCyber: AdaptateurMonAideCyber;
@@ -29,7 +29,7 @@ describe('La ressource Statistiques', () => {
 
     beforeEach(() => {
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
-      entrepotResultatTest = new EntrepotResultatTestMemoire();
+      entrepôtRésultatTestMaturité = new EntrepôtRésultatTestMaturitéMémoire();
       adaptateurStatistiqueMiniTests = new AdaptateurStatistiqueMiniTestsMémoire();
       adaptateurStatistiqueParcours = new AdaptateurStatistiqueParcoursMémoire();
       monAideCyber = {
@@ -38,7 +38,7 @@ describe('La ressource Statistiques', () => {
       serveur = creeServeur({
         ...configurationDeTestDuServeur,
         entrepotUtilisateur,
-        entrepotResultatTest,
+        entrepôtRésultatTestMaturité,
         adaptateurStatistiqueMiniTests,
         adaptateurStatistiqueParcours,
         adaptateurMonAideCyber: monAideCyber,
@@ -68,7 +68,7 @@ describe('La ressource Statistiques', () => {
     });
 
     it('renvoie le nombre de tests de maturité', async () => {
-      await new ResultatTestMaturiteCreateur().dansEntrepot(entrepotResultatTest).creePlusieurs(3);
+      await new ResultatTestMaturiteCreateur().dansEntrepot(entrepôtRésultatTestMaturité).creePlusieurs(3);
 
       const reponse = await request(serveur).get('/api/statistiques');
 
@@ -88,7 +88,7 @@ describe('La ressource Statistiques', () => {
     });
 
     it('renvoie les niveaux de maturité', async () => {
-      const createur = new ResultatTestMaturiteCreateur().dansEntrepot(entrepotResultatTest);
+      const createur = new ResultatTestMaturiteCreateur().dansEntrepot(entrepôtRésultatTestMaturité);
       await createur.deNiveau('insuffisant').creePlusieurs(1);
       await createur.deNiveau('emergent').creePlusieurs(2);
       await createur.deNiveau('intermediaire').creePlusieurs(3);

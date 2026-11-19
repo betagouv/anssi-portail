@@ -12,7 +12,7 @@ import { CodeRégion } from '../../../../src/metier/referentielRegions.js';
 import { CodeSecteur } from '../../../../src/metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../../../src/metier/referentielTranchesEffectifEtablissement.js';
 import { ResultatTestMaturiteCreateur } from '../../../metier/mini-tests/maturite-cyber/ResultatTestMaturiteCreateur.js';
-import { EntrepotResultatTestMemoire } from '../../../persistance/entrepotResultatTestMemoire.js';
+import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise } from '../../fauxObjets.js';
@@ -20,12 +20,12 @@ import { jeanneDupont } from '../../objetsPretsALEmploi.js';
 
 describe('La ressource qui gère le dernier résultat de test', () => {
   let serveur: Express;
-  let entrepotResultatTest: EntrepotResultatTestMemoire;
+  let entrepôtRésultatTestMaturité: EntrepôtRésultatTestMaturitéMémoire;
   let adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   let cookieJeanneDupont: string;
 
   beforeEach(async () => {
-    entrepotResultatTest = new EntrepotResultatTestMemoire();
+    entrepôtRésultatTestMaturité = new EntrepôtRésultatTestMaturitéMémoire();
     adaptateurRechercheEntreprise = {
       ...fauxAdaptateurRechercheEntreprise,
     };
@@ -38,7 +38,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       adaptateurRechercheEntreprise,
-      entrepotResultatTest,
+      entrepôtRésultatTestMaturité,
       entrepotUtilisateur,
     });
   });
@@ -65,7 +65,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
       ...donneesSupplementaires,
     });
     await resultatDeJeanne.revendiquePropriete(jeanneDupont, fauxAdaptateurRechercheEntreprise);
-    await entrepotResultatTest.ajoute(resultatDeJeanne);
+    await entrepôtRésultatTestMaturité.ajoute(resultatDeJeanne);
     return resultatDeJeanne;
   }
 
@@ -110,7 +110,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
         await new ResultatTestMaturiteCreateur()
           .deNiveau('insuffisant')
           .pour(jeanneDupont)
-          .dansEntrepot(entrepotResultatTest)
+          .dansEntrepot(entrepôtRésultatTestMaturité)
           .cree();
 
         const reponse = await requeteGET();
@@ -250,7 +250,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
       const requeteGET = async () => await request(serveur).get('/api/resultats-test/dernier').send();
 
       it('renvoie une erreur 401', async () => {
-        await entrepotResultatTest.ajoute(new ResultatTestMaturite(donneesResultatTestCorrectes()));
+        await entrepôtRésultatTestMaturité.ajoute(new ResultatTestMaturite(donneesResultatTestCorrectes()));
 
         const reponse = await requeteGET();
 

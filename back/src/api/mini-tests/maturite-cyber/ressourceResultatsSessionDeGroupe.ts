@@ -6,7 +6,7 @@ import { corpsVide, valideCorpsRequete } from '../../zod.js';
 
 export const ressourceResultatsSessionDeGroupe = ({
   entrepotSessionDeGroupe,
-  entrepotResultatTest,
+  entrepôtRésultatTestMaturité,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
@@ -19,7 +19,7 @@ export const ressourceResultatsSessionDeGroupe = ({
         return;
       }
 
-      const resultatsSession = await session.resultatSession(entrepotResultatTest);
+      const resultatsSession = await session.resultatSession(entrepôtRésultatTestMaturité);
       reponse.status(HttpStatusCode.Ok).send(resultatsSession);
     })
   );

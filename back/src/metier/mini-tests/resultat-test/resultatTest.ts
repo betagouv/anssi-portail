@@ -1,5 +1,5 @@
 import { v7 as uuidv7 } from 'uuid';
-import { Utilisateur } from '../utilisateur.js';
+import { Utilisateur } from '../../utilisateur.js';
 
 export type DonnéesCréationRésultatTest = {
   id?: string;

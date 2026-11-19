@@ -48,7 +48,7 @@ const présentationOrganisation = (
 };
 
 const ressourceDernierResultatDeTest = ({
-  entrepotResultatTest,
+  entrepôtRésultatTestMaturité,
   middleware,
   entrepotUtilisateur,
   adaptateurHachage,
@@ -61,7 +61,7 @@ const ressourceDernierResultatDeTest = ({
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete, reponse) => {
-      const resultatTest = await entrepotResultatTest.dernierPourUtilisateur(requete.utilisateur);
+      const resultatTest = await entrepôtRésultatTestMaturité.dernierPourUtilisateur(requete.utilisateur);
       if (!resultatTest) {
         reponse.sendStatus(HttpStatusCode.NotFound);
         return;

@@ -6,7 +6,7 @@ import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../../zod.js';
 
 const ressourceResultatDeTest = ({
-  entrepotResultatTest,
+  entrepôtRésultatTestMaturité,
   busEvenements,
   middleware,
   entrepotUtilisateur,
@@ -20,7 +20,7 @@ const ressourceResultatDeTest = ({
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete, reponse) => {
-      const resultatTest = await entrepotResultatTest.parId(requete.params.id as string);
+      const resultatTest = await entrepôtRésultatTestMaturité.parId(requete.params.id as string);
       if (!resultatTest) {
         reponse.sendStatus(HttpStatusCode.NotFound);
         return;
@@ -39,7 +39,7 @@ const ressourceResultatDeTest = ({
 
       await resultatTest.revendiquePropriete(utilisateur, adaptateurRechercheEntreprise);
 
-      await entrepotResultatTest.metsAjour(resultatTest);
+      await entrepôtRésultatTestMaturité.metsAjour(resultatTest);
       await busEvenements.publie(
         new ProprieteTestRevendiquee({
           utilisateur,

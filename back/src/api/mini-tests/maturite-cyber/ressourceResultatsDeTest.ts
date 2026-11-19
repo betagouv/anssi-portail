@@ -15,7 +15,7 @@ import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 const ressourceResultatsDeTest = ({
   busEvenements,
   middleware,
-  entrepotResultatTest,
+  entrepôtRésultatTestMaturité,
   entrepotUtilisateur,
   adaptateurHachage,
   adaptateurRechercheEntreprise,
@@ -43,7 +43,7 @@ const ressourceResultatsDeTest = ({
           await resultatTest.revendiquePropriete(utilisateur, adaptateurRechercheEntreprise);
         }
 
-        await entrepotResultatTest.ajoute(resultatTest);
+        await entrepôtRésultatTestMaturité.ajoute(resultatTest);
 
         await busEvenements.publie(
           new TestRealise({
@@ -74,7 +74,7 @@ const ressourceResultatsDeTest = ({
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
-      const resultatsDeTest = await entrepotResultatTest.pourUtilisateur(requete.utilisateur);
+      const resultatsDeTest = await entrepôtRésultatTestMaturité.pourUtilisateur(requete.utilisateur);
 
       reponse.send(
         resultatsDeTest.map((resultat) => ({

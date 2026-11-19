@@ -9,7 +9,7 @@ import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../../zod.js';
 
 export const ressourceRepartitionDesResultatsDeTest = ({
-  entrepotResultatTest,
+  entrepôtRésultatTestMaturité,
   adaptateurEnvironnement,
 }: ConfigurationServeur) => {
   const routeur = Router();
@@ -25,7 +25,7 @@ export const ressourceRepartitionDesResultatsDeTest = ({
         const codeRegion = estCodeRegion(requete.query.region) ? requete.query.region : undefined;
         const tailleOrganisation = trancheEffectifParCode(requete.query.tailleOrganisation);
         const codeTrancheEffectif = tailleOrganisation.code !== 'NN' ? tailleOrganisation.code : undefined;
-        const tousLesResultats = await entrepotResultatTest.parFiltresEnOmettantUtilisateur({
+        const tousLesResultats = await entrepôtRésultatTestMaturité.parFiltresEnOmettantUtilisateur({
           codeSecteur,
           codeRegion,
           codeTrancheEffectif,

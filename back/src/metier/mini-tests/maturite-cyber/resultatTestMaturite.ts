@@ -1,5 +1,5 @@
 import { AdaptateurRechercheEntreprise } from '../../../infra/adaptateurRechercheEntreprise.js';
-import { DonnéesCréationRésultatTest, RésultatTest } from '../resultatTest.js';
+import { DonnéesCréationRésultatTest, RésultatTest } from '../resultat-test/resultatTest.js';
 import { CodeRégion, estCodeRegion } from './../../referentielRegions.js';
 import { CodeSecteur, estCodeSecteur } from './../../referentielSecteurs.js';
 import { CodeTrancheEffectif, trancheEffectifParCode } from './../../referentielTranchesEffectifEtablissement.js';
