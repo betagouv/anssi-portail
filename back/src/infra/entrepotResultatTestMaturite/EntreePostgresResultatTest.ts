@@ -8,13 +8,14 @@ export type EntréePostgresRésultatTest = EntréePostgresRésultatTestMaturité
 export type EntréePostgresRésultatTestCommune = {
   id: string;
   date_realisation: Date;
+  email_utilisateur_hache: string | null;
 };
 
 export type EntréePostgresRésultatTestMaturité = {
+  type_test: 'maturité cyber';
   region: CodeRégion | null;
   secteur: CodeSecteur | null;
   taille_organisation: CodeTrancheEffectif | null;
   reponses: ReponsesTestMaturite | null;
   code_session_groupe: string | null;
-  email_utilisateur_hache: string | null;
 } & EntréePostgresRésultatTestCommune;
