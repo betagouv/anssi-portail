@@ -10,7 +10,7 @@ import {
   type EntréePostgresDuType,
   type EntréePostgresRésultatTest,
   type TypeTest,
-} from './EntreePostgresResultatTest.js';
+} from './entreePostgresResultatTest.js';
 
 export abstract class EntrepôtRésultatTestPostgres<
   Type extends TypeTest,

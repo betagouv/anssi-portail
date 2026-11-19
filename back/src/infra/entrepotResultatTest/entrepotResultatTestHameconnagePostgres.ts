@@ -1,15 +1,16 @@
-import type { EntrepôtRésultatTestVraiFaux } from '../../metier/mini-tests/vrai-faux/entrepotResultatTestVraiFaux.js';
+import { EntrepôtRésultatTestHameçonnage } from '../../metier/mini-tests/hameconnage/entrepotResultatTestHameconnage.js';
+import { RésultatTestHameçonnage } from '../../metier/mini-tests/hameconnage/resultatTestHameconnage.js';
 import { RésultatTestVraiFaux } from '../../metier/mini-tests/vrai-faux/resultatTestVraiFaux.js';
-import type { EntréePostgresRésultatTestVraiFaux } from './EntreePostgresResultatTest.js';
+import { EntréePostgresRésultatTestHameçonnage } from './entreePostgresResultatTest.js';
 import { EntrepôtRésultatTestPostgres } from './entrepotResultatTestPostgres.js';
 
-export class EntrepôtRésultatTestVraiFauxPostgres
-  extends EntrepôtRésultatTestPostgres<'vrai-faux', RésultatTestVraiFaux>
-  implements EntrepôtRésultatTestVraiFaux
+export class EntrepôtRésultatTestHameçonnagePostgres
+  extends EntrepôtRésultatTestPostgres<'hameçonnage', RésultatTestVraiFaux>
+  implements EntrepôtRésultatTestHameçonnage
 {
-  protected readonly typeTest = 'vrai-faux';
+  protected readonly typeTest = 'hameçonnage';
 
-  protected async versRésultat(entrée: EntréePostgresRésultatTestVraiFaux): Promise<RésultatTestVraiFaux> {
+  protected async versRésultat(entrée: EntréePostgresRésultatTestHameçonnage): Promise<RésultatTestVraiFaux> {
     const utilisateur = entrée.email_utilisateur_hache
       ? await this.entrepotUtilisateur.parEmailHache(entrée.email_utilisateur_hache)
       : undefined;
@@ -29,7 +30,7 @@ export class EntrepôtRésultatTestVraiFauxPostgres
     });
   }
 
-  protected versEntrée(résultat: RésultatTestVraiFaux): EntréePostgresRésultatTestVraiFaux {
+  protected versEntrée(résultat: RésultatTestHameçonnage): EntréePostgresRésultatTestHameçonnage {
     const { utilisateur } = résultat;
     return {
       id: résultat.id,
