@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import { consigneRetourArticleDonnéDansJournal } from '../../src/bus/consigneRetourArticleDonneDansJournal.js';
 import { RetourArticleDonné } from '../../src/bus/evenements/retourArticleDonne.js';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe("L'abonnement qui consigne l'évènement de retour d'un article", () => {
   it("consigne l'évènement", async () => {
@@ -10,10 +10,7 @@ describe("L'abonnement qui consigne l'évènement de retour d'un article", () =>
       consigneEvenement: async () => {},
     };
     const consigneEvenement = vi.spyOn(adaptateurJournal, 'consigneEvenement');
-    const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
-      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    };
+    const adaptateurHorloge = fabriqueAdaptateurHorloge('2025-03-10T00:00:00Z');
 
     await consigneRetourArticleDonnéDansJournal({
       adaptateurHorloge,

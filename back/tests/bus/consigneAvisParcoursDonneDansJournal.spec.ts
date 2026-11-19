@@ -5,6 +5,7 @@ import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
+import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe("L'abonnement qui consigne le don d'un avis sur un parcours dans le journal", () => {
   let adaptateurJournal: AdaptateurJournal;
@@ -25,10 +26,7 @@ describe("L'abonnement qui consigne le don d'un avis sur un parcours dans le jou
 
   beforeEach(() => {
     adaptateurJournal = { consigneEvenement: async () => {} };
-    adaptateurHorloge = {
-      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
-      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    };
+    adaptateurHorloge = fabriqueAdaptateurHorloge('2025-03-10T00:00:00Z');
     adaptateurHachage = fauxAdaptateurHachage;
   });
 

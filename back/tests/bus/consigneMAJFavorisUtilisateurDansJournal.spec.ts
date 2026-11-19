@@ -2,10 +2,10 @@ import { describe, expect, it } from 'vitest';
 import { consigneMAJFavorisUtilisateurDansJournal } from '../../src/bus/consigneMAJFavorisUtilisateurDansJournal.js';
 import { MiseAJourFavorisUtilisateur } from '../../src/bus/miseAJourFavorisUtilisateur.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 import { jeanneDupont } from '../api/objetsPretsALEmploi.js';
+import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire.js';
 
 describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur dans le journal", () => {
@@ -16,10 +16,7 @@ describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur
         evenementRecu = donneesEvenement;
       },
     };
-    const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => Temporal.Instant.from('2025-04-16T00:00:00Z'),
-      maintenantZoné: () => Temporal.Instant.from('2025-04-16T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    };
+    const adaptateurHorloge = fabriqueAdaptateurHorloge('2025-04-16T00:00:00Z');
 
     const adaptateurHachage: AdaptateurHachage = {
       ...fauxAdaptateurHachage,

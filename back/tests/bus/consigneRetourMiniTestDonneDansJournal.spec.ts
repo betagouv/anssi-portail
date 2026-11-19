@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { consigneRetourMiniTestDonnéDansJournal } from '../../src/bus/consigneRetourMiniTestDonneDansJournal.js';
 import { RetourMiniTestDonné } from '../../src/bus/evenements/retourMiniTestDonne.js';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { MiniTest } from '../../src/metier/mini-tests/mini-test.js';
+import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe("L'abonnement qui consigne l'évènement de retour de test de maturité", () => {
   it.each([
@@ -17,10 +17,7 @@ describe("L'abonnement qui consigne l'évènement de retour de test de maturité
         évènementReçu = donneesEvenement;
       },
     };
-    const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
-      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    };
+    const adaptateurHorloge = fabriqueAdaptateurHorloge('2025-03-10T00:00:00Z');
 
     await consigneRetourMiniTestDonnéDansJournal({
       adaptateurHorloge,

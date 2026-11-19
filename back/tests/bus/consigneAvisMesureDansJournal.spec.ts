@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { consigneRetourAvisMesureDonneDansJournal } from '../../src/bus/consigneAvisMesureDonneDansJournal.js';
 import { AvisMesureDonne } from '../../src/bus/evenements/avisMesureDonne.js';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe("L'abonnement qui consigne un avis sur une mesure dans le journal", () => {
   it('consigne un évènement AvisMesureDonne', async () => {
@@ -12,10 +12,7 @@ describe("L'abonnement qui consigne un avis sur une mesure dans le journal", () 
         evenementRecu = donneesEvenement;
       },
     };
-    const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
-      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    };
+    const adaptateurHorloge = fabriqueAdaptateurHorloge('2025-03-10T00:00:00Z');
 
     await consigneRetourAvisMesureDonneDansJournal({
       adaptateurJournal,

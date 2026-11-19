@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { consigneSimulationNis2TermineeDansJournal } from '../../src/bus/consigneSimulationNis2TermineeDansJournal.js';
 import { SimulationNis2Terminee } from '../../src/bus/evenements/simulationNis2Terminee.js';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { EtatQuestionnaire } from '../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
+import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe("L'abonnement qui consigne une simulation NIS2 terminée dans le journal", () => {
   const reponseComplete = (): EtatQuestionnaire => ({
@@ -31,10 +31,7 @@ describe("L'abonnement qui consigne une simulation NIS2 terminée dans le journa
         evenementRecu = donneesEvenement;
       },
     };
-    const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => Temporal.Instant.from('2026-03-24T00:00:00Z'),
-      maintenantZoné: () => Temporal.Instant.from('2026-03-24T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    };
+    const adaptateurHorloge = fabriqueAdaptateurHorloge('2026-03-24T00:00:00Z');
 
     await consigneSimulationNis2TermineeDansJournal({
       adaptateurJournal,

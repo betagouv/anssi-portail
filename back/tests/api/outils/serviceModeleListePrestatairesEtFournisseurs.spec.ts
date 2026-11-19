@@ -3,18 +3,11 @@ import { fromBuffer } from '@office-kit/xlsx/node';
 import { getSheetByIndex } from '@office-kit/xlsx/workbook';
 import { describe, expect, it } from 'vitest';
 import { ServiceModèleListeDesPrestatairesEtFournisseurs } from '../../../src/api/outils/modeleListePrestatairesEtFournisseurs/serviceModeleListePrestatairesEtFournisseurs.js';
-import { AdaptateurHorloge } from '../../../src/infra/adaptateurHorloge.js';
+import { fabriqueAdaptateurHorloge } from '../../infra/adaptateurHorlogePourLesTests.js';
 import { fauxFournisseurDeChemin } from '../fauxObjets.js';
 
 describe('Le service du modèle de liste des prestataires et des fournisseurs', () => {
-  const fauxAdaptateurHorloge: AdaptateurHorloge = {
-    maintenant: () => Temporal.PlainDate.from('2018-11-17').toZonedDateTime(Temporal.Now.timeZoneId()).toInstant(),
-    maintenantZoné: () =>
-      Temporal.PlainDate.from('2018-11-17')
-        .toZonedDateTime(Temporal.Now.timeZoneId())
-        .toInstant()
-        .toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-  };
+  const fauxAdaptateurHorloge = fabriqueAdaptateurHorloge('2018-11-17');
   const récupèreModèleExcel = async () => {
     const service = new ServiceModèleListeDesPrestatairesEtFournisseurs(fauxFournisseurDeChemin, fauxAdaptateurHorloge);
 

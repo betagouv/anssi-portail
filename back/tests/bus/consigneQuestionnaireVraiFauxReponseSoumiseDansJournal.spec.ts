@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { consigneQuestionnaireVraiFauxReponseSoumiseDansJournal } from '../../src/bus/consigneQuestionnaireVraiFauxReponseSoumiseDansJournal.js';
 import { QuestionnaireVraiFauxRéponseSoumise } from '../../src/bus/evenements/questionnaireVraiFauxReponseSoumise.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
+import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe('L’abonnement qui consigne une réponse à une question vraie/faux dans le journal', () => {
   it('consigne un évènement QuestionnaireVraiFauxRéponseSoumise pour un utilisateur identifié', async () => {
@@ -14,10 +14,7 @@ describe('L’abonnement qui consigne une réponse à une question vraie/faux da
         evenementRecu = donneesEvenement;
       },
     };
-    const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
-      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    };
+    const adaptateurHorloge = fabriqueAdaptateurHorloge('2025-03-10T00:00:00Z');
     const adaptateurHachage: AdaptateurHachage = {
       ...fauxAdaptateurHachage,
       hache: (valeur) => `${valeur}-hacheHMAC`,
@@ -61,10 +58,7 @@ describe('L’abonnement qui consigne une réponse à une question vraie/faux da
         evenementRecu = donneesEvenement;
       },
     };
-    const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
-      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    };
+    const adaptateurHorloge = fabriqueAdaptateurHorloge('2025-03-10T00:00:00Z');
     const adaptateurHachage: AdaptateurHachage = {
       ...fauxAdaptateurHachage,
       hache: (valeur) => `${valeur}-hacheHMAC`,

@@ -4,18 +4,11 @@ import { fromBuffer } from '@office-kit/xlsx/node';
 import { getSheetByIndex } from '@office-kit/xlsx/workbook';
 import { describe, expect, it, vi } from 'vitest';
 import { ServiceModèleRACI } from '../../../src/api/outils/modeleRaci/serviceModeleRaci.js';
-import { AdaptateurHorloge } from '../../../src/infra/adaptateurHorloge.js';
+import { fabriqueAdaptateurHorloge } from '../../infra/adaptateurHorlogePourLesTests.js';
 import { fauxFournisseurDeChemin } from '../fauxObjets.js';
 
 describe('Le service du modèle de RACI', () => {
-  const fauxAdaptateurHorloge: AdaptateurHorloge = {
-    maintenant: () => Temporal.PlainDate.from('2018-11-17').toZonedDateTime(Temporal.Now.timeZoneId()).toInstant(),
-    maintenantZoné: () =>
-      Temporal.PlainDate.from('2018-11-17')
-        .toZonedDateTime(Temporal.Now.timeZoneId())
-        .toInstant()
-        .toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-  };
+  const fauxAdaptateurHorloge = fabriqueAdaptateurHorloge('2018-11-17');
   const récupèreModèleExcel = async () => {
     const service = new ServiceModèleRACI(fauxFournisseurDeChemin, fauxAdaptateurHorloge);
 
@@ -38,10 +31,7 @@ describe('Le service du modèle de RACI', () => {
     ['America/Los_Angeles', '01-01-2026'],
   ])('date la version dans le fuseau du serveur (%s)', async (fuseau, dateAttendue) => {
     vi.spyOn(Temporal.Now, 'timeZoneId').mockReturnValue(fuseau);
-    const service = new ServiceModèleRACI(fauxFournisseurDeChemin, {
-      maintenant: () => Temporal.Instant.from('2026-01-01T23:30:00Z'),
-      maintenantZoné: () => Temporal.Instant.from('2026-01-01T23:30:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    });
+    const service = new ServiceModèleRACI(fauxFournisseurDeChemin, fabriqueAdaptateurHorloge('2026-01-01T23:30:00Z'));
 
     const résultat = await loadWorkbook(fromBuffer(await service.génèreModèle()));
 

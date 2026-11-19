@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { consigneTestRealiseDansJournal } from '../../src/bus/consigneTestRealiseDansJournal.js';
 import { TestRealise } from '../../src/bus/evenements/testRealise.js';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe("L'abonnement qui consigne la réalisation d'un test dans le journal", () => {
   it('consigne un évènement de NouveauTestRealise', () => {
@@ -12,10 +12,7 @@ describe("L'abonnement qui consigne la réalisation d'un test dans le journal", 
         evenementRecu = donneesEvenement;
       },
     };
-    const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
-      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    };
+    const adaptateurHorloge = fabriqueAdaptateurHorloge('2025-03-10T00:00:00Z');
 
     consigneTestRealiseDansJournal({
       adaptateurJournal,
