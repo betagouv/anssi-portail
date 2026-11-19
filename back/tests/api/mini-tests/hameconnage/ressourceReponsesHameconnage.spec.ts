@@ -7,6 +7,7 @@ import { creeServeur } from '../../../../src/api/msc/index.js';
 import { TestHameçonnageRéponseSoumise } from '../../../../src/bus/evenements/testHameconnageReponseSoumise.js';
 import { TestHameçonnageTerminé } from '../../../../src/bus/evenements/testHameconnageTermine.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
+import { EntrepôtRésultatTestHameçonnageMémoire } from '../../../persistance/entrepotResultatTestHameconnageMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';
 import { configurationDeTestDuServeur, fauxRapporteur } from '../../fauxObjets.js';
@@ -15,14 +16,18 @@ import { jeanneDupont } from '../../objetsPretsALEmploi.js';
 describe('La ressource des réponses au mini test hameçonnage', () => {
   let serveur: Express;
   let busÉvénements: MockBusEvenement;
+  let entrepôtRésultatTestHameçonnage: EntrepôtRésultatTestHameçonnageMémoire;
+
   beforeEach(async () => {
     busÉvénements = fabriqueBusPourLesTests(fauxRapporteur);
+    entrepôtRésultatTestHameçonnage = new EntrepôtRésultatTestHameçonnageMémoire();
     const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     await entrepotUtilisateur.ajoute(jeanneDupont);
 
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements: busÉvénements,
+      entrepôtRésultatTestHameçonnage,
       entrepotUtilisateur,
     });
   });
@@ -34,6 +39,7 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
         idMail: 'INCORRECT',
         réponse: 'non',
         numéroRéponse: 1,
+        score: '5/9',
       });
 
       expect(réponse.status).toBe(HttpStatusCode.BadRequest);
@@ -45,6 +51,7 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
         idMail: 'ENEDIS',
         réponse: 'bonne',
         numéroRéponse: 1,
+        score: '5/9',
       });
 
       expect(réponse.status).toBe(HttpStatusCode.Created);
@@ -56,6 +63,7 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
         idMail: 'ENEDIS',
         réponse: 'bonne',
         numéroRéponse: 1,
+        score: '5/9',
       });
 
       expect(busÉvénements.aRecuUnEvenement(TestHameçonnageRéponseSoumise)).toBeTruthy();
@@ -67,6 +75,7 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
         idMail: 'ENEDIS',
         réponse: 'bonne',
         numéroRéponse: 1,
+        score: '5/9',
       });
 
       const événement = busÉvénements.recupereEvenement(TestHameçonnageRéponseSoumise);
@@ -83,6 +92,7 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
         idMail: 'ENEDIS',
         réponse: 'bonne',
         numéroRéponse: 1,
+        score: '5/9',
       });
 
       const événement = busÉvénements.recupereEvenement(TestHameçonnageRéponseSoumise);
@@ -98,6 +108,7 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
         idMail: 'ENEDIS',
         réponse: 'bonne',
         numéroRéponse: 1,
+        score: '5/9',
       });
 
       expect(busÉvénements.recupereEvenement(TestHameçonnageRéponseSoumise)?.parcours).toBe('allégé');
@@ -109,6 +120,7 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
         idMail: 'ENEDIS',
         réponse: 'bonne',
         numéroRéponse: 12,
+        score: '5/9',
       });
 
       expect(réponse.status).toBe(HttpStatusCode.BadRequest);
@@ -120,6 +132,7 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
         idMail: 'ENEDIS',
         réponse: 'bonne',
         numéroRéponse: NOMBRE_DE_MAILS_HAMEÇONNAGE,
+        score: '5/9',
       });
 
       const événement = busÉvénements.recupereEvenement(TestHameçonnageTerminé);
@@ -134,6 +147,7 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
         idMail: 'ENEDIS',
         réponse: 'bonne',
         numéroRéponse: NOMBRE_DE_MAILS_HAMEÇONNAGE,
+        score: '5/9',
       });
 
       const événement = busÉvénements.recupereEvenement(TestHameçonnageTerminé);
@@ -150,6 +164,7 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
         idMail: 'ENEDIS',
         réponse: 'bonne',
         numéroRéponse: NOMBRE_DE_MAILS_HAMEÇONNAGE,
+        score: '5/9',
       });
 
       expect(busÉvénements.recupereEvenement(TestHameçonnageTerminé)?.parcours).toBe('allégé');
@@ -163,9 +178,50 @@ describe('La ressource des réponses au mini test hameçonnage', () => {
           idMail: 'ENEDIS',
           réponse: 'bonne',
           numéroRéponse: NOMBRE_DE_MAILS_HAMEÇONNAGE - 1,
+          score: '5/9',
         });
 
       expect(busÉvénements.naPasRecuDEvenement(TestHameçonnageTerminé)).toBeTruthy();
+    });
+
+    it('entrepose le score final pour un utilisateur connecté', async () => {
+      const cookie = encodeSession({ email: jeanneDupont.email, token: 'token' });
+      const réponse = await request(serveur).post('/api/mini-tests/hameconnage/reponses').set('Cookie', [cookie]).send({
+        idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
+        idMail: 'ENEDIS',
+        réponse: 'bonne',
+        numéroRéponse: NOMBRE_DE_MAILS_HAMEÇONNAGE,
+        score: '5/9',
+      });
+
+      expect(réponse.status).toBe(HttpStatusCode.Created);
+      expect(await entrepôtRésultatTestHameçonnage.taille()).toEqual(1);
+      expect((await entrepôtRésultatTestHameçonnage.tous())[0].score).toEqual('5/9');
+    });
+
+    it("n'entrepose pas le score final s'il est trop long", async () => {
+      const cookie = encodeSession({ email: jeanneDupont.email, token: 'token' });
+      const réponse = await request(serveur).post('/api/mini-tests/hameconnage/reponses').set('Cookie', [cookie]).send({
+        idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
+        idMail: 'ENEDIS',
+        réponse: 'bonne',
+        numéroRéponse: NOMBRE_DE_MAILS_HAMEÇONNAGE,
+        score: '50/9',
+      });
+
+      expect(réponse.status).toBe(HttpStatusCode.BadRequest);
+    });
+
+    it('n’entrepose pas le résultat pour un test anonyme', async () => {
+      await request(serveur).post('/api/mini-tests/hameconnage/reponses').send({
+        idCorrélation: '01a19bd7-6c3f-7592-9c6c-d12de96cbef1',
+        idMail: 'ENEDIS',
+        réponse: 'bonne',
+        numéroRéponse: NOMBRE_DE_MAILS_HAMEÇONNAGE,
+        score: '5/9',
+      });
+
+      expect(await entrepôtRésultatTestHameçonnage.taille()).toEqual(0);
     });
   });
 });

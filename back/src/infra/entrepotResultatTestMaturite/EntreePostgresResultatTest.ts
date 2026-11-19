@@ -3,7 +3,8 @@ import type { CodeRégion } from '../../metier/referentielRegions.js';
 import type { CodeSecteur } from '../../metier/referentielSecteurs.js';
 import type { CodeTrancheEffectif } from '../../metier/referentielTranchesEffectifEtablissement.js';
 
-export type EntréePostgresRésultatTest = EntréePostgresRésultatTestMaturité | EntréePostgresRésultatTestVraiFaux;
+export type EntréePostgresRésultatTest =
+  EntréePostgresRésultatTestMaturité | EntréePostgresRésultatTestVraiFaux | EntréePostgresRésultatTestHameçonnage;
 
 export type EntréePostgresRésultatTestCommune = {
   id: string;
@@ -22,6 +23,11 @@ export type EntréePostgresRésultatTestMaturité = {
 
 export type EntréePostgresRésultatTestVraiFaux = {
   type_test: 'vrai-faux';
+  score: string | null;
+} & EntréePostgresRésultatTestCommune;
+
+export type EntréePostgresRésultatTestHameçonnage = {
+  type_test: 'hameçonnage';
   score: string | null;
 } & EntréePostgresRésultatTestCommune;
 
