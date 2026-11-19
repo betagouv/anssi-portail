@@ -1,122 +1,66 @@
-import Knex from 'knex';
-import config from '../../../knexfile.js';
-import {
+import type {
   EntrepôtRésultatTestMaturité,
   FiltreResultatsTest,
 } from '../../metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
 import { RésultatTestMaturité } from '../../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
-import { Utilisateur } from '../../metier/utilisateur.js';
-import { AdaptateurHachage } from '../adaptateurHachage.js';
-import { EntrepotUtilisateurMPAPostgres } from '../entrepotUtilisateurMPAPostgres.js';
-import type { EntréePostgresRésultatTest } from './EntreePostgresResultatTest.js';
+import type { EntréePostgresRésultatTest, EntréePostgresRésultatTestMaturité } from './EntreePostgresResultatTest.js';
+import { EntrepôtRésultatTestPostgres } from './entrepotResultatTestPostgres.js';
 
-export class EntrepôtRésultatTestMaturitéPostgres implements EntrepôtRésultatTestMaturité {
-  knex: Knex.Knex;
-  entrepotUtilisateur: EntrepotUtilisateurMPAPostgres;
-  private adaptateurHachage: AdaptateurHachage;
+export class EntrepôtRésultatTestMaturitéPostgres
+  extends EntrepôtRésultatTestPostgres<'maturité cyber', RésultatTestMaturité>
+  implements EntrepôtRésultatTestMaturité
+{
+  protected readonly typeTest = 'maturité cyber';
 
-  constructor({
-    entrepotUtilisateur,
-    adaptateurHachage,
-  }: {
-    entrepotUtilisateur: EntrepotUtilisateurMPAPostgres;
-    adaptateurHachage: AdaptateurHachage;
-  }) {
-    this.adaptateurHachage = adaptateurHachage;
-    this.knex = Knex(config);
-    this.entrepotUtilisateur = entrepotUtilisateur;
+  protected async versRésultat(entrée: EntréePostgresRésultatTestMaturité): Promise<RésultatTestMaturité> {
+    const utilisateur = entrée.email_utilisateur_hache
+      ? await this.entrepotUtilisateur.parEmailHache(entrée.email_utilisateur_hache)
+      : undefined;
+
+    const résultat = this.construitRésultat(entrée);
+    résultat.utilisateur = utilisateur;
+    return résultat;
   }
 
-  private tableRésultatsTest() {
-    return this.knex<EntréePostgresRésultatTest>('resultats_test');
+  private construitRésultat(entrée: EntréePostgresRésultatTestMaturité): RésultatTestMaturité {
+    if (entrée.reponses === null) {
+      throw new Error(`Réponses manquantes pour le résultat de test ${entrée.id}`);
+    }
+
+    return new RésultatTestMaturité({
+      id: entrée.id,
+      dateRealisation: entrée.date_realisation,
+      region: entrée.region ?? undefined,
+      secteur: entrée.secteur ?? undefined,
+      tailleOrganisation: entrée.taille_organisation ?? undefined,
+      reponses: entrée.reponses,
+      codeSessionGroupe: entrée.code_session_groupe ?? undefined,
+    });
+  }
+
+  protected versEntrée(résultat: RésultatTestMaturité): EntréePostgresRésultatTestMaturité {
+    const { utilisateur } = résultat;
+    return {
+      id: résultat.id,
+      date_realisation: résultat.dateRealisation,
+      email_utilisateur_hache: utilisateur ? this.adaptateurHachage.hache(utilisateur.email) : null,
+      type_test: this.typeTest,
+      region: résultat.region ?? null,
+      secteur: résultat.secteur ?? null,
+      taille_organisation: résultat.tailleOrganisation ?? null,
+      reponses: résultat.reponses,
+      code_session_groupe: résultat.codeSessionGroupe ?? null,
+    };
   }
 
   async ceuxDeSessionGroupe(code: string): Promise<RésultatTestMaturité[]> {
-    const donnees = await this.tableRésultatsTest().where({
-      code_session_groupe: code,
-    });
-    return Promise.all(donnees.map((donnees) => this.traduitEnResultatTestMaturite(donnees)));
-  }
-
-  private async traduitEnResultatTestMaturite(
-    donneesTestMaturite: EntréePostgresRésultatTest,
-    avecUtilisateur: boolean = true
-  ) {
-    const { reponses } = donneesTestMaturite;
-    if (reponses === null) {
-      throw new Error(`Réponses manquantes pour le résultat de test ${donneesTestMaturite.id}`);
-    }
-
-    const utilisateur: Utilisateur | undefined =
-      avecUtilisateur && donneesTestMaturite.email_utilisateur_hache
-        ? await this.entrepotUtilisateur.parEmailHache(donneesTestMaturite.email_utilisateur_hache)
-        : undefined;
-
-    const resultat = new RésultatTestMaturité({
-      id: donneesTestMaturite.id,
-      region: donneesTestMaturite.region ?? undefined,
-      secteur: donneesTestMaturite.secteur ?? undefined,
-      tailleOrganisation: donneesTestMaturite.taille_organisation ?? undefined,
-      reponses,
-      codeSessionGroupe: donneesTestMaturite.code_session_groupe ?? undefined,
-      dateRealisation: donneesTestMaturite.date_realisation,
-    });
-    resultat.utilisateur = utilisateur;
-    return resultat;
-  }
-
-  async parId(id: string): Promise<RésultatTestMaturité | undefined> {
-    const donnees = await this.tableRésultatsTest().where({ id }).first();
-    return donnees ? this.traduitEnResultatTestMaturite(donnees) : undefined;
-  }
-
-  async dernierPourUtilisateur(utilisateur: Utilisateur): Promise<RésultatTestMaturité | undefined> {
-    const donnees = await this.tableRésultatsTest()
-      .where({
-        email_utilisateur_hache: this.adaptateurHachage.hache(utilisateur.email),
-      })
-      .orderBy('date_realisation', 'desc')
-      .first();
-    return donnees ? this.traduitEnResultatTestMaturite(donnees) : undefined;
-  }
-
-  async metsÀjour(resultatTest: RésultatTestMaturité): Promise<void> {
-    await this.tableRésultatsTest()
-      .where({ id: resultatTest.id })
-      .update({
-        email_utilisateur_hache: resultatTest.utilisateur
-          ? this.adaptateurHachage.hache(resultatTest.utilisateur.email)
-          : null,
-      });
-  }
-
-  async ajoute(resultatTest: RésultatTestMaturité): Promise<void> {
-    const { utilisateur, tailleOrganisation, codeSessionGroupe, dateRealisation, ...reste } = resultatTest;
-    await this.tableRésultatsTest().insert({
-      ...reste,
-      type_test: 'maturité cyber',
-      taille_organisation: tailleOrganisation,
-      code_session_groupe: codeSessionGroupe,
-      email_utilisateur_hache: utilisateur ? this.adaptateurHachage.hache(utilisateur.email) : null,
-      date_realisation: dateRealisation,
-    });
-  }
-
-  async taille() {
-    const resultat = await this.tableRésultatsTest().count({ count: '*' });
-    return Number(resultat[0].count);
+    const entrées = await this.tableRésultatsTest().where({ code_session_groupe: code });
+    return Promise.all(entrées.map((entrée) => this.hydrate(entrée)));
   }
 
   async tousEnOmettantUtilisateur(): Promise<RésultatTestMaturité[]> {
-    const resultats = await this.tableRésultatsTest();
-    return Promise.all(resultats.map((resultat) => this.traduitEnResultatTestMaturite(resultat, false)));
-  }
-
-  async pourUtilisateur(utilisateur: Utilisateur): Promise<RésultatTestMaturité[]> {
-    const resultats = await this.tableRésultatsTest().where({
-      email_utilisateur_hache: this.adaptateurHachage.hache(utilisateur.email),
-    });
-    return Promise.all(resultats.map((resultat) => this.traduitEnResultatTestMaturite(resultat)));
+    const entrées = await this.tableRésultatsTest();
+    return entrées.map((entrée) => this.hydrateSansUtilisateur(entrée));
   }
 
   async parFiltresEnOmettantUtilisateur({
@@ -124,12 +68,15 @@ export class EntrepôtRésultatTestMaturitéPostgres implements EntrepôtRésult
     codeRegion,
     codeTrancheEffectif,
   }: FiltreResultatsTest): Promise<RésultatTestMaturité[]> {
-    const resultats = await this.tableRésultatsTest().where((builder) => {
-      if (codeSecteur) builder = builder.where('secteur', codeSecteur);
-      if (codeRegion) builder = builder.where('region', codeRegion);
-      if (codeTrancheEffectif) builder = builder.where('taille_organisation', codeTrancheEffectif);
-      return builder;
-    });
-    return Promise.all(resultats.map((resultat) => this.traduitEnResultatTestMaturite(resultat, false)));
+    const requête = this.tableRésultatsTest();
+    if (codeSecteur) requête.where({ secteur: codeSecteur });
+    if (codeRegion) requête.where({ region: codeRegion });
+    if (codeTrancheEffectif) requête.where({ taille_organisation: codeTrancheEffectif });
+    const entrées = await requête;
+    return entrées.map((entrée) => this.hydrateSansUtilisateur(entrée));
+  }
+
+  private hydrateSansUtilisateur(entrée: EntréePostgresRésultatTest): RésultatTestMaturité {
+    return this.construitRésultat(this.entréeDuType(entrée));
   }
 }
