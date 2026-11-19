@@ -47,8 +47,7 @@ export class ÉditeurFeuilleXLSX {
 
   définisLibelléÀLaVersionDuJour() {
     const dateFormattée = this.adaptateurHorloge
-      .maintenant()
-      .toZonedDateTimeISO(Temporal.Now.timeZoneId())
+      .maintenantZoné()
       .toPlainDate()
       .toLocaleString('fr-FR')
       .replace(/\//g, '-');
