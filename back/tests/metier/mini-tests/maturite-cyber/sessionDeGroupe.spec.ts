@@ -4,7 +4,7 @@ import {
   ResultatTestMaturite,
 } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { SessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
-import { EntrepotResultatTestMemoire } from '../../../persistance/entrepotResultatTestMemoire.js';
+import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 
 const resultatAvecReponses = (reponses: ReponsesTestMaturite, codeSession: string) =>
   new ResultatTestMaturite({
@@ -21,7 +21,7 @@ describe('La session de groupe', () => {
       const sessionDeGroupe = await SessionDeGroupe.cree({
         genere: async () => 'ABCD',
       });
-      const entrepotResultatTest = new EntrepotResultatTestMemoire();
+      const entrepotResultatTest = new EntrepôtRésultatTestMaturitéMémoire();
 
       const resultatSession = await sessionDeGroupe.resultatSession(entrepotResultatTest);
 
@@ -50,7 +50,7 @@ describe('La session de groupe', () => {
       const sessionDeGroupe = await SessionDeGroupe.cree({
         genere: async () => 'ABCD',
       });
-      const entrepotResultatTest = new EntrepotResultatTestMemoire();
+      const entrepotResultatTest = new EntrepôtRésultatTestMaturitéMémoire();
       await entrepotResultatTest.ajoute(
         resultatAvecReponses(
           {
@@ -92,7 +92,7 @@ describe('La session de groupe', () => {
       const sessionDeGroupe = await SessionDeGroupe.cree({
         genere: async () => 'ABCD',
       });
-      const entrepotResultatTest = new EntrepotResultatTestMemoire();
+      const entrepotResultatTest = new EntrepôtRésultatTestMaturitéMémoire();
       await entrepotResultatTest.ajoute(
         resultatAvecReponses(
           {

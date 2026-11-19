@@ -8,7 +8,7 @@ import { TestRealise } from '../../../../src/bus/evenements/testRealise.js';
 import { ResultatTestMaturite } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { Utilisateur } from '../../../../src/metier/utilisateur.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
-import { EntrepotResultatTestMemoire } from '../../../persistance/entrepotResultatTestMemoire.js';
+import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise, fauxRapporteur } from '../../fauxObjets.js';
@@ -19,7 +19,7 @@ const REGEX_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-
 describe('La ressource qui gère les résultats de test de maturité', () => {
   let serveur: Express;
   let busEvenements: MockBusEvenement;
-  let entrepotResultatTest: EntrepotResultatTestMemoire;
+  let entrepôtRésultatTestMaturité: EntrepôtRésultatTestMaturitéMémoire;
   let entrepotUtilisateur: EntrepotUtilisateurMemoire;
 
   const donneesCorrectes = {
@@ -39,13 +39,13 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
   beforeEach(() => {
     busEvenements = fabriqueBusPourLesTests(fauxRapporteur);
-    entrepotResultatTest = new EntrepotResultatTestMemoire();
+    entrepôtRésultatTestMaturité = new EntrepôtRésultatTestMaturitéMémoire();
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     entrepotUtilisateur.ajoute(jeanneDupont);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements,
-      entrepotResultatTest,
+      entrepôtRésultatTestMaturité,
       entrepotUtilisateur,
     });
   });
@@ -139,7 +139,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
             },
           });
 
-        const resultatSauvegarde = await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont);
+        const resultatSauvegarde = await entrepôtRésultatTestMaturité.dernierPourUtilisateur(jeanneDupont);
 
         expect(resultatSauvegarde).toBeDefined();
         expect(resultatSauvegarde?.utilisateur).toBe(jeanneDupont);
@@ -162,7 +162,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           .set('Cookie', [cookie])
           .send(donneesCorrectes);
 
-        const resultatSauvegarde = await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont);
+        const resultatSauvegarde = await entrepôtRésultatTestMaturité.dernierPourUtilisateur(jeanneDupont);
         expect(resultatSauvegarde!.id).toMatch(REGEX_UUID);
         expect(reponse.body).toEqual({ id: resultatSauvegarde!.id });
       });
@@ -194,7 +194,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
               },
             });
 
-          const resultatSauvegarde = await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont);
+          const resultatSauvegarde = await entrepôtRésultatTestMaturité.dernierPourUtilisateur(jeanneDupont);
 
           expect(resultatSauvegarde?.region).toBe('FR-971');
           expect(resultatSauvegarde?.secteur).toBe('A');
@@ -229,7 +229,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       it('sauvegarde le résultat du test sans email', async () => {
         await request(serveur).post('/api/resultats-test').send(donneesCorrectes);
 
-        const resultatSauvegarde = (await entrepotResultatTest.tous())[0];
+        const resultatSauvegarde = (await entrepôtRésultatTestMaturité.tous())[0];
         expect(resultatSauvegarde).toBeDefined();
         expect(resultatSauvegarde?.utilisateur).toBeUndefined();
       });
@@ -368,7 +368,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           codeSessionGroupe: 'ABC2ED',
         });
 
-      const resultatSauvegarde = (await entrepotResultatTest.tous())[0];
+      const resultatSauvegarde = (await entrepôtRésultatTestMaturité.tous())[0];
 
       expect(resultatSauvegarde.codeSessionGroupe).toBe('ABC2ED');
     });
@@ -400,7 +400,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           tailleOrganisation: '01',
         });
         await resultatDunUtilisateur.revendiquePropriete(utilisateur, fauxAdaptateurRechercheEntreprise);
-        await entrepotResultatTest.ajoute(resultatDunUtilisateur);
+        await entrepôtRésultatTestMaturité.ajoute(resultatDunUtilisateur);
       }
 
       it('renvoie les résultats de test', async () => {
@@ -447,7 +447,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           dateRealisation: new Date(2025, 8, 11),
         });
         await testDeJeanne.revendiquePropriete(jeanneDupont, fauxAdaptateurRechercheEntreprise);
-        await entrepotResultatTest.ajoute(testDeJeanne);
+        await entrepôtRésultatTestMaturité.ajoute(testDeJeanne);
 
         const reponse = await request(serveur).get('/api/resultats-test').set('Cookie', [cookie]);
 

@@ -1,12 +1,15 @@
 import {
-  EntrepotResultatTest,
+  EntrepôtRésultatTestMaturité,
   FiltreResultatsTest,
-} from '../../src/metier/mini-tests/maturite-cyber/entrepotResultatTest.js';
+} from '../../src/metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
 import { ResultatTestMaturite } from '../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { Utilisateur } from '../../src/metier/utilisateur.js';
 import { EntrepotMemoire } from './entrepotMemoire.js';
 
-export class EntrepotResultatTestMemoire extends EntrepotMemoire<ResultatTestMaturite> implements EntrepotResultatTest {
+export class EntrepôtRésultatTestMaturitéMémoire
+  extends EntrepotMemoire<ResultatTestMaturite>
+  implements EntrepôtRésultatTestMaturité
+{
   async pourUtilisateur(utilisateur: Utilisateur): Promise<ResultatTestMaturite[]> {
     return this.entites
       .filter((entite) => entite.utilisateur === utilisateur)

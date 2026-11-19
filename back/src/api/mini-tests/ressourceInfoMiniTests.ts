@@ -6,7 +6,7 @@ import { corpsVide, valideCorpsRequete } from '../zod.js';
 
 export const ressourceInfoMiniTests = ({
   entrepotReactionMiniTest,
-  entrepotResultatTest,
+  entrepôtRésultatTestMaturité,
   adaptateurStatistiqueMiniTests,
 }: ConfigurationServeur) => {
   const routeur = Router();
@@ -16,7 +16,7 @@ export const ressourceInfoMiniTests = ({
     cors(),
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
-      const compteurMaturitéCyber = await entrepotResultatTest.taille();
+      const compteurMaturitéCyber = await entrepôtRésultatTestMaturité.taille();
       const { vraiFaux, exposition, reflexesCyber, hameconnage } =
         await adaptateurStatistiqueMiniTests.nombreDeMiniTestsRéalisés();
 

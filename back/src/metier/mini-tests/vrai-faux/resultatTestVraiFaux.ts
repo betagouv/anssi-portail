@@ -1,5 +1,5 @@
 import { Utilisateur } from '../../utilisateur.js';
-import { DonnéesCréationRésultatTest, RésultatTest } from '../resultatTest.js';
+import { DonnéesCréationRésultatTest, RésultatTest } from '../resultat-test/resultatTest.js';
 
 export type DonnéesCréationRésultatTestVraiFaux = {
   utilisateur: Utilisateur;

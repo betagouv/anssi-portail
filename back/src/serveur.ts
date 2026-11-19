@@ -123,7 +123,7 @@ const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
   rapporteur,
 });
 
-const entrepotResultatTest = new EntrepotResultatTestPostgres({
+const entrepôtRésultatTestMaturité = new EntrepotResultatTestPostgres({
   adaptateurHachage,
   entrepotUtilisateur,
 });
@@ -230,7 +230,7 @@ const host = process.env.HOST;
     },
     adaptateurRechercheEntreprise,
     adaptateurProfilAnssi,
-    entrepotResultatTest,
+    entrepôtRésultatTestMaturité,
     entrepotFavori,
     entrepotSessionDeGroupe,
     adaptateurMonAideCyber,

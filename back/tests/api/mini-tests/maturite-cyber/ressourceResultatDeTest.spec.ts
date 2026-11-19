@@ -9,7 +9,7 @@ import { CodeRégion } from '../../../../src/metier/referentielRegions.js';
 import { CodeSecteur } from '../../../../src/metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../../../src/metier/referentielTranchesEffectifEtablissement.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
-import { EntrepotResultatTestMemoire } from '../../../persistance/entrepotResultatTestMemoire.js';
+import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise, fauxRapporteur } from '../../fauxObjets.js';
@@ -17,12 +17,12 @@ import { hectorDurant, jeanneDupont } from '../../objetsPretsALEmploi.js';
 
 describe('La ressource qui gère un résultat de test', () => {
   let serveur: Express;
-  let entrepotResultatTest: EntrepotResultatTestMemoire;
+  let entrepôtRésultatTestMaturité: EntrepôtRésultatTestMaturitéMémoire;
   let cookieJeanneDupont: string;
   let busEvenements: MockBusEvenement;
 
   beforeEach(async () => {
-    entrepotResultatTest = new EntrepotResultatTestMemoire();
+    entrepôtRésultatTestMaturité = new EntrepôtRésultatTestMaturitéMémoire();
     const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     await entrepotUtilisateur.ajoute(jeanneDupont);
     cookieJeanneDupont = encodeSession({
@@ -32,7 +32,7 @@ describe('La ressource qui gère un résultat de test', () => {
     busEvenements = fabriqueBusPourLesTests(fauxRapporteur);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
-      entrepotResultatTest,
+      entrepôtRésultatTestMaturité,
       busEvenements,
       entrepotUtilisateur,
     });
@@ -60,12 +60,12 @@ describe('La ressource qui gère un résultat de test', () => {
         id: 'r1',
       });
       await resultatDeHector.revendiquePropriete(hectorDurant, fauxAdaptateurRechercheEntreprise);
-      await entrepotResultatTest.ajoute(resultatDeHector);
+      await entrepôtRésultatTestMaturité.ajoute(resultatDeHector);
 
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
       expect(reponse.status).toBe(HttpStatusCode.Forbidden);
-      const resultatTest = await entrepotResultatTest.parId('r1');
+      const resultatTest = await entrepôtRésultatTestMaturité.parId('r1');
       expect(resultatTest!.utilisateur).toBe(hectorDurant);
       busEvenements.naPasRecuDEvenement(ProprieteTestRevendiquee);
     });
@@ -76,7 +76,7 @@ describe('La ressource qui gère un résultat de test', () => {
         id: 'r1',
       });
       await resultatDeJeanne.revendiquePropriete(jeanneDupont, fauxAdaptateurRechercheEntreprise);
-      await entrepotResultatTest.ajoute(resultatDeJeanne);
+      await entrepôtRésultatTestMaturité.ajoute(resultatDeJeanne);
 
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
@@ -85,7 +85,7 @@ describe('La ressource qui gère un résultat de test', () => {
     });
 
     it("associe l'utilisateur courant au résultat de test", async () => {
-      await entrepotResultatTest.ajoute(
+      await entrepôtRésultatTestMaturité.ajoute(
         new ResultatTestMaturite({
           ...donneesResultatTestCorrectes(),
           id: 'r1',
@@ -95,7 +95,7 @@ describe('La ressource qui gère un résultat de test', () => {
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
       expect(reponse.status).toBe(HttpStatusCode.Ok);
-      const resultatTest = await entrepotResultatTest.parId('r1');
+      const resultatTest = await entrepôtRésultatTestMaturité.parId('r1');
       expect(resultatTest!.utilisateur).toBe(jeanneDupont);
     });
 
@@ -106,7 +106,7 @@ describe('La ressource qui gère un résultat de test', () => {
     });
 
     it('publie un événement de revendication de propriété du test', async () => {
-      await entrepotResultatTest.ajoute(
+      await entrepôtRésultatTestMaturité.ajoute(
         new ResultatTestMaturite({
           ...donneesResultatTestCorrectes(),
           id: 'r1',

@@ -1,12 +1,15 @@
 import Knex from 'knex';
 import config from '../../knexfile.js';
-import { EntrepotResultatTest, FiltreResultatsTest } from '../metier/mini-tests/maturite-cyber/entrepotResultatTest.js';
+import {
+  EntrepôtRésultatTestMaturité,
+  FiltreResultatsTest,
+} from '../metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
 import { ResultatTestMaturite } from '../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { Utilisateur } from '../metier/utilisateur.js';
 import { AdaptateurHachage } from './adaptateurHachage.js';
 import { EntrepotUtilisateurMPAPostgres } from './entrepotUtilisateurMPAPostgres.js';
 
-export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
+export class EntrepotResultatTestPostgres implements EntrepôtRésultatTestMaturité {
   knex: Knex.Knex;
   entrepotUtilisateur: EntrepotUtilisateurMPAPostgres;
   private adaptateurHachage: AdaptateurHachage;

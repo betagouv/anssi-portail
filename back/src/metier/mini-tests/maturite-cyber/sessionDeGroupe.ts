@@ -1,4 +1,4 @@
-import { EntrepotResultatTest } from './entrepotResultatTest.js';
+import { EntrepôtRésultatTestMaturité } from './entrepotResultatTestMaturite.js';
 import { GenerateurCodeSessionDeGroupe } from './generateurCodeSessionDeGroupe.js';
 import {
   IdNiveauMaturite,
@@ -44,7 +44,7 @@ export class SessionDeGroupe {
     return new SessionDeGroupe(code);
   }
 
-  async resultatSession(entrepotResultatTest: EntrepotResultatTest): Promise<ResultatSession> {
+  async resultatSession(entrepotResultatTest: EntrepôtRésultatTestMaturité): Promise<ResultatSession> {
     const resultatsTest = await entrepotResultatTest.ceuxDeSessionGroupe(this.code);
 
     const resultatsParNiveau: Record<IdNiveauMaturite, ResultatTestMaturite[]> = tousLesIdNiveauMaturite.reduce(

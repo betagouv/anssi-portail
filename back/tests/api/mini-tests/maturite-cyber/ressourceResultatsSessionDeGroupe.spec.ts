@@ -3,21 +3,21 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc/index.js';
-import { EntrepotResultatTest } from '../../../../src/metier/mini-tests/maturite-cyber/entrepotResultatTest.js';
+import { EntrepôtRésultatTestMaturité } from '../../../../src/metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
 import { EntrepotSessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
 import {
   DonneesCreationResultatTestMaturite,
   ResultatTestMaturite,
 } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { SessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
-import { EntrepotResultatTestMemoire } from '../../../persistance/entrepotResultatTestMemoire.js';
+import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { EntrepotSessionDeGroupeMemoire } from '../../../persistance/EntrepotSessionDeGroupeMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
 
 describe("La ressource qui gère les résultats d'une session de groupe", () => {
   let serveur: Express;
   let entrepotSessionDeGroupe: EntrepotSessionDeGroupe;
-  let entrepotResultatTest: EntrepotResultatTest;
+  let entrepôtRésultatTestMaturité: EntrepôtRésultatTestMaturité;
   const generateurCodeSessionDeGroupe = (code: string) => ({
     genere: async () => code,
   });
@@ -38,12 +38,12 @@ describe("La ressource qui gère les résultats d'une session de groupe", () => 
   };
 
   beforeEach(() => {
-    entrepotResultatTest = new EntrepotResultatTestMemoire();
+    entrepôtRésultatTestMaturité = new EntrepôtRésultatTestMaturitéMémoire();
     entrepotSessionDeGroupe = new EntrepotSessionDeGroupeMemoire();
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       entrepotSessionDeGroupe,
-      entrepotResultatTest,
+      entrepôtRésultatTestMaturité,
     });
   });
 
@@ -75,7 +75,7 @@ describe("La ressource qui gère les résultats d'une session de groupe", () => 
     it('répond le nombre de participants en cas de résultats', async () => {
       const sessionDeGroupe = await SessionDeGroupe.cree(generateurCodeSessionDeGroupe('ABC2ED'));
       await entrepotSessionDeGroupe.ajoute(sessionDeGroupe);
-      await entrepotResultatTest.ajoute(
+      await entrepôtRésultatTestMaturité.ajoute(
         new ResultatTestMaturite({
           ...donneesResultatTest,
           codeSessionGroupe: 'ABC2ED',

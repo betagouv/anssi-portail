@@ -9,7 +9,7 @@ export const ressourceStatistiques = ({
   adaptateurStatistiqueMiniTests,
   adaptateurStatistiqueParcours,
   entrepotUtilisateur,
-  entrepotResultatTest,
+  entrepôtRésultatTestMaturité,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
@@ -18,7 +18,7 @@ export const ressourceStatistiques = ({
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
       const statistiques = await calculeStatistiques({
-        entrepotResultatTest,
+        entrepôtRésultatTestMaturité,
         entrepotUtilisateur,
         adaptateurStatistiqueMiniTests,
         adaptateurStatistiqueParcours,

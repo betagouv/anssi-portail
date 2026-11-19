@@ -10,7 +10,7 @@ export type FiltreResultatsTest = {
   codeTrancheEffectif?: CodeTrancheEffectif;
 };
 
-export interface EntrepotResultatTest {
+export interface EntrepôtRésultatTestMaturité {
   ajoute(resultatTest: ResultatTestMaturite): Promise<void>;
 
   parId(id: string): Promise<ResultatTestMaturite | undefined>;

@@ -6,21 +6,21 @@ import { creeServeur } from '../../../src/api/msc/index.js';
 import { ResultatTestMaturite } from '../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { RéactionMiniTest } from '../../../src/metier/mini-tests/reactionMiniTest.js';
 import { EntrepotReactionMiniTestMemoire } from '../../persistance/entrepotReactionMiniTestMemoire.js';
-import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire.js';
+import { EntrepôtRésultatTestMaturitéMémoire } from '../../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
 
 describe('La ressource des informations des mini-tests', () => {
   let serveur: Express;
   let entrepotReactionMiniTest: EntrepotReactionMiniTestMemoire;
-  let entrepotResultatTest: EntrepotResultatTestMemoire;
+  let entrepôtRésultatTestMaturité: EntrepôtRésultatTestMaturitéMémoire;
 
   beforeEach(() => {
     entrepotReactionMiniTest = new EntrepotReactionMiniTestMemoire();
-    entrepotResultatTest = new EntrepotResultatTestMemoire();
+    entrepôtRésultatTestMaturité = new EntrepôtRésultatTestMaturitéMémoire();
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       entrepotReactionMiniTest,
-      entrepotResultatTest,
+      entrepôtRésultatTestMaturité,
     });
   });
 
@@ -52,7 +52,7 @@ describe('La ressource des informations des mini-tests', () => {
 
     it('renvoie le compteur des tests maturité', async () => {
       for (let i = 0; i < 252; i++) {
-        await entrepotResultatTest.ajoute(
+        await entrepôtRésultatTestMaturité.ajoute(
           new ResultatTestMaturite({ region: 'FR-NAQ', secteur: 'A', tailleOrganisation: '00', reponses: { a: 0 } })
         );
       }

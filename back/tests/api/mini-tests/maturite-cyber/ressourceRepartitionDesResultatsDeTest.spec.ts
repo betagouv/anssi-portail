@@ -5,23 +5,23 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc/index.js';
 import { ResultatTestMaturite } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { ResultatTestMaturiteCreateur } from '../../../metier/mini-tests/maturite-cyber/ResultatTestMaturiteCreateur.js';
-import { EntrepotResultatTestMemoire } from '../../../persistance/entrepotResultatTestMemoire.js';
+import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
 
 describe('La ressource qui gère les series de résultats de test de maturité', () => {
   let serveur: Express;
-  let entrepotResultatTest: EntrepotResultatTestMemoire;
+  let entrepôtRésultatTestMaturité: EntrepôtRésultatTestMaturitéMémoire;
 
   beforeEach(() => {
-    entrepotResultatTest = new EntrepotResultatTestMemoire();
+    entrepôtRésultatTestMaturité = new EntrepôtRésultatTestMaturitéMémoire();
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
-      entrepotResultatTest,
+      entrepôtRésultatTestMaturité,
     });
   });
   describe('sur requête GET', () => {
     it('répond 200', async () => {
-      const createur = new ResultatTestMaturiteCreateur().dansEntrepot(entrepotResultatTest);
+      const createur = new ResultatTestMaturiteCreateur().dansEntrepot(entrepôtRésultatTestMaturité);
       await createur.creePlusieurs(2);
 
       const reponse = await request(serveur).get('/api/repartition-resultats-test');
@@ -30,7 +30,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
     });
 
     it('calcule la moyenne des scores de résultats de même niveau', async () => {
-      const createur = new ResultatTestMaturiteCreateur().dansEntrepot(entrepotResultatTest);
+      const createur = new ResultatTestMaturiteCreateur().dansEntrepot(entrepôtRésultatTestMaturité);
       await createur.deNiveau('insuffisant').cree();
       await createur.deNiveau('emergent').cree();
       await createur
@@ -67,7 +67,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
     });
 
     it('calcule le nombre total de test par niveau', async () => {
-      const createur = new ResultatTestMaturiteCreateur().dansEntrepot(entrepotResultatTest);
+      const createur = new ResultatTestMaturiteCreateur().dansEntrepot(entrepôtRésultatTestMaturité);
       await createur.deNiveau('insuffisant').cree();
       await createur.deNiveau('emergent').cree();
       await createur.deNiveau('emergent').cree();
@@ -79,7 +79,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
     });
 
     it('répond 204 si trop peu de résultats', async () => {
-      entrepotResultatTest.ajoute(
+      entrepôtRésultatTestMaturité.ajoute(
         new ResultatTestMaturite({
           secteur: 'A',
           region: 'FR-NOR',
@@ -103,7 +103,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
 
     describe('avec un filtre', () => {
       it('sur le secteur, ne remonte que les résultats de même secteur', async () => {
-        const createur = new ResultatTestMaturiteCreateur().dansEntrepot(entrepotResultatTest);
+        const createur = new ResultatTestMaturiteCreateur().dansEntrepot(entrepôtRésultatTestMaturité);
         await createur.deNiveau('insuffisant').deSecteur('A').cree();
         await createur.deNiveau('insuffisant').deSecteur('A').cree();
         await createur.deNiveau('insuffisant').deSecteur('B').cree();
@@ -115,7 +115,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
       });
 
       it('sur la région, ne remonte que les résultats de la même région', async () => {
-        const createur = new ResultatTestMaturiteCreateur().dansEntrepot(entrepotResultatTest);
+        const createur = new ResultatTestMaturiteCreateur().dansEntrepot(entrepôtRésultatTestMaturité);
         await createur.deNiveau('insuffisant').deRegion('FR-NOR').cree();
         await createur.deNiveau('insuffisant').deRegion('FR-NOR').cree();
         await createur.deNiveau('insuffisant').deRegion('FR-20R').cree();
@@ -127,7 +127,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
       });
 
       it("sur la taille d'organisation, ne remonte que les résultats de même taille", async () => {
-        const createur = new ResultatTestMaturiteCreateur().dansEntrepot(entrepotResultatTest);
+        const createur = new ResultatTestMaturiteCreateur().dansEntrepot(entrepôtRésultatTestMaturité);
         await createur.deNiveau('insuffisant').deTailleOrganisation('01').cree();
         await createur.deNiveau('insuffisant').deTailleOrganisation('01').cree();
         await createur.deNiveau('insuffisant').deTailleOrganisation('11').cree();

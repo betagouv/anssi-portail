@@ -1,7 +1,7 @@
 import { AdaptateurStatistiqueParcours } from './adaptateurStatistiqueParcours.js';
 import { EntrepotUtilisateur } from './entrepotUtilisateur.js';
 import { AdaptateurStatistiqueMiniTests } from './mini-tests/adaptateurStatistiqueMiniTests.js';
-import { EntrepotResultatTest } from './mini-tests/maturite-cyber/entrepotResultatTest.js';
+import { EntrepôtRésultatTestMaturité } from './mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
 import { IdNiveauMaturite } from './mini-tests/maturite-cyber/resultatTestMaturite.js';
 
 const NOMBRES_DE_DIAGNOSTIC_CYBER = 7130;
@@ -35,15 +35,15 @@ export type Statistiques = {
 export const calculeStatistiques = async ({
   adaptateurStatistiqueMiniTests,
   adaptateurStatistiqueParcours,
-  entrepotResultatTest,
+  entrepôtRésultatTestMaturité,
   entrepotUtilisateur,
 }: {
   adaptateurStatistiqueMiniTests: AdaptateurStatistiqueMiniTests;
   adaptateurStatistiqueParcours: AdaptateurStatistiqueParcours;
-  entrepotResultatTest: EntrepotResultatTest;
+  entrepôtRésultatTestMaturité: EntrepôtRésultatTestMaturité;
   entrepotUtilisateur: EntrepotUtilisateur;
 }): Promise<Statistiques> => {
-  const tousLesTests = await entrepotResultatTest.tousEnOmettantUtilisateur();
+  const tousLesTests = await entrepôtRésultatTestMaturité.tousEnOmettantUtilisateur();
   const listeDesNiveaux: IdNiveauMaturite[] = tousLesTests.map((test) => test.niveau());
   const parNiveau = listeDesNiveaux.reduce(
     (accumulateur, niveau) => {
@@ -77,7 +77,7 @@ export const calculeStatistiques = async ({
   return {
     utilisateursInscrits: await entrepotUtilisateur.taille(),
     testsMaturite: {
-      total: await entrepotResultatTest.taille(),
+      total: await entrepôtRésultatTestMaturité.taille(),
       parNiveau,
     },
     diagnosticsCyber: NOMBRES_DE_DIAGNOSTIC_CYBER,

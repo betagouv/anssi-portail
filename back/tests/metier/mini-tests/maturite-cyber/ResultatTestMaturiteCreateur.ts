@@ -1,4 +1,4 @@
-import { EntrepotResultatTest } from '../../../../src/metier/mini-tests/maturite-cyber/entrepotResultatTest.js';
+import { EntrepôtRésultatTestMaturité } from '../../../../src/metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
 import {
   IdNiveauMaturite,
   ReponsesTestMaturite,
@@ -21,7 +21,7 @@ export class ResultatTestMaturiteCreateur {
   };
   tailleOrganisation: CodeTrancheEffectif | undefined;
   utilisateur: Utilisateur | undefined;
-  entrepotResultatTest: EntrepotResultatTest | undefined;
+  entrepotResultatTest: EntrepôtRésultatTestMaturité | undefined;
   secteur: CodeSecteur | undefined;
   region: CodeRégion | undefined;
 
@@ -69,7 +69,7 @@ export class ResultatTestMaturiteCreateur {
     return this;
   }
 
-  dansEntrepot(entrepotResultatTest: EntrepotResultatTest) {
+  dansEntrepot(entrepotResultatTest: EntrepôtRésultatTestMaturité) {
     this.entrepotResultatTest = entrepotResultatTest;
     return this;
   }
