@@ -1,14 +1,18 @@
-import { v7 as uuidv7 } from 'uuid';
 import { Utilisateur } from '../../utilisateur.js';
+import { DonnéesCréationRésultatTest, RésultatTest } from '../resultatTest.js';
 
-export class RésultatTestVraiFaux {
-  public readonly id: string;
-  public readonly utilisateur: Utilisateur;
+export type DonnéesCréationRésultatTestVraiFaux = {
+  utilisateur: Utilisateur;
+  score: string;
+} & DonnéesCréationRésultatTest;
+
+export class RésultatTestVraiFaux extends RésultatTest {
+  declare public readonly utilisateur: Utilisateur;
   public readonly score: string;
 
-  constructor({ utilisateur, score }: { utilisateur: Utilisateur; score: string }) {
-    this.id = uuidv7();
-    this.utilisateur = utilisateur;
+  constructor({ id, dateRealisation, utilisateur, score }: DonnéesCréationRésultatTestVraiFaux) {
+    super({ id, dateRealisation, utilisateur });
+
     this.score = score;
   }
 }
