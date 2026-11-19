@@ -1,7 +1,7 @@
 import { CodeRégion } from '../../referentielRegions.js';
 import { CodeSecteur } from '../../referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../referentielTranchesEffectifEtablissement.js';
-import { Utilisateur } from '../../utilisateur.js';
+import { EntrepôtRésultatTest } from '../resultat-test/entrepotResultatTest.js';
 import { RésultatTestMaturité } from './resultatTestMaturite.js';
 
 export type FiltreResultatsTest = {
@@ -10,21 +10,8 @@ export type FiltreResultatsTest = {
   codeTrancheEffectif?: CodeTrancheEffectif;
 };
 
-export interface EntrepôtRésultatTestMaturité {
-  ajoute(resultatTest: RésultatTestMaturité): Promise<void>;
-
-  parId(id: string): Promise<RésultatTestMaturité | undefined>;
-
-  metsÀjour(resultatTest: RésultatTestMaturité): Promise<void>;
-
-  dernierPourUtilisateur(utilisateur: Utilisateur): Promise<RésultatTestMaturité | undefined>;
-
+export interface EntrepôtRésultatTestMaturité extends EntrepôtRésultatTest<RésultatTestMaturité> {
   ceuxDeSessionGroupe(code: string): Promise<RésultatTestMaturité[]>;
-
-  taille(): Promise<number>;
   tousEnOmettantUtilisateur(): Promise<RésultatTestMaturité[]>;
-
-  pourUtilisateur(utilisateur: Utilisateur): Promise<RésultatTestMaturité[]>;
-
   parFiltresEnOmettantUtilisateur(filtres: FiltreResultatsTest): Promise<RésultatTestMaturité[]>;
 }
