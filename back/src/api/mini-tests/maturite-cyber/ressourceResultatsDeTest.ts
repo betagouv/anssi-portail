@@ -4,7 +4,7 @@ import { Request, Response, Router } from 'express';
 import z from 'zod';
 import { ProprieteTestRevendiquee } from '../../../bus/evenements/proprieteTestRevendiquee.js';
 import { TestRealise } from '../../../bus/evenements/testRealise.js';
-import { ResultatTestMaturite } from '../../../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { RésultatTestMaturité } from '../../../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { ConfigurationServeur } from '../../configurationServeur.js';
 import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../../zod.js';
@@ -32,7 +32,7 @@ const ressourceResultatsDeTest = ({
         const { tailleOrganisation, region, secteur, reponses, codeSessionGroupe } = requete.body;
 
         const utilisateur = requete.utilisateur;
-        const resultatTest = new ResultatTestMaturite({
+        const resultatTest = new RésultatTestMaturité({
           tailleOrganisation: tailleOrganisation ?? undefined,
           region: region ?? undefined,
           secteur: secteur ?? undefined,

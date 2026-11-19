@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import {
   ReponsesTestMaturite,
-  ResultatTestMaturite,
+  RésultatTestMaturité,
 } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { SessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 
 const resultatAvecReponses = (reponses: ReponsesTestMaturite, codeSession: string) =>
-  new ResultatTestMaturite({
+  new RésultatTestMaturité({
     region: 'FR-NOR',
     secteur: 'J',
     tailleOrganisation: '51',

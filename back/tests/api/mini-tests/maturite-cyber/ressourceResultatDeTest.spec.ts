@@ -4,7 +4,7 @@ import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc/index.js';
 import { ProprieteTestRevendiquee } from '../../../../src/bus/evenements/proprieteTestRevendiquee.js';
-import { ResultatTestMaturite } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { RésultatTestMaturité } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { CodeRégion } from '../../../../src/metier/referentielRegions.js';
 import { CodeSecteur } from '../../../../src/metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../../../src/metier/referentielTranchesEffectifEtablissement.js';
@@ -55,7 +55,7 @@ describe('La ressource qui gère un résultat de test', () => {
 
   describe('sur requête PUT', () => {
     it('refuse la mise à jour si le résultat de test a déjà été revendiqué par un autre utilisateur', async () => {
-      const resultatDeHector = new ResultatTestMaturite({
+      const resultatDeHector = new RésultatTestMaturité({
         ...donneesResultatTestCorrectes(),
         id: 'r1',
       });
@@ -71,7 +71,7 @@ describe('La ressource qui gère un résultat de test', () => {
     });
 
     it('ne fait rien si le résultat a déjà été revendiqué par cet utilisateur', async () => {
-      const resultatDeJeanne = new ResultatTestMaturite({
+      const resultatDeJeanne = new RésultatTestMaturité({
         ...donneesResultatTestCorrectes(),
         id: 'r1',
       });
@@ -86,7 +86,7 @@ describe('La ressource qui gère un résultat de test', () => {
 
     it("associe l'utilisateur courant au résultat de test", async () => {
       await entrepôtRésultatTestMaturité.ajoute(
-        new ResultatTestMaturite({
+        new RésultatTestMaturité({
           ...donneesResultatTestCorrectes(),
           id: 'r1',
         })
@@ -107,7 +107,7 @@ describe('La ressource qui gère un résultat de test', () => {
 
     it('publie un événement de revendication de propriété du test', async () => {
       await entrepôtRésultatTestMaturité.ajoute(
-        new ResultatTestMaturite({
+        new RésultatTestMaturité({
           ...donneesResultatTestCorrectes(),
           id: 'r1',
         })

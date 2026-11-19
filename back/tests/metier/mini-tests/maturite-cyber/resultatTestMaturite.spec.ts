@@ -3,7 +3,7 @@ import { AdaptateurRechercheEntreprise } from '../../../../src/infra/adaptateurR
 import {
   IdNiveauMaturite,
   ReponsesTestMaturite,
-  ResultatTestMaturite,
+  RésultatTestMaturité,
 } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { fauxAdaptateurRechercheEntreprise } from '../../../api/fauxObjets.js';
 import { jeanneDupont } from '../../../api/objetsPretsALEmploi.js';
@@ -18,7 +18,7 @@ const reponsesParDefaut: ReponsesTestMaturite = {
 };
 
 const resultatAvecReponses = (reponses: ReponsesTestMaturite = reponsesParDefaut) =>
-  new ResultatTestMaturite({
+  new RésultatTestMaturité({
     region: 'FR-NOR',
     secteur: 'J',
     tailleOrganisation: '51',
@@ -124,7 +124,7 @@ describe('Le résultat du test de maturité', () => {
       },
     };
     it('on recopie les informations de la recherche entreprise', async () => {
-      const monResultat = new ResultatTestMaturite({
+      const monResultat = new RésultatTestMaturité({
         reponses: reponsesParDefaut,
         region: undefined,
         secteur: undefined,
@@ -139,7 +139,7 @@ describe('Le résultat du test de maturité', () => {
     });
 
     it('on ne recopie pas les informations de la recherche entreprise déjà présentes dans le test', async () => {
-      const monResultat = new ResultatTestMaturite({
+      const monResultat = new RésultatTestMaturité({
         reponses: reponsesParDefaut,
         region: 'FR-20R',
         secteur: 'A',

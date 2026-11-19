@@ -1,7 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
 import { ResultatRechercheEntreprise } from '../../../infra/adaptateurRechercheEntreprise.js';
-import { ResultatTestMaturite } from '../../../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { RésultatTestMaturité } from '../../../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { CodeRégion, estCodeRegion, regionParCode } from '../../../metier/referentielRegions.js';
 import { Secteur, secteurParCode } from '../../../metier/referentielSecteurs.js';
 import { TrancheEffectif, trancheEffectifParCode } from '../../../metier/referentielTranchesEffectifEtablissement.js';
@@ -19,7 +19,7 @@ type PrésentationOrganisation = {
 };
 
 const présentationOrganisation = (
-  résulatTest: ResultatTestMaturite,
+  résulatTest: RésultatTestMaturité,
   résultatRechercheOrganisation?: ResultatRechercheEntreprise
 ): PrésentationOrganisation | undefined => {
   const codeTrancheEffectif = résultatRechercheOrganisation?.codeTrancheEffectif ?? résulatTest.tailleOrganisation;

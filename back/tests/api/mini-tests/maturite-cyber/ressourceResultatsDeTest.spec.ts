@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc/index.js';
 import { ProprieteTestRevendiquee } from '../../../../src/bus/evenements/proprieteTestRevendiquee.js';
 import { TestRealise } from '../../../../src/bus/evenements/testRealise.js';
-import { ResultatTestMaturite } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { RésultatTestMaturité } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { Utilisateur } from '../../../../src/metier/utilisateur.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
@@ -392,7 +392,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       });
 
       async function ajouteUnResultatDeTest(id: string, utilisateur: Utilisateur) {
-        const resultatDunUtilisateur = new ResultatTestMaturite({
+        const resultatDunUtilisateur = new RésultatTestMaturité({
           secteur: 'A',
           region: 'FR-NOR',
           id,
@@ -431,7 +431,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       });
 
       it('renvoie les informations nécessaires du test', async () => {
-        const testDeJeanne = new ResultatTestMaturite({
+        const testDeJeanne = new RésultatTestMaturité({
           secteur: 'A',
           region: 'FR-NOR',
           id: 'test-id-1',

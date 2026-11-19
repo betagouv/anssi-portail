@@ -7,7 +7,7 @@ import { EntrepôtRésultatTestMaturité } from '../../../../src/metier/mini-tes
 import { EntrepotSessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
 import {
   DonneesCreationResultatTestMaturite,
-  ResultatTestMaturite,
+  RésultatTestMaturité,
 } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { SessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
@@ -76,7 +76,7 @@ describe("La ressource qui gère les résultats d'une session de groupe", () => 
       const sessionDeGroupe = await SessionDeGroupe.cree(generateurCodeSessionDeGroupe('ABC2ED'));
       await entrepotSessionDeGroupe.ajoute(sessionDeGroupe);
       await entrepôtRésultatTestMaturité.ajoute(
-        new ResultatTestMaturite({
+        new RésultatTestMaturité({
           ...donneesResultatTest,
           codeSessionGroupe: 'ABC2ED',
         })

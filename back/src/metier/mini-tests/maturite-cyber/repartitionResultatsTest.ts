@@ -1,4 +1,4 @@
-import { IdNiveauMaturite, IdRubrique, ResultatTestMaturite, tousLesIdRubrique } from './resultatTestMaturite.js';
+import { IdNiveauMaturite, IdRubrique, RésultatTestMaturité, tousLesIdRubrique } from './resultatTestMaturite.js';
 
 type ScoresPourUnNiveau = {
   id: IdNiveauMaturite;
@@ -12,7 +12,7 @@ export type RepartitionResultatsTestPourUnNiveau = {
 };
 
 export class RepartitionResultatsTest {
-  constructor(private readonly resultatsDeTest: ResultatTestMaturite[]) {}
+  constructor(private readonly resultatsDeTest: RésultatTestMaturité[]) {}
 
   calculeRepartitionParNiveau = () => {
     const listeDesScoresParNiveau = this.resultatsDeTest.reduce((accumulateur, test) => {

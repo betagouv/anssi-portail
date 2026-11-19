@@ -39,7 +39,7 @@ const ressourceResultatDeTest = ({
 
       await resultatTest.revendiquePropriete(utilisateur, adaptateurRechercheEntreprise);
 
-      await entrepôtRésultatTestMaturité.metsAjour(resultatTest);
+      await entrepôtRésultatTestMaturité.metsÀjour(resultatTest);
       await busEvenements.publie(
         new ProprieteTestRevendiquee({
           utilisateur,
