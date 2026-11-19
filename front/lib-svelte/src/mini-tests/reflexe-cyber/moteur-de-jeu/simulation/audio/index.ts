@@ -1,4 +1,5 @@
-import { détecteRendu } from '../../../../../utils/rendu.svelte';
+import { estServeur } from '$plateforme/environnement';
+import { requêteMédiaMobile } from '../../../../../utils/rendu.svelte';
 import { sonothèque } from './sonotheque';
 
 export type Son =
@@ -11,12 +12,8 @@ type FenêtreAvecWebkitAudioContext = Window &
 
 let contexteAudio: AudioContext | undefined;
 
-const rendu = détecteRendu();
-
-const audioActivéSurÉcran = !rendu.estMobile;
-
 export const prépareAudio = async (): Promise<AudioContext | undefined> => {
-  if (!audioActivéSurÉcran) return;
+  if (estServeur || window.matchMedia(requêteMédiaMobile).matches) return;
 
   const ConstructeurAudioContext = window.AudioContext || (window as FenêtreAvecWebkitAudioContext).webkitAudioContext;
   if (!ConstructeurAudioContext) return;

@@ -3,11 +3,13 @@ export type Affichage = 'mobile' | 'tablette' | 'bureau';
 const seuilMd = '767px';
 const seuilLg = '992px';
 
+export const requêteMédiaMobile = `(width < ${seuilMd})`;
+
 export const détecteRendu = () => {
   let affichage: Affichage = $state('bureau');
 
   $effect(() => {
-    const requêteMédiaEstMobile = window.matchMedia(`(width < ${seuilMd})`);
+    const requêteMédiaEstMobile = window.matchMedia(requêteMédiaMobile);
     const requêteMédiaEstTablette = window.matchMedia(`(${seuilMd} <= width < ${seuilLg})`);
     const requêteMédiaEstBureauEtPlus = window.matchMedia(`(width >= ${seuilLg})`);
 
