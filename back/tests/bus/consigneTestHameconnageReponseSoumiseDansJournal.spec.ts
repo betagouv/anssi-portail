@@ -15,6 +15,7 @@ describe("L'abonnement qui consigne une réponse au test d'hameçonnage dans le 
     };
     const adaptateurHorloge: AdaptateurHorloge = {
       maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
+      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
     };
 
     await consigneTestHameconnageReponseSoumiseDansJournal({
@@ -59,6 +60,7 @@ describe("L'abonnement qui consigne une réponse au test d'hameçonnage dans le 
     };
     const adaptateurHorloge: AdaptateurHorloge = {
       maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
+      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
     };
     await consigneTestHameconnageReponseSoumiseDansJournal({
       adaptateurJournal,

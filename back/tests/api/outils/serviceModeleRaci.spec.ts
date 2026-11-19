@@ -10,6 +10,11 @@ import { fauxFournisseurDeChemin } from '../fauxObjets.js';
 describe('Le service du modèle de RACI', () => {
   const fauxAdaptateurHorloge: AdaptateurHorloge = {
     maintenant: () => Temporal.PlainDate.from('2018-11-17').toZonedDateTime(Temporal.Now.timeZoneId()).toInstant(),
+    maintenantZoné: () =>
+      Temporal.PlainDate.from('2018-11-17')
+        .toZonedDateTime(Temporal.Now.timeZoneId())
+        .toInstant()
+        .toZonedDateTimeISO(Temporal.Now.timeZoneId()),
   };
   const récupèreModèleExcel = async () => {
     const service = new ServiceModèleRACI(fauxFournisseurDeChemin, fauxAdaptateurHorloge);
@@ -35,6 +40,7 @@ describe('Le service du modèle de RACI', () => {
     vi.spyOn(Temporal.Now, 'timeZoneId').mockReturnValue(fuseau);
     const service = new ServiceModèleRACI(fauxFournisseurDeChemin, {
       maintenant: () => Temporal.Instant.from('2026-01-01T23:30:00Z'),
+      maintenantZoné: () => Temporal.Instant.from('2026-01-01T23:30:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
     });
 
     const résultat = await loadWorkbook(fromBuffer(await service.génèreModèle()));

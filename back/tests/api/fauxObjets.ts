@@ -384,6 +384,7 @@ export const fauxGestionnaireRequêtesComplémentaires: GestionnaireRequêtesCom
 
 export const fauxAdaptateurHorloge: AdaptateurHorloge = {
   maintenant: () => Temporal.Now.instant(),
+  maintenantZoné: () => Temporal.Now.zonedDateTimeISO(),
 };
 
 const entrepôtContact = new EntrepôtContactStatique();

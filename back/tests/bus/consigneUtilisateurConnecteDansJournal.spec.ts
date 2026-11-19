@@ -14,6 +14,7 @@ describe("L'abonnement qui consigne la connexion d'un utilisateur dans le journa
     };
     const adaptateurHorloge: AdaptateurHorloge = {
       maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
+      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
     };
 
     await consigneUtilisateurConnecteDansJournal({

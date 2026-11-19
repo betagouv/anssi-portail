@@ -16,6 +16,7 @@ describe("L'abonnement qui consigne l'évènement de changement de parcours dans
     };
     const adaptateurHorloge: AdaptateurHorloge = {
       maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
+      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
     };
     const suivi = {
       campagne: 'campagne_2026_NA',
