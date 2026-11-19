@@ -2,7 +2,7 @@ import { CodeRégion } from '../../referentielRegions.js';
 import { CodeSecteur } from '../../referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../referentielTranchesEffectifEtablissement.js';
 import { Utilisateur } from '../../utilisateur.js';
-import { ResultatTestMaturite } from './resultatTestMaturite.js';
+import { RésultatTestMaturité } from './resultatTestMaturite.js';
 
 export type FiltreResultatsTest = {
   codeSecteur?: CodeSecteur;
@@ -11,20 +11,20 @@ export type FiltreResultatsTest = {
 };
 
 export interface EntrepôtRésultatTestMaturité {
-  ajoute(resultatTest: ResultatTestMaturite): Promise<void>;
+  ajoute(resultatTest: RésultatTestMaturité): Promise<void>;
 
-  parId(id: string): Promise<ResultatTestMaturite | undefined>;
+  parId(id: string): Promise<RésultatTestMaturité | undefined>;
 
-  metsAjour(resultatTest: ResultatTestMaturite): Promise<void>;
+  metsÀjour(resultatTest: RésultatTestMaturité): Promise<void>;
 
-  dernierPourUtilisateur(utilisateur: Utilisateur): Promise<ResultatTestMaturite | undefined>;
+  dernierPourUtilisateur(utilisateur: Utilisateur): Promise<RésultatTestMaturité | undefined>;
 
-  ceuxDeSessionGroupe(code: string): Promise<ResultatTestMaturite[]>;
+  ceuxDeSessionGroupe(code: string): Promise<RésultatTestMaturité[]>;
 
   taille(): Promise<number>;
-  tousEnOmettantUtilisateur(): Promise<ResultatTestMaturite[]>;
+  tousEnOmettantUtilisateur(): Promise<RésultatTestMaturité[]>;
 
-  pourUtilisateur(utilisateur: Utilisateur): Promise<ResultatTestMaturite[]>;
+  pourUtilisateur(utilisateur: Utilisateur): Promise<RésultatTestMaturité[]>;
 
-  parFiltresEnOmettantUtilisateur(filtres: FiltreResultatsTest): Promise<ResultatTestMaturite[]>;
+  parFiltresEnOmettantUtilisateur(filtres: FiltreResultatsTest): Promise<RésultatTestMaturité[]>;
 }

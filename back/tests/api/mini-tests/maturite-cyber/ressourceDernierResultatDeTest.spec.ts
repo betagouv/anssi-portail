@@ -6,7 +6,7 @@ import { creeServeur } from '../../../../src/api/msc/index.js';
 import { AdaptateurRechercheEntreprise } from '../../../../src/infra/adaptateurRechercheEntreprise.js';
 import {
   DonneesCreationResultatTestMaturite,
-  ResultatTestMaturite,
+  RésultatTestMaturité,
 } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { CodeRégion } from '../../../../src/metier/referentielRegions.js';
 import { CodeSecteur } from '../../../../src/metier/referentielSecteurs.js';
@@ -60,7 +60,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
   async function ajouteResultatDeTestPourJeanne(
     donneesSupplementaires: Partial<DonneesCreationResultatTestMaturite> = {}
   ) {
-    const resultatDeJeanne = new ResultatTestMaturite({
+    const resultatDeJeanne = new RésultatTestMaturité({
       ...donneesResultatTestCorrectes(),
       ...donneesSupplementaires,
     });
@@ -122,7 +122,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
         let codeTrancheEffectifRenvoyeParRechercheEntreprise: CodeTrancheEffectif | undefined = '11';
         let codeSecteurRenvoyeParRechercheEntreprise: CodeSecteur | undefined;
         let codeRegionRenvoyeParRechercheEntreprise: CodeRégion | undefined = 'FR-971';
-        let resultatTestMaturite: ResultatTestMaturite;
+        let resultatTestMaturite: RésultatTestMaturité;
 
         beforeEach(async () => {
           resultatTestMaturite = await ajouteResultatDeTestPourJeanne();
@@ -250,7 +250,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
       const requeteGET = async () => await request(serveur).get('/api/resultats-test/dernier').send();
 
       it('renvoie une erreur 401', async () => {
-        await entrepôtRésultatTestMaturité.ajoute(new ResultatTestMaturite(donneesResultatTestCorrectes()));
+        await entrepôtRésultatTestMaturité.ajoute(new RésultatTestMaturité(donneesResultatTestCorrectes()));
 
         const reponse = await requeteGET();
 

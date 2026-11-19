@@ -3,7 +3,7 @@ import { GenerateurCodeSessionDeGroupe } from './generateurCodeSessionDeGroupe.j
 import {
   IdNiveauMaturite,
   IdRubrique,
-  ResultatTestMaturite,
+  RésultatTestMaturité,
   tousLesIdNiveauMaturite,
   tousLesIdRubrique,
 } from './resultatTestMaturite.js';
@@ -25,7 +25,7 @@ const moyenne = (numbers: number[]) => {
   return numbers.reduce((acc, n) => acc + n, 0) / numbers.length;
 };
 
-const resumeNiveau = (resultatsDuNiveau: ResultatTestMaturite[]): ResumeNiveauMaturite => ({
+const resumeNiveau = (resultatsDuNiveau: RésultatTestMaturité[]): ResumeNiveauMaturite => ({
   total: resultatsDuNiveau.length,
   moyennes: tousLesIdRubrique.reduce(
     (accumulateur, idRubrique) => ({
@@ -47,12 +47,12 @@ export class SessionDeGroupe {
   async resultatSession(entrepotResultatTest: EntrepôtRésultatTestMaturité): Promise<ResultatSession> {
     const resultatsTest = await entrepotResultatTest.ceuxDeSessionGroupe(this.code);
 
-    const resultatsParNiveau: Record<IdNiveauMaturite, ResultatTestMaturite[]> = tousLesIdNiveauMaturite.reduce(
+    const resultatsParNiveau: Record<IdNiveauMaturite, RésultatTestMaturité[]> = tousLesIdNiveauMaturite.reduce(
       (previousValue, idNiveau) => ({
         ...previousValue,
         [idNiveau]: resultatsTest.filter((r) => r.niveau() === idNiveau),
       }),
-      {} as Record<IdNiveauMaturite, ResultatTestMaturite[]>
+      {} as Record<IdNiveauMaturite, RésultatTestMaturité[]>
     );
 
     return {

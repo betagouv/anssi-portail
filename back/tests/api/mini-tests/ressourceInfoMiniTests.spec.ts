@@ -3,7 +3,7 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
-import { ResultatTestMaturite } from '../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { RésultatTestMaturité } from '../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { RéactionMiniTest } from '../../../src/metier/mini-tests/reactionMiniTest.js';
 import { EntrepotReactionMiniTestMemoire } from '../../persistance/entrepotReactionMiniTestMemoire.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../persistance/entrepotResultatTestMaturiteMemoire.js';
@@ -53,7 +53,7 @@ describe('La ressource des informations des mini-tests', () => {
     it('renvoie le compteur des tests maturité', async () => {
       for (let i = 0; i < 252; i++) {
         await entrepôtRésultatTestMaturité.ajoute(
-          new ResultatTestMaturite({ region: 'FR-NAQ', secteur: 'A', tailleOrganisation: '00', reponses: { a: 0 } })
+          new RésultatTestMaturité({ region: 'FR-NAQ', secteur: 'A', tailleOrganisation: '00', reponses: { a: 0 } })
         );
       }
 

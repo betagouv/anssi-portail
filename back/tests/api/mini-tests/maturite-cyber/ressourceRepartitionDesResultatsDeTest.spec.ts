@@ -3,7 +3,7 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc/index.js';
-import { ResultatTestMaturite } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { RésultatTestMaturité } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { ResultatTestMaturiteCreateur } from '../../../metier/mini-tests/maturite-cyber/ResultatTestMaturiteCreateur.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
@@ -80,7 +80,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
 
     it('répond 204 si trop peu de résultats', async () => {
       entrepôtRésultatTestMaturité.ajoute(
-        new ResultatTestMaturite({
+        new RésultatTestMaturité({
           secteur: 'A',
           region: 'FR-NOR',
           id: 'test-id-1',

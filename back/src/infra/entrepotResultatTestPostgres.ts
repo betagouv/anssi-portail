@@ -4,7 +4,7 @@ import {
   EntrepôtRésultatTestMaturité,
   FiltreResultatsTest,
 } from '../metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
-import { ResultatTestMaturite } from '../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { RésultatTestMaturité } from '../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { Utilisateur } from '../metier/utilisateur.js';
 import { AdaptateurHachage } from './adaptateurHachage.js';
 import { EntrepotUtilisateurMPAPostgres } from './entrepotUtilisateurMPAPostgres.js';
@@ -26,7 +26,7 @@ export class EntrepotResultatTestPostgres implements EntrepôtRésultatTestMatur
     this.entrepotUtilisateur = entrepotUtilisateur;
   }
 
-  async ceuxDeSessionGroupe(code: string): Promise<ResultatTestMaturite[]> {
+  async ceuxDeSessionGroupe(code: string): Promise<RésultatTestMaturité[]> {
     const donnees = await this.knex('resultats_test').where({
       code_session_groupe: code,
     });
@@ -43,7 +43,7 @@ export class EntrepotResultatTestPostgres implements EntrepôtRésultatTestMatur
         ? await this.entrepotUtilisateur.parEmailHache(donneesTestMaturite.email_utilisateur_hache)
         : undefined;
 
-    const resultat = new ResultatTestMaturite({
+    const resultat = new RésultatTestMaturité({
       ...donneesTestMaturite,
       tailleOrganisation: donneesTestMaturite.taille_organisation,
       codeSessionGroupe: donneesTestMaturite.code_session_groupe,
@@ -53,12 +53,12 @@ export class EntrepotResultatTestPostgres implements EntrepôtRésultatTestMatur
     return resultat;
   }
 
-  async parId(id: string): Promise<ResultatTestMaturite | undefined> {
+  async parId(id: string): Promise<RésultatTestMaturité | undefined> {
     const donnees = await this.knex('resultats_test').where({ id }).first();
     return donnees ? this.traduitEnResultatTestMaturite(donnees) : undefined;
   }
 
-  async dernierPourUtilisateur(utilisateur: Utilisateur): Promise<ResultatTestMaturite | undefined> {
+  async dernierPourUtilisateur(utilisateur: Utilisateur): Promise<RésultatTestMaturité | undefined> {
     const donnees = await this.knex('resultats_test')
       .where({
         email_utilisateur_hache: this.adaptateurHachage.hache(utilisateur.email),
@@ -68,7 +68,7 @@ export class EntrepotResultatTestPostgres implements EntrepôtRésultatTestMatur
     return donnees ? this.traduitEnResultatTestMaturite(donnees) : undefined;
   }
 
-  async metsAjour(resultatTest: ResultatTestMaturite): Promise<void> {
+  async metsÀjour(resultatTest: RésultatTestMaturité): Promise<void> {
     await this.knex('resultats_test')
       .where({ id: resultatTest.id })
       .update({
@@ -78,7 +78,7 @@ export class EntrepotResultatTestPostgres implements EntrepôtRésultatTestMatur
       });
   }
 
-  async ajoute(resultatTest: ResultatTestMaturite): Promise<void> {
+  async ajoute(resultatTest: RésultatTestMaturité): Promise<void> {
     const { utilisateur, tailleOrganisation, codeSessionGroupe, dateRealisation, ...reste } = resultatTest;
     await this.knex('resultats_test').insert({
       ...reste,
@@ -94,12 +94,12 @@ export class EntrepotResultatTestPostgres implements EntrepôtRésultatTestMatur
     return Number(resultat[0].count);
   }
 
-  async tousEnOmettantUtilisateur(): Promise<ResultatTestMaturite[]> {
+  async tousEnOmettantUtilisateur(): Promise<RésultatTestMaturité[]> {
     const resultats = await this.knex('resultats_test');
     return Promise.all(resultats.map((resultat) => this.traduitEnResultatTestMaturite(resultat, false)));
   }
 
-  async pourUtilisateur(utilisateur: Utilisateur): Promise<ResultatTestMaturite[]> {
+  async pourUtilisateur(utilisateur: Utilisateur): Promise<RésultatTestMaturité[]> {
     const resultats = await this.knex('resultats_test').where({
       email_utilisateur_hache: this.adaptateurHachage.hache(utilisateur.email),
     });
@@ -110,7 +110,7 @@ export class EntrepotResultatTestPostgres implements EntrepôtRésultatTestMatur
     codeSecteur,
     codeRegion,
     codeTrancheEffectif,
-  }: FiltreResultatsTest): Promise<ResultatTestMaturite[]> {
+  }: FiltreResultatsTest): Promise<RésultatTestMaturité[]> {
     const resultats = await this.knex('resultats_test').where((builder) => {
       if (codeSecteur) builder = builder.where('secteur', codeSecteur);
       if (codeRegion) builder = builder.where('region', codeRegion);

@@ -30,7 +30,7 @@ export const tousLesIdRubrique = [
 
 export type IdRubrique = (typeof tousLesIdRubrique)[number];
 
-export class ResultatTestMaturite extends RésultatTest {
+export class RésultatTestMaturité extends RésultatTest {
   region: CodeRégion | undefined;
   secteur: CodeSecteur | undefined;
   tailleOrganisation: CodeTrancheEffectif | undefined;

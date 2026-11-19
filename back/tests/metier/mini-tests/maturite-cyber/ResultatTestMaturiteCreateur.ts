@@ -2,7 +2,7 @@ import { EntrepôtRésultatTestMaturité } from '../../../../src/metier/mini-tes
 import {
   IdNiveauMaturite,
   ReponsesTestMaturite,
-  ResultatTestMaturite,
+  RésultatTestMaturité,
 } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { CodeRégion } from '../../../../src/metier/referentielRegions.js';
 import { CodeSecteur } from '../../../../src/metier/referentielSecteurs.js';
@@ -75,7 +75,7 @@ export class ResultatTestMaturiteCreateur {
   }
 
   cree = async () => {
-    const resultatConstruit = new ResultatTestMaturite({
+    const resultatConstruit = new RésultatTestMaturité({
       region: this.region,
       secteur: this.secteur,
       tailleOrganisation: this.tailleOrganisation,

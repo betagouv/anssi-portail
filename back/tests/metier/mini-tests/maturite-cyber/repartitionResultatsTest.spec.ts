@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { RepartitionResultatsTest } from '../../../../src/metier/mini-tests/maturite-cyber/repartitionResultatsTest.js';
-import { ResultatTestMaturite } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { RésultatTestMaturité } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { ResultatTestMaturiteCreateur } from './ResultatTestMaturiteCreateur.js';
 
 describe('Les répartitions des résultats de test', () => {
   describe('Lorsque le filtre est actif', () => {
     it("calcule le ratio d'un niveau", async () => {
       const createur = new ResultatTestMaturiteCreateur();
-      const resultats: ResultatTestMaturite[] = [
+      const resultats: RésultatTestMaturité[] = [
         ...(await createur.deNiveau('insuffisant').creePlusieurs(3)),
         await createur.deNiveau('emergent').cree(),
       ];
