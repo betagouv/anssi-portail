@@ -1,9 +1,7 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { type Express } from 'express';
 import request from 'supertest';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
-import { OutilTéléchargé } from '../../../src/bus/evenements/outilTelecharge.js';
 import { AdaptateurHorloge } from '../../../src/infra/adaptateurHorloge.js';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
 import { MockBusEvenement } from '../../bus/busPourLesTests.js';
@@ -47,12 +45,6 @@ describe("La ressource du rappel de mise à jour de l'inventaire des composants 
         : ressource;
     };
 
-    it('réponds 200', async () => {
-      const { status } = await récupèrelÉvènement();
-
-      expect(status).toBe(HttpStatusCode.Ok);
-    });
-
     it('sers un fichier au format ics', async () => {
       const { headers } = await récupèrelÉvènement();
 
@@ -86,47 +78,6 @@ describe("La ressource du rappel de mise à jour de l'inventaire des composants 
       expect(lignes[21]).toBe('END:VALARM');
       expect(lignes[22]).toBe('END:VEVENT');
       expect(lignes[23]).toBe('END:VCALENDAR');
-    });
-
-    it('renvoi un évènement qui a lieu dans un an entre 9h et 9h30', async () => {
-      adaptateurHorloge.maintenantZoné = () =>
-        Temporal.Instant.from('2026-10-14T05:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId());
-
-      const { text } = await récupèrelÉvènement();
-
-      const lignes = text.split('\r\n');
-      expect(lignes[10]).toBe('DTSTART:20271014T090000Z');
-      expect(lignes[11]).toBe('DTEND:20271014T093000Z');
-    });
-
-    it.each([
-      ['Europe/Paris', '20250228T080000Z', '20250228T083000Z'],
-      ['America/Los_Angeles', '20250228T170000Z', '20250228T173000Z'],
-    ])('calcule le rappel selon la date locale en année bissextile (%s)', async (fuseau, horaireDébut, horaireFin) => {
-      vi.spyOn(Temporal.Now, 'timeZoneId').mockReturnValue(fuseau);
-      adaptateurHorloge.maintenantZoné = () =>
-        Temporal.Instant.from('2024-02-28T23:30:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId());
-
-      const { text } = await récupèrelÉvènement();
-
-      const lignes = text.split('\r\n');
-      expect(lignes[10]).toBe(`DTSTART:${horaireDébut}`);
-      expect(lignes[11]).toBe(`DTEND:${horaireFin}`);
-    });
-
-    it('refuse un utilisateur non connecté', async () => {
-      const { status } = await récupèrelÉvènement('non-connecté');
-
-      expect(status).toBe(HttpStatusCode.Unauthorized);
-    });
-
-    it('publie un évènement de téléchargement', async () => {
-      await récupèrelÉvènement();
-
-      expect(busEvenements.aRecuUnEvenement(OutilTéléchargé)).toBe(true);
-      const évènement = busEvenements.recupereEvenement(OutilTéléchargé);
-      expect(évènement!.outil).toBe('rappel-mise-a-jour-inventaire-composants-obsoletes.ics');
-      expect(évènement!.email).toBe(jeanneDupont.email);
     });
   });
 });

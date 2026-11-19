@@ -1,15 +1,19 @@
 import { Express, RequestHandler } from 'express';
 import { Outil } from '../../../../metier/outils/outils.js';
+import { RappelAnnuel } from '../../../../metier/outils/rappelAnnuel.js';
+import {
+  rappelMiseAJourAnnuaireContacts,
+  rappelMiseAJourInventaireComposantsObsolètes,
+  rappelMiseAJourListeDActivités,
+  rappelMiseAJourListeInterconnexions,
+  rappelMiseAJourListePrestatairesEtFournisseurs,
+} from '../../../../metier/outils/rappelsDeMiseAJour.js';
 import { ConfigurationServeur } from '../../../configurationServeur.js';
 import { ressourceCampagneDeSensibilisation } from '../../../outils/campagneDeSensibilisation/ressourceCampagneDeSensibilisation.js';
 import { ressourceModeleAnnuaireDeCrise } from '../../../outils/modeleAnnuaireDeCrise/ressourceModeleAnnuaireDeCrise.js';
 import { ressourceModèleXslxGénérique } from '../../../outils/modeleXslxGenerique/ressourceModeleXslx.js';
 import { ServiceModèleXslx } from '../../../outils/modeleXslxGenerique/serviceModeleXslx.js';
-import { ressourceRappelMiseAJourAnnuaireContacts } from '../../../outils/ressourceRappelMiseAJourAnnuaireContacts.js';
-import { ressourceRappelMiseAJourInventaireComposantsObsoletes } from '../../../outils/ressourceRappelMiseAJourInventaireComposantsObsoletes.js';
-import { ressourceRappelMiseAJourListeDActivités } from '../../../outils/ressourceRappelMiseÀJourListeDActivites.js';
-import { ressourceRappelMiseAJourListeInterconnexions } from '../../../outils/ressourceRappelMiseAJourListeInterconnexions.js';
-import { ressourceRappelMiseAJourListePrestatairesEtFournisseurs } from '../../../outils/ressourceRappelMiseAJourListePrestatairesEtFournisseurs.js';
+import { ressourceRappelIcsGénérique } from '../../../outils/rappelIcsGenerique/ressourceRappelIcs.js';
 import { ressourceRetoursSurOutil } from '../../../outils/ressourceRetoursSurOutil.js';
 import { enregistreRouteDansExpress } from '../../enregistreRoutes.js';
 
@@ -40,26 +44,17 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
   });
 
   /// OUTILS ICS
-  enregistreRoute(
-    '/rappel-mise-a-jour-annuaire-contacts.ics',
-    ressourceRappelMiseAJourAnnuaireContacts(configurationServeur)
-  );
-  enregistreRoute(
-    '/rappel-mise-a-jour-liste-d-activites.ics',
-    ressourceRappelMiseAJourListeDActivités(configurationServeur)
-  );
-  enregistreRoute(
-    '/rappel-mise-a-jour-liste-prestataires-et-fournisseurs.ics',
-    ressourceRappelMiseAJourListePrestatairesEtFournisseurs(configurationServeur)
-  );
-  enregistreRoute(
-    '/rappel-mise-a-jour-liste-interconnexions.ics',
-    ressourceRappelMiseAJourListeInterconnexions(configurationServeur)
-  );
-  enregistreRoute(
-    '/rappel-mise-a-jour-inventaire-composants-obsoletes.ics',
-    ressourceRappelMiseAJourInventaireComposantsObsoletes(configurationServeur)
-  );
+  (
+    [
+      ['rappel-mise-a-jour-annuaire-contacts.ics', rappelMiseAJourAnnuaireContacts],
+      ['rappel-mise-a-jour-liste-d-activites.ics', rappelMiseAJourListeDActivités],
+      ['rappel-mise-a-jour-liste-prestataires-et-fournisseurs.ics', rappelMiseAJourListePrestatairesEtFournisseurs],
+      ['rappel-mise-a-jour-liste-interconnexions.ics', rappelMiseAJourListeInterconnexions],
+      ['rappel-mise-a-jour-inventaire-composants-obsoletes.ics', rappelMiseAJourInventaireComposantsObsolètes],
+    ] satisfies [Outil, RappelAnnuel][]
+  ).forEach(([outil, rappel]) => {
+    enregistreRoute(`/${outil}`, ressourceRappelIcsGénérique(configurationServeur, rappel, outil));
+  });
 
   /// OUTILS AUTRE
   enregistreRoute('/campagne-de-sensibilisation', ressourceCampagneDeSensibilisation(configurationServeur));
