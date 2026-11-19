@@ -22,7 +22,6 @@ import { AdaptateurCellar } from '../../src/infra/adaptateurCellar.js';
 import { adaptateurCompression } from '../../src/infra/adaptateurCompression.js';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { adaptateurMonAideCyberVide } from '../../src/infra/adaptateurMonAideCyberVide.js';
 import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi.js';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
@@ -35,6 +34,7 @@ import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js
 import { Parcours } from '../../src/metier/parcours.js';
 import { Rapporteur } from '../../src/metier/rapporteur.js';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests.js';
+import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 import { EntrepôtArticleMémoire } from '../persistance/entrepotArticleMemoire.js';
 import { EntrepotExigenceMemoire } from '../persistance/entrepotExigenceMemoire.js';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire.js';
@@ -382,10 +382,7 @@ export const fauxGestionnaireRequêtesComplémentaires: GestionnaireRequêtesCom
   },
 };
 
-export const fauxAdaptateurHorloge: AdaptateurHorloge = {
-  maintenant: () => Temporal.Now.instant(),
-  maintenantZoné: () => Temporal.Now.zonedDateTimeISO(),
-};
+export const fauxAdaptateurHorloge = fabriqueAdaptateurHorloge();
 
 const entrepôtContact = new EntrepôtContactStatique();
 

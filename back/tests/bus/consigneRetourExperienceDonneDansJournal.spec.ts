@@ -5,6 +5,7 @@ import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
+import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe("L'abonnement qui consigne le don d'un retour d’expérience dans le journal", () => {
   let adaptateurHorloge: AdaptateurHorloge;
@@ -20,10 +21,7 @@ describe("L'abonnement qui consigne le don d'un retour d’expérience dans le j
   };
 
   beforeEach(() => {
-    adaptateurHorloge = {
-      maintenant: () => Temporal.Now.instant(),
-      maintenantZoné: () => Temporal.Now.instant().toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    };
+    adaptateurHorloge = fabriqueAdaptateurHorloge();
     adaptateurHachage = {
       ...fauxAdaptateurHachage,
       hache: (valeur) => `${valeur}-hacheHMAC`,
@@ -37,10 +35,7 @@ describe("L'abonnement qui consigne le don d'un retour d’expérience dans le j
         evenementRecu = donneesEvenement;
       },
     };
-    adaptateurHorloge = {
-      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
-      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    };
+    adaptateurHorloge = fabriqueAdaptateurHorloge('2025-03-10T00:00:00Z');
 
     await consigneEvenementDansJournal()(
       new RetourExperienceDonne({

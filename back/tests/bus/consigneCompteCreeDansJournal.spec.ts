@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { consigneCompteCreeDansJournal } from '../../src/bus/consigneCompteCreeDansJournal.js';
 import { CompteCree } from '../../src/bus/evenements/compteCree.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
+import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe("L'abonnement qui consigne la création d'un compte utilisateur dans le journal", () => {
   it("consigne un évènement avec les données de l'utilisateur", async () => {
@@ -14,10 +14,7 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
         évènementReçu = donnéesÉvÈnement;
       },
     };
-    const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
-      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    };
+    const adaptateurHorloge = fabriqueAdaptateurHorloge('2025-03-10T00:00:00Z');
 
     const adaptateurHachage: AdaptateurHachage = {
       ...fauxAdaptateurHachage,
@@ -51,10 +48,7 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
         évènementReçu = donnéesÉvÈnement;
       },
     };
-    const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
-      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    };
+    const adaptateurHorloge = fabriqueAdaptateurHorloge('2025-03-10T00:00:00Z');
 
     const adaptateurHachage: AdaptateurHachage = {
       ...fauxAdaptateurHachage,

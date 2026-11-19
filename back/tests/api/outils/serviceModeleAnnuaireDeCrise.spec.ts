@@ -5,20 +5,13 @@ import { getSheetByIndex } from '@office-kit/xlsx/workbook';
 import { getCellsInRow } from '@office-kit/xlsx/worksheet';
 import { describe, expect, it } from 'vitest';
 import { ServiceModeleAnnuaireDeCrise } from '../../../src/api/outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
-import { AdaptateurHorloge } from '../../../src/infra/adaptateurHorloge.js';
 import { EntrepôtContactStatique } from '../../../src/infra/entrepotContactStatique.js';
 import { CodeRégion } from '../../../src/metier/referentielRegions.js';
+import { fabriqueAdaptateurHorloge } from '../../infra/adaptateurHorlogePourLesTests.js';
 import { fauxFournisseurDeChemin } from '../fauxObjets.js';
 
 describe("Le service du modèle de l'annuaire de crise", () => {
-  const fauxAdaptateurHorloge: AdaptateurHorloge = {
-    maintenant: () => Temporal.PlainDate.from('2018-11-17').toZonedDateTime(Temporal.Now.timeZoneId()).toInstant(),
-    maintenantZoné: () =>
-      Temporal.PlainDate.from('2018-11-17')
-        .toZonedDateTime(Temporal.Now.timeZoneId())
-        .toInstant()
-        .toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-  };
+  const fauxAdaptateurHorloge = fabriqueAdaptateurHorloge('2018-11-17');
   const récupèreModèleExcel = async ({
     codeActivité,
     codeRégion,

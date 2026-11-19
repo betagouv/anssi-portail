@@ -9,10 +9,10 @@ import { ParcoursChangé } from '../../src/bus/evenements/parcoursChange.js';
 import { ParcoursCompletTerminé } from '../../src/bus/evenements/parcoursCompletTermine.js';
 import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
 import { adaptateurEmailBrevo } from '../../src/infra/adaptateurEmailBrevo.js';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { fauxAdaptateurEnvironnement, fauxRapporteur } from '../api/fauxObjets.js';
+import { fabriqueAdaptateurHorloge } from './adaptateurHorlogePourLesTests.js';
 import { fabriqueClientPost, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
 
 describe('L’adaptateur email Brevo', () => {
@@ -30,10 +30,7 @@ describe('L’adaptateur email Brevo', () => {
     pixelDeSuiviAccepté: true,
   });
 
-  const adaptateurHorloge: AdaptateurHorloge = {
-    maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
-    maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-  };
+  const adaptateurHorloge = fabriqueAdaptateurHorloge('2025-03-10T00:00:00Z');
 
   beforeEach(() => {
     postAxiosAppele = false;

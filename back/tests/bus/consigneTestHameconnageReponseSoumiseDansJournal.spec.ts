@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { consigneTestHameconnageReponseSoumiseDansJournal } from '../../src/bus/consigneTestHameconnageReponseSoumiseDansJournal.js';
 import { TestHameçonnageRéponseSoumise } from '../../src/bus/evenements/testHameconnageReponseSoumise.js';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
+import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe("L'abonnement qui consigne une réponse au test d'hameçonnage dans le journal", () => {
   it('consigne un évènement TestHameçonnageRéponseSoumise pour un utilisateur identifié', async () => {
@@ -13,10 +13,7 @@ describe("L'abonnement qui consigne une réponse au test d'hameçonnage dans le 
         evenementRecu = donneesEvenement;
       },
     };
-    const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
-      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    };
+    const adaptateurHorloge = fabriqueAdaptateurHorloge('2025-03-10T00:00:00Z');
 
     await consigneTestHameconnageReponseSoumiseDansJournal({
       adaptateurJournal,
@@ -58,10 +55,7 @@ describe("L'abonnement qui consigne une réponse au test d'hameçonnage dans le 
         evenementRecu = donneesEvenement;
       },
     };
-    const adaptateurHorloge: AdaptateurHorloge = {
-      maintenant: () => Temporal.Instant.from('2025-03-10T00:00:00Z'),
-      maintenantZoné: () => Temporal.Instant.from('2025-03-10T00:00:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
-    };
+    const adaptateurHorloge = fabriqueAdaptateurHorloge('2025-03-10T00:00:00Z');
     await consigneTestHameconnageReponseSoumiseDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
