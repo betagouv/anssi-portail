@@ -12,7 +12,7 @@
 
 <HerosRiche
   {propriétésFilAriane}
-  description="Un rançongiciel frappe votre organisation. Vivez six événements clés et choisissez, à chaque étape, le réflexe qui permettra de contenir la crise et de préparer la reprise d'activité."
+  description="Un rançongiciel frappe votre organisation. Vivez six événements clés et choisissez, à chaque étape, le réflexe qui permettra de contenir la crise et de préparer la reprise d'activité. Une première simulation de crise cyber, en ligne, pour vous sensibiliser et sensibiliser vos équipes."
   variante="cafe-creme"
   class="avec-image-fond"
   badges={[{ label: '⏱️ 8 minutes', accent: 'green-bourgeon' }]}

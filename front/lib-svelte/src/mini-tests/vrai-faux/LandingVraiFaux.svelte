@@ -21,7 +21,7 @@
 {#snippet herosRiche()}
   <HerosRiche
     {propriétésFilAriane}
-    description=""
+    description="Connaître la réalité des cybermenaces est un premier pas vers leur prise en compte au sein de chaque organisation. Grâce à ce quizz sur les cyberattaques, testez vos connaissances pour mieux vous préparer&nbsp;!"
     variante="cafe-creme"
     class="avec-image-fond"
     badges={[{ label: '⏱️ 3 minutes', accent: 'green-bourgeon' }]}
