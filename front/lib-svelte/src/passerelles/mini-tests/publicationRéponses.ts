@@ -30,6 +30,7 @@ export const publieRéponseTestHameçonnage = async (
     idMail: string;
     réponse: 'bonne' | 'mauvaise';
     numéroRéponse: number;
+    score: string;
   },
   options?: { urlBase?: string }
 ): Promise<void> => {
