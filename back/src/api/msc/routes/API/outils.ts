@@ -6,6 +6,7 @@ import { ressourceModeleAnnuaireDeCrise } from '../../../outils/modeleAnnuaireDe
 import { ressourceModèleXslxGénérique } from '../../../outils/modeleXslxGenerique/ressourceModeleXslx.js';
 import { ServiceModèleXslx } from '../../../outils/modeleXslxGenerique/serviceModeleXslx.js';
 import { ressourceRappelMiseAJourAnnuaireContacts } from '../../../outils/ressourceRappelMiseAJourAnnuaireContacts.js';
+import { ressourceRappelMiseAJourInventaireComposantsObsoletes } from '../../../outils/ressourceRappelMiseAJourInventaireComposantsObsoletes.js';
 import { ressourceRappelMiseAJourListeDActivités } from '../../../outils/ressourceRappelMiseÀJourListeDActivites.js';
 import { ressourceRappelMiseAJourListeInterconnexions } from '../../../outils/ressourceRappelMiseAJourListeInterconnexions.js';
 import { ressourceRappelMiseAJourListePrestatairesEtFournisseurs } from '../../../outils/ressourceRappelMiseAJourListePrestatairesEtFournisseurs.js';
@@ -54,6 +55,10 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
   enregistreRoute(
     '/rappel-mise-a-jour-liste-interconnexions.ics',
     ressourceRappelMiseAJourListeInterconnexions(configurationServeur)
+  );
+  enregistreRoute(
+    '/rappel-mise-a-jour-inventaire-composants-obsoletes.ics',
+    ressourceRappelMiseAJourInventaireComposantsObsoletes(configurationServeur)
   );
 
   /// OUTILS AUTRE
