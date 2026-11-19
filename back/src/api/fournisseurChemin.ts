@@ -26,6 +26,7 @@ export interface FournisseurChemin {
     modèleRevueDroitsDAccès: () => string;
     modèleListeDesPrestatairesEtFournisseurs: () => string;
     modèleListeDesInterconnexions: () => string;
+    modèleInventaireDesComposantsObsolètes: () => string;
   };
   jekyll: {
     page403: () => string;
@@ -101,6 +102,8 @@ export const fournisseurChemin: FournisseurChemin = {
       cheminBackDepuisOutils('modeleListePrestatairesEtFournisseurs', 'modele-liste-prestataires-et-fournisseurs.xlsx'),
     modèleListeDesInterconnexions: () =>
       cheminBackDepuisOutils('modeleListeInterconnexions', 'modele-liste-interconnexions.xlsx'),
+    modèleInventaireDesComposantsObsolètes: () =>
+      cheminBackDepuisOutils('modele-inventaire-composants-obsoletes', 'modele-inventaire-composants-obsoletes.xlsx'),
   },
   jekyll: {
     page403: () => construisCheminVersArtefactJekyll('403.html'),

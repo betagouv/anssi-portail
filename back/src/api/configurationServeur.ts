@@ -36,6 +36,7 @@ import { FournisseurChemin } from './fournisseurChemin.js';
 import { ServiceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 import { GestionnaireRequêtesComplémentaires, Middleware } from './middlewares/middleware.js';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
+import { ServiceModèleInventaireDesComposantsObsolètes } from './outils/modele-inventaire-composants-obsoletes/serviceModeleInventaireComposantsObsoletes.js';
 import { ServiceModeleAnnuaireDeCrise } from './outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from './outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleListeDesInterconnexions } from './outils/modeleListeInterconnexions/serviceModeleListeInterconnexions.js';
@@ -96,6 +97,7 @@ export type ConfigurationServeur = {
   serviceModèleRevueDroitsDAccès: ServiceModèleRevueDroitsDAccès;
   serviceModeleListePrestatairesEtFournisseurs: ServiceModèleListeDesPrestatairesEtFournisseurs;
   serviceModeleListeInterconnexions: ServiceModèleListeDesInterconnexions;
+  serviceModeleInventaireComposantsObsoletes: ServiceModèleInventaireDesComposantsObsolètes;
   adaptateurEmail: AdaptateurEmail;
   generateurImage: GenerateurImage;
   adaptateurCompression: AdaptateurCompression;

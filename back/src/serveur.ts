@@ -10,6 +10,7 @@ import { fabriqueMiddleware } from './api/middlewares/middleware.js';
 import { fabriquePublieMesureConsultée } from './api/middlewares/publieMesureConsultee.js';
 import { creeServeur } from './api/msc/index.js';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC.js';
+import { ServiceModèleInventaireDesComposantsObsolètes } from './api/outils/modele-inventaire-composants-obsoletes/serviceModeleInventaireComposantsObsoletes.js';
 import { ServiceModeleAnnuaireDeCrise } from './api/outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from './api/outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleListeDesInterconnexions } from './api/outils/modeleListeInterconnexions/serviceModeleListeInterconnexions.js';
@@ -268,6 +269,10 @@ const host = process.env.HOST;
       adaptateurHorloge
     ),
     serviceModeleListeInterconnexions: new ServiceModèleListeDesInterconnexions(fournisseurChemin, adaptateurHorloge),
+    serviceModeleInventaireComposantsObsoletes: new ServiceModèleInventaireDesComposantsObsolètes(
+      fournisseurChemin,
+      adaptateurHorloge
+    ),
     adaptateurCompression,
     gestionnairesRequêtesComplémentaires: {
       attributionParcours,
