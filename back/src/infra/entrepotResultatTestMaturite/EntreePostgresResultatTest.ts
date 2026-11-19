@@ -7,7 +7,7 @@ export type EntréePostgresRésultatTest = EntréePostgresRésultatTestMaturité
 
 export type EntréePostgresRésultatTestCommune = {
   id: string;
-  date_realisation: Date | null;
+  date_realisation: Date;
 };
 
 export type EntréePostgresRésultatTestMaturité = {

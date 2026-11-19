@@ -59,7 +59,7 @@ export class EntrepôtRésultatTestMaturitéPostgres implements EntrepôtRésult
       tailleOrganisation: donneesTestMaturite.taille_organisation ?? undefined,
       reponses,
       codeSessionGroupe: donneesTestMaturite.code_session_groupe ?? undefined,
-      dateRealisation: donneesTestMaturite.date_realisation ?? undefined,
+      dateRealisation: donneesTestMaturite.date_realisation,
     });
     resultat.utilisateur = utilisateur;
     return resultat;
