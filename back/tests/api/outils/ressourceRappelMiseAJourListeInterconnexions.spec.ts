@@ -96,8 +96,8 @@ describe('La ressource du rappel de mise à jour de la liste des interconnexions
       expect(lignes[33]).toBe('END:VCALENDAR');
     });
 
-    it('renvoi un évènement qui a lieu dans un an, de 9h à 9h30', async () => {
-      adaptateurHorloge.maintenant = () => Temporal.Instant.from('2026-10-14T00:00:00Z');
+    it('renvoi un évènement qui a lieu dans un an entre 9h et 9h30', async () => {
+      adaptateurHorloge.maintenant = () => Temporal.Instant.from('2026-10-14T05:00:00Z');
 
       const { text } = await récupèrelÉvènement();
 
@@ -107,16 +107,17 @@ describe('La ressource du rappel de mise à jour de la liste des interconnexions
     });
 
     it.each([
-      ['Europe/Paris', '20250228'],
-      ['America/Los_Angeles', '20250301'],
-    ])('calcule le rappel selon la date locale en année bissextile (%s)', async (fuseau, jourAttendu) => {
+      ['Europe/Paris', '20250228T080000Z', '20250228T083000Z'],
+      ['America/Los_Angeles', '20250228T170000Z', '20250228T173000Z'],
+    ])('calcule le rappel selon la date locale en année bissextile (%s)', async (fuseau, horaireDébut, horaireFin) => {
       vi.spyOn(Temporal.Now, 'timeZoneId').mockReturnValue(fuseau);
       adaptateurHorloge.maintenant = () => Temporal.Instant.from('2024-02-28T23:30:00Z');
 
       const { text } = await récupèrelÉvènement();
 
-      expect(text).toContain(`DTSTART:${jourAttendu}T083000Z`);
-      expect(text).toContain(`DTEND:${jourAttendu}T090000Z`);
+      const lignes = text.split('\r\n');
+      expect(lignes[11]).toBe(`DTSTART:${horaireDébut}`);
+      expect(lignes[12]).toBe(`DTEND:${horaireFin}`);
     });
 
     it('refuse un utilisateur non connecté', async () => {
