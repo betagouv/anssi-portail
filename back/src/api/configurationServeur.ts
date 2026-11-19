@@ -24,6 +24,7 @@ import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur.js';
 import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
 import { AdaptateurStatistiqueMiniTests } from '../metier/mini-tests/adaptateurStatistiqueMiniTests.js';
 import { EntrepotReactionMiniTest } from '../metier/mini-tests/entrepotReactionMiniTest.js';
+import { EntrepôtRésultatTestHameçonnage } from '../metier/mini-tests/hameconnage/entrepotResultatTestHameconnage.js';
 import { EntrepôtRésultatTestMaturité } from '../metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
 import { EntrepotSessionDeGroupe } from '../metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
 import { GenerateurCodeSessionDeGroupe } from '../metier/mini-tests/maturite-cyber/generateurCodeSessionDeGroupe.js';
@@ -76,6 +77,7 @@ export type ConfigurationServeur = {
   entrepotReactionMiniTest: EntrepotReactionMiniTest;
   entrepôtModule: EntrepôtModule;
   entrepôtQuestionVraieFausse: EntrepôtQuestionVraieFausse;
+  entrepôtRésultatTestHameçonnage: EntrepôtRésultatTestHameçonnage;
   entrepôtRésultatTestVraiFaux: EntrepôtRésultatTestVraiFaux;
   fournisseurChemin: FournisseurChemin;
   generateurCodeSessionDeGroupe: GenerateurCodeSessionDeGroupe;

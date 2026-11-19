@@ -9,4 +9,5 @@ export const schémaPostRéponsesHameçonnage = z.strictObject({
   idMail: z.enum(idsMails),
   réponse: z.enum(['bonne', 'mauvaise']),
   numéroRéponse: z.number().int().min(1).max(NOMBRE_DE_MAILS_HAMEÇONNAGE),
+  score: z.string().max(3),
 });

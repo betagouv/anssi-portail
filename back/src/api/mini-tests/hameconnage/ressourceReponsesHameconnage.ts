@@ -4,6 +4,7 @@ import { Router } from 'express';
 import { z } from 'zod';
 import { TestHameçonnageRéponseSoumise } from '../../../bus/evenements/testHameconnageReponseSoumise.js';
 import { TestHameçonnageTerminé } from '../../../bus/evenements/testHameconnageTermine.js';
+import { RésultatTestHameçonnage } from '../../../metier/mini-tests/hameconnage/resultatTestHameconnage.js';
 import { Utilisateur } from '../../../metier/utilisateur.js';
 import { ConfigurationServeur } from '../../configurationServeur.js';
 import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
@@ -16,6 +17,7 @@ export const ressourceRéponsesHameçonnage = ({
   busEvenements,
   middleware,
   entrepotUtilisateur,
+  entrepôtRésultatTestHameçonnage,
   adaptateurHachage,
 }: ConfigurationServeur) => {
   const routeur = Router();
@@ -44,6 +46,12 @@ export const ressourceRéponsesHameçonnage = ({
           })
         );
         if (requête.body.numéroRéponse === NOMBRE_DE_MAILS_HAMEÇONNAGE) {
+          if (utilisateur) {
+            await entrepôtRésultatTestHameçonnage.ajoute(
+              new RésultatTestHameçonnage({ utilisateur, score: requête.body.score })
+            );
+          }
+
           await busEvenements.publie(
             new TestHameçonnageTerminé({ idCorrélation: requête.body.idCorrélation, ...informationsUtilisateur })
           );
