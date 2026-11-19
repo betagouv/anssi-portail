@@ -33,31 +33,32 @@ export const tousLesIdRubrique = [
 export type IdRubrique = (typeof tousLesIdRubrique)[number];
 
 export class ResultatTestMaturite {
-  id!: string;
+  id: string;
+  dateRealisation: Date;
+
   region: CodeRégion | undefined;
   secteur: CodeSecteur | undefined;
   tailleOrganisation: CodeTrancheEffectif | undefined;
   reponses: ReponsesTestMaturite;
   codeSessionGroupe?: string;
   utilisateur: Utilisateur | undefined;
-  dateRealisation: Date | undefined;
 
   constructor({
+    id,
+    dateRealisation,
     region,
     secteur,
     tailleOrganisation,
     reponses,
-    id,
     codeSessionGroupe,
-    dateRealisation,
   }: DonneesCreationResultatTestMaturite) {
+    this.id = id ?? uuidv7();
+    this.dateRealisation = dateRealisation ?? new Date();
     this.region = region;
     this.secteur = secteur;
     this.tailleOrganisation = tailleOrganisation;
     this.reponses = reponses;
     this.codeSessionGroupe = codeSessionGroupe;
-    this.id = id ?? uuidv7();
-    this.dateRealisation = dateRealisation;
   }
 
   async revendiquePropriete(utilisateur: Utilisateur, adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise) {

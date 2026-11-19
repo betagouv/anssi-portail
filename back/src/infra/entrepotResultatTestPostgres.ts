@@ -76,19 +76,13 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
   }
 
   async ajoute(resultatTest: ResultatTestMaturite): Promise<void> {
-    const {
-      utilisateur,
-      tailleOrganisation,
-      codeSessionGroupe,
-      dateRealisation: _dateRealisation,
-      ...reste
-    } = resultatTest;
-    // On ne veut pas insérer la date de réalisation qui est définie par postgres par défaut
+    const { utilisateur, tailleOrganisation, codeSessionGroupe, dateRealisation, ...reste } = resultatTest;
     await this.knex('resultats_test').insert({
       ...reste,
       taille_organisation: tailleOrganisation,
       code_session_groupe: codeSessionGroupe,
       email_utilisateur_hache: utilisateur ? this.adaptateurHachage.hache(utilisateur.email) : null,
+      date_realisation: dateRealisation,
     });
   }
 
