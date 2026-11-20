@@ -66,9 +66,10 @@ export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
 
   async servicesParNiveauSecurite(filtres: FiltresObservatoire): Promise<TotalParNiveauSecurite[]> {
     const sql = `
+      WITH services AS (${SERVICES_FILTRES})
       SELECT niveau_securite AS "niveauSecurite",
              COUNT(*)::int AS total
-      FROM mss.services_crees
+      FROM services
       WHERE niveau_securite IS NOT NULL
       GROUP BY niveau_securite
       ORDER BY CASE niveau_securite

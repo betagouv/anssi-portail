@@ -218,5 +218,17 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
 
       expect(services).toStrictEqual([{ niveauSecurite: 'Modérés', total: 1 }]);
     });
+
+    it('applique les filtres', async () => {
+      await trx('mss.services_crees').insert([
+        { id_hash: 'service-breton', niveau_securite: 'Modérés', region: 'FR-BRE' },
+        { id_hash: 'service-normand', niveau_securite: 'Modérés', region: 'FR-NOR' },
+      ]);
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const services = await adaptateur.servicesParNiveauSecurite({ region: 'FR-BRE' });
+
+      expect(services).toStrictEqual([{ niveauSecurite: 'Modérés', total: 1 }]);
+    });
   });
 });
