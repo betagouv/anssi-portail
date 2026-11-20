@@ -70,6 +70,11 @@ export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
              COUNT(*)::int AS total
       FROM mss.services_crees
       GROUP BY niveau_securite
+      ORDER BY CASE niveau_securite
+                 WHEN 'Élémentaires' THEN 1
+                 WHEN 'Modérés' THEN 2
+                 WHEN 'Importants' THEN 3
+               END
     `;
     return this.requete<TotalParNiveauSecurite>(sql, filtres);
   }
