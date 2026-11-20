@@ -48,8 +48,9 @@ export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
   async mesuresFaitesParMois(filtres: FiltresObservatoire): Promise<TotalMensuel[]> {
     const sql = `
       SELECT to_char(date - interval '1 month', 'YYYY-MM') AS mois,
-             total_faites AS total
+             SUM(total_faites)::int AS total
       FROM mss.mesures_faites
+      GROUP BY date
       ORDER BY date
     `;
     return this.requete<TotalMensuel>(sql, filtres);
