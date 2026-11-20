@@ -17,4 +17,5 @@ export interface AdaptateurObservatoire {
   mesuresFaitesParMois(filtres: FiltresObservatoire): Promise<TotalMensuel[]>;
   servicesParNiveauSecurite(filtres: FiltresObservatoire): Promise<TotalParNiveauSecurite[]>;
   cumulMensuelHomologations(filtres: FiltresObservatoire): Promise<CumulMensuel[]>;
+  dateDerniereExecution(): Promise<Date>;
 }
