@@ -52,5 +52,17 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
 
       expect(total).toBe(1);
     });
+
+    it('ne compte que les services du département filtré', async () => {
+      await trx('mss.services_crees').insert([
+        { id_hash: 'service-finistérien', departement: '29' },
+        { id_hash: 'service-morbihannais', departement: '56' },
+      ]);
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const total = await adaptateur.totalServices({ departement: '29' });
+
+      expect(total).toBe(1);
+    });
   });
 });
