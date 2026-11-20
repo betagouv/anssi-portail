@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
-import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire.js';
+import { EntrepôtModuleMémoire } from '../../persistance/entrepôtModuleMémoire.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';

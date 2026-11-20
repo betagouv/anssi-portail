@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { fabriqueAttributionParcoursMesure } from '../../../src/api/middlewares/attributionParcoursMesure.js';
 import { Parcours } from '../../../src/metier/parcours.js';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
-import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire.js';
+import { EntrepôtModuleMémoire } from '../../persistance/entrepôtModuleMémoire.js';
 import { ConstructeurDeMesure } from '../mesures/constructeurDeMesure.js';
 import { ConstructeurDeModule } from '../mesures/constructeurDeModule.js';
 import { fabriqueModuleCyberdépart, mesureAuthentA2Etapes } from '../objetsPretsALEmploi.js';

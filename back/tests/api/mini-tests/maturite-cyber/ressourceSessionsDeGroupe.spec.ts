@@ -6,7 +6,7 @@ import { creeServeur } from '../../../../src/api/msc/index.js';
 import { AdaptateurEnvironnement } from '../../../../src/infra/adaptateurEnvironnement.js';
 import { EntrepotSessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
 import { GenerateurCodeSessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/generateurCodeSessionDeGroupe.js';
-import { EntrepotSessionDeGroupeMemoire } from '../../../persistance/EntrepotSessionDeGroupeMemoire.js';
+import { EntrepotSessionDeGroupeMemoire } from '../../../persistance/entrepotSessionDeGroupeMemoire.js';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../../fauxObjets.js';
 
 describe('La ressource qui gère les sessions de groupe', () => {

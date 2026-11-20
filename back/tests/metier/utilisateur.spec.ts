@@ -17,7 +17,7 @@ import { utilisateurDeTest } from '../api/mesures/constructeurDUtilisateur.js';
 import { fabriqueModuleCyberdépart, mesureAuthentA2Etapes } from '../api/objetsPretsALEmploi.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
 import { EntrepotMesureMemoire } from '../persistance/entrepotMesureMemoire.js';
-import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire.js';
+import { EntrepotPriseEnCompteMemoire } from '../persistance/entrepotPriseEnCompteMemoire.js';
 
 describe("L'utilisateur", () => {
   const infosUtilisateur = {

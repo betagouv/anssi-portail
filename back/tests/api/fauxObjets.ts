@@ -43,15 +43,15 @@ import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMe
 import { EntrepotGuideMemoire } from '../persistance/entrepotGuideMemoire.js';
 import { EntrepotGuideTravailMemoire } from '../persistance/entrepotGuideTravailMemoire.js';
 import { EntrepotMesureMemoire } from '../persistance/entrepotMesureMemoire.js';
-import { EntrepôtModuleMémoire } from '../persistance/EntrepôtModuleMémoire.js';
-import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire.js';
+import { EntrepôtModuleMémoire } from '../persistance/entrepôtModuleMémoire.js';
+import { EntrepotPriseEnCompteMemoire } from '../persistance/entrepotPriseEnCompteMemoire.js';
 import { EntrepôtQuestionVraieFausseMémoire } from '../persistance/entrepotQuestionVraieFausseMemoire.js';
 import { EntrepotReactionMiniTestMemoire } from '../persistance/entrepotReactionMiniTestMemoire.js';
 import { EntrepôtRésultatTestExpositionMémoire } from '../persistance/entrepotResultatTestExpositionMemoire.js';
 import { EntrepôtRésultatTestHameçonnageMémoire } from '../persistance/entrepotResultatTestHameconnageMemoire.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { EntrepôtRésultatTestVraiFauxMémoire } from '../persistance/entrepotResultatTestVraiFauxMemoire.js';
-import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire.js';
+import { EntrepotSessionDeGroupeMemoire } from '../persistance/entrepotSessionDeGroupeMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 
 export const fauxControleurErreurs: ErrorRequestHandler = (erreur, _requete, _reponse, suite) => suite(erreur);
