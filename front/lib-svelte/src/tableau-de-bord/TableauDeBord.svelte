@@ -4,6 +4,7 @@
   import Lien from '../ui/Lien.svelte';
   import AutresRessources from './AutresRessources.svelte';
   import Favoris from './Favoris.svelte';
+  import TestsCyber from './TestsCyber.svelte';
 </script>
 
 <div class="conteneur-externe">
@@ -11,6 +12,7 @@
     <div class="conteneur-interne">
       <h1>Bonjour {$profilStore?.prenom},</h1>
 
+      <TestsCyber />
       <Favoris />
 
       <AutresRessources />
