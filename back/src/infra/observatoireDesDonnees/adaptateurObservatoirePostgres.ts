@@ -1,20 +1,26 @@
 import { Knex } from 'knex';
 import { AdaptateurObservatoire, CumulMensuel, FiltresObservatoire } from './adaptateurObservatoire.js';
 
+const SERVICES_FILTRES = `
+  SELECT *
+  FROM mss.services_crees
+  WHERE (:region::text IS NULL OR region = :region)
+    AND (:departement::text IS NULL OR departement = :departement)
+    AND (:secteurActivite::text IS NULL OR secteur_activite = :secteurActivite)
+    AND (:typeOrganisation::text IS NULL OR type_organisation = :typeOrganisation)
+`;
+
 export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
   constructor(private readonly knex: Knex) {}
 
   async totalServices(filtres: FiltresObservatoire): Promise<number> {
-    const [{ total }] = await this.knex('mss.services_crees')
-      .modify((requete) => {
-        const { departement, region, secteurActivite, typeOrganisation } = filtres;
-        if (region) requete.where('region', region);
-        if (departement) requete.where('departement', departement);
-        if (secteurActivite) requete.where('secteur_activite', secteurActivite);
-        if (typeOrganisation) requete.where('type_organisation', typeOrganisation);
-      })
-      .count<{ total: string }[]>('* as total');
-    return Number(total);
+    const sql = `
+      WITH services AS (${SERVICES_FILTRES})
+      SELECT COUNT(*)::int AS total
+      FROM services
+    `;
+    const [{ total }] = await this.requete<{ total: number }>(sql, filtres);
+    return total;
   }
 
   async cumulMensuelServices(_filtres: FiltresObservatoire): Promise<CumulMensuel[]> {
@@ -35,6 +41,17 @@ export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
       LEFT JOIN crees_par_mois ON crees_par_mois.mois = mois.mois
       ORDER BY mois.mois
     `);
+    return rows;
+  }
+
+  private async requete<T>(sql: string, filtres: FiltresObservatoire): Promise<T[]> {
+    const parametres = {
+      region: filtres.region ?? null,
+      departement: filtres.departement ?? null,
+      secteurActivite: filtres.secteurActivite ?? null,
+      typeOrganisation: filtres.typeOrganisation ?? null,
+    };
+    const { rows } = await this.knex.raw<{ rows: T[] }>(sql, parametres);
     return rows;
   }
 }
