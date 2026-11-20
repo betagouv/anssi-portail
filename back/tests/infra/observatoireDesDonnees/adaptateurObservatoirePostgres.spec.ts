@@ -40,5 +40,17 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
 
       expect(total).toBe(2);
     });
+
+    it('ne compte que les services de la région filtrée', async () => {
+      await trx('mss.services_crees').insert([
+        { id_hash: 'service-breton', region: 'FR-BRE' },
+        { id_hash: 'service-normand', region: 'FR-NOR' },
+      ]);
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const total = await adaptateur.totalServices({ region: 'FR-BRE' });
+
+      expect(total).toBe(1);
+    });
   });
 });
