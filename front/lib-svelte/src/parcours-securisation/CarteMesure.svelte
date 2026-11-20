@@ -1,13 +1,15 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
+  import type { Component, Snippet } from 'svelte';
   import Lien from '../ui/Lien.svelte';
   import type { Mesure } from './mesures/mesure';
 
   interface Props {
     mesure: Mesure;
+    badges?: Snippet;
+    horizontal?: boolean;
   }
 
-  const { mesure }: Props = $props();
+  const { mesure, badges, horizontal = false }: Props = $props();
   const typeDeLien = $derived(mesure.estPriseEnCompte ? 'secondaire' : 'primaire');
   const libelleDeLien = $derived(mesure.estPriseEnCompte ? 'Accéder au détail' : "Passer à l'action");
   const titre = $derived(mesure.phraseAccroche || mesure.titre);
@@ -27,6 +29,8 @@
 <dsfr-card
   {description}
   enlarge={false}
+  has-badge={!!badges || undefined}
+  horizontal={horizontal || undefined}
   has-buttons={true}
   has-description="true"
   has-header-badge={mesure.estPriseEnCompte || undefined}
@@ -47,6 +51,7 @@
       type="accent"
     ></dsfr-badge>
   </div>
+  {@render badges?.()}
   <div slot="buttonsgroup" class="actions-carte">
     <Lien apparence="bouton" href={`/mesures/${mesure.id}`} type={typeDeLien} libelle={libelleDeLien} etire={true}
     ></Lien>
