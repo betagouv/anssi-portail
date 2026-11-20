@@ -94,12 +94,12 @@ export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
     return this.requete<CumulMensuel>(sql, filtres);
   }
 
-  async dateDerniereExecution(): Promise<Date> {
+  async dateDerniereExecution(): Promise<Date | null> {
     const sql = `
       SELECT MAX(date_execution) AS "date"
       FROM mss.executions
     `;
-    const [{ date }] = await this.requete<{ date: Date }>(sql, {});
+    const [{ date }] = await this.requete<{ date: Date | null }>(sql, {});
     return date;
   }
 
