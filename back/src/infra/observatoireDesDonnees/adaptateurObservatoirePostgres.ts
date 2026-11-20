@@ -4,8 +4,12 @@ import { AdaptateurObservatoire, FiltresObservatoire } from './adaptateurObserva
 export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
   constructor(private readonly knex: Knex) {}
 
-  async totalServices(_filtres: FiltresObservatoire): Promise<number> {
-    const [{ total }] = await this.knex('mss.services_crees').count<{ total: string }[]>('* as total');
+  async totalServices(filtres: FiltresObservatoire): Promise<number> {
+    const [{ total }] = await this.knex('mss.services_crees')
+      .modify((requete) => {
+        if (filtres.region) requete.where('region', filtres.region);
+      })
+      .count<{ total: string }[]>('* as total');
     return Number(total);
   }
 }
