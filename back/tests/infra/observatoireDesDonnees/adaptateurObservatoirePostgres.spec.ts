@@ -32,7 +32,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
   });
 
   describe('concernant le total des services', () => {
-    it('compte tous les services en l’absence de filtre', async () => {
+    it("compte tous les services en l'absence de filtre", async () => {
       await trx('mss.services_crees').insert([{ id_hash: 'service-1' }, { id_hash: 'service-2' }]);
       const adaptateur = new AdaptateurObservatoirePostgres(trx);
 
@@ -65,7 +65,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
       expect(total).toBe(1);
     });
 
-    it('ne compte que les services du secteur d’activité filtré', async () => {
+    it("ne compte que les services du secteur d'activité filtré", async () => {
       await trx('mss.services_crees').insert([
         { id_hash: 'service-santé', secteur_activite: 'sante' },
         { id_hash: 'service-énergie', secteur_activite: 'energie' },
@@ -73,6 +73,18 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
       const adaptateur = new AdaptateurObservatoirePostgres(trx);
 
       const total = await adaptateur.totalServices({ secteurActivite: 'sante' });
+
+      expect(total).toBe(1);
+    });
+
+    it("ne compte que les services du type d'organisation filtré", async () => {
+      await trx('mss.services_crees').insert([
+        { id_hash: 'service-d-une-commune', type_organisation: 'commune' },
+        { id_hash: 'service-d-un-ministère', type_organisation: 'ministere' },
+      ]);
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const total = await adaptateur.totalServices({ typeOrganisation: 'commune' });
 
       expect(total).toBe(1);
     });
