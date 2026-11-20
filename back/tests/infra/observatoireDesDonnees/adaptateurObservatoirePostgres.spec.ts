@@ -122,5 +122,17 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { mois: '2026-03', cumul: 2 },
       ]);
     });
+
+    it('applique les filtres', async () => {
+      await trx('mss.services_crees').insert([
+        { id_hash: 'service-breton', date_creation: '2026-01-05', region: 'FR-BRE' },
+        { id_hash: 'service-normand', date_creation: '2026-01-20', region: 'FR-NOR' },
+      ]);
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const cumul = await adaptateur.cumulMensuelServices({ region: 'FR-BRE' });
+
+      expect(cumul).toStrictEqual([{ mois: '2026-01', cumul: 1 }]);
+    });
   });
 });
