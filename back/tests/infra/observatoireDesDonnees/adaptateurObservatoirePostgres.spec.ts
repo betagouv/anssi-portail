@@ -246,5 +246,18 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
 
       expect(homologations).toStrictEqual([{ mois: '2026-02', cumul: 2 }]);
     });
+
+    it('additionne les cumuls de tous les services pour un même mois, parce que la synchronisation enregistre déjà un total cumulé par service', async () => {
+      await trx('mss.services_crees').insert([{ id_hash: 'service-1' }, { id_hash: 'service-2' }]);
+      await trx('mss.homologations_realisees').insert([
+        { id_hash_service: 'service-1', date: '2026-03-01', total_realisees: 2 },
+        { id_hash_service: 'service-2', date: '2026-03-01', total_realisees: 3 },
+      ]);
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const homologations = await adaptateur.cumulMensuelHomologations({});
+
+      expect(homologations).toStrictEqual([{ mois: '2026-02', cumul: 5 }]);
+    });
   });
 });

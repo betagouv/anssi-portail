@@ -84,8 +84,9 @@ export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
   async cumulMensuelHomologations(filtres: FiltresObservatoire): Promise<CumulMensuel[]> {
     const sql = `
       SELECT to_char(date - interval '1 month', 'YYYY-MM') AS mois,
-             total_realisees AS cumul
+             SUM(total_realisees)::int AS cumul
       FROM mss.homologations_realisees
+      GROUP BY date
       ORDER BY date
     `;
     return this.requete<CumulMensuel>(sql, filtres);
