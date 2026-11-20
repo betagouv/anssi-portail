@@ -206,5 +206,17 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         'Importants',
       ]);
     });
+
+    it('ignore les services sans niveau de sécurité', async () => {
+      await trx('mss.services_crees').insert([
+        { id_hash: 'service-modéré', niveau_securite: 'Modérés' },
+        { id_hash: 'service-sans-niveau', niveau_securite: null },
+      ]);
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const services = await adaptateur.servicesParNiveauSecurite({});
+
+      expect(services).toStrictEqual([{ niveauSecurite: 'Modérés', total: 1 }]);
+    });
   });
 });
