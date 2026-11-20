@@ -6,7 +6,7 @@
     actuel: number;
     max: number;
     cible?: number;
-    mode?: 'compact' | 'reactif';
+    mode?: 'compact' | 'reactif' | 'sans-titre';
     libelle?: string;
     anime?: boolean;
   }
@@ -29,10 +29,14 @@
 </script>
 
 <div class={[mode, 'progression']}>
-  <p class="texte-standard-md libelle">{libelle}</p>
+  {#if mode !== 'sans-titre'}
+    <p class="texte-standard-md libelle">{libelle}</p>
+  {/if}
   <span class="texte-standard-md avancement">{actuel}&nbsp;/&nbsp;{max}</span>
   <div class="barre" bind:this={barre}>
-    <progress class="barre-actuelle" value={avancement.current} {max}>{avancement.current}</progress>
+    <progress class="barre-actuelle" value={avancement.current} {max} aria-label={libelle}
+      >{avancement.current}</progress
+    >
     {#if cible}
       {#if actuel < cible}
         <div class="badge-recompense">
@@ -65,6 +69,20 @@
 
     &.compact {
       grid-template-columns: auto min-content;
+    }
+
+    &.sans-titre {
+      grid-template-areas: 'barre libelle';
+      grid-template-columns: minmax(0, 384px) max-content;
+
+      .avancement {
+        white-space: nowrap;
+      }
+
+      .barre {
+        width: 100%;
+        min-width: 0;
+      }
     }
 
     &.reactif {

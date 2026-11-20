@@ -1,5 +1,6 @@
 <script lang="ts">
   import { profilStore } from '../../stores/profil.store';
+  import EncartAvancementCyberpdepart from './EncartAvancementCyberpdepart.svelte';
   import EncartPrésentationParcours from './EncartPresentationParcours.svelte';
 </script>
 
@@ -10,4 +11,6 @@
     </p>
     <EncartPrésentationParcours />
   </div>
+{:else if $profilStore?.parcoursSecurisation?.parcoursActuel === 'allégé'}
+  <EncartAvancementCyberpdepart />
 {/if}
