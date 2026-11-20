@@ -25,6 +25,7 @@
   },
   "private": true,
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.16",
     "@types/bcrypt": "^6.0.0",
     "@types/compression": "^1.8.1",
     "@types/cookie-parser": "^1.4.10",
@@ -38,6 +39,7 @@
     "@types/papaparse": "^5.5.2",
     "@types/supertest": "^7.0.0",
     "adm-zip": "^0.6.0",
+    "knex-pglite": "^0.14.0",
     "node-mocks-http": "^1.17.2",
     "npm-run-all2": "^9.0.0",
     "prettier": "catalog:",
