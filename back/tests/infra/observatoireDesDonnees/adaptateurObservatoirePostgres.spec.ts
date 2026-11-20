@@ -289,5 +289,13 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
 
       expect(date).toStrictEqual(new Date('2026-03-01T03:00:00Z'));
     });
+
+    it("renvoie null quand la synchronisation ne s'est jamais exécutée", async () => {
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const date = await adaptateur.dateDerniereExecution();
+
+      expect(date).toBeNull();
+    });
   });
 });
