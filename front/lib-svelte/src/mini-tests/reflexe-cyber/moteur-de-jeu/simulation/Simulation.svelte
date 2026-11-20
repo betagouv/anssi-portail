@@ -70,6 +70,7 @@
       idRôle: rôle.id,
       numéroÉvènement: numéroÉvènementCourant,
       réflexe,
+      score: `${score.filter((s) => s).length}/${score.length}`,
     });
   };
 
