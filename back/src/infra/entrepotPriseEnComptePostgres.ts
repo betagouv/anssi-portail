@@ -3,7 +3,7 @@ import config from '../../knexfile.js';
 import { EntrepotMesure } from '../metier/entrepotMesure.js';
 import { EntrepotPriseEnCompte } from '../metier/entrepotPriseEnCompte.js';
 import { Mesure } from '../metier/mesure.js';
-import { PriseEnCompte } from '../metier/PriseEnCompte.js';
+import { PriseEnCompte } from '../metier/priseEnCompte.js';
 import { Utilisateur } from '../metier/utilisateur.js';
 import { AdaptateurHachage } from './adaptateurHachage.js';
 

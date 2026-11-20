@@ -8,7 +8,7 @@ import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js'
 import { Mesure } from '../../../src/metier/mesure.js';
 import { Module } from '../../../src/metier/module.js';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
-import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire.js';
+import { EntrepôtModuleMémoire } from '../../persistance/entrepôtModuleMémoire.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';

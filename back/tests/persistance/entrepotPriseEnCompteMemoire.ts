@@ -1,6 +1,6 @@
 import { EntrepotPriseEnCompte } from '../../src/metier/entrepotPriseEnCompte.js';
 import { Mesure } from '../../src/metier/mesure.js';
-import { PriseEnCompte } from '../../src/metier/PriseEnCompte.js';
+import { PriseEnCompte } from '../../src/metier/priseEnCompte.js';
 import { Utilisateur } from '../../src/metier/utilisateur.js';
 import { EntrepotMemoire } from './entrepotMemoire.js';
 

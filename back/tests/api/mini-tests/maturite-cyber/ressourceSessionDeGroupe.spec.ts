@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc/index.js';
 import { EntrepotSessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
 import { SessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
-import { EntrepotSessionDeGroupeMemoire } from '../../../persistance/EntrepotSessionDeGroupeMemoire.js';
+import { EntrepotSessionDeGroupeMemoire } from '../../../persistance/entrepotSessionDeGroupeMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
 
 describe('La ressource qui gère une session de groupe', () => {

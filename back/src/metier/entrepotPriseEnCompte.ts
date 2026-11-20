@@ -1,5 +1,5 @@
 import { Mesure } from './mesure.js';
-import { PriseEnCompte } from './PriseEnCompte.js';
+import { PriseEnCompte } from './priseEnCompte.js';
 import { Utilisateur } from './utilisateur.js';
 
 export interface EntrepotPriseEnCompte {

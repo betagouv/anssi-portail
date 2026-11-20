@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { GenerateurAleatoireCodeSessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/generateurCodeSessionDeGroupe.js';
 import { SessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
-import { EntrepotSessionDeGroupeMemoire } from '../../../persistance/EntrepotSessionDeGroupeMemoire.js';
+import { EntrepotSessionDeGroupeMemoire } from '../../../persistance/entrepotSessionDeGroupeMemoire.js';
 
 describe('Le générateur aléatoire de code de session de groupe', () => {
   let generateur: GenerateurAleatoireCodeSessionDeGroupe;

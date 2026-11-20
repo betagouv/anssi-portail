@@ -11,7 +11,7 @@ import {
 } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { SessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
-import { EntrepotSessionDeGroupeMemoire } from '../../../persistance/EntrepotSessionDeGroupeMemoire.js';
+import { EntrepotSessionDeGroupeMemoire } from '../../../persistance/entrepotSessionDeGroupeMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
 
 describe("La ressource qui gère les résultats d'une session de groupe", () => {
