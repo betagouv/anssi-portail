@@ -4,7 +4,7 @@
   interface Props {
     children: Snippet;
     motif?: 'cercle' | 'gribouillis' | 'vague';
-    couleur?: 'cafe-creme' | 'macaron';
+    couleur?: 'cafe-creme' | 'macaron' | 'bourgeon';
     petit?: boolean;
     urlBase?: string;
   }
@@ -14,7 +14,9 @@
   const nomMotif = $derived.by(() => {
     if (motif === 'vague') {
       if (petit) return 'motif-mot-souligne-petite-vague-macaron';
-      return couleur === 'macaron' ? 'motif-mot-souligne-vague-macaron' : 'motif-mot-souligne-vague-moutarde';
+      if (couleur === 'macaron') return 'motif-mot-souligne-vague-macaron';
+      if (couleur === 'bourgeon') return 'motif-mot-souligne-vague-bourgeon';
+      return 'motif-mot-souligne-vague-moutarde';
     }
     if (motif === 'cercle') return 'motif-mot-entoure-moutarde';
     if (motif === 'gribouillis') return 'motif-mot-souligne-gribouillis-macaron';
@@ -61,7 +63,7 @@
     }
 
     &.vague {
-      --height: 31px;
+      --height: var(--mot-en-exergue-hauteur-vague, 31px);
 
       &::after {
         background-position: left center;

@@ -4,12 +4,14 @@
   import Lien from '../ui/Lien.svelte';
   import AutresRessources from './AutresRessources.svelte';
   import Favoris from './Favoris.svelte';
+  import Parcours from './parcours/Parcours.svelte';
 </script>
 
 <div class="conteneur-externe">
   <DsfrContainer>
     <div class="conteneur-interne">
       <h1>Bonjour {$profilStore?.prenom},</h1>
+      <Parcours />
 
       <Favoris />
 
