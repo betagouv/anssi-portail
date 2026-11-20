@@ -7,7 +7,10 @@ export type FiltresObservatoire = {
 
 export type CumulMensuel = { mois: string; cumul: number };
 
+export type TotalMensuel = { mois: string; total: number };
+
 export interface AdaptateurObservatoire {
   totalServices(filtres: FiltresObservatoire): Promise<number>;
   cumulMensuelServices(filtres: FiltresObservatoire): Promise<CumulMensuel[]>;
+  mesuresFaitesParMois(filtres: FiltresObservatoire): Promise<TotalMensuel[]>;
 }
