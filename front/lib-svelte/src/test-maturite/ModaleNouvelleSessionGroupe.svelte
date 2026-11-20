@@ -3,6 +3,7 @@
   import { peintUnQRCode } from '$plateforme/qrcode';
   import { clic } from '../directives/actions.svelte';
   import Modale from '../ui/Modale.svelte';
+  import { copieDansLePressePapier } from '../ui/presse-papier';
   import type { ReponseCreationSessionGroupe } from './SessionGroupe';
 
   let codeSession = $state<string>('');
@@ -25,20 +26,18 @@
 
   let codeSessionFormate = $derived(codeSession && codeSession.slice(0, 3) + '-' + codeSession.slice(3));
 
-  const copieLienParticipant = () => {
-    navigator.clipboard.writeText(lienPourParticipants).then(function () {
-      alert('Lien participant copié dans le presse-papier.');
-    });
+  const copieLienParticipant = async () => {
+    const copié = await copieDansLePressePapier(lienPourParticipants);
+    alert(copié ? 'Lien participant copié dans le presse-papier.' : 'Échec de la copie dans le presse-papier.');
   };
 
   let lienPourOrganisateur = $derived(
     `${window.location.origin}/test-maturite?session-groupe=${codeSession}&organisateur`
   );
 
-  const copieLienOrganisateur = () => {
-    navigator.clipboard.writeText(lienPourOrganisateur).then(function () {
-      alert('Lien organisateur copié dans le presse-papier.');
-    });
+  const copieLienOrganisateur = async () => {
+    const copié = await copieDansLePressePapier(lienPourOrganisateur);
+    alert(copié ? 'Lien organisateur copié dans le presse-papier.' : 'Échec de la copie dans le presse-papier.');
   };
 </script>
 

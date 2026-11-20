@@ -9,6 +9,7 @@
   import Heros from '../../ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '../../ui/IllustrationDragonPasDeResultat.svelte';
   import Lien from '../../ui/Lien.svelte';
+  import { copieDansLePressePapier } from '../../ui/presse-papier';
   import Separateur from '../../ui/Separateur.svelte';
   import { CollectionGuide, type Guide } from '../Guide.types';
   import { chargeGuidesDansLeStore, guidesStore } from '../stores/guides/guides.store';
@@ -36,8 +37,8 @@
 
   async function copierLeLienCourt() {
     if (guide?.lienCourt) {
-      await navigator.clipboard.writeText(guide?.lienCourt);
-      alert('Lien copié dans le presse-papier');
+      const copié = await copieDansLePressePapier(guide.lienCourt);
+      alert(copié ? 'Lien copié dans le presse-papier' : 'Échec de la copie dans le presse-papier.');
     }
   }
 

@@ -7,14 +7,14 @@
   import Heros from '../ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import Lien from '../ui/Lien.svelte';
+  import { copieDansLePressePapier } from '../ui/presse-papier';
   import ContenuFavoris from './ContenuFavoris.svelte';
 
-  const partageLien = () => {
+  const partageLien = async () => {
     const hote = new URL(window.location.href).origin;
     const urlPartagee = `${hote}/favoris-partages/${$profilStore?.idListeFavoris}`;
-    navigator.clipboard.writeText(urlPartagee).then(() => {
-      alert('Adresse copiée dans le presse-papier.');
-    });
+    const copié = await copieDansLePressePapier(urlPartagee);
+    alert(copié ? 'Adresse copiée dans le presse-papier.' : 'Échec de la copie dans le presse-papier.');
   };
   onMount(chargeGuidesDansLeStore);
 </script>

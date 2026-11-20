@@ -2,6 +2,7 @@
   import { getContext, untrack } from 'svelte';
   import Bouton from '../ui/Bouton.svelte';
   import Lien from '../ui/Lien.svelte';
+  import { copieDansLePressePapier } from '../ui/presse-papier';
 
   const { cheminPartagé, sujetMail }: { cheminPartagé: string; sujetMail: string } = $props();
 
@@ -19,10 +20,9 @@
     );
   };
 
-  const partageLien = () => {
-    navigator.clipboard.writeText(lienPage).then(function () {
-      alert('Adresse copiée dans le presse-papier.');
-    });
+  const partageLien = async () => {
+    const copié = await copieDansLePressePapier(lienPage);
+    alert(copié ? 'Adresse copiée dans le presse-papier.' : 'Échec de la copie dans le presse-papier.');
   };
 </script>
 
