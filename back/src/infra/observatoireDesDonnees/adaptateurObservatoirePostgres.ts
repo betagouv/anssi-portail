@@ -7,8 +7,10 @@ export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
   async totalServices(filtres: FiltresObservatoire): Promise<number> {
     const [{ total }] = await this.knex('mss.services_crees')
       .modify((requete) => {
-        if (filtres.region) requete.where('region', filtres.region);
-        if (filtres.departement) requete.where('departement', filtres.departement);
+        const { departement, region, secteurActivite } = filtres;
+        if (region) requete.where('region', region);
+        if (departement) requete.where('departement', departement);
+        if (secteurActivite) requete.where('secteur_activite', secteurActivite);
       })
       .count<{ total: string }[]>('* as total');
     return Number(total);
