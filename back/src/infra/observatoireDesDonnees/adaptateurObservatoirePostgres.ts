@@ -19,12 +19,21 @@ export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
 
   async cumulMensuelServices(_filtres: FiltresObservatoire): Promise<CumulMensuel[]> {
     const { rows } = await this.knex.raw<{ rows: CumulMensuel[] }>(`
-      SELECT to_char(date_trunc('month', date_creation), 'YYYY-MM') AS mois,
-             (SUM(COUNT(*)) OVER (ORDER BY date_trunc('month', date_creation)))::int AS cumul
-      FROM mss.services_crees
-      WHERE date_creation IS NOT NULL
-      GROUP BY date_trunc('month', date_creation)
-      ORDER BY date_trunc('month', date_creation)
+      WITH crees_par_mois AS (
+        SELECT date_trunc('month', date_creation) AS mois, COUNT(*) AS nombre
+        FROM mss.services_crees
+        WHERE date_creation IS NOT NULL
+        GROUP BY 1
+      ),
+      mois AS (
+        SELECT generate_series(MIN(mois), MAX(mois), interval '1 month') AS mois
+        FROM crees_par_mois
+      )
+      SELECT to_char(mois.mois, 'YYYY-MM') AS mois,
+             (SUM(COALESCE(crees_par_mois.nombre, 0)) OVER (ORDER BY mois.mois))::int AS cumul
+      FROM mois
+      LEFT JOIN crees_par_mois ON crees_par_mois.mois = mois.mois
+      ORDER BY mois.mois
     `);
     return rows;
   }

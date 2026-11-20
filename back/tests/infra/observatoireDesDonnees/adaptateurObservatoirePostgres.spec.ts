@@ -106,5 +106,21 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { mois: '2026-02', cumul: 3 },
       ]);
     });
+
+    it('inclut les mois sans création', async () => {
+      await trx('mss.services_crees').insert([
+        { id_hash: 'service-de-janvier', date_creation: '2026-01-05' },
+        { id_hash: 'service-de-mars', date_creation: '2026-03-10' },
+      ]);
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const cumul = await adaptateur.cumulMensuelServices({});
+
+      expect(cumul).toStrictEqual([
+        { mois: '2026-01', cumul: 1 },
+        { mois: '2026-02', cumul: 1 },
+        { mois: '2026-03', cumul: 2 },
+      ]);
+    });
   });
 });
