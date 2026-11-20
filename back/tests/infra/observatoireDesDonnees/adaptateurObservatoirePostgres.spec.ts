@@ -1,5 +1,6 @@
 import { Knex } from 'knex';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
+import { AdaptateurObservatoirePostgres } from '../../../src/infra/observatoireDesDonnees/adaptateurObservatoirePostgres.js';
 import { creeBddObservatoirePourLesTests } from './bddObservatoirePourLesTests.js';
 
 describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
@@ -28,5 +29,16 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
     const services = await trx('mss.services_crees').select('id_hash', 'region');
 
     expect(services).toStrictEqual([{ id_hash: 'un-service', region: 'FR-BRE' }]);
+  });
+
+  describe('concernant le total des services', () => {
+    it('compte tous les services en l’absence de filtre', async () => {
+      await trx('mss.services_crees').insert([{ id_hash: 'service-1' }, { id_hash: 'service-2' }]);
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const total = await adaptateur.totalServices({});
+
+      expect(total).toBe(2);
+    });
   });
 });
