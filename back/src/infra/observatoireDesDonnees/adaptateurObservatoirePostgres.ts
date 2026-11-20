@@ -1,5 +1,11 @@
 import { Knex } from 'knex';
-import { AdaptateurObservatoire, CumulMensuel, FiltresObservatoire, TotalMensuel } from './adaptateurObservatoire.js';
+import {
+  AdaptateurObservatoire,
+  CumulMensuel,
+  FiltresObservatoire,
+  TotalMensuel,
+  TotalParNiveauSecurite,
+} from './adaptateurObservatoire.js';
 
 const SERVICES_FILTRES = `
   SELECT *
@@ -56,6 +62,16 @@ export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
       ORDER BY date
     `;
     return this.requete<TotalMensuel>(sql, filtres);
+  }
+
+  async servicesParNiveauSecurite(filtres: FiltresObservatoire): Promise<TotalParNiveauSecurite[]> {
+    const sql = `
+      SELECT niveau_securite AS "niveauSecurite",
+             COUNT(*)::int AS total
+      FROM mss.services_crees
+      GROUP BY niveau_securite
+    `;
+    return this.requete<TotalParNiveauSecurite>(sql, filtres);
   }
 
   private async requete<T>(sql: string, filtres: FiltresObservatoire): Promise<T[]> {

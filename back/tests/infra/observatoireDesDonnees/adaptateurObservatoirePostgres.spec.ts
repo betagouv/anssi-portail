@@ -176,4 +176,18 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
       expect(mesures).toStrictEqual([{ mois: '2026-02', total: 4 }]);
     });
   });
+
+  describe('concernant les services par niveau de sécurité', () => {
+    it('compte les services par niveau de sécurité', async () => {
+      await trx('mss.services_crees').insert([
+        { id_hash: 'service-1', niveau_securite: 'Modérés' },
+        { id_hash: 'service-2', niveau_securite: 'Modérés' },
+      ]);
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const services = await adaptateur.servicesParNiveauSecurite({});
+
+      expect(services).toStrictEqual([{ niveauSecurite: 'Modérés', total: 2 }]);
+    });
+  });
 });
