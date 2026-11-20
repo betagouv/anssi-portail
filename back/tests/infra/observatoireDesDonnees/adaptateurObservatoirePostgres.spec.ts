@@ -159,5 +159,21 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
 
       expect(mesures).toStrictEqual([{ mois: '2026-02', total: 7 }]);
     });
+
+    it('applique les filtres', async () => {
+      await trx('mss.services_crees').insert([
+        { id_hash: 'service-breton', region: 'FR-BRE' },
+        { id_hash: 'service-normand', region: 'FR-NOR' },
+      ]);
+      await trx('mss.mesures_faites').insert([
+        { id_hash_service: 'service-breton', date: '2026-03-01', total_faites: 4 },
+        { id_hash_service: 'service-normand', date: '2026-03-01', total_faites: 3 },
+      ]);
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const mesures = await adaptateur.mesuresFaitesParMois({ region: 'FR-BRE' });
+
+      expect(mesures).toStrictEqual([{ mois: '2026-02', total: 4 }]);
+    });
   });
 });
