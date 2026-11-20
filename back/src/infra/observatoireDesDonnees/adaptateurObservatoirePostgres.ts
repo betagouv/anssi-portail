@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-import { AdaptateurObservatoire, FiltresObservatoire } from './adaptateurObservatoire.js';
+import { AdaptateurObservatoire, CumulMensuel, FiltresObservatoire } from './adaptateurObservatoire.js';
 
 export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
   constructor(private readonly knex: Knex) {}
@@ -15,5 +15,17 @@ export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
       })
       .count<{ total: string }[]>('* as total');
     return Number(total);
+  }
+
+  async cumulMensuelServices(_filtres: FiltresObservatoire): Promise<CumulMensuel[]> {
+    const { rows } = await this.knex.raw<{ rows: CumulMensuel[] }>(`
+      SELECT to_char(date_trunc('month', date_creation), 'YYYY-MM') AS mois,
+             (SUM(COUNT(*)) OVER (ORDER BY date_trunc('month', date_creation)))::int AS cumul
+      FROM mss.services_crees
+      WHERE date_creation IS NOT NULL
+      GROUP BY date_trunc('month', date_creation)
+      ORDER BY date_trunc('month', date_creation)
+    `);
+    return rows;
   }
 }

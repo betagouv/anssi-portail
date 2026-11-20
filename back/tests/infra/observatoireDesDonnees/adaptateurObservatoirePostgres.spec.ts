@@ -89,4 +89,22 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
       expect(total).toBe(1);
     });
   });
+
+  describe('concernant le cumul mensuel des services', () => {
+    it('cumule les services créés mois par mois', async () => {
+      await trx('mss.services_crees').insert([
+        { id_hash: 'service-1', date_creation: '2026-01-05' },
+        { id_hash: 'service-2', date_creation: '2026-01-20' },
+        { id_hash: 'service-3', date_creation: '2026-02-10' },
+      ]);
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const cumul = await adaptateur.cumulMensuelServices({});
+
+      expect(cumul).toStrictEqual([
+        { mois: '2026-01', cumul: 2 },
+        { mois: '2026-02', cumul: 3 },
+      ]);
+    });
+  });
 });
