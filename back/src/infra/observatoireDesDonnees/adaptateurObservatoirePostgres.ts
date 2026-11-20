@@ -8,6 +8,7 @@ export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
     const [{ total }] = await this.knex('mss.services_crees')
       .modify((requete) => {
         if (filtres.region) requete.where('region', filtres.region);
+        if (filtres.departement) requete.where('departement', filtres.departement);
       })
       .count<{ total: string }[]>('* as total');
     return Number(total);
