@@ -259,5 +259,21 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
 
       expect(homologations).toStrictEqual([{ mois: '2026-02', cumul: 5 }]);
     });
+
+    it('applique les filtres', async () => {
+      await trx('mss.services_crees').insert([
+        { id_hash: 'service-breton', region: 'FR-BRE' },
+        { id_hash: 'service-normand', region: 'FR-NOR' },
+      ]);
+      await trx('mss.homologations_realisees').insert([
+        { id_hash_service: 'service-breton', date: '2026-03-01', total_realisees: 2 },
+        { id_hash_service: 'service-normand', date: '2026-03-01', total_realisees: 3 },
+      ]);
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const homologations = await adaptateur.cumulMensuelHomologations({ region: 'FR-BRE' });
+
+      expect(homologations).toStrictEqual([{ mois: '2026-02', cumul: 2 }]);
+    });
   });
 });
