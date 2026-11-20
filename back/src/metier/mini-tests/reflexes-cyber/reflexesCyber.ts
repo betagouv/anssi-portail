@@ -5,6 +5,8 @@ import { CodeRégion } from '../../referentielRegions.js';
 import { CodeSecteur } from '../../referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../referentielTranchesEffectifEtablissement.js';
 import { Utilisateur } from '../../utilisateur.js';
+import { EntrepôtRésultatTestRéflexesCyber } from './entrepotResultatTestReflexesCyber.js';
+import { RésultatTestRéflexesCyber } from './resultatTestReflexesCyber.js';
 
 export type Scénario = 'entreprise' | 'collectivité';
 export type Rôle = 'direction' | 'si' | 'communication' | 'juridique' | 'rh' | 'relations';
@@ -13,6 +15,7 @@ export type Réflexe = 'bon' | 'mauvais' | 'aucun';
 export class RéflexesCyber {
   private readonly NUMÉRO_ÉVÉNEMENT_FIN_SIMULATION = 6;
   consommeLaRéponse = async ({
+    entrepôtRésultatTestRéflexesCyber,
     busÉvénements,
     idCorrélation,
     idScénario,
@@ -20,7 +23,9 @@ export class RéflexesCyber {
     numéroÉvènement,
     réflexe,
     utilisateur,
+    score,
   }: {
+    entrepôtRésultatTestRéflexesCyber: EntrepôtRésultatTestRéflexesCyber;
     busÉvénements: BusEvenements;
     idCorrélation: string;
     idScénario: Scénario;
@@ -28,6 +33,7 @@ export class RéflexesCyber {
     numéroÉvènement: number;
     réflexe: Réflexe;
     utilisateur?: Utilisateur;
+    score: string;
   }) => {
     let email: string | undefined;
     let codeRegion: CodeRégion | undefined;
@@ -54,6 +60,10 @@ export class RéflexesCyber {
       })
     );
     if (numéroÉvènement === this.NUMÉRO_ÉVÉNEMENT_FIN_SIMULATION) {
+      if (utilisateur) {
+        await entrepôtRésultatTestRéflexesCyber.ajoute(new RésultatTestRéflexesCyber({ utilisateur, score }));
+      }
+
       await busÉvénements.publie(
         new SimulationRéflexesCyberTerminé({
           idCorrélation,

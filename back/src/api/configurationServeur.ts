@@ -29,6 +29,7 @@ import { EntrepôtRésultatTestHameçonnage } from '../metier/mini-tests/hamecon
 import { EntrepôtRésultatTestMaturité } from '../metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
 import { EntrepotSessionDeGroupe } from '../metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
 import { GenerateurCodeSessionDeGroupe } from '../metier/mini-tests/maturite-cyber/generateurCodeSessionDeGroupe.js';
+import { EntrepôtRésultatTestRéflexesCyber } from '../metier/mini-tests/reflexes-cyber/entrepotResultatTestReflexesCyber.js';
 import { EntrepôtQuestionVraieFausse } from '../metier/mini-tests/vrai-faux/entrepotQuestionVraieFausse.js';
 import { EntrepôtRésultatTestVraiFaux } from '../metier/mini-tests/vrai-faux/entrepotResultatTestVraiFaux.js';
 import { EntrepotExigence } from '../metier/nis2/entrepotExigence.js';
@@ -79,6 +80,7 @@ export type ConfigurationServeur = {
   entrepôtModule: EntrepôtModule;
   entrepôtQuestionVraieFausse: EntrepôtQuestionVraieFausse;
   entrepôtRésultatTestExposition: EntrepôtRésultatTestExposition;
+  entrepôtRésultatTestRéflexesCyber: EntrepôtRésultatTestRéflexesCyber;
   entrepôtRésultatTestHameçonnage: EntrepôtRésultatTestHameçonnage;
   entrepôtRésultatTestVraiFaux: EntrepôtRésultatTestVraiFaux;
   fournisseurChemin: FournisseurChemin;
