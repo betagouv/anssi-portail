@@ -276,4 +276,18 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
       expect(homologations).toStrictEqual([{ mois: '2026-02', cumul: 2 }]);
     });
   });
+
+  describe('concernant la date de dernière exécution de la synchronisation', () => {
+    it('renvoie la date la plus récente', async () => {
+      await trx('mss.executions').insert([
+        { date_execution: '2026-02-01T03:00:00Z' },
+        { date_execution: '2026-03-01T03:00:00Z' },
+      ]);
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const date = await adaptateur.dateDerniereExecution();
+
+      expect(date).toStrictEqual(new Date('2026-03-01T03:00:00Z'));
+    });
+  });
 });
