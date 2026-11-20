@@ -81,6 +81,16 @@ export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
     return this.requete<TotalParNiveauSecurite>(sql, filtres);
   }
 
+  async cumulMensuelHomologations(filtres: FiltresObservatoire): Promise<CumulMensuel[]> {
+    const sql = `
+      SELECT to_char(date - interval '1 month', 'YYYY-MM') AS mois,
+             total_realisees AS cumul
+      FROM mss.homologations_realisees
+      ORDER BY date
+    `;
+    return this.requete<CumulMensuel>(sql, filtres);
+  }
+
   private async requete<T>(sql: string, filtres: FiltresObservatoire): Promise<T[]> {
     const parametres = {
       region: filtres.region ?? null,
