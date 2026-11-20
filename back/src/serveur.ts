@@ -48,6 +48,7 @@ import { EntrepotMesurePostgres } from './infra/entrepotMesurePostgres.js';
 import { EntrepotPriseEnComptePostgres } from './infra/entrepotPriseEnComptePostgres.js';
 import { EntrepôtQuestionVraieFausseStatique } from './infra/entrepotQuestionVraieFausseStatique.js';
 import { EntrepotReactionMiniTestPostgres } from './infra/entrepotReactionMiniTestPostgres.js';
+import { EntrepôtRésultatTestExpositionPostgres } from './infra/entrepotResultatTest/entrepotResultatTestExpositionPostgres.js';
 import { EntrepôtRésultatTestHameçonnagePostgres } from './infra/entrepotResultatTest/entrepotResultatTestHameconnagePostgres.js';
 import { EntrepôtRésultatTestMaturitéPostgres } from './infra/entrepotResultatTest/entrepotResultatTestMaturitePostgres.js';
 import { EntrepôtRésultatTestVraiFauxPostgres } from './infra/entrepotResultatTest/entrepotResultatTestVraiFauxPostgres.js';
@@ -196,6 +197,11 @@ const entrepôtRésultatTestHameçonnage = new EntrepôtRésultatTestHameçonnag
   entrepotUtilisateur,
 });
 
+const entrepôtRésultatTestExposition = new EntrepôtRésultatTestExpositionPostgres({
+  adaptateurHachage,
+  entrepotUtilisateur,
+});
+
 const port = Number(process.env.PORT ?? 3000);
 const host = process.env.HOST;
 
@@ -257,6 +263,7 @@ const host = process.env.HOST;
     entrepôtQuestionVraieFausse: entrepôtQuestionVraieFausseStatique,
     entrepôtRésultatTestVraiFaux: entrepôtRésultatTestVraiFaux,
     entrepôtRésultatTestHameçonnage: entrepôtRésultatTestHameçonnage,
+    entrepôtRésultatTestExposition: entrepôtRésultatTestExposition,
     cellar,
     serviceSanteGuides,
     adaptateurEmail,
