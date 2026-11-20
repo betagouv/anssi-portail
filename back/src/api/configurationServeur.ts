@@ -24,6 +24,7 @@ import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur.js';
 import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
 import { AdaptateurStatistiqueMiniTests } from '../metier/mini-tests/adaptateurStatistiqueMiniTests.js';
 import { EntrepotReactionMiniTest } from '../metier/mini-tests/entrepotReactionMiniTest.js';
+import { EntrepôtRésultatTestExposition } from '../metier/mini-tests/exposition/entrepotResultatTestExposition.js';
 import { EntrepôtRésultatTestHameçonnage } from '../metier/mini-tests/hameconnage/entrepotResultatTestHameconnage.js';
 import { EntrepôtRésultatTestMaturité } from '../metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
 import { EntrepotSessionDeGroupe } from '../metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
@@ -77,6 +78,7 @@ export type ConfigurationServeur = {
   entrepotReactionMiniTest: EntrepotReactionMiniTest;
   entrepôtModule: EntrepôtModule;
   entrepôtQuestionVraieFausse: EntrepôtQuestionVraieFausse;
+  entrepôtRésultatTestExposition: EntrepôtRésultatTestExposition;
   entrepôtRésultatTestHameçonnage: EntrepôtRésultatTestHameçonnage;
   entrepôtRésultatTestVraiFaux: EntrepôtRésultatTestVraiFaux;
   fournisseurChemin: FournisseurChemin;

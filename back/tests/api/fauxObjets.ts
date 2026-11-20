@@ -47,6 +47,7 @@ import { EntrepôtModuleMémoire } from '../persistance/EntrepôtModuleMémoire.
 import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire.js';
 import { EntrepôtQuestionVraieFausseMémoire } from '../persistance/entrepotQuestionVraieFausseMemoire.js';
 import { EntrepotReactionMiniTestMemoire } from '../persistance/entrepotReactionMiniTestMemoire.js';
+import { EntrepôtRésultatTestExpositionMémoire } from '../persistance/entrepotResultatTestExpositionMemoire.js';
 import { EntrepôtRésultatTestHameçonnageMémoire } from '../persistance/entrepotResultatTestHameconnageMemoire.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { EntrepôtRésultatTestVraiFauxMémoire } from '../persistance/entrepotResultatTestVraiFauxMemoire.js';
@@ -428,6 +429,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   entrepôtRésultatTestMaturité: new EntrepôtRésultatTestMaturitéMémoire(),
   entrepôtRésultatTestVraiFaux: new EntrepôtRésultatTestVraiFauxMémoire(),
   entrepôtRésultatTestHameçonnage: new EntrepôtRésultatTestHameçonnageMémoire(),
+  entrepôtRésultatTestExposition: new EntrepôtRésultatTestExpositionMémoire(),
   serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(fauxFournisseurDeChemin),
   serviceModeleAnnuaireDeCrise: new ServiceModeleAnnuaireDeCrise(
     fauxFournisseurDeChemin,

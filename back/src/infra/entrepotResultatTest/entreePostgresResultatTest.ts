@@ -4,7 +4,10 @@ import type { CodeSecteur } from '../../metier/referentielSecteurs.js';
 import type { CodeTrancheEffectif } from '../../metier/referentielTranchesEffectifEtablissement.js';
 
 export type EntréePostgresRésultatTest =
-  EntréePostgresRésultatTestMaturité | EntréePostgresRésultatTestVraiFaux | EntréePostgresRésultatTestHameçonnage;
+  | EntréePostgresRésultatTestMaturité
+  | EntréePostgresRésultatTestVraiFaux
+  | EntréePostgresRésultatTestHameçonnage
+  | EntréePostgresRésultatTestExposition;
 
 export type EntréePostgresRésultatTestCommune = {
   id: string;
@@ -29,6 +32,10 @@ export type EntréePostgresRésultatTestVraiFaux = {
 export type EntréePostgresRésultatTestHameçonnage = {
   type_test: 'hameçonnage';
   score: string | null;
+} & EntréePostgresRésultatTestCommune;
+
+export type EntréePostgresRésultatTestExposition = {
+  type_test: 'exposition';
 } & EntréePostgresRésultatTestCommune;
 
 export type TypeTest = EntréePostgresRésultatTest['type_test'];

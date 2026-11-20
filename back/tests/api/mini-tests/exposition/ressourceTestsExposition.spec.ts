@@ -6,6 +6,7 @@ import { creeServeur } from '../../../../src/api/msc/index.js';
 import { TestExpositionRéalisé } from '../../../../src/bus/evenements/TestExpositionRealise.js';
 import { EntrepotUtilisateur } from '../../../../src/metier/entrepotUtilisateur.js';
 import { MockBusEvenement } from '../../../bus/busPourLesTests.js';
+import { EntrepôtRésultatTestExpositionMémoire } from '../../../persistance/entrepotResultatTestExpositionMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';
 import { configurationDeTestDuServeur, fauxRapporteur } from '../../fauxObjets.js';
@@ -15,15 +16,18 @@ describe('La ressource des tests d’exposition', () => {
   let serveur: Express;
   let busEvenements: MockBusEvenement;
   let entrepotUtilisateur: EntrepotUtilisateur;
+  let entrepôtRésultatTestExposition: EntrepôtRésultatTestExpositionMémoire;
   const corpsParDéfaut = { typeOrganisation: 'collectivite', secteur: 'sante', facteursAggravant: [] };
 
   beforeEach(async () => {
     busEvenements = new MockBusEvenement(fauxRapporteur);
+    entrepôtRésultatTestExposition = new EntrepôtRésultatTestExpositionMémoire();
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     await entrepotUtilisateur.ajoute(jeanneDupont);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements,
+      entrepôtRésultatTestExposition,
       entrepotUtilisateur,
     });
   });
@@ -78,6 +82,23 @@ describe('La ressource des tests d’exposition', () => {
         expect(événement?.codeSecteur).toBe('A');
         expect(événement?.codeRegion).toBe('FR-971');
         expect(événement?.codeTrancheEffectif).toBe('11');
+      });
+
+      it('entrepose la réalisation du test avec sa date', async () => {
+        await request(serveur).post('/api/mini-tests/exposition/tests').set('Cookie', [cookie]).send(corpsParDéfaut);
+
+        const résultats = await entrepôtRésultatTestExposition.tous();
+        expect(résultats).toHaveLength(1);
+        expect(résultats[0].utilisateur.email).toBe(jeanneDupont.email);
+        expect(résultats[0].dateRealisation).toBeInstanceOf(Date);
+      });
+    });
+
+    describe('venant d’un utilisateur anonyme', () => {
+      it('n’entrepose pas de résultat', async () => {
+        await request(serveur).post('/api/mini-tests/exposition/tests').send(corpsParDéfaut);
+
+        expect(await entrepôtRésultatTestExposition.taille()).toBe(0);
       });
     });
 
