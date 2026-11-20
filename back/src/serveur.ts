@@ -51,6 +51,7 @@ import { EntrepotReactionMiniTestPostgres } from './infra/entrepotReactionMiniTe
 import { EntrepôtRésultatTestExpositionPostgres } from './infra/entrepotResultatTest/entrepotResultatTestExpositionPostgres.js';
 import { EntrepôtRésultatTestHameçonnagePostgres } from './infra/entrepotResultatTest/entrepotResultatTestHameconnagePostgres.js';
 import { EntrepôtRésultatTestMaturitéPostgres } from './infra/entrepotResultatTest/entrepotResultatTestMaturitePostgres.js';
+import { EntrepôtRésultatTestRéflexesCyberPostgres } from './infra/entrepotResultatTest/entrepotResultatTestReflexesCyberPostgres.js';
 import { EntrepôtRésultatTestVraiFauxPostgres } from './infra/entrepotResultatTest/entrepotResultatTestVraiFauxPostgres.js';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres.js';
 import { EntrepotSessionDeGroupePostgres } from './infra/entrepotSessionDeGroupePostgres.js';
@@ -202,6 +203,11 @@ const entrepôtRésultatTestExposition = new EntrepôtRésultatTestExpositionPos
   entrepotUtilisateur,
 });
 
+const entrepôtRésultatTestRéflexesCyber = new EntrepôtRésultatTestRéflexesCyberPostgres({
+  adaptateurHachage,
+  entrepotUtilisateur,
+});
+
 const port = Number(process.env.PORT ?? 3000);
 const host = process.env.HOST;
 
@@ -264,6 +270,7 @@ const host = process.env.HOST;
     entrepôtRésultatTestVraiFaux: entrepôtRésultatTestVraiFaux,
     entrepôtRésultatTestHameçonnage: entrepôtRésultatTestHameçonnage,
     entrepôtRésultatTestExposition: entrepôtRésultatTestExposition,
+    entrepôtRésultatTestRéflexesCyber: entrepôtRésultatTestRéflexesCyber,
     cellar,
     serviceSanteGuides,
     adaptateurEmail,

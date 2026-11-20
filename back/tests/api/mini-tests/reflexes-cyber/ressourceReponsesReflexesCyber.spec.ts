@@ -6,6 +6,7 @@ import { creeServeur } from '../../../../src/api/msc/index.js';
 import { SimulationRéflexesCyberRéponseSoumise } from '../../../../src/bus/evenements/simulationReflexesCyberReponseSoumise.js';
 import { SimulationRéflexesCyberTerminé } from '../../../../src/bus/evenements/simulationReflexesCyberTermine.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
+import { EntrepôtRésultatTestRéflexesCyberMémoire } from '../../../persistance/entrepotResultatTestReflexesCyberMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';
 import { configurationDeTestDuServeur, fauxRapporteur } from '../../fauxObjets.js';
@@ -14,14 +15,17 @@ import { jeanneDupont } from '../../objetsPretsALEmploi.js';
 describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
   let serveur: Express;
   let busÉvénements: MockBusEvenement;
+  let entrepôtRésultatTestRéflexesCyber: EntrepôtRésultatTestRéflexesCyberMémoire;
 
   beforeEach(async () => {
     busÉvénements = fabriqueBusPourLesTests(fauxRapporteur);
+    entrepôtRésultatTestRéflexesCyber = new EntrepôtRésultatTestRéflexesCyberMémoire();
     const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     await entrepotUtilisateur.ajoute(jeanneDupont);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements: busÉvénements,
+      entrepôtRésultatTestRéflexesCyber,
       entrepotUtilisateur,
     });
   });
@@ -33,6 +37,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
       idRôle: 'direction',
       numéroÉvènement: 1,
       réflexe: 'bon',
+      score: '5/6',
     });
   };
 
@@ -44,6 +49,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
         idRôle: 'direction',
         numéroÉvènement: 1,
         réflexe: 'bon',
+        score: '5/6',
       });
 
       expect(reponse.status).toBe(HttpStatusCode.Created);
@@ -56,6 +62,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
         idRôle: 'direction',
         numéroÉvènement: 1,
         réflexe: 'bon',
+        score: '5/6',
       });
 
       expect(reponse.status).toBe(HttpStatusCode.BadRequest);
@@ -68,6 +75,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
         idRôle: 'direction',
         numéroÉvènement: 1.5,
         réflexe: 'bon',
+        score: '5/6',
       });
 
       expect(reponse.status).toBe(HttpStatusCode.BadRequest);
@@ -86,6 +94,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
         idRôle: 'direction',
         numéroÉvènement: 6,
         réflexe: 'bon',
+        score: '5/6',
       });
 
       expect(busÉvénements.aRecuUnEvenement(SimulationRéflexesCyberTerminé)).toBeTruthy();
@@ -98,6 +107,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
         idRôle: 'direction',
         numéroÉvènement: 4,
         réflexe: 'bon',
+        score: '5/6',
       });
 
       expect(busÉvénements.naPasRecuDEvenement(SimulationRéflexesCyberTerminé)).toBeTruthy();
@@ -111,6 +121,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
         idRôle: 'direction',
         numéroÉvènement: 4,
         réflexe: 'bon',
+        score: '5/6',
       });
 
       const événement = busÉvénements.recupereEvenement(SimulationRéflexesCyberRéponseSoumise);
@@ -128,6 +139,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
         idRôle: 'direction',
         numéroÉvènement: 6,
         réflexe: 'bon',
+        score: '5/6',
       });
 
       const événement = busÉvénements.recupereEvenement(SimulationRéflexesCyberTerminé);
@@ -135,6 +147,38 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
       expect(événement?.codeRegion).toBe('FR-971');
       expect(événement?.codeSecteur).toBe('A');
       expect(événement?.codeTrancheEffectif).toBe('11');
+    });
+
+    it('entrepose le score final pour un utilisateur connecté', async () => {
+      const cookie = encodeSession({ email: jeanneDupont.email, token: 'token' });
+
+      const réponse = await request(serveur)
+        .post('/api/mini-tests/reflexes-cyber/reponses')
+        .set('Cookie', [cookie])
+        .send({
+          idCorrélation: '01a0a561-2416-726f-84c5-7912f3dfb57e',
+          idScénario: 'entreprise',
+          idRôle: 'direction',
+          numéroÉvènement: 6,
+          réflexe: 'bon',
+          score: '5/6',
+        });
+
+      expect(réponse.status).toBe(HttpStatusCode.Created);
+      expect((await entrepôtRésultatTestRéflexesCyber.tous())[0].score).toEqual('5/6');
+    });
+
+    it('répond une 400 si le score est trop long', async () => {
+      const réponse = await request(serveur).post('/api/mini-tests/reflexes-cyber/reponses').send({
+        idCorrélation: '01a0a561-2416-726f-84c5-7912f3dfb57e',
+        idScénario: 'entreprise',
+        idRôle: 'direction',
+        numéroÉvènement: 6,
+        réflexe: 'bon',
+        score: '50/6',
+      });
+
+      expect(réponse.status).toBe(HttpStatusCode.BadRequest);
     });
   });
 });

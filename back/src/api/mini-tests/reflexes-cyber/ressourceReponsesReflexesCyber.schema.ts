@@ -6,4 +6,5 @@ export const schemaPostRéponsesRéflexesCyber = z.strictObject({
   idRôle: z.enum(['direction', 'si', 'communication', 'juridique', 'rh', 'relations']),
   numéroÉvènement: z.number().int().min(1).max(6),
   réflexe: z.enum(['bon', 'mauvais', 'aucun']),
+  score: z.string().max(3),
 });

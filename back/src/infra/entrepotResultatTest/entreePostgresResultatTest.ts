@@ -7,7 +7,8 @@ export type EntréePostgresRésultatTest =
   | EntréePostgresRésultatTestMaturité
   | EntréePostgresRésultatTestVraiFaux
   | EntréePostgresRésultatTestHameçonnage
-  | EntréePostgresRésultatTestExposition;
+  | EntréePostgresRésultatTestExposition
+  | EntréePostgresRésultatTestRéflexesCyber;
 
 export type EntréePostgresRésultatTestCommune = {
   id: string;
@@ -36,6 +37,11 @@ export type EntréePostgresRésultatTestHameçonnage = {
 
 export type EntréePostgresRésultatTestExposition = {
   type_test: 'exposition';
+} & EntréePostgresRésultatTestCommune;
+
+export type EntréePostgresRésultatTestRéflexesCyber = {
+  type_test: 'réflexes cyber';
+  score: string | null;
 } & EntréePostgresRésultatTestCommune;
 
 export type TypeTest = EntréePostgresRésultatTest['type_test'];

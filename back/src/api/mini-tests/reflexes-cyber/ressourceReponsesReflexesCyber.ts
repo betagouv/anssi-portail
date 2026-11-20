@@ -14,6 +14,7 @@ export const ressourceRéponsesRéflexesCyber = ({
   middleware,
   adaptateurHachage,
   entrepotUtilisateur,
+  entrepôtRésultatTestRéflexesCyber,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.post(
@@ -24,6 +25,7 @@ export const ressourceRéponsesRéflexesCyber = ({
       async (requête: CorpsDeRequeteTypee<z.output<typeof schemaPostRéponsesRéflexesCyber>>, reponse) => {
         const simulation = new RéflexesCyber();
         await simulation.consommeLaRéponse({
+          entrepôtRésultatTestRéflexesCyber,
           busÉvénements: busEvenements,
           idCorrélation: requête.body.idCorrélation,
           idScénario: requête.body.idScénario,
@@ -31,6 +33,7 @@ export const ressourceRéponsesRéflexesCyber = ({
           numéroÉvènement: requête.body.numéroÉvènement,
           réflexe: requête.body.réflexe,
           utilisateur: requête.utilisateur,
+          score: requête.body.score,
         });
         return reponse.sendStatus(HttpStatusCode.Created);
       }
