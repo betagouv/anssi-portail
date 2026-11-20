@@ -64,5 +64,17 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
 
       expect(total).toBe(1);
     });
+
+    it('ne compte que les services du secteur d’activité filtré', async () => {
+      await trx('mss.services_crees').insert([
+        { id_hash: 'service-santé', secteur_activite: 'sante' },
+        { id_hash: 'service-énergie', secteur_activite: 'energie' },
+      ]);
+      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+
+      const total = await adaptateur.totalServices({ secteurActivite: 'sante' });
+
+      expect(total).toBe(1);
+    });
   });
 });
