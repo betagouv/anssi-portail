@@ -119,7 +119,7 @@ export const Precisions: Record<PointsAttentionPrecis, { titre: string; texte: s
       gestion de risques, de notification d'incidents et de supervision
       se substitueront aux obligations de même type de la directive
       NIS&nbsp;2. En revanche, les autres obligations de la directive
-      NIS&nbsp;2 (telles celle au registre des entités essentielles et
+      NIS&nbsp;2 (telles que celle relative à l’inscription au registre des entités essentielles et
       importantes) demeureront pour les entités susmentionnées.
     `,
   },

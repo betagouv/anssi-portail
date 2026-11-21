@@ -38,9 +38,9 @@
       </h2>
 
       <p class="description">
-        Débutante ou déjà engagée, Mes&ZeroWidthSpace;Services&ZeroWidthSpace;Cyber propose à votre organisation un
-        parcours gratuit adapté à son niveau en cybersécurité. 12&nbsp;mesures pour démarrer (ou «&nbsp;pour prendre son
-        Cyberdépart&nbsp;») avec l'aide d'un Aidant cyber si besoin. 58&nbsp;mesures pour aller plus loin.
+        Que votre organisation soit débutante ou déjà engagée, Mes&ZeroWidthSpace;Services&ZeroWidthSpace;Cyber lui
+        propose un parcours gratuit adapté à son niveau en cybersécurité. 12&nbsp;mesures pour démarrer (ou «&nbsp;pour
+        prendre son Cyberdépart&nbsp;») avec l'aide d'un Aidant cyber si besoin. 58&nbsp;mesures pour aller plus loin.
       </p>
     </div>
 

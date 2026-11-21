@@ -14,7 +14,7 @@ sources:
   - Innovation ANSSI
 cible: |
   <ul>
-  <li> Ouvert au grand public et est destiné prioritairement aux élèves, leurs enseignants et leurs parents.</li>
+  <li> Ce dispositif est ouvert au grand public et destiné prioritairement aux élèves, à leurs enseignants et à leurs parents.</li>
   </ul>
 liens:
   - accompagnement:
