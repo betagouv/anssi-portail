@@ -6,7 +6,7 @@
 
   const { mesure }: { mesure: Mesure } = $props();
   const boitesÀOutils = import.meta.glob<{ default: Component } | undefined>('./personnalisee/BoiteAOutils*.svelte');
-  const IDS_DE_MESURE_À_MASQUER: Mesure['id'][] = ['MCO_MCS.6'];
+  const IDS_DE_MESURE_À_MASQUER: Mesure['id'][] = [];
   const boîtesÀOutilsPersonnaliséesÀNePasAfficher = estEnvProduction ? IDS_DE_MESURE_À_MASQUER : [];
 
   const chargeBoiteÀOutilsPersonnalisée = $derived.by(async () => {
