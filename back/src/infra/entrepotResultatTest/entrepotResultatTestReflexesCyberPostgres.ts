@@ -10,9 +10,7 @@ export class EntrepôtRésultatTestRéflexesCyberPostgres
   protected readonly typeTest = 'réflexes cyber';
 
   protected async versRésultat(entrée: EntréePostgresRésultatTestRéflexesCyber): Promise<RésultatTestRéflexesCyber> {
-    const utilisateur = entrée.email_utilisateur_hache
-      ? await this.entrepotUtilisateur.parEmailHache(entrée.email_utilisateur_hache)
-      : undefined;
+    const utilisateur = await this.entrepotUtilisateur.parEmailHache(entrée.email_utilisateur_hache);
 
     if (!utilisateur) {
       throw new Error(`Utilisateur introuvable pour le résultat de test ${entrée.id}`);
