@@ -10,9 +10,7 @@ export class EntrepôtRésultatTestVraiFauxPostgres
   protected readonly typeTest = 'vrai-faux';
 
   protected async versRésultat(entrée: EntréePostgresRésultatTestVraiFaux): Promise<RésultatTestVraiFaux> {
-    const utilisateur = entrée.email_utilisateur_hache
-      ? await this.entrepotUtilisateur.parEmailHache(entrée.email_utilisateur_hache)
-      : undefined;
+    const utilisateur = await this.entrepotUtilisateur.parEmailHache(entrée.email_utilisateur_hache);
 
     if (!utilisateur) {
       throw new Error(`Utilisateur introuvable pour le résultat de test ${entrée.id}`);
@@ -27,11 +25,10 @@ export class EntrepôtRésultatTestVraiFauxPostgres
   }
 
   protected versEntrée(résultat: RésultatTestVraiFaux): EntréePostgresRésultatTestVraiFaux {
-    const { utilisateur } = résultat;
     return {
       id: résultat.id,
       date_realisation: résultat.dateRealisation,
-      email_utilisateur_hache: utilisateur ? this.adaptateurHachage.hache(utilisateur.email) : null,
+      email_utilisateur_hache: this.adaptateurHachage.hache(résultat.utilisateur.email),
       type_test: this.typeTest,
       score: résultat.score,
     };

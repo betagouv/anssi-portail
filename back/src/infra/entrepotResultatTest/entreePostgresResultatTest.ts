@@ -13,11 +13,11 @@ export type EntréePostgresRésultatTest =
 export type EntréePostgresRésultatTestCommune = {
   id: string;
   date_realisation: Date;
-  email_utilisateur_hache: string | null;
 };
 
 export type EntréePostgresRésultatTestMaturité = {
   type_test: 'maturité cyber';
+  email_utilisateur_hache: string | null;
   region: CodeRégion | null;
   secteur: CodeSecteur | null;
   taille_organisation: CodeTrancheEffectif | null;
@@ -27,20 +27,24 @@ export type EntréePostgresRésultatTestMaturité = {
 
 export type EntréePostgresRésultatTestVraiFaux = {
   type_test: 'vrai-faux';
+  email_utilisateur_hache: string;
   score: string;
 } & EntréePostgresRésultatTestCommune;
 
 export type EntréePostgresRésultatTestHameçonnage = {
   type_test: 'hameçonnage';
+  email_utilisateur_hache: string;
   score: string;
 } & EntréePostgresRésultatTestCommune;
 
 export type EntréePostgresRésultatTestExposition = {
   type_test: 'exposition';
+  email_utilisateur_hache: string;
 } & EntréePostgresRésultatTestCommune;
 
 export type EntréePostgresRésultatTestRéflexesCyber = {
   type_test: 'réflexes cyber';
+  email_utilisateur_hache: string;
   score: string;
 } & EntréePostgresRésultatTestCommune;
 
