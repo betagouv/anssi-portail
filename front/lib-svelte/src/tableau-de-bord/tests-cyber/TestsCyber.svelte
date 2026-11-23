@@ -2,11 +2,15 @@
   import { Icone } from '@lab-anssi/ui-kit';
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import type { IdNiveau } from '../../niveaux-maturite/NiveauxMaturite.type';
   import Lien from '../../ui/Lien.svelte';
   import TuileNiveauMaturité from './TuileNiveauMaturite.svelte';
 
   type IdMiniTest = 'maturité' | 'vraiFaux' | 'exposition' | 'réflexesCyber' | 'hameçonnage';
-  type RéalisationMiniTests = Record<IdMiniTest, { réalisé: boolean }>;
+  type RéalisationMiniTests = Record<IdMiniTest, { réalisé: boolean }> & {
+    maturité: { réalisé: boolean; niveau: IdNiveau };
+  };
+
   type TestsCyber = {
     id: IdMiniTest;
     icone: string;
@@ -96,7 +100,7 @@
   {#if réalisationMiniTests && réalisationMiniTests['maturité'].réalisé}
     <div class="section maturite">
       <h4>Maturité cyber de votre organisation</h4>
-      <TuileNiveauMaturité niveau="emergent" />
+      <TuileNiveauMaturité niveau={réalisationMiniTests.maturité.niveau} />
 
       <Lien libelle="Accéder aux détails" href="/ma-maturite" icone="arrow-right-line" iconeADroite />
     </div>

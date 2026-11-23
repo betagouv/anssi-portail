@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { niveauxMaturite } from '../../niveaux-maturite/NiveauxMaturite.donnees';
   import type { IdNiveau, NiveauMaturite } from '../../niveaux-maturite/NiveauxMaturite.type';
+  import { récupèreStatistiquesMSC, type Statistiques } from '../../passerelles/statistiquesMSC';
 
   type Props = {
     niveau: IdNiveau;
@@ -8,12 +10,21 @@
 
   const { niveau }: Props = $props();
   const niveauCourant = $derived(niveauxMaturite.find((courant) => courant.id === niveau) as NiveauMaturite);
+
+  let pourcentageNiveauCourant: number | undefined = $state(undefined);
+
+  onMount(async () => {
+    const statistiques: Statistiques = await récupèreStatistiquesMSC();
+    pourcentageNiveauCourant = Math.round(
+      (statistiques.testsMaturite.parNiveau[niveau] / statistiques.testsMaturite.total) * 100
+    );
+  });
 </script>
 
 <div class="tuile-niveau">
   <img class="plante" src="/assets/images/test-maturite/niveaux/{niveau}.svg" alt="Niveau de maturité" />
   <h6>{niveauCourant.label}</h6>
-  <p class="texte-mention-xs">Comme 28&nbsp;% des organisations ayant réalisé le test.</p>
+  <p class="texte-mention-xs">Comme {pourcentageNiveauCourant}&nbsp;% des organisations ayant réalisé le test.</p>
 </div>
 
 <style lang="scss">
