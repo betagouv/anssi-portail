@@ -6,6 +6,7 @@
   import AnneauProgression from '../../parcours-securisation/AnneauProgression.svelte';
   import CarteMesure from '../../parcours-securisation/CarteMesure.svelte';
   import type { Mesure } from '../../parcours-securisation/mesures/mesure';
+  import BadgeCyberdepart from '../../parcours-securisation/module-cyberdepart/BadgeCyberdepart.svelte';
   import type { ModuleRéponseApi } from '../../parcours-securisation/moduleReponseApi';
   import Progression from '../../parcours-securisation/Progression.svelte';
   import Lien from '../../ui/Lien.svelte';
@@ -14,10 +15,12 @@
 
   let prochaineMesureÀFaire: Mesure | undefined = $state();
   let moduleCyberdépart: ModuleRéponseApi | undefined = $state();
+  let moduleTerminé = $state(false);
   onMount(async () => {
     const { data } = await axios.get<ModuleRéponseApi>(`/api/modules/1`);
     moduleCyberdépart = data;
-    prochaineMesureÀFaire = data.mesures.find((mesure) => !mesure.estPriseEnCompte) ?? data.mesures.at(-1);
+    prochaineMesureÀFaire = data.mesures.find((mesure) => !mesure.estPriseEnCompte);
+    moduleTerminé = data.mesures.every((mesure) => mesure.estPriseEnCompte);
   });
 
   const totalMesures = $derived(moduleCyberdépart?.mesures.length ?? 0);
@@ -59,7 +62,12 @@
     <img src="/assets/images/parcours-securisation/logo-cyberdepart.svg" alt="" />
     <p class="texte-standard-md">{cibleBadge} mesures à prendre en compte pour valider votre Cyberdépart.</p>
   </div>
-  <div class="lien">
+  <div class="footer">
+    {#if moduleTerminé}
+      <div class="completion">
+        <BadgeCyberdepart />
+      </div>
+    {/if}
     <Lien
       libelle={`Accédez aux ${totalMesures} mesures`}
       icone="arrow-right-line"
@@ -95,41 +103,36 @@
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
-    }
 
-    .lien {
-      grid-area: lien;
-      justify-self: start;
-    }
-
-    .entete {
-      display: grid;
-      grid-template-areas:
-        'titre'
-        'progression'
-        'introduction';
-      gap: 1.5rem;
-      align-items: center;
-
-      @include a-partir-de(sm) {
+      .entete {
+        display: grid;
         grid-template-areas:
-          'titre progression'
-          'introduction introduction';
-        grid-template-columns: 1fr 1fr;
-      }
+          'titre'
+          'progression'
+          'introduction';
+        gap: 1.5rem;
+        align-items: center;
 
-      .titre {
-        grid-area: titre;
-        margin: 0;
-      }
-      .progression {
-        grid-area: progression;
         @include a-partir-de(sm) {
-          margin-left: auto;
+          grid-template-areas:
+            'titre progression'
+            'introduction introduction';
+          grid-template-columns: 1fr 1fr;
         }
-      }
-      p {
-        grid-area: introduction;
+
+        .titre {
+          grid-area: titre;
+          margin: 0;
+        }
+        .progression {
+          grid-area: progression;
+          @include a-partir-de(sm) {
+            margin-left: auto;
+          }
+        }
+        p {
+          grid-area: introduction;
+        }
       }
     }
 
@@ -154,6 +157,14 @@
         text-align: center;
         margin: 0;
       }
+    }
+
+    .footer {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      grid-area: lien;
+      justify-self: start;
     }
   }
 </style>
