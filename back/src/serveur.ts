@@ -59,6 +59,7 @@ import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPo
 import { GenerateurImageAvif } from './infra/generateurImage.js';
 import { messagerieMattermost } from './infra/messagerieMattermost.js';
 import { EntrepotExigenceGrist } from './infra/nis2/entrepotExigenceGrist.js';
+import { fabriqueAdaptateurObservatoire } from './infra/observatoireDesDonnees/fabriqueAdaptateurObservatoire.js';
 import { rapporteurConsole } from './infra/rapporteurConsole.js';
 import { controleurErreursSentry, initialiseSentry, rapporteurSentry } from './infra/sentry.js';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage.js';
@@ -89,6 +90,8 @@ const adaptateurStatistiqueMiniTests = adaptateurEnvironnement.journal.baseDeDon
 const adaptateurStatistiqueParcours = adaptateurEnvironnement.journal.baseDeDonnéesActive()
   ? new AdaptateurStatistiqueParcoursPostgres()
   : new AdaptateurStatistiqueParcoursMémoire();
+
+const adaptateurObservatoire = fabriqueAdaptateurObservatoire(adaptateurEnvironnement);
 
 const entrepotFavori = new EntrepotFavoriPostgres({ adaptateurHachage });
 const entrepotFinancement = new EntrepotFinancementGrist({
@@ -309,6 +312,7 @@ const host = process.env.HOST;
     },
     adaptateurStatistiqueMiniTests,
     adaptateurStatistiqueParcours,
+    adaptateurObservatoire,
   });
 
   const annonceEcoute = () => {

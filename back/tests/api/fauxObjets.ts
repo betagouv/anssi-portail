@@ -30,6 +30,7 @@ import { AdaptateurStatistiqueMiniTestsMémoire } from '../../src/infra/adaptate
 import { AdaptateurStatistiqueParcoursMémoire } from '../../src/infra/adaptateurStatistiqueParcoursMémoire.js';
 import { AdaptateurEnrichissement } from '../../src/infra/enrichissement/adaptateurEnrichissement.js';
 import { EntrepôtContactStatique } from '../../src/infra/entrepotContactStatique.js';
+import { AdaptateurObservatoireMemoire } from '../../src/infra/observatoireDesDonnees/adaptateurObservatoireMemoire.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js';
 import { Parcours } from '../../src/metier/parcours.js';
@@ -313,6 +314,9 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   journal: {
     baseDeDonnéesActive: () => false,
   },
+  observatoire: {
+    urlServeur: () => undefined,
+  },
 };
 
 const vraiMiddleware = fabriqueMiddleware({
@@ -410,6 +414,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurJWT: fauxAdaptateurJWT,
   adaptateurMonAideCyber: fauxAdaptateurMonAideCyber,
   adaptateurOIDC: fauxAdaptateurOIDC,
+  adaptateurObservatoire: new AdaptateurObservatoireMemoire(),
   adaptateurProfilAnssi: fauxAdaptateurProfilAnssi,
   adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
   adaptateurStatistiqueMiniTests: new AdaptateurStatistiqueMiniTestsMémoire(),
