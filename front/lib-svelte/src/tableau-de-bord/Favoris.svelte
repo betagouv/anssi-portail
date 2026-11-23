@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { Icone } from '@lab-anssi/ui-kit';
   import { onMount } from 'svelte';
   import CarteItem from '../catalogue/CarteItem.svelte';
   import { chargeGuidesDansLeStore } from '../catalogue/stores/guides/guides.store';
   import { itemsCatalogueEnFavori } from '../catalogue/stores/itemsCatalogueEnFavori';
   import Lien from '../ui/Lien.svelte';
   import { détecteRendu } from '../utils/rendu.svelte';
+  import TitreDeSection from './TitreDeSection.svelte';
 
   onMount(chargeGuidesDansLeStore);
 
@@ -16,7 +16,7 @@
 
 {#if nombreDeCartesAffichées > 0}
   <div class="favoris">
-    <h2 class="fr-h4"><span><Icone nom="heart-line" taille="lg" /></span>Favoris</h2>
+    <TitreDeSection libellé="Favoris" icône="heart-line" />
 
     <div class="cartes">
       {#each { length: nombreDeCartesAffichées }, i}
@@ -45,16 +45,6 @@
       grid-template-areas:
         'titre lien'
         'cartes cartes';
-    }
-
-    h2 {
-      grid-area: titre;
-      display: flex;
-      gap: 0.5rem;
-
-      span {
-        color: var(--artwork-minor-blue-france);
-      }
     }
 
     .cartes {
