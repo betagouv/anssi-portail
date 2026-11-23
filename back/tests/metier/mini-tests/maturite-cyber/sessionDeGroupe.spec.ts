@@ -1,19 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import {
-  ReponsesTestMaturite,
-  RésultatTestMaturité,
-} from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { SessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
+import { unRésultatDeTestDeMaturité } from '../../../api/mini-tests/maturite-cyber/constructeurResultatTestMaturite.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
-
-const resultatAvecReponses = (reponses: ReponsesTestMaturite, codeSession: string) =>
-  new RésultatTestMaturité({
-    region: 'FR-NOR',
-    secteur: 'J',
-    tailleOrganisation: '51',
-    codeSessionGroupe: codeSession,
-    reponses,
-  });
 
 describe('La session de groupe', () => {
   describe('sur demande des résultats', () => {
@@ -52,30 +40,30 @@ describe('La session de groupe', () => {
       });
       const entrepotResultatTest = new EntrepôtRésultatTestMaturitéMémoire();
       await entrepotResultatTest.ajoute(
-        resultatAvecReponses(
-          {
+        await unRésultatDeTestDeMaturité()
+          .avecRéponses({
             'prise-en-compte-risque': 3,
             pilotage: 3,
             budget: 3,
             'ressources-humaines': 4,
             'adoption-solutions': 4,
             posture: 4,
-          },
-          'ABCD'
-        )
+          })
+          .avecCodeSessionGroupe('ABCD')
+          .construis()
       );
       await entrepotResultatTest.ajoute(
-        resultatAvecReponses(
-          {
+        await unRésultatDeTestDeMaturité()
+          .avecRéponses({
             'prise-en-compte-risque': 1,
             pilotage: 1,
             budget: 1,
             'ressources-humaines': 1,
             'adoption-solutions': 1,
             posture: 1,
-          },
-          'ABCD'
-        )
+          })
+          .avecCodeSessionGroupe('ABCD')
+          .construis()
       );
 
       const resultatSession = await sessionDeGroupe.resultatSession(entrepotResultatTest);
@@ -93,31 +81,32 @@ describe('La session de groupe', () => {
         genere: async () => 'ABCD',
       });
       const entrepotResultatTest = new EntrepôtRésultatTestMaturitéMémoire();
+
       await entrepotResultatTest.ajoute(
-        resultatAvecReponses(
-          {
+        await unRésultatDeTestDeMaturité()
+          .avecRéponses({
             'prise-en-compte-risque': 1,
             pilotage: 1,
             budget: 1,
             'ressources-humaines': 4,
             'adoption-solutions': 1,
             posture: 1,
-          },
-          'ABCD'
-        )
+          })
+          .avecCodeSessionGroupe('ABCD')
+          .construis()
       );
       await entrepotResultatTest.ajoute(
-        resultatAvecReponses(
-          {
+        await unRésultatDeTestDeMaturité()
+          .avecRéponses({
             'prise-en-compte-risque': 1,
             pilotage: 1,
             budget: 1,
             'ressources-humaines': 3,
             'adoption-solutions': 1,
             posture: 1,
-          },
-          'ABCD'
-        )
+          })
+          .avecCodeSessionGroupe('ABCD')
+          .construis()
       );
 
       const resultatSession = await sessionDeGroupe.resultatSession(entrepotResultatTest);

@@ -13,6 +13,7 @@ import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisa
 import { encodeSession } from '../../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise, fauxRapporteur } from '../../fauxObjets.js';
 import { hectorDurant, jeanneDupont } from '../../objetsPretsALEmploi.js';
+import { unRésultatDeTestDeMaturité } from './constructeurResultatTestMaturite.js';
 
 const REGEX_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 
@@ -392,14 +393,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       });
 
       async function ajouteUnResultatDeTest(id: string, utilisateur: Utilisateur) {
-        const resultatDunUtilisateur = new RésultatTestMaturité({
-          secteur: 'A',
-          region: 'FR-NOR',
-          id,
-          reponses: {},
-          tailleOrganisation: '01',
-        });
-        await resultatDunUtilisateur.revendiquePropriete(utilisateur, fauxAdaptateurRechercheEntreprise);
+        const resultatDunUtilisateur = await unRésultatDeTestDeMaturité().pour(utilisateur).avecId(id).construis();
         await entrepôtRésultatTestMaturité.ajoute(resultatDunUtilisateur);
       }
 

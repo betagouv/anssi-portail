@@ -5,14 +5,11 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc/index.js';
 import { EntrepôtRésultatTestMaturité } from '../../../../src/metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
 import { EntrepotSessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
-import {
-  DonneesCreationResultatTestMaturite,
-  RésultatTestMaturité,
-} from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { SessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { EntrepotSessionDeGroupeMemoire } from '../../../persistance/entrepotSessionDeGroupeMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
+import { unRésultatDeTestDeMaturité } from './constructeurResultatTestMaturite.js';
 
 describe("La ressource qui gère les résultats d'une session de groupe", () => {
   let serveur: Express;
@@ -21,21 +18,6 @@ describe("La ressource qui gère les résultats d'une session de groupe", () => 
   const generateurCodeSessionDeGroupe = (code: string) => ({
     genere: async () => code,
   });
-
-  const donneesResultatTest: Omit<DonneesCreationResultatTestMaturite, 'utilisateur'> = {
-    region: 'FR-NOR',
-    secteur: 'J',
-    tailleOrganisation: '51',
-    reponses: {
-      'prise-en-compte-risque': 2,
-      pilotage: 3,
-      budget: 5,
-      'ressources-humaines': 3,
-      'adoption-solutions': 2,
-      posture: 3,
-    },
-    codeSessionGroupe: 'ABC2ED',
-  };
 
   beforeEach(() => {
     entrepôtRésultatTestMaturité = new EntrepôtRésultatTestMaturitéMémoire();
@@ -76,10 +58,7 @@ describe("La ressource qui gère les résultats d'une session de groupe", () => 
       const sessionDeGroupe = await SessionDeGroupe.cree(generateurCodeSessionDeGroupe('ABC2ED'));
       await entrepotSessionDeGroupe.ajoute(sessionDeGroupe);
       await entrepôtRésultatTestMaturité.ajoute(
-        new RésultatTestMaturité({
-          ...donneesResultatTest,
-          codeSessionGroupe: 'ABC2ED',
-        })
+        await unRésultatDeTestDeMaturité().avecCodeSessionGroupe('ABC2ED').construis()
       );
 
       const reponse = await request(serveur).get('/api/sessions-groupe/ABC2ED/resultats').send();

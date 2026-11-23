@@ -4,16 +4,13 @@ import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc/index.js';
 import { ProprieteTestRevendiquee } from '../../../../src/bus/evenements/proprieteTestRevendiquee.js';
-import { RésultatTestMaturité } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
-import { CodeRégion } from '../../../../src/metier/referentielRegions.js';
-import { CodeSecteur } from '../../../../src/metier/referentielSecteurs.js';
-import { CodeTrancheEffectif } from '../../../../src/metier/referentielTranchesEffectifEtablissement.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';
-import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise, fauxRapporteur } from '../../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxRapporteur } from '../../fauxObjets.js';
 import { hectorDurant, jeanneDupont } from '../../objetsPretsALEmploi.js';
+import { unRésultatDeTestDeMaturité } from './constructeurResultatTestMaturite.js';
 
 describe('La ressource qui gère un résultat de test', () => {
   let serveur: Express;
@@ -38,28 +35,9 @@ describe('La ressource qui gère un résultat de test', () => {
     });
   });
 
-  const donneesResultatTestCorrectes = () => ({
-    utilisateur: undefined,
-    region: 'FR-NOR' as CodeRégion,
-    secteur: 'J' as CodeSecteur,
-    tailleOrganisation: '51' as CodeTrancheEffectif,
-    reponses: {
-      'prise-en-compte-risque': 2,
-      pilotage: 3,
-      budget: 5,
-      'ressources-humaines': 3,
-      'adoption-solutions': 2,
-      posture: 3,
-    },
-  });
-
   describe('sur requête PUT', () => {
     it('refuse la mise à jour si le résultat de test a déjà été revendiqué par un autre utilisateur', async () => {
-      const resultatDeHector = new RésultatTestMaturité({
-        ...donneesResultatTestCorrectes(),
-        id: 'r1',
-      });
-      await resultatDeHector.revendiquePropriete(hectorDurant, fauxAdaptateurRechercheEntreprise);
+      const resultatDeHector = await unRésultatDeTestDeMaturité().avecId('r1').pour(hectorDurant).construis();
       await entrepôtRésultatTestMaturité.ajoute(resultatDeHector);
 
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
@@ -71,11 +49,7 @@ describe('La ressource qui gère un résultat de test', () => {
     });
 
     it('ne fait rien si le résultat a déjà été revendiqué par cet utilisateur', async () => {
-      const resultatDeJeanne = new RésultatTestMaturité({
-        ...donneesResultatTestCorrectes(),
-        id: 'r1',
-      });
-      await resultatDeJeanne.revendiquePropriete(jeanneDupont, fauxAdaptateurRechercheEntreprise);
+      const resultatDeJeanne = await unRésultatDeTestDeMaturité().avecId('r1').pour(jeanneDupont).construis();
       await entrepôtRésultatTestMaturité.ajoute(resultatDeJeanne);
 
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
@@ -85,12 +59,7 @@ describe('La ressource qui gère un résultat de test', () => {
     });
 
     it("associe l'utilisateur courant au résultat de test", async () => {
-      await entrepôtRésultatTestMaturité.ajoute(
-        new RésultatTestMaturité({
-          ...donneesResultatTestCorrectes(),
-          id: 'r1',
-        })
-      );
+      await entrepôtRésultatTestMaturité.ajoute(await unRésultatDeTestDeMaturité().avecId('r1').construis());
 
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
@@ -106,12 +75,7 @@ describe('La ressource qui gère un résultat de test', () => {
     });
 
     it('publie un événement de revendication de propriété du test', async () => {
-      await entrepôtRésultatTestMaturité.ajoute(
-        new RésultatTestMaturité({
-          ...donneesResultatTestCorrectes(),
-          id: 'r1',
-        })
-      );
+      await entrepôtRésultatTestMaturité.ajoute(await unRésultatDeTestDeMaturité().avecId('r1').construis());
 
       await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
