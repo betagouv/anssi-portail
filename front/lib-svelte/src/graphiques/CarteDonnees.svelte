@@ -1,5 +1,11 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import { enPropriétéWebC } from '$plateforme/webComponent';
+
+  export interface TableauDeDonnees {
+    colonnes: Array<string>;
+    lignes: Array<Array<string | number>>;
+  }
 
   interface Props {
     id: string;
@@ -7,10 +13,21 @@
     infobulle?: string;
     source: string;
     date: string;
+    /** Alternative textuelle au graphique : si elle est fournie, la carte propose de basculer entre les deux vues. */
+    tableau?: TableauDeDonnees;
     children: Snippet;
   }
 
-  let { id, titre, infobulle, source, date, children }: Props = $props();
+  let { id, titre, infobulle, source, date, tableau, children }: Props = $props();
+
+  let vue: 'graphique' | 'tableau' = $state('graphique');
+
+  const colonnes = $derived((tableau?.colonnes ?? []).map((label, index) => ({ key: `colonne-${index}`, label })));
+  const lignes = $derived(
+    (tableau?.lignes ?? []).map((ligne) =>
+      Object.fromEntries(ligne.map((cellule, index) => [`colonne-${index}`, cellule]))
+    )
+  );
 </script>
 
 <article class="carte-donnees">
@@ -30,10 +47,42 @@
     {/if}
   </header>
   <div class="contenu">
-    {@render children()}
+    {#if tableau && vue === 'tableau'}
+      <dsfr-table
+        id="tableau-{id}"
+        caption={titre}
+        no-caption
+        columns={enPropriétéWebC(colonnes)}
+        rows={enPropriétéWebC(lignes)}
+      ></dsfr-table>
+    {:else}
+      {@render children()}
+    {/if}
   </div>
   <footer>
     <p>{source}, {date}</p>
+    {#if tableau}
+      <div class="choix-vue" role="group" aria-label="Choisir la vue">
+        <button
+          type="button"
+          title="Vue graphique"
+          aria-label="Vue graphique"
+          aria-pressed={vue === 'graphique'}
+          onclick={() => (vue = 'graphique')}
+        >
+          <lab-anssi-icone nom="pie-chart-2-fill" taille="sm"></lab-anssi-icone>
+        </button>
+        <button
+          type="button"
+          title="Vue tableau"
+          aria-label="Vue tableau"
+          aria-pressed={vue === 'tableau'}
+          onclick={() => (vue = 'tableau')}
+        >
+          <lab-anssi-icone nom="table-line" taille="sm"></lab-anssi-icone>
+        </button>
+      </div>
+    {/if}
   </footer>
 </article>
 
@@ -71,11 +120,48 @@
       min-width: 0;
     }
 
-    footer p {
-      color: var(--text-default-grey);
-      font-size: 0.75rem;
-      line-height: 1.25rem;
-      margin: 0;
+    footer {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-height: 2rem;
+
+      p {
+        flex: 1;
+        color: var(--text-default-grey);
+        font-size: 0.75rem;
+        line-height: 1.25rem;
+        margin: 0;
+      }
+    }
+
+    .choix-vue {
+      display: flex;
+      border: 1px solid var(--border-default-grey);
+      border-radius: 4px;
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: -1px;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        background: none;
+        color: var(--text-title-grey);
+        cursor: pointer;
+
+        &[aria-pressed='true'] {
+          border-color: var(--border-active-blue-france);
+          color: var(--text-active-blue-france);
+        }
+
+        &:focus-visible {
+          outline: 2px solid var(--focus-color, #0a76f6);
+          outline-offset: 2px;
+        }
+      }
     }
   }
 </style>

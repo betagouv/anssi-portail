@@ -55,6 +55,10 @@
           infobulle="Évolution du nombre de systèmes d’information déclarés dans MonServiceSécurisé."
           {source}
           {date}
+          tableau={{
+            colonnes: ['Mois', 'SI sécurisés'],
+            lignes: évolutionDesSystèmesSécurisés.map((point) => [point.mois, point.total.toLocaleString('fr-FR')]),
+          }}
         >
           <GraphiqueLineaire
             x={évolutionDesSystèmesSécurisés.map((point) => point.mois)}
