@@ -14,9 +14,6 @@ export class EntrepôtRésultatTestHameçonnagePostgres
       ? await this.entrepotUtilisateur.parEmailHache(entrée.email_utilisateur_hache)
       : undefined;
 
-    if (entrée.score === null) {
-      throw new Error(`Score manquant pour le résultat de test ${entrée.id}`);
-    }
     if (!utilisateur) {
       throw new Error(`Utilisateur introuvable pour le résultat de test ${entrée.id}`);
     }
