@@ -5,7 +5,7 @@ import { CodeSecteur, estCodeSecteur } from './../../referentielSecteurs.js';
 import { CodeTrancheEffectif, trancheEffectifParCode } from './../../referentielTranchesEffectifEtablissement.js';
 import { Utilisateur } from './../../utilisateur.js';
 
-export type ReponsesTestMaturite = Record<string, number>;
+export type ReponsesTestMaturite = Record<IdRubrique, number>;
 
 export type DonneesCreationResultatTestMaturite = {
   region: CodeRégion | undefined;
