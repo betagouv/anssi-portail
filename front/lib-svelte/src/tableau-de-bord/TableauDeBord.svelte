@@ -5,7 +5,7 @@
   import AutresRessources from './AutresRessources.svelte';
   import Favoris from './Favoris.svelte';
   import Parcours from './parcours/Parcours.svelte';
-  import TestsCyber from './TestsCyber.svelte';
+  import TestsCyber from './tests-cyber/TestsCyber.svelte';
 </script>
 
 <div class="conteneur-externe">

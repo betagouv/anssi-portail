@@ -2,7 +2,8 @@
   import { Icone } from '@lab-anssi/ui-kit';
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import Lien from '../ui/Lien.svelte';
+  import Lien from '../../ui/Lien.svelte';
+  import TuileNiveauMaturité from './TuileNiveauMaturite.svelte';
 
   type IdMiniTest = 'maturité' | 'vraiFaux' | 'exposition' | 'réflexesCyber' | 'hameçonnage';
   type RéalisationMiniTests = Record<IdMiniTest, { réalisé: boolean }>;
@@ -54,7 +55,7 @@
       altIcone: 'Canne à pêche',
       couleurIcone: 'yellow-moutarde',
       lien: '/hameconnage',
-      libelléLien: 'Hame\u00ADçonnage\u00a0: saurez-vous distinguez le mail légitime du faux\u00a0?',
+      libelléLien: 'Hame\u00ADçonnage\u00a0: saurez-vous distinguer le mail légitime du faux\u00a0?',
     },
   ];
 
@@ -67,36 +68,73 @@
 </script>
 
 <div class="tests-cyber">
-  <h2>Tests cyber</h2>
-  <p class="texte-standard-md">
-    Comprendre les enjeux cyber de votre organisation à l’aide de nos test simples et ludiques.
-  </p>
-  <ul>
-    {#each testsCyber as test (test.id)}
-      <li>
-        {#if réalisationMiniTests && réalisationMiniTests[test.id].réalisé}
-          <div class="statut realise">
-            <Icone nom="checkbox-circle-fill" taille="md" />
-            <span class="sr-only">mini-test réalisé</span>
-          </div>
-        {:else}
-          <div class="statut">
-            <Icone nom="checkbox-circle-line" taille="md" />
-            <span class="sr-only">mini-test non réalisé</span>
-          </div>
-        {/if}
-        <img src={`/assets/icones/${test.icone}.avif`} alt={test.altIcone} class={`fond-${test.couleurIcone}`} />
-        <Lien href={test.lien} libelle={test.libelléLien} />
-      </li>
-    {/each}
-  </ul>
+  <div class="section">
+    <h2>Tests cyber</h2>
+    <p class="texte-standard-md">
+      Comprendre les enjeux cyber de votre organisation à l’aide de nos test simples et ludiques.
+    </p>
+    <ul>
+      {#each testsCyber as test (test.id)}
+        <li>
+          {#if réalisationMiniTests && réalisationMiniTests[test.id].réalisé}
+            <div class="statut realise">
+              <Icone nom="checkbox-circle-fill" taille="md" />
+              <span class="sr-only">mini-test réalisé</span>
+            </div>
+          {:else}
+            <div class="statut">
+              <Icone nom="checkbox-circle-line" taille="md" />
+              <span class="sr-only">mini-test non réalisé</span>
+            </div>
+          {/if}
+          <img src={`/assets/icones/${test.icone}.avif`} alt={test.altIcone} class={`fond-${test.couleurIcone}`} />
+          <Lien href={test.lien} libelle={test.libelléLien} />
+        </li>
+      {/each}
+    </ul>
+  </div>
+  {#if réalisationMiniTests && réalisationMiniTests['maturité'].réalisé}
+    <div class="section maturite">
+      <h4>Maturité cyber de votre organisation</h4>
+      <TuileNiveauMaturité niveau="emergent" />
+
+      <Lien libelle="Accéder aux détails" href="/ma-maturite" icone="arrow-right-line" iconeADroite />
+    </div>
+  {/if}
 </div>
 
 <style lang="scss">
+  @use '../../../../assets/styles/responsive' as *;
+
   .tests-cyber {
-    background: var(--background-default-grey);
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @include a-partir-de(md) {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+    }
+
+    .section {
+      flex: 1;
+      background: var(--background-default-grey);
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
+      padding: 1rem;
+
+      @include a-partir-de(lg) {
+        padding: 2rem;
+      }
+
+      &.maturite {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        h4 {
+          margin-bottom: 0;
+        }
+      }
+    }
 
     h2 {
       margin-bottom: 1rem;
