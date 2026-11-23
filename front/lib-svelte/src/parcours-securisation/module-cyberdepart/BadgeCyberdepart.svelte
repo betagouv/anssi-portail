@@ -1,6 +1,7 @@
 <script lang="ts">
   import { afficheBadgeCyberdépart } from '$plateforme/environnement';
   import BoutonPartageBadgeCyberdépart from './BoutonPartageBadgeCyberdepart.svelte';
+  import BoutonTelechargementVisuels from './BoutonTelechargementVisuels.svelte';
 
   const titre = afficheBadgeCyberdépart ? 'Badge Cyberdépart' : 'Vous avez validé votre Cyberdépart\u00a0!';
   const description = afficheBadgeCyberdépart
@@ -8,10 +9,6 @@
       premières actions mises en place pour réduire les risques cyber les plus fréquents.`
     : `Cette étape témoigne de l’engagement de votre organisation dans une première démarche de sécurisation. Elle valorise les
       premières actions mises en place pour réduire les risques cyber les plus fréquents.`;
-  const libelléCta = afficheBadgeCyberdépart ? 'Télécharger mon attestation' : 'Télécharger les visuels';
-  const urlBouton = afficheBadgeCyberdépart
-    ? '/api/cyberdepart/attestation_badge_cyberdepart.zip'
-    : '/api/cyberdepart/visuels_cyberdepart.zip';
 </script>
 
 <div class="badge">
@@ -23,18 +20,7 @@
     </p>
     <div class="actions">
       <BoutonPartageBadgeCyberdépart typeDuBouton="secondaire" />
-      <dsfr-button
-        label={libelléCta}
-        kind="secondary"
-        size="md"
-        has-icon={true}
-        icon="download-line"
-        icon-place="left"
-        markup="a"
-        type="button"
-        href={urlBouton}
-        centered
-      ></dsfr-button>
+      <BoutonTelechargementVisuels />
     </div>
   </div>
 </div>
