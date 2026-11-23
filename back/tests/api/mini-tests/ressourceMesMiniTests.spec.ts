@@ -3,7 +3,15 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
+import { RésultatTestExposition } from '../../../src/metier/mini-tests/exposition/resultatTestExposition.js';
+import { RésultatTestHameçonnage } from '../../../src/metier/mini-tests/hameconnage/resultatTestHameconnage.js';
+import { RésultatTestRéflexesCyber } from '../../../src/metier/mini-tests/reflexes-cyber/resultatTestReflexesCyber.js';
+import { RésultatTestVraiFaux } from '../../../src/metier/mini-tests/vrai-faux/resultatTestVraiFaux.js';
+import { EntrepôtRésultatTestExpositionMémoire } from '../../persistance/entrepotResultatTestExpositionMemoire.js';
+import { EntrepôtRésultatTestHameçonnageMémoire } from '../../persistance/entrepotResultatTestHameconnageMemoire.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../persistance/entrepotResultatTestMaturiteMemoire.js';
+import { EntrepôtRésultatTestRéflexesCyberMémoire } from '../../persistance/entrepotResultatTestReflexesCyberMemoire.js';
+import { EntrepôtRésultatTestVraiFauxMémoire } from '../../persistance/entrepotResultatTestVraiFauxMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
@@ -13,15 +21,27 @@ import { unRésultatDeTestDeMaturité } from './maturite-cyber/constructeurResul
 describe('La ressource de mes mini tests', () => {
   let serveur: Express;
   let entrepôtRésultatTestMaturité: EntrepôtRésultatTestMaturitéMémoire;
+  let entrepôtRésultatTestVraiFaux: EntrepôtRésultatTestVraiFauxMémoire;
+  let entrepôtRésultatTestExposition: EntrepôtRésultatTestExpositionMémoire;
+  let entrepôtRésultatTestHameçonnage: EntrepôtRésultatTestHameçonnageMémoire;
+  let entrepôtRésultatTestRéflexesCyber: EntrepôtRésultatTestRéflexesCyberMémoire;
   let entrepotUtilisateur: EntrepotUtilisateurMemoire;
 
   beforeEach(async () => {
     entrepôtRésultatTestMaturité = new EntrepôtRésultatTestMaturitéMémoire();
+    entrepôtRésultatTestVraiFaux = new EntrepôtRésultatTestVraiFauxMémoire();
+    entrepôtRésultatTestExposition = new EntrepôtRésultatTestExpositionMémoire();
+    entrepôtRésultatTestHameçonnage = new EntrepôtRésultatTestHameçonnageMémoire();
+    entrepôtRésultatTestRéflexesCyber = new EntrepôtRésultatTestRéflexesCyberMémoire();
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     await entrepotUtilisateur.ajoute(jeanneDupont);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       entrepôtRésultatTestMaturité,
+      entrepôtRésultatTestVraiFaux,
+      entrepôtRésultatTestExposition,
+      entrepôtRésultatTestHameçonnage,
+      entrepôtRésultatTestRéflexesCyber,
       entrepotUtilisateur,
     });
   });
@@ -56,6 +76,71 @@ describe('La ressource de mes mini tests', () => {
       const réponse = await getConnecté();
 
       expect(réponse.body.maturité.réalisé).toBe(false);
+    });
+
+    it('indique que le test vrai-faux a été réalisé', async () => {
+      await entrepôtRésultatTestVraiFaux.ajoute(
+        new RésultatTestVraiFaux({
+          utilisateur: jeanneDupont,
+          score: '3',
+        })
+      );
+
+      const réponse = await getConnecté();
+
+      expect(réponse.body.vraiFaux.réalisé).toBe(true);
+    });
+
+    it('indique que le test vrai-faux n’a pas été réalisé', async () => {
+      const réponse = await getConnecté();
+
+      expect(réponse.body.vraiFaux.réalisé).toBe(false);
+    });
+
+    it('indique que le test d’exposition a été réalisé', async () => {
+      await entrepôtRésultatTestExposition.ajoute(new RésultatTestExposition({ utilisateur: jeanneDupont }));
+
+      const réponse = await getConnecté();
+
+      expect(réponse.body.exposition.réalisé).toBe(true);
+    });
+
+    it('indique que le test d’exposition n’a pas été réalisé', async () => {
+      const réponse = await getConnecté();
+
+      expect(réponse.body.exposition.réalisé).toBe(false);
+    });
+
+    it('indique que le test hameçonnage a été réalisé', async () => {
+      await entrepôtRésultatTestHameçonnage.ajoute(
+        new RésultatTestHameçonnage({ utilisateur: jeanneDupont, score: '3' })
+      );
+
+      const réponse = await getConnecté();
+
+      expect(réponse.body.hameçonnage.réalisé).toBe(true);
+    });
+
+    it('indique que le test hameçonnage n’a pas été réalisé', async () => {
+      const réponse = await getConnecté();
+
+      expect(réponse.body.hameçonnage.réalisé).toBe(false);
+    });
+
+    it('indique que le test réflexes cyber a été réalisé', async () => {
+      await entrepôtRésultatTestRéflexesCyber.ajoute(
+        new RésultatTestRéflexesCyber({ utilisateur: jeanneDupont, score: '2' })
+      );
+
+      const réponse = await getConnecté();
+
+      expect(réponse.body.réflexesCyber.réalisé).toBe(true);
+    });
+
+    it('indique que le test réflexes cyber n’a pas été réalisé', async () => {
+      const réponse = await getConnecté();
+
+      expect(réponse.body.réflexesCyber.réalisé).toBe(false);
     });
   });
 });

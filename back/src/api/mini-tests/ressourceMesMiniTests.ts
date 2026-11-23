@@ -7,6 +7,10 @@ export const ressourceMesMiniTests = ({
   entrepotUtilisateur,
   adaptateurHachage,
   entrepôtRésultatTestMaturité,
+  entrepôtRésultatTestVraiFaux,
+  entrepôtRésultatTestExposition,
+  entrepôtRésultatTestRéflexesCyber,
+  entrepôtRésultatTestHameçonnage,
 }: ConfigurationServeur) => {
   const routeur = Router();
 
@@ -15,12 +19,20 @@ export const ressourceMesMiniTests = ({
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideCorpsRequete(corpsVide),
-    async (_requête, réponse) => {
-      const résultatTestMaturité = await entrepôtRésultatTestMaturité.dernierPourUtilisateur(_requête.utilisateur);
+    async (requête, réponse) => {
+      const résultatTestMaturité = await entrepôtRésultatTestMaturité.dernierPourUtilisateur(requête.utilisateur);
+      const résultatTestVraiFaux = await entrepôtRésultatTestVraiFaux.dernierPourUtilisateur(requête.utilisateur);
+      const résultatTestExposition = await entrepôtRésultatTestExposition.dernierPourUtilisateur(requête.utilisateur);
+      const résultatTestHameçonnage = await entrepôtRésultatTestHameçonnage.dernierPourUtilisateur(requête.utilisateur);
+      const résultatTestRéflexesCyber = await entrepôtRésultatTestRéflexesCyber.dernierPourUtilisateur(
+        requête.utilisateur
+      );
       réponse.send({
-        maturité: {
-          réalisé: résultatTestMaturité !== undefined,
-        },
+        maturité: { réalisé: résultatTestMaturité !== undefined },
+        vraiFaux: { réalisé: résultatTestVraiFaux !== undefined },
+        exposition: { réalisé: résultatTestExposition !== undefined },
+        hameçonnage: { réalisé: résultatTestHameçonnage !== undefined },
+        réflexesCyber: { réalisé: résultatTestRéflexesCyber !== undefined },
       });
     }
   );
