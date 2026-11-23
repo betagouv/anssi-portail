@@ -249,7 +249,7 @@ importers:
         version: 8.72.2(eslint@10.15.0(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3)
       vitest:
         specifier: 'catalog:'
-        version: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
+        version: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
 
   axios:
     dependencies:
@@ -262,7 +262,7 @@ importers:
         version: 26.6.6
       vitest:
         specifier: 'catalog:'
-        version: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
+        version: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
 
   back:
     dependencies:
@@ -340,7 +340,7 @@ importers:
         version: 4.7.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
       jsdom:
         specifier: ^31.0.0
-        version: 31.0.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
+        version: 31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
       jsonwebtoken:
         specifier: ^9.0.3
         version: 9.0.3
@@ -443,7 +443,7 @@ importers:
         version: 4.23.15
       vitest:
         specifier: 'catalog:'
-        version: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
+        version: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
 
   comparaison-grist:
     dependencies:
@@ -471,7 +471,7 @@ importers:
         version: 26.6.6
       vitest:
         specifier: 'catalog:'
-        version: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
+        version: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
 
   demande-diag:
     dependencies:
@@ -539,7 +539,7 @@ importers:
         version: 1.21.1(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
       dompurify:
         specifier: ^3.4.11
-        version: 3.4.17
+        version: 3.4.18
       entities:
         specifier: 'catalog:'
         version: 9.0.0
@@ -600,10 +600,10 @@ importers:
         version: 8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15)
       vitest:
         specifier: 'catalog:'
-        version: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
+        version: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
       vitest-localstorage-mock:
         specifier: ^0.1.2
-        version: 0.1.3(vitest@5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15)))
+        version: 0.1.3(vitest@5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15)))
 
   mise-a-jour-financements:
     dependencies:
@@ -628,7 +628,7 @@ importers:
         version: 4.23.15
       vitest:
         specifier: 'catalog:'
-        version: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
+        version: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
 
   regles-eslint:
     dependencies:
@@ -653,7 +653,7 @@ importers:
         version: 5.57.3(@typescript-eslint/types@8.72.2)
       vitest:
         specifier: 'catalog:'
-        version: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
+        version: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
 
   webc-externes/mini-test-exposition:
     dependencies:
@@ -2959,8 +2959,8 @@ packages:
     resolution: {integrity: sha512-gYzvtM72ZtxQO0T048kd6HWSbbGCNOUwcnfQ01cqIJ4X2IYKFFHZ5mKvrQETcFXxsRObZulDaKmy//R7TPtsBg==}
     engines: {node: '>=20.19.0'}
 
-  dompurify@3.4.17:
-    resolution: {integrity: sha512-B/pSlYVHQ58kqISD/yDjuJ1yfzI34m1gF4lAod2bwSRhiN4K5Cl3H8Af7hqB2PmTL911tdEudnnXn5FnhRoz0w==}
+  dompurify@3.4.18:
+    resolution: {integrity: sha512-ofe3wI/uNm68HInABYFJYqQxRw1EaKAjNdrFVKqjUY+UZurvNd2L/HuQe097s/4RivWiZyP6tT7aoT8atjfhwg==}
 
   domutils@4.0.2:
     resolution: {integrity: sha512-qI4JLRKnSzqFqr7hAlS5xQDusBCjKSEG4t4+7aNrIQMHBcsC2TGEhuyABJdYkgSewL57PNLYEiibY2iPKhKpaA==}
@@ -3516,8 +3516,8 @@ packages:
     resolution: {integrity: sha512-28R/k+NAjeuf7+CKlTxWZVExJGwVVLwY06DgEnOMz2gEpfNkDcD7QvyiVPT0xy0XXhU8vHsd4Ot42OOPdJG7dQ==}
     hasBin: true
 
-  jsdom@31.0.0:
-    resolution: {integrity: sha512-xAkhD9z1eyFC5+QUi9K24CaZJgdCQ2GOGLW1GdVDoQvkp/AxEH9TQ0pAplPOlIiV92hfcgnFOADZypbjgbBT6Q==}
+  jsdom@31.0.1:
+    resolution: {integrity: sha512-CbhJL8ZQg3eKswxSZth4QO9tW0jPIhmR0vtSXQSbKSfWbwIT6hoRc17wdHIVTQ43KI0mdV5iTJr3281IDgVZ5g==}
     engines: {node: ^22.22.2 || ^24.15.0 || >=26.0.0}
     peerDependencies:
       '@napi-rs/canvas': ^1.0.13
@@ -7148,7 +7148,7 @@ snapshots:
     dependencies:
       domelementtype: 3.0.0
 
-  dompurify@3.4.17:
+  dompurify@3.4.18:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
 
@@ -7707,8 +7707,8 @@ snapshots:
 
   isomorphic-dompurify@4.7.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0):
     dependencies:
-      dompurify: 3.4.17
-      jsdom: 31.0.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
+      dompurify: 3.4.18
+      jsdom: 31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
     transitivePeerDependencies:
       - '@napi-rs/canvas'
       - '@noble/hashes'
@@ -7735,7 +7735,7 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  jsdom@31.0.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0):
+  jsdom@31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0):
     dependencies:
       '@exodus/bytes': 1.16.0(@noble/hashes@1.8.0)
       bcp-47: 2.1.2
@@ -9048,11 +9048,11 @@ snapshots:
     optionalDependencies:
       vite: 8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15)
 
-  vitest-localstorage-mock@0.1.3(vitest@5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))):
+  vitest-localstorage-mock@0.1.3(vitest@5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))):
     dependencies:
-      vitest: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
+      vitest: 5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
 
-  vitest@5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15)):
+  vitest@5.1.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15)):
     dependencies:
       '@types/chai': 5.2.3
       '@vitest/mocker': 5.1.0(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
@@ -9071,7 +9071,7 @@ snapshots:
     optionalDependencies:
       '@opentelemetry/api': 1.9.1
       '@types/node': 26.6.6
-      jsdom: 31.0.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
+      jsdom: 31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
     transitivePeerDependencies:
       - msw
 
