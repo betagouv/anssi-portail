@@ -1,9 +1,13 @@
 <script lang="ts">
   import { Icone } from '@lab-anssi/ui-kit';
+  import axios from 'axios';
+  import { onMount } from 'svelte';
   import Lien from '../ui/Lien.svelte';
 
+  type IdMiniTest = 'maturité' | 'vraiFaux' | 'exposition' | 'réflexesCyber' | 'hameçonnage';
+  type RéalisationMiniTests = Record<IdMiniTest, { réalisé: boolean }>;
   type TestsCyber = {
-    id: 'maturité' | 'vraiFaux' | 'exposition' | 'réflexesCyber' | 'hameçonnage';
+    id: IdMiniTest;
     icone: string;
     altIcone: string;
     couleurIcone: 'green-bourgeon' | 'pink-macaron' | 'blue-cumulus' | 'purple-glycine' | 'yellow-moutarde';
@@ -53,6 +57,13 @@
       libelléLien: 'Hame\u00ADçonnage\u00a0: saurez-vous distinguez le mail légitime du faux\u00a0?',
     },
   ];
+
+  let réalisationMiniTests: RéalisationMiniTests | undefined = $state(undefined);
+
+  onMount(async () => {
+    const { data } = await axios.get<RéalisationMiniTests>('/api/mes-mini-tests');
+    réalisationMiniTests = data;
+  });
 </script>
 
 <div class="tests-cyber">
@@ -63,9 +74,17 @@
   <ul class="tests">
     {#each testsCyber as test (test.id)}
       <li>
-        <div class="statut">
-          <Icone nom="checkbox-circle-line" taille="md" />
-        </div>
+        {#if réalisationMiniTests && réalisationMiniTests[test.id].réalisé}
+          <div class="statut realise">
+            <Icone nom="checkbox-circle-fill" taille="md" />
+            <span class="sr-only">mini-test réalisé</span>
+          </div>
+        {:else}
+          <div class="statut">
+            <Icone nom="checkbox-circle-line" taille="md" />
+            <span class="sr-only">mini-test non réalisé</span>
+          </div>
+        {/if}
         <img src={`/assets/icones/${test.icone}.avif`} alt={test.altIcone} class={`fond-${test.couleurIcone}`} />
         <Lien href={test.lien} libelle={test.libelléLien} />
       </li>
@@ -98,8 +117,24 @@
         gap: 0.75rem;
         align-items: center;
 
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+
         .statut {
           color: var(--text-disabled-grey);
+
+          &.realise {
+            color: var(--text-default-success);
+          }
         }
 
         img {
