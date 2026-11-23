@@ -2,7 +2,7 @@
   import { estServeur } from '$plateforme/environnement';
   import { clic } from '../directives/actions.svelte';
 
-  type Props = {
+  export type Props = {
     apparence?: 'lien' | 'bouton';
     blank?: boolean;
     etire?: boolean;
