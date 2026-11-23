@@ -4,10 +4,7 @@ import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc/index.js';
 import { AdaptateurRechercheEntreprise } from '../../../../src/infra/adaptateurRechercheEntreprise.js';
-import {
-  DonneesCreationResultatTestMaturite,
-  RésultatTestMaturité,
-} from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { RésultatTestMaturité } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { CodeRégion } from '../../../../src/metier/referentielRegions.js';
 import { CodeSecteur } from '../../../../src/metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../../../src/metier/referentielTranchesEffectifEtablissement.js';
@@ -17,6 +14,7 @@ import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisa
 import { encodeSession } from '../../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise } from '../../fauxObjets.js';
 import { jeanneDupont } from '../../objetsPretsALEmploi.js';
+import { ConstructeurRésultatTestMaturité, unRésultatDeTestDeMaturité } from './constructeurResultatTestMaturite.js';
 
 describe('La ressource qui gère le dernier résultat de test', () => {
   let serveur: Express;
@@ -43,30 +41,11 @@ describe('La ressource qui gère le dernier résultat de test', () => {
     });
   });
 
-  const donneesResultatTestCorrectes = (): DonneesCreationResultatTestMaturite => ({
-    region: 'FR-NOR' as CodeRégion,
-    secteur: 'J' as CodeSecteur,
-    tailleOrganisation: '51' as CodeTrancheEffectif,
-    reponses: {
-      'prise-en-compte-risque': 2,
-      pilotage: 3,
-      budget: 5,
-      'ressources-humaines': 3,
-      'adoption-solutions': 2,
-      posture: 3,
-    },
-  });
-
-  async function ajouteResultatDeTestPourJeanne(
-    donneesSupplementaires: Partial<DonneesCreationResultatTestMaturite> = {}
-  ) {
-    const resultatDeJeanne = new RésultatTestMaturité({
-      ...donneesResultatTestCorrectes(),
-      ...donneesSupplementaires,
-    });
-    await resultatDeJeanne.revendiquePropriete(jeanneDupont, fauxAdaptateurRechercheEntreprise);
-    await entrepôtRésultatTestMaturité.ajoute(resultatDeJeanne);
-    return resultatDeJeanne;
+  async function ajouteRésultatDeTestPourJeanne(constructeurFournis?: ConstructeurRésultatTestMaturité) {
+    const constructeur = constructeurFournis ?? unRésultatDeTestDeMaturité();
+    const résultatDeJeanne = await constructeur.pour(jeanneDupont).construis();
+    await entrepôtRésultatTestMaturité.ajoute(résultatDeJeanne);
+    return résultatDeJeanne;
   }
 
   describe('sur requête GET', () => {
@@ -75,7 +54,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
         await request(serveur).get('/api/resultats-test/dernier').set('Cookie', [cookieJeanneDupont]).send();
 
       it('renvoie 200 et le dernier résultat de test ', async () => {
-        await ajouteResultatDeTestPourJeanne();
+        await ajouteRésultatDeTestPourJeanne();
 
         const reponse = await requeteGET();
 
@@ -91,9 +70,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
       });
 
       it('renvoie la date de réalisation du test', async () => {
-        await ajouteResultatDeTestPourJeanne({
-          dateRealisation: new Date(2025, 5, 11),
-        });
+        await ajouteRésultatDeTestPourJeanne(unRésultatDeTestDeMaturité().avecDateRéalisation(new Date(2025, 5, 11)));
 
         const reponse = await requeteGET();
 
@@ -125,7 +102,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
         let resultatTestMaturite: RésultatTestMaturité;
 
         beforeEach(async () => {
-          resultatTestMaturite = await ajouteResultatDeTestPourJeanne();
+          resultatTestMaturite = await ajouteRésultatDeTestPourJeanne();
           adaptateurRechercheEntreprise.rechercheOrganisation = async (terme) => {
             return terme === '13000766900018'
               ? {
@@ -216,7 +193,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
       describe("en cas de réponse incorrecte de l'API", () => {
         it('sans données de test préalables', async () => {
-          const résultat = await ajouteResultatDeTestPourJeanne();
+          const résultat = await ajouteRésultatDeTestPourJeanne();
           résultat.region = undefined;
           résultat.secteur = undefined;
           résultat.tailleOrganisation = undefined;
@@ -229,11 +206,9 @@ describe('La ressource qui gère le dernier résultat de test', () => {
         });
 
         it('avec données de test préalables', async () => {
-          await ajouteResultatDeTestPourJeanne({
-            region: 'FR-20R',
-            secteur: 'C',
-            tailleOrganisation: '12',
-          });
+          await ajouteRésultatDeTestPourJeanne(
+            unRésultatDeTestDeMaturité().avecRégion('FR-20R').avecSecteur('C').avecTailleOrganisation('12')
+          );
           adaptateurRechercheEntreprise.rechercheOrganisation = async () => undefined;
 
           const réponse = await requeteGET();
@@ -250,7 +225,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
       const requeteGET = async () => await request(serveur).get('/api/resultats-test/dernier').send();
 
       it('renvoie une erreur 401', async () => {
-        await entrepôtRésultatTestMaturité.ajoute(new RésultatTestMaturité(donneesResultatTestCorrectes()));
+        await entrepôtRésultatTestMaturité.ajoute(await unRésultatDeTestDeMaturité().construis());
 
         const reponse = await requeteGET();
 

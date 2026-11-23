@@ -3,10 +3,10 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc/index.js';
-import { RésultatTestMaturité } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { ResultatTestMaturiteCreateur } from '../../../metier/mini-tests/maturite-cyber/ResultatTestMaturiteCreateur.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
+import { unRésultatDeTestDeMaturité } from './constructeurResultatTestMaturite.js';
 
 describe('La ressource qui gère les series de résultats de test de maturité', () => {
   let serveur: Express;
@@ -79,22 +79,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
     });
 
     it('répond 204 si trop peu de résultats', async () => {
-      entrepôtRésultatTestMaturité.ajoute(
-        new RésultatTestMaturité({
-          secteur: 'A',
-          region: 'FR-NOR',
-          id: 'test-id-1',
-          reponses: {
-            'adoption-solutions': 1,
-            'prise-en-compte-risque': 1,
-            'ressources-humaines': 1,
-            budget: 1,
-            pilotage: 1,
-            posture: 1,
-          },
-          tailleOrganisation: '01',
-        })
-      );
+      await entrepôtRésultatTestMaturité.ajoute(await unRésultatDeTestDeMaturité().construis());
 
       const reponse = await request(serveur).get('/api/repartition-resultats-test');
 
