@@ -12,8 +12,7 @@
     titre: string;
     infobulle?: string;
     source: string;
-    date: string;
-    /** Alternative textuelle au graphique : si elle est fournie, la carte propose de basculer entre les deux vues. */
+    date?: string;
     tableau?: TableauDeDonnees;
     children: Snippet;
   }
@@ -60,7 +59,7 @@
     {/if}
   </div>
   <footer>
-    <p>{source}, {date}</p>
+    <p>{date ? `${source}, ${date}` : source}</p>
     {#if tableau}
       <div class="choix-vue" role="group" aria-label="Choisir la vue">
         <button

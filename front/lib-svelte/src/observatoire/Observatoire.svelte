@@ -1,27 +1,62 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import CarteDonnees from '../graphiques/CarteDonnees.svelte';
   import '../graphiques/dsfrChart';
+  import GraphiqueCirculaire from '../graphiques/GraphiqueCirculaire.svelte';
   import GraphiqueLineaire from '../graphiques/GraphiqueLineaire.svelte';
+  import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
+  import {
+    récupèreDonnéesObservatoire,
+    type DonnéesObservatoire,
+    type PointMensuel,
+  } from '../passerelles/observatoire';
+  import { formateDate, formateNombre, libelleDuMois } from './formatage';
 
-  // Données fictives, en dur le temps du POC.
-  const source = 'MonServiceSécurisé';
-  const date = '30/09/2026';
-  const évolutionDesSystèmesSécurisés = [
-    { mois: 'oct. 25', total: 14250 },
-    { mois: 'nov. 25', total: 14900 },
-    { mois: 'déc. 25', total: 15550 },
-    { mois: 'janv. 26', total: 16210 },
-    { mois: 'févr. 26', total: 16860 },
-    { mois: 'mars 26', total: 17510 },
-    { mois: 'avr. 26', total: 18160 },
-    { mois: 'mai 26', total: 18810 },
-    { mois: 'juin 26', total: 19460 },
-    { mois: 'juil. 26', total: 20110 },
-    { mois: 'août 26', total: 20780 },
-    { mois: 'sept. 26', total: 21440 },
+  const onglets = [
+    { label: 'Menace cyber', fragment: '#menace-cyber' },
+    { label: 'Organisations', fragment: '#organisations' },
+    { label: 'Projets', fragment: '#projets' },
   ];
-  const systèmesSécurisés = évolutionDesSystèmesSécurisés.at(-1)!.total;
+  let ongletActif = $state('#projets');
+
+  const source = 'MonServiceSécurisé';
+
+  let données: DonnéesObservatoire | undefined = $state();
+  let enErreur = $state(false);
+
+  const date = $derived(données?.dateDerniereMiseAJour ? formateDate(données.dateDerniereMiseAJour) : undefined);
+
+  const dernièreValeur = (série: PointMensuel[]) => série.at(-1)?.valeur ?? 0;
+  const enTableau = (série: PointMensuel[], libellé: string) => ({
+    colonnes: ['Mois', libellé],
+    lignes: série.map((point) => [libelleDuMois(point.mois), formateNombre(point.valeur)]),
+  });
+
+  onMount(async () => {
+    try {
+      données = await récupèreDonnéesObservatoire();
+    } catch {
+      enErreur = true;
+    }
+  });
 </script>
+
+{#snippet evolution(id: string, série: PointMensuel[], libellé: string, infobulle: string)}
+  <CarteDonnees {id} titre="Évolution par mois (cumul)" {infobulle} {source} {date} tableau={enTableau(série, libellé)}>
+    <GraphiqueLineaire
+      x={série.map((point) => libelleDuMois(point.mois))}
+      y={série.map((point) => point.valeur)}
+      nom={libellé}
+      unite={libellé}
+    />
+  </CarteDonnees>
+{/snippet}
+
+{#snippet chiffreCle(id: string, titre: string, valeur: number, infobulle: string)}
+  <CarteDonnees {id} {titre} {infobulle} {source} {date}>
+    <p class="chiffre-cle">{formateNombre(valeur)}</p>
+  </CarteDonnees>
+{/snippet}
 
 <header class="bandeau">
   <dsfr-container>
@@ -35,40 +70,96 @@
 
 <div class="contenu">
   <dsfr-container>
-    <section>
-      <h2>Projets</h2>
-      <p class="introduction">La sécurisation et l’homologation des systèmes d’information dans le secteur public.</p>
+    <NavigationTertiaire liens={onglets} bind:lienActif={ongletActif} />
 
-      <div class="rangee">
-        <CarteDonnees
-          id="systemes-securises"
-          titre="Systèmes d’information sécurisés"
-          infobulle="Nombre de systèmes d’information déclarés dans MonServiceSécurisé."
-          {source}
-          {date}
-        >
-          <p class="chiffre-cle">{systèmesSécurisés.toLocaleString('fr-FR')}</p>
-        </CarteDonnees>
-        <CarteDonnees
-          id="evolution-systemes-securises"
-          titre="Évolution par mois (cumul)"
-          infobulle="Évolution du nombre de systèmes d’information déclarés dans MonServiceSécurisé."
-          {source}
-          {date}
-          tableau={{
-            colonnes: ['Mois', 'SI sécurisés'],
-            lignes: évolutionDesSystèmesSécurisés.map((point) => [point.mois, point.total.toLocaleString('fr-FR')]),
-          }}
-        >
-          <GraphiqueLineaire
-            x={évolutionDesSystèmesSécurisés.map((point) => point.mois)}
-            y={évolutionDesSystèmesSécurisés.map((point) => point.total)}
-            nom="SI sécurisés"
-            unite="SI sécurisés"
-          />
-        </CarteDonnees>
-      </div>
-    </section>
+    {#if ongletActif === '#projets'}
+      <section>
+        <h2>Projets</h2>
+        <p class="introduction">La sécurisation et l’homologation des systèmes d’information dans le secteur public.</p>
+
+        {#if données}
+          {@const niveaux = données.services.parNiveauSecurite}
+          <div class="rangee">
+            {@render chiffreCle(
+              'systemes-securises',
+              'Systèmes d’information sécurisés',
+              données.services.total,
+              'Nombre de systèmes d’information déclarés dans MonServiceSécurisé.'
+            )}
+            {@render evolution(
+              'evolution-systemes-securises',
+              données.services.cumulMensuel,
+              'SI sécurisés',
+              'Évolution du nombre de systèmes d’information déclarés dans MonServiceSécurisé.'
+            )}
+          </div>
+
+          <div class="rangee pleine-largeur">
+            <CarteDonnees
+              id="repartition-besoins-securite"
+              titre="Répartition par besoins de sécurité des projets"
+              infobulle="Répartition des systèmes selon leur sensibilité&nbsp;: «&nbsp;Élémentaires&nbsp;», «&nbsp;Modérés&nbsp;» ou «&nbsp;Importants&nbsp;». Plus le besoin est important, plus les mesures de sécurité demandées sont nombreuses."
+              {source}
+              {date}
+              tableau={{
+                colonnes: ['Besoins de sécurité', 'SI sécurisés'],
+                lignes: niveaux.map((niveau) => [niveau.niveauSecurite, formateNombre(niveau.total)]),
+              }}
+            >
+              <div class="graphique-circulaire">
+                <GraphiqueCirculaire
+                  x={niveaux.map((niveau) => niveau.niveauSecurite)}
+                  y={niveaux.map((niveau) => niveau.total)}
+                  unite="SI sécurisés"
+                  plein
+                />
+              </div>
+            </CarteDonnees>
+          </div>
+
+          <div class="rangee">
+            {@render chiffreCle(
+              'faiblesses-corrigees',
+              'Faiblesses corrigées',
+              dernièreValeur(données.mesuresFaites.parMois),
+              'Nombre de mesures de sécurité mises en œuvre pour sécuriser les systèmes d’information.'
+            )}
+            {@render evolution(
+              'evolution-faiblesses-corrigees',
+              données.mesuresFaites.parMois,
+              'Mesures faites',
+              'Évolution du nombre de mesures de sécurité mises en œuvre pour sécuriser les systèmes d’information.'
+            )}
+          </div>
+
+          <div class="rangee">
+            {@render chiffreCle(
+              'homologations-realisees',
+              'Homologations réalisées',
+              dernièreValeur(données.homologations.cumulMensuel),
+              'Nombre d’homologations de systèmes d’information réalisées avec MonServiceSécurisé.'
+            )}
+            {@render evolution(
+              'evolution-homologations-realisees',
+              données.homologations.cumulMensuel,
+              'Homologations',
+              'Évolution du nombre d’homologations de systèmes d’information réalisées avec MonServiceSécurisé.'
+            )}
+          </div>
+        {:else if enErreur}
+          <p class="message" role="alert">
+            Les données de l’observatoire sont momentanément indisponibles. Veuillez réessayer plus tard.
+          </p>
+        {:else}
+          <p class="message" role="status">Chargement des données…</p>
+        {/if}
+      </section>
+    {:else}
+      <section>
+        <h2>{onglets.find((onglet) => onglet.fragment === ongletActif)?.label}</h2>
+        <p class="message">Ces données seront bientôt disponibles.</p>
+      </section>
+    {/if}
   </dsfr-container>
 </div>
 
@@ -135,6 +226,25 @@
       @include a-partir-de(md) {
         grid-template-columns: 1fr 2fr;
       }
+    }
+
+    .rangee.pleine-largeur {
+      grid-template-columns: 1fr;
+    }
+
+    .graphique-circulaire {
+      width: 100%;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    .message {
+      margin-top: 1.5rem;
+      color: var(--text-mention-grey);
+    }
+
+    section {
+      margin-top: 1.5rem;
     }
 
     .chiffre-cle {
