@@ -2,9 +2,10 @@
   import Bouton, { type Props as PropsDuBouton } from '../../ui/Bouton.svelte';
 
   type Props = {
+    taille?: PropsDuBouton['taille'];
     typeDuBouton: PropsDuBouton['type'];
   };
-  const { typeDuBouton }: Props = $props();
+  const { taille, typeDuBouton }: Props = $props();
 
   const { protocol, host } = window.location;
   const lienPagePartagée = `${protocol}://${host}/partage-cyberdepart`;
@@ -25,5 +26,6 @@
   surClic={partageLinkedIn}
   icone="linkedin-box-line"
   etire={true}
+  {taille}
   type={typeDuBouton}
 />
