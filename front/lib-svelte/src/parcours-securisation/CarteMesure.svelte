@@ -61,7 +61,7 @@
     Chargement…
   {:then VignetteAnimée}
     {#if VignetteAnimée}
-      <div slot="image" class="image">
+      <div slot="image" class="image" class:horizontal>
         <VignetteAnimée {survol} />
       </div>
     {/if}
@@ -69,6 +69,8 @@
 </dsfr-card>
 
 <style lang="scss">
+  @use '../../../assets/styles/responsive.scss' as *;
+
   .actions-carte {
     display: flex;
     flex-direction: column;
@@ -76,5 +78,18 @@
   .image {
     display: flex;
     flex-direction: column;
+
+    @include a-partir-de(md) {
+      &.horizontal {
+        --flex-vignette: none;
+        --hauteur-vignette: 100%;
+        --largeur-vignette: auto;
+        align-items: center;
+        flex-direction: row;
+        height: 100%;
+        justify-content: center;
+        overflow: hidden;
+      }
+    }
   }
 </style>

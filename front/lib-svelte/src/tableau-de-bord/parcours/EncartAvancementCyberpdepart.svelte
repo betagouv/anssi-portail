@@ -134,6 +134,10 @@
           grid-area: introduction;
         }
       }
+
+      :global(dsfr-card) {
+        min-height: auto;
+      }
     }
 
     .objectif {
