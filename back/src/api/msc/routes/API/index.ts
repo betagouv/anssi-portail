@@ -37,6 +37,7 @@ import { ressourceFinancement } from '../../../ressourceFinancement.js';
 import { ressourceFinancements } from '../../../ressourceFinancements.js';
 import { ressourceInformationsCreationCompte } from '../../../ressourceInformationsCreationCompte.js';
 import { ressourceInfosSite } from '../../../ressourceInfosSite.js';
+import { ressourceObservatoire } from '../../../ressourceObservatoire.js';
 import { ressourcePageCrisp } from '../../../ressourcePageCrisp.js';
 import { ressourceProfil } from '../../../ressourceProfil.js';
 import { ressourceRetoursExperience } from '../../../ressourceRetoursExperience.js';
@@ -89,6 +90,10 @@ export const enregistreLesRoutesAPI = (app: Express, configurationServeur: Confi
   enregistreRoute('/retours-experience', ressourceRetoursExperience(configurationServeur));
 
   enregistreRoute('/statistiques', ressourceStatistiques(configurationServeur));
+
+  if (configurationServeur.adaptateurEnvironnement.fonctionnalites.observatoire()) {
+    enregistreRoute('/observatoire', ressourceObservatoire(configurationServeur));
+  }
 
   enregistreRoute('/repartition-resultats-test', ressourceRepartitionDesResultatsDeTest(configurationServeur));
 
