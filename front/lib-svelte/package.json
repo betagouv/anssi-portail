@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "@anssi-portail/contacts-sectoriels": "workspace:^",
+    "@gouvfr/dsfr-chart": "^2.1.1",
     "@lab-anssi/ui-kit": "catalog:",
     "@pdfme/pdf-lib": "^6.2.8",
     "@sentry/browser": "^10.70.0",
