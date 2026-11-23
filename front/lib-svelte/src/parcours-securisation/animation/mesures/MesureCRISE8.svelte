@@ -158,8 +158,9 @@
 
 <style lang="scss">
   #picto-contacts {
-    width: 100%;
-    flex: 1;
+    width: var(--largeur-vignette, 100%);
+    height: var(--hauteur-vignette, auto);
+    flex: var(--flex-vignette, 1);
     cursor: pointer;
 
     #feature {
