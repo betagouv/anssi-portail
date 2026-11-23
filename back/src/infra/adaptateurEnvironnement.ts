@@ -91,6 +91,7 @@ type AdaptateurEnvironnement = {
   };
   fonctionnalites: {
     espaceConnecté: () => boolean;
+    observatoire: () => boolean;
   };
   rechercheEntreprise: {
     apiUrl: () => string;
@@ -291,6 +292,7 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       const espaceConnectéActif = process.env.FEATURE_FLAG_ESPACE_CONNECTE;
       return espaceConnectéActif === 'true';
     },
+    observatoire: () => process.env.FEATURE_FLAG_OBSERVATOIRE === 'true',
   },
   rechercheEntreprise: {
     apiUrl: () => {

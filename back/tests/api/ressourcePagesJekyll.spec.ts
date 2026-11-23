@@ -150,4 +150,38 @@ describe('La ressource pages jekyll', () => {
       expect(reponse.headers.location).toBe('/nis2');
     });
   });
+
+  describe("sur demande de la page de l'observatoire", () => {
+    const serveurAvecObservatoire = (actif: boolean) =>
+      creeServeur({
+        ...configurationDeTestDuServeur,
+        fournisseurChemin,
+        adaptateurEnvironnement: {
+          ...configurationDeTestDuServeur.adaptateurEnvironnement,
+          fonctionnalites: {
+            ...configurationDeTestDuServeur.adaptateurEnvironnement.fonctionnalites,
+            observatoire: () => actif,
+          },
+        },
+      });
+
+    it('sers le fichier html de jekyll lorsque la fonctionnalité est activée', async () => {
+      let nomPageDemande: string;
+      fournisseurChemin.jekyll.page = (nomPage: string) => {
+        nomPageDemande = nomPage;
+        return ressourceFactice();
+      };
+
+      const reponse = await request(serveurAvecObservatoire(true)).get('/observatoire');
+
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
+      expect(nomPageDemande!).toBe('observatoire');
+    });
+
+    it('répond 404 lorsque la fonctionnalité est désactivée', async () => {
+      const reponse = await request(serveurAvecObservatoire(false)).get('/observatoire');
+
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
+    });
+  });
 });

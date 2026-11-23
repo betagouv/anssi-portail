@@ -292,6 +292,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   },
   fonctionnalites: {
     espaceConnecté: () => true,
+    observatoire: () => true,
   },
   appEnv: () => 'local',
   nodeEnv: () => 'developpement',

@@ -50,4 +50,8 @@ export const enregistreLesRoutesStatiques = (app: Express, configurationServeur:
   const enregistreRoute = enregistreRouteDansExpress(app);
 
   routesStatiques.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
+
+  if (configurationServeur.adaptateurEnvironnement.fonctionnalites.observatoire()) {
+    enregistreRoute('/observatoire', ressourcePagesJekyll(configurationServeur, 'observatoire'));
+  }
 };
