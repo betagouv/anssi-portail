@@ -531,6 +531,9 @@ importers:
       '@anssi-portail/contacts-sectoriels':
         specifier: workspace:^
         version: link:../../contacts-sectoriels
+      '@gouvfr/dsfr-chart':
+        specifier: ^2.1.1
+        version: 2.1.1
       '@lab-anssi/ui-kit':
         specifier: 'catalog:'
         version: 2.1.1(svelte@5.57.3(@typescript-eslint/types@8.72.2))
@@ -1151,6 +1154,10 @@ packages:
     peerDependenciesMeta:
       '@noble/hashes':
         optional: true
+
+  '@gouvfr/dsfr-chart@2.1.1':
+    resolution: {integrity: sha512-+d31EVpxqfA/O5xrPZzOTF8C4usHCVmt+fk00twyMyDp8Tpcz8J7hP4s4a6M+OgkOwnOriRoV5ET55gJmWoIZA==}
+    engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
 
   '@html-eslint/parser@0.68.0':
     resolution: {integrity: sha512-X22bU2qzEpzPI0bHtnfXzoUS8q/It/DNycJnIdsPzBDXcly+PItV5AJU4nm/+9FZCXSE3IZJvORRCTuvvpV8Bg==}
@@ -5539,6 +5546,8 @@ snapshots:
   '@exodus/bytes@1.16.0(@noble/hashes@1.8.0)':
     optionalDependencies:
       '@noble/hashes': 1.8.0
+
+  '@gouvfr/dsfr-chart@2.1.1': {}
 
   '@html-eslint/parser@0.68.0':
     dependencies:
