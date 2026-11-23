@@ -91,6 +91,7 @@ export default defineConfig(({ command, mode }) => {
           'badge-agent-anssi': 'src/main-badge-agent-anssi.ts',
           'bandeau-maintenance': 'src/main-bandeau-maintenance.ts',
           statistiques: 'src/main-statistiques.ts',
+          observatoire: 'src/main-observatoire.ts',
           financements: 'src/main-financements.ts',
           guide: 'src/main-guide.ts',
           'demande-diagnostic': 'src/main-demande-diagnostic.ts',
