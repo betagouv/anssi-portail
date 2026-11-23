@@ -7,6 +7,8 @@
   import CarteMesure from '../../parcours-securisation/CarteMesure.svelte';
   import type { Mesure } from '../../parcours-securisation/mesures/mesure';
   import BadgeCyberdepart from '../../parcours-securisation/module-cyberdepart/BadgeCyberdepart.svelte';
+  import BoutonPartageBadgeCyberdepart from '../../parcours-securisation/module-cyberdepart/BoutonPartageBadgeCyberdepart.svelte';
+  import BoutonTelechargementVisuels from '../../parcours-securisation/module-cyberdepart/BoutonTelechargementVisuels.svelte';
   import type { ModuleRéponseApi } from '../../parcours-securisation/moduleReponseApi';
   import Progression from '../../parcours-securisation/Progression.svelte';
   import Lien from '../../ui/Lien.svelte';
@@ -28,8 +30,10 @@
   const nombreMesuresPrisesEnCompte = $derived(
     moduleCyberdépart?.mesures.filter((mesure) => mesure.estPriseEnCompte).length ?? 0
   );
+  const cibleAtteinte = $derived(nombreMesuresPrisesEnCompte >= cibleBadge);
 
   const pageSource = 'espace-connecté-encart-avancement-cyberdépart';
+  const nomLogo = $derived(cibleAtteinte ? 'logo-cyberdepart.svg' : 'logo-cyberdepart-transparent.svg');
 </script>
 
 <div class="avancement-cyberdepart">
@@ -55,13 +59,20 @@
       </CarteMesure>
     {/if}
   </div>
-  <div class="objectif">
-    <div class="anneau">
-      <AnneauProgression actuel={nombreMesuresPrisesEnCompte} max={cibleBadge} />
+  {#if !moduleTerminé}
+    <div class="objectif">
+      <div class="anneau">
+        <AnneauProgression actuel={nombreMesuresPrisesEnCompte} max={cibleBadge} />
+      </div>
+      <img src={`/assets/images/parcours-securisation/${nomLogo}`} alt="" />
+      {#if cibleAtteinte}
+        <BoutonPartageBadgeCyberdepart taille="sm" typeDuBouton="secondaire" />
+        <BoutonTelechargementVisuels taille="sm" />
+      {:else}
+        <p class="texte-standard-md">{cibleBadge} mesures à prendre en compte pour valider votre Cyberdépart.</p>
+      {/if}
     </div>
-    <img src="/assets/images/parcours-securisation/logo-cyberdepart.svg" alt="" />
-    <p class="texte-standard-md">{cibleBadge} mesures à prendre en compte pour valider votre Cyberdépart.</p>
-  </div>
+  {/if}
   <div class="footer">
     {#if moduleTerminé}
       <div class="completion">
@@ -149,6 +160,7 @@
       border-radius: 0.5rem;
       background-color: var(--blue-france-925-125);
       padding: 1rem 1.5rem 1.5rem 1.5rem;
+      gap: 1rem;
 
       .anneau {
         position: absolute;
