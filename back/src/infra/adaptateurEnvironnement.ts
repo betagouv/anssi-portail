@@ -113,6 +113,9 @@ type AdaptateurEnvironnement = {
   journal: {
     baseDeDonnéesActive: () => boolean;
   };
+  observatoire: {
+    urlServeur: () => string | undefined;
+  };
 };
 
 const ajouteBarreObliqueFinale = (url: string): string => {
@@ -339,6 +342,9 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
   },
   journal: {
     baseDeDonnéesActive: () => process.env.BASE_DONNEES_JOURNAL_EN_MEMOIRE !== 'true',
+  },
+  observatoire: {
+    urlServeur: () => process.env.BASE_DONNEES_OBSERVATOIRE_URL_SERVEUR || undefined,
   },
 };
 
