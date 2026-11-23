@@ -72,6 +72,17 @@ describe('La ressource de mes mini tests', () => {
       expect(réponse.body.maturité.réalisé).toBe(true);
     });
 
+    it('indique le niveau du test de maturité', async () => {
+      const résultatTestDeMaturité = await unRésultatDeTestDeMaturité().pour(jeanneDupont).construis();
+
+      await entrepôtRésultatTestMaturité.ajoute(résultatTestDeMaturité);
+
+      const réponse = await getConnecté();
+
+      expect(réponse.body.maturité.réalisé).toBe(true);
+      expect(réponse.body.maturité.niveau).toBe(résultatTestDeMaturité.niveau());
+    });
+
     it('indique que le test de maturité n’a pas été réalisé', async () => {
       const réponse = await getConnecté();
 

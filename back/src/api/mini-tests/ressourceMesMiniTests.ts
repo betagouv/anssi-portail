@@ -27,8 +27,12 @@ export const ressourceMesMiniTests = ({
       const résultatTestRéflexesCyber = await entrepôtRésultatTestRéflexesCyber.dernierPourUtilisateur(
         requête.utilisateur
       );
+
       réponse.send({
-        maturité: { réalisé: résultatTestMaturité !== undefined },
+        maturité: {
+          réalisé: résultatTestMaturité !== undefined,
+          niveau: résultatTestMaturité?.niveau(),
+        },
         vraiFaux: { réalisé: résultatTestVraiFaux !== undefined },
         exposition: { réalisé: résultatTestExposition !== undefined },
         hameçonnage: { réalisé: résultatTestHameçonnage !== undefined },
