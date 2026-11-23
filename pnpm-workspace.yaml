@@ -3,6 +3,7 @@ packages:
   - '*'
   - front/lib-svelte
   - webc-externes/*
+  - '!_site'
 
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 preferFrozenLockfile: true
