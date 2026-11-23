@@ -55,8 +55,11 @@ export class ConstructeurRésultatTestMaturité {
     return this;
   }
 
-  avecRéponses(réponses: ReponsesTestMaturite) {
-    this.réponses = réponses;
+  avecRéponses(réponses: Partial<ReponsesTestMaturite>) {
+    this.réponses = {
+      ...this.réponses,
+      ...réponses,
+    };
     return this;
   }
 

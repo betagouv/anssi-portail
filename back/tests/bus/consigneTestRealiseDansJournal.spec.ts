@@ -20,7 +20,14 @@ describe("L'abonnement qui consigne la réalisation d'un test dans le journal", 
     })(
       new TestRealise({
         region: 'FR-20R',
-        reponses: { pilotage: 2 },
+        reponses: {
+          'prise-en-compte-risque': 2,
+          pilotage: 2,
+          budget: 5,
+          'ressources-humaines': 3,
+          'adoption-solutions': 2,
+          posture: 3,
+        },
         secteur: 'A',
         tailleOrganisation: '00',
         idResultatTest: 'ef3dc8c7-beed-4bd7-a475-409515c28a0c',
@@ -30,7 +37,14 @@ describe("L'abonnement qui consigne la réalisation d'un test dans le journal", 
     expect(evenementRecu).toBeDefined();
     expect(evenementRecu!.type).toBe('TEST_REALISE');
     expect(evenementRecu!.donnees.region).toBe('FR-20R');
-    expect(evenementRecu!.donnees.reponses).toEqual({ pilotage: 2 });
+    expect(evenementRecu!.donnees.reponses).toEqual({
+      'prise-en-compte-risque': 2,
+      pilotage: 2,
+      budget: 5,
+      'ressources-humaines': 3,
+      'adoption-solutions': 2,
+      posture: 3,
+    });
     expect(evenementRecu!.donnees.secteur).toBe('A');
     expect(evenementRecu!.donnees.tailleOrganisation).toBe('00');
     expect(evenementRecu!.date).toEqual(Temporal.Instant.from('2025-03-10T00:00:00Z'));
