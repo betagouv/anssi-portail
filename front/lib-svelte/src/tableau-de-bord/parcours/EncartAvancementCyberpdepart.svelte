@@ -55,7 +55,7 @@
       </CarteMesure>
     {/if}
   </div>
-  <div class="badge">
+  <div class="objectif">
     <div class="anneau">
       <AnneauProgression actuel={nombreMesuresPrisesEnCompte} max={cibleBadge} />
     </div>
@@ -84,7 +84,7 @@
     display: grid;
     grid-template-areas:
       'contenu'
-      'badge'
+      'objectif'
       'lien';
     padding: 1.5rem;
     background-color: var(--background-default-grey);
@@ -93,7 +93,7 @@
 
     @include a-partir-de(sm) {
       grid-template-areas:
-        'contenu badge'
+        'contenu objectif'
         'lien lien';
       grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     }
@@ -136,8 +136,8 @@
       }
     }
 
-    .badge {
-      grid-area: badge;
+    .objectif {
+      grid-area: objectif;
       position: relative;
       display: flex;
       flex-direction: column;
