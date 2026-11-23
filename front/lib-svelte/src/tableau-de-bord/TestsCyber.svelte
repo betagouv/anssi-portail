@@ -71,7 +71,7 @@
   <p class="texte-standard-md">
     Comprendre les enjeux cyber de votre organisation à l’aide de nos test simples et ludiques.
   </p>
-  <ul class="tests">
+  <ul>
     {#each testsCyber as test (test.id)}
       <li>
         {#if réalisationMiniTests && réalisationMiniTests[test.id].réalisé}
