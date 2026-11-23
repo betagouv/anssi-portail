@@ -67,7 +67,7 @@
 
       &::after {
         background-position: left center;
-        bottom: 0;
+        bottom: var(--mot-en-exergue-decalage-vague, 0);
       }
     }
 

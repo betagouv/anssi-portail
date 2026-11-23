@@ -3,6 +3,7 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { MediaQuery } from 'svelte/reactivity';
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import AnneauProgression from '../../parcours-securisation/AnneauProgression.svelte';
   import CarteMesure from '../../parcours-securisation/CarteMesure.svelte';
   import type { Mesure } from '../../parcours-securisation/mesures/mesure';
@@ -12,6 +13,7 @@
   import type { ModuleRéponseApi } from '../../parcours-securisation/moduleReponseApi';
   import Progression from '../../parcours-securisation/Progression.svelte';
   import Lien from '../../ui/Lien.svelte';
+  import MotEnExergue from '../../ui/MotEnExergue.svelte';
 
   const àPartirDeSm = new MediaQuery('min-width: 576px');
 
@@ -34,7 +36,44 @@
 
   const pageSource = 'espace-connecté-encart-avancement-cyberdépart';
   const nomLogo = $derived(cibleAtteinte ? 'logo-cyberdepart.svg' : 'logo-cyberdepart-transparent.svg');
+
+  const tagsBascule = [
+    { label: '46 nouvelles mesures', id: '46-nouvelles-mesures' },
+    { label: '5 nouveaux modules', id: '5-nouveaux-modules' },
+    {
+      label: 'Basé sur ReCyF',
+      id: 'base-sur-recyf',
+    },
+  ];
 </script>
+
+{#if moduleTerminé}
+  <div class="bascule">
+    <div class="gauche">
+      <dsfr-tags-group tags={enPropriétéWebC(tagsBascule)} hasIcon></dsfr-tags-group>
+      <h2 class="fr-h1">
+        Passez au niveau <MotEnExergue motif="vague" couleur="bourgeon">supérieur</MotEnExergue>&#8239;!
+      </h2>
+      <p class="texte-standard-md">
+        Continuez votre parcours de sécurisation et <b>protégez votre organisation dans la durée</b> contre les 5 risques
+        cyber les plus courants&nbsp;: perte de maîtrise, exposition, failles exploitées, usurpation d'identité, crise subie.
+      </p>
+      <Lien
+        apparence="bouton"
+        libelle="Continuer mon parcours"
+        href={`/parcours-complet?pageSource=${pageSource}`}
+        icone="arrow-right-circle-fill"
+        iconeADroite
+        taille="lg"
+      />
+    </div>
+    <img
+      loading="lazy"
+      src="/assets/images/parcours-securisation/six-modules-dont-premier-termine.svg"
+      alt="modules du parcours complet"
+    />
+  </div>
+{/if}
 
 <div class="avancement-cyberdepart">
   <div class="corps">
@@ -45,10 +84,17 @@
           <Progression actuel={nombreMesuresPrisesEnCompte} max={totalMesures} cible={cibleBadge} mode="sans-titre"
           ></Progression>
         </div>
-        <p class="texte-standard-md">
-          <strong>🛡️Renforcez dès maintenant votre sécurité.</strong> Commencez par des actions simples et concrètes pour
-          protéger votre organisation contre les cyberattaques.
-        </p>
+        {#if moduleTerminé}
+          <p class="texte-standard-md">
+            <b>✅ Bravo vous avez terminé&#8239;!</b> Vous avez pris en compte les 12 mesures recommandées pour commencer
+            à protéger votre organisation contre les risques de cyberattaques.
+          </p>
+        {:else}
+          <p>
+            <b>🛡️Renforcez dès maintenant votre sécurité.</b> Commencez par des actions simples et concrètes pour protéger
+            votre organisation contre les cyberattaques.
+          </p>
+        {/if}
       </div>
       {#if prochaineMesureÀFaire}
         <CarteMesure mesure={prochaineMesureÀFaire} horizontal={àPartirDeSm.current}>
@@ -60,6 +106,7 @@
         </CarteMesure>
       {/if}
     </div>
+
     {#if !moduleTerminé}
       <div class="objectif">
         <div class="anneau">
@@ -91,13 +138,39 @@
 <style lang="scss">
   @use '../../../../assets/styles/responsive' as *;
 
+  .bascule {
+    display: flex;
+    background-color: var(--yellow-moutarde-925-125);
+    padding: 1rem;
+    gap: 1.5rem;
+    border-radius: 1rem;
+
+    @include a-partir-de(md) {
+      padding: 2rem;
+    }
+
+    .gauche {
+      flex-direction: column;
+      h2 {
+        --mot-en-exergue-decalage-vague: -0.5rem;
+      }
+    }
+
+    img {
+      display: none;
+
+      @include a-partir-de(md) {
+        display: block;
+        align-self: center;
+      }
+    }
+  }
   .avancement-cyberdepart {
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
     background-color: var(--background-default-grey);
     box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
-    gap: 1.5rem;
 
     .corps {
       display: flex;
