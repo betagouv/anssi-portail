@@ -1,5 +1,5 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { defineConfig, UserConfig } from 'vite';
+import { defineConfig, type UserConfig } from 'vite';
 import { plateformePlugin } from './src/plateforme/plateforme.plugin.js';
 import { emetComposantsAutorisés } from './src/utils/composantsAutorises.plugin.js';
 import { injecteNonce } from './src/utils/injecteNonce.plugin.js';
