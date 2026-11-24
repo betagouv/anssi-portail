@@ -11,10 +11,47 @@ describe('Le service Observatoire', () => {
     dateDerniereExecution: async () => new Date('2026-02-01T08:00:00.000Z'),
   };
 
+  const donneesMenaceCyber = {
+    evenementsSecurite: {
+      total: '3 586',
+      source: 'ANSSI, Panorama de la Cybermenace 2025',
+      date: null,
+    },
+    incidents: {
+      total: '1 366',
+      source: 'ANSSI, Panorama de la Cybermenace 2025',
+      date: null,
+    },
+    rançongiciels: {
+      total: '48 %',
+      source: 'ANSSI, signalements 2025',
+      date: null,
+    },
+    fraudesVirement: {
+      total: '+170 %',
+      source: 'Cybermalveillance.gouv.fr, demandes d’assistance 2025',
+      date: null,
+    },
+    cyberharcèlements: {
+      total: '+205 %',
+      source: 'Cybermalveillance.gouv.fr, demandes d’assistance 2025',
+      date: null,
+    },
+    volsDonnées: {
+      total: '+51 %',
+      source: 'ANSSI, signalements 2025',
+      date: null,
+    },
+  };
+  const adaptateurObservatoireMenaceCyber = {
+    donnees: () => donneesMenaceCyber,
+  };
+
   describe('sur demande des données de projets', () => {
     it("agrège les résultats de l'adaptateur MSS, en y ajoutant la source et la date", async () => {
       const observatoire = new ServiceObservatoire({
         adaptateurObservatoireMSS,
+        adaptateurObservatoireMenaceCyber,
       });
 
       const donneesProjets = await observatoire.donneesProjets();
@@ -39,5 +76,13 @@ describe('Le service Observatoire', () => {
         },
       });
     });
+  });
+
+  it('retourne les données de la cyber menace', () => {
+    const observatoire = new ServiceObservatoire({ adaptateurObservatoireMSS, adaptateurObservatoireMenaceCyber });
+
+    const donnees = observatoire.donneesMenaceCyber();
+
+    expect(donnees).toStrictEqual(donneesMenaceCyber);
   });
 });

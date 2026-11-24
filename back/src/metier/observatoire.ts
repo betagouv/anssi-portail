@@ -1,6 +1,6 @@
 export type DonneeObservatoire<T> = T & {
   source: string;
-  date: Date;
+  date: Date | null;
 };
 
 export type FiltresObservatoire = {

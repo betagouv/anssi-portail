@@ -30,6 +30,7 @@ import { AdaptateurStatistiqueMiniTestsMémoire } from '../../src/infra/adaptate
 import { AdaptateurStatistiqueParcoursMémoire } from '../../src/infra/adaptateurStatistiqueParcoursMémoire.js';
 import { AdaptateurEnrichissement } from '../../src/infra/enrichissement/adaptateurEnrichissement.js';
 import { EntrepôtContactStatique } from '../../src/infra/entrepotContactStatique.js';
+import { AdaptateurObservatoireMenaceCyber } from '../../src/infra/observatoireDesDonnees/adaptateurObservatoireMenaceCyberMemoire.js';
 import { AdaptateurObservatoireMSSMemoire } from '../../src/infra/observatoireDesDonnees/adaptateurObservatoireMSSMemoire.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js';
@@ -440,6 +441,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   entrepôtRésultatTestRéflexesCyber: new EntrepôtRésultatTestRéflexesCyberMémoire(),
   serviceObservatoire: new ServiceObservatoire({
     adaptateurObservatoireMSS: new AdaptateurObservatoireMSSMemoire(),
+    adaptateurObservatoireMenaceCyber: new AdaptateurObservatoireMenaceCyber(),
   }),
   serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(fauxFournisseurDeChemin),
   serviceModeleAnnuaireDeCrise: new ServiceModeleAnnuaireDeCrise(
