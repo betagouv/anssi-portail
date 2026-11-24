@@ -16,7 +16,9 @@
 
 {#if nombreDeCartesAffichées > 0}
   <div class="favoris">
-    <TitreDeSection libellé="Favoris" icône="heart-line" />
+    <div class="titre">
+      <TitreDeSection libellé="Favoris" icône="heart-line" />
+    </div>
 
     <div class="cartes">
       {#each { length: nombreDeCartesAffichées }, i}
@@ -46,6 +48,10 @@
       grid-template-areas:
         'titre lien'
         'cartes cartes';
+    }
+
+    .titre {
+      grid-area: titre;
     }
 
     .cartes {

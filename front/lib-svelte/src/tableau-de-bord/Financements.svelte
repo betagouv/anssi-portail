@@ -21,7 +21,9 @@
 </script>
 
 <div class="financements">
-  <TitreDeSection libellé="Financements cyber" icône="money-euro-circle-line" />
+  <div class="titre">
+    <TitreDeSection libellé="Financements cyber" icône="money-euro-circle-line" />
+  </div>
 
   <div class="tag">
     <DsfrTag
@@ -61,6 +63,10 @@
         'titre tag lien'
         'cartes cartes cartes';
       grid-column-gap: 0.5rem;
+    }
+
+    .titre {
+      grid-area: titre;
     }
 
     .tag {
