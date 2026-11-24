@@ -19,12 +19,8 @@
   ];
   let ongletActif = $state('#projets');
 
-  const source = 'MonServiceSécurisé';
-
   let données: DonnéesObservatoire | undefined = $state();
   let enErreur = $state(false);
-
-  const date = $derived(données?.dateDerniereMiseAJour ? formateDate(données.dateDerniereMiseAJour) : undefined);
 
   const dernièreValeur = (série: PointMensuel[]) => série.at(-1)?.valeur ?? 0;
   const enTableau = (série: PointMensuel[], libellé: string) => ({
@@ -41,8 +37,22 @@
   });
 </script>
 
-{#snippet evolution(id: string, série: PointMensuel[], libellé: string, infobulle: string)}
-  <CarteDonnees {id} titre="Évolution par mois (cumul)" {infobulle} {source} {date} tableau={enTableau(série, libellé)}>
+{#snippet evolution(
+  id: string,
+  série: PointMensuel[],
+  libellé: string,
+  infobulle: string,
+  source: string,
+  date: Date | null
+)}
+  <CarteDonnees
+    {id}
+    titre="Évolution par mois (cumul)"
+    {infobulle}
+    {source}
+    date={date ? formateDate(date) : undefined}
+    tableau={enTableau(série, libellé)}
+  >
     <GraphiqueLineaire
       x={série.map((point) => libelleDuMois(point.mois))}
       y={série.map((point) => point.valeur)}
@@ -52,8 +62,8 @@
   </CarteDonnees>
 {/snippet}
 
-{#snippet chiffreCle(id: string, titre: string, valeur: number, infobulle: string)}
-  <CarteDonnees {id} {titre} {infobulle} {source} {date}>
+{#snippet chiffreCle(id: string, titre: string, valeur: number, infobulle: string, source: string, date: Date | null)}
+  <CarteDonnees {id} {titre} {infobulle} {source} date={date ? formateDate(date) : undefined}>
     <p class="chiffre-cle">{formateNombre(valeur)}</p>
   </CarteDonnees>
 {/snippet}
@@ -78,19 +88,23 @@
         <p class="introduction">La sécurisation et l’homologation des systèmes d’information dans le secteur public.</p>
 
         {#if données}
-          {@const niveaux = données.services.parNiveauSecurite}
+          {@const niveaux = données.projets.services.parNiveauSecurite}
           <div class="rangee">
             {@render chiffreCle(
               'systemes-securises',
               'Systèmes d’information sécurisés',
-              données.services.total,
-              'Nombre de systèmes d’information déclarés dans MonServiceSécurisé.'
+              données.projets.services.total,
+              'Nombre de systèmes d’information déclarés dans MonServiceSécurisé.',
+              données.projets.services.source,
+              données.projets.services.date
             )}
             {@render evolution(
               'evolution-systemes-securises',
-              données.services.cumulMensuel,
+              données.projets.services.cumulMensuel,
               'SI sécurisés',
-              'Évolution du nombre de systèmes d’information déclarés dans MonServiceSécurisé.'
+              'Évolution du nombre de systèmes d’information déclarés dans MonServiceSécurisé.',
+              données.projets.services.source,
+              données.projets.services.date
             )}
           </div>
 
@@ -99,8 +113,8 @@
               id="repartition-besoins-securite"
               titre="Répartition par besoins de sécurité des projets"
               infobulle="Répartition des systèmes selon leur sensibilité&nbsp;: «&nbsp;Élémentaires&nbsp;», «&nbsp;Modérés&nbsp;» ou «&nbsp;Importants&nbsp;». Plus le besoin est important, plus les mesures de sécurité demandées sont nombreuses."
-              {source}
-              {date}
+              source={données.projets.services.source}
+              date={données.projets.services.date ? formateDate(données.projets.services.date) : undefined}
               tableau={{
                 colonnes: ['Besoins de sécurité', 'SI sécurisés'],
                 lignes: niveaux.map((niveau) => [niveau.niveauSecurite, formateNombre(niveau.total)]),
@@ -121,14 +135,18 @@
             {@render chiffreCle(
               'faiblesses-corrigees',
               'Faiblesses corrigées',
-              dernièreValeur(données.mesuresFaites.parMois),
-              'Nombre de mesures de sécurité mises en œuvre pour sécuriser les systèmes d’information.'
+              dernièreValeur(données.projets.mesuresFaites.parMois),
+              'Nombre de mesures de sécurité mises en œuvre pour sécuriser les systèmes d’information.',
+              données.projets.mesuresFaites.source,
+              données.projets.mesuresFaites.date
             )}
             {@render evolution(
               'evolution-faiblesses-corrigees',
-              données.mesuresFaites.parMois,
+              données.projets.mesuresFaites.parMois,
               'Mesures faites',
-              'Évolution du nombre de mesures de sécurité mises en œuvre pour sécuriser les systèmes d’information.'
+              'Évolution du nombre de mesures de sécurité mises en œuvre pour sécuriser les systèmes d’information.',
+              données.projets.mesuresFaites.source,
+              données.projets.mesuresFaites.date
             )}
           </div>
 
@@ -136,14 +154,18 @@
             {@render chiffreCle(
               'homologations-realisees',
               'Homologations réalisées',
-              dernièreValeur(données.homologations.cumulMensuel),
-              'Nombre d’homologations de systèmes d’information réalisées avec MonServiceSécurisé.'
+              dernièreValeur(données.projets.homologations.cumulMensuel),
+              'Nombre d’homologations de systèmes d’information réalisées avec MonServiceSécurisé.',
+              données.projets.homologations.source,
+              données.projets.homologations.date
             )}
             {@render evolution(
               'evolution-homologations-realisees',
-              données.homologations.cumulMensuel,
+              données.projets.homologations.cumulMensuel,
               'Homologations',
-              'Évolution du nombre d’homologations de systèmes d’information réalisées avec MonServiceSécurisé.'
+              'Évolution du nombre d’homologations de systèmes d’information réalisées avec MonServiceSécurisé.',
+              données.projets.homologations.source,
+              données.projets.homologations.date
             )}
           </div>
         {:else if enErreur}
