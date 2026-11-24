@@ -113,6 +113,7 @@ export default defineConfig(({ command, mode }) => {
           'resultats-session-groupe': 'src/main-resultats-session-groupe.ts',
           'session-groupe': 'src/main-session-groupe.ts',
           'simulateur-nis2': 'src/main-simulateur-nis2.ts',
+          'tableau-de-bord': 'src/main-tableau-de-bord.ts',
           'test-maturite': 'src/main-test-maturite.ts',
           associations: 'src/main-associations.ts',
           catalogue: 'src/main-catalogue.ts',
