@@ -1,6 +1,6 @@
 import { Knex } from 'knex';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
-import { AdaptateurObservatoirePostgres } from '../../../src/infra/observatoireDesDonnees/adaptateurObservatoirePostgres.js';
+import { AdaptateurObservatoireMSSPostgres } from '../../../src/infra/observatoireDesDonnees/adaptateurObservatoireMSSPostgres.js';
 import { creeBddObservatoirePourLesTests } from './bddObservatoirePourLesTests.js';
 
 describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
@@ -34,7 +34,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
   describe('concernant le total des services', () => {
     it("compte tous les services en l'absence de filtre", async () => {
       await trx('mss.services_crees').insert([{ id_hash: 'service-1' }, { id_hash: 'service-2' }]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const total = await adaptateur.totalServices({});
 
@@ -46,7 +46,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { id_hash: 'service-breton', region: 'FR-BRE' },
         { id_hash: 'service-normand', region: 'FR-NOR' },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const total = await adaptateur.totalServices({ region: 'FR-BRE' });
 
@@ -58,7 +58,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { id_hash: 'service-finistérien', departement: '29' },
         { id_hash: 'service-morbihannais', departement: '56' },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const total = await adaptateur.totalServices({ departement: '29' });
 
@@ -70,7 +70,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { id_hash: 'service-santé', secteur_activite: 'sante' },
         { id_hash: 'service-énergie', secteur_activite: 'energie' },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const total = await adaptateur.totalServices({ secteurActivite: 'sante' });
 
@@ -82,7 +82,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { id_hash: 'service-d-une-commune', type_organisation: 'commune' },
         { id_hash: 'service-d-un-ministère', type_organisation: 'ministere' },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const total = await adaptateur.totalServices({ typeOrganisation: 'commune' });
 
@@ -97,7 +97,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { id_hash: 'service-2', date_creation: '2026-01-20' },
         { id_hash: 'service-3', date_creation: '2026-02-10' },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const cumul = await adaptateur.cumulMensuelServices({});
 
@@ -112,7 +112,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { id_hash: 'service-de-janvier', date_creation: '2026-01-05' },
         { id_hash: 'service-de-mars', date_creation: '2026-03-10' },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const cumul = await adaptateur.cumulMensuelServices({});
 
@@ -128,7 +128,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { id_hash: 'service-breton', date_creation: '2026-01-05', region: 'FR-BRE' },
         { id_hash: 'service-normand', date_creation: '2026-01-20', region: 'FR-NOR' },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const cumul = await adaptateur.cumulMensuelServices({ region: 'FR-BRE' });
 
@@ -140,7 +140,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
     it("rattache les mesures au mois précédent leur date, parce que la synchronisation tourne en début de mois et enregistre l'état du mois écoulé", async () => {
       await trx('mss.services_crees').insert({ id_hash: 'un-service' });
       await trx('mss.mesures_faites').insert({ id_hash_service: 'un-service', date: '2026-03-01', total_faites: 4 });
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const mesures = await adaptateur.mesuresFaitesParMois({});
 
@@ -153,7 +153,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { id_hash_service: 'service-1', date: '2026-03-01', total_faites: 4 },
         { id_hash_service: 'service-2', date: '2026-03-01', total_faites: 3 },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const mesures = await adaptateur.mesuresFaitesParMois({});
 
@@ -169,7 +169,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { id_hash_service: 'service-breton', date: '2026-03-01', total_faites: 4 },
         { id_hash_service: 'service-normand', date: '2026-03-01', total_faites: 3 },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const mesures = await adaptateur.mesuresFaitesParMois({ region: 'FR-BRE' });
 
@@ -183,7 +183,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { id_hash: 'service-1', niveau_securite: 'Modérés' },
         { id_hash: 'service-2', niveau_securite: 'Modérés' },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const services = await adaptateur.servicesParNiveauSecurite({});
 
@@ -196,7 +196,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { id_hash: 'service-modéré', niveau_securite: 'Modérés' },
         { id_hash: 'service-élémentaire', niveau_securite: 'Élémentaires' },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const services = await adaptateur.servicesParNiveauSecurite({});
 
@@ -212,7 +212,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { id_hash: 'service-modéré', niveau_securite: 'Modérés' },
         { id_hash: 'service-sans-niveau', niveau_securite: null },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const services = await adaptateur.servicesParNiveauSecurite({});
 
@@ -224,7 +224,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { id_hash: 'service-breton', niveau_securite: 'Modérés', region: 'FR-BRE' },
         { id_hash: 'service-normand', niveau_securite: 'Modérés', region: 'FR-NOR' },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const services = await adaptateur.servicesParNiveauSecurite({ region: 'FR-BRE' });
 
@@ -240,7 +240,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         date: '2026-03-01',
         total_realisees: 2,
       });
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const homologations = await adaptateur.cumulMensuelHomologations({});
 
@@ -253,7 +253,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { id_hash_service: 'service-1', date: '2026-03-01', total_realisees: 2 },
         { id_hash_service: 'service-2', date: '2026-03-01', total_realisees: 3 },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const homologations = await adaptateur.cumulMensuelHomologations({});
 
@@ -269,7 +269,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { id_hash_service: 'service-breton', date: '2026-03-01', total_realisees: 2 },
         { id_hash_service: 'service-normand', date: '2026-03-01', total_realisees: 3 },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const homologations = await adaptateur.cumulMensuelHomologations({ region: 'FR-BRE' });
 
@@ -283,7 +283,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
         { date_execution: '2026-02-01T03:00:00Z' },
         { date_execution: '2026-03-01T03:00:00Z' },
       ]);
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const date = await adaptateur.dateDerniereExecution();
 
@@ -291,7 +291,7 @@ describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {
     });
 
     it("renvoie null quand la synchronisation ne s'est jamais exécutée", async () => {
-      const adaptateur = new AdaptateurObservatoirePostgres(trx);
+      const adaptateur = new AdaptateurObservatoireMSSPostgres(trx);
 
       const date = await adaptateur.dateDerniereExecution();
 

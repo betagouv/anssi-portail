@@ -1,11 +1,11 @@
 import { Knex } from 'knex';
 import {
-  AdaptateurObservatoire,
+  AdaptateurObservatoireMSS,
   CumulMensuel,
   FiltresObservatoire,
   TotalMensuel,
   TotalParNiveauSecurite,
-} from './adaptateurObservatoire.js';
+} from './adaptateurObservatoireMSS.js';
 
 const SERVICES_FILTRES = `
   SELECT *
@@ -16,7 +16,7 @@ const SERVICES_FILTRES = `
     AND (:typeOrganisation::text IS NULL OR type_organisation = :typeOrganisation)
 `;
 
-export class AdaptateurObservatoirePostgres implements AdaptateurObservatoire {
+export class AdaptateurObservatoireMSSPostgres implements AdaptateurObservatoireMSS {
   constructor(private readonly knex: Knex) {}
 
   async totalServices(filtres: FiltresObservatoire): Promise<number> {

@@ -1,9 +1,9 @@
 import {
-  AdaptateurObservatoire,
+  AdaptateurObservatoireMSS,
   CumulMensuel,
   TotalMensuel,
   TotalParNiveauSecurite,
-} from './adaptateurObservatoire.js';
+} from './adaptateurObservatoireMSS.js';
 
 const MOIS = [
   '2025-10',
@@ -23,7 +23,7 @@ const MOIS = [
 const serieLineaire = (debut: number, fin: number): number[] =>
   MOIS.map((_, index) => Math.round(debut + ((fin - debut) * index) / (MOIS.length - 1)));
 
-export class AdaptateurObservatoireMemoire implements AdaptateurObservatoire {
+export class AdaptateurObservatoireMSSMemoire implements AdaptateurObservatoireMSS {
   totalServices = async (): Promise<number> => 21440;
 
   cumulMensuelServices = async (): Promise<CumulMensuel[]> =>

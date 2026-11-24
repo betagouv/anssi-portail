@@ -9,7 +9,7 @@ import { AdaptateurMonAideCyber } from '../infra/adaptateurMonAideCyber.js';
 import { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi.js';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise.js';
 import { GenerateurImage } from '../infra/generateurImage.js';
-import { AdaptateurObservatoire } from '../infra/observatoireDesDonnees/adaptateurObservatoire.js';
+import { AdaptateurObservatoireMSS } from '../infra/observatoireDesDonnees/adaptateurObservatoireMSS.js';
 import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { AdaptateurStatistiqueParcours } from '../metier/adaptateurStatistiqueParcours.js';
 import { EntrepôtArticle } from '../metier/blog/entrepotArticle.js';
@@ -59,7 +59,7 @@ export type ConfigurationServeur = {
   adaptateurHorloge: AdaptateurHorloge;
   adaptateurJWT: AdaptateurJWT;
   adaptateurMonAideCyber: AdaptateurMonAideCyber;
-  adaptateurObservatoire: AdaptateurObservatoire;
+  adaptateurObservatoire: AdaptateurObservatoireMSS;
   adaptateurOIDC: AdaptateurOIDC;
   adaptateurProfilAnssi: AdaptateurProfilAnssi;
   adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
