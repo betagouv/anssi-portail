@@ -82,14 +82,17 @@
       </span>
     </div>
     <div slot="panel-1">
-      <PanneauContacts>
+      <PanneauContacts aucunRésultat={!contactSectoriel} messageAucunRésultat="Aucun contact sectoriel disponible.">
         {#if contactSectoriel}
           <CarteContactSectoriel modèle={CarteContactTableauDeBord} contact={contactSectoriel} />
         {/if}
       </PanneauContacts>
     </div>
     <div slot="panel-2">
-      <PanneauContacts>
+      <PanneauContacts
+        aucunRésultat={nombreContactsRégionaux == 0}
+        messageAucunRésultat="Aucun contact régional disponible."
+      >
         {#if contactsRégionaux && contactCOT}
           <CarteContactCOT
             modèle={CarteContactTableauDeBord}
@@ -106,7 +109,10 @@
       </PanneauContacts>
     </div>
     <div slot="panel-3">
-      <PanneauContacts>
+      <PanneauContacts
+        aucunRésultat={contactsNationaux.length == 0}
+        messageAucunRésultat="Aucun contact national disponible."
+      >
         {#each contactsNationaux as contactNational (contactNational.nom)}
           <CarteContactNational modèle={CarteContactTableauDeBord} contact={contactNational} />
         {/each}
