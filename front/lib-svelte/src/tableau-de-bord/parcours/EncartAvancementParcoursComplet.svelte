@@ -7,6 +7,7 @@
   import type { Mesure, Module } from '../../parcours-securisation/mesures/mesure';
   import Lien from '../../ui/Lien.svelte';
   import AnneauProgressionTexte from './AnneauProgressionTexte.svelte';
+  import ProgressionParcoursComplet from './ProgressionParcoursComplet.svelte';
 
   type ModulePrésentation = {
     id: number;
@@ -22,7 +23,7 @@
   let _modules: ModulePrésentation[] = $state([]);
   let prochaineMesureÀFaire: Mesure | undefined = $state();
   let nombreMesuresPrisesEnCompte: number = $state(0);
-  let nombreMesuresTotal = $state(0);
+  let nombreMesures = $state(0);
   let parcoursTerminé = $state(false);
 
   onMount(async () => {
@@ -31,8 +32,8 @@
     const mesures = data.modules.flatMap((m) => m.mesures);
     prochaineMesureÀFaire = mesures.find((mesure) => !mesure.estPriseEnCompte);
     nombreMesuresPrisesEnCompte = mesures.filter((mesure) => mesure.estPriseEnCompte).length;
-    nombreMesuresTotal = mesures.length;
-    parcoursTerminé = nombreMesuresPrisesEnCompte === nombreMesuresTotal;
+    nombreMesures = mesures.length;
+    parcoursTerminé = nombreMesuresPrisesEnCompte === nombreMesures;
   });
 
   const pageSource = 'espace-connecté-encart-avancement-parcours-complet';
@@ -48,16 +49,13 @@
     <div class="anneau">
       <AnneauProgressionTexte
         actuel={nombreMesuresPrisesEnCompte}
-        max={nombreMesuresTotal}
+        max={nombreMesures}
         libelle="Nombre de mesures prises en compte"
       />
     </div>
   </div>
   <div class="encouragements">
-    <p class="texte-standard-md">
-      👉 Votre parcours de sécurisation commence ici&#8239;! Mettez en place vos premières mesures pour renforcer dès
-      maintenant la cybersécurité de votre organisation.
-    </p>
+    <ProgressionParcoursComplet {nombreMesures} {nombreMesuresPrisesEnCompte} />
   </div>
   <div class="carte">
     {#if prochaineMesureÀFaire}
@@ -120,12 +118,6 @@
 
       .anneau {
         margin-inline: auto;
-      }
-    }
-
-    .encouragements {
-      p {
-        margin: 0;
       }
     }
 
