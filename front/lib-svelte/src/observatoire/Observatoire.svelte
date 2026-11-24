@@ -7,6 +7,7 @@
   import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
   import {
     récupèreDonnéesObservatoire,
+    type ChiffreCléMenaceCyber,
     type DonnéesObservatoire,
     type PointMensuel,
   } from '../passerelles/observatoire';
@@ -17,7 +18,7 @@
     { label: 'Organisations', fragment: '#organisations' },
     { label: 'Projets', fragment: '#projets' },
   ];
-  let ongletActif = $state('#projets');
+  let ongletActif = $state('#menace-cyber');
 
   let données: DonnéesObservatoire | undefined = $state();
   let enErreur = $state(false);
@@ -66,6 +67,35 @@
   <CarteDonnees {id} {titre} {infobulle} {source} date={date ? formateDate(date) : undefined}>
     <p class="chiffre-cle">{formateNombre(valeur)}</p>
   </CarteDonnees>
+{/snippet}
+
+{#snippet chiffreMenace(
+  id: string,
+  titre: string,
+  description: string,
+  infobulle: string,
+  chiffre: ChiffreCléMenaceCyber
+)}
+  <CarteDonnees
+    {id}
+    {titre}
+    {description}
+    {infobulle}
+    source={chiffre.source}
+    date={chiffre.date ? formateDate(chiffre.date) : undefined}
+  >
+    <p class="chiffre-cle">{chiffre.total}</p>
+  </CarteDonnees>
+{/snippet}
+
+{#snippet étatDuChargement()}
+  {#if enErreur}
+    <p class="message" role="alert">
+      Les données de l’observatoire sont momentanément indisponibles. Veuillez réessayer plus tard.
+    </p>
+  {:else}
+    <p class="message" role="status">Chargement des données…</p>
+  {/if}
 {/snippet}
 
 <header class="bandeau">
@@ -168,12 +198,74 @@
               données.projets.homologations.date
             )}
           </div>
-        {:else if enErreur}
-          <p class="message" role="alert">
-            Les données de l’observatoire sont momentanément indisponibles. Veuillez réessayer plus tard.
-          </p>
         {:else}
-          <p class="message" role="status">Chargement des données…</p>
+          {@render étatDuChargement()}
+        {/if}
+      </section>
+    {:else if ongletActif === '#menace-cyber'}
+      <section>
+        <h2>La menace cyber</h2>
+        <p class="introduction">
+          Les chiffres clés de la cybermenace en 2025, issus du Panorama de l’ANSSI et des demandes d’assistance reçues
+          par Cybermalveillance.gouv.fr. Ils reflètent les signalements reçus et ne sont pas forcément représentatifs de
+          l’ensemble des incidents en France.
+        </p>
+
+        {#if données}
+          {@const menace = données.menaceCyber}
+          <h3>Signalements reçus par l’ANSSI</h3>
+          <p class="sous-titre">Nombre de signalements reçus et d’incidents avérés en 2025.</p>
+          <div class="chiffres-cles par-deux">
+            {@render chiffreMenace(
+              'evenements-securite',
+              'Événements de sécurité traités',
+              'Signalements reçus et traités par l’ANSSI en 2025',
+              'Nombre d’événements de sécurité portés à la connaissance de l’ANSSI et traités par ses équipes en 2025. Ils regroupent des signalements (comportements anormaux pouvant avoir un caractère malveillant) et des incidents (attaques dont l’ANSSI a confirmé la réussite). Tous ne correspondent donc pas à des attaques abouties.',
+              menace.evenementsSecurite
+            )}
+            {@render chiffreMenace(
+              'incidents-averes',
+              'Incidents avérés',
+              'Événements confirmés comme attaques réussies en 2025',
+              'Parmi les événements traités, ceux où l’attaque a réellement réussi : un acteur malveillant a pu agir sur le système informatique de la victime.',
+              menace.incidents
+            )}
+          </div>
+
+          <h3>Tendances de la cybermenace</h3>
+          <p class="sous-titre">Tendances clés de la cybermenace observées en 2025.</p>
+          <div class="chiffres-cles par-quatre">
+            {@render chiffreMenace(
+              'rancongiciel',
+              'Rançongiciel',
+              'Part des TPE, PME et ETI parmi les victimes de rançongiciels en 2025',
+              'Selon l’ANSSI, les rançongiciels restent une menace importante en France : 128 compromissions ont été recensées en 2025. Toutes les organisations peuvent être touchées : près de la moitié des victimes sont des TPE, PME ou ETI, aux côtés des collectivités, des établissements de santé et d’enseignement. Les attaquants chiffrent les systèmes et volent souvent des données pour exiger une rançon. Les accès distants gérés par des prestataires ou sous-traitants peuvent servir de porte d’entrée, avec un risque d’arrêt d’activité.',
+              menace.rançongiciels
+            )}
+            {@render chiffreMenace(
+              'fraude-virement',
+              'Fraude au virement',
+              'Hausse des fraudes au virement constatées en 2025 (faux RIB, faux ordres de virement)',
+              'Les fraudes au virement ont bondi de +170 % en 2025 selon Cybermalveillance.gouv.fr : usurpation d’un fournisseur ou d’un dirigeant, souvent après piratage d’une messagerie, pour détourner un paiement. Les données bancaires ayant fait l’objet de violations récentes et exposées concourent à ce risque. Pour les entreprises, elle est l’une des cybermenaces les plus fréquentes constatées en 2025 (+93 %).',
+              menace.fraudesVirement
+            )}
+            {@render chiffreMenace(
+              'cyberharcelement',
+              'Cyberharcèlement',
+              'Hausse des cas visant les entreprises en 2025 (dénigrement, faux avis, usurpation d’identité)',
+              'Le cyberharcèlement des organisations progresse fortement en 2025 selon Cybermalveillance.gouv.fr, visant autant les dirigeants ou agents que la structure elle-même. Une augmentation de +205 % pour les entreprises a été constatée. Une forte présence en ligne y expose davantage : faux avis, dénigrement organisé, parfois assortis d’une demande de rançon pour leur retrait.',
+              menace.cyberharcèlements
+            )}
+            {@render chiffreMenace(
+              'vols-donnees',
+              'Vols de données',
+              'Progression des incidents liés à l’exfiltration de données en 2025',
+              'En 2025, l’ANSSI a constaté, sur la base des signalements reçus, une forte progression des incidents liés à l’exfiltration de données (environ 51 %).',
+              menace.volsDonnées
+            )}
+          </div>
+        {:else}
+          {@render étatDuChargement()}
         {/if}
       </section>
     {:else}
@@ -238,6 +330,36 @@
     .introduction {
       color: var(--text-mention-grey);
       max-width: 736px;
+    }
+
+    h3 {
+      color: var(--text-title-grey);
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+      font-weight: bold;
+      margin: 1.5rem 0 0.25rem;
+    }
+
+    .sous-titre {
+      color: var(--text-mention-grey);
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+    }
+
+    .chiffres-cles {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+
+      @include a-partir-de(sm) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      &.par-quatre {
+        @include a-partir-de(lg) {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
     }
 
     .rangee {

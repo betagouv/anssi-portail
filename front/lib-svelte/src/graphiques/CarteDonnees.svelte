@@ -10,6 +10,7 @@
   interface Props {
     id: string;
     titre: string;
+    description?: string;
     infobulle?: string;
     source: string;
     date?: string;
@@ -17,7 +18,7 @@
     children: Snippet;
   }
 
-  let { id, titre, infobulle, source, date, tableau, children }: Props = $props();
+  let { id, titre, description, infobulle, source, date, tableau, children }: Props = $props();
 
   let vue: 'graphique' | 'tableau' = $state('graphique');
 
@@ -45,6 +46,9 @@
       </dsfr-tooltip>
     {/if}
   </header>
+  {#if description}
+    <p class="description">{description}</p>
+  {/if}
   <div class="contenu">
     {#if tableau && vue === 'tableau'}
       <dsfr-table
@@ -109,6 +113,13 @@
         font-weight: bold;
         margin: 0;
       }
+    }
+
+    .description {
+      color: var(--text-default-grey);
+      font-size: 0.75rem;
+      line-height: 1.25rem;
+      margin: 0;
     }
 
     .contenu {

@@ -7,7 +7,13 @@ type DonneesObservatoire<T> = T & {
   source: string;
 };
 
+export type ChiffreCléMenaceCyber = DonneesObservatoire<{ total: string }>;
+
+type IndicateurMenaceCyber =
+  'evenementsSecurite' | 'incidents' | 'rançongiciels' | 'fraudesVirement' | 'cyberharcèlements' | 'volsDonnées';
+
 export type DonnéesObservatoire = {
+  menaceCyber: Record<IndicateurMenaceCyber, ChiffreCléMenaceCyber>;
   projets: {
     services: DonneesObservatoire<{
       total: number;
@@ -25,6 +31,7 @@ type DonneesAPIObservatoire<T> = T & {
 };
 
 type APIObservatoire = {
+  menaceCyber: Record<IndicateurMenaceCyber, DonneesAPIObservatoire<{ total: string }>>;
   projets: {
     services: DonneesAPIObservatoire<{
       total: number;
@@ -40,7 +47,20 @@ const enDate = (date: string | null) => (date ? new Date(date) : null);
 
 export const récupèreDonnéesObservatoire = async (): Promise<DonnéesObservatoire> => {
   const { data } = await axios.get<APIObservatoire>('/api/observatoire');
+  const chiffreClé = (chiffre: APIObservatoire['menaceCyber'][IndicateurMenaceCyber]): ChiffreCléMenaceCyber => ({
+    ...chiffre,
+    date: enDate(chiffre.date),
+  });
+
   return {
+    menaceCyber: {
+      evenementsSecurite: chiffreClé(data.menaceCyber.evenementsSecurite),
+      incidents: chiffreClé(data.menaceCyber.incidents),
+      rançongiciels: chiffreClé(data.menaceCyber.rançongiciels),
+      fraudesVirement: chiffreClé(data.menaceCyber.fraudesVirement),
+      cyberharcèlements: chiffreClé(data.menaceCyber.cyberharcèlements),
+      volsDonnées: chiffreClé(data.menaceCyber.volsDonnées),
+    },
     projets: {
       services: {
         ...data.projets.services,
