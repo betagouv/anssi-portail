@@ -39,6 +39,7 @@
       'titre'
       'cartes'
       'lien';
+    grid-row-gap: 1.5rem;
 
     @include a-partir-de(md) {
       grid-template-columns: 1fr auto;
@@ -72,8 +73,7 @@
       grid-area: lien;
 
       @include a-partir-de(md) {
-        margin-bottom: 1.5rem;
-        align-self: end;
+        align-self: center;
       }
     }
   }

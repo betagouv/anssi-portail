@@ -13,6 +13,7 @@
 
 <style lang="scss">
   h2 {
+    margin-bottom: 0;
     grid-area: titre;
     display: flex;
     gap: 0.5rem;
