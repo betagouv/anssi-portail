@@ -59,6 +59,7 @@ import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPo
 import { GenerateurImageAvif } from './infra/generateurImage.js';
 import { messagerieMattermost } from './infra/messagerieMattermost.js';
 import { EntrepotExigenceGrist } from './infra/nis2/entrepotExigenceGrist.js';
+import { AdaptateurObservatoireMenaceCyber } from './infra/observatoireDesDonnees/adaptateurObservatoireMenaceCyberMemoire.js';
 import { fabriqueAdaptateurObservatoireMSS } from './infra/observatoireDesDonnees/fabriqueAdaptateurObservatoireMSS.js';
 import { rapporteurConsole } from './infra/rapporteurConsole.js';
 import { controleurErreursSentry, initialiseSentry, rapporteurSentry } from './infra/sentry.js';
@@ -313,7 +314,10 @@ const host = process.env.HOST;
     },
     adaptateurStatistiqueMiniTests,
     adaptateurStatistiqueParcours,
-    serviceObservatoire: new ServiceObservatoire({ adaptateurObservatoireMSS }),
+    serviceObservatoire: new ServiceObservatoire({
+      adaptateurObservatoireMSS,
+      adaptateurObservatoireMenaceCyber: new AdaptateurObservatoireMenaceCyber(),
+    }),
   });
 
   const annonceEcoute = () => {

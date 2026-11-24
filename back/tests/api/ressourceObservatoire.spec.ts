@@ -3,6 +3,7 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/msc/index.js';
+import { AdaptateurObservatoireMenaceCyber } from '../../src/infra/observatoireDesDonnees/adaptateurObservatoireMenaceCyberMemoire.js';
 import { ServiceObservatoire } from '../../src/metier/serviceObservatoire.js';
 import { configurationDeTestDuServeur } from './fauxObjets.js';
 
@@ -34,6 +35,7 @@ describe('La ressource Observatoire', () => {
           cumulMensuelHomologations: async () => [{ mois: '2026-01', cumul: 1 }],
           dateDerniereExecution: async () => new Date('2026-02-01T08:00:00.000Z'),
         },
+        adaptateurObservatoireMenaceCyber: new AdaptateurObservatoireMenaceCyber(),
       });
       serveur = serveurAvecObservatoire(true);
     });
@@ -43,6 +45,14 @@ describe('La ressource Observatoire', () => {
 
       expect(reponse.status).toBe(HttpStatusCode.Ok);
       expect(Object.keys(reponse.body.projets)).toEqual(['services', 'mesuresFaites', 'homologations']);
+      expect(Object.keys(reponse.body.menaceCyber)).toEqual([
+        'evenementsSecurite',
+        'incidents',
+        'rançongiciels',
+        'fraudesVirement',
+        'cyberharcèlements',
+        'volsDonnées',
+      ]);
     });
 
     it('répond 404 lorsque la fonctionnalité est désactivée', async () => {

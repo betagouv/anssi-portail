@@ -10,8 +10,9 @@ export const ressourceObservatoire = ({ serviceObservatoire }: ConfigurationServ
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
       const projets = await serviceObservatoire.donneesProjets();
+      const menaceCyber = serviceObservatoire.donneesMenaceCyber();
 
-      reponse.send({ projets });
+      reponse.send({ projets, menaceCyber });
     })
   );
   return routeur;
