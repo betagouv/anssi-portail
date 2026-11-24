@@ -11,7 +11,7 @@ export type TotalMensuel = { mois: string; total: number };
 
 export type TotalParNiveauSecurite = { niveauSecurite: string; total: number };
 
-export interface AdaptateurObservatoire {
+export interface AdaptateurObservatoireMSS {
   totalServices(filtres: FiltresObservatoire): Promise<number>;
   cumulMensuelServices(filtres: FiltresObservatoire): Promise<CumulMensuel[]>;
   mesuresFaitesParMois(filtres: FiltresObservatoire): Promise<TotalMensuel[]>;

@@ -3,13 +3,13 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/msc/index.js';
-import { AdaptateurObservatoire } from '../../src/infra/observatoireDesDonnees/adaptateurObservatoire.js';
+import { AdaptateurObservatoireMSS } from '../../src/infra/observatoireDesDonnees/adaptateurObservatoireMSS.js';
 import { configurationDeTestDuServeur } from './fauxObjets.js';
 
 describe('La ressource Observatoire', () => {
   describe('sur demande GET', () => {
     let serveur: Express;
-    let adaptateurObservatoire: AdaptateurObservatoire;
+    let adaptateurObservatoire: AdaptateurObservatoireMSS;
 
     const serveurAvecObservatoire = (actif: boolean) =>
       creeServeur({
