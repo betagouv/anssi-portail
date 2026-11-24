@@ -3,6 +3,7 @@
   import { profilStore } from '../stores/profil.store';
   import Lien from '../ui/Lien.svelte';
   import AutresRessources from './AutresRessources.svelte';
+  import Contacts from './Contacts.svelte';
   import Favoris from './Favoris.svelte';
   import Financements from './Financements.svelte';
   import Parcours from './parcours/Parcours.svelte';
@@ -15,6 +16,8 @@
       <h1>Bonjour {$profilStore?.prenom},</h1>
 
       <Parcours />
+
+      <Contacts />
 
       <Financements />
 
