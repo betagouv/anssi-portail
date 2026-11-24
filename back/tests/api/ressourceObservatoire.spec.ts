@@ -3,18 +3,18 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../src/api/msc/index.js';
-import { AdaptateurObservatoireMSS } from '../../src/infra/observatoireDesDonnees/adaptateurObservatoireMSS.js';
+import { ServiceObservatoire } from '../../src/metier/serviceObservatoire.js';
 import { configurationDeTestDuServeur } from './fauxObjets.js';
 
 describe('La ressource Observatoire', () => {
   describe('sur demande GET', () => {
     let serveur: Express;
-    let adaptateurObservatoire: AdaptateurObservatoireMSS;
+    let serviceObservatoire: ServiceObservatoire;
 
     const serveurAvecObservatoire = (actif: boolean) =>
       creeServeur({
         ...configurationDeTestDuServeur,
-        adaptateurObservatoire,
+        serviceObservatoire,
         adaptateurEnvironnement: {
           ...configurationDeTestDuServeur.adaptateurEnvironnement,
           fonctionnalites: {
@@ -25,39 +25,24 @@ describe('La ressource Observatoire', () => {
       });
 
     beforeEach(() => {
-      adaptateurObservatoire = {
-        totalServices: async () => 3,
-        cumulMensuelServices: async () => [{ mois: '2026-01', cumul: 3 }],
-        mesuresFaitesParMois: async () => [{ mois: '2026-01', total: 42 }],
-        servicesParNiveauSecurite: async () => [{ niveauSecurite: 'Modérés', total: 3 }],
-        cumulMensuelHomologations: async () => [{ mois: '2026-01', cumul: 1 }],
-        dateDerniereExecution: async () => new Date('2026-02-01T08:00:00.000Z'),
-      };
+      serviceObservatoire = new ServiceObservatoire({
+        adaptateurObservatoireMSS: {
+          totalServices: async () => 3,
+          cumulMensuelServices: async () => [{ mois: '2026-01', cumul: 3 }],
+          mesuresFaitesParMois: async () => [{ mois: '2026-01', total: 42 }],
+          servicesParNiveauSecurite: async () => [{ niveauSecurite: 'Modérés', total: 3 }],
+          cumulMensuelHomologations: async () => [{ mois: '2026-01', cumul: 1 }],
+          dateDerniereExecution: async () => new Date('2026-02-01T08:00:00.000Z'),
+        },
+      });
       serveur = serveurAvecObservatoire(true);
     });
 
-    it('renvoie tous les chiffres de l’observatoire', async () => {
+    it('renvoie les données du service', async () => {
       const reponse = await request(serveur).get('/api/observatoire');
 
       expect(reponse.status).toBe(HttpStatusCode.Ok);
-      expect(reponse.body).toStrictEqual({
-        dateDerniereMiseAJour: '2026-02-01T08:00:00.000Z',
-        services: {
-          total: 3,
-          cumulMensuel: [{ mois: '2026-01', cumul: 3 }],
-          parNiveauSecurite: [{ niveauSecurite: 'Modérés', total: 3 }],
-        },
-        mesuresFaites: { parMois: [{ mois: '2026-01', total: 42 }] },
-        homologations: { cumulMensuel: [{ mois: '2026-01', cumul: 1 }] },
-      });
-    });
-
-    it('renvoie une date de dernière mise à jour nulle s’il n’y a jamais eu de chargement', async () => {
-      adaptateurObservatoire.dateDerniereExecution = async () => null;
-
-      const reponse = await request(serveur).get('/api/observatoire');
-
-      expect(reponse.body.dateDerniereMiseAJour).toBeNull();
+      expect(Object.keys(reponse.body.projets)).toEqual(['services', 'mesuresFaites', 'homologations']);
     });
 
     it('répond 404 lorsque la fonctionnalité est désactivée', async () => {

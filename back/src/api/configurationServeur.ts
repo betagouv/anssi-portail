@@ -9,7 +9,6 @@ import { AdaptateurMonAideCyber } from '../infra/adaptateurMonAideCyber.js';
 import { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi.js';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise.js';
 import { GenerateurImage } from '../infra/generateurImage.js';
-import { AdaptateurObservatoireMSS } from '../infra/observatoireDesDonnees/adaptateurObservatoireMSS.js';
 import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { AdaptateurStatistiqueParcours } from '../metier/adaptateurStatistiqueParcours.js';
 import { EntrepôtArticle } from '../metier/blog/entrepotArticle.js';
@@ -35,6 +34,7 @@ import { EntrepôtQuestionVraieFausse } from '../metier/mini-tests/vrai-faux/ent
 import { EntrepôtRésultatTestVraiFaux } from '../metier/mini-tests/vrai-faux/entrepotResultatTestVraiFaux.js';
 import { EntrepotExigence } from '../metier/nis2/entrepotExigence.js';
 import { Rapporteur } from '../metier/rapporteur.js';
+import { ServiceObservatoire } from '../metier/serviceObservatoire.js';
 import { ServiceSanteGuides } from '../metier/serviceSanteGuides.js';
 import { AdaptateurJWT } from './adaptateurJWT.js';
 import { FournisseurChemin } from './fournisseurChemin.js';
@@ -59,7 +59,6 @@ export type ConfigurationServeur = {
   adaptateurHorloge: AdaptateurHorloge;
   adaptateurJWT: AdaptateurJWT;
   adaptateurMonAideCyber: AdaptateurMonAideCyber;
-  adaptateurObservatoire: AdaptateurObservatoireMSS;
   adaptateurOIDC: AdaptateurOIDC;
   adaptateurProfilAnssi: AdaptateurProfilAnssi;
   adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
@@ -97,6 +96,7 @@ export type ConfigurationServeur = {
     ipAutorisees: string[] | false;
   };
   cellar: AdaptateurCellar;
+  serviceObservatoire: ServiceObservatoire;
   serviceSanteGuides: ServiceSanteGuides;
   serviceRécompensesCyberDépart: ServiceRécompensesCyberDépart;
   serviceModeleAnnuaireDeCrise: ServiceModeleAnnuaireDeCrise;
