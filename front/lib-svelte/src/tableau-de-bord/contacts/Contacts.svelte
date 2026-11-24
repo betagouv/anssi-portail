@@ -6,7 +6,7 @@
   import CarteContactCSIRT from '../../contacts/CarteContactCSIRT.svelte';
   import CarteContactNational from '../../contacts/CarteContactNational.svelte';
   import CarteContactSectoriel from '../../contacts/CarteContactSectoriel.svelte';
-  import type { ContactSectoriel } from '../../contacts/contacts.type';
+  import type { ContactNational, ContactSectoriel, ContactsRegionaux } from '../../contacts/contacts.type';
   import TitreDeSection from '../TitreDeSection.svelte';
   import CarteContactTableauDeBord from './CarteContactTableauDeBord.svelte';
   import PanneauContacts from './PanneauContacts.svelte';
@@ -22,33 +22,38 @@
   const surChangementDeTab = ({ detail }: { detail: { index: number } }) => {
     indexTabActivée = detail.index;
   };
-  const contactSectoriel: ContactSectoriel = {
+
+  const contactSectoriel: ContactSectoriel | undefined = $state({
     nom: 'CERT Santé',
     siteWeb: 'https://cyberveille.esante.gouv.fr/',
-  };
-
-  const cot = { nom: 'Guillaume CRÉPIN', email: 'ile-de-france@ssi.gouv.fr' };
-  const campus = {
+  });
+  const contactCOT: ContactsRegionaux['COT'] | undefined = $state({
+    nom: 'Guillaume CRÉPIN',
+    email: 'ile-de-france@ssi.gouv.fr',
+  });
+  const contactCampus: ContactsRegionaux['campus'] | undefined = $state({
     adresse: '5-7 rue Bellini 92800 La Défense',
     nom: 'Le Campus Cyber',
     siteWeb: 'https://campuscyber.fr/',
-  };
-  const csirt = {
+  });
+  const contactCSIRT: ContactsRegionaux['CSIRT'] | undefined = $state({
     nom: 'Urgence Cyber Île-de-France',
     siteWeb: 'https://urgencecyber.iledefrance.fr/',
     adresse: '2, rue Simone Veil 93400 Saint-Ouen-sur-Seine',
     telephone: '0 800 730 647',
-  };
-  const contactsNationaux = [
+  });
+  const nombreContactsRégionaux = $derived(
+    [contactCOT, contactCSIRT, contactCampus].filter((prédicat) => !!prédicat).length
+  );
+  const contactsNationaux: ContactNational[] = $state([
     {
       nom: '17 Cyber',
       description:
         'Le 17cyber propose aux particuliers et aux autres entités, un diagnostic permettant d’obtenir des recommandations en cas d’incident et d’être mis en relation avec un policier, un gendarme, un prestataire ou un CSIRT territorial.',
-      fonction: 'Police nationale, la Gendarmerie et Cybermalveillance.gouv.fr',
       lienPrincipal: { libelle: 'Aller sur le 17Cyber', href: 'https://www.cybermalveillance.gouv.fr/diagnostic' },
       téléphone: '17 (France) ou 112 (Europe)',
     },
-  ];
+  ]);
 </script>
 
 <div class="contacts">
@@ -56,13 +61,19 @@
 
   <dsfr-tabs {tabs} active-tab-index={indexTabActivée} ontabchanged={surChangementDeTab}>
     <div slot="tab-1">
-      Contacts sectoriels <span class="tab-tag" class:actif={indexTabActivée === 0}><span>1</span></span>
+      Contacts sectoriels <span class="tab-tag" class:actif={indexTabActivée === 0}>
+        <span>{contactSectoriel ? 1 : 0}</span>
+      </span>
     </div>
     <div slot="tab-2">
-      Contacts régionaux <span class="tab-tag" class:actif={indexTabActivée === 1}><span>30</span></span>
+      Contacts régionaux <span class="tab-tag" class:actif={indexTabActivée === 1}>
+        <span>{nombreContactsRégionaux}</span>
+      </span>
     </div>
     <div slot="tab-3">
-      Contacts nationaux <span class="tab-tag" class:actif={indexTabActivée === 2}><span>4</span></span>
+      Contacts nationaux <span class="tab-tag" class:actif={indexTabActivée === 2}>
+        <span>{contactsNationaux.length}</span>
+      </span>
     </div>
     <div slot="panel-1">
       <PanneauContacts>
@@ -71,9 +82,9 @@
     </div>
     <div slot="panel-2">
       <PanneauContacts>
-        <CarteContactCOT modèle={CarteContactTableauDeBord} contact={cot} désignation="région" />
-        <CarteContactCSIRT modèle={CarteContactTableauDeBord} contact={csirt} />
-        <CarteContactCampus modèle={CarteContactTableauDeBord} contact={campus} />
+        <CarteContactCOT modèle={CarteContactTableauDeBord} contact={contactCOT} désignation="région" />
+        <CarteContactCSIRT modèle={CarteContactTableauDeBord} contact={contactCSIRT} />
+        <CarteContactCampus modèle={CarteContactTableauDeBord} contact={contactCampus} />
       </PanneauContacts>
     </div>
     <div slot="panel-3">
