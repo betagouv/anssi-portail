@@ -58,6 +58,7 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      flex-wrap: wrap;
 
       @include a-partir-de(md) {
         flex-direction: row;
