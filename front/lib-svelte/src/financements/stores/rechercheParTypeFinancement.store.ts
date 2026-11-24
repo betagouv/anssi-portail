@@ -1,5 +1,5 @@
 import { get, writable } from 'svelte/store';
-import type { ResumeFinancement } from '../financement';
+import type { RésuméFinancement } from '../financement';
 
 const selectionTypeFinancement = writable<string[]>([]);
 
@@ -7,7 +7,7 @@ export const rechercheParTypeFinancement = {
   set: selectionTypeFinancement.set,
   subscribe: selectionTypeFinancement.subscribe,
   reinitialise: () => selectionTypeFinancement.set([]),
-  ok: (resumeFinancement: ResumeFinancement): boolean =>
+  ok: (résuméFinancement: RésuméFinancement): boolean =>
     !get(selectionTypeFinancement).length ||
-    resumeFinancement.typesDeFinancement.some((type) => get(selectionTypeFinancement).includes(type)),
+    résuméFinancement.typesDeFinancement.some((type) => get(selectionTypeFinancement).includes(type)),
 };

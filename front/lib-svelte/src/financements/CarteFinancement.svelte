@@ -1,9 +1,9 @@
 <script lang="ts">
   import BadgeTypeFinancement from './BadgeTypeFinancement.svelte';
-  import type { ResumeFinancement } from './financement';
+  import type { RésuméFinancement } from './financement';
 
   interface Props {
-    financement: ResumeFinancement;
+    financement: RésuméFinancement;
   }
 
   let { financement }: Props = $props();

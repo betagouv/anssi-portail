@@ -1,4 +1,4 @@
-export type ResumeFinancement = {
+export type RésuméFinancement = {
   id: number;
   entitesElligibles: string[];
   financeur: string;
@@ -8,7 +8,7 @@ export type ResumeFinancement = {
   regions: string[];
 };
 
-export type Financement = ResumeFinancement & {
+export type Financement = RésuméFinancement & {
   objectifs: string;
   operationsEligibles: string;
   benificiaires: string;

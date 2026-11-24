@@ -3,15 +3,15 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import CarteFinancement from '../financements/CarteFinancement.svelte';
-  import type { ResumeFinancement } from '../financements/financement';
+  import type { RésuméFinancement } from '../financements/financement';
   import Lien from '../ui/Lien.svelte';
   import { détecteRendu } from '../utils/rendu.svelte';
   import TitreDeSection from './TitreDeSection.svelte';
 
-  let financements: ResumeFinancement[] = $state([]);
+  let financements: RésuméFinancement[] = $state([]);
 
   onMount(async () => {
-    const { data } = await axios.get<ResumeFinancement[]>('/api/financements');
+    const { data } = await axios.get<RésuméFinancement[]>('/api/financements');
     financements = data;
   });
 
