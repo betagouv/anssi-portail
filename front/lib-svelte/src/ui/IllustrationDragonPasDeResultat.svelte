@@ -10,7 +10,7 @@
 <img
   src="/assets/images/illustration-dragon-aucun-resultat.svg"
   width="175"
-  height="317"
+  height="150"
   alt={texteAlternatif}
   class:petit
 />
