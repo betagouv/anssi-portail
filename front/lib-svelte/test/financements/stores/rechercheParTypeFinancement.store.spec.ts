@@ -1,10 +1,10 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import type { ResumeFinancement } from '../../../src/financements/financement';
+import type { RésuméFinancement } from '../../../src/financements/financement';
 import { rechercheParTypeFinancement } from '../../../src/financements/stores/rechercheParTypeFinancement.store';
 
 describe('La recherche par type de financement', () => {
-  const resumeFinancement: ResumeFinancement = {
+  const résuméFinancement: RésuméFinancement = {
     entitesElligibles: ['PME'],
     financeur: 'BPI',
     id: 1,
@@ -29,7 +29,7 @@ describe('La recherche par type de financement', () => {
     it('en rejetant un financement dont le type de financement ne correspond pas', () => {
       rechercheParTypeFinancement.set(["Aide à l'innovation cyber"]);
 
-      const resultat = rechercheParTypeFinancement.ok(resumeFinancement);
+      const resultat = rechercheParTypeFinancement.ok(résuméFinancement);
 
       expect(resultat).toBe(false);
     });
@@ -37,13 +37,13 @@ describe('La recherche par type de financement', () => {
     it('en incluant un financement dont le type de financement correspond', () => {
       rechercheParTypeFinancement.set(['Formation', "Aide à l'innovation cyber"]);
 
-      const resultat = rechercheParTypeFinancement.ok(resumeFinancement);
+      const resultat = rechercheParTypeFinancement.ok(résuméFinancement);
 
       expect(resultat).toBe(true);
     });
 
     it("en incluant un financement si il n'y pas de filtre actif", () => {
-      const resultat = rechercheParTypeFinancement.ok(resumeFinancement);
+      const resultat = rechercheParTypeFinancement.ok(résuméFinancement);
 
       expect(resultat).toBe(true);
     });

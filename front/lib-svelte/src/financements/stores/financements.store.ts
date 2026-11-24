@@ -1,11 +1,11 @@
 import { writable } from 'svelte/store';
-import type { ResumeFinancement } from '../financement';
+import type { RésuméFinancement } from '../financement';
 
-const { subscribe, set } = writable<ResumeFinancement[]>([]);
+const { subscribe, set } = writable<RésuméFinancement[]>([]);
 
 export const financementsStore = {
   subscribe,
-  initialise: (resumesFinancement: ResumeFinancement[]) => {
-    set([...resumesFinancement]);
+  initialise: (résumésFinancement: RésuméFinancement[]) => {
+    set([...résumésFinancement]);
   },
 };

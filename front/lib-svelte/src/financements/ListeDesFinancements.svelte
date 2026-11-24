@@ -11,7 +11,7 @@
   import Lien from '../ui/Lien.svelte';
   import CarteFinancement from './CarteFinancement.svelte';
   import FiltresFinancements from './FiltresFinancements.svelte';
-  import type { ResumeFinancement } from './financement';
+  import type { RésuméFinancement } from './financement';
   import SqueletteCarteFinancement from './SqueletteCarteFinancement.svelte';
   import { financementsStore } from './stores/financements.store';
   import { financementsFiltre } from './stores/financementsFiltre.store';
@@ -20,7 +20,7 @@
   import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
 
   type Props = {
-    financementsInitiaux?: ResumeFinancement[];
+    financementsInitiaux?: RésuméFinancement[];
   };
 
   type ReponseAxios = {
@@ -36,7 +36,7 @@
   const { financementsInitiaux = [] }: Props = $props();
   financementsStore.initialise(untrack(() => financementsInitiaux));
 
-  let financements = $state<ResumeFinancement[]>([]);
+  let financements = $state<RésuméFinancement[]>([]);
   let chargement = $state(false);
 
   const estConnecte = profilStore.utilisateurEstConnecte();

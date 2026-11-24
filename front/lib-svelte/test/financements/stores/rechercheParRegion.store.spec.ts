@@ -1,10 +1,10 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import type { ResumeFinancement } from '../../../src/financements/financement';
+import type { RésuméFinancement } from '../../../src/financements/financement';
 import { rechercheParRegion } from '../../../src/financements/stores/rechercheParRegion.store';
 
 describe('La recherche par région', () => {
-  const resumeFinancement: ResumeFinancement = {
+  const résuméFinancement: RésuméFinancement = {
     entitesElligibles: ['PME'],
     financeur: 'BPI',
     id: 1,
@@ -28,7 +28,7 @@ describe('La recherche par région', () => {
     it('en rejetant un financement dont le type de financement ne correspond pas', () => {
       rechercheParRegion.set('FR-HDF');
 
-      const resultat = rechercheParRegion.ok(resumeFinancement);
+      const resultat = rechercheParRegion.ok(résuméFinancement);
 
       expect(resultat).toBeFalsy();
     });
@@ -36,13 +36,13 @@ describe('La recherche par région', () => {
     it('en incluant un financement dont le type de financement correspond', () => {
       rechercheParRegion.set('FR-IDF');
 
-      const resultat = rechercheParRegion.ok(resumeFinancement);
+      const resultat = rechercheParRegion.ok(résuméFinancement);
 
       expect(resultat).toBeTruthy();
     });
 
     it("en incluant un financement si il n'y pas de filtre actif", () => {
-      const resultat = rechercheParRegion.ok(resumeFinancement);
+      const resultat = rechercheParRegion.ok(résuméFinancement);
 
       expect(resultat).toBeTruthy();
     });
@@ -51,7 +51,7 @@ describe('La recherche par région', () => {
       rechercheParRegion.set('FR-IDF');
 
       const resultat = rechercheParRegion.ok({
-        ...resumeFinancement,
+        ...résuméFinancement,
         regions: ['FRANCE'],
       });
 
