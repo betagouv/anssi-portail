@@ -88,15 +88,19 @@
       </div>
     {/if}
   </div>
-  <Lien
-    libelle="Accédez aux modules"
-    icone="arrow-right-line"
-    iconeADroite
-    href={`/parcours-complet?pageSource=${pageSource}`}
-  />
+  <div class="lien">
+    <Lien
+      libelle="Accédez aux modules"
+      icone="arrow-right-line"
+      iconeADroite
+      href={`/parcours-complet?pageSource=${pageSource}`}
+    />
+  </div>
 </div>
 
 <style lang="scss">
+  @use '../../../../assets/styles/responsive' as *;
+
   .avancement {
     display: flex;
     flex-direction: column;
@@ -105,11 +109,22 @@
     background-color: var(--background-default-grey);
     box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
 
+    @include a-partir-de(md) {
+      display: grid;
+      grid-template-areas:
+        'titre progression'
+        'encouragements progression'
+        'carte progression'
+        'lien progression';
+    }
+
     .titre {
+      grid-area: titre;
       margin: 0;
     }
 
     .progression {
+      grid-area: progression;
       display: flex;
       flex-direction: column;
       padding: 1.5rem;
@@ -121,11 +136,27 @@
       }
     }
 
-    .parcours-termine {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-      background-color: var(--background-alt-blue-france);
+    .encouragements {
+      grid-area: encouragements;
+    }
+
+    .carte {
+      grid-area: carte;
+
+      .parcours-termine {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        background-color: var(--background-alt-blue-france);
+      }
+
+      :global(dsfr-card) {
+        min-height: auto;
+      }
+    }
+
+    .lien {
+      grid-area: lien;
     }
   }
 </style>
