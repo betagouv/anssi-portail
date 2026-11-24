@@ -36,6 +36,8 @@
     display: flex;
     flex-direction: column;
     width: auto;
+    background-color: var(--background-default-grey);
+
     .contenu {
       display: flex;
       flex-direction: column;
