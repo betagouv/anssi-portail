@@ -1,12 +1,21 @@
 <script lang="ts">
+  import { calculeCodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
   import { DsfrTabs } from '@lab-anssi/ui-kit';
-  import type { ComponentProps } from 'svelte';
+  import axios from 'axios';
+  import { onMount, type ComponentProps } from 'svelte';
   import CarteContactCampus from '../../contacts/CarteContactCampus.svelte';
   import CarteContactCOT from '../../contacts/CarteContactCOT.svelte';
   import CarteContactCSIRT from '../../contacts/CarteContactCSIRT.svelte';
   import CarteContactNational from '../../contacts/CarteContactNational.svelte';
   import CarteContactSectoriel from '../../contacts/CarteContactSectoriel.svelte';
-  import type { ContactNational, ContactSectoriel, ContactsRegionaux } from '../../contacts/contacts.type';
+  import {
+    estCodeRegion,
+    type ContactNational,
+    type ContactSectoriel,
+    type ContactsInitiaux,
+    type ContactsRegionaux,
+  } from '../../contacts/contacts.type';
+  import { profilStore } from '../../stores/profil.store';
   import TitreDeSection from '../TitreDeSection.svelte';
   import CarteContactTableauDeBord from './CarteContactTableauDeBord.svelte';
   import PanneauContacts from './PanneauContacts.svelte';
@@ -17,43 +26,40 @@
     content: '',
   }));
 
-  let indexTabActivée = $state(0);
+  let contactsInitiaux = $state<ContactsInitiaux>();
+
+  onMount(async () => {
+    try {
+      const { data } = await axios.get<ContactsInitiaux>('/api/contacts');
+      contactsInitiaux = data;
+    } catch {
+      contactsInitiaux = undefined;
+    }
+  });
+
+  const codeSecteur = $derived(calculeCodeSecteurContact($profilStore?.codeActivite));
+  const contactSectoriel: ContactSectoriel | undefined = $derived(
+    codeSecteur ? contactsInitiaux?.sectoriels[codeSecteur] : undefined
+  );
+
+  const codeRégion = $derived($profilStore?.codeRegion);
+  const contactsRégionaux: ContactsRegionaux | undefined = $derived(
+    codeRégion && estCodeRegion(codeRégion) ? contactsInitiaux?.regionaux[codeRégion] : undefined
+  );
+  const contactCOT: ContactsRegionaux['COT'] = $derived(contactsRégionaux?.COT);
+  const contactCampus: ContactsRegionaux['campus'] = $derived(contactsRégionaux?.campus);
+  const contactCSIRT: ContactsRegionaux['CSIRT'] = $derived(contactsRégionaux?.CSIRT);
+  const nombreContactsRégionaux = $derived(
+    [contactCOT, contactCSIRT, contactCampus].filter((prédicat) => !!prédicat).length
+  );
+
+  const contactsNationaux: ContactNational[] = $derived(contactsInitiaux?.nationaux ?? []);
+
+  let indexTabActivée = $derived(contactSectoriel ? 0 : nombreContactsRégionaux > 0 ? 1 : 2);
 
   const surChangementDeTab = ({ detail }: { detail: { index: number } }) => {
     indexTabActivée = detail.index;
   };
-
-  const contactSectoriel: ContactSectoriel | undefined = $state({
-    nom: 'CERT Santé',
-    siteWeb: 'https://cyberveille.esante.gouv.fr/',
-  });
-  const contactCOT: ContactsRegionaux['COT'] | undefined = $state({
-    nom: 'Guillaume CRÉPIN',
-    email: 'ile-de-france@ssi.gouv.fr',
-  });
-  const contactCampus: ContactsRegionaux['campus'] | undefined = $state({
-    adresse: '5-7 rue Bellini 92800 La Défense',
-    nom: 'Le Campus Cyber',
-    siteWeb: 'https://campuscyber.fr/',
-  });
-  const contactCSIRT: ContactsRegionaux['CSIRT'] | undefined = $state({
-    nom: 'Urgence Cyber Île-de-France',
-    siteWeb: 'https://urgencecyber.iledefrance.fr/',
-    adresse: '2, rue Simone Veil 93400 Saint-Ouen-sur-Seine',
-    telephone: '0 800 730 647',
-  });
-  const nombreContactsRégionaux = $derived(
-    [contactCOT, contactCSIRT, contactCampus].filter((prédicat) => !!prédicat).length
-  );
-  const contactsNationaux: ContactNational[] = $state([
-    {
-      nom: '17 Cyber',
-      description:
-        'Le 17cyber propose aux particuliers et aux autres entités, un diagnostic permettant d’obtenir des recommandations en cas d’incident et d’être mis en relation avec un policier, un gendarme, un prestataire ou un CSIRT territorial.',
-      lienPrincipal: { libelle: 'Aller sur le 17Cyber', href: 'https://www.cybermalveillance.gouv.fr/diagnostic' },
-      téléphone: '17 (France) ou 112 (Europe)',
-    },
-  ]);
 </script>
 
 <div class="contacts">
@@ -77,14 +83,26 @@
     </div>
     <div slot="panel-1">
       <PanneauContacts>
-        <CarteContactSectoriel modèle={CarteContactTableauDeBord} contact={contactSectoriel} />
+        {#if contactSectoriel}
+          <CarteContactSectoriel modèle={CarteContactTableauDeBord} contact={contactSectoriel} />
+        {/if}
       </PanneauContacts>
     </div>
     <div slot="panel-2">
       <PanneauContacts>
-        <CarteContactCOT modèle={CarteContactTableauDeBord} contact={contactCOT} désignation="région" />
-        <CarteContactCSIRT modèle={CarteContactTableauDeBord} contact={contactCSIRT} />
-        <CarteContactCampus modèle={CarteContactTableauDeBord} contact={contactCampus} />
+        {#if contactsRégionaux && contactCOT}
+          <CarteContactCOT
+            modèle={CarteContactTableauDeBord}
+            contact={contactCOT}
+            désignation={contactsRégionaux.designation}
+          />
+        {/if}
+        {#if contactCSIRT}
+          <CarteContactCSIRT modèle={CarteContactTableauDeBord} contact={contactCSIRT} />
+        {/if}
+        {#if contactCampus}
+          <CarteContactCampus modèle={CarteContactTableauDeBord} contact={contactCampus} />
+        {/if}
       </PanneauContacts>
     </div>
     <div slot="panel-3">
