@@ -49,7 +49,6 @@ import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMe
 import { EntrepotGuideMemoire } from '../persistance/entrepotGuideMemoire.js';
 import { EntrepotGuideTravailMemoire } from '../persistance/entrepotGuideTravailMemoire.js';
 import { EntrepotMesureMemoire } from '../persistance/entrepotMesureMemoire.js';
-import { EntrepôtModuleMémoire } from '../persistance/entrepôtModuleMémoire.js';
 import { EntrepotPriseEnCompteMemoire } from '../persistance/entrepotPriseEnCompteMemoire.js';
 import { EntrepôtQuestionVraieFausseMémoire } from '../persistance/entrepotQuestionVraieFausseMemoire.js';
 import { EntrepotReactionMiniTestMemoire } from '../persistance/entrepotReactionMiniTestMemoire.js';
@@ -60,6 +59,7 @@ import { EntrepôtRésultatTestRéflexesCyberMémoire } from '../persistance/ent
 import { EntrepôtRésultatTestVraiFauxMémoire } from '../persistance/entrepotResultatTestVraiFauxMemoire.js';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/entrepotSessionDeGroupeMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
+import { EntrepôtModuleMémoire } from '../persistance/entrepôtModuleMémoire.js';
 
 export const fauxControleurErreurs: ErrorRequestHandler = (erreur, _requete, _reponse, suite) => suite(erreur);
 

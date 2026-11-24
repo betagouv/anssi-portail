@@ -75,7 +75,7 @@ Embedded in external sites as:
 ## Code Style
 
 - Svelte + TypeScript
-- Prettier formatting
+- Oxfmt formatting
 - ESLint checks
 - Sass for styling (if used)
 
@@ -86,7 +86,7 @@ Key dev dependencies:
 - `svelte` - Component framework
 - `vite` - Build tool
 - `@sveltejs/vite-plugin-svelte` - Svelte compiler for Vite
-- `typescript`, `eslint`, `prettier` - Quality tools
+- `typescript`, `eslint`, `oxfmt` - Quality tools
 
 Runtime:
 

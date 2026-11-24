@@ -6,8 +6,8 @@ import { creeServeur } from '../../../src/api/msc/index.js';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
 import { Module } from '../../../src/metier/module.js';
 import { Utilisateur } from '../../../src/metier/utilisateur.js';
-import { EntrepôtModuleMémoire } from '../../persistance/entrepôtModuleMémoire.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
+import { EntrepôtModuleMémoire } from '../../persistance/entrepôtModuleMémoire.js';
 import { encodeSession } from '../cookie.js';
 import {
   configurationDeTestDuServeur,

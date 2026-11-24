@@ -3,7 +3,13 @@ import { requêteMédiaMobile } from '../../../../../utils/rendu.svelte';
 import { sonothèque } from './sonotheque';
 
 export type Son =
-  'bon-réflexe' | 'mauvais-réflexe' | 'palier-20s' | 'notification' | 'saisie-clavier' | 'tic<=10s' | 'tic<=3s';
+  | 'bon-réflexe'
+  | 'mauvais-réflexe'
+  | 'palier-20s'
+  | 'notification'
+  | 'saisie-clavier'
+  | 'tic<=10s'
+  | 'tic<=3s';
 
 type FenêtreAvecWebkitAudioContext = Window &
   typeof globalThis & {

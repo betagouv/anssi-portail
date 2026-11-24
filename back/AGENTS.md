@@ -31,7 +31,7 @@ pnpm --filter @anssi-portail/back exec vitest run tests/path/to/file.spec.ts  # 
 # Quality
 pnpm --filter @anssi-portail/back lint          # ESLint
 pnpm --filter @anssi-portail/back lint:fix      # Auto-fix
-pnpm --filter @anssi-portail/back format        # Prettier
+pnpm --filter @anssi-portail/back format        # Oxfmt
 pnpm --filter @anssi-portail/back typecheck     # TypeScript check (no emit)
 
 # Build
@@ -120,5 +120,5 @@ Required keys (from `.env`):
 ## Code Style
 
 - ESLint + TypeScript strict mode
-- Prettier: 120-char lines, single quotes, trailing commas
+- Oxfmt: 120-char lines, single quotes, trailing commas
 - No console.log in production code (use logging adapters)

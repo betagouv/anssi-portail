@@ -10,7 +10,12 @@ type DonneesObservatoire<T> = T & {
 export type ChiffreCléMenaceCyber = DonneesObservatoire<{ total: string }>;
 
 type IndicateurMenaceCyber =
-  'evenementsSecurite' | 'incidents' | 'rançongiciels' | 'fraudesVirement' | 'cyberharcèlements' | 'volsDonnées';
+  | 'evenementsSecurite'
+  | 'incidents'
+  | 'rançongiciels'
+  | 'fraudesVirement'
+  | 'cyberharcèlements'
+  | 'volsDonnées';
 
 export type TotalParNiveauMaturité = { niveau: string; total: number };
 

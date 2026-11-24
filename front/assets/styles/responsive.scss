@@ -31,7 +31,7 @@ $points-de-rupture-a-partir-de: (
       @content;
     }
   } @else {
-    @warn "Un point de rupture inconnu (`#{$point-de-rupture}`) a été utilisé. "
-        + "Les points de rupture disponibles sont: #{map.keys($points-de-rupture-a-partir-de)}.";
+    @warn 'Un point de rupture inconnu (`#{$point-de-rupture}`) a été utilisé. ' +
+      'Les points de rupture disponibles sont: #{map.keys($points-de-rupture-a-partir-de)}.';
   }
 }

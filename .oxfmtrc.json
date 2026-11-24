@@ -1,0 +1,25 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 120,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "svelte": true,
+  "sortPackageJson": false,
+  "sortImports": {
+    "internalPattern": ["$plateforme/"],
+    "groups": ["builtin", "external", "internal", ["parent", "sibling", "index"], "unknown"],
+    "newlinesBetween": false,
+    "sortSideEffects": false
+  },
+  "ignorePatterns": [
+    "front/**/*.html",
+    "!front/lib-svelte/**/*.html",
+    "**/dist/**",
+    "**/dist-*/**",
+    "**/AGENTS.md",
+    ".agents/**",
+    ".serena/**",
+    "**/*.toml",
+    "pnpm-lock.yaml"
+  ]
+}
