@@ -18,7 +18,7 @@
     </div>
     <h6>{financement.nom}</h6>
     <div class="tags">
-      {#each financement.entitesElligibles as entite (entite)}
+      {#each financement.entitésÉligibles as entite (entite)}
         <dsfr-tag type="accent" accent="yellow-tournesol" size="sm" label={entite}>
           <span slot="seo">{entite}</span>
         </dsfr-tag>

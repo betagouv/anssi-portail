@@ -50,9 +50,9 @@ describe('La ressource Financements', () => {
           nom: 'Cyber PME',
           financeur: 'BPI France',
           typesDeFinancement: ['Formation'],
-          entitesElligibles: ['PME', 'ETI'],
-          perimetresGeographiques: ['France'],
-          regions: ['FRANCE'],
+          entitésÉligibles: ['PME', 'ETI'],
+          périmètresGéographiques: ['France'],
+          régions: ['FRANCE'],
         },
       ]);
     });
@@ -72,9 +72,9 @@ describe('La ressource Financements', () => {
           nom: 'Cyber PME',
           financeur: 'BPI France',
           typesDeFinancement: ['Formation'],
-          entitesElligibles: ['PME', 'ETI'],
-          perimetresGeographiques: ['France'],
-          regions: ['FRANCE'],
+          entitésÉligibles: ['PME', 'ETI'],
+          périmètresGéographiques: ['France'],
+          régions: ['FRANCE'],
         },
       ];
       const resultatRechercheEntreprise = {
@@ -98,7 +98,7 @@ describe('La ressource Financements', () => {
         await entrepotFinancement.ajoute({
           ...financementCyberPME,
           id: 2,
-          regions: ['FR-IDF'],
+          régions: ['FR-IDF'],
         });
 
         const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
@@ -115,7 +115,7 @@ describe('La ressource Financements', () => {
         await entrepotFinancement.ajoute({
           ...financementCyberPME,
           id: 2,
-          entitesElligibles: ['TPE'],
+          entitésÉligibles: ['TPE'],
         });
 
         const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
@@ -126,9 +126,9 @@ describe('La ressource Financements', () => {
             nom: 'Cyber PME',
             financeur: 'BPI France',
             typesDeFinancement: ['Formation'],
-            entitesElligibles: ['TPE'],
-            perimetresGeographiques: ['France'],
-            regions: ['FRANCE'],
+            entitésÉligibles: ['TPE'],
+            périmètresGéographiques: ['France'],
+            régions: ['FRANCE'],
           },
         ]);
       });
@@ -142,7 +142,7 @@ describe('La ressource Financements', () => {
         await entrepotFinancement.ajoute({
           ...financementCyberPME,
           id: 2,
-          entitesElligibles: ['TPE'],
+          entitésÉligibles: ['TPE'],
         });
 
         const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
@@ -159,7 +159,7 @@ describe('La ressource Financements', () => {
         await entrepotFinancement.ajoute({
           ...financementCyberPME,
           id: 2,
-          entitesElligibles: ['TPE'],
+          entitésÉligibles: ['TPE'],
         });
 
         const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
@@ -175,7 +175,7 @@ describe('La ressource Financements', () => {
         await entrepotFinancement.ajoute({
           ...financementCyberPME,
           id: 2,
-          entitesElligibles: ['Entreprises'],
+          entitésÉligibles: ['Entreprises'],
         });
 
         const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
@@ -186,9 +186,9 @@ describe('La ressource Financements', () => {
             nom: 'Cyber PME',
             financeur: 'BPI France',
             typesDeFinancement: ['Formation'],
-            entitesElligibles: ['Entreprises'],
-            perimetresGeographiques: ['France'],
-            regions: ['FRANCE'],
+            entitésÉligibles: ['Entreprises'],
+            périmètresGéographiques: ['France'],
+            régions: ['FRANCE'],
           },
         ]);
       });
@@ -202,7 +202,7 @@ describe('La ressource Financements', () => {
         await entrepotFinancement.ajoute({
           ...financementCyberPME,
           id: 2,
-          entitesElligibles: ['Collectivités'],
+          entitésÉligibles: ['Collectivités'],
         });
 
         const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
@@ -213,9 +213,9 @@ describe('La ressource Financements', () => {
             nom: 'Cyber PME',
             financeur: 'BPI France',
             typesDeFinancement: ['Formation'],
-            entitesElligibles: ['Collectivités'],
-            perimetresGeographiques: ['France'],
-            regions: ['FRANCE'],
+            entitésÉligibles: ['Collectivités'],
+            périmètresGéographiques: ['France'],
+            régions: ['FRANCE'],
           },
         ]);
       });
@@ -229,7 +229,7 @@ describe('La ressource Financements', () => {
         await entrepotFinancement.ajoute({
           ...financementCyberPME,
           id: 2,
-          entitesElligibles: ['Associations'],
+          entitésÉligibles: ['Associations'],
         });
 
         const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
@@ -240,9 +240,9 @@ describe('La ressource Financements', () => {
             nom: 'Cyber PME',
             financeur: 'BPI France',
             typesDeFinancement: ['Formation'],
-            entitesElligibles: ['Associations'],
-            perimetresGeographiques: ['France'],
-            regions: ['FRANCE'],
+            entitésÉligibles: ['Associations'],
+            périmètresGéographiques: ['France'],
+            régions: ['FRANCE'],
           },
         ]);
       });

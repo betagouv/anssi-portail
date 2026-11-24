@@ -27,7 +27,7 @@ export class MétadonnéesDeFinancement implements FournisseurDeMétadonnées {
 
   async description(route: string) {
     const financement = await this.résolveurDePage.financement(route);
-    return financement ? `${financement.nom} (${financement.perimetresGeographiques})` : undefined;
+    return financement ? `${financement.nom} (${financement.périmètresGéographiques})` : undefined;
   }
 }
 

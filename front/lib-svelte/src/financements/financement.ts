@@ -1,17 +1,17 @@
 export type RésuméFinancement = {
   id: number;
-  entitesElligibles: string[];
+  entitésÉligibles: string[];
   financeur: string;
   nom: string;
   typesDeFinancement: string[];
-  perimetresGeographiques: string[];
-  regions: string[];
+  périmètresGéographiques: string[];
+  régions: string[];
 };
 
 export type Financement = RésuméFinancement & {
   objectifs: string;
-  operationsEligibles: string;
-  benificiaires: string;
+  opérationsÉligibles: string;
+  bénéficiaires: string;
   montant: string;
   condition: string;
   sources: string[];

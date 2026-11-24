@@ -16,35 +16,18 @@
 
   const { financementInitial, idFinancement }: Props = $props();
 
-  type ReponseAxios = {
-    id: number;
-    nom: string;
-    financeur: string;
-    typesDeFinancement: string[];
-    entitesElligibles: string[];
-    perimetresGeographiques: string[];
-    regions: string[];
-    objectifs: string;
-    operationsEligibles: string;
-    benificiaires: string;
-    montant: string;
-    condition: string;
-    sources: string[];
-    contact: string;
-  };
-
   let financement: Financement | undefined = $state(untrack(() => financementInitial));
   let entreesMenuFinancement: Record<string, string> | undefined = $state();
 
   onMount(() => {
     (async () => {
       try {
-        const reponse = await axios.get<ReponseAxios>(`/api/financements/${idFinancement}`);
+        const reponse = await axios.get<Financement>(`/api/financements/${idFinancement}`);
         financement = reponse.data;
         const entrees: [string, string][] = [];
         if (financement.objectifs) entrees.push(['objectifs', 'Objectifs']);
-        if (financement.operationsEligibles) entrees.push(['operations-eligibles', 'Opérations éligibles']);
-        if (financement.benificiaires) entrees.push(['beneficiaires', 'Bénéficiaires']);
+        if (financement.opérationsÉligibles) entrees.push(['operations-eligibles', 'Opérations éligibles']);
+        if (financement.bénéficiaires) entrees.push(['beneficiaires', 'Bénéficiaires']);
         if (financement.montant) entrees.push(['montant', 'Montant']);
         if (financement.condition) entrees.push(['conditions', 'Conditions']);
         entreesMenuFinancement = Object.fromEntries(entrees);
@@ -150,7 +133,7 @@
   cacheIllustration
   titre={financement ? financement.nom : ''}
   theme="clair"
-  description={`Zone géographique éligible pour cette aide\u00a0: ${financement?.perimetresGeographiques}`}
+  description={`Zone géographique éligible pour cette aide\u00a0: ${financement?.périmètresGéographiques}`}
   {propriétésFilAriane}
 >
   {#snippet tags()}
@@ -185,7 +168,7 @@
       <MenuFinancement
         dictionnaireAncreLibelle={entreesMenuFinancement}
         mode="mobile"
-        tags={financement.entitesElligibles}
+        tags={financement.entitésÉligibles}
       />
     {/if}
 
@@ -195,7 +178,7 @@
           <MenuFinancement
             dictionnaireAncreLibelle={entreesMenuFinancement}
             mode="desktop"
-            tags={financement.entitesElligibles}
+            tags={financement.entitésÉligibles}
           />
         {/if}
         <div class="fiche">
@@ -206,10 +189,10 @@
           <SectionDetailsFinancement
             ancre="operations-eligibles"
             titre="Opérations éligibles"
-            detail={financement.operationsEligibles}
+            detail={financement.opérationsÉligibles}
           />
 
-          <SectionDetailsFinancement ancre="beneficiaires" titre="Bénéficiaires" detail={financement.benificiaires} />
+          <SectionDetailsFinancement ancre="beneficiaires" titre="Bénéficiaires" detail={financement.bénéficiaires} />
 
           <SectionDetailsFinancement ancre="montant" titre="Montant" detail={financement.montant} />
 

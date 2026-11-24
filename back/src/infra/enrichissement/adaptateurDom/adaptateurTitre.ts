@@ -22,7 +22,7 @@ export class TitreDeFinancement implements FournisseurDeTitre {
 
   async titre(route: string) {
     const financement = await this.résolveurDePage.financement(route);
-    return financement ? `${financement.nom} (${financement.perimetresGeographiques})` : undefined;
+    return financement ? `${financement.nom} (${financement.périmètresGéographiques})` : undefined;
   }
 }
 

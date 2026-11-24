@@ -5,12 +5,12 @@ export class Financement {
   nom: string;
   financeur: string;
   typesDeFinancement: string[];
-  entitesElligibles: string[];
-  perimetresGeographiques: string[];
-  regions: Array<CodeRégion | 'FRANCE'>;
+  entitésÉligibles: string[];
+  périmètresGéographiques: string[];
+  régions: Array<CodeRégion | 'FRANCE'>;
   objectifs: string;
-  operationsEligibles: string;
-  benificiaires: string;
+  opérationsÉligibles: string;
+  bénéficiaires: string;
   montant: string;
   condition: string;
   sources: string[];
@@ -21,12 +21,12 @@ export class Financement {
     nom,
     financeur,
     typesDeFinancement,
-    entitesElligibles,
-    perimetresGeographiques,
-    regions,
+    entitésÉligibles,
+    périmètresGéographiques,
+    régions,
     objectifs,
-    operationsEligibles,
-    benificiaires,
+    opérationsÉligibles,
+    bénéficiaires,
     montant,
     condition,
     sources,
@@ -35,13 +35,13 @@ export class Financement {
     id: number;
     nom: string;
     financeur: string;
-    entitesElligibles: string[];
+    entitésÉligibles: string[];
     typesDeFinancement: string[];
-    perimetresGeographiques: string[];
-    regions: string[];
+    périmètresGéographiques: string[];
+    régions: string[];
     objectifs: string;
-    operationsEligibles: string;
-    benificiaires: string;
+    opérationsÉligibles: string;
+    bénéficiaires: string;
     montant: string;
     condition: string;
     sources: string[];
@@ -51,17 +51,17 @@ export class Financement {
     this.nom = nom;
     this.financeur = financeur;
     this.typesDeFinancement = typesDeFinancement;
-    this.entitesElligibles = entitesElligibles;
-    this.perimetresGeographiques = perimetresGeographiques;
+    this.entitésÉligibles = entitésÉligibles;
+    this.périmètresGéographiques = périmètresGéographiques;
     this.objectifs = objectifs;
-    this.operationsEligibles = operationsEligibles;
-    this.benificiaires = benificiaires;
+    this.opérationsÉligibles = opérationsÉligibles;
+    this.bénéficiaires = bénéficiaires;
     this.montant = montant;
     this.condition = condition;
     this.sources = sources;
     this.contact = contact;
-    this.regions = regions.includes('France')
+    this.régions = régions.includes('France')
       ? ['FRANCE']
-      : regions.map((region) => regionParNom(region)?.codeIso).filter((codeRegion) => !!codeRegion);
+      : régions.map((region) => regionParNom(region)?.codeIso).filter((codeRegion) => !!codeRegion);
   }
 }

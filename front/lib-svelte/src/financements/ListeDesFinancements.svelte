@@ -23,16 +23,6 @@
     financementsInitiaux?: RésuméFinancement[];
   };
 
-  type ReponseAxios = {
-    id: number;
-    nom: string;
-    financeur: string;
-    entitesElligibles: string[];
-    typesDeFinancement: string[];
-    perimetresGeographiques: string[];
-    regions: string[];
-  }[];
-
   const { financementsInitiaux = [] }: Props = $props();
   financementsStore.initialise(untrack(() => financementsInitiaux));
 
@@ -50,7 +40,7 @@
   onMount(async () => {
     try {
       chargement = true;
-      const reponse = await axios.get<ReponseAxios>('/api/financements');
+      const reponse = await axios.get<RésuméFinancement[]>('/api/financements');
       financements = reponse.data;
     } catch {
       financements = [];
