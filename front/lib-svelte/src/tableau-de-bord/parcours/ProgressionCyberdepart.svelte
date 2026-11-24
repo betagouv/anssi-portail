@@ -53,6 +53,7 @@
   <h2 class="titre">Cyberdépart</h2>
   <div class="progression">
     <Progression actuel={nombreMesuresPrisesEnCompte} max={nombreMesures} cible={cibleBadge} mode="sans-titre" />
+    <p class="texte-standard-md">{nombreMesuresPrisesEnCompte}/{nombreMesures}</p>
   </div>
 
   <p class="texte-standard-md">
@@ -90,6 +91,8 @@
     }
     .progression {
       grid-area: progression;
+      display: flex;
+
       @include a-partir-de(sm) {
         margin-left: auto;
       }
