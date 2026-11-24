@@ -1,11 +1,6 @@
 import { Knex } from 'knex';
-import {
-  AdaptateurObservatoireMSS,
-  CumulMensuel,
-  FiltresObservatoire,
-  TotalMensuel,
-  TotalParNiveauSecurite,
-} from './adaptateurObservatoireMSS.js';
+import { CumulMensuel, FiltresObservatoire, TotalMensuel, TotalParNiveauSecurite } from '../../metier/observatoire.js';
+import { AdaptateurObservatoireMSS } from './adaptateurObservatoireMSS.js';
 
 const SERVICES_FILTRES = `
   SELECT *
