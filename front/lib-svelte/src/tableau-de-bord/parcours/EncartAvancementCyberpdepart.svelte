@@ -11,9 +11,9 @@
   import BoutonPartageBadgeCyberdepart from '../../parcours-securisation/module-cyberdepart/BoutonPartageBadgeCyberdepart.svelte';
   import BoutonTelechargementVisuels from '../../parcours-securisation/module-cyberdepart/BoutonTelechargementVisuels.svelte';
   import type { ModuleRéponseApi } from '../../parcours-securisation/moduleReponseApi';
-  import Progression from '../../parcours-securisation/Progression.svelte';
   import Lien from '../../ui/Lien.svelte';
   import MotEnExergue from '../../ui/MotEnExergue.svelte';
+  import ProgressionCyberdepart from './ProgressionCyberdepart.svelte';
 
   const àPartirDeSm = new MediaQuery('min-width: 576px');
 
@@ -27,7 +27,7 @@
     moduleTerminé = data.mesures.every((mesure) => mesure.estPriseEnCompte);
   });
 
-  const totalMesures = $derived(moduleCyberdépart?.mesures.length ?? 0);
+  const nombreMesures = $derived(moduleCyberdépart?.mesures.length ?? 0);
   const cibleBadge = $derived(moduleCyberdépart?.cibleBadge ?? 0);
   const nombreMesuresPrisesEnCompte = $derived(
     moduleCyberdépart?.mesures.filter((mesure) => mesure.estPriseEnCompte).length ?? 0
@@ -45,6 +45,10 @@
       id: 'base-sur-recyf',
     },
   ];
+
+  const libelléActionRecommandée = $derived(
+    nombreMesuresPrisesEnCompte === 0 ? 'première action recommandée' : 'action recommandée'
+  );
 </script>
 
 {#if moduleTerminé}
@@ -78,29 +82,12 @@
 <div class="avancement-cyberdepart">
   <div class="corps">
     <div class="entete-et-carte">
-      <div class="entete">
-        <h2 class="titre">Cyberdépart</h2>
-        <div class="progression">
-          <Progression actuel={nombreMesuresPrisesEnCompte} max={totalMesures} cible={cibleBadge} mode="sans-titre"
-          ></Progression>
-        </div>
-        {#if moduleTerminé}
-          <p class="texte-standard-md">
-            <b>✅ Bravo vous avez terminé&#8239;!</b> Vous avez pris en compte les 12 mesures recommandées pour commencer
-            à protéger votre organisation contre les risques de cyberattaques.
-          </p>
-        {:else}
-          <p>
-            <b>🛡️Renforcez dès maintenant votre sécurité.</b> Commencez par des actions simples et concrètes pour protéger
-            votre organisation contre les cyberattaques.
-          </p>
-        {/if}
-      </div>
+      <ProgressionCyberdepart {nombreMesuresPrisesEnCompte} {nombreMesures} {cibleBadge} />
       {#if prochaineMesureÀFaire}
         <CarteMesure mesure={prochaineMesureÀFaire} horizontal={àPartirDeSm.current}>
           {#snippet badges()}
             <div slot="badgesgroup">
-              <DsfrBadge accent="yellow-moutarde" label="première action recommandée" type="accent" size="sm" />
+              <DsfrBadge accent="yellow-moutarde" label={libelléActionRecommandée} type="accent" size="sm" />
             </div>
           {/snippet}
         </CarteMesure>
@@ -127,7 +114,7 @@
       <BadgeCyberdepart />
     {/if}
     <Lien
-      libelle={`Accédez aux ${totalMesures} mesures`}
+      libelle={`Accédez aux ${nombreMesures} mesures`}
       icone="arrow-right-line"
       iconeADroite
       href={`/modules/1?pageSource=${pageSource}`}
@@ -171,6 +158,7 @@
     padding: 1.5rem;
     background-color: var(--background-default-grey);
     box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
+    gap: 1.5rem;
 
     .corps {
       display: flex;
@@ -188,37 +176,6 @@
 
         @include a-partir-de(md) {
           flex-shrink: 1000;
-        }
-
-        .entete {
-          display: grid;
-          grid-template-areas:
-            'titre'
-            'progression'
-            'introduction';
-          gap: 1.5rem;
-          align-items: center;
-
-          @include a-partir-de(sm) {
-            grid-template-areas:
-              'titre progression'
-              'introduction introduction';
-            grid-template-columns: 1fr 1fr;
-          }
-
-          .titre {
-            grid-area: titre;
-            margin: 0;
-          }
-          .progression {
-            grid-area: progression;
-            @include a-partir-de(sm) {
-              margin-left: auto;
-            }
-          }
-          p {
-            grid-area: introduction;
-          }
         }
 
         :global(dsfr-card) {
