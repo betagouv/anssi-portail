@@ -68,6 +68,7 @@ import { EntrepotGuideTravail } from './metier/entrepotGuideTravail.js';
 import { EntrepotMesure } from './metier/entrepotMesure.js';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/mini-tests/maturite-cyber/generateurCodeSessionDeGroupe.js';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
+import { ServiceObservatoire } from './metier/serviceObservatoire.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
 
 const sentryConfiguré = Boolean(adaptateurEnvironnement.sentry.dsn());
@@ -91,7 +92,7 @@ const adaptateurStatistiqueParcours = adaptateurEnvironnement.journal.baseDeDonn
   ? new AdaptateurStatistiqueParcoursPostgres()
   : new AdaptateurStatistiqueParcoursMémoire();
 
-const adaptateurObservatoire = fabriqueAdaptateurObservatoireMSS(adaptateurEnvironnement);
+const adaptateurObservatoireMSS = fabriqueAdaptateurObservatoireMSS(adaptateurEnvironnement);
 
 const entrepotFavori = new EntrepotFavoriPostgres({ adaptateurHachage });
 const entrepotFinancement = new EntrepotFinancementGrist({
@@ -312,7 +313,7 @@ const host = process.env.HOST;
     },
     adaptateurStatistiqueMiniTests,
     adaptateurStatistiqueParcours,
-    adaptateurObservatoire,
+    serviceObservatoire: new ServiceObservatoire({ adaptateurObservatoireMSS }),
   });
 
   const annonceEcoute = () => {

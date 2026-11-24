@@ -35,6 +35,7 @@ import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js';
 import { Parcours } from '../../src/metier/parcours.js';
 import { Rapporteur } from '../../src/metier/rapporteur.js';
+import { ServiceObservatoire } from '../../src/metier/serviceObservatoire.js';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests.js';
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 import { EntrepôtArticleMémoire } from '../persistance/entrepotArticleMemoire.js';
@@ -414,7 +415,6 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurJWT: fauxAdaptateurJWT,
   adaptateurMonAideCyber: fauxAdaptateurMonAideCyber,
   adaptateurOIDC: fauxAdaptateurOIDC,
-  adaptateurObservatoire: new AdaptateurObservatoireMSSMemoire(),
   adaptateurProfilAnssi: fauxAdaptateurProfilAnssi,
   adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
   adaptateurStatistiqueMiniTests: new AdaptateurStatistiqueMiniTestsMémoire(),
@@ -438,6 +438,9 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   entrepôtRésultatTestHameçonnage: new EntrepôtRésultatTestHameçonnageMémoire(),
   entrepôtRésultatTestExposition: new EntrepôtRésultatTestExpositionMémoire(),
   entrepôtRésultatTestRéflexesCyber: new EntrepôtRésultatTestRéflexesCyberMémoire(),
+  serviceObservatoire: new ServiceObservatoire({
+    adaptateurObservatoireMSS: new AdaptateurObservatoireMSSMemoire(),
+  }),
   serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(fauxFournisseurDeChemin),
   serviceModeleAnnuaireDeCrise: new ServiceModeleAnnuaireDeCrise(
     fauxFournisseurDeChemin,
