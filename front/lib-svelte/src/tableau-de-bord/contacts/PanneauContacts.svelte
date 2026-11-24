@@ -25,6 +25,8 @@
 </div>
 
 <style lang="scss">
+  @use '../../../../assets/styles/responsive' as *;
+
   .contenu {
     display: flex;
     flex-direction: column;
@@ -35,9 +37,17 @@
     }
 
     .cartes {
-      display: flex;
-      flex-direction: column;
+      --nombre-colonnes: 1;
+      display: grid;
+      grid-template-columns: repeat(var(--nombre-colonnes), 1fr);
       gap: 1rem;
+
+      @include a-partir-de(md) {
+        --nombre-colonnes: 2;
+      }
+      @include a-partir-de(lg) {
+        --nombre-colonnes: 3;
+      }
     }
 
     .pied-de-page {
