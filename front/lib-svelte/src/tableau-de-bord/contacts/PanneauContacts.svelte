@@ -1,18 +1,31 @@
 <script lang="ts">
   import { Icone } from '@lab-anssi/ui-kit';
   import type { Snippet } from 'svelte';
+  import IllustrationDragonPasDeResultat from '../../ui/IllustrationDragonPasDeResultat.svelte';
   import Lien from '../../ui/Lien.svelte';
 
-  const { children }: { children: Snippet } = $props();
+  type Props = {
+    children: Snippet;
+    aucunRésultat?: boolean;
+    messageAucunRésultat?: string;
+  };
+  const { children, aucunRésultat = false, messageAucunRésultat = '' }: Props = $props();
 </script>
 
 <div class="contenu">
   <p class="texte-mention-xs">
     Contactez toujours en priorité les personnes responsables au sein de votre organisation.
   </p>
-  <div class="cartes">
-    {@render children()}
-  </div>
+  {#if aucunRésultat}
+    <div class="aucun-contact">
+      <IllustrationDragonPasDeResultat texteAlternatif="Aucun contact sectoriel trouvé" />
+      <p class="texte-standard-md">{messageAucunRésultat}</p>
+    </div>
+  {:else}
+    <div class="cartes">
+      {@render children()}
+    </div>
+  {/if}
   <div class="pied-de-page">
     <Icone nom="verified-badge-fill" />
     <div>
@@ -34,6 +47,18 @@
 
     .texte-mention-xs {
       margin-bottom: 0;
+    }
+
+    .aucun-contact {
+      margin: 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+
+      .texte-standard-md {
+        margin-bottom: 0;
+      }
     }
 
     .cartes {
