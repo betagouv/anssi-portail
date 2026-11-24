@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Component, Snippet } from 'svelte';
   import Lien from '../ui/Lien.svelte';
   import CarteContact from './CarteContact.svelte';
   import type { ContactNational } from './contacts.type';
@@ -6,11 +7,12 @@
 
   type Props = {
     contact: ContactNational;
+    modèle?: Component<{ titre: string; children: Snippet }>;
   };
-  const { contact }: Props = $props();
+  const { contact, modèle: ModèleCarteContact = CarteContact }: Props = $props();
 </script>
 
-<CarteContact titre={contact.nom}>
+<ModèleCarteContact titre={contact.nom}>
   <p>{contact.description}</p>
   {#if contact.contacts}
     <div>
@@ -29,7 +31,7 @@
   {#if contact.téléphone}
     <LigneContact type="telephone" valeur={contact.téléphone} />
   {/if}
-</CarteContact>
+</ModèleCarteContact>
 
 <style lang="scss">
   p {
