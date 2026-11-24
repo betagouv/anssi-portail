@@ -7,11 +7,13 @@
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Heros from '../ui/Heros.svelte';
-  import Lien from '../ui/Lien.svelte';
-  import CarteContact from './CarteContact.svelte';
+  import CarteContactCampus from './CarteContactCampus.svelte';
+  import CarteContactCOT from './CarteContactCOT.svelte';
+  import CarteContactCSIRT from './CarteContactCSIRT.svelte';
+  import CarteContactNational from './CarteContactNational.svelte';
+  import CarteContactSectoriel from './CarteContactSectoriel.svelte';
   import { estCodeRegion, type ContactsInitiaux } from './contacts.type';
   import FiltresContacts from './FiltresContacts.svelte';
-  import LigneContact from './LigneContact.svelte';
   import NoteInformation from './NoteInformation.svelte';
 
   type Props = {
@@ -87,74 +89,27 @@
           <h2>Contacts régionaux</h2>
 
           {#if contactsRegionaux.COT}
-            {@const { nom, email } = contactsRegionaux.COT}
-            <CarteContact titre="Délégué(e)s ANSSI de votre {contactsRegionaux.designation}">
-              <LigneContact type="nom" valeur={nom} />
-              <LigneContact type="email" valeur={email} />
-            </CarteContact>
+            <CarteContactCOT contact={contactsRegionaux.COT} désignation={contactsRegionaux.designation} />
           {/if}
 
           {#if contactsRegionaux.CSIRT}
-            {@const { nom, telephone, siteWeb, adresse, email } = contactsRegionaux.CSIRT}
-            <CarteContact titre={nom}>
-              {#if telephone}
-                <LigneContact type="telephone" valeur={telephone} />
-              {/if}
-              {#if email}
-                <LigneContact type="email" valeur={email} />
-              {/if}
-              <LigneContact type="site-web" valeur={siteWeb} />
-              {#if adresse}
-                <LigneContact type="adresse" valeur={adresse} />
-              {/if}
-            </CarteContact>
+            <CarteContactCSIRT contact={contactsRegionaux.CSIRT} />
           {/if}
 
           {#if contactsRegionaux.campus}
-            {@const { nom, siteWeb, adresse, email } = contactsRegionaux.campus}
-            <CarteContact titre={nom}>
-              {#if email}
-                <LigneContact type="email" valeur={email} />
-              {/if}
-              <LigneContact type="site-web" valeur={siteWeb} />
-              <LigneContact type="adresse" valeur={adresse} />
-            </CarteContact>
+            <CarteContactCampus contact={contactsRegionaux.campus} />
           {/if}
         {/if}
 
         {#if contactSectoriel}
           <h2>Contacts sectoriels</h2>
-          <CarteContact titre={contactSectoriel.nom}>
-            <LigneContact type="site-web" valeur={contactSectoriel.siteWeb} />
-            {#if contactSectoriel.téléphone}
-              <LigneContact type="telephone" valeur={contactSectoriel.téléphone} />
-            {/if}
-          </CarteContact>
+          <CarteContactSectoriel contact={contactSectoriel} />
         {/if}
 
         <h2>Contacts nationaux</h2>
 
-        {#each contactsInitiaux?.nationaux ?? [] as { nom, description, contacts, lienPrincipal, email, téléphone } (nom)}
-          <CarteContact titre={nom}>
-            <p>{description}</p>
-            {#if contacts}
-              <div>
-                <p>{contacts.introduction}</p>
-                <ul>
-                  {#each contacts.liens as { libelle, href } (href)}
-                    <li><Lien {href} {libelle} blank></Lien></li>
-                  {/each}
-                </ul>
-              </div>
-            {/if}
-            <LigneContact type="site-web" valeur={lienPrincipal.href} libelle={lienPrincipal.libelle} />
-            {#if email}
-              <LigneContact type="email" valeur={email} />
-            {/if}
-            {#if téléphone}
-              <LigneContact type="telephone" valeur={téléphone} />
-            {/if}
-          </CarteContact>
+        {#each contactsInitiaux?.nationaux ?? [] as contactNational (contactNational.nom)}
+          <CarteContactNational contact={contactNational} />
         {/each}
       </div>
     {:else}
@@ -186,8 +141,7 @@
     }
   }
 
-  h2,
-  p {
+  h2 {
     margin: 0;
   }
 
@@ -195,10 +149,6 @@
     margin: 8px 0 0 0;
     font-size: 2rem;
     line-height: 2.5rem;
-  }
-
-  p {
-    line-height: 1.5rem;
   }
 
   .contacts {
