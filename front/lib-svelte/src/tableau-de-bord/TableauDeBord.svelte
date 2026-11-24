@@ -4,6 +4,7 @@
   import Lien from '../ui/Lien.svelte';
   import AutresRessources from './AutresRessources.svelte';
   import Favoris from './Favoris.svelte';
+  import Financements from './Financements.svelte';
   import Parcours from './parcours/Parcours.svelte';
   import TestsCyber from './tests-cyber/TestsCyber.svelte';
 </script>
@@ -12,9 +13,13 @@
   <DsfrContainer>
     <div class="conteneur-interne">
       <h1>Bonjour {$profilStore?.prenom},</h1>
+
       <Parcours />
 
+      <Financements />
+
       <TestsCyber />
+
       <Favoris />
 
       <AutresRessources />
