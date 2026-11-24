@@ -1,9 +1,5 @@
-import {
-  AdaptateurObservatoireMSS,
-  CumulMensuel,
-  TotalMensuel,
-  TotalParNiveauSecurite,
-} from './adaptateurObservatoireMSS.js';
+import { CumulMensuel, TotalMensuel, TotalParNiveauSecurite } from '../../metier/observatoire.js';
+import { AdaptateurObservatoireMSS } from './adaptateurObservatoireMSS.js';
 
 const MOIS = [
   '2025-10',
