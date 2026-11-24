@@ -31,8 +31,8 @@
 <div class={[mode, 'progression']}>
   {#if mode !== 'sans-titre'}
     <p class="texte-standard-md libelle">{libelle}</p>
+    <span class="texte-standard-md avancement">{actuel}&nbsp;/&nbsp;{max}</span>
   {/if}
-  <span class="texte-standard-md avancement">{actuel}&nbsp;/&nbsp;{max}</span>
   <div class="barre" bind:this={barre}>
     <progress class="barre-actuelle" value={avancement.current} {max} aria-label={libelle}
       >{avancement.current}</progress
