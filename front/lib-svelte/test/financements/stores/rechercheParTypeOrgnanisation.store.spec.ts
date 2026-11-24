@@ -5,13 +5,13 @@ import { rechercheParTypeOrganisation } from '../../../src/financements/stores/r
 
 describe("La recherche par type d'organisation", () => {
   const résuméFinancement: RésuméFinancement = {
-    entitesElligibles: ['PME'],
+    entitésÉligibles: ['PME'],
     financeur: 'BPI',
     id: 1,
     nom: 'Aide Cyber',
-    perimetresGeographiques: ['France'],
+    périmètresGéographiques: ['France'],
     typesDeFinancement: ['Formation'],
-    regions: ['FRANCE'],
+    régions: ['FRANCE'],
   };
   beforeEach(() => {
     rechercheParTypeOrganisation.reinitialise();

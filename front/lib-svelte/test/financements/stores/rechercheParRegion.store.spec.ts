@@ -5,13 +5,13 @@ import { rechercheParRegion } from '../../../src/financements/stores/recherchePa
 
 describe('La recherche par région', () => {
   const résuméFinancement: RésuméFinancement = {
-    entitesElligibles: ['PME'],
+    entitésÉligibles: ['PME'],
     financeur: 'BPI',
     id: 1,
     nom: 'Aide Cyber',
-    perimetresGeographiques: ['Ile-de-France'],
+    périmètresGéographiques: ['Ile-de-France'],
     typesDeFinancement: ['Formation'],
-    regions: ['FR-IDF'],
+    régions: ['FR-IDF'],
   };
   beforeEach(() => {
     rechercheParRegion.reinitialise();
@@ -52,7 +52,7 @@ describe('La recherche par région', () => {
 
       const resultat = rechercheParRegion.ok({
         ...résuméFinancement,
-        regions: ['FRANCE'],
+        régions: ['FRANCE'],
       });
 
       expect(resultat).toBeTruthy();

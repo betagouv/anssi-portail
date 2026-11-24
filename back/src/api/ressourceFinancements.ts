@@ -12,7 +12,7 @@ const construitFiltreFinancementParRegion = (codeRegion?: string) => {
     return () => true;
   }
   return (financement: Financement): boolean =>
-    financement.regions.includes('FRANCE') || financement.regions.includes(codeRegion);
+    financement.régions.includes('FRANCE') || financement.régions.includes(codeRegion);
 };
 
 const construitFiltreFinancementParEntite = ({
@@ -25,24 +25,24 @@ const construitFiltreFinancementParEntite = ({
   codeTrancheEffectif?: string;
 }) => {
   if (estCollectivite) {
-    return (financement: Financement): boolean => financement.entitesElligibles.includes('Collectivités');
+    return (financement: Financement): boolean => financement.entitésÉligibles.includes('Collectivités');
   }
   if (estAssociation) {
-    return (financement: Financement): boolean => financement.entitesElligibles.includes('Associations');
+    return (financement: Financement): boolean => financement.entitésÉligibles.includes('Associations');
   }
   const trancheEffectif = trancheEffectifParCode(codeTrancheEffectif);
   if (trancheEffectif.code !== 'NN') {
     const codeEffectifNombre = Number(trancheEffectif.code);
     if (codeEffectifNombre < 12) {
-      return (financement: Financement): boolean => financement.entitesElligibles.includes('TPE');
+      return (financement: Financement): boolean => financement.entitésÉligibles.includes('TPE');
     }
     if (codeEffectifNombre < 32) {
-      return (financement: Financement): boolean => financement.entitesElligibles.includes('PME');
+      return (financement: Financement): boolean => financement.entitésÉligibles.includes('PME');
     }
     if (codeEffectifNombre < 52) {
-      return (financement: Financement): boolean => financement.entitesElligibles.includes('ETI');
+      return (financement: Financement): boolean => financement.entitésÉligibles.includes('ETI');
     }
-    return (financement: Financement): boolean => financement.entitesElligibles.includes('Entreprises');
+    return (financement: Financement): boolean => financement.entitésÉligibles.includes('Entreprises');
   }
   return () => true;
 };
@@ -89,9 +89,9 @@ export const ressourceFinancements = ({
             nom: financement.nom,
             financeur: financement.financeur,
             typesDeFinancement: financement.typesDeFinancement,
-            entitesElligibles: financement.entitesElligibles,
-            perimetresGeographiques: financement.perimetresGeographiques,
-            regions: financement.regions,
+            entitésÉligibles: financement.entitésÉligibles,
+            périmètresGéographiques: financement.périmètresGéographiques,
+            régions: financement.régions,
           }))
         );
       } catch {

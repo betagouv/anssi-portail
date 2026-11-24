@@ -11,8 +11,8 @@ export const rechercheParRegion = {
     const regionFiltree = get(selectionRegions);
     return (
       !regionFiltree ||
-      résuméFinancement.regions.includes('FRANCE') ||
-      résuméFinancement.regions.includes(regionFiltree)
+      résuméFinancement.régions.includes('FRANCE') ||
+      résuméFinancement.régions.includes(regionFiltree)
     );
   },
 };
