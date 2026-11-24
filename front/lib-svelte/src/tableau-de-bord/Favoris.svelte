@@ -61,7 +61,7 @@
       display: grid;
       grid-template-columns: repeat(var(--nombre-cartes), 1fr);
       grid-area: cartes;
-      gap: 1rem;
+      gap: 1.5rem 1rem;
 
       :global(dsfr-card) {
         min-height: unset;

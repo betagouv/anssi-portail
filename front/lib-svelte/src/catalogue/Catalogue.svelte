@@ -203,8 +203,12 @@
       <dsfr-button centered label="Réinitialiser les filtres" use:clic={reinitialiseFiltres}></dsfr-button>
     </FiltresBureau>
 
-    {#each élémentsDuCatalogue as élément (élément.id)}
-      <CarteItem item={élément} avecBoutonFavori />
+    {#if élémentsDuCatalogue.length > 0}
+      <div class="cartes-catalogue">
+        {#each élémentsDuCatalogue as élément (élément.id)}
+          <CarteItem item={élément} avecBoutonFavori />
+        {/each}
+      </div>
     {:else}
       <div class="aucun-resultat">
         <div class="illustration">
@@ -217,7 +221,7 @@
           <dsfr-button label="Réinitialiser les filtres" use:clic={reinitialiseFiltres}></dsfr-button>
         {/if}
       </div>
-    {/each}
+    {/if}
   </div>
 </dsfr-container>
 

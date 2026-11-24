@@ -86,22 +86,16 @@
   column-gap: 24px;
   align-content: flex-start;
 
-  .sommaire-deplie {
-    /*
-    Lorsqu’il y a des lignes implicites générées par l’auto-fill du repeat, il n’est pas possible
-    d’utiliser la ligne -1 comme ligne de fin pour réaliser un span sur toute la hauteur des lignes.
-    Mettre 100 lignes (valeur très arbitraire mais suffisante pour le moment) permet de résoudre ce
-    problème.
-    Cependant, il y a un problème induit puisque cela génère virtuellement  100 lignes. En soit, cela
-    ne pose pas de souci puisque les lignes ont une hauteur nulle. Mais les gap restent entre les lignes
-    et créent un espace blanc non désiré. C’est pour cette raison qu’on utilise ici un column-gap entre
-    les colonnes et un margin-bottom sur les cartes à la place d’un simple gap: 24px.
-    */
-    grid-row: 1 / 100;
-  }
+  .cartes-catalogue {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+    align-content: start;
+    row-gap: 24px;
 
-  .carte {
-    margin-bottom: 24px;
+    @include a-partir-de(lg) {
+      grid-column-start: 2;
+    }
   }
 
   .aucun-resultat {
@@ -110,7 +104,6 @@
     align-items: center;
     gap: 16px;
     grid-column: 1 / -1;
-    grid-row: 1 / -1;
     text-align: center;
 
     @include a-partir-de(lg) {

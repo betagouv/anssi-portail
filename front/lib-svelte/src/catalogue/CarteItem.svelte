@@ -124,7 +124,6 @@
   .carte-item {
     display: flex;
     flex-direction: column;
-    margin-bottom: 24px;
 
     dsfr-card {
       flex: 1;
