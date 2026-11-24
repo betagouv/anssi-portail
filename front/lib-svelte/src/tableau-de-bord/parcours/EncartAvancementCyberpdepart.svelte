@@ -49,6 +49,10 @@
   const libelléActionRecommandée = $derived(
     nombreMesuresPrisesEnCompte === 0 ? 'première action recommandée' : 'action recommandée'
   );
+  const nombreMesuresRestantesAvantBadge = $derived(cibleBadge - nombreMesuresPrisesEnCompte);
+  const libelléNombreMesureRestantesAvantBadge = $derived(
+    nombreMesuresRestantesAvantBadge === 1 ? '1 mesure' : `${nombreMesuresRestantesAvantBadge} mesures`
+  );
 </script>
 
 {#if moduleTerminé}
@@ -104,7 +108,9 @@
           <BoutonPartageBadgeCyberdepart taille="sm" typeDuBouton="secondaire" />
           <BoutonTelechargementVisuels taille="sm" />
         {:else}
-          <p class="texte-standard-md">{cibleBadge} mesures à prendre en compte pour valider votre Cyberdépart.</p>
+          <p class="texte-standard-md">
+            {libelléNombreMesureRestantesAvantBadge} à prendre en compte pour valider votre Cyberdépart.
+          </p>
         {/if}
       </div>
     {/if}
