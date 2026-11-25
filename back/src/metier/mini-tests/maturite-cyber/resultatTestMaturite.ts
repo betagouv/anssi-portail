@@ -19,6 +19,14 @@ export const tousLesIdNiveauMaturite = ['insuffisant', 'emergent', 'intermediair
 
 export type IdNiveauMaturite = (typeof tousLesIdNiveauMaturite)[number];
 
+export const libellésNiveauMaturité: Record<IdNiveauMaturite, string> = {
+  insuffisant: 'Insuffisant',
+  emergent: 'Émergent',
+  intermediaire: 'Intermédiaire',
+  confirme: 'Confirmé',
+  optimal: 'Optimal',
+};
+
 export const tousLesIdRubrique = [
   'prise-en-compte-risque',
   'pilotage',
