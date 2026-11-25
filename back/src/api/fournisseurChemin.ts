@@ -19,6 +19,7 @@ export interface FournisseurChemin {
     badgePngRécompenseCyberdepart: () => string;
     banniereSvgRécompenseCyberdepart: () => string;
     modèleAnnuaireDeCrise: () => string;
+    modèleAnalyseDeConformité: () => string;
     modèleListeDActivités: () => string;
     modèleRACI: () => string;
     modèleModificationsMotsDePasse: () => string;
@@ -90,6 +91,8 @@ export const fournisseurChemin: FournisseurChemin = {
     badgePngRécompenseCyberdepart: () => cheminBackDepuisMesures('ressourceRecompensesCyberDepart', 'badge.png'),
     banniereSvgRécompenseCyberdepart: () => cheminBackDepuisMesures('ressourceRecompensesCyberDepart', 'banniere.svg'),
     modèleAnnuaireDeCrise: () => cheminBackDepuisOutils('modeleAnnuaireDeCrise', 'modele-annuaire-de-crise.xlsx'),
+    modèleAnalyseDeConformité: () =>
+      cheminBackDepuisOutils('modeleAnalyseDeConformite', 'modele-analyse-de-conformite.xlsx'),
     modèleListeDActivités: () => cheminBackDepuisOutils('modeleListeDActivites', 'modele-liste-d-activites.xlsx'),
     modèleRACI: () => cheminBackDepuisOutils('modeleRaci', 'modele-raci.xlsx'),
     modèleModificationsMotsDePasse: () =>
