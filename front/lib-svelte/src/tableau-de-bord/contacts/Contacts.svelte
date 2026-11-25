@@ -112,6 +112,7 @@
       <PanneauContacts
         aucunRésultat={contactsNationaux.length == 0}
         messageAucunRésultat="Aucun contact national disponible."
+        colonnesMax={2}
       >
         {#each contactsNationaux as contactNational (contactNational.nom)}
           <CarteContactNational modèle={CarteContactTableauDeBord} contact={contactNational} />
