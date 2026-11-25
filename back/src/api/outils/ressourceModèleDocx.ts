@@ -7,7 +7,7 @@ import { FournisseurChemin } from '../fournisseurChemin.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
 
-export const ressourceDocumentOutils = (
+export const ressourceModèleDocx = (
   { adaptateurHachage, entrepotUtilisateur, middleware, busEvenements }: ConfigurationServeur,
   outil: Extract<
     Outil,

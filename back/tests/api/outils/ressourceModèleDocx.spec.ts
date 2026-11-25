@@ -11,14 +11,14 @@ import { encodeSession } from '../cookie.js';
 import { configurationDeTestDuServeur, fauxRapporteur } from '../fauxObjets.js';
 import { jeanneDupont } from '../objetsPretsALEmploi.js';
 
-describe("La ressource générique de téléchargement de documents d'outils ", () => {
+describe('La ressource de téléchargement de documents DOCX ', () => {
   let serveur: Express;
   let busEvenements: MockBusEvenement;
   let entrepotUtilisateur: EntrepotUtilisateur;
   const documentsOutil = [
-    { fichier: 'modele-suivi-des-arrivees.docx', taille: 40331 },
-    { fichier: 'modele-suivi-de-changement-de-fonction.docx', taille: 39481 },
-    { fichier: 'modele-suivi-des-departs.docx', taille: 40252 },
+    { document: 'modele-suivi-des-arrivees.docx', taille: 40331 },
+    { document: 'modele-suivi-de-changement-de-fonction.docx', taille: 39481 },
+    { document: 'modele-suivi-des-departs.docx', taille: 40252 },
   ];
 
   beforeEach(async () => {
@@ -34,12 +34,12 @@ describe("La ressource générique de téléchargement de documents d'outils ", 
     });
   });
 
-  describe.each(documentsOutil)('Concernant le fichier $fichier', ({ fichier, taille }) => {
+  describe.each(documentsOutil)('Concernant le document $document', ({ document: document, taille }) => {
     describe('sur une requête GET', () => {
       const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
       const récupèreDocument = async () =>
         request(serveur)
-          .get(`/api/outils/${fichier}`)
+          .get(`/api/outils/${document}`)
           .set('Cookie', cookieJeanneDupont)
           .buffer(true)
           .parse((res, callback) => {
@@ -58,7 +58,7 @@ describe("La ressource générique de téléchargement de documents d'outils ", 
         const { headers } = await récupèreDocument();
 
         expect(headers['content-type']).toBe('application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-        expect(headers['content-disposition']).toBe(`attachment; filename=${fichier}`);
+        expect(headers['content-disposition']).toBe(`attachment; filename=${document}`);
       });
 
       it('renvoie un fichier valide', async () => {
@@ -69,7 +69,7 @@ describe("La ressource générique de téléchargement de documents d'outils ", 
       });
 
       it('refuse un utilisateur non connecté', async () => {
-        const { status } = await request(serveur).get(`/api/outils/${fichier}`);
+        const { status } = await request(serveur).get(`/api/outils/${document}`);
 
         expect(status).toBe(HttpStatusCode.Unauthorized);
       });
@@ -79,7 +79,7 @@ describe("La ressource générique de téléchargement de documents d'outils ", 
 
         expect(busEvenements.aRecuUnEvenement(OutilTéléchargé)).toBe(true);
         const évènement = busEvenements.recupereEvenement(OutilTéléchargé);
-        expect(évènement!.outil).toBe(fichier);
+        expect(évènement!.outil).toBe(document);
         expect(évènement!.email).toBe(jeanneDupont.email);
       });
     });
