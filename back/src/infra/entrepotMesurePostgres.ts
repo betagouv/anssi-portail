@@ -1,9 +1,9 @@
 import Knex from 'knex';
 import config from '../../knexfile.js';
-import { ModulePersisté } from '../entrepotModulePostgres.js';
 import { EntrepotMesure } from '../metier/entrepotMesure.js';
 import { LienPourAllerPlusLoin, Mesure, Procédure, type Risque } from '../metier/mesure.js';
 import { EntrepotExigence } from '../metier/nis2/entrepotExigence.js';
+import { ModulePersisté } from './entrepotModulePostgres.js';
 
 export type MesurePersistee = {
   id: string;

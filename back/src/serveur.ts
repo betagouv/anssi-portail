@@ -23,7 +23,6 @@ import { ServiceModèleRevueComptesUtilisateurs } from './api/outils/modeleRevue
 import { ServiceModèleRevueDroitsDAccès } from './api/outils/modeleRevueDroitsDAcces/serviceModeleRevueDroitsDAcces.js';
 import { BusEvenements } from './bus/busEvenements.js';
 import { cableTousLesAbonnes } from './bus/cablage.js';
-import { EntrepôtModulePostgres } from './entrepotModulePostgres.js';
 import { adaptateurCellar } from './infra/adaptateurCellar.js';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement.js';
 import { adaptateurCompression } from './infra/adaptateurCompression.js';
@@ -47,6 +46,7 @@ import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist.js';
 import { EntrepotGuideGrist } from './infra/entrepotGuideGrist.js';
 import { EntrepotGuideTravailGrist } from './infra/entrepotGuideTravailGrist.js';
 import { EntrepotMesurePostgres } from './infra/entrepotMesurePostgres.js';
+import { EntrepôtModulePostgres } from './infra/entrepotModulePostgres.js';
 import { EntrepotPriseEnComptePostgres } from './infra/entrepotPriseEnComptePostgres.js';
 import { EntrepôtQuestionVraieFausseStatique } from './infra/entrepotQuestionVraieFausseStatique.js';
 import { EntrepotReactionMiniTestPostgres } from './infra/entrepotReactionMiniTestPostgres.js';
