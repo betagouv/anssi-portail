@@ -41,7 +41,7 @@
       {/each}
     </div>
 
-    <div class="lien">
+    <div class="lien" class:financementsSupplementaires={financements.length > nombreMaxDeCartesAffichées}>
       <Lien href="/financements" libelle="Accéder à tous mes financements" icone="arrow-right-line" iconeADroite />
     </div>
   </div>
@@ -98,6 +98,10 @@
 
     .lien {
       grid-area: lien;
+
+      &:not(.financementsSupplementaires) {
+        display: none;
+      }
 
       @include a-partir-de(md) {
         align-self: center;
