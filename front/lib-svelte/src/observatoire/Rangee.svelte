@@ -3,13 +3,14 @@
 
   interface Props {
     pleineLargeur?: boolean;
+    colonnesÉgales?: boolean;
     children: Snippet;
   }
 
-  let { pleineLargeur = false, children }: Props = $props();
+  let { pleineLargeur = false, colonnesÉgales = false, children }: Props = $props();
 </script>
 
-<div class="rangee" class:pleine-largeur={pleineLargeur}>
+<div class="rangee" class:pleine-largeur={pleineLargeur} class:colonnes-egales={colonnesÉgales}>
   {@render children()}
 </div>
 
@@ -27,6 +28,12 @@
 
     &.pleine-largeur {
       grid-template-columns: 1fr;
+    }
+
+    &.colonnes-egales {
+      @include a-partir-de(md) {
+        grid-template-columns: 1fr 1fr;
+      }
     }
   }
 </style>
