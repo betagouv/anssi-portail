@@ -38,7 +38,6 @@ import { ressourceFinancements } from '../../../ressourceFinancements.js';
 import { ressourceInformationsCreationCompte } from '../../../ressourceInformationsCreationCompte.js';
 import { ressourceInfosSite } from '../../../ressourceInfosSite.js';
 import { ressourceObservatoire } from '../../../ressourceObservatoire.js';
-import { ressourcePageCrisp } from '../../../ressourcePageCrisp.js';
 import { ressourceProfil } from '../../../ressourceProfil.js';
 import { ressourceRetoursExperience } from '../../../ressourceRetoursExperience.js';
 import { ressourceSanteGuides } from '../../../ressourceSanteGuides.js';
@@ -82,8 +81,6 @@ export const enregistreLesRoutesAPI = (app: Express, configurationServeur: Confi
     ressourceSessionDeGroupe(configurationServeur),
     ressourceResultatsSessionDeGroupe(configurationServeur)
   );
-
-  enregistreRoute('/pages-crisp', ressourcePageCrisp(configurationServeur));
 
   enregistreRoute('/infos-site', ressourceInfosSite(configurationServeur));
 
