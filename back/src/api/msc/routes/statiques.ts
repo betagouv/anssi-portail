@@ -1,14 +1,16 @@
+import pagesKit from '@anssi-portail/msc/pages.json' with { type: 'json' };
 import { Express } from 'express';
 import { ConfigurationServeur } from '../../configurationServeur.js';
 import { ressourcePagesJekyll } from '../../ressourcePagesJekyll.js';
 import { enregistreRouteDansExpress } from '../enregistreRoutes.js';
 
-export const routesStatiques = [
+export const pagesStatiquesDuSitemap = [
   'catalogue',
   'test-maturite',
   'niveaux-maturite',
   'apres-authentification',
   'a-propos',
+  'mentions-legales',
   'confidentialite',
   'cgu',
   'accessibilite',
@@ -48,7 +50,9 @@ export const routesStatiques = [
 export const enregistreLesRoutesStatiques = (app: Express, configurationServeur: ConfigurationServeur) => {
   const enregistreRoute = enregistreRouteDansExpress(app);
 
-  routesStatiques.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
+  pagesStatiquesDuSitemap
+    .filter((page) => !Object.hasOwn(pagesKit, page))
+    .forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
 
   if (configurationServeur.adaptateurEnvironnement.fonctionnalites.observatoire()) {
     enregistreRoute('/observatoire', ressourcePagesJekyll(configurationServeur, 'observatoire'));

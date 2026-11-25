@@ -12,7 +12,11 @@ interface LienSitemap {
   modifiéLe?: string;
 }
 
-const récupèreLiens = (pages: string[], { fournisseurChemin }: ConfigurationServeur): LienSitemap[] => {
+const récupèreLiens = (
+  pages: string[],
+  { fournisseurChemin }: ConfigurationServeur,
+  pagesKit: LienSitemap[]
+): LienSitemap[] => {
   const pagesRenommées = {
     '/front.html': '/front/accueil.html',
     '/prestataires-labellises.html': '/prestataires.html',
@@ -26,6 +30,8 @@ const récupèreLiens = (pages: string[], { fournisseurChemin }: ConfigurationSe
   };
 
   return pages.map((page): LienSitemap => {
+    const pageKit = pagesKit.find(({ url }) => url === page);
+    if (pageKit) return pageKit;
     const cheminFichier = fournisseurChemin.jekyll.page(page);
     let cheminOriginel = cheminFichier.replace('/_site/', '/');
     cheminOriginel = cheminOriginel.replace('/index.', '.');
@@ -55,15 +61,15 @@ export const ressourceSitemapXml = (
   try {
     const sitemapStream = new SitemapStream({ hostname: 'https://messervices.cyber.gouv.fr' });
 
-    const liensStatiques = récupèreLiens(pagesStatiques, configurationServeur);
-    [...liensStatiques, ...pagesKit].forEach((lien) => {
+    const liensStatiques = récupèreLiens(pagesStatiques, configurationServeur, pagesKit);
+    liensStatiques.forEach((lien) => {
       sitemapStream.write({
         url: lien.url,
         lastmod: lien.modifiéLe,
       });
     });
 
-    construitRoutesDynamiques(configurationServeur).then((liensDynamiques) => {
+    construitRoutesDynamiques(configurationServeur, pagesKit).then((liensDynamiques) => {
       liensDynamiques.forEach((lien: LienSitemap) => {
         sitemapStream.write({
           url: lien.url,
@@ -95,12 +101,10 @@ export const ressourceSitemapXml = (
   return routeur;
 };
 
-const construitRoutesDynamiques = async ({
-  entrepôtContact,
-  entrepotFinancement,
-  entrepotGuide,
-  entrepôtArticle,
-}: ConfigurationServeur): Promise<LienSitemap[]> => {
+const construitRoutesDynamiques = async (
+  { entrepôtContact, entrepotFinancement, entrepotGuide, entrepôtArticle }: ConfigurationServeur,
+  pagesKit: LienSitemap[]
+): Promise<LienSitemap[]> => {
   const liensFinancement = (await entrepotFinancement.tous()).map((financement) => ({
     url: `/financement/${financement.id}`,
   }));
@@ -131,17 +135,23 @@ const construitRoutesDynamiques = async ({
       return { url: `/ressources/${basename(f, '.html')}`, modifiéLe: new Date(données.modifiéLe).toISOString() };
     });
 
+  const servicesMigrés = pagesKit.filter(({ url }) => url.startsWith('services/'));
   const liensServices = siteFront
     .fichiers()
     .filter((f) => f.indexOf('front/_site/services') >= 0)
     .filter((f) => f.indexOf('.html') >= 0)
     .filter((f) => f.indexOf('index.html') < 0)
+    .filter((f) => !servicesMigrés.some((page) => page.url === 'services/' + basename(f, '.html')))
     .filter(contientFicheDétaillée)
     .map((f): LienSitemap => {
       const cheminOriginel = f.replace('/_site/services/', '/_services/').replace('.html', '.md');
       const données = matter(fs.readFileSync(cheminOriginel, 'utf-8')).data;
       return { url: `/services/${basename(f, '.html')}`, modifiéLe: new Date(données.modifiéLe).toISOString() };
     });
+
+  // Respecte l’ordre des noms de fichiers de la collection Jekyll, extension comprise.
+  liensServices.push(...servicesMigrés.map((page) => ({ ...page, url: '/' + page.url })));
+  liensServices.sort((a, b) => Buffer.compare(Buffer.from(a.url + '.html'), Buffer.from(b.url + '.html')));
 
   const liensContactsRégionaux = Object.keys(await entrepôtContact.régionaux()).map((codeRegion): LienSitemap => ({
     url: `/contacts/${codeRegion.toLowerCase()}`,

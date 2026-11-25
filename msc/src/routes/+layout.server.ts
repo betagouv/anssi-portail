@@ -8,7 +8,7 @@ const métadonnées = Object.fromEntries(
   Object.entries(pages).map(([nom, page]) => [
     nom,
     {
-      titre: page.titre,
+      titre: 'titre' in page ? page.titre : undefined,
       description: descriptionsMSC['/' + nom + '/'] ?? descriptionsMSC['/' + nom] ?? '',
     },
   ])

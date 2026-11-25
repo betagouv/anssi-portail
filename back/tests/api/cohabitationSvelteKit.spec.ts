@@ -15,4 +15,14 @@ describe('La cohabitation de SvelteKit avec Express', () => {
     expect(réponse.text).toContain('<h2>Éditeur</h2>');
     expect(réponse.text).toMatch(/<link rel="canonical" href="[^"]*\/mentions-legales"/u);
   });
+
+  it('sert le contenu et les métadonnées de la fiche Conseil Technique', async () => {
+    const serveur = creeServeur({ ...configuration, middleware });
+    const réponse = await request(serveur).get('/services/conseil-technique').expect(200);
+    expect(réponse.text).toContain('<title>Conseil Technique</title>');
+    expect(réponse.text).toContain('GovernmentService');
+    expect(réponse.text).toContain('<code>conseil.technique [at] ssi.gouv.fr</code>');
+    expect(réponse.text).toContain('Le service conseil technique est accessible à tous.');
+    await request(serveur).get('/services/conseil-technique.html').expect('Location', '/services/conseil-technique');
+  });
 });

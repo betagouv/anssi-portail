@@ -23,7 +23,7 @@ import { enregistreLAuthentification } from './routes/authentification.js';
 import { enregistreLesFichiersStatiques } from './routes/fichiersStatiques.js';
 import { enregistreLesFinancements } from './routes/financements.js';
 import { enregistreLesRedirections } from './routes/redirections.js';
-import { enregistreLesRoutesStatiques, routesStatiques } from './routes/statiques.js';
+import { enregistreLesRoutesStatiques, pagesStatiquesDuSitemap } from './routes/statiques.js';
 import { enregistreLesAssetsKit, enregistreSvelteKit, pagesDuSitemapKit } from './routes/svelteKit.js';
 import { enregistreLesVisas } from './routes/visas.js';
 
@@ -102,7 +102,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute('/robots.txt', ressourceRobotsTxt(configurationServeur));
   enregistreRoute('/llms.txt', ressourceLlmsTxt(configurationServeur));
-  enregistreRoute('/sitemap.xml', ressourceSitemapXml(routesStatiques, configurationServeur, pagesDuSitemapKit));
+  enregistreRoute(
+    '/sitemap.xml',
+    ressourceSitemapXml(pagesStatiquesDuSitemap, configurationServeur, pagesDuSitemapKit)
+  );
 
   // À laisser à la fin de la fonction
   configureLaGestionDErreur(app, configurationServeur);

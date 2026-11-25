@@ -1,0 +1,11 @@
+{
+  "name": "conseil-technique",
+  "url": "/services/conseil-technique",
+  "nom": "Conseil Technique",
+  "description": "Poser une question technique",
+  "typologie": "service",
+  "illustration": "conseil-technique/conseil-technique.avif",
+  "avecFicheDetaillee": true,
+  "sources": ["ANSSI"],
+  "droitsAcces": ["ENTITES_PUBLIQUES", "REGULES_NIS2"]
+}

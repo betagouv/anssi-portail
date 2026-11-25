@@ -1,10 +1,11 @@
 <script type="application/json" id="donnees-items-cyber">
   {
     "itemsCyber": [
-      {% assign items = site.services | concat: site.ressources %}
+      {% assign services = site.services | push: site.data.services["conseil-technique"] | sort: 'name' %}
+      {% assign items = services | concat: site.ressources %}
       {% for item in items %}
       {
-        "id": "{{ item.id }}",
+        "id": "{{ item.id | default: item.url }}",
         "nom": "{{ item.nom }}",
         "typologie": "{{ item.typologie }}",
         "illustration": "{{ item.illustration }}",

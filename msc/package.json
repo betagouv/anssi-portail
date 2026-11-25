@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "watch": "node --watch-path=src --watch-path=../front/lib-svelte/src --watch-path=../front/assets/styles --watch-path=../front/_data/meta-description.yml --watch-path=pages.json --watch-path=vite.config.ts node_modules/vite/bin/vite.js build --mode development",
+    "watch": "node --watch-path=src --watch-path=../front/lib-svelte/src --watch-path=../front/assets/styles --watch-path=../front/_data --watch-path=pages.json --watch-path=vite.config.ts node_modules/vite/bin/vite.js build --mode development",
     "lint": "eslint .",
     "typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "test": "pnpm typecheck && pnpm lint"

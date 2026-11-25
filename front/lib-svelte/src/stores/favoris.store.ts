@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getContext } from 'svelte';
 import { derived, writable } from 'svelte/store';
 import { profilStore } from './profil.store';
 
@@ -27,3 +28,5 @@ export const favorisStore = {
   ajoute: (favori: string) => favoris.update((current) => [...current, favori]),
   retire: (favori: string) => favoris.update((current) => current.filter((item) => item !== favori)),
 };
+
+export const utiliseFavoris = () => getContext<typeof favorisStore>('favorisMSC') ?? favorisStore;
