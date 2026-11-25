@@ -187,7 +187,7 @@ catalogs:
       version: 9.0.0
     isomorphic-dompurify:
       specifier: ^4.0.0
-      version: 4.7.0
+      version: 4.8.0
     pdfjs-dist:
       specifier: ^6.2.108
       version: 6.5.438
@@ -337,7 +337,7 @@ importers:
         version: 3.12.1
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 4.7.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
+        version: 4.8.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
       jsdom:
         specifier: ^31.0.0
         version: 31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
@@ -461,7 +461,7 @@ importers:
         version: 9.0.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 4.7.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
+        version: 4.8.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -514,7 +514,7 @@ importers:
         version: 9.0.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 4.7.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
+        version: 4.8.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
       svelte:
         specifier: 'catalog:'
         version: 5.58.0(@typescript-eslint/types@8.73.0)
@@ -557,7 +557,7 @@ importers:
         version: 0.8.3
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 4.7.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
+        version: 4.8.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
       pdfjs-dist:
         specifier: 'catalog:'
         version: 6.5.438
@@ -624,7 +624,7 @@ importers:
         version: 9.0.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 4.7.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
+        version: 4.8.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -3517,8 +3517,8 @@ packages:
   iso8601-duration@2.1.4:
     resolution: {integrity: sha512-2TuWcuR6W0OhFZQDAY+jDUp9FC2fVTDgxTtbN0nFBfwmUA6HTqXc0wx2tIBVd/FhRp4CnJbDgCv3sCeTPMQbew==}
 
-  isomorphic-dompurify@4.7.0:
-    resolution: {integrity: sha512-7CDsVX8svURoGnNmrmfatqCy/VZ4qrh8kWB2Go+h3CFbsuchL7/SUTPOsyXcYtpCgTDMBlRG4ZEUEDzsQ4XB2Q==}
+  isomorphic-dompurify@4.8.0:
+    resolution: {integrity: sha512-NeJbMkmJQ72DudwaDP5OvMTmRTv0Rgp8oRIEpbGtxzIgKoALAE0D7lpvRRiX4fpnGrlIIGjrh92bl3XdsqYDQw==}
     engines: {node: ^22.22.2 || ^24.15.0 || >=26.0.0}
 
   isomorphic-git@1.41.9:
@@ -7739,7 +7739,7 @@ snapshots:
 
   iso8601-duration@2.1.4: {}
 
-  isomorphic-dompurify@4.7.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0):
+  isomorphic-dompurify@4.8.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0):
     dependencies:
       dompurify: 3.4.18
       jsdom: 31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
