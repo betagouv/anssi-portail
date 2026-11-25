@@ -29,6 +29,7 @@ import { CodeRégion } from '../metier/referentielRegions.js';
 import { CodeSecteur } from '../metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement.js';
 import { Utilisateur } from '../metier/utilisateur.js';
+import { MiseAJourObservatoire } from '../taches/metsAJourObservatoire.js';
 import { MigrationChiffrement } from './migrationChiffrement.js';
 import { MigrationHash } from './migrationHash.js';
 
@@ -595,6 +596,30 @@ export class ConsoleAdministration {
       console.info(`Suppression des comptes utilisateurs sans profil ANSSI suivant: ${emailsSupprimés}`);
     } else {
       console.info(`${emailsSupprimés} seront supprimés`);
+    }
+  }
+
+  async metsAJourObservatoire() {
+    const urlObservatoire = adaptateurEnvironnement.observatoire.urlServeur();
+    if (!urlObservatoire) {
+      console.error("La variable BASE_DONNEES_OBSERVATOIRE_URL_SERVEUR n'est pas renseignée");
+      return;
+    }
+
+    const knexObservatoire = Knex({ client: 'pg', connection: urlObservatoire });
+    try {
+      const trace = await new MiseAJourObservatoire({
+        knexObservatoire,
+        knexMSC: this.knexMSC,
+        knexJournal: this.knexJournal,
+        adaptateurChiffrement: this.adaptateurChiffrement,
+        adaptateurHachage: this.adaptateurHachage,
+        adaptateurProfilAnssi: this.adaptateurProfilAnssi,
+        adaptateurRechercheEntreprise: this.adaptateurRechercheEntreprise,
+      }).execute();
+      trace.forEach((ligne) => console.log(ligne));
+    } finally {
+      await knexObservatoire.destroy();
     }
   }
 }
