@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { SeuilCompletion } from '../../src/metier/observatoire.js';
 import { ServiceObservatoire } from '../../src/metier/serviceObservatoire.js';
+import { DATE_MAJ_NOMBRES_DE_DIAGNOSTIC_CYBER, NOMBRES_DE_DIAGNOSTIC_CYBER } from '../../src/metier/statistiques.js';
 
 describe('Le service Observatoire', () => {
   const adaptateurObservatoireMSS = {
@@ -17,6 +19,13 @@ describe('Le service Observatoire', () => {
       { niveau: 'Émergent', total: 3 },
       { niveau: 'Optimal', total: 2 },
     ],
+    totalTestsSensibilisation: async () => 12,
+    cumulMensuelTestsSensibilisation: async () => [{ mois: '2026-02', cumul: 12 }],
+    totalParcoursRejoints: async () => 7,
+    totalCyberdepartsValides: async () => 4,
+    cumulMensuelCyberdepartsValides: async () => [{ mois: '2026-02', cumul: 4 }],
+    totalCompletions: async (seuil: SeuilCompletion) => 100 - seuil,
+    cumulMensuelCompletions: async (seuil: SeuilCompletion) => [{ mois: '2026-02', cumul: 100 - seuil }],
     dateDerniereExecution: async () => new Date('2026-03-01T02:30:00.000Z'),
   };
 
@@ -108,7 +117,58 @@ describe('Le service Observatoire', () => {
             { niveau: 'Optimal', total: 2 },
           ],
         },
+        testsSensibilisation: {
+          source: 'MesServicesCyber',
+          date: new Date('2026-03-01T02:30:00.000Z'),
+          total: 12,
+          cumulMensuel: [{ mois: '2026-02', cumul: 12 }],
+        },
+        demarchesInitiees: {
+          source: 'MesServicesCyber',
+          date: new Date('2026-03-01T02:30:00.000Z'),
+          total: 7 + NOMBRES_DE_DIAGNOSTIC_CYBER,
+        },
+        diagnosticsCyberdepart: {
+          source: 'MesServicesCyber',
+          date: DATE_MAJ_NOMBRES_DE_DIAGNOSTIC_CYBER,
+          total: NOMBRES_DE_DIAGNOSTIC_CYBER,
+        },
+        cyberdepartsValides: {
+          source: 'MesServicesCyber',
+          date: new Date('2026-03-01T02:30:00.000Z'),
+          total: 4,
+          cumulMensuel: [{ mois: '2026-02', cumul: 4 }],
+        },
+        completions: {
+          source: 'MesServicesCyber',
+          date: new Date('2026-03-01T02:30:00.000Z'),
+          parSeuil: [
+            { seuil: 50, total: 50, cumulMensuel: [{ mois: '2026-02', cumul: 50 }] },
+            { seuil: 80, total: 20, cumulMensuel: [{ mois: '2026-02', cumul: 20 }] },
+            { seuil: 100, total: 0, cumulMensuel: [{ mois: '2026-02', cumul: 0 }] },
+          ],
+        },
       });
+    });
+
+    const dateDesDemarches = async (dateDerniereExecution: Date | null) => {
+      const observatoire = new ServiceObservatoire({
+        adaptateurObservatoireMSS,
+        adaptateurObservatoireMSC: {
+          ...adaptateurObservatoireMSC,
+          dateDerniereExecution: async () => dateDerniereExecution,
+        },
+        adaptateurObservatoireMenaceCyber,
+      });
+      return (await observatoire.donneesOrganisations()).demarchesInitiees.date;
+    };
+
+    it('date les démarches initiées du nombre de diagnostics lorsque la mise à jour est plus récente', async () => {
+      expect(await dateDesDemarches(new Date('2999-01-01'))).toStrictEqual(DATE_MAJ_NOMBRES_DE_DIAGNOSTIC_CYBER);
+    });
+
+    it("ne date pas les démarches initiées tant que la mise à jour n'a jamais été exécutée", async () => {
+      expect(await dateDesDemarches(null)).toBeNull();
     });
   });
 
