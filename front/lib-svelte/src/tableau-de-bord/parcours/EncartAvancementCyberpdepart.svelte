@@ -134,7 +134,7 @@
   .bascule {
     display: flex;
     background-color: var(--yellow-moutarde-925-125);
-    padding: 1rem;
+    padding: 1.5rem;
     gap: 1.5rem;
     border-radius: 1rem;
 
