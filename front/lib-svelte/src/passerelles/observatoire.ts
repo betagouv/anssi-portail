@@ -14,6 +14,8 @@ type IndicateurMenaceCyber =
 
 export type TotalParNiveauMaturité = { niveau: string; total: number };
 
+export type TotalDépartement = { code: string; nom: string; total: number };
+
 export type SeuilComplétion = 50 | 80 | 100;
 
 export type DonnéesObservatoire = {
@@ -23,9 +25,18 @@ export type DonnéesObservatoire = {
     testsSensibilisation: DonneesObservatoire<{ total: number; cumulMensuel: PointMensuel[] }>;
     démarchesInitiées: DonneesObservatoire<{ total: number }>;
     diagnosticsCyberdépart: DonneesObservatoire<{ total: number }>;
-    cyberdépartsValidés: DonneesObservatoire<{ total: number; cumulMensuel: PointMensuel[] }>;
+    cyberdépartsValidés: DonneesObservatoire<{
+      total: number;
+      cumulMensuel: PointMensuel[];
+      parDépartement: TotalDépartement[];
+    }>;
     complétions: DonneesObservatoire<{
-      parSeuil: { seuil: SeuilComplétion; total: number; cumulMensuel: PointMensuel[] }[];
+      parSeuil: {
+        seuil: SeuilComplétion;
+        total: number;
+        cumulMensuel: PointMensuel[];
+        parDépartement: TotalDépartement[];
+      }[];
     }>;
   };
   projets: {
@@ -53,9 +64,18 @@ type APIObservatoire = {
     testsSensibilisation: DonneesAPIObservatoire<{ total: number; cumulMensuel: CumulMensuelAPI[] }>;
     demarchesInitiees: DonneesAPIObservatoire<{ total: number }>;
     diagnosticsCyberdepart: DonneesAPIObservatoire<{ total: number }>;
-    cyberdepartsValides: DonneesAPIObservatoire<{ total: number; cumulMensuel: CumulMensuelAPI[] }>;
+    cyberdepartsValides: DonneesAPIObservatoire<{
+      total: number;
+      cumulMensuel: CumulMensuelAPI[];
+      parDepartement: TotalDépartement[];
+    }>;
     completions: DonneesAPIObservatoire<{
-      parSeuil: { seuil: SeuilComplétion; total: number; cumulMensuel: CumulMensuelAPI[] }[];
+      parSeuil: {
+        seuil: SeuilComplétion;
+        total: number;
+        cumulMensuel: CumulMensuelAPI[];
+        parDepartement: TotalDépartement[];
+      }[];
     }>;
   };
   projets: {
@@ -112,6 +132,7 @@ export const récupèreDonnéesObservatoire = async (): Promise<DonnéesObservat
         ...data.organisations.cyberdepartsValides,
         date: enDate(data.organisations.cyberdepartsValides.date),
         cumulMensuel: enPoints(data.organisations.cyberdepartsValides.cumulMensuel),
+        parDépartement: data.organisations.cyberdepartsValides.parDepartement,
       },
       complétions: {
         ...data.organisations.completions,
@@ -119,6 +140,7 @@ export const récupèreDonnéesObservatoire = async (): Promise<DonnéesObservat
         parSeuil: data.organisations.completions.parSeuil.map((parSeuil) => ({
           ...parSeuil,
           cumulMensuel: enPoints(parSeuil.cumulMensuel),
+          parDépartement: parSeuil.parDepartement,
         })),
       },
     },

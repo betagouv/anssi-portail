@@ -1,3 +1,5 @@
+import type { SeuilComplétion } from '../passerelles/observatoire';
+
 const formatMois = new Intl.DateTimeFormat('fr-FR', { month: 'short', year: '2-digit', timeZone: 'UTC' });
 const formatDate = new Intl.DateTimeFormat('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
 const formatNombre = new Intl.NumberFormat('fr-FR');
@@ -10,3 +12,5 @@ export const libelleDuMois = (mois: string): string => {
 export const formateDate = (date: Date): string => formatDate.format(date);
 
 export const formateNombre = (nombre: number): string => formatNombre.format(nombre);
+
+export const libelléDuSeuil = (seuil: SeuilComplétion): string => (seuil === 100 ? '100 %' : `≥ ${seuil} %`);

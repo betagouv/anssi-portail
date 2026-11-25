@@ -9,6 +9,7 @@
   import { formateDate, formateNombre } from './formatage';
   import Onglet from './Onglet.svelte';
   import Rangee from './Rangee.svelte';
+  import RepartitionGeographique from './RepartitionGeographique.svelte';
   import SousSection from './SousSection.svelte';
 
   interface Props {
@@ -136,6 +137,9 @@
         />
       </Rangee>
       <CompletionNiveauComplet {complétions} />
+      <Rangee pleineLargeur>
+        <RepartitionGeographique {cyberdépartsValidés} {complétions} />
+      </Rangee>
     </SousSection>
   {:else}
     <EtatDuChargement {enErreur} />
