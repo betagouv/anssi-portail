@@ -142,6 +142,8 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
         'modeleSuiviDeChangementDeFonction',
         'modele-suivi-de-changement-de-fonction.docx'
       ),
+    modèleSuiviDesDéparts: () =>
+      join(process.cwd(), 'src', 'api', 'outils', 'modeleSuiviDesDeparts', 'modele-suivi-des-departs.docx'),
   },
   jekyll: {
     page403: () => ressourceFactice(),

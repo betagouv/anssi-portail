@@ -31,6 +31,7 @@ export interface FournisseurChemin {
     modèleInventaireDesComposantsObsolètes: () => string;
     modèleSuiviDesArrivées: () => string;
     modèleSuiviDeChangementDeFonction: () => string;
+    modèleSuiviDesDéparts: () => string;
   };
   jekyll: {
     page403: () => string;
@@ -114,6 +115,7 @@ export const fournisseurChemin: FournisseurChemin = {
     modèleSuiviDesArrivées: () => cheminBackDepuisOutils('modeleSuiviDesArrivees', 'modele-suivi-des-arrivees.docx'),
     modèleSuiviDeChangementDeFonction: () =>
       cheminBackDepuisOutils('modeleSuiviDeChangementDeFonction', 'modele-suivi-de-changement-de-fonction.docx'),
+    modèleSuiviDesDéparts: () => cheminBackDepuisOutils('modeleSuiviDesDeparts', 'modele-suivi-des-departs.docx'),
   },
   jekyll: {
     page403: () => construisCheminVersArtefactJekyll('403.html'),
