@@ -155,7 +155,7 @@
         border-radius: 0.5rem;
         background-color: var(--background-alt-green-bourgeon);
 
-        @include a-partir-de(md) {
+        @include a-partir-de(sm) {
           align-items: center;
           flex-direction: row;
           gap: 1.5rem;
