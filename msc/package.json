@@ -4,21 +4,31 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
+    "watch": "node --watch-path=src --watch-path=../front/lib-svelte/src --watch-path=../front/assets/styles --watch-path=../front/_data/meta-description.yml --watch-path=pages.json --watch-path=vite.config.ts node_modules/vite/bin/vite.js build --mode development",
     "lint": "eslint .",
     "typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "test": "pnpm typecheck && pnpm lint",
-    "watch": "node --watch-path=src --watch-path=pages.json --watch-path=vite.config.ts node_modules/vite/bin/vite.js build --mode development"
+    "test": "pnpm typecheck && pnpm lint"
+  },
+  "dependencies": {
+    "@anssi-portail/svelte": "workspace:^",
+    "@lab-anssi/ui-kit": "catalog:",
+    "isomorphic-dompurify": "catalog:",
+    "@sentry/browser": "^10.70.0"
   },
   "devDependencies": {
+    "@sentry/vite-plugin": "^5.4.0",
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "eslint-plugin-svelte": "^3.15.2",
     "globals": "^17.0.0",
+    "sass": "^1.102.0",
     "svelte": "catalog:",
     "svelte-check": "^4.4.5",
     "vite": "^8.2.1",
     "@sveltejs/kit": "^3.1.0",
     "@sveltejs/adapter-node": "^6.0.0",
     "@types/node": "catalog:",
+    "js-yaml": "^5.4.1",
+    "regles-eslint": "workspace:^",
     "typescript": "^6.0.3"
   },
   "exports": {

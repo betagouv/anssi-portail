@@ -1,5 +1,17 @@
 {
   "extends": "$app/tsconfig",
-  "compilerOptions": { "strict": true, "skipLibCheck": true, "target": "ESNext" },
-  "include": ["src", "*.ts"]
+  "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true,
+    "target": "ESNext",
+    "paths": {
+      "$lib/*": ["./src/lib/*"],
+      "$msc/*": ["../front/lib-svelte/src/*"],
+      "$plateforme/*": ["../front/lib-svelte/src/plateforme/*.client"]
+    },
+    "allowImportingTsExtensions": true,
+    "checkJs": false
+  },
+  "include": ["src", "test", "*", "../front/lib-svelte/src/global.d.ts", "../front/lib-svelte/src/vite-env.d.ts"],
+  "exclude": ["src/service-worker", "dist"]
 }

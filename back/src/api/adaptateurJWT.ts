@@ -13,3 +13,13 @@ export const adaptateurJWT = (adaptateurEnvironnement: AdaptateurEnvironnement):
     jwt.sign(donnees, adaptateurEnvironnement.secrets.jwt(), { expiresIn: UNE_HEURE.total('seconds') }),
   decode: (token: string) => jwt.verify(token, adaptateurEnvironnement.secrets.jwt()) as JwtPayload,
 });
+
+export const sessionAuthentifiée = (token: string | undefined, adaptateur: AdaptateurJWT): boolean => {
+  if (!token) return false;
+  try {
+    adaptateur.decode(token);
+    return true;
+  } catch {
+    return false;
+  }
+};

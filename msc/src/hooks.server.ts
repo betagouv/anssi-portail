@@ -8,7 +8,9 @@ export const handle: Handle = async ({ event, resolve }) => {
   const requête = event.platform?.req;
   if (!requête || !('msc' in requête)) throw new Error('La requête doit passer par Express');
   Object.assign(event.locals, requête.msc as ContexteMSC);
-  const réponse = await resolve(event);
+  const réponse = await resolve(event, {
+    transformPageChunk: ({ html }) => html.replace('__VERSION_KIT_UI__', import.meta.env.VERSION_KIT_UI),
+  });
   // Kit signe son script de démarrage. Conserver les autres directives Helmet et
   // autoriser le même nonce pour les styles des composants du kit UI.
   const cspKit = réponse.headers.get('content-security-policy');

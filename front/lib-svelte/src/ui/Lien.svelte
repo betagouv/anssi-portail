@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { estServeur } from '$plateforme/environnement';
   import { clic } from '../directives/actions.svelte';
 
@@ -44,6 +45,12 @@
     surClic,
   }: Props = $props();
 
+  // L’hydratation Kit démarre avec la même ancre que le rendu serveur.
+  let afficheAncre = $state(estServeur || import.meta.env.MSC_SVELTEKIT === true);
+  onMount(() => {
+    afficheAncre = false;
+  });
+
   const hasIcon = $derived(!!icone);
   const iconPlace = $derived(iconeADroite ? 'right' : 'left');
 
@@ -76,7 +83,7 @@
   };
 </script>
 
-{#if estServeur}
+{#if afficheAncre}
   <a {href}>{libelle}</a>
 {:else if apparence == 'lien'}
   <dsfr-link

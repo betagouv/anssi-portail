@@ -1,14 +1,17 @@
 <script lang="ts">
   import { enPropriétéWebC } from '$plateforme/webComponent';
   import { creeLienContactsUtiles } from '../contacts/contacts';
-  import { profilStore } from '../stores/profil.store';
+  import { utiliseProfil } from '../stores/profil.store';
   import { détecteRendu } from '../utils/rendu.svelte';
+
+  const profilStore = utiliseProfil();
 
   let estConnecte = () => !!$profilStore;
 
   const rendu = détecteRendu();
 
-  const cheminRelatif: string = typeof window !== 'undefined' ? window.location.pathname : '/';
+  let { cheminRelatif = typeof window !== 'undefined' ? window.location.pathname : '/' }: { cheminRelatif?: string } =
+    $props();
 
   const itemDeMenu = (label: string, href: string, active: boolean) => ({
     label,

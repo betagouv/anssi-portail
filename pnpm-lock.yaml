@@ -643,7 +643,23 @@ importers:
         version: 5.1.1(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(jsdom@31.0.1(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15))
 
   msc:
+    dependencies:
+      '@anssi-portail/svelte':
+        specifier: workspace:^
+        version: link:../front/lib-svelte
+      '@lab-anssi/ui-kit':
+        specifier: 'catalog:'
+        version: 2.2.0(svelte@5.58.0(@typescript-eslint/types@8.73.0))
+      '@sentry/browser':
+        specifier: ^10.70.0
+        version: 10.78.0
+      isomorphic-dompurify:
+        specifier: 'catalog:'
+        version: 4.8.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
     devDependencies:
+      '@sentry/vite-plugin':
+        specifier: ^5.4.0
+        version: 5.4.1(rollup@4.59.0)(supports-color@10.2.2)
       '@sveltejs/adapter-node':
         specifier: ^6.0.0
         version: 6.0.4(@sveltejs/kit@3.3.1(@opentelemetry/api@1.9.1)(@sveltejs/vite-plugin-svelte@7.3.1(svelte@5.58.0(@typescript-eslint/types@8.73.0))(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15)))(svelte@5.58.0(@typescript-eslint/types@8.73.0))(typescript@6.0.3)(vite@8.3.8(@types/node@26.6.6)(esbuild@0.28.2)(sass@1.108.2)(tsx@4.23.15)))
@@ -662,6 +678,15 @@ importers:
       globals:
         specifier: ^17.0.0
         version: 17.14.0
+      js-yaml:
+        specifier: ^5.4.1
+        version: 5.4.1
+      regles-eslint:
+        specifier: workspace:^
+        version: link:../regles-eslint
+      sass:
+        specifier: ^1.102.0
+        version: 1.108.2
       svelte:
         specifier: 'catalog:'
         version: 5.58.0(@typescript-eslint/types@8.73.0)

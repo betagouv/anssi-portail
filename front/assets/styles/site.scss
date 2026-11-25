@@ -318,7 +318,8 @@ img[src$='.svg'] {
 
 // On règle les CLS (Content Layout Shift) liés à l'utilisation des composants du DSFR.
 
-dsfr-header {
+dsfr-header,
+.entete-msc {
   display: block;
   min-height: 165px;
 
@@ -338,7 +339,8 @@ dsfr-header {
   }
 }
 
-dsfr-footer {
+dsfr-footer,
+.pied-de-page-msc {
   display: block;
   min-height: 338px;
 }

@@ -3,9 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="csp-nonce" content="%sveltekit.nonce%" />
+    <link rel="stylesheet" href="/assets/styles/dsfr.css" />
+    <link rel="stylesheet" href="/assets/styles/site.css" />
+    <link rel="stylesheet" href="/assets/styles/fonts.css" />
+    <script
+      nonce="%sveltekit.nonce%"
+      defer
+      src="https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com/__VERSION_KIT_UI__/lab-anssi-ui-kit.iife.js"
+    ></script>
     %sveltekit.head%
   </head>
-  <body>
+  <body data-themeable="true">
     <div>%sveltekit.body%</div>
   </body>
 </html>

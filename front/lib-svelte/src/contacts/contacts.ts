@@ -1,7 +1,7 @@
 import { calculeCodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
 import type { Profil } from '../stores/profil.store';
 
-export const creeLienContactsUtiles = (profil: Profil | undefined) => {
+export const creeLienContactsUtiles = (profil: Pick<Profil, 'codeActivite' | 'codeRegion'> | undefined) => {
   if (profil) {
     const codeSecteurContact = calculeCodeSecteurContact(profil.codeActivite);
     const parametres = new URLSearchParams();

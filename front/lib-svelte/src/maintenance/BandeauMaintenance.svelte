@@ -2,10 +2,14 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
 
-  let maintenanceEnPreparation: { jour: string; heure: string } | undefined = $state();
+  type Prevision = { jour: string; heure: string };
+  let { prevision }: { prevision?: Prevision | null } = $props();
+  let previsionChargee: Prevision | undefined = $state();
+  const maintenanceEnPreparation = $derived(prevision === undefined ? previsionChargee : prevision);
   onMount(async () => {
+    if (prevision !== undefined) return;
     const reponse = await axios.get('/api/infos-site');
-    maintenanceEnPreparation = reponse.data.maintenanceEnPreparation;
+    previsionChargee = reponse.data.maintenanceEnPreparation;
   });
 </script>
 

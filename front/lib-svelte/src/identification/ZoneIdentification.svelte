@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { profilStore } from '../stores/profil.store';
+  import { utiliseProfil } from '../stores/profil.store';
+
+  const profilStore = utiliseProfil();
 </script>
 
 <div class="conteneur-zone-indentification">
