@@ -12,6 +12,7 @@ const outils = [
   'modele-liste-interconnexions.xlsx',
   'modele-inventaire-composants-obsoletes.xlsx',
   'modele-analyse-de-conformite.xlsx',
+  'modele-cartographie.xlsx',
   'rappel-mise-a-jour-liste-prestataires-et-fournisseurs.ics',
   'rappel-mise-a-jour-liste-interconnexions.ics',
   'rappel-mise-a-jour-inventaire-composants-obsoletes.ics',

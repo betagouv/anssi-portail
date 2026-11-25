@@ -13,6 +13,7 @@ import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC.js';
 import { ServiceModèleInventaireDesComposantsObsolètes } from '../../src/api/outils/modele-inventaire-composants-obsoletes/serviceModeleInventaireComposantsObsoletes.js';
 import { ServiceModèleAnalyseDeConformité } from '../../src/api/outils/modeleAnalyseDeConformite/serviceModeleAnalyseDeConformite.js';
 import { ServiceModeleAnnuaireDeCrise } from '../../src/api/outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
+import { ServiceModèleCartographie } from '../../src/api/outils/modeleCartographie/serviceModeleCartographie.js';
 import { ServiceModèleListeDActivités } from '../../src/api/outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleListeDesInterconnexions } from '../../src/api/outils/modeleListeInterconnexions/serviceModeleListeInterconnexions.js';
 import { ServiceModèleListeDesPrestatairesEtFournisseurs } from '../../src/api/outils/modeleListePrestatairesEtFournisseurs/serviceModeleListePrestatairesEtFournisseurs.js';
@@ -119,6 +120,8 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
       join(process.cwd(), 'src', 'api', 'outils', 'modeleListeInterconnexions', 'modele-liste-interconnexions.xlsx'),
     modèleAnalyseDeConformité: () =>
       join(process.cwd(), 'src', 'api', 'outils', 'modeleAnalyseDeConformite', 'modele-analyse-de-conformite.xlsx'),
+    modèleCartographie: () =>
+      join(process.cwd(), 'src', 'api', 'outils', 'modeleCartographie', 'modele-cartographie.xlsx'),
     modèleInventaireDesComposantsObsolètes: () =>
       join(
         process.cwd(),
@@ -475,6 +478,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
     fauxFournisseurDeChemin,
     fauxAdaptateurHorloge
   ),
+  serviceModèleCartographie: new ServiceModèleCartographie(fauxFournisseurDeChemin, fauxAdaptateurHorloge),
   serviceModeleInventaireComposantsObsoletes: new ServiceModèleInventaireDesComposantsObsolètes(
     fauxFournisseurDeChemin,
     fauxAdaptateurHorloge

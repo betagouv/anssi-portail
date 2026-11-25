@@ -20,6 +20,7 @@ export interface FournisseurChemin {
     banniereSvgRécompenseCyberdepart: () => string;
     modèleAnnuaireDeCrise: () => string;
     modèleAnalyseDeConformité: () => string;
+    modèleCartographie: () => string;
     modèleListeDActivités: () => string;
     modèleRACI: () => string;
     modèleModificationsMotsDePasse: () => string;
@@ -93,6 +94,7 @@ export const fournisseurChemin: FournisseurChemin = {
     modèleAnnuaireDeCrise: () => cheminBackDepuisOutils('modeleAnnuaireDeCrise', 'modele-annuaire-de-crise.xlsx'),
     modèleAnalyseDeConformité: () =>
       cheminBackDepuisOutils('modeleAnalyseDeConformite', 'modele-analyse-de-conformite.xlsx'),
+    modèleCartographie: () => cheminBackDepuisOutils('modeleCartographie', 'modele-cartographie.xlsx'),
     modèleListeDActivités: () => cheminBackDepuisOutils('modeleListeDActivites', 'modele-liste-d-activites.xlsx'),
     modèleRACI: () => cheminBackDepuisOutils('modeleRaci', 'modele-raci.xlsx'),
     modèleModificationsMotsDePasse: () =>
