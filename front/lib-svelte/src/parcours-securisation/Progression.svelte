@@ -7,11 +7,20 @@
     max: number;
     cible?: number;
     mode?: 'compact' | 'reactif' | 'sans-titre';
+    taille?: 'sm' | 'md';
     libelle?: string;
     anime?: boolean;
   }
 
-  const { actuel, max, cible, mode = 'reactif', libelle = 'Progression', anime = false }: Props = $props();
+  const {
+    actuel,
+    max,
+    cible,
+    mode = 'reactif',
+    libelle = 'Progression',
+    anime = false,
+    taille = 'md',
+  }: Props = $props();
 
   const avancement = $derived(new Tween(actuel - (anime ? 1 : 0), { easing: cubicInOut, duration: 2000 }));
 
@@ -33,7 +42,7 @@
     <p class="texte-standard-md libelle">{libelle}</p>
     <span class="texte-standard-md avancement">{actuel}&nbsp;/&nbsp;{max}</span>
   {/if}
-  <div class="barre" bind:this={barre}>
+  <div class={['barre', taille]} bind:this={barre}>
     <progress class="barre-actuelle" value={avancement.current} {max} aria-label={libelle}>
       {avancement.current}
     </progress>
@@ -113,11 +122,17 @@
 
     .barre {
       grid-area: barre;
-      height: 12px;
       position: relative;
       max-width: 384px;
       display: flex;
       flex-direction: column;
+
+      &.md {
+        height: 12px;
+      }
+      &.sm {
+        height: 8px;
+      }
 
       .barre-actuelle {
         background-color: var(--background-contrast-grey);
