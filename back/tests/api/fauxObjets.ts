@@ -216,6 +216,16 @@ export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = 
       siret,
     },
   ],
+  rechercheOrganisationDetaillee: async () => ({
+    natureJuridique: '5710',
+    categorieEntreprise: 'PME',
+    trancheEffectifSalarie: '11',
+    finances: null,
+    complements: { collectiviteTerritoriale: null, estAssociation: false },
+    sectionActivitePrincipale: 'A',
+    departement: '86',
+    region: '75',
+  }),
 };
 
 export const fauxAdaptateurProfilAnssi: AdaptateurProfilAnssi = {
