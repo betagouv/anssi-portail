@@ -5,6 +5,8 @@ import type { AdaptateurChiffrement, ObjetChiffre } from '../infra/adaptateurChi
 import type { AdaptateurHachage } from '../infra/adaptateurHachage.js';
 import type { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi.js';
 import type { AdaptateurRechercheEntreprise, OrganisationDetaillee } from '../infra/adaptateurRechercheEntreprise.js';
+import type { DonneesEvenement } from '../infra/donneesEvenement.js';
+import type { TypeTest } from '../infra/entrepotResultatTest/entreePostgresResultatTest.js';
 import {
   libellésNiveauMaturité,
   RésultatTestMaturité,
@@ -15,6 +17,9 @@ import { régions } from '../metier/referentielRegions.js';
 const TABLE_EXECUTIONS = 'msc.executions';
 const TABLE_UTILISATEURS = 'msc.utilisateurs';
 const TABLE_TESTS = 'msc.tests_realises';
+const TABLE_PARCOURS_REJOINTS = 'msc.parcours_rejoints';
+const TABLE_BADGES_CYBERDEPART = 'msc.badges_cyberdepart';
+const TABLE_COMPLETIONS = 'msc.completions_parcours';
 const TABLE_EVENEMENTS = 'journal_msc.evenements';
 
 const INTERVALLE_APPELS_RECHERCHE_ENTREPRISE_EN_MS = Math.ceil(1000 / 7);
@@ -22,8 +27,22 @@ const TAILLE_LOT_PROFILS_ANSSI = 500;
 const TAILLE_PAQUET_ECRITURE = 1000;
 const UN_JOUR_EN_MS = 24 * 60 * 60 * 1000;
 
-type ÉvénementTestRevendiqué = {
+const SEUILS_COMPLETION = [50, 80, 100];
+
+type TypeÉvénement = DonneesEvenement['type'];
+
+type Événement = {
+  id: string;
+  type: TypeÉvénement;
+  date: Date;
   donnees: { idResultatTest?: string; idUtilisateur?: string };
+};
+
+const typeTestParÉvénement: Partial<Record<TypeÉvénement, TypeTest>> = {
+  QUESTIONNAIRE_VRAI_FAUX_TERMINE: 'vrai-faux',
+  TEST_EXPOSITION_REALISE: 'exposition',
+  SIMULATION_REFLEXES_CYBER_TERMINEE: 'réflexes cyber',
+  TEST_HAMECONNAGE_TERMINE: 'hameçonnage',
 };
 
 type ProfilUtilisateur = {
@@ -65,6 +84,8 @@ const tailleDepuisTranche = (codeTrancheEffectif: string | null | undefined) =>
   codeTrancheEffectif
     ? tailleEntite({ natureJuridique: null, categorieEntreprise: null, trancheEffectifSalarie: codeTrancheEffectif })
     : null;
+
+const nombreMesuresPour = (seuil: number, nombreTotalMesures: number) => Math.ceil((nombreTotalMesures * seuil) / 100);
 
 const enLots = <T>(éléments: T[], taille: number): T[][] =>
   Array.from({ length: Math.ceil(éléments.length / taille) }, (_, index) =>
@@ -121,6 +142,10 @@ export class MiseAJourObservatoire {
     trace.push(`👤 ${traités} utilisateur(s) sans profil traité(s), ${avecProfil} profil(s) trouvé(s)`);
     trace.push(`🧭 ${await this.metsAJourTestsMaturite(debut)} test(s) de maturité écrit(s)`);
     trace.push(`🔗 ${await this.rattacheTestsRevendiques(debut)} test(s) rattaché(s) à un compte`);
+    trace.push(`🧪 ${await this.metsAJourAutresTests(debut)} autre(s) test(s) de sensibilisation ajouté(s)`);
+    trace.push(`🚀 ${await this.metsAJourParcoursRejoints(debut)} parcours rejoint(s) ajouté(s)`);
+    trace.push(`🏅 ${await this.metsAJourBadgesCyberdepart(debut)} badge(s) Cyberdépart ajouté(s)`);
+    trace.push(`📈 ${await this.metsAJourCompletions(debut)} seuil(s) de complétion ajouté(s)`);
 
     await this.knexObservatoire(TABLE_EXECUTIONS).insert({ date_execution: dateExecution });
     return trace;
@@ -233,7 +258,7 @@ export class MiseAJourObservatoire {
   }
 
   private async rattacheTestsRevendiques(debut: Date | undefined): Promise<number> {
-    const événements = await this.testsRevendiques(debut);
+    const événements = await this.evenements(['PROPRIETE_TEST_REVENDIQUEE'], debut);
     const rattachements = événements.flatMap(({ donnees: { idResultatTest, idUtilisateur } }) =>
       idResultatTest && idUtilisateur
         ? [{ idHashTest: this.adaptateurHachage.hache(idResultatTest), idUtilisateur }]
@@ -251,13 +276,87 @@ export class MiseAJourObservatoire {
     return nombreRattachés;
   }
 
-  private async testsRevendiques(debut: Date | undefined): Promise<ÉvénementTestRevendiqué[]> {
+  private async metsAJourAutresTests(debut: Date | undefined): Promise<number> {
+    const événements = await this.evenements(Object.keys(typeTestParÉvénement) as TypeÉvénement[], debut);
+    const lignes = événements.map(({ id, type, date, donnees }) => ({
+      id_hash: this.adaptateurHachage.hache(id),
+      type_test: typeTestParÉvénement[type],
+      date_realisation: versJour(date),
+      id_hash_utilisateur: donnees.idUtilisateur ?? null,
+    }));
+
+    return this.ajouteSiAbsent(TABLE_TESTS, lignes);
+  }
+
+  private metsAJourParcoursRejoints(debut: Date | undefined): Promise<number> {
+    return this.ajouteEvenementParUtilisateur(TABLE_PARCOURS_REJOINTS, 'PARCOURS_REJOINT', debut);
+  }
+
+  private metsAJourBadgesCyberdepart(debut: Date | undefined): Promise<number> {
+    return this.ajouteEvenementParUtilisateur(TABLE_BADGES_CYBERDEPART, 'BADGE_CYBERDEPART_DEBLOQUE', debut);
+  }
+
+  private async ajouteEvenementParUtilisateur(
+    table: string,
+    type: TypeÉvénement,
+    debut: Date | undefined
+  ): Promise<number> {
+    const événements = await this.evenements([type], debut);
+    const lignes = événements.flatMap(({ date, donnees: { idUtilisateur } }) =>
+      idUtilisateur ? [{ id_hash_utilisateur: idUtilisateur, date: versJour(date) }] : []
+    );
+
+    return this.ajouteSiAbsent(table, lignes);
+  }
+
+  private async metsAJourCompletions(debut: Date | undefined): Promise<number> {
+    const [{ total }] = await this.knexMSC('mesures').count('* as total');
+    const paliers = SEUILS_COMPLETION.map((seuil) => ({ seuil, rang: nombreMesuresPour(seuil, Number(total)) }));
+
+    const prisesEnCompte = this.knexMSC('prises_en_compte')
+      .select('email_utilisateur_hache', 'date')
+      .rowNumber('rang', (fenetre) => fenetre.partitionBy('email_utilisateur_hache').orderBy('date'));
+    if (debut) {
+      prisesEnCompte.whereIn(
+        'email_utilisateur_hache',
+        this.knexMSC('prises_en_compte').select('email_utilisateur_hache').where('date', '>=', debut)
+      );
+    }
+    const franchissements: { email_utilisateur_hache: string; date: Date; rang: string }[] = await this.knexMSC
+      .select('email_utilisateur_hache', 'date', 'rang')
+      .from(prisesEnCompte.as('prises_en_compte_ordonnees'))
+      .whereIn(
+        'rang',
+        paliers.map(({ rang }) => rang)
+      );
+
+    const lignes = franchissements.flatMap(({ email_utilisateur_hache: emailHaché, date, rang: rangFranchi }) =>
+      paliers
+        .filter(({ rang }) => rang === Number(rangFranchi))
+        .map(({ seuil }) => ({ id_hash_utilisateur: emailHaché, seuil, date: versJour(date) }))
+    );
+
+    return this.ajouteSiAbsent(TABLE_COMPLETIONS, lignes);
+  }
+
+  private async evenements(types: TypeÉvénement[], debut: Date | undefined): Promise<Événement[]> {
     const requete = this.knexJournal(TABLE_EVENEMENTS)
-      .select('donnees')
-      .where({ type: 'PROPRIETE_TEST_REVENDIQUEE' })
+      .select('id', 'type', 'date', 'donnees')
+      .whereIn('type', types)
       .orderBy('date');
     if (debut) requete.where('date', '>=', debut);
     return requete;
+  }
+
+  private async ajouteSiAbsent(table: string, lignes: Record<string, unknown>[]): Promise<number> {
+    return this.knexObservatoire.transaction(async (trx) => {
+      let nombreAjoutées = 0;
+      for (const paquet of enLots(lignes, TAILLE_PAQUET_ECRITURE)) {
+        const ajoutées = await trx(table).insert(paquet).onConflict().ignore().returning('*');
+        nombreAjoutées += ajoutées.length;
+      }
+      return nombreAjoutées;
+    });
   }
 
   private async ecrit(
