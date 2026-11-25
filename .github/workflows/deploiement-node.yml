@@ -74,6 +74,9 @@ jobs:
         run: |
           pnpm --filter @anssi-portail/svelte build
 
+      - name: Construis les pages SvelteKit
+        run: pnpm --filter @anssi-portail/msc build
+
       - name: Construis avec Jekyll
         run: |
           bundle config set --local path './front/vendor/bundle'
@@ -89,6 +92,6 @@ jobs:
         run: |
           git config --global user.email "contact@messervicescyber.beta.gouv.fr"
           git config --global user.name "MesServicesCyber"
-          git add --force front/_site
+          git add --force front/_site msc/dist
           git commit -m "Ajoute le site généré"
           pnpm exec clever deploy --force --same-commit-policy=rebuild

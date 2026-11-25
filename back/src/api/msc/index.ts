@@ -24,6 +24,7 @@ import { enregistreLesFichiersStatiques } from './routes/fichiersStatiques.js';
 import { enregistreLesFinancements } from './routes/financements.js';
 import { enregistreLesRedirections } from './routes/redirections.js';
 import { enregistreLesRoutesStatiques, routesStatiques } from './routes/statiques.js';
+import { enregistreLesAssetsKit, enregistreSvelteKit } from './routes/svelteKit.js';
 import { enregistreLesVisas } from './routes/visas.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
@@ -47,7 +48,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreLesRedirections(app);
   enregistreLAuthentification(app, configurationServeur);
   enregistreLesFichiersStatiques(app, fournisseurChemin);
+  enregistreLesAssetsKit(app);
   app.use(middleware.verifieModeMaintenance); // doit être après les fichiers statiques
+  enregistreSvelteKit(app, configurationServeur);
   enregistreLesRoutesAPI(app, configurationServeur);
 
   const enregistreRoute = enregistreRouteDansExpress(app);

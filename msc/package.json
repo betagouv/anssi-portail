@@ -6,7 +6,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "test": "pnpm typecheck && pnpm lint"
+    "test": "pnpm typecheck && pnpm lint",
+    "watch": "node --watch-path=src --watch-path=pages.json --watch-path=vite.config.ts node_modules/vite/bin/vite.js build --mode development"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
@@ -19,5 +20,15 @@
     "@sveltejs/adapter-node": "^6.0.0",
     "@types/node": "catalog:",
     "typescript": "^6.0.3"
+  },
+  "exports": {
+    "./handler": {
+      "types": "./handler.d.ts",
+      "default": "./dist/handler.js"
+    },
+    "./contexte": {
+      "types": "./contexte.d.ts"
+    },
+    "./pages.json": "./pages.json"
   }
 }

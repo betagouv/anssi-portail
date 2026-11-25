@@ -4,5 +4,11 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [sveltekit({ preprocess: vitePreprocess(), adapter: adapter({ out: 'dist', precompress: false }) })],
+  plugins: [
+    sveltekit({
+      preprocess: vitePreprocess(),
+      adapter: adapter({ out: 'dist', precompress: false }),
+      csp: { mode: 'nonce', directives: { 'script-src': ['self'], 'style-src': ['self'] } },
+    }),
+  ],
 });

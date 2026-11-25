@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { describe, expect, it } from 'vitest';
+import { describe, it } from 'vitest';
 import { fabriqueMiddleware } from '../../src/api/middlewares/middleware.js';
 import { creeServeur } from '../../src/api/msc/index.js';
 import {
@@ -11,7 +11,7 @@ import {
 } from './fauxObjets.js';
 
 describe('Lorsque l’application est en maintenance', () => {
-  it('sers les ressources statiques', async () => {
+  it('sert les ressources statiques', async () => {
     const middleware = fabriqueMiddleware({
       adaptateurJWT: fauxAdaptateurJWT,
       fournisseurChemin: fauxFournisseurDeChemin,
@@ -27,8 +27,7 @@ describe('Lorsque l’application est en maintenance', () => {
     };
     const serveur = creeServeur(configurationServeur);
 
-    const réponse = await request(serveur).get('/assets');
-
-    expect(réponse.status).toBe(200);
+    await request(serveur).get('/assets').expect(200);
+    await request(serveur).get('/_app/version.json').expect('Content-Type', /json/u).expect(200);
   });
 });

@@ -16,7 +16,7 @@
     "migre-bdd:clever": "node ./node_modules/knex/bin/cli.js migrate:latest --knexfile dist/knexfile.js",
     "prelint": "[ -d ../regles-eslint/dist ] || pnpm -F regles-eslint build",
     "prestart": "tsc && pnpm migre-bdd:clever",
-    "pretest": "npm-run-all --parallel typecheck lint",
+    "pretest": "pnpm --filter @anssi-portail/msc build && npm-run-all --parallel typecheck lint",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
@@ -52,6 +52,7 @@
     "@11ty/gray-matter": "^3.0.0",
     "@anssi-portail/axios": "workspace:^",
     "@anssi-portail/contacts-sectoriels": "workspace:^",
+    "@anssi-portail/msc": "workspace:^",
     "@aws-sdk/client-s3": "^3.1112.0",
     "@aws-sdk/credential-providers": "^3.1112.0",
     "@lab-anssi/lib": "^3.2.2",

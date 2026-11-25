@@ -275,6 +275,9 @@ importers:
       '@anssi-portail/contacts-sectoriels':
         specifier: workspace:^
         version: link:../contacts-sectoriels
+      '@anssi-portail/msc':
+        specifier: workspace:^
+        version: link:../msc
       '@aws-sdk/client-s3':
         specifier: ^3.1112.0
         version: 3.1172.0
