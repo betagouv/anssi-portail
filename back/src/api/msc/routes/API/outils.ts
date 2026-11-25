@@ -62,7 +62,20 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
   /// OUTILS DOCX
   enregistreRoute(
     `/modele-suivi-des-arrivees.docx`,
-    ressourceDocumentOutils(configurationServeur, 'modele-suivi-des-arrivees.docx')
+    ressourceDocumentOutils(
+      configurationServeur,
+      'modele-suivi-des-arrivees.docx',
+      configurationServeur.fournisseurChemin.back.modèleSuiviDesArrivées
+    )
+  );
+
+  enregistreRoute(
+    `/modele-suivi-de-changement-de-fonction.docx`,
+    ressourceDocumentOutils(
+      configurationServeur,
+      'modele-suivi-de-changement-de-fonction.docx',
+      configurationServeur.fournisseurChemin.back.modèleSuiviDeChangementDeFonction
+    )
   );
 
   /// OUTILS AUTRE

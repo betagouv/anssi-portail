@@ -17,6 +17,7 @@ const outils = [
   'rappel-mise-a-jour-liste-interconnexions.ics',
   'rappel-mise-a-jour-inventaire-composants-obsoletes.ics',
   'modele-suivi-des-arrivees.docx',
+  'modele-suivi-de-changement-de-fonction.docx',
 ] as const;
 export type Outil = (typeof outils)[number];
 
