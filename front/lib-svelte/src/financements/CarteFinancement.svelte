@@ -36,9 +36,9 @@
     display: flex;
     flex-direction: column;
     width: auto;
-    background-color: var(--background-default-grey);
 
     .contenu {
+      background-color: var(--background-default-grey);
       display: flex;
       flex-direction: column;
       align-items: flex-start;
