@@ -282,8 +282,8 @@ importers:
         specifier: ^3.1112.0
         version: 3.1171.0
       '@lab-anssi/lib':
-        specifier: ^3.1.1
-        version: 3.1.1(debug@4.4.3(supports-color@10.2.2))(express@5.3.0(supports-color@10.2.2))(supports-color@10.2.2)
+        specifier: ^3.2.2
+        version: 3.2.2(debug@4.4.3(supports-color@10.2.2))(express@5.3.0(supports-color@10.2.2))(supports-color@10.2.2)
       '@myriaddreamin/typst-ts-node-compiler':
         specifier: ^0.7.0
         version: 0.7.0
@@ -1536,8 +1536,8 @@ packages:
   '@kwsites/promise-deferred@1.1.1':
     resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
 
-  '@lab-anssi/lib@3.1.1':
-    resolution: {integrity: sha512-sAa8UP8FmdrjD2+F1JNXOe/MYhpmcX7Smmc8gkhAkEUidtNp37N9HlghEPDkuD7L4y0Dpri0BmqdUMczYWhzUw==}
+  '@lab-anssi/lib@3.2.2':
+    resolution: {integrity: sha512-zrYAfEygEMx7QXHQFopXoIMA5UsGB3zrPmjBSc0zc2teebE8BzpQFI9dDM5Czq2jVEWoFYrH9uRzjzrOG38dGw==}
     peerDependencies:
       express: ~5.2.1
 
@@ -5859,7 +5859,7 @@ snapshots:
 
   '@kwsites/promise-deferred@1.1.1': {}
 
-  '@lab-anssi/lib@3.1.1(debug@4.4.3(supports-color@10.2.2))(express@5.3.0(supports-color@10.2.2))(supports-color@10.2.2)':
+  '@lab-anssi/lib@3.2.2(debug@4.4.3(supports-color@10.2.2))(express@5.3.0(supports-color@10.2.2))(supports-color@10.2.2)':
     dependencies:
       axios: 1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
       express: 5.3.0(supports-color@10.2.2)
