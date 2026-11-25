@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import Knex from 'knex';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fabriqueAdaptateurChiffrement } from '../../src/infra/adaptateurChiffrement.js';
@@ -48,6 +49,15 @@ const ajouteTablesMSCEtJournal = async (knex: Knex.Knex) => {
       table.string('secteur');
       table.string('taille_organisation');
       table.jsonb('reponses');
+    })
+    .createTable('mesures', (table) => {
+      table.string('id').primary();
+    })
+    .createTable('prises_en_compte', (table) => {
+      table.string('email_utilisateur_hache').references('email_hache').inTable('utilisateurs').notNullable();
+      table.string('id_mesure').references('id').inTable('mesures').notNullable();
+      table.timestamp('date').notNullable();
+      table.primary(['email_utilisateur_hache', 'id_mesure']);
     });
   await knex.schema.createSchema('journal_msc');
   await knex.schema.withSchema('journal_msc').createTable('evenements', (table) => {
@@ -80,8 +90,8 @@ describe("La tâche de mise à jour de l'observatoire MSC", () => {
   const unUtilisateurDeMSC = (email: string) =>
     trx('utilisateurs').insert({ email_hache: hache(email), donnees: adaptateurChiffrement.chiffre({ email }) });
 
-  const unEvenement = (type: string, date: string, donnees: Record<string, string>) =>
-    trx('journal_msc.evenements').insert({ type, date, donnees });
+  const unEvenement = (type: string, date: string, donnees: Record<string, string>, id: string = randomUUID()) =>
+    trx('journal_msc.evenements').insert({ id, type, date, donnees });
 
   const uneExecutionPrecedente = (date: string) => trx('msc.executions').insert({ date_execution: date });
 
@@ -294,6 +304,236 @@ describe("La tâche de mise à jour de l'observatoire MSC", () => {
       expect(await trx('msc.tests_realises').select('id_hash_utilisateur')).toEqual([
         { id_hash_utilisateur: hache('jeanne@example.com') },
       ]);
+    });
+  });
+
+  describe('concernant les autres tests de sensibilisation', () => {
+    const idEvenement = '01932f0a-0000-7000-8000-000000000001';
+
+    it.each([
+      { evenement: 'QUESTIONNAIRE_VRAI_FAUX_TERMINE', typeTest: 'vrai-faux' },
+      { evenement: 'TEST_EXPOSITION_REALISE', typeTest: 'exposition' },
+      { evenement: 'SIMULATION_REFLEXES_CYBER_TERMINEE', typeTest: 'réflexes cyber' },
+      { evenement: 'TEST_HAMECONNAGE_TERMINE', typeTest: 'hameçonnage' },
+    ])("publie l'événement $evenement comme un test « $typeTest »", async ({ evenement, typeTest }) => {
+      await unUtilisateurDeMSC('jeanne@example.com');
+      await unEvenement(
+        evenement,
+        '2026-11-20T10:00:00.000Z',
+        { idUtilisateur: hache('jeanne@example.com') },
+        idEvenement
+      );
+
+      await tache().execute();
+
+      expect(
+        await lignes('msc.tests_realises', [
+          'id_hash',
+          'type_test',
+          'date_realisation',
+          'niveau',
+          'id_hash_utilisateur',
+        ])
+      ).toEqual([
+        {
+          id_hash: hache(idEvenement),
+          type_test: typeTest,
+          date_realisation: '2026-11-20',
+          niveau: null,
+          id_hash_utilisateur: hache('jeanne@example.com'),
+        },
+      ]);
+    });
+
+    it('publie un test fait sans compte', async () => {
+      await unEvenement('QUESTIONNAIRE_VRAI_FAUX_TERMINE', '2026-11-20T10:00:00.000Z', {});
+
+      await tache().execute();
+
+      expect(await trx('msc.tests_realises').select('type_test', 'id_hash_utilisateur')).toEqual([
+        { type_test: 'vrai-faux', id_hash_utilisateur: null },
+      ]);
+    });
+
+    it('ne publie pas les autres événements du journal', async () => {
+      await unEvenement('TEST_REALISE', '2026-11-20T10:00:00.000Z', {});
+
+      await tache().execute();
+
+      expect(await trx('msc.tests_realises').select()).toEqual([]);
+    });
+
+    it('ne relit que les événements survenus depuis la veille de la dernière exécution', async () => {
+      await uneExecutionPrecedente('2026-11-24T02:30:00.000Z');
+      await unEvenement('TEST_HAMECONNAGE_TERMINE', '2026-11-23T02:29:00.000Z', {});
+      await unEvenement('TEST_HAMECONNAGE_TERMINE', '2026-11-23T02:31:00.000Z', {}, idEvenement);
+
+      await tache().execute();
+
+      expect(await trx('msc.tests_realises').select('id_hash')).toEqual([{ id_hash: hache(idEvenement) }]);
+    });
+
+    it('ne crée pas de doublon lorsque la tâche est rejouée', async () => {
+      await unEvenement('TEST_HAMECONNAGE_TERMINE', '2026-11-25T01:00:00.000Z', {});
+
+      await tache().execute();
+      await tache().execute();
+
+      expect(await trx('msc.tests_realises').select()).toHaveLength(1);
+    });
+  });
+
+  describe.each([
+    { sujet: 'parcours rejoints', evenement: 'PARCOURS_REJOINT', table: 'msc.parcours_rejoints' },
+    { sujet: 'badges Cyberdépart', evenement: 'BADGE_CYBERDEPART_DEBLOQUE', table: 'msc.badges_cyberdepart' },
+  ])('concernant les $sujet', ({ evenement, table }) => {
+    const idUtilisateur = hache('jeanne@example.com');
+
+    it("publie la date de l'événement pour chaque utilisateur", async () => {
+      await unUtilisateurDeMSC('jeanne@example.com');
+      await unEvenement(evenement, '2026-11-20T10:00:00.000Z', { idUtilisateur });
+
+      await tache().execute();
+
+      expect(await lignes(table, ['id_hash_utilisateur', 'date'])).toEqual([
+        { id_hash_utilisateur: idUtilisateur, date: '2026-11-20' },
+      ]);
+    });
+
+    it('ne crée pas de doublon lorsque la tâche est rejouée', async () => {
+      await unUtilisateurDeMSC('jeanne@example.com');
+      await unEvenement(evenement, '2026-11-25T01:00:00.000Z', { idUtilisateur });
+
+      await tache().execute();
+      await tache().execute();
+
+      expect(await lignes(table, ['id_hash_utilisateur', 'date'])).toEqual([
+        { id_hash_utilisateur: idUtilisateur, date: '2026-11-25' },
+      ]);
+    });
+
+    it('ne relit que les événements survenus depuis la veille de la dernière exécution', async () => {
+      await uneExecutionPrecedente('2026-11-24T02:30:00.000Z');
+      await unUtilisateurDeMSC('jeanne@example.com');
+      await unUtilisateurDeMSC('jean@example.com');
+      await unEvenement(evenement, '2026-11-23T02:29:00.000Z', { idUtilisateur });
+      await unEvenement(evenement, '2026-11-23T02:31:00.000Z', { idUtilisateur: hache('jean@example.com') });
+
+      await tache().execute();
+
+      expect(await trx(table).select('id_hash_utilisateur')).toEqual([
+        { id_hash_utilisateur: hache('jean@example.com') },
+      ]);
+    });
+  });
+
+  describe('concernant les complétions du parcours', () => {
+    const idUtilisateur = hache('jeanne@example.com');
+
+    const desMesures = (nombre: number) =>
+      trx('mesures').insert(Array.from({ length: nombre }, (_, index) => ({ id: `mesure-${index + 1}` })));
+
+    const desPrisesEnCompte = (dates: string[], emailHache = idUtilisateur) =>
+      trx('prises_en_compte').insert(
+        dates.map((date, index) => ({ email_utilisateur_hache: emailHache, id_mesure: `mesure-${index + 1}`, date }))
+      );
+
+    const completions = () => lignes('msc.completions_parcours', ['seuil', 'date'], ['date', 'seuil']);
+
+    beforeEach(async () => {
+      await unUtilisateurDeMSC('jeanne@example.com');
+    });
+
+    it('publie la date de la prise en compte qui fait franchir chaque seuil', async () => {
+      await desMesures(5);
+      await desPrisesEnCompte(['2026-11-01', '2026-11-02', '2026-11-03', '2026-11-04', '2026-11-05']);
+
+      await tache().execute();
+
+      expect(await completions()).toEqual([
+        { seuil: '50', date: '2026-11-03' },
+        { seuil: '80', date: '2026-11-04' },
+        { seuil: '100', date: '2026-11-05' },
+      ]);
+    });
+
+    it("ne publie rien tant qu'aucun seuil n'est franchi", async () => {
+      await desMesures(5);
+      await desPrisesEnCompte(['2026-11-01', '2026-11-02']);
+
+      await tache().execute();
+
+      expect(await completions()).toEqual([]);
+    });
+
+    it('suit les dates de prise en compte et non leur ordre en base', async () => {
+      await desMesures(4);
+      await desPrisesEnCompte(['2026-11-09', '2026-11-01']);
+
+      await tache().execute();
+
+      expect(await completions()).toEqual([{ seuil: '50', date: '2026-11-09' }]);
+    });
+
+    it('publie tous les seuils franchis par une même prise en compte', async () => {
+      await desMesures(1);
+      await desPrisesEnCompte(['2026-11-01']);
+
+      await tache().execute();
+
+      expect(await completions()).toEqual([
+        { seuil: '50', date: '2026-11-01' },
+        { seuil: '80', date: '2026-11-01' },
+        { seuil: '100', date: '2026-11-01' },
+      ]);
+    });
+
+    it('calcule les seuils de chaque utilisateur séparément', async () => {
+      await unUtilisateurDeMSC('jean@example.com');
+      await desMesures(4);
+      await desPrisesEnCompte(['2026-11-01']);
+      await desPrisesEnCompte(['2026-11-02', '2026-11-03'], hache('jean@example.com'));
+
+      await tache().execute();
+
+      expect(await trx('msc.completions_parcours').select('id_hash_utilisateur', 'seuil')).toEqual([
+        { id_hash_utilisateur: hache('jean@example.com'), seuil: 50 },
+      ]);
+    });
+
+    it('relit les anciennes prises en compte des utilisateurs actifs depuis la dernière exécution', async () => {
+      await uneExecutionPrecedente('2026-11-24T02:30:00.000Z');
+      await desMesures(4);
+      await desPrisesEnCompte(['2026-06-01', '2026-11-24T10:00:00.000Z']);
+
+      await tache().execute();
+
+      expect(await completions()).toEqual([{ seuil: '50', date: '2026-11-24' }]);
+    });
+
+    it('ne relit pas les utilisateurs sans prise en compte depuis la dernière exécution', async () => {
+      await uneExecutionPrecedente('2026-11-24T02:30:00.000Z');
+      await desMesures(4);
+      await desPrisesEnCompte(['2026-06-01', '2026-06-02']);
+
+      await tache().execute();
+
+      expect(await completions()).toEqual([]);
+    });
+
+    it('ne modifie pas une date déjà publiée', async () => {
+      await trx('msc.utilisateurs').insert({ id_hash: idUtilisateur });
+      await trx('msc.completions_parcours').insert({
+        id_hash_utilisateur: idUtilisateur,
+        seuil: 50,
+        date: '2026-10-01',
+      });
+      await desMesures(4);
+      await desPrisesEnCompte(['2026-11-01', '2026-11-02']);
+
+      await tache().execute();
+
+      expect(await completions()).toEqual([{ seuil: '50', date: '2026-10-01' }]);
     });
   });
 });
