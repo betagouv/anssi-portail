@@ -131,6 +131,8 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
         'modele-inventaire-composants-obsoletes',
         'modele-inventaire-composants-obsoletes.xlsx'
       ),
+    modèleSuiviDesArrivées: () =>
+      join(process.cwd(), 'src', 'api', 'outils', 'modeleSuiviDesArrivees', 'modele-suivi-des-arrivees.docx'),
   },
   jekyll: {
     page403: () => ressourceFactice(),
