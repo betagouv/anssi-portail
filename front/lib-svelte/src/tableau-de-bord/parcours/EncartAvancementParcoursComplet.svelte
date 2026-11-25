@@ -60,7 +60,12 @@
         <div class="detail-module">
           <p class="texte-detail-sm">{module.nom}</p>
           <div class="progression-visuelle">
-            <Progression mode="sans-titre" actuel={mesuresPriseEnCompteParModule} max={module.mesures.length} />
+            <Progression
+              mode="sans-titre"
+              actuel={mesuresPriseEnCompteParModule}
+              max={module.mesures.length}
+              taille="sm"
+            />
             <p class="texte-standard-md">{mesuresPriseEnCompteParModule}/{module.mesures.length}</p>
           </div>
         </div>
