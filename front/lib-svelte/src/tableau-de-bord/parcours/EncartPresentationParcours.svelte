@@ -42,6 +42,7 @@
         description="Sauvegarder régulièrement les données, vérifier et mettre à l’abri ses sauvegardes"
         size="sm"
         hasBadge
+        noLink
         variations="no-border"
         hasButtons
       >
@@ -83,6 +84,7 @@
       description="Le socle de départ de la sécurisation d'une organisation&nbsp;: les mesures les plus accessibles et les plus rentables, peu coûteuses et rapides à déployer, à mettre en place avant toute protection avancée."
       size="sm"
       hasBadge
+      noLink
       variations="no-border"
       hasButtons
     >
@@ -92,7 +94,7 @@
       <div slot="buttonsgroup" class="action">
         <Lien
           apparence="bouton"
-          libelle="Découvrir toutes les mesures"
+          libelle="Accéder aux mesures"
           href="/modules/1?pageSource=${pageSource}-complet"
           etire
           type="secondaire"
