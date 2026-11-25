@@ -28,6 +28,10 @@ export type DonneesObservatoireProjets = {
 
 export type TotalParNiveauMaturite = { niveau: string; total: number };
 
+export type TotalParDepartement = { departement: string; total: number };
+
+export type RepartitionParDepartement = { code: string; nom: string; total: number }[];
+
 export const SEUILS_COMPLETION = [50, 80, 100] as const;
 
 export type SeuilCompletion = (typeof SEUILS_COMPLETION)[number];
@@ -40,8 +44,17 @@ export type DonneesObservatoireOrganisations = {
   testsSensibilisation: DonneeObservatoire<{ total: number; cumulMensuel: CumulMensuel[] }>;
   demarchesInitiees: DonneeObservatoire<{ total: number }>;
   diagnosticsCyberdepart: DonneeObservatoire<{ total: number }>;
-  cyberdepartsValides: DonneeObservatoire<{ total: number; cumulMensuel: CumulMensuel[] }>;
+  cyberdepartsValides: DonneeObservatoire<{
+    total: number;
+    cumulMensuel: CumulMensuel[];
+    parDepartement: RepartitionParDepartement;
+  }>;
   completions: DonneeObservatoire<{
-    parSeuil: { seuil: SeuilCompletion; total: number; cumulMensuel: CumulMensuel[] }[];
+    parSeuil: {
+      seuil: SeuilCompletion;
+      total: number;
+      cumulMensuel: CumulMensuel[];
+      parDepartement: RepartitionParDepartement;
+    }[];
   }>;
 };
