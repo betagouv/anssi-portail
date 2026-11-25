@@ -7,6 +7,7 @@ import type { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi.js';
 import type { AdaptateurRechercheEntreprise, OrganisationDetaillee } from '../infra/adaptateurRechercheEntreprise.js';
 import {
   RésultatTestMaturité,
+  type IdNiveauMaturite,
   type ReponsesTestMaturite,
 } from '../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { régions } from '../metier/referentielRegions.js';
@@ -20,6 +21,14 @@ const INTERVALLE_APPELS_RECHERCHE_ENTREPRISE_EN_MS = Math.ceil(1000 / 7);
 const TAILLE_LOT_PROFILS_ANSSI = 500;
 const TAILLE_PAQUET_ECRITURE = 1000;
 const UN_JOUR_EN_MS = 24 * 60 * 60 * 1000;
+
+const LIBELLES_NIVEAUX_MATURITE: Record<IdNiveauMaturite, string> = {
+  insuffisant: 'Insuffisant',
+  emergent: 'Émergent',
+  intermediaire: 'Intermédiaire',
+  confirme: 'Confirmé',
+  optimal: 'Optimal',
+};
 
 type ÉvénementTestRevendiqué = {
   donnees: { idResultatTest?: string; idUtilisateur?: string };
@@ -212,12 +221,14 @@ export class MiseAJourObservatoire {
       type_test: 'maturité cyber',
       date_realisation: versJour(résultat.date_realisation),
       niveau: résultat.reponses
-        ? new RésultatTestMaturité({
-            region: undefined,
-            secteur: undefined,
-            tailleOrganisation: undefined,
-            reponses: résultat.reponses,
-          }).niveau()
+        ? LIBELLES_NIVEAUX_MATURITE[
+            new RésultatTestMaturité({
+              region: undefined,
+              secteur: undefined,
+              tailleOrganisation: undefined,
+              reponses: résultat.reponses,
+            }).niveau()
+          ]
         : null,
       id_hash_utilisateur: résultat.email_utilisateur_hache,
       region_declaree: régionInseeDepuisIso(résultat.region),
