@@ -3,7 +3,7 @@
   import type { DonnéesObservatoire, SeuilComplétion } from '../passerelles/observatoire';
   import ChiffreCle from './ChiffreCle.svelte';
   import EvolutionMensuelle from './EvolutionMensuelle.svelte';
-  import { formateNombre } from './formatage';
+  import { formateNombre, libelléDuSeuil } from './formatage';
   import Rangee from './Rangee.svelte';
 
   interface Props {
@@ -11,8 +11,6 @@
   }
 
   let { complétions }: Props = $props();
-
-  const libelléDuSeuil = (seuil: SeuilComplétion) => (seuil === 100 ? '100 %' : `≥ ${seuil} %`);
 
   let seuil: SeuilComplétion = $state(50);
 

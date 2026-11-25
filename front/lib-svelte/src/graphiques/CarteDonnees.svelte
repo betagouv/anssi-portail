@@ -15,10 +15,11 @@
     source: string;
     date?: string;
     tableau?: TableauDeDonnees;
+    réglages?: Snippet;
     children: Snippet;
   }
 
-  let { id, titre, description, infobulle, source, date, tableau, children }: Props = $props();
+  let { id, titre, description, infobulle, source, date, tableau, réglages, children }: Props = $props();
 
   let vue: 'graphique' | 'tableau' = $state('graphique');
 
@@ -48,6 +49,11 @@
   </header>
   {#if description}
     <p class="description">{description}</p>
+  {/if}
+  {#if réglages}
+    <div class="reglages">
+      {@render réglages()}
+    </div>
   {/if}
   <div class="contenu">
     {#if tableau && vue === 'tableau'}
@@ -94,6 +100,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    min-width: 0;
     height: 100%;
     padding: 1.5rem;
     box-sizing: border-box;
@@ -120,6 +127,10 @@
       font-size: 0.75rem;
       line-height: 1.25rem;
       margin: 0;
+    }
+
+    .reglages {
+      overflow-x: auto;
     }
 
     .contenu {
