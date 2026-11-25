@@ -12,6 +12,7 @@ import {
   RésultatTestMaturité,
   type ReponsesTestMaturite,
 } from '../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { SEUILS_COMPLETION } from '../metier/observatoire.js';
 import { régions } from '../metier/referentielRegions.js';
 
 const TABLE_EXECUTIONS = 'msc.executions';
@@ -26,8 +27,6 @@ const INTERVALLE_APPELS_RECHERCHE_ENTREPRISE_EN_MS = Math.ceil(1000 / 7);
 const TAILLE_LOT_PROFILS_ANSSI = 500;
 const TAILLE_PAQUET_ECRITURE = 1000;
 const UN_JOUR_EN_MS = 24 * 60 * 60 * 1000;
-
-const SEUILS_COMPLETION = [50, 80, 100];
 
 type TypeÉvénement = DonneesEvenement['type'];
 

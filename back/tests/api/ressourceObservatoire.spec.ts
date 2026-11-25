@@ -47,7 +47,14 @@ describe('La ressource Observatoire', () => {
 
       expect(reponse.status).toBe(HttpStatusCode.Ok);
       expect(Object.keys(reponse.body.projets)).toEqual(['services', 'mesuresFaites', 'homologations']);
-      expect(Object.keys(reponse.body.organisations)).toEqual(['testsMaturite']);
+      expect(Object.keys(reponse.body.organisations)).toEqual([
+        'testsMaturite',
+        'testsSensibilisation',
+        'demarchesInitiees',
+        'diagnosticsCyberdepart',
+        'cyberdepartsValides',
+        'completions',
+      ]);
       expect(Object.keys(reponse.body.menaceCyber)).toEqual([
         'evenementsSecurite',
         'incidents',
