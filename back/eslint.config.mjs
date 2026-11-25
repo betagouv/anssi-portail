@@ -12,7 +12,7 @@ export default defineConfig(
     extends: [eslint.configs.recommended, tseslint.configs.recommended, reglesEslint.configs.all],
   },
   {
-    files: ['migrations/**/*.ts', 'src/admin/**/*.ts'],
+    files: ['migrations/**/*.ts', 'src/admin/**/*.ts', 'src/taches/**/*.ts'],
     rules: {
       'no-console': 'off',
     },
