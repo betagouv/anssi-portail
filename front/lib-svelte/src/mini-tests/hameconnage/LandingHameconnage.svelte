@@ -21,7 +21,7 @@
 {#snippet herosRiche()}
   <HerosRiche
     {propriétésFilAriane}
-    description="Des tentatives de hameçonnage / phishing peuvent tromper la vigilance des équipes et conduire à des vols de données ou encore à l'installation de logiciels malveillants. S'entraîner à les reconnaître permet de se protéger. Faites le test&nbsp;!"
+    description="Des tentatives de hameçonnage / phishing peuvent tromper la vigilance des équipes et conduire à des vols de données ou encore à l'installation de logiciels malveillants. S'entraîner à les reconnaître permet de se protéger. Faites le test&#8239;!"
     variante="cafe-creme"
     class="avec-image-fond"
     badges={[{ label: '⏱️ 6 minutes', accent: 'green-bourgeon' }]}
