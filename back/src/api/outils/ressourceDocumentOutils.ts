@@ -9,7 +9,10 @@ import { corpsVide, valideCorpsRequete } from '../zod.js';
 
 export const ressourceDocumentOutils = (
   { adaptateurHachage, entrepotUtilisateur, middleware, busEvenements }: ConfigurationServeur,
-  outil: Extract<Outil, 'modele-suivi-des-arrivees.docx' | 'modele-suivi-de-changement-de-fonction.docx'>,
+  outil: Extract<
+    Outil,
+    'modele-suivi-des-arrivees.docx' | 'modele-suivi-de-changement-de-fonction.docx' | 'modele-suivi-des-departs.docx'
+  >,
   cheminFichier: FournisseurChemin['back'][keyof FournisseurChemin['back']]
 ) => {
   const routeur = Router();

@@ -78,6 +78,15 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
     )
   );
 
+  enregistreRoute(
+    `/modele-suivi-des-departs.docx`,
+    ressourceDocumentOutils(
+      configurationServeur,
+      'modele-suivi-des-departs.docx',
+      configurationServeur.fournisseurChemin.back.modèleSuiviDesDéparts
+    )
+  );
+
   /// OUTILS AUTRE
   enregistreRoute('/campagne-de-sensibilisation', ressourceCampagneDeSensibilisation(configurationServeur));
 };

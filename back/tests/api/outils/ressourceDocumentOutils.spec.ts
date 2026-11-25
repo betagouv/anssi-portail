@@ -18,6 +18,7 @@ describe("La ressource générique de téléchargement de documents d'outils ", 
   const documentsOutil = [
     { fichier: 'modele-suivi-des-arrivees.docx', taille: 40331 },
     { fichier: 'modele-suivi-de-changement-de-fonction.docx', taille: 39481 },
+    { fichier: 'modele-suivi-des-departs.docx', taille: 40252 },
   ];
 
   beforeEach(async () => {
