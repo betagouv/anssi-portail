@@ -172,4 +172,99 @@ describe('La recherche entreprise', () => {
       expect(resultats[0].departement).toBe('92');
     }
   );
+
+  describe('pour une organisation détaillée', () => {
+    it("renvoie les données de l'API renommées sans underscore", async () => {
+      const resultat = resultatSirene();
+      vi.spyOn(axios, 'get').mockResolvedValue({
+        data: {
+          results: [
+            {
+              ...resultat,
+              matching_etablissements: [
+                { ...resultat.matching_etablissements[0], region: '11', tranche_effectif_salarie: '41' },
+              ],
+              section_activite_principale: 'O',
+              nature_juridique: '7120',
+              categorie_entreprise: 'ETI',
+              finances: { '2024': { ca: 1_500_000, resultat_net: 10_000 } },
+              complements: {
+                est_association: false,
+                collectivite_territoriale: null,
+                identifiant_association: null,
+                est_administration: true,
+              },
+            },
+          ],
+        },
+      });
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteur);
+
+      const organisation = await adaptateur.rechercheOrganisationDetaillee('18008001200248');
+
+      expect(organisation).toEqual({
+        natureJuridique: '7120',
+        categorieEntreprise: 'ETI',
+        trancheEffectifSalarie: '41',
+        finances: { '2024': { ca: 1_500_000, resultatNet: 10_000 } },
+        complements: {
+          collectiviteTerritoriale: null,
+          estAssociation: false,
+          identifiantAssociation: null,
+          estAdministration: true,
+        },
+        sectionActivitePrincipale: 'O',
+        departement: '92',
+        region: '11',
+      });
+    });
+
+    it('renvoie des valeurs nulles quand les données sont absentes', async () => {
+      vi.spyOn(axios, 'get').mockResolvedValue({ data: { results: [resultatSirene()] } });
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteur);
+
+      const organisation = await adaptateur.rechercheOrganisationDetaillee('18008001200248');
+
+      expect(organisation).toMatchObject({
+        natureJuridique: null,
+        categorieEntreprise: null,
+        trancheEffectifSalarie: null,
+        finances: null,
+        region: null,
+      });
+    });
+
+    it("renvoie undefined quand l'entité n'a pas d'établissement correspondant", async () => {
+      vi.spyOn(axios, 'get').mockResolvedValue({
+        data: { results: [{ ...resultatSirene(), matching_etablissements: [] }] },
+      });
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteur);
+
+      expect(await adaptateur.rechercheOrganisationDetaillee('18008001200248')).toBeUndefined();
+    });
+
+    it('renvoie undefined quand aucun établissement ne correspond', async () => {
+      vi.spyOn(axios, 'get').mockResolvedValue({ data: { results: [] } });
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteur);
+
+      expect(await adaptateur.rechercheOrganisationDetaillee('18008001200248')).toBeUndefined();
+    });
+
+    it("lève l'erreur de l'API au lieu de renvoyer un résultat vide", async () => {
+      vi.spyOn(axios, 'get').mockRejectedValue(new Error('API indisponible'));
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteur);
+
+      await expect(adaptateur.rechercheOrganisationDetaillee('18008001200248')).rejects.toThrow('API indisponible');
+    });
+
+    it('ne met pas le résultat en cache', async () => {
+      const get = vi.spyOn(axios, 'get').mockResolvedValue({ data: { results: [resultatSirene()] } });
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement, fauxRapporteur);
+
+      await adaptateur.rechercheOrganisationDetaillee('18008001200248');
+      await adaptateur.rechercheOrganisationDetaillee('18008001200248');
+
+      expect(get).toHaveBeenCalledTimes(2);
+    });
+  });
 });

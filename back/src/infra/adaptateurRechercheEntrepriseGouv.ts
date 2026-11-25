@@ -2,7 +2,11 @@ import axios, { AxiosError } from '@anssi-portail/axios';
 import { Rapporteur } from '../metier/rapporteur.js';
 import { régions } from '../metier/referentielRegions.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
-import { AdaptateurRechercheEntreprise, ResultatRechercheEntreprise } from './adaptateurRechercheEntreprise.js';
+import {
+  AdaptateurRechercheEntreprise,
+  OrganisationDetaillee,
+  ResultatRechercheEntreprise,
+} from './adaptateurRechercheEntreprise.js';
 import { Cache } from './cache.js';
 
 const TRENTE_MINUTES = Temporal.Duration.from({ minutes: 30 });
@@ -30,6 +34,45 @@ export class AdaptateurRechercheEntrepriseGouv implements AdaptateurRechercheEnt
     return this.cache.get(`${terme}-${département}`, () => {
       return this.#rechercheOrganisations(terme, département);
     });
+  }
+
+  async rechercheOrganisationDetaillee(siret: string): Promise<OrganisationDetaillee | undefined> {
+    const réponse = await axios.get<{ results: RésultatSirene[] }>(this.apiUrl, {
+      params: {
+        q: siret,
+        per_page: 1,
+        page: 1,
+        limite_matching_etablissements: 1,
+        mtm_campaign: 'mes-services-cyber',
+      },
+    });
+
+    const [entité] = réponse.data.results;
+    const établissement = entité?.matching_etablissements?.[0];
+    if (!entité || !établissement) return undefined;
+
+    return {
+      natureJuridique: entité.nature_juridique ?? null,
+      categorieEntreprise: entité.categorie_entreprise ?? null,
+      trancheEffectifSalarie: établissement.tranche_effectif_salarie ?? null,
+      finances: entité.finances
+        ? Object.fromEntries(
+            Object.entries(entité.finances).map(([année, { ca, resultat_net: resultatNet }]) => [
+              année,
+              { ca, resultatNet },
+            ])
+          )
+        : null,
+      complements: {
+        collectiviteTerritoriale: entité.complements.collectivite_territoriale,
+        estAssociation: entité.complements.est_association,
+        identifiantAssociation: entité.complements.identifiant_association,
+        estAdministration: entité.complements.est_administration,
+      },
+      sectionActivitePrincipale: entité.section_activite_principale,
+      departement: établissement.commune ? extraisCodeINSEE(établissement.commune) : null,
+      region: établissement.region ?? null,
+    };
   }
 
   async #rechercheOrganisations(terme: string, département: string | null): Promise<ResultatRechercheEntreprise[]> {
@@ -117,14 +160,23 @@ type RésultatSirene = {
     liste_enseignes?: string[] | null;
     commune?: string | null;
     siret?: string | null;
+    region?: string | null;
+    tranche_effectif_salarie?: string | null;
   }[];
   section_activite_principale: string | null; // contrairement à ce que dit la documentation, null est possible
   tranche_effectif_salarie: string | null; // contrairement à ce que dit la documentation, null est possible
   complements: {
     collectivite_territoriale: {
+      code: string;
       code_insee: string;
+      niveau: string;
     } | null;
     est_association: boolean;
+    identifiant_association?: string | null;
+    est_administration?: boolean | null;
   };
   activite_principale_naf25: string | null;
+  nature_juridique?: string | null;
+  categorie_entreprise?: 'PME' | 'ETI' | 'GE' | null;
+  finances?: Record<string, { ca: number | null; resultat_net: number | null }> | null;
 };
