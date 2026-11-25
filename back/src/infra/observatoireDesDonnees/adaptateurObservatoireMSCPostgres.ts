@@ -3,7 +3,12 @@ import {
   libellésNiveauMaturité,
   tousLesIdNiveauMaturite,
 } from '../../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
-import { CumulMensuel, SeuilCompletion, TotalParNiveauMaturite } from '../../metier/observatoire.js';
+import {
+  CumulMensuel,
+  SeuilCompletion,
+  TotalParDepartement,
+  TotalParNiveauMaturite,
+} from '../../metier/observatoire.js';
 import { AdaptateurObservatoireMSC } from './adaptateurObservatoireMSC.js';
 import { cumulMensuel, total } from './requetesObservatoire.js';
 
@@ -46,12 +51,20 @@ export class AdaptateurObservatoireMSCPostgres implements AdaptateurObservatoire
     return cumulMensuel(this.knex, this.knex('msc.badges_cyberdepart'), 'date');
   }
 
+  async cyberdepartsValidesParDepartement(): Promise<TotalParDepartement[]> {
+    return this.parDepartement(this.knex('msc.badges_cyberdepart'));
+  }
+
   async totalCompletions(seuil: SeuilCompletion): Promise<number> {
     return total(this.completions(seuil));
   }
 
   async cumulMensuelCompletions(seuil: SeuilCompletion): Promise<CumulMensuel[]> {
     return cumulMensuel(this.knex, this.completions(seuil), 'date');
+  }
+
+  async completionsParDepartement(seuil: SeuilCompletion): Promise<TotalParDepartement[]> {
+    return this.parDepartement(this.completions(seuil));
   }
 
   async dateDerniereExecution(): Promise<Date | null> {
@@ -65,5 +78,16 @@ export class AdaptateurObservatoireMSCPostgres implements AdaptateurObservatoire
 
   private completions(seuil: SeuilCompletion) {
     return this.knex('msc.completions_parcours').where({ seuil });
+  }
+
+  private async parDepartement(lignes: Knex.QueryBuilder): Promise<TotalParDepartement[]> {
+    const totaux: { departement: string; total: string }[] = await lignes
+      .join('msc.utilisateurs', 'msc.utilisateurs.id_hash', 'id_hash_utilisateur')
+      .select('departement')
+      .count('* as total')
+      .whereNotNull('departement')
+      .groupBy('departement')
+      .orderBy('departement');
+    return totaux.map(({ departement, total }) => ({ departement, total: Number(total) }));
   }
 }

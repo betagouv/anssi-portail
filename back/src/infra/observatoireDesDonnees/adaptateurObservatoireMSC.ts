@@ -1,4 +1,9 @@
-import { CumulMensuel, SeuilCompletion, TotalParNiveauMaturite } from '../../metier/observatoire.js';
+import {
+  CumulMensuel,
+  SeuilCompletion,
+  TotalParDepartement,
+  TotalParNiveauMaturite,
+} from '../../metier/observatoire.js';
 
 export interface AdaptateurObservatoireMSC {
   totalTestsMaturite(): Promise<number>;
@@ -8,7 +13,9 @@ export interface AdaptateurObservatoireMSC {
   totalParcoursRejoints(): Promise<number>;
   totalCyberdepartsValides(): Promise<number>;
   cumulMensuelCyberdepartsValides(): Promise<CumulMensuel[]>;
+  cyberdepartsValidesParDepartement(): Promise<TotalParDepartement[]>;
   totalCompletions(seuil: SeuilCompletion): Promise<number>;
   cumulMensuelCompletions(seuil: SeuilCompletion): Promise<CumulMensuel[]>;
+  completionsParDepartement(seuil: SeuilCompletion): Promise<TotalParDepartement[]>;
   dateDerniereExecution(): Promise<Date | null>;
 }

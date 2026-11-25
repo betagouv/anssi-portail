@@ -130,6 +130,37 @@ describe("L'adaptateur PostgreSQL de l'observatoire des données de MSC", () => 
     });
   });
 
+  describe('concernant la répartition par département', () => {
+    beforeEach(async () => {
+      await trx('msc.utilisateurs').insert([
+        { id_hash: 'utilisateur-0', departement: '35' },
+        { id_hash: 'utilisateur-1', departement: '35' },
+        { id_hash: 'utilisateur-2', departement: '2A' },
+        { id_hash: 'utilisateur-3', departement: null },
+      ]);
+    });
+
+    it('compte les niveaux Cyberdépart validés de chaque département, sans les utilisateurs sans département', async () => {
+      await desDates('msc.badges_cyberdepart', ['2026-01-01', '2026-01-01', '2026-01-01', '2026-01-01']);
+
+      const parDepartement = await new AdaptateurObservatoireMSCPostgres(trx).cyberdepartsValidesParDepartement();
+
+      expect(parDepartement).toStrictEqual([
+        { departement: '2A', total: 1 },
+        { departement: '35', total: 2 },
+      ]);
+    });
+
+    it('compte les complétions de chaque département pour le seuil demandé', async () => {
+      await desDates('msc.completions_parcours', ['2026-01-01', '2026-01-01', '2026-01-01'], { seuil: 50 });
+      await desDates('msc.completions_parcours', ['2026-02-01'], { seuil: 80 });
+
+      const parDepartement = await new AdaptateurObservatoireMSCPostgres(trx).completionsParDepartement(80);
+
+      expect(parDepartement).toStrictEqual([{ departement: '35', total: 1 }]);
+    });
+  });
+
   describe('concernant les complétions du parcours', () => {
     beforeEach(async () => {
       await desUtilisateurs(2);

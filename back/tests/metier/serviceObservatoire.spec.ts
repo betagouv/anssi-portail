@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { SeuilCompletion } from '../../src/metier/observatoire.js';
+import { departements } from '../../src/metier/referentielDepartements.js';
 import { ServiceObservatoire } from '../../src/metier/serviceObservatoire.js';
 import { DATE_MAJ_NOMBRES_DE_DIAGNOSTIC_CYBER, NOMBRES_DE_DIAGNOSTIC_CYBER } from '../../src/metier/statistiques.js';
 
@@ -24,8 +25,10 @@ describe('Le service Observatoire', () => {
     totalParcoursRejoints: async () => 7,
     totalCyberdepartsValides: async () => 4,
     cumulMensuelCyberdepartsValides: async () => [{ mois: '2026-02', cumul: 4 }],
+    cyberdepartsValidesParDepartement: async () => [{ departement: '35', total: 2 }],
     totalCompletions: async (seuil: SeuilCompletion) => 100 - seuil,
     cumulMensuelCompletions: async (seuil: SeuilCompletion) => [{ mois: '2026-02', cumul: 100 - seuil }],
+    completionsParDepartement: async (seuil: SeuilCompletion) => [{ departement: '2A', total: seuil }],
     dateDerniereExecution: async () => new Date('2026-03-01T02:30:00.000Z'),
   };
 
@@ -138,17 +141,34 @@ describe('Le service Observatoire', () => {
           date: new Date('2026-03-01T02:30:00.000Z'),
           total: 4,
           cumulMensuel: [{ mois: '2026-02', cumul: 4 }],
+          parDepartement: expect.any(Array),
         },
         completions: {
           source: 'MesServicesCyber',
           date: new Date('2026-03-01T02:30:00.000Z'),
           parSeuil: [
-            { seuil: 50, total: 50, cumulMensuel: [{ mois: '2026-02', cumul: 50 }] },
-            { seuil: 80, total: 20, cumulMensuel: [{ mois: '2026-02', cumul: 20 }] },
-            { seuil: 100, total: 0, cumulMensuel: [{ mois: '2026-02', cumul: 0 }] },
+            { seuil: 50, total: 50, cumulMensuel: [{ mois: '2026-02', cumul: 50 }], parDepartement: expect.any(Array) },
+            { seuil: 80, total: 20, cumulMensuel: [{ mois: '2026-02', cumul: 20 }], parDepartement: expect.any(Array) },
+            { seuil: 100, total: 0, cumulMensuel: [{ mois: '2026-02', cumul: 0 }], parDepartement: expect.any(Array) },
           ],
         },
       });
+    });
+
+    it('répartit les niveaux validés sur tous les départements, à zéro pour ceux sans donnée', async () => {
+      const observatoire = new ServiceObservatoire({
+        adaptateurObservatoireMSS,
+        adaptateurObservatoireMSC,
+        adaptateurObservatoireMenaceCyber,
+      });
+
+      const { cyberdepartsValides, completions } = await observatoire.donneesOrganisations();
+
+      expect(cyberdepartsValides.parDepartement).toHaveLength(departements.length);
+      expect(cyberdepartsValides.parDepartement).toContainEqual({ code: '35', nom: 'Ille-et-Vilaine', total: 2 });
+      expect(cyberdepartsValides.parDepartement).toContainEqual({ code: '01', nom: 'Ain', total: 0 });
+      expect(completions.parSeuil[1].parDepartement).toHaveLength(departements.length);
+      expect(completions.parSeuil[1].parDepartement).toContainEqual({ code: '2A', nom: 'Corse-du-Sud', total: 80 });
     });
 
     const dateDesDemarches = async (dateDerniereExecution: Date | null) => {

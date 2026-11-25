@@ -1,12 +1,24 @@
 import { AdaptateurObservatoireMenaceCyber } from '../infra/observatoireDesDonnees/adaptateurObservatoireMenaceCyberMemoire.js';
 import { AdaptateurObservatoireMSC } from '../infra/observatoireDesDonnees/adaptateurObservatoireMSC.js';
 import { AdaptateurObservatoireMSS } from '../infra/observatoireDesDonnees/adaptateurObservatoireMSS.js';
-import { DonneesObservatoireOrganisations, DonneesObservatoireProjets, SEUILS_COMPLETION } from './observatoire.js';
+import {
+  DonneesObservatoireOrganisations,
+  DonneesObservatoireProjets,
+  RepartitionParDepartement,
+  SEUILS_COMPLETION,
+  TotalParDepartement,
+} from './observatoire.js';
+import { departements } from './referentielDepartements.js';
 import { DATE_MAJ_NOMBRES_DE_DIAGNOSTIC_CYBER, NOMBRES_DE_DIAGNOSTIC_CYBER } from './statistiques.js';
 
 const SANS_FILTRE = {};
 const source = 'MonServiceSécurisé';
 const sourceMSC = 'MesServicesCyber';
+
+const surTousLesDepartements = (totaux: TotalParDepartement[]): RepartitionParDepartement => {
+  const totalParCode = new Map(totaux.map(({ departement, total }) => [departement, total]));
+  return departements.map(({ code, nom }) => ({ code, nom, total: totalParCode.get(code) ?? 0 }));
+};
 
 const dateLaPlusAncienne = (a: Date, b: Date) => (a < b ? a : b);
 
@@ -56,6 +68,7 @@ export class ServiceObservatoire {
       totalParcoursRejoints,
       totalCyberdepartsValides,
       cumulMensuelCyberdepartsValides,
+      cyberdepartsValidesParDepartement,
       completionsParSeuil,
       date,
     ] = await Promise.all([
@@ -66,6 +79,7 @@ export class ServiceObservatoire {
       this.adaptateurObservatoireMSC.totalParcoursRejoints(),
       this.adaptateurObservatoireMSC.totalCyberdepartsValides(),
       this.adaptateurObservatoireMSC.cumulMensuelCyberdepartsValides(),
+      this.adaptateurObservatoireMSC.cyberdepartsValidesParDepartement(),
       this.completionsParSeuil(),
       this.adaptateurObservatoireMSC.dateDerniereExecution(),
     ]);
@@ -93,6 +107,7 @@ export class ServiceObservatoire {
         source: sourceMSC,
         total: totalCyberdepartsValides,
         cumulMensuel: cumulMensuelCyberdepartsValides,
+        parDepartement: surTousLesDepartements(cyberdepartsValidesParDepartement),
       },
       completions: { date, source: sourceMSC, parSeuil: completionsParSeuil },
     };
@@ -101,11 +116,12 @@ export class ServiceObservatoire {
   private completionsParSeuil() {
     return Promise.all(
       SEUILS_COMPLETION.map(async (seuil) => {
-        const [total, cumulMensuel] = await Promise.all([
+        const [total, cumulMensuel, parDepartement] = await Promise.all([
           this.adaptateurObservatoireMSC.totalCompletions(seuil),
           this.adaptateurObservatoireMSC.cumulMensuelCompletions(seuil),
+          this.adaptateurObservatoireMSC.completionsParDepartement(seuil),
         ]);
-        return { seuil, total, cumulMensuel };
+        return { seuil, total, cumulMensuel, parDepartement: surTousLesDepartements(parDepartement) };
       })
     );
   }

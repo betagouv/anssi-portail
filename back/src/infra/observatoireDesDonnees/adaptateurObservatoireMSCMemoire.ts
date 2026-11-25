@@ -1,4 +1,10 @@
-import { CumulMensuel, SeuilCompletion, TotalParNiveauMaturite } from '../../metier/observatoire.js';
+import {
+  CumulMensuel,
+  SeuilCompletion,
+  TotalParDepartement,
+  TotalParNiveauMaturite,
+} from '../../metier/observatoire.js';
+import { codeDepartement } from '../../metier/referentielDepartements.js';
 import { AdaptateurObservatoireMSC } from './adaptateurObservatoireMSC.js';
 
 const MOIS = [
@@ -18,6 +24,9 @@ const MOIS = [
 
 const cumulLineaire = (debut: number, fin: number): CumulMensuel[] =>
   MOIS.map((mois, index) => ({ mois, cumul: Math.round(debut + ((fin - debut) * index) / (MOIS.length - 1)) }));
+
+const repartitionFictive = (maximum: number): TotalParDepartement[] =>
+  codeDepartement.map((departement, index) => ({ departement, total: (index * 37) % (maximum + 1) }));
 
 const COMPLETIONS: Record<SeuilCompletion, number> = { 50: 1894, 80: 912, 100: 347 };
 
@@ -42,10 +51,15 @@ export class AdaptateurObservatoireMSCMemoire implements AdaptateurObservatoireM
 
   cumulMensuelCyberdepartsValides = async (): Promise<CumulMensuel[]> => cumulLineaire(1150, 5292);
 
+  cyberdepartsValidesParDepartement = async (): Promise<TotalParDepartement[]> => repartitionFictive(252);
+
   totalCompletions = async (seuil: SeuilCompletion): Promise<number> => COMPLETIONS[seuil];
 
   cumulMensuelCompletions = async (seuil: SeuilCompletion): Promise<CumulMensuel[]> =>
     cumulLineaire(Math.round(COMPLETIONS[seuil] / 5), COMPLETIONS[seuil]);
+
+  completionsParDepartement = async (seuil: SeuilCompletion): Promise<TotalParDepartement[]> =>
+    repartitionFictive(Math.round(COMPLETIONS[seuil] / 20));
 
   dateDerniereExecution = async (): Promise<Date | null> => new Date('2026-09-30T00:00:00.000Z');
 }
