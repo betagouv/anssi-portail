@@ -44,6 +44,7 @@ import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
 import { ServiceModèleInventaireDesComposantsObsolètes } from './outils/modele-inventaire-composants-obsoletes/serviceModeleInventaireComposantsObsoletes.js';
 import { ServiceModèleAnalyseDeConformité } from './outils/modeleAnalyseDeConformite/serviceModeleAnalyseDeConformite.js';
 import { ServiceModeleAnnuaireDeCrise } from './outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
+import { ServiceModèleCartographie } from './outils/modeleCartographie/serviceModeleCartographie.js';
 import { ServiceModèleListeDActivités } from './outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleListeDesInterconnexions } from './outils/modeleListeInterconnexions/serviceModeleListeInterconnexions.js';
 import { ServiceModèleListeDesPrestatairesEtFournisseurs } from './outils/modeleListePrestatairesEtFournisseurs/serviceModeleListePrestatairesEtFournisseurs.js';
@@ -110,6 +111,7 @@ export type ConfigurationServeur = {
   serviceModeleListeInterconnexions: ServiceModèleListeDesInterconnexions;
   serviceModeleInventaireComposantsObsoletes: ServiceModèleInventaireDesComposantsObsolètes;
   serviceModèleAnalyseDeConformité: ServiceModèleAnalyseDeConformité;
+  serviceModèleCartographie: ServiceModèleCartographie;
   adaptateurEmail: AdaptateurEmail;
   generateurImage: GenerateurImage;
   adaptateurCompression: AdaptateurCompression;

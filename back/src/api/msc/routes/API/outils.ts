@@ -39,6 +39,7 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
       ['modele-liste-interconnexions.xlsx', configurationServeur.serviceModeleListeInterconnexions],
       ['modele-inventaire-composants-obsoletes.xlsx', configurationServeur.serviceModeleInventaireComposantsObsoletes],
       ['modele-analyse-de-conformite.xlsx', configurationServeur.serviceModèleAnalyseDeConformité],
+      ['modele-cartographie.xlsx', configurationServeur.serviceModèleCartographie],
     ] satisfies [Outil, ServiceModèleXslx][]
   ).forEach(([outil, serviceXslx]) => {
     enregistreRoute(`/${outil}`, ressourceModèleXslxGénérique(configurationServeur, serviceXslx, outil));

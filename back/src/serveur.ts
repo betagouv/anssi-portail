@@ -13,6 +13,7 @@ import { adaptateurOIDC } from './api/oidc/adaptateurOIDC.js';
 import { ServiceModèleInventaireDesComposantsObsolètes } from './api/outils/modele-inventaire-composants-obsoletes/serviceModeleInventaireComposantsObsoletes.js';
 import { ServiceModèleAnalyseDeConformité } from './api/outils/modeleAnalyseDeConformite/serviceModeleAnalyseDeConformite.js';
 import { ServiceModeleAnnuaireDeCrise } from './api/outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
+import { ServiceModèleCartographie } from './api/outils/modeleCartographie/serviceModeleCartographie.js';
 import { ServiceModèleListeDActivités } from './api/outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleListeDesInterconnexions } from './api/outils/modeleListeInterconnexions/serviceModeleListeInterconnexions.js';
 import { ServiceModèleListeDesPrestatairesEtFournisseurs } from './api/outils/modeleListePrestatairesEtFournisseurs/serviceModeleListePrestatairesEtFournisseurs.js';
@@ -304,6 +305,7 @@ const host = process.env.HOST;
     ),
     serviceModeleListeInterconnexions: new ServiceModèleListeDesInterconnexions(fournisseurChemin, adaptateurHorloge),
     serviceModèleAnalyseDeConformité: new ServiceModèleAnalyseDeConformité(fournisseurChemin, adaptateurHorloge),
+    serviceModèleCartographie: new ServiceModèleCartographie(fournisseurChemin, adaptateurHorloge),
     serviceModeleInventaireComposantsObsoletes: new ServiceModèleInventaireDesComposantsObsolètes(
       fournisseurChemin,
       adaptateurHorloge
