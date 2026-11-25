@@ -62,6 +62,7 @@ import { GenerateurImageAvif } from './infra/generateurImage.js';
 import { messagerieMattermost } from './infra/messagerieMattermost.js';
 import { EntrepotExigenceGrist } from './infra/nis2/entrepotExigenceGrist.js';
 import { AdaptateurObservatoireMenaceCyber } from './infra/observatoireDesDonnees/adaptateurObservatoireMenaceCyberMemoire.js';
+import { fabriqueAdaptateurObservatoireMSC } from './infra/observatoireDesDonnees/fabriqueAdaptateurObservatoireMSC.js';
 import { fabriqueAdaptateurObservatoireMSS } from './infra/observatoireDesDonnees/fabriqueAdaptateurObservatoireMSS.js';
 import { rapporteurConsole } from './infra/rapporteurConsole.js';
 import { controleurErreursSentry, initialiseSentry, rapporteurSentry } from './infra/sentry.js';
@@ -96,6 +97,7 @@ const adaptateurStatistiqueParcours = adaptateurEnvironnement.journal.baseDeDonn
   : new AdaptateurStatistiqueParcoursMémoire();
 
 const adaptateurObservatoireMSS = fabriqueAdaptateurObservatoireMSS(adaptateurEnvironnement);
+const adaptateurObservatoireMSC = fabriqueAdaptateurObservatoireMSC(adaptateurEnvironnement);
 
 const entrepotFavori = new EntrepotFavoriPostgres({ adaptateurHachage });
 const entrepotFinancement = new EntrepotFinancementGrist({
@@ -320,6 +322,7 @@ const host = process.env.HOST;
     adaptateurStatistiqueParcours,
     serviceObservatoire: new ServiceObservatoire({
       adaptateurObservatoireMSS,
+      adaptateurObservatoireMSC,
       adaptateurObservatoireMenaceCyber: new AdaptateurObservatoireMenaceCyber(),
     }),
   });
