@@ -1,4 +1,5 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
+import pagesKit from '@anssi-portail/msc/pages.json' with { type: 'json' };
 import compression from 'compression';
 import express, { json } from 'express';
 import { ConfigurationServeur } from '../configurationServeur.js';
@@ -68,9 +69,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute('/conseils-cyber/:slug', ressourcePagesJekyll(configurationServeur, 'conseils-cyber'));
 
-  routesPagesConnectéesStatiques.forEach((page) =>
-    enregistreRoute(`/${page}`, ressourcePagesJekyllConnectees(configurationServeur, page))
-  );
+  routesPagesConnectéesStatiques
+    .filter((page) => !Object.hasOwn(pagesKit, page))
+    .forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyllConnectees(configurationServeur, page)));
 
   enregistreRoute(`/services`, ressourcePageService(configurationServeur));
 

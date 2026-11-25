@@ -34,9 +34,15 @@ export const enregistreSvelteKit = (app: Express, configuration: ConfigurationSe
     configuration.entrepotUtilisateur,
     configuration.adaptateurHachage
   );
+  const chargeSession: RequestHandler = (req, res, next) => {
+    res.locals.sessionAuthentifiée = sessionAuthentifiée(req.session?.token, configuration.adaptateurJWT);
+    if (res.locals.sessionAuthentifiée) return chargeUtilisateur(req, res, next);
+    next();
+  };
   const délègue: RequestHandler = async (req, res, next) => {
     const utilisateur = req.utilisateur as Utilisateur | undefined;
     const contexte: ContexteMSC = {
+      sessionAuthentifiée: res.locals.sessionAuthentifiée === true,
       entrepotKitRelais: configuration.entrepotKitRelais,
       profil: utilisateur && {
         nom: utilisateur.nom,
@@ -60,8 +66,7 @@ export const enregistreSvelteKit = (app: Express, configuration: ConfigurationSe
     [...chemins, ...chemins.map((chemin) => chemin + '/__data.json')],
     valideCorpsRequete(corpsVide),
     canonique,
-    (req, res, next) =>
-      sessionAuthentifiée(req.session?.token, configuration.adaptateurJWT) ? chargeUtilisateur(req, res, next) : next(),
+    chargeSession,
     délègue
   );
 };

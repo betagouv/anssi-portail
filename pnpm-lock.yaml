@@ -543,9 +543,6 @@ importers:
       '@lab-anssi/ui-kit':
         specifier: 'catalog:'
         version: 2.2.0(svelte@5.58.0(@typescript-eslint/types@8.73.0))
-      '@pdfme/pdf-lib':
-        specifier: ^6.2.8
-        version: 6.2.8
       '@sentry/browser':
         specifier: ^10.70.0
         version: 10.78.0
@@ -558,15 +555,9 @@ importers:
       entities:
         specifier: 'catalog:'
         version: 9.0.0
-      fflate:
-        specifier: ^0.8.3
-        version: 0.8.3
       isomorphic-dompurify:
         specifier: 'catalog:'
         version: 4.8.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
-      pdfjs-dist:
-        specifier: 'catalog:'
-        version: 6.5.438
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
@@ -672,12 +663,21 @@ importers:
       '@lab-anssi/ui-kit':
         specifier: 'catalog:'
         version: 2.2.0(svelte@5.58.0(@typescript-eslint/types@8.73.0))
+      '@pdfme/pdf-lib':
+        specifier: ^6.2.8
+        version: 6.2.8
       '@sentry/browser':
         specifier: ^10.70.0
         version: 10.78.0
+      fflate:
+        specifier: ^0.8.3
+        version: 0.8.3
       isomorphic-dompurify:
         specifier: 'catalog:'
         version: 4.8.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
+      pdfjs-dist:
+        specifier: 'catalog:'
+        version: 6.5.438
     devDependencies:
       '@sentry/vite-plugin':
         specifier: ^5.4.0

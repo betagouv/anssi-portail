@@ -8,6 +8,7 @@ export default defineConfig(
   globalIgnores(['.svelte-kit/**', 'dist/**']),
   createConfig(import.meta.dirname),
   ...svelte.configs.recommended,
+  { files: ['**/*.svelte.ts'], languageOptions: { parser: tseslint.parser } },
   { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
   {
     files: ['**/*.svelte'],

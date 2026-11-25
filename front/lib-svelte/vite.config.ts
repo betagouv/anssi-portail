@@ -77,7 +77,6 @@ export default defineConfig(({ command, mode }) => {
           'bandeau-maintenance': 'src/main-bandeau-maintenance.ts',
           'barometre-simplifie': 'src/main-barometre-simplifie.ts',
           'bouton-favori': 'src/main-bouton-favori.ts',
-          'campagne-de-sensibilisation': 'src/main-campagne-de-sensibilisation.ts',
           'carrousel-des-interlocuteurs': 'src/main-carrousel-des-interlocuteurs.ts',
           'centre-aide': 'src/main-centre-aide.ts',
           'composants-ui': 'src/main-composants-ui.ts',

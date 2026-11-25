@@ -15,7 +15,10 @@
     "isomorphic-dompurify": "catalog:",
     "@sentry/browser": "^10.70.0",
     "@anssi-portail/infrastructure": "workspace:^",
-    "@anssi-portail/axios": "workspace:^"
+    "@anssi-portail/axios": "workspace:^",
+    "@pdfme/pdf-lib": "^6.2.8",
+    "fflate": "^0.8.3",
+    "pdfjs-dist": "catalog:"
   },
   "devDependencies": {
     "@sentry/vite-plugin": "^5.4.0",

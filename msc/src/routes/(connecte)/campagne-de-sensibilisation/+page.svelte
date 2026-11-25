@@ -1,16 +1,16 @@
 <script lang="ts">
   import { DsfrUpload } from '@lab-anssi/ui-kit';
-  import Bouton from '../../ui/Bouton.svelte';
-  import type { PropriétésFilAriane } from '../../ui/filAriane';
-  import HerosRiche from '../../ui/HerosRiche.svelte';
-  import RetourUtilisateurSurContenu from '../../ui/RetourUtilisateurSurContenu.svelte';
+  import Bouton from '$msc/ui/Bouton.svelte';
+  import type { PropriétésFilAriane } from '$msc/ui/filAriane';
+  import HerosRiche from '$msc/ui/HerosRiche.svelte';
+  import RetourUtilisateurSurContenu from '$msc/ui/RetourUtilisateurSurContenu.svelte';
   import IllustrationHerosKitSensibilisation from './animation/IllustrationHerosCampagneSensibilisation.svelte';
-  import { archiveCampagne } from './archiveCampagne.svelte';
-  import { téléchargeFichierDansNavigateur } from './manipulationZip';
+  import { creeArchiveCampagne } from './archiveCampagne.svelte';
   import ModaleAperçu from './ModaleApercu.svelte';
   import Thématique from './Thematique.svelte';
   import { thématiques } from './thematiques';
 
+  const archiveCampagne = creeArchiveCampagne();
   const TAILLE_MAX_LOGO_EN_OCTETS = 2_000_000;
   let aperçuEnCours = $state(false);
   let téléchargementEnCours = $state(false);
@@ -22,6 +22,7 @@
     try {
       téléchargementEnCours = true;
       const { archive } = await archiveCampagne.génère();
+      const { téléchargeFichierDansNavigateur } = await import('./manipulationZip');
       téléchargeFichierDansNavigateur(archive, 'ANSSI-Campagne-de-sensibilisation.zip');
     } finally {
       téléchargementEnCours = false;
@@ -105,11 +106,11 @@
     <p class="texte-article-lg">Ce contenu vous a-t-il aidé&#8239;?</p>
   </RetourUtilisateurSurContenu>
 
-  <ModaleAperçu bind:aperçuEnCours></ModaleAperçu>
+  <ModaleAperçu {archiveCampagne} bind:aperçuEnCours></ModaleAperçu>
 </dsfr-container>
 
 <style lang="scss">
-  @use '../../../../assets/styles/responsive' as *;
+  @use 'responsive' as *;
 
   dsfr-container {
     padding-bottom: 3.5rem;

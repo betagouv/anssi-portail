@@ -1,22 +1,20 @@
-<script module lang="ts">
-  // @ts-expect-error pas de types pour le worker pdf.js, import pour effet de bord
-  await import('pdfjs-dist/build/pdf.worker.mjs');
-  const { getDocument } = await import('pdfjs-dist');
-</script>
-
 <script lang="ts">
-  import Bouton from '../../ui/Bouton.svelte';
-  import Modale from '../../ui/Modale.svelte';
-  import { archiveCampagne } from './archiveCampagne.svelte';
+  import Bouton from '$msc/ui/Bouton.svelte';
+  import Modale from '$msc/ui/Modale.svelte';
+  import type { creeArchiveCampagne } from './archiveCampagne.svelte';
 
   type Props = {
+    archiveCampagne: ReturnType<typeof creeArchiveCampagne>;
     aperçuEnCours: boolean;
   };
 
-  let { aperçuEnCours = $bindable() }: Props = $props();
+  let { archiveCampagne, aperçuEnCours = $bindable() }: Props = $props();
   let indexPrévisualisation: number = $state(0);
 
   const récupèrePromesseDeConversion = async (pdf: Uint8Array<ArrayBuffer>) => {
+    // @ts-expect-error le worker PDF.js ne fournit pas de déclaration TypeScript
+    await import('pdfjs-dist/build/pdf.worker.mjs');
+    const { getDocument } = await import('pdfjs-dist');
     const chargementPDF = getDocument({ data: pdf.slice() });
     const documentPDF = await chargementPDF.promise;
 
@@ -105,7 +103,7 @@
 </Modale>
 
 <style lang="scss">
-  @use '../../../../assets/styles/responsive' as *;
+  @use 'responsive' as *;
 
   .contenu-aperçu {
     box-sizing: border-box;

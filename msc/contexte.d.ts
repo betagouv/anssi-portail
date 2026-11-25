@@ -3,6 +3,7 @@ import type { EntrepotKitRelais } from './src/lib/kit-relais/server/entrepotKitR
 
 export interface ContexteMSC {
   entrepotKitRelais: EntrepotKitRelais;
+  sessionAuthentifiée: boolean;
   profil?: ProfilNavigation;
   maintenance?: { jour: string; heure: string };
   rapporteur: { erreur(erreur: unknown, message?: string): void };

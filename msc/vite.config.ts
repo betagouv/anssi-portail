@@ -16,6 +16,9 @@ export default defineConfig(({ mode }) => {
     readFileSync(new URL('./node_modules/@lab-anssi/ui-kit/package.json', import.meta.url), 'utf8')
   );
   return {
+    css: {
+      preprocessorOptions: { scss: { loadPaths: [path.resolve(import.meta.dirname, '../front/assets/styles')] } },
+    },
     ssr: { external: ['isomorphic-dompurify'] },
     resolve: { alias: { $msc: composants, $lib: path.resolve(import.meta.dirname, 'src/lib') }, dedupe: ['svelte'] },
     define: {

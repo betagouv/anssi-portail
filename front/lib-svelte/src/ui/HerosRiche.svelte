@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import type { ClassValue } from 'svelte/elements';
+  import { utiliseProfil } from '../stores/profil.store';
   import type { Badge } from './badge.type';
   import { fabriqueFilAriane, type PropriétésFilAriane } from './filAriane';
   import FilAriane from './FilAriane.svelte';
@@ -43,7 +44,8 @@
   $effect(() => {
     conteneur?.style.setProperty('--url-image-de-fond', urlImageDeFond);
   });
-  const segmentsFilAriane = $derived(fabriqueFilAriane(propriétésFilAriane));
+  const profil = utiliseProfil();
+  const segmentsFilAriane = $derived(fabriqueFilAriane(propriétésFilAriane, !!$profil));
 </script>
 
 <dsfr-container

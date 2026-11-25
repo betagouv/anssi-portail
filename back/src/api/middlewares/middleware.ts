@@ -10,7 +10,7 @@ import { AdaptateurEnrichissement } from '../../infra/enrichissement/adaptateurE
 import { EntrepotUtilisateur } from '../../metier/entrepotUtilisateur.js';
 import { Parcours } from '../../metier/parcours.js';
 import { Utilisateur } from '../../metier/utilisateur.js';
-import { AdaptateurJWT } from '../adaptateurJWT.js';
+import { AdaptateurJWT, sessionAuthentifiée } from '../adaptateurJWT.js';
 import { FournisseurChemin } from '../fournisseurChemin.js';
 import { detruisSession } from '../session.js';
 
@@ -78,20 +78,8 @@ export const fabriqueMiddleware = ({
   };
 
   const verifieJWTNavigation = async (requete: Request, reponse: Response, suite: NextFunction) => {
-    const redirigeVersConnexion = () =>
-      reponse.redirect(`/connexion?urlRedirection=${encodeURIComponent(requete.originalUrl)}`);
-
-    if (!requete.session?.token) {
-      redirigeVersConnexion();
-      return;
-    }
-
-    try {
-      adaptateurJWT.decode(requete.session.token);
-      suite();
-    } catch {
-      redirigeVersConnexion();
-    }
+    if (sessionAuthentifiée(requete.session?.token, adaptateurJWT)) suite();
+    else reponse.redirect(`/connexion?urlRedirection=${encodeURIComponent(requete.originalUrl)}`);
   };
 
   const ajouteMethodeEnrichissement = async (requête: Request, reponse: Response, suite: NextFunction) => {

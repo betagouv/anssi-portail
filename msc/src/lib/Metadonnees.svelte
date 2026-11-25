@@ -3,7 +3,7 @@
 
   let { origine }: { origine: string } = $props();
   const rubrique = $derived(page.url.pathname.split('/')[1]);
-  const meta = $derived(page.data.métadonnées?.[page.url.pathname.slice(1)]);
+  const meta = $derived(page.data.métadonnées);
   const seo = $derived(page.data.seo);
   const nom = $derived(seo?.nom ?? meta?.titre ?? 'MesServicesCyber');
   const titre = $derived(seo?.titre ?? nom + ' | MesServicesCyber');

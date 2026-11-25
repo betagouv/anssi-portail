@@ -13,11 +13,11 @@ const métadonnées = Object.fromEntries(
     },
   ])
 );
-export const load: LayoutServerLoad = async ({ locals }) => {
+export const load: LayoutServerLoad = ({ locals, url }) => {
   return {
     profil: locals.profil,
     maintenance: locals.maintenance ?? null,
-    métadonnées,
+    métadonnées: métadonnées[url.pathname.slice(1)],
     origine: process.env.URL_BASE_MSC ?? 'https://messervices.cyber.gouv.fr',
     delaiAvis: process.env.DELAI_AFFICHAGE_AVIS_UTILISATEUR,
     matomo: process.env.MATOMO_ID,

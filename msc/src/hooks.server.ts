@@ -1,3 +1,4 @@
+import { redirect } from '@sveltejs/kit';
 import type { Handle, HandleServerError } from '@sveltejs/kit/hooks';
 import type { ContexteMSC } from '../contexte';
 
@@ -8,6 +9,10 @@ export const handle: Handle = async ({ event, resolve }) => {
   const requête = event.platform?.req;
   if (!requête || !('msc' in requête)) throw new Error('La requête doit passer par Express');
   Object.assign(event.locals, requête.msc as ContexteMSC);
+  if (event.route.id?.startsWith('/(connecte)/') && !event.locals.sessionAuthentifiée) {
+    const destination = event.url.pathname + event.url.search;
+    redirect(302, '/connexion?urlRedirection=' + encodeURIComponent(destination));
+  }
   const réponse = await resolve(event, {
     transformPageChunk: ({ html }) => html.replace('__VERSION_KIT_UI__', import.meta.env.VERSION_KIT_UI),
   });
