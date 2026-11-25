@@ -12,7 +12,9 @@
 </script>
 
 <div class="badge">
-  <img src="/assets/images/parcours-securisation/visuel-cyberdepart.svg" width="391" height="220" alt={titre} />
+  <div>
+    <img src="/assets/images/parcours-securisation/visuel-cyberdepart.svg" width="391" height="220" alt={titre} />
+  </div>
   <div class="explications">
     <h6>{titre}</h6>
     <p class="texte-standard-md">
@@ -45,8 +47,10 @@
       justify-self: center;
       height: 230px;
       object-fit: cover;
+
       @include a-partir-de(md) {
-        width: auto;
+        height: 100%;
+        width: 391px;
       }
     }
 
