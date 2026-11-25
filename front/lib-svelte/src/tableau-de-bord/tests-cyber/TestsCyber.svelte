@@ -118,6 +118,10 @@
     @include a-partir-de(md) {
       display: grid;
       grid-template-columns: 3fr 1fr;
+
+      &:not(:has(> .maturite)) {
+        grid-template-columns: 1fr;
+      }
     }
 
     .section {
