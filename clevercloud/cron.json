@@ -1,0 +1,1 @@
+["CRON_TZ=Europe/Paris", "45 2 * * * $ROOT/scripts/taches/tacheMetsAJourObservatoire.sh"]
