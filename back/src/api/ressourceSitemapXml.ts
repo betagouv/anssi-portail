@@ -44,7 +44,11 @@ const récupèreLiens = (pages: string[], { fournisseurChemin }: ConfigurationSe
   });
 };
 
-export const ressourceSitemapXml = (pagesStatiques: string[], configurationServeur: ConfigurationServeur) => {
+export const ressourceSitemapXml = (
+  pagesStatiques: string[],
+  configurationServeur: ConfigurationServeur,
+  pagesKit: LienSitemap[] = []
+) => {
   const cheminVersSitemapXml = configurationServeur.fournisseurChemin.front.sitemapXml();
   const rapporteur = configurationServeur.rapporteur;
   if (cheminVersSitemapXml.length === 0) return () => {};
@@ -52,7 +56,7 @@ export const ressourceSitemapXml = (pagesStatiques: string[], configurationServe
     const sitemapStream = new SitemapStream({ hostname: 'https://messervices.cyber.gouv.fr' });
 
     const liensStatiques = récupèreLiens(pagesStatiques, configurationServeur);
-    liensStatiques.forEach((lien) => {
+    [...liensStatiques, ...pagesKit].forEach((lien) => {
       sitemapStream.write({
         url: lien.url,
         lastmod: lien.modifiéLe,

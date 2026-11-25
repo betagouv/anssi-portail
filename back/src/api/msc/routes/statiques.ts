@@ -9,7 +9,6 @@ export const routesStatiques = [
   'niveaux-maturite',
   'apres-authentification',
   'a-propos',
-  'mentions-legales',
   'confidentialite',
   'cgu',
   'accessibilite',

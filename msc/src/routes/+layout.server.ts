@@ -5,9 +5,10 @@ import type { LayoutServerLoad } from './$types';
 
 const descriptionsMSC = lireYaml(descriptions) as Record<string, string>;
 const métadonnées = Object.fromEntries(
-  Object.keys(pages).map((nom) => [
+  Object.entries(pages).map(([nom, page]) => [
     nom,
     {
+      titre: page.titre,
       description: descriptionsMSC['/' + nom + '/'] ?? descriptionsMSC['/' + nom] ?? '',
     },
   ])

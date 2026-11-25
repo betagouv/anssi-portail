@@ -2,8 +2,10 @@
   import { page } from '$app/state';
 
   let { origine }: { origine: string } = $props();
+  const rubrique = $derived(page.url.pathname.split('/')[1]);
   const meta = $derived(page.data.métadonnées?.[page.url.pathname.slice(1)]);
-  const nom = 'MesServicesCyber';
+  const nom = $derived(meta?.titre ?? 'MesServicesCyber');
+  const titre = $derived(nom + ' | MesServicesCyber');
   const description = $derived(meta?.description ?? '');
   const canonique = $derived(origine + page.url.pathname);
   const image = $derived(origine + '/assets/images/logo-anssi.png');
@@ -39,6 +41,17 @@
       isPartOf: { '@id': origine + '/#website' },
       inLanguage: 'fr',
     },
+    ...(rubrique === 'mentions-legales'
+      ? [
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Accueil', item: origine + '/' },
+              { '@type': 'ListItem', position: 2, name: nom },
+            ],
+          },
+        ]
+      : []),
   ]);
   const jsonLd = $derived(
     JSON.stringify({ '@context': 'https://schema.org', '@graph': données }).replaceAll('<', '\\u003c')
@@ -46,18 +59,18 @@
 </script>
 
 <svelte:head>
-  <title>{nom}</title>
+  <title>{titre}</title>
   <link rel="canonical" href={canonique} />
   <meta name="description" content={description} />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="fr_FR" />
   <meta property="og:site_name" content="MesServicesCyber" />
-  <meta property="og:title" content={nom} />
+  <meta property="og:title" content={titre} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonique} />
   <meta property="og:image" content={image} />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={nom} />
+  <meta name="twitter:title" content={titre} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={image} />
   <!-- eslint-disable-next-line svelte/no-at-html-tags -- JSON sérialisé, chevrons échappés. -->

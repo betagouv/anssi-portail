@@ -8,6 +8,8 @@ import type { ConfigurationServeur } from '../../configurationServeur.js';
 import { previsionMaintenance } from '../../ressourceInfosSite.js';
 import { corpsVide, valideCorpsRequete } from '../../zod.js';
 
+export const pagesDuSitemapKit = Object.entries(pages).map(([url, page]) => ({ url, modifiéLe: page.modifiéLe }));
+
 const délègue: RequestHandler = async (req, res, next) => {
   const { handler } = await import('@anssi-portail/msc/handler');
   handler(req, res, next);

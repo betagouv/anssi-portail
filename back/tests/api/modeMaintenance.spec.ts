@@ -11,7 +11,7 @@ import {
 } from './fauxObjets.js';
 
 describe('Lorsque l’application est en maintenance', () => {
-  it('sert les ressources statiques', async () => {
+  it('sert les ressources statiques et renvoie la page de maintenance sur les routes migrées', async () => {
     const middleware = fabriqueMiddleware({
       adaptateurJWT: fauxAdaptateurJWT,
       fournisseurChemin: fauxFournisseurDeChemin,
@@ -29,5 +29,6 @@ describe('Lorsque l’application est en maintenance', () => {
 
     await request(serveur).get('/assets').expect(200);
     await request(serveur).get('/_app/version.json').expect('Content-Type', /json/u).expect(200);
+    await request(serveur).get('/mentions-legales').expect('Content-Type', /html/u).expect(503);
   });
 });

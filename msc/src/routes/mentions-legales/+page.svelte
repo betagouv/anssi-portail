@@ -1,0 +1,50 @@
+<script lang="ts">
+  import { BandeauPage } from '@lab-anssi/ui-kit';
+  import Lien from '$msc/ui/Lien.svelte';
+</script>
+
+<svelte:head><link rel="stylesheet" href="/assets/styles/page-statique.css" /></svelte:head>
+<BandeauPage type="simple" theme="clair" avecFilAriane titre="Mentions légales" />
+<dsfr-container class="contenu-page-statique">
+  <div class="contenu-section">
+    <h2>Éditeur</h2>
+    <p>Le site est édité par l&#39;Agence nationale de la sécurité des systèmes d&#39;information (ANSSI)&nbsp;:</p>
+    <p>
+      51 boulevard de la Tour-Maubourg<br />75700 Paris 07 SP<br />France<br />
+      <Lien href="mailto:lab-inno@ssi.gouv.fr" libelle="lab-inno@ssi.gouv.fr" neutre></Lien>
+    </p>
+    <p>Téléphone&nbsp;: 01 71 75 84 05</p>
+    <h2>Directeur de la publication</h2>
+    <p>Vincent Strubel, directeur général de l&#39;ANSSI.</p>
+    <p>
+      La conception éditoriale, le suivi et les mises à jour du site internet sont assurés par les services de
+      l&#39;ANSSI.
+    </p>
+    <h2>Hébergement</h2>
+    <p>
+      L&#39;hébergement du site est assuré par Clever Cloud SAS, société par actions simplifiée, immatriculée au RCS de
+      Nantes sous le numéro RCS Nantes B 524 172 699.
+    </p>
+    <p>Le siège social de l&#39;hébergeur est situé au 4 rue Voltaire, 44000 Nantes, France.</p>
+    <p>
+      Toute correspondance à leur attention doit être adressée à l&#39;adresse suivante&nbsp;:<br />
+      <Lien href="mailto:support@clever-cloud.com" libelle="support@clever-cloud.com" neutre></Lien>
+    </p>
+    <p>Téléphone&nbsp;: 02 85 52 07 69</p>
+    <h2>Protection des contenus</h2>
+    <p>
+      Sauf mention expresse contraire, tous les contenus protégeables par le droit de la Propriété intellectuelle ne
+      peuvent être reproduits ou réutilisés sans l&#39;autorisation expresse de l&#39;ANSSI.
+    </p>
+    <h2>Demande d&#39;autorisation</h2>
+    <p>
+      Les demandes d&#39;autorisation de reproduction d&#39;un contenu doivent au préalable être adressées à
+      l&#39;ANSSI, en écrivant à l&#39;adresse suivante&nbsp;:
+      <Lien href="mailto:lab-inno@ssi.gouv.fr" libelle="lab-inno@ssi.gouv.fr" neutre></Lien>
+    </p>
+    <p>
+      La demande devra préciser le contenu visé ainsi que le contexte d&#39;utilisation prévu (supports concernés,
+      période, destinataires, etc.).
+    </p>
+  </div>
+</dsfr-container>
