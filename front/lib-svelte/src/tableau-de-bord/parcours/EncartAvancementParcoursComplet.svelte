@@ -124,6 +124,7 @@
 
     @include a-partir-de(lg) {
       display: grid;
+      grid-template-columns: 2fr 1fr;
       grid-template-areas:
         'titre progression'
         'encouragements progression'
@@ -219,10 +220,39 @@
       grid-area: carte;
 
       .parcours-termine {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-areas:
+          'titre'
+          'details'
+          'illustration';
+        grid-template-columns: 1fr;
+        gap: 1rem;
+
         padding: 1rem;
         background-color: var(--background-alt-blue-france);
+
+        @include a-partir-de(md) {
+          grid-template-columns: 2fr 1fr;
+          grid-template-areas:
+            'titre illustration'
+            'details illustration';
+        }
+
+        p {
+          grid-area: titre;
+        }
+
+        ul {
+          grid-area: details;
+        }
+
+        img {
+          grid-row: illustration;
+          width: 100%;
+          max-width: 240px;
+          align-self: center;
+          justify-self: center;
+        }
       }
 
       :global(dsfr-card) {
