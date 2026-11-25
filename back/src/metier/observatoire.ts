@@ -25,3 +25,12 @@ export type DonneesObservatoireProjets = {
   mesuresFaites: DonneeObservatoire<{ parMois: TotalMensuel[] }>;
   homologations: DonneeObservatoire<{ cumulMensuel: CumulMensuel[] }>;
 };
+
+export type TotalParNiveauMaturite = { niveau: string; total: number };
+
+export type DonneesObservatoireOrganisations = {
+  testsMaturite: DonneeObservatoire<{
+    total: number;
+    parNiveau: TotalParNiveauMaturite[];
+  }>;
+};

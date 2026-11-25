@@ -11,6 +11,15 @@ describe('Le service Observatoire', () => {
     dateDerniereExecution: async () => new Date('2026-02-01T08:00:00.000Z'),
   };
 
+  const adaptateurObservatoireMSC = {
+    totalTestsMaturite: async () => 5,
+    testsMaturiteParNiveau: async () => [
+      { niveau: 'Émergent', total: 3 },
+      { niveau: 'Optimal', total: 2 },
+    ],
+    dateDerniereExecution: async () => new Date('2026-03-01T02:30:00.000Z'),
+  };
+
   const donneesMenaceCyber = {
     evenementsSecurite: {
       total: '3 586',
@@ -51,6 +60,7 @@ describe('Le service Observatoire', () => {
     it("agrège les résultats de l'adaptateur MSS, en y ajoutant la source et la date", async () => {
       const observatoire = new ServiceObservatoire({
         adaptateurObservatoireMSS,
+        adaptateurObservatoireMSC,
         adaptateurObservatoireMenaceCyber,
       });
 
@@ -78,8 +88,36 @@ describe('Le service Observatoire', () => {
     });
   });
 
+  describe('sur demande des données des organisations', () => {
+    it("agrège les résultats de l'adaptateur MSC, en y ajoutant la source et la date", async () => {
+      const observatoire = new ServiceObservatoire({
+        adaptateurObservatoireMSS,
+        adaptateurObservatoireMSC,
+        adaptateurObservatoireMenaceCyber,
+      });
+
+      const donneesOrganisations = await observatoire.donneesOrganisations();
+
+      expect(donneesOrganisations).toStrictEqual({
+        testsMaturite: {
+          source: 'MesServicesCyber',
+          date: new Date('2026-03-01T02:30:00.000Z'),
+          total: 5,
+          parNiveau: [
+            { niveau: 'Émergent', total: 3 },
+            { niveau: 'Optimal', total: 2 },
+          ],
+        },
+      });
+    });
+  });
+
   it('retourne les données de la cyber menace', () => {
-    const observatoire = new ServiceObservatoire({ adaptateurObservatoireMSS, adaptateurObservatoireMenaceCyber });
+    const observatoire = new ServiceObservatoire({
+      adaptateurObservatoireMSS,
+      adaptateurObservatoireMSC,
+      adaptateurObservatoireMenaceCyber,
+    });
 
     const donnees = observatoire.donneesMenaceCyber();
 
