@@ -20,30 +20,32 @@
   const nombreDeCartesAffichées = $derived(Math.min(financements.length, nombreMaxDeCartesAffichées));
 </script>
 
-<div class="financements">
-  <div class="titre">
-    <TitreDeSection libellé="Financements cyber" icône="money-euro-circle-line" />
-  </div>
+{#if nombreDeCartesAffichées > 0}
+  <div class="financements">
+    <div class="titre">
+      <TitreDeSection libellé="Financements cyber" icône="money-euro-circle-line" />
+    </div>
 
-  <div class="tag">
-    <DsfrTag
-      type="clickable"
-      href="/financements"
-      accent="green-emeraude"
-      label={`${financements.length} disponible${financements.length > 1 ? 's' : ''}`}
-    />
-  </div>
+    <div class="tag">
+      <DsfrTag
+        type="clickable"
+        href="/financements"
+        accent="green-emeraude"
+        label={`${financements.length} disponible${financements.length > 1 ? 's' : ''}`}
+      />
+    </div>
 
-  <div class="cartes">
-    {#each { length: nombreDeCartesAffichées }, i}
-      <CarteFinancement financement={financements[i]} />
-    {/each}
-  </div>
+    <div class="cartes">
+      {#each { length: nombreDeCartesAffichées }, i}
+        <CarteFinancement financement={financements[i]} />
+      {/each}
+    </div>
 
-  <div class="lien">
-    <Lien href="/financements" libelle="Accéder à tous mes financements" icone="arrow-right-line" iconeADroite />
+    <div class="lien">
+      <Lien href="/financements" libelle="Accéder à tous mes financements" icone="arrow-right-line" iconeADroite />
+    </div>
   </div>
-</div>
+{/if}
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
