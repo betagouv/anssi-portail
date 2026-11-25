@@ -3,7 +3,9 @@
   import GraphiqueCirculaire from '../graphiques/GraphiqueCirculaire.svelte';
   import type { DonnéesObservatoire } from '../passerelles/observatoire';
   import ChiffreCle from './ChiffreCle.svelte';
+  import CompletionNiveauComplet from './CompletionNiveauComplet.svelte';
   import EtatDuChargement from './EtatDuChargement.svelte';
+  import EvolutionMensuelle from './EvolutionMensuelle.svelte';
   import { formateDate, formateNombre } from './formatage';
   import Onglet from './Onglet.svelte';
   import Rangee from './Rangee.svelte';
@@ -22,7 +24,14 @@
   introduction="Comment les organisations s’emparent de la cybersécurité&nbsp;: de la découverte du risque avec les tests de sensibilisation cyber jusqu’à la prise en compte des mesures de sécurité."
 >
   {#if données}
-    {@const { testsMaturité } = données}
+    {@const {
+      testsMaturité,
+      testsSensibilisation,
+      démarchesInitiées,
+      diagnosticsCyberdépart,
+      cyberdépartsValidés,
+      complétions,
+    } = données}
     {@const niveaux = testsMaturité.parNiveau}
     <SousSection
       titre="Baromètre de la maturité cyber"
@@ -57,6 +66,76 @@
           </div>
         </CarteDonnees>
       </Rangee>
+    </SousSection>
+
+    <SousSection titre="Entités sensibilisées" description="Utilisation des tests de sensibilisation cyber.">
+      <Rangee>
+        <ChiffreCle
+          id="tests-sensibilisation-realises"
+          titre="Tests de sensibilisation cyber réalisés"
+          valeur={formateNombre(testsSensibilisation.total)}
+          infobulle="Nombre de tests de sensibilisation réalisés sur MesServicesCyber (test de maturité, vrai&nbsp;/&nbsp;faux, hameçonnage, etc.)."
+          source={testsSensibilisation.source}
+          date={testsSensibilisation.date}
+        />
+        <EvolutionMensuelle
+          id="evolution-tests-sensibilisation"
+          série={testsSensibilisation.cumulMensuel}
+          libellé="Tests de sensibilisation cyber réalisés"
+          infobulle="Progression du nombre de tests de sensibilisation cyber réalisés, mois par mois."
+          source={testsSensibilisation.source}
+          date={testsSensibilisation.date}
+        />
+      </Rangee>
+    </SousSection>
+
+    <SousSection
+      titre="Entités passées à l’action"
+      description="Organisations ayant démarré au moins une démarche de sécurisation."
+    >
+      <Rangee colonnesÉgales>
+        <ChiffreCle
+          id="demarches-initiees"
+          titre="Démarches de sécurisation initiées"
+          valeur={formateNombre(démarchesInitiées.total)}
+          infobulle="Nombre total de démarches de sécurisation engagées par les organisations sur MesServicesCyber (diagnostic et parcours de sécurisation)."
+          source={démarchesInitiées.source}
+          date={démarchesInitiées.date}
+        />
+        <ChiffreCle
+          id="diagnostics-cyberdepart"
+          titre="Diagnostics Cyberdépart réalisés"
+          valeur={formateNombre(diagnosticsCyberdépart.total)}
+          infobulle="Nombre de diagnostics Cyberdépart réalisés par les organisations sur MesServicesCyber."
+          source={diagnosticsCyberdépart.source}
+          date={diagnosticsCyberdépart.date}
+        />
+      </Rangee>
+    </SousSection>
+
+    <SousSection
+      titre="Engagement dans une démarche de sécurisation"
+      description="Organisations ayant démarré au moins une démarche de sécurisation et leur progression."
+    >
+      <Rangee>
+        <ChiffreCle
+          id="cyberdeparts-valides"
+          titre="Niveau Cyberdépart validé"
+          valeur={formateNombre(cyberdépartsValidés.total)}
+          infobulle="Nombre d’organisations qui ont validé leur Cyberdépart, c’est-à-dire pris en compte 50&nbsp;% des mesures de sécurité essentielles."
+          source={cyberdépartsValidés.source}
+          date={cyberdépartsValidés.date}
+        />
+        <EvolutionMensuelle
+          id="evolution-cyberdeparts-valides"
+          série={cyberdépartsValidés.cumulMensuel}
+          libellé="Cyberdépart validé"
+          infobulle="Total des organisations ayant validé Cyberdépart, mois par mois. «&nbsp;Cumul&nbsp;» signifie que chaque mois s’ajoute aux précédents&nbsp;: la courbe ne peut que monter."
+          source={cyberdépartsValidés.source}
+          date={cyberdépartsValidés.date}
+        />
+      </Rangee>
+      <CompletionNiveauComplet {complétions} />
     </SousSection>
   {:else}
     <EtatDuChargement {enErreur} />
