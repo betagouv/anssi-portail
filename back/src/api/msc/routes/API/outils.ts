@@ -15,11 +15,11 @@ import { ressourceModeleAnnuaireDeCrise } from '../../../outils/modeleAnnuaireDe
 import { ressourceModèleXslxGénérique } from '../../../outils/modeleXslxGenerique/ressourceModeleXslx.js';
 import { ServiceModèleXslx } from '../../../outils/modeleXslxGenerique/serviceModeleXslx.js';
 import { ressourceRappelIcsGénérique } from '../../../outils/rappelIcsGenerique/ressourceRappelIcs.js';
-import { ressourceDocumentOutils } from '../../../outils/ressourceDocumentOutils.js';
+import { ressourceModèleDocx } from '../../../outils/ressourceModèleDocx.js';
 import { ressourceRetoursSurOutil } from '../../../outils/ressourceRetoursSurOutil.js';
 import { enregistreRouteDansExpress } from '../../enregistreRoutes.js';
 
-type OutilDocx = Parameters<typeof ressourceDocumentOutils>[1];
+type OutilDocx = Parameters<typeof ressourceModèleDocx>[1];
 
 export const enregistreLesOutils = (app: Express, configurationServeur: ConfigurationServeur) => {
   const enregistreRoute = (suffixe: string, ...gestionnaires: RequestHandler[]) =>
@@ -73,7 +73,7 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
       ['modele-suivi-des-departs.docx', configurationServeur.fournisseurChemin.back.modèleSuiviDesDéparts],
     ] satisfies [OutilDocx, FournisseurChemin['back'][keyof FournisseurChemin['back']]][]
   ).forEach(([outil, cheminFichier]) => {
-    enregistreRoute(`/${outil}`, ressourceDocumentOutils(configurationServeur, outil, cheminFichier));
+    enregistreRoute(`/${outil}`, ressourceModèleDocx(configurationServeur, outil, cheminFichier));
   });
 
   /// OUTILS AUTRE
