@@ -8,8 +8,9 @@
     children: Snippet;
     aucunRésultat?: boolean;
     messageAucunRésultat?: string;
+    colonnesMax?: 1 | 2 | 3;
   };
-  const { children, aucunRésultat = false, messageAucunRésultat = '' }: Props = $props();
+  const { children, aucunRésultat = false, messageAucunRésultat = '', colonnesMax = 3 }: Props = $props();
 </script>
 
 <div class="contenu">
@@ -22,7 +23,7 @@
       <p class="texte-standard-md">{messageAucunRésultat}</p>
     </div>
   {:else}
-    <div class="cartes">
+    <div class={['cartes', `colonnes-max-${colonnesMax}`]}>
       {@render children()}
     </div>
   {/if}
@@ -69,9 +70,21 @@
 
       @include a-partir-de(md) {
         --nombre-colonnes: 2;
+
+        &.colonnes-max-1 {
+          --nombre-colonnes: 1;
+        }
       }
       @include a-partir-de(lg) {
         --nombre-colonnes: 3;
+
+        &.colonnes-max-1 {
+          --nombre-colonnes: 1;
+        }
+
+        &.colonnes-max-2 {
+          --nombre-colonnes: 2;
+        }
       }
     }
 
