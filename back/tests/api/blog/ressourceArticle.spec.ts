@@ -1,10 +1,11 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { creeServeur } from '../../../src/api/msc/index.js';
 import { EntrepôtArticleMémoire } from '../../persistance/entrepotArticleMemoire.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
+import { kitRelais } from '../objetsPretsALEmploi.js';
 import { ConstructeurDArticleAvecToutesLesMétadonnées } from './constructeurDeResumeDArticle.js';
 
 describe("La ressource d'un article de blog", () => {
@@ -38,6 +39,26 @@ describe("La ressource d'un article de blog", () => {
       const reponse = await request(serveur).get('/api/articles/article-un');
 
       expect(reponse.status).toBe(HttpStatusCode.NotFound);
+    });
+  });
+
+  describe("pour une requête GET sur '/api/articles/kit-relais'", () => {
+    const URLKitRelai = '/api/articles/kit-relais';
+
+    it('retourne un statut 200', async () => {
+      const réponse = await request(serveur).get(URLKitRelai);
+      expect(réponse.status).toBe(HttpStatusCode.Ok);
+    });
+
+    it("retourne l'article du kit relais", async () => {
+      vi.spyOn(entrepôtArticle, 'kitRelais').mockResolvedValue(kitRelais);
+      const réponse = await request(serveur).get(URLKitRelai);
+
+      const page = réponse.body;
+      expect(page.titre).toBe(kitRelais.titre);
+      expect(page.description).toBe(kitRelais.description);
+      expect(page.contenu).toBe(kitRelais.contenu);
+      expect(page.tableDesMatières).toEqual(kitRelais.tableDesMatières);
     });
   });
 });

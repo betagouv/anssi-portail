@@ -4,7 +4,7 @@ import PageCrisp from './page-crisp/PageCrisp.svelte';
 import type { PageHtmlCrisp } from './page-crisp/pageCrisp.type';
 
 const hydratePageCrisp = async () => {
-  const réponse = await axios.get<PageHtmlCrisp>(`/api/pages-crisp${window.location.pathname}`);
+  const réponse = await axios.get<PageHtmlCrisp>(`/api/articles/kit-relais`);
 
   hydrate(PageCrisp, {
     target: document.getElementById('page-crisp')!,
