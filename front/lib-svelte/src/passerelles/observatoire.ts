@@ -12,8 +12,13 @@ export type ChiffreCléMenaceCyber = DonneesObservatoire<{ total: string }>;
 type IndicateurMenaceCyber =
   'evenementsSecurite' | 'incidents' | 'rançongiciels' | 'fraudesVirement' | 'cyberharcèlements' | 'volsDonnées';
 
+export type TotalParNiveauMaturité = { niveau: string; total: number };
+
 export type DonnéesObservatoire = {
   menaceCyber: Record<IndicateurMenaceCyber, ChiffreCléMenaceCyber>;
+  organisations: {
+    testsMaturité: DonneesObservatoire<{ total: number; parNiveau: TotalParNiveauMaturité[] }>;
+  };
   projets: {
     services: DonneesObservatoire<{
       total: number;
@@ -32,6 +37,9 @@ type DonneesAPIObservatoire<T> = T & {
 
 type APIObservatoire = {
   menaceCyber: Record<IndicateurMenaceCyber, DonneesAPIObservatoire<{ total: string }>>;
+  organisations: {
+    testsMaturite: DonneesAPIObservatoire<{ total: number; parNiveau: TotalParNiveauMaturité[] }>;
+  };
   projets: {
     services: DonneesAPIObservatoire<{
       total: number;
@@ -60,6 +68,12 @@ export const récupèreDonnéesObservatoire = async (): Promise<DonnéesObservat
       fraudesVirement: chiffreClé(data.menaceCyber.fraudesVirement),
       cyberharcèlements: chiffreClé(data.menaceCyber.cyberharcèlements),
       volsDonnées: chiffreClé(data.menaceCyber.volsDonnées),
+    },
+    organisations: {
+      testsMaturité: {
+        ...data.organisations.testsMaturite,
+        date: enDate(data.organisations.testsMaturite.date),
+      },
     },
     projets: {
       services: {
