@@ -9,7 +9,7 @@
     taille: string;
     titre: string;
     description?: string;
-    typeFichier: 'ICS' | 'XLSX';
+    typeFichier: 'DOCX' | 'ICS' | 'XLSX';
   };
   const { identifiant, href, taille, titre, typeFichier, description }: Props = $props();
   const src = $derived(
