@@ -6,6 +6,7 @@ _site
 vendor
 node_modules
 dist/
+.svelte-kit/
 dist-*/
 .vscode
 .env
