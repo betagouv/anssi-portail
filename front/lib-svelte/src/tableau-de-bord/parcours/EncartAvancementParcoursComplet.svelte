@@ -2,11 +2,11 @@
   import { DsfrBadge } from '@lab-anssi/ui-kit';
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { MediaQuery } from 'svelte/reactivity';
   import CarteMesure from '../../parcours-securisation/CarteMesure.svelte';
   import type { Mesure, Module } from '../../parcours-securisation/mesures/mesure';
   import Progression from '../../parcours-securisation/Progression.svelte';
   import Lien from '../../ui/Lien.svelte';
+  import { détecteMédia, requêteMédiaÀPartirDeSm } from '../../utils/rendu.svelte';
   import AnneauProgressionTexte from './AnneauProgressionTexte.svelte';
   import ProgressionParcoursComplet from './ProgressionParcoursComplet.svelte';
 
@@ -17,7 +17,7 @@
     mesures: Mesure[];
   };
 
-  const àPartirDeSm = new MediaQuery('min-width: 576px');
+  const àPartirDeSm = détecteMédia(requêteMédiaÀPartirDeSm);
   let modules: ModulePrésentation[] = $state([]);
   let prochaineMesureÀFaire: Mesure | undefined = $state();
   let nombreMesuresPrisesEnCompte: number = $state(0);
@@ -72,7 +72,7 @@
   </div>
   <div class="carte">
     {#if prochaineMesureÀFaire}
-      <CarteMesure mesure={prochaineMesureÀFaire} horizontal={àPartirDeSm.current}>
+      <CarteMesure mesure={prochaineMesureÀFaire} horizontal={àPartirDeSm.correspond}>
         {#snippet badges()}
           <div slot="badgesgroup">
             <DsfrBadge accent="yellow-moutarde" label={libelléActionRecommandée} type="accent" size="sm" />

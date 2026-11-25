@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import { arrondisAuCentieme } from '../utils/arrondis';
+  import { détecteMédia, requêteMédiaPetitÉcran } from '../utils/rendu.svelte';
   import type { SerieRadar } from './Serie';
   import { rubriques } from './TestMaturite.donnees';
 
@@ -34,28 +34,10 @@
 
   const libelleSerie = (serie: SerieRadar) => niveauxMaturite.find((niveau) => niveau.id === serie.id)?.label;
 
-  let coefDistanceLibelle = $state(1.1);
-  let viewBox = $state('-600 -225 1200 450');
-  let estPetitEcran = $state(false);
-
-  onMount(() => {
-    const mediaQuery = window.matchMedia('(max-width: 576px)');
-    const modifieViewBox = () => {
-      estPetitEcran = mediaQuery.matches;
-
-      if (estPetitEcran) {
-        viewBox = '-220 -220 440 440';
-        coefDistanceLibelle = 1.03;
-      } else {
-        viewBox = '-600 -225 1200 450';
-        coefDistanceLibelle = 1.1;
-      }
-    };
-
-    modifieViewBox();
-    mediaQuery.addEventListener('change', modifieViewBox);
-    return () => mediaQuery.removeEventListener('change', modifieViewBox);
-  });
+  const petitÉcran = détecteMédia(requêteMédiaPetitÉcran);
+  const estPetitEcran = $derived(petitÉcran.correspond);
+  const coefDistanceLibelle = $derived(estPetitEcran ? 1.03 : 1.1);
+  const viewBox = $derived(estPetitEcran ? '-220 -220 440 440' : '-600 -225 1200 450');
 </script>
 
 <div class="radar">

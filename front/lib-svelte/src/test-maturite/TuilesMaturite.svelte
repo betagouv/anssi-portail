@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { NiveauMaturite } from '../niveaux-maturite/NiveauxMaturite.type';
+  import { détecteMédia, requêteMédiaPetitÉcran } from '../utils/rendu.svelte';
 
   interface Props {
     niveauCourant: NiveauMaturite;
@@ -12,18 +12,11 @@
 
   let { niveauCourant, animeTuiles = true, defilementAutomatique = true, urlBase = '' }: Props = $props();
   let conteneur: HTMLDivElement | undefined = $state();
-  let estPetitEcran = $state(false);
+  const petitÉcran = détecteMédia(requêteMédiaPetitÉcran);
+  const estPetitEcran = $derived(petitÉcran.correspond);
 
   const indexNiveauCourant = $derived(niveauxMaturite.indexOf(niveauCourant));
   const animation = $derived(!estPetitEcran && animeTuiles);
-
-  onMount(() => {
-    const mediaQuery = window.matchMedia('(max-width: 576px)');
-    const actualiseTailleEcran = () => (estPetitEcran = mediaQuery.matches);
-    actualiseTailleEcran();
-    mediaQuery.addEventListener('change', actualiseTailleEcran);
-    return () => mediaQuery.removeEventListener('change', actualiseTailleEcran);
-  });
 
   $effect(() => {
     if (!defilementAutomatique) return;
