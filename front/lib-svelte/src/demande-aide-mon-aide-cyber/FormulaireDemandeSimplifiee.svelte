@@ -126,8 +126,8 @@
         errorMessage="Ce champ est obligatoire. Veuillez le cocher."
         required
       >
-        <span
-          >J’accepte les <Lien
+        <span>
+          J’accepte les <Lien
             href="https://monaide.cyber.gouv.fr/cgu"
             libelle="conditions générales d’utilisation"
             blank

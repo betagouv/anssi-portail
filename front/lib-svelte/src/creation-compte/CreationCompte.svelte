@@ -221,8 +221,8 @@
               <CaseACocher id="cguAcceptees" nom="cguAcceptees" bind:coche={formulaireInscription.cguAcceptees} requis>
                 <span class="requis">
                   J'accepte les&nbsp;<Lien href="/cgu" libelle=" conditions générales d'utilisation" neutre></Lien>
-                  de MesServicesCyber</span
-                >
+                  de MesServicesCyber
+                </span>
               </CaseACocher>
             </div>
             <div class="case-a-cocher">

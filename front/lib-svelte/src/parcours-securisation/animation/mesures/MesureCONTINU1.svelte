@@ -24,10 +24,10 @@
   class:animée
 >
   <title id="picto-title">Sauvegarde</title>
-  <desc id="picto-desc"
-    >Au survol, les repères du cadran pivotent et le cadenas se rétracte puis retrouve sa taille et les traits
-    décoratifs se redessinent en 828 ms.</desc
-  >
+  <desc id="picto-desc">
+    Au survol, les repères du cadran pivotent et le cadenas se rétracte puis retrouve sa taille et les traits décoratifs
+    se redessinent en 828 ms.
+  </desc>
 
   <rect width="282" height="159" fill="#FBF6ED" pointer-events="all" />
 

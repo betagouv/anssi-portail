@@ -24,10 +24,10 @@
   class:animée
 >
   <title id="picto-title">Contacts</title>
-  <desc id="picto-desc"
-    >Au survol, le combiné oscille légèrement tandis que les deux cartes échangent leur place et les traits décoratifs
-    se redessinent en 828 ms.</desc
-  >
+  <desc id="picto-desc">
+    Au survol, le combiné oscille légèrement tandis que les deux cartes échangent leur place et les traits décoratifs se
+    redessinent en 828 ms.
+  </desc>
 
   <rect width="282" height="159" fill="#FBF6ED" pointer-events="all" />
 

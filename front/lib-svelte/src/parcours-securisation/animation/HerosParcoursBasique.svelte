@@ -71,7 +71,8 @@
       y="244.22"
       color-interpolation-filters="sRGB"
       filterUnits="userSpaceOnUse"
-      ><feFlood flood-opacity="0" result="BackgroundImageFix" /><feColorMatrix
+    >
+      <feFlood flood-opacity="0" result="BackgroundImageFix" /><feColorMatrix
         in="SourceAlpha"
         result="hardAlpha"
         values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
@@ -81,8 +82,8 @@
         in="SourceGraphic"
         in2="effect1_dropShadow_21569_891"
         result="shape"
-      /></filter
-    ><filter
+      />
+    </filter><filter
       id="filter1_d_21569_891"
       width="100"
       height="100"
@@ -90,7 +91,8 @@
       y="10"
       color-interpolation-filters="sRGB"
       filterUnits="userSpaceOnUse"
-      ><feFlood flood-opacity="0" result="BackgroundImageFix" /><feColorMatrix
+    >
+      <feFlood flood-opacity="0" result="BackgroundImageFix" /><feColorMatrix
         in="SourceAlpha"
         result="hardAlpha"
         values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
@@ -100,15 +102,15 @@
         in="SourceGraphic"
         in2="effect1_dropShadow_21569_891"
         result="shape"
-      /></filter
-    ><pattern id="pattern0_21569_891" width="1" height="1" patternContentUnits="objectBoundingBox"
-      ><use href="#image0_21569_891" transform="matrix(.00063957 0 0 .00060404 -.234877 -.107503)" /></pattern
-    ><image
+      />
+    </filter><pattern id="pattern0_21569_891" width="1" height="1" patternContentUnits="objectBoundingBox">
+      <use href="#image0_21569_891" transform="matrix(.00063957 0 0 .00060404 -.234877 -.107503)" />
+    </pattern><image
       id="image0_21569_891"
       width="2048"
       height="2048"
       href="/assets/images/parcours-securisation/animation/heros-parcours-basique.avif"
       preserveAspectRatio="none"
-    /></defs
-  ></svg
->
+    />
+  </defs>
+</svg>

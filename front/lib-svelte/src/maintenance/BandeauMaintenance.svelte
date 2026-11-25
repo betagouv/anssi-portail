@@ -13,10 +13,10 @@
   <dsfr-container id="maintenance">
     <div class="contenu-section">
       <p>
-        <span class="prevision"
-          >Une maintenance est prévue le {maintenanceEnPreparation.jour}
-          sur MesServicesCyber, de {maintenanceEnPreparation.heure}.</span
-        >
+        <span class="prevision">
+          Une maintenance est prévue le {maintenanceEnPreparation.jour}
+          sur MesServicesCyber, de {maintenanceEnPreparation.heure}.
+        </span>
         <span>La plateforme sera inaccessible. Nous nous excusons pour la gêne occasionnée.</span>
       </p>
     </div>
