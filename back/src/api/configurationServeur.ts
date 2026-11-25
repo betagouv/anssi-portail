@@ -42,6 +42,7 @@ import { ServiceRécompensesCyberDépart } from './mesures/ressourceRecompensesC
 import { GestionnaireRequêtesComplémentaires, Middleware } from './middlewares/middleware.js';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
 import { ServiceModèleInventaireDesComposantsObsolètes } from './outils/modele-inventaire-composants-obsoletes/serviceModeleInventaireComposantsObsoletes.js';
+import { ServiceModèleAnalyseDeConformité } from './outils/modeleAnalyseDeConformite/serviceModeleAnalyseDeConformite.js';
 import { ServiceModeleAnnuaireDeCrise } from './outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { ServiceModèleListeDActivités } from './outils/modeleListeDActivites/serviceModeleListeDActivites.js';
 import { ServiceModèleListeDesInterconnexions } from './outils/modeleListeInterconnexions/serviceModeleListeInterconnexions.js';
@@ -108,6 +109,7 @@ export type ConfigurationServeur = {
   serviceModeleListePrestatairesEtFournisseurs: ServiceModèleListeDesPrestatairesEtFournisseurs;
   serviceModeleListeInterconnexions: ServiceModèleListeDesInterconnexions;
   serviceModeleInventaireComposantsObsoletes: ServiceModèleInventaireDesComposantsObsolètes;
+  serviceModèleAnalyseDeConformité: ServiceModèleAnalyseDeConformité;
   adaptateurEmail: AdaptateurEmail;
   generateurImage: GenerateurImage;
   adaptateurCompression: AdaptateurCompression;
