@@ -230,7 +230,7 @@ describe("La tâche de mise à jour de l'observatoire MSC", () => {
         ...surcharge,
       });
 
-    it('publie chaque test avec son niveau et le profil déclaré', async () => {
+    it('publie chaque test avec le libellé de son niveau et le profil déclaré', async () => {
       await unTestDeMaturite('test-1', { region: 'FR-BRE', secteur: 'J', taille_organisation: '11' });
 
       await tache().execute();
@@ -240,7 +240,7 @@ describe("La tâche de mise à jour de l'observatoire MSC", () => {
           id_hash: hache('test-1'),
           type_test: 'maturité cyber',
           date_realisation: expect.anything(),
-          niveau: 'intermediaire',
+          niveau: 'Intermédiaire',
           id_hash_utilisateur: null,
           region_declaree: '53',
           secteur_activite_declare: 'J',
