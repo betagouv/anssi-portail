@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { Cache } from '../../src/infra/cache.js';
+import { Cache } from '../src/cache.js';
 
 const VINGT_QUATRE_HEURES = Temporal.Duration.from({ hours: 24 });
 const VINGT_CINQ_HEURES = Temporal.Duration.from({ hours: 25 });

@@ -88,7 +88,8 @@
     "sitemap": "^10.0.0",
     "svelte": "catalog:",
     "uuid": "catalog:",
-    "zod": "^4.5.4"
+    "zod": "^4.5.4",
+    "@anssi-portail/infrastructure": "workspace:^"
   },
   "directories": {
     "test": "tests"

@@ -13,7 +13,9 @@
     "@anssi-portail/svelte": "workspace:^",
     "@lab-anssi/ui-kit": "catalog:",
     "isomorphic-dompurify": "catalog:",
-    "@sentry/browser": "^10.70.0"
+    "@sentry/browser": "^10.70.0",
+    "@anssi-portail/infrastructure": "workspace:^",
+    "@anssi-portail/axios": "workspace:^"
   },
   "devDependencies": {
     "@sentry/vite-plugin": "^5.4.0",
@@ -39,6 +41,7 @@
     "./contexte": {
       "types": "./contexte.d.ts"
     },
-    "./pages.json": "./pages.json"
+    "./pages.json": "./pages.json",
+    "./kit-relais": "./src/lib/kit-relais/server/entrepotKitRelaisCrisp.ts"
   }
 }

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { BandeauPage } from '@lab-anssi/ui-kit';
   import type { ComponentProps, Snippet } from 'svelte';
+  import { utiliseProfil } from '../stores/profil.store';
   import { fabriqueFilAriane, type PropriétésFilAriane } from './filAriane';
 
   type Props = {
@@ -50,7 +51,8 @@
     'heros-centre': 'default',
   };
   const type = $derived(typeParFormat[format]);
-  const segmentsFilAriane = $derived(fabriqueFilAriane(propriétésFilAriane));
+  const profil = utiliseProfil();
+  const segmentsFilAriane = $derived(fabriqueFilAriane(propriétésFilAriane, !!$profil));
 </script>
 
 <div class="heros" class:pastel={theme === 'pastel'}>

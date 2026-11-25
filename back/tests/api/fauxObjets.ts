@@ -452,6 +452,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurStatistiqueParcours: new AdaptateurStatistiqueParcoursMémoire(),
   busEvenements: fabriqueBusPourLesTests(fauxRapporteur),
   entrepôtArticle: new EntrepôtArticleMémoire(),
+  entrepotKitRelais: { lis: async () => ({ titre: '', description: '', contenu: '', tableDesMatières: [] }) },
   entrepotFavori: new EntrepotFavoriMemoire(),
   entrepôtContact,
   entrepotFinancement: new EntrepotFinancementMemoire(),

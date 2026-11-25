@@ -32,7 +32,6 @@ import { ChargeurExigences } from './chargementProprietes/chargeurExigences.js';
 import { ChargeurFilAriane } from './chargementProprietes/chargeurFilAriane.js';
 import { ChargeurFinancements } from './chargementProprietes/chargeurFinancements.js';
 import { ChargeurGuide } from './chargementProprietes/chargeurGuides.js';
-import { ChargeurPageCrisp } from './chargementProprietes/chargeurPageCrisp.js';
 import { ChargeurRessourcesCyber } from './chargementProprietes/chargeurRessourcesCyber.js';
 import { composantsAutorisés } from './composantsAutorises.genere.js';
 import { RésolveurDePage } from './resolveurDePage.js';
@@ -121,7 +120,6 @@ export const fabriqueAdaptateurEnrichissement = async (
     new ChargeurFinancements(résolveurDePage, entrepôtFinancement),
     new ChargeurContacts(résolveurDePage, entrepôtContact),
     new ChargeurCrisp(résolveurDePage, entrepôtArticle),
-    new ChargeurPageCrisp(entrepôtArticle),
     new ChargeurFilAriane(),
   ];
 

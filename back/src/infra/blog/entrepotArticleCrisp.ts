@@ -1,16 +1,14 @@
+import { aseptiseHtml } from '@anssi-portail/infrastructure/aseptisationDuHtml';
+import { Cache } from '@anssi-portail/infrastructure/cache';
 import { CmsCrisp, PageHtmlCrisp, ResumeArticleCrispAvecSlug } from '@lab-anssi/lib';
 import { Article } from '../../metier/blog/article.js';
 import { EntrepôtArticle } from '../../metier/blog/entrepotArticle.js';
 import { RésuméArticle } from '../../metier/blog/resumeArticle.js';
 import { Rapporteur } from '../../metier/rapporteur.js';
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
-import { aseptiseHtml } from '../aseptisationDuHtml.js';
-import { Cache } from '../cache.js';
 
 export class EntrepôtArticleCrisp implements EntrepôtArticle {
   private static CLÉ_LISTE_RÉSUMÉS_ARTICLE = 'CLE_LISTE_RÉSUMÉS_ARTICLE';
-  private static CLÉ_KIT_RELAIS = 'kit-relais';
-  private static SLUG_CRISP_KIT_RELAIS = 'le-kit-relais-messervicescyber';
 
   private cacheDesRésumés: Cache<RésuméArticle[]>;
   private cacheDesArticles: Cache<Article>;
@@ -66,15 +64,6 @@ export class EntrepôtArticleCrisp implements EntrepôtArticle {
 
   async articleDeBlogExiste(slug: string): Promise<boolean> {
     return (await this.tousLesArticlesDeBlog()).some((article) => article.slug === slug);
-  }
-
-  async kitRelais(): Promise<Article> {
-    const récupèreDepuisCrisp = async (): Promise<Article> => {
-      const article = await this.cmsCrisp.recupereArticle(EntrepôtArticleCrisp.SLUG_CRISP_KIT_RELAIS);
-      return this.depuis(article);
-    };
-
-    return this.cacheDesArticles.get(EntrepôtArticleCrisp.CLÉ_KIT_RELAIS, récupèreDepuisCrisp);
   }
 
   private depuis(articleCrisp: PageHtmlCrisp): Article {

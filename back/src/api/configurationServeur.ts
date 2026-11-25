@@ -1,3 +1,4 @@
+import type { ContexteMSC } from '@anssi-portail/msc/contexte';
 import { ErrorRequestHandler } from 'express';
 import { BusEvenements } from '../bus/busEvenements.js';
 import { AdaptateurCellar } from '../infra/adaptateurCellar.js';
@@ -68,6 +69,7 @@ export type ConfigurationServeur = {
   adaptateurStatistiqueParcours: AdaptateurStatistiqueParcours;
   busEvenements: BusEvenements;
   entrepôtArticle: EntrepôtArticle;
+  entrepotKitRelais: ContexteMSC['entrepotKitRelais'];
   entrepôtContact: EntrepôtContact;
   entrepotFavori: EntrepotFavori;
   entrepotFinancement: EntrepotFinancement;

@@ -16,7 +16,6 @@ const rolldownOptions: NonNullable<UserConfig['build']>['rolldownOptions'] = {
     guide: 'src/catalogue/guides/Guide.svelte',
     financements: 'src/financements/Financements.svelte',
     contacts: 'src/contacts/Contacts.svelte',
-    'page-crisp': 'src/page-crisp/PageCrisp.svelte',
     'fil-ariane': 'src/ui/FilAriane.svelte',
     'test-maturite': 'src/test-maturite/TestMaturite.svelte',
     'session-groupe': 'src/test-maturite/SessionGroupe.svelte',

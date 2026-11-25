@@ -30,5 +30,6 @@ describe('Lorsque l’application est en maintenance', () => {
     await request(serveur).get('/assets').expect(200);
     await request(serveur).get('/_app/version.json').expect('Content-Type', /json/u).expect(200);
     await request(serveur).get('/mentions-legales').expect('Content-Type', /html/u).expect(503);
+    await request(serveur).get('/api/pages-crisp/kit-relais').expect('Content-Type', /html/u).expect(503);
   });
 });

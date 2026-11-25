@@ -1,4 +1,4 @@
-import { Cache } from './cache.js';
+import { Cache } from '@anssi-portail/infrastructure/cache';
 import { ClientHttp } from './clientHttp.js';
 
 export type ReponseGrist<TYPE_DOCUMENT> = {

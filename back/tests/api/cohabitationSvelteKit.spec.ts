@@ -25,4 +25,16 @@ describe('La cohabitation de SvelteKit avec Express', () => {
     expect(réponse.text).toContain('Le service conseil technique est accessible à tous.');
     await request(serveur).get('/services/conseil-technique.html').expect('Location', '/services/conseil-technique');
   });
+
+  it('compresse le HTML Kit et partage le quota des API entre Kit et Express', async () => {
+    const serveur = creeServeur({
+      ...configuration,
+      middleware,
+      reseau: { ...configuration.reseau, trustProxy: 1, maxRequetesParMinuteAPI: 1 },
+    });
+    await request(serveur).get('/mentions-legales').set('Accept-Encoding', 'gzip').expect('Content-Encoding', 'gzip');
+    await request(serveur).get('/api/pages-crisp/kit-relais').set('Forwarded', 'for=192.0.2.1').expect(200);
+    await request(serveur).get('/api/infos-site').set('Forwarded', 'for=192.0.2.1').expect(429);
+    await request(serveur).get('/api/infos-site').set('Forwarded', 'for=192.0.2.2').expect(200);
+  });
 });

@@ -103,7 +103,6 @@ export default defineConfig(({ command, mode }) => {
           'mini-tests': 'src/main-mini-tests.ts',
           'module-cyberdepart': 'src/main-module-cyberdepart.ts',
           'niveaux-maturite': 'src/main-niveaux-maturite.ts',
-          'page-crisp': 'src/main-page-crisp.ts',
           'page-directive-nis2': 'src/main-page-directive-nis2.ts',
           'parcours-complet': 'src/main-parcours-complet.ts',
           'parcours-cyberdepart': 'src/main-parcours-cyberdepart.ts',

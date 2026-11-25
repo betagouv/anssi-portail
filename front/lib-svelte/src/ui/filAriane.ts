@@ -21,11 +21,14 @@ export type PropriétésFilAriane = {
   feuille: string;
 };
 
-export const fabriqueFilAriane = (propriétés: PropriétésFilAriane | undefined): Segment[] => {
+export const fabriqueFilAriane = (
+  propriétés: PropriétésFilAriane | undefined,
+  connecté = !!profil.current?.email
+): Segment[] => {
   if (!propriétés) return [];
 
   const premièreBranche: Branche =
-    espaceConnectéActivé && !!profil.current?.email
+    espaceConnectéActivé && connecté
       ? { nom: 'Tableau de bord', lien: '/tableau-de-bord' }
       : { nom: 'Accueil', lien: '/' };
 

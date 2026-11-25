@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import axios from '@anssi-portail/axios';
+import { creeEntrepotKitRelais } from '@anssi-portail/msc/kit-relais';
 import { CmsCrisp } from '@lab-anssi/lib';
 import { adaptateurJWT } from './api/adaptateurJWT.js';
 import { fournisseurChemin } from './api/fournisseurChemin.js';
@@ -266,6 +267,7 @@ const host = process.env.HOST;
     adaptateurHorloge,
     messagerieInstantanee,
     entrepôtArticle,
+    entrepotKitRelais: creeEntrepotKitRelais(cmsCrisp, adaptateurEnvironnement.crisp.duréeDuCache()),
     entrepôtContact,
     entrepotFinancement,
     entrepotGuide,

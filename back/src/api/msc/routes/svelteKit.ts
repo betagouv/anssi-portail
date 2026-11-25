@@ -10,13 +10,8 @@ import { corpsVide, valideCorpsRequete } from '../../zod.js';
 
 export const pagesDuSitemapKit = Object.entries(pages).map(([url, page]) => ({
   url,
-  modifiéLe: page.modifiéLe,
+  modifiéLe: 'modifiéLe' in page ? page.modifiéLe : undefined,
 }));
-
-const délègue: RequestHandler = async (req, res, next) => {
-  const { handler } = await import('@anssi-portail/msc/handler');
-  handler(req, res, next);
-};
 
 export const enregistreLesAssetsKit = (app: Express) => {
   const chemin = fileURLToPath(new URL('./client/_app', import.meta.resolve('@anssi-portail/msc/handler')));
@@ -30,35 +25,43 @@ export const enregistreLesAssetsKit = (app: Express) => {
 
 export const enregistreSvelteKit = (app: Express, configuration: ConfigurationServeur) => {
   const chemins = Object.keys(pages).map((page) => '/' + page);
+  const canonique: RequestHandler = (req, res, next) => {
+    const chemin = req.path.replace(/\/+$/u, '');
+    if (req.path !== chemin) return res.redirect(308, chemin + req.originalUrl.slice(req.path.length));
+    next();
+  };
   const chargeUtilisateur = configuration.middleware.ajouteUtilisateurARequete(
     configuration.entrepotUtilisateur,
     configuration.adaptateurHachage
   );
+  const délègue: RequestHandler = async (req, res, next) => {
+    const utilisateur = req.utilisateur as Utilisateur | undefined;
+    const contexte: ContexteMSC = {
+      entrepotKitRelais: configuration.entrepotKitRelais,
+      profil: utilisateur && {
+        nom: utilisateur.nom,
+        prenom: utilisateur.prenom,
+        estAgentAnssi: await utilisateur.estAgentAnssi(),
+        codeActivite: (await utilisateur.organisation()).codeActivite,
+        codeRegion: await utilisateur.codeRegion(),
+        parcoursSecurisation: { parcoursActuel: utilisateur.parcoursActuel() },
+      },
+      maintenance: previsionMaintenance(configuration.adaptateurEnvironnement),
+      rapporteur: configuration.rapporteur,
+      politiqueDeSécurité: String(res.getHeader('content-security-policy') ?? ''),
+    };
+    Object.assign(req, { msc: contexte });
+    const { handler } = await import('@anssi-portail/msc/handler');
+    handler(req, res, next);
+  };
+
+  app.get('/api/pages-crisp/kit-relais', valideCorpsRequete(corpsVide), canonique, délègue);
   app.get(
     [...chemins, ...chemins.map((chemin) => chemin + '/__data.json')],
     valideCorpsRequete(corpsVide),
+    canonique,
     (req, res, next) =>
       sessionAuthentifiée(req.session?.token, configuration.adaptateurJWT) ? chargeUtilisateur(req, res, next) : next(),
-    async (req, res, next) => {
-      const chemin = req.path.replace(/\/+$/u, '');
-      if (req.path !== chemin) return res.redirect(308, chemin + req.originalUrl.slice(req.path.length));
-      const utilisateur = req.utilisateur as Utilisateur | undefined;
-      const contexte: ContexteMSC = {
-        profil: utilisateur && {
-          nom: utilisateur.nom,
-          prenom: utilisateur.prenom,
-          estAgentAnssi: await utilisateur.estAgentAnssi(),
-          codeActivite: (await utilisateur.organisation()).codeActivite,
-          codeRegion: await utilisateur.codeRegion(),
-          parcoursSecurisation: { parcoursActuel: utilisateur.parcoursActuel() },
-        },
-        maintenance: previsionMaintenance(configuration.adaptateurEnvironnement),
-        rapporteur: configuration.rapporteur,
-        politiqueDeSécurité: String(res.getHeader('content-security-policy') ?? ''),
-      };
-      Object.assign(req, { msc: contexte });
-      next();
-    },
     délègue
   );
 };

@@ -1,0 +1,36 @@
+{
+  "name": "@anssi-portail/infrastructure",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=26.0.0"
+  },
+  "exports": {
+    "./cache": {
+      "types": "./src/cache.ts",
+      "anssi-portail:source": "./src/cache.ts",
+      "default": "./dist/cache.js"
+    },
+    "./aseptisationDuHtml": {
+      "types": "./src/aseptisationDuHtml.ts",
+      "anssi-portail:source": "./src/aseptisationDuHtml.ts",
+      "default": "./dist/aseptisationDuHtml.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "lint": "eslint .",
+    "prepare": "pnpm build",
+    "pretest": "pnpm build",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "vitest": "catalog:"
+  },
+  "dependencies": {
+    "isomorphic-dompurify": "catalog:"
+  }
+}

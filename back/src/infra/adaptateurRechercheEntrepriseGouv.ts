@@ -1,4 +1,5 @@
 import axios, { AxiosError } from '@anssi-portail/axios';
+import { Cache } from '@anssi-portail/infrastructure/cache';
 import { Rapporteur } from '../metier/rapporteur.js';
 import { régions } from '../metier/referentielRegions.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
@@ -7,7 +8,6 @@ import {
   OrganisationDetaillee,
   ResultatRechercheEntreprise,
 } from './adaptateurRechercheEntreprise.js';
-import { Cache } from './cache.js';
 
 const TRENTE_MINUTES = Temporal.Duration.from({ minutes: 30 });
 

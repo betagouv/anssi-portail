@@ -6,7 +6,7 @@ import {
 import { EntrepôtContactStatique } from '../../../src/infra/entrepotContactStatique.js';
 import { ConstructeurDArticleAvecToutesLesMétadonnées } from '../../api/blog/constructeurDeResumeDArticle.js';
 import { fauxAdaptateurEnvironnement, fauxFournisseurDeChemin } from '../../api/fauxObjets.js';
-import { financementCyberPME, guideDevsecops, kitRelais } from '../../api/objetsPretsALEmploi.js';
+import { financementCyberPME, guideDevsecops } from '../../api/objetsPretsALEmploi.js';
 import { EntrepôtArticleMémoire } from '../../persistance/entrepotArticleMemoire.js';
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire.js';
 import { EntrepotFinancementMemoire } from '../../persistance/entrepotFinancementMemoire.js';
@@ -208,20 +208,6 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       expect(rendu).toMatch(/<meta name="description" content="La description de l'article 1">/);
       expect(rendu).toMatch(/<meta property="og:description" content="La description de l'article 1">/);
       expect(rendu).toMatch(/<meta name="twitter:description" content="La description de l'article 1">/);
-    });
-
-    it("lorsqu'on sert le kit relais depuis l'article Crisp", async () => {
-      vi.spyOn(entrepôtArticle, 'kitRelais').mockResolvedValue({
-        ...kitRelais,
-        description: 'La description du kit relais !',
-      });
-      const htmlFactice = fabriqueHtmlFactice('http://localhost:3000/kit-relais');
-
-      const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/kit-relais');
-
-      expect(rendu).toMatch(/<meta name="description" content="La description du kit relais !">/);
-      expect(rendu).toMatch(/<meta property="og:description" content="La description du kit relais !">/);
-      expect(rendu).toMatch(/<meta name="twitter:description" content="La description du kit relais !">/);
     });
   });
 });

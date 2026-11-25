@@ -36,9 +36,5 @@ export class RésolveurDePage {
     if (slugArticle) {
       return this.entrepôtArticle.articleDeBlogParSlug(slugArticle);
     }
-
-    if (routeDemandée.match(/\/kit-relais/)) {
-      return this.entrepôtArticle.kitRelais();
-    }
   }
 }
