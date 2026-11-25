@@ -14,6 +14,7 @@ import { ressourceModeleAnnuaireDeCrise } from '../../../outils/modeleAnnuaireDe
 import { ressourceModèleXslxGénérique } from '../../../outils/modeleXslxGenerique/ressourceModeleXslx.js';
 import { ServiceModèleXslx } from '../../../outils/modeleXslxGenerique/serviceModeleXslx.js';
 import { ressourceRappelIcsGénérique } from '../../../outils/rappelIcsGenerique/ressourceRappelIcs.js';
+import { ressourceDocumentOutils } from '../../../outils/ressourceDocumentOutils.js';
 import { ressourceRetoursSurOutil } from '../../../outils/ressourceRetoursSurOutil.js';
 import { enregistreRouteDansExpress } from '../../enregistreRoutes.js';
 
@@ -57,6 +58,12 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
   ).forEach(([outil, rappel]) => {
     enregistreRoute(`/${outil}`, ressourceRappelIcsGénérique(configurationServeur, rappel, outil));
   });
+
+  /// OUTILS DOCX
+  enregistreRoute(
+    `/modele-suivi-des-arrivees.docx`,
+    ressourceDocumentOutils(configurationServeur, 'modele-suivi-des-arrivees.docx')
+  );
 
   /// OUTILS AUTRE
   enregistreRoute('/campagne-de-sensibilisation', ressourceCampagneDeSensibilisation(configurationServeur));

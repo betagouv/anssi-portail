@@ -29,6 +29,7 @@ export interface FournisseurChemin {
     modèleListeDesPrestatairesEtFournisseurs: () => string;
     modèleListeDesInterconnexions: () => string;
     modèleInventaireDesComposantsObsolètes: () => string;
+    modèleSuiviDesArrivées: () => string;
   };
   jekyll: {
     page403: () => string;
@@ -109,6 +110,7 @@ export const fournisseurChemin: FournisseurChemin = {
       cheminBackDepuisOutils('modeleListeInterconnexions', 'modele-liste-interconnexions.xlsx'),
     modèleInventaireDesComposantsObsolètes: () =>
       cheminBackDepuisOutils('modele-inventaire-composants-obsoletes', 'modele-inventaire-composants-obsoletes.xlsx'),
+    modèleSuiviDesArrivées: () => cheminBackDepuisOutils('modeleSuiviDesArrivees', 'modele-suivi-des-arrivees.docx'),
   },
   jekyll: {
     page403: () => construisCheminVersArtefactJekyll('403.html'),
