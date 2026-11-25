@@ -42,6 +42,7 @@
         description="Sauvegarder régulièrement les données, vérifier et mettre à l’abri ses sauvegardes"
         size="sm"
         hasBadge
+        variations="no-border"
         hasButtons
       >
         <div slot="badgesgroup">
@@ -82,6 +83,7 @@
       description="Le socle de départ de la sécurisation d'une organisation&nbsp;: les mesures les plus accessibles et les plus rentables, peu coûteuses et rapides à déployer, à mettre en place avant toute protection avancée."
       size="sm"
       hasBadge
+      variations="no-border"
       hasButtons
     >
       <div slot="badgesgroup">
