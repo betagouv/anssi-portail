@@ -60,6 +60,15 @@ Svelte supports TypeScript via `<script lang="ts">` blocks.
 
 **Component props:** Define interfaces for prop types
 
+## Media queries (SSR)
+
+Ne pas appeler `new MediaQuery(...)` (`svelte/reactivity`) ni `window.matchMedia` dans un composant. Passer par `src/utils/rendu.svelte.ts` :
+
+- `détecteRendu()` pour mobile / tablette / bureau ;
+- `détecteMédia(requête, valeurServeur)` pour une autre requête (constantes `requêteMédia…` du même fichier).
+
+Tant que le composant n'est pas monté (SSR et hydratation), la valeur est `valeurServeur`, pour que l'hydratation corresponde au HTML serveur. Si le même effet est faisable en CSS (`@media`), préférer le CSS.
+
 ## Testing
 
 **Framework:** Vitest + testing-library (standard for component testing)

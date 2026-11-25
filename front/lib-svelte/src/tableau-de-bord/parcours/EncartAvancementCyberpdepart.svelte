@@ -2,7 +2,6 @@
   import { DsfrBadge } from '@lab-anssi/ui-kit';
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { MediaQuery } from 'svelte/reactivity';
   import { enPropriétéWebC } from '$plateforme/webComponent';
   import AnneauProgression from '../../parcours-securisation/AnneauProgression.svelte';
   import CarteMesure from '../../parcours-securisation/CarteMesure.svelte';
@@ -13,9 +12,10 @@
   import type { ModuleRéponseApi } from '../../parcours-securisation/moduleReponseApi';
   import Lien from '../../ui/Lien.svelte';
   import MotEnExergue from '../../ui/MotEnExergue.svelte';
+  import { détecteMédia, requêteMédiaÀPartirDeSm } from '../../utils/rendu.svelte';
   import ProgressionCyberdepart from './ProgressionCyberdepart.svelte';
 
-  const àPartirDeSm = new MediaQuery('min-width: 576px');
+  const àPartirDeSm = détecteMédia(requêteMédiaÀPartirDeSm);
 
   let prochaineMesureÀFaire: Mesure | undefined = $state();
   let moduleCyberdépart: ModuleRéponseApi | undefined = $state();
@@ -88,7 +88,7 @@
     <div class="entete-et-carte">
       <ProgressionCyberdepart {nombreMesuresPrisesEnCompte} {nombreMesures} {cibleBadge} />
       {#if prochaineMesureÀFaire}
-        <CarteMesure mesure={prochaineMesureÀFaire} horizontal={àPartirDeSm.current}>
+        <CarteMesure mesure={prochaineMesureÀFaire} horizontal={àPartirDeSm.correspond}>
           {#snippet badges()}
             <div slot="badgesgroup">
               <DsfrBadge accent="yellow-moutarde" label={libelléActionRecommandée} type="accent" size="sm" />

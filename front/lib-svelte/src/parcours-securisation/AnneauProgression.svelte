@@ -1,7 +1,7 @@
 <script lang="ts">
   import { cubicInOut } from 'svelte/easing';
   import { Tween } from 'svelte/motion';
-  import { MediaQuery } from 'svelte/reactivity';
+  import { détecteMédia, requêteMédiaMouvementRéduit } from '../utils/rendu.svelte';
 
   interface Props {
     actuel: number;
@@ -14,13 +14,13 @@
   const rayon = 29;
   const circonference = 2 * Math.PI * rayon;
 
-  const mouvementRéduit = new MediaQuery('prefers-reduced-motion: reduce');
+  const mouvementRéduit = détecteMédia(requêteMédiaMouvementRéduit);
   const ratio = $derived(max > 0 ? Math.min(Math.max(actuel / max, 0), 1) : 0);
   const estComplet = $derived(ratio >= 1);
 
   const avancement = new Tween(0, { easing: cubicInOut, duration: 1200 });
   $effect(() => {
-    avancement.set(ratio, { duration: mouvementRéduit.current ? 0 : 1200 });
+    avancement.set(ratio, { duration: mouvementRéduit.correspond ? 0 : 1200 });
   });
 </script>
 
