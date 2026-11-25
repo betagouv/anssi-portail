@@ -24,10 +24,10 @@
   class:animée
 >
   <title id="picto-title">Mise à jour</title>
-  <desc id="picto-desc"
-    >Au survol, les flèches et l'engrenage pivotent en sens opposés tandis que le tracé inférieur revient de droite à
-    gauche et les traits décoratifs se redessinent en 828 ms.</desc
-  >
+  <desc id="picto-desc">
+    Au survol, les flèches et l'engrenage pivotent en sens opposés tandis que le tracé inférieur revient de droite à
+    gauche et les traits décoratifs se redessinent en 828 ms.
+  </desc>
   <rect width="282" height="159" fill="#FBF6ED" pointer-events="all" />
   <g id="artwork" transform="translate(95 33.5)">
     <g id="Group 2121">

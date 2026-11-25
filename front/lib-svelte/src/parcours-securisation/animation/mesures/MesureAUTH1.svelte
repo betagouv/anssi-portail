@@ -24,10 +24,10 @@
   class:animée
 >
   <title id="picto-title">Changer le mot de passe</title>
-  <desc id="picto-desc"
-    >Au survol, la flèche de renouvellement effectue un tour complet et les quatre points grandissent successivement
-    depuis leur centre et les traits décoratifs se redessinent en 828 ms.</desc
-  >
+  <desc id="picto-desc">
+    Au survol, la flèche de renouvellement effectue un tour complet et les quatre points grandissent successivement
+    depuis leur centre et les traits décoratifs se redessinent en 828 ms.
+  </desc>
 
   <rect width="282" height="159" fill="#FBF6ED" pointer-events="all" />
   <g id="artwork" transform="translate(95 33.5)">

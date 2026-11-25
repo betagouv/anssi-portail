@@ -24,10 +24,10 @@
     class:animée
   >
     <title id="reflexes-title">Pictogramme interactif des réflexes</title>
-    <desc id="reflexes-description"
-      >Au survol, les applications disparaissent et une alerte d'insecte avec deux indicateurs de connexion coupée
-      apparaît avec un léger rebond.</desc
-    >
+    <desc id="reflexes-description">
+      Au survol, les applications disparaissent et une alerte d'insecte avec deux indicateurs de connexion coupée
+      apparaît avec un léger rebond.
+    </desc>
 
     <rect width="192" height="128" fill="transparent" pointer-events="all" />
 

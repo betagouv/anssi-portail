@@ -24,10 +24,10 @@
   class:animée
 >
   <title id="picto-title">Crise</title>
-  <desc id="picto-desc"
-    >Au survol, l'alerte se contracte puis s'agrandit nettement, tandis que la tête se soulève légèrement avant de
-    revenir à sa position initiale et les traits décoratifs se redessinent en 828 ms.</desc
-  >
+  <desc id="picto-desc">
+    Au survol, l'alerte se contracte puis s'agrandit nettement, tandis que la tête se soulève légèrement avant de
+    revenir à sa position initiale et les traits décoratifs se redessinent en 828 ms.
+  </desc>
 
   <rect width="282" height="159" fill="#FBF6ED" pointer-events="all" />
 

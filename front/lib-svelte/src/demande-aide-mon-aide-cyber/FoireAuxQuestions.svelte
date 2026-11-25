@@ -25,9 +25,9 @@
   <Accordeon libelle="Mon organisation est-elle concernée&#8239;?" niveauTitre={4}>
     <div class="corps">
       <p>
-        ✅ <strong
-          >Oui, si vous êtes une TPE/PME, une collectivité, ou une association avec au moins deux salariés.</strong
-        ><br />
+        ✅ <strong>
+          Oui, si vous êtes une TPE/PME, une collectivité, ou une association avec au moins deux salariés.
+        </strong><br />
         Le diagnostic s’adresse aux structures disposant d’un système d’information minimal (ordinateurs, messagerie, réseau
         partagé...).<br /><br />
       </p>
@@ -45,9 +45,9 @@
   >
     <div class="corps">
       <p>
-        🛡️ Les cyberattaques se sont massivement multipliées ces dernières années, et <strong
-          >aucune organisation n’est à l’abri</strong
-        >, quelle que soit sa taille ou son secteur.<br />
+        🛡️ Les cyberattaques se sont massivement multipliées ces dernières années, et <strong>
+          aucune organisation n’est à l’abri
+        </strong>, quelle que soit sa taille ou son secteur.<br />
         <br />
         <strong>Les principales conséquences d’une attaque sont&nbsp;:</strong><br />
       </p>

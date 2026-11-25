@@ -24,10 +24,10 @@
   class:animée
 >
   <title id="picto-title">Admin</title>
-  <desc id="picto-desc"
-    >Au survol, l'engrenage pivote de 180° autour du point central tandis que le tracé inférieur poursuit le mouvement
-    du supérieur et les traits décoratifs se redessinent en 828 ms.</desc
-  >
+  <desc id="picto-desc">
+    Au survol, l'engrenage pivote de 180° autour du point central tandis que le tracé inférieur poursuit le mouvement du
+    supérieur et les traits décoratifs se redessinent en 828 ms.
+  </desc>
 
   <rect width="282" height="159" fill="#FBF6ED" pointer-events="all" />
   <g id="artwork" transform="translate(94.5 33.5)">

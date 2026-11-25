@@ -24,10 +24,10 @@
   class:animée
 >
   <title id="picto-title">Inventaire</title>
-  <desc id="picto-desc"
-    >Au survol, les trois coches et leurs lignes se dessinent à tour de rôle tandis que le stylo se rétracte puis
-    retrouve sa taille et les traits décoratifs se redessinent en 828 ms.</desc
-  >
+  <desc id="picto-desc">
+    Au survol, les trois coches et leurs lignes se dessinent à tour de rôle tandis que le stylo se rétracte puis
+    retrouve sa taille et les traits décoratifs se redessinent en 828 ms.
+  </desc>
   <rect width="282" height="159" fill="#FBF6ED" pointer-events="all" />
   <g id="artwork" transform="translate(94.5 34)">
     <g id="Group 2118">

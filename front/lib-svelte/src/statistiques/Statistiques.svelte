@@ -108,9 +108,9 @@
     <div class="repartition">
       <div>
         <h2>Baromètre de la maturité cyber</h2>
-        <span class="description"
-          >Répartition de la maturité cyber des organisations sur l’ensemble des tests réalisés.</span
-        >
+        <span class="description">
+          Répartition de la maturité cyber des organisations sur l’ensemble des tests réalisés.
+        </span>
       </div>
       <div class="filtres">
         <p>Affinez les résultats en appliquant des filtres par secteur, région ou taille d’organisation.</p>

@@ -1,7 +1,7 @@
 <script lang="ts"></script>
 
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 220 320"
-  ><path
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 220 320">
+  <path
     fill="#fff"
     d="M12 1h196a11 11 0 0 1 11 11v296a11 11 0 0 1-11 11H12a11 11 0 0 1-11-11V12A11 11 0 0 1 12 1"
   /><path
@@ -86,5 +86,5 @@
   /><path
     fill="#000091"
     d="M150.44 112.7q-.62.55-1.17 1.18-.22.3-.13.58c.12.46.75.75 1.2.32.4-.48 1.53-1.44 1.15-2.06-.24-.38-.76-.31-1.05-.02"
-  /></svg
->
+  />
+</svg>

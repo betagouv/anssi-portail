@@ -94,9 +94,9 @@
       </path>
       {#each pointsDuPolygone as point, index (index)}
         <circle class="sommet" r="8" cx={point.x} cy={point.y} fill={serie.couleur} stroke="white" stroke-width="3px">
-          <title
-            >{`${libelleSerie(serie)} / ${rubriques[index].label}\u00a0: ${arrondisAuCentieme(serie.valeurs[rubriques[index].id])}`}</title
-          >
+          <title>
+            {`${libelleSerie(serie)} / ${rubriques[index].label}\u00a0: ${arrondisAuCentieme(serie.valeurs[rubriques[index].id])}`}
+          </title>
         </circle>
       {/each}
     {/each}

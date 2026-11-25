@@ -64,8 +64,9 @@
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
-      Votre cyber&shy;sécurité décolle en <MotEnExergue motif="vague" couleur="cafe-creme">12&nbsp;mesures</MotEnExergue
-      >
+      Votre cyber&shy;sécurité décolle en <MotEnExergue motif="vague" couleur="cafe-creme">
+        12&nbsp;mesures
+      </MotEnExergue>
     {/snippet}
     {#snippet actions()}
       <dsfr-button

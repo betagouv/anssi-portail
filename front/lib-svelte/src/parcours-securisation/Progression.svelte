@@ -34,9 +34,9 @@
   {/if}
   <span class="texte-standard-md avancement">{actuel}&nbsp;/&nbsp;{max}</span>
   <div class="barre" bind:this={barre}>
-    <progress class="barre-actuelle" value={avancement.current} {max} aria-label={libelle}
-      >{avancement.current}</progress
-    >
+    <progress class="barre-actuelle" value={avancement.current} {max} aria-label={libelle}>
+      {avancement.current}
+    </progress>
     {#if cible}
       {#if actuel < cible}
         <div class="badge-recompense">

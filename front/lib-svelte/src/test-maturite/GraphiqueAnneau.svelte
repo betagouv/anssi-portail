@@ -71,8 +71,8 @@
 <svg id="radar" viewBox="-130 -130 260 260" xmlns="http://www.w3.org/2000/svg">
   {#if nomDeLaDonnee}
     <text class="total" x="0" y="0" text-anchor="middle" font-size="40">{totalSerie(serie)}</text>
-    <text class="libelle-total" x="0" y="15px" font-size="16" dominant-baseline="hanging" text-anchor="middle"
-      >{nomDeLaDonnee}
+    <text class="libelle-total" x="0" y="15px" font-size="16" dominant-baseline="hanging" text-anchor="middle">
+      {nomDeLaDonnee}
     </text>
   {/if}
   {#each secteurs as secteur, index (index)}
@@ -85,8 +85,10 @@
          L {secteur.premierPointInterieur.x} {secteur.premierPointInterieur.y}
          A {rayonInterieur} {rayonInterieur} 0 {secteur.arcLarge ? 1 : 0} 0 {secteur.secondPointInterieur.x} {secteur
         .secondPointInterieur.y}
-         Z"><title>{`${serie[index].libelle}\u00a0: ${valeurSerieAffichee}`}</title></path
+         Z"
     >
+      <title>{`${serie[index].libelle}\u00a0: ${valeurSerieAffichee}`}</title>
+    </path>
   {/each}
 </svg>
 
