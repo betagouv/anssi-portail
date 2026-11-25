@@ -9,6 +9,7 @@ import {
   rappelMiseAJourListePrestatairesEtFournisseurs,
 } from '../../../../metier/outils/rappelsDeMiseAJour.js';
 import { ConfigurationServeur } from '../../../configurationServeur.js';
+import { FournisseurChemin } from '../../../fournisseurChemin.js';
 import { ressourceCampagneDeSensibilisation } from '../../../outils/campagneDeSensibilisation/ressourceCampagneDeSensibilisation.js';
 import { ressourceModeleAnnuaireDeCrise } from '../../../outils/modeleAnnuaireDeCrise/ressourceModeleAnnuaireDeCrise.js';
 import { ressourceModèleXslxGénérique } from '../../../outils/modeleXslxGenerique/ressourceModeleXslx.js';
@@ -17,6 +18,8 @@ import { ressourceRappelIcsGénérique } from '../../../outils/rappelIcsGeneriqu
 import { ressourceDocumentOutils } from '../../../outils/ressourceDocumentOutils.js';
 import { ressourceRetoursSurOutil } from '../../../outils/ressourceRetoursSurOutil.js';
 import { enregistreRouteDansExpress } from '../../enregistreRoutes.js';
+
+type OutilDocx = Parameters<typeof ressourceDocumentOutils>[1];
 
 export const enregistreLesOutils = (app: Express, configurationServeur: ConfigurationServeur) => {
   const enregistreRoute = (suffixe: string, ...gestionnaires: RequestHandler[]) =>
@@ -60,32 +63,18 @@ export const enregistreLesOutils = (app: Express, configurationServeur: Configur
   });
 
   /// OUTILS DOCX
-  enregistreRoute(
-    `/modele-suivi-des-arrivees.docx`,
-    ressourceDocumentOutils(
-      configurationServeur,
-      'modele-suivi-des-arrivees.docx',
-      configurationServeur.fournisseurChemin.back.modèleSuiviDesArrivées
-    )
-  );
-
-  enregistreRoute(
-    `/modele-suivi-de-changement-de-fonction.docx`,
-    ressourceDocumentOutils(
-      configurationServeur,
-      'modele-suivi-de-changement-de-fonction.docx',
-      configurationServeur.fournisseurChemin.back.modèleSuiviDeChangementDeFonction
-    )
-  );
-
-  enregistreRoute(
-    `/modele-suivi-des-departs.docx`,
-    ressourceDocumentOutils(
-      configurationServeur,
-      'modele-suivi-des-departs.docx',
-      configurationServeur.fournisseurChemin.back.modèleSuiviDesDéparts
-    )
-  );
+  (
+    [
+      ['modele-suivi-des-arrivees.docx', configurationServeur.fournisseurChemin.back.modèleSuiviDesArrivées],
+      [
+        'modele-suivi-de-changement-de-fonction.docx',
+        configurationServeur.fournisseurChemin.back.modèleSuiviDeChangementDeFonction,
+      ],
+      ['modele-suivi-des-departs.docx', configurationServeur.fournisseurChemin.back.modèleSuiviDesDéparts],
+    ] satisfies [OutilDocx, FournisseurChemin['back'][keyof FournisseurChemin['back']]][]
+  ).forEach(([outil, cheminFichier]) => {
+    enregistreRoute(`/${outil}`, ressourceDocumentOutils(configurationServeur, outil, cheminFichier));
+  });
 
   /// OUTILS AUTRE
   enregistreRoute('/campagne-de-sensibilisation', ressourceCampagneDeSensibilisation(configurationServeur));
