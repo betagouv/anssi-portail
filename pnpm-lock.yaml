@@ -174,8 +174,8 @@ settings:
 catalogs:
   default:
     '@lab-anssi/ui-kit':
-      specifier: 2.1.1
-      version: 2.1.1
+      specifier: 2.1.3
+      version: 2.1.3
     '@types/node':
       specifier: ^26.0.0
       version: 26.6.6
@@ -536,7 +536,7 @@ importers:
         version: 2.1.1
       '@lab-anssi/ui-kit':
         specifier: 'catalog:'
-        version: 2.1.1(svelte@5.58.0(@typescript-eslint/types@8.73.0))
+        version: 2.1.3(svelte@5.58.0(@typescript-eslint/types@8.73.0))
       '@pdfme/pdf-lib':
         specifier: ^6.2.8
         version: 6.2.8
@@ -1541,11 +1541,11 @@ packages:
     peerDependencies:
       express: ~5.2.1
 
-  '@lab-anssi/ui-kit@2.1.1':
-    resolution: {integrity: sha512-m5PONLNKQGnWecWa8ectxe28FUWXznr2UBJ0k+wQzrwaU3qHwf+5Av4Vt5nABRdTyjMHTTBmmibjLq7lKFKhCA==}
-    engines: {node: '>=26.13.0'}
+  '@lab-anssi/ui-kit@2.1.3':
+    resolution: {integrity: sha512-qR018acnJ0LEUpBFY2jlkxI/awv7VeBrcFYqxmEsNMB099hFJxnhSAZdI+Z3nCoPwDW7QedvRsnNb1bJ2xMXeQ==}
+    engines: {node: '>=26.13.1'}
     peerDependencies:
-      svelte: ^5.57.3
+      svelte: ^5.58.0
 
   '@myriaddreamin/typst-ts-node-compiler-android-arm-eabi@0.7.0':
     resolution: {integrity: sha512-25gKyErQai/u/EWBOSSZvV0rFfSL4tqHgYEyd4rZPXSHMpkvvgPmfA/Ees8InB1nnPV9Jlu9r0sftV6oiccprg==}
@@ -5873,7 +5873,7 @@ snapshots:
       - debug
       - supports-color
 
-  '@lab-anssi/ui-kit@2.1.1(svelte@5.58.0(@typescript-eslint/types@8.73.0))':
+  '@lab-anssi/ui-kit@2.1.3(svelte@5.58.0(@typescript-eslint/types@8.73.0))':
     dependencies:
       svelte: 5.58.0(@typescript-eslint/types@8.73.0)
 

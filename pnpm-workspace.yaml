@@ -21,7 +21,7 @@ allowBuilds:
   esbuild: false
 
 catalog:
-  '@lab-anssi/ui-kit': 2.1.1
+  '@lab-anssi/ui-kit': 2.1.3
   '@types/node': ^26.0.0
   axios: ^1.18.0
   entities: ^9.0.0
