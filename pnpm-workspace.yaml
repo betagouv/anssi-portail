@@ -28,7 +28,7 @@ catalog:
   isomorphic-dompurify: ^4.0.0
   pdfjs-dist: ^6.2.108
   prettier: 3.10.1
-  svelte: 5.57.3
+  svelte: 5.58.0
   tsx: ^4.23.12
   uuid: ^14.0.1
   vitest: ^5.0.0
