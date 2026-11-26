@@ -1,6 +1,6 @@
 <script lang="ts">
+  import Badge from '@ui/Badge.svelte';
   import Lien from '@ui/Lien.svelte';
-
   import Progression from '../Progression.svelte';
 
   type ModulePrésentation = {
@@ -49,14 +49,7 @@
         has-detail-end={true}
       >
         <div slot="headerbadges">
-          <dsfr-badge
-            accent="green-emeraude"
-            has-icon
-            icon="checkbox-circle-fill"
-            label="Terminé"
-            size="md"
-            type="accent"
-          ></dsfr-badge>
+          <Badge accent="green-emeraude" icone="checkbox-circle-fill" libellé="Terminé" taille="md"></Badge>
         </div>
         <div class="progression" slot="contentend">
           <Progression

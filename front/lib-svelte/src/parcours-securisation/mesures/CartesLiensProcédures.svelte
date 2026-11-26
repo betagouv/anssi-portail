@@ -1,6 +1,6 @@
 <script lang="ts">
   import { clic } from '@directives/actions.svelte';
-
+  import Badge from '@ui/Badge.svelte';
   import type { Mesure } from './mesure';
 
   const { mesure, surSélectionProcédure }: { mesure: Mesure; surSélectionProcédure: () => void } = $props();
@@ -32,7 +32,9 @@
         role="button"
         use:clic={() => selectionneLaProcédure(index)}
       >
-        <dsfr-badge slot="badgesgroup" label="Boite à outils" type="accent" accent="purple-glycine"></dsfr-badge>
+        <div slot="badgesgroup" class="badge">
+          <Badge libellé="Boite à outils" accent="purple-glycine" />
+        </div>
       </dsfr-card>
     {/each}
   </div>
@@ -44,7 +46,7 @@
       min-height: 0;
       margin-bottom: 1rem;
 
-      dsfr-badge {
+      .badge {
         margin-bottom: 0.75rem;
       }
     }

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Badge from './Badge.svelte';
 </script>
 
-<dsfr-badge type="accent" accent="green-emeraude" label="Bêta"></dsfr-badge>
+<Badge accent="green-emeraude" libellé="Bêta"></Badge>

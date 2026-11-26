@@ -1,11 +1,14 @@
 <script lang="ts">
+  import Badge from '../../ui/Badge.svelte';
+  import type { CouleurDeBadge } from '../../ui/badge.type';
+
   interface Props {
     niveau: string;
   }
 
   let { niveau }: Props = $props();
 
-  const badgeNiveauxConnus: Record<string, { label: string; accent: string }> = {
+  const badgeNiveauxConnus: Record<string, { label: string; accent: CouleurDeBadge }> = {
     moyen: {
       label: 'moyenne',
       accent: 'yellow-tournesol',
@@ -28,5 +31,4 @@
   );
 </script>
 
-<dsfr-badge accent={proprieteBadge.accent} label={proprieteBadge.label.toUpperCase()} size="sm" type="accent"
-></dsfr-badge>
+<Badge accent={proprieteBadge.accent} libellé={proprieteBadge.label.toUpperCase()} taille="sm" />
