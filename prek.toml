@@ -12,4 +12,5 @@ hooks = [
 repo = "local"
 hooks = [
     { id = "format", name = "format", entry = "pnpm exec prettier --write --ignore-unknown", language = "system", pass_filenames = true, stages = [ "commit" ] },
+    { id = "knip", name = "knip", entry = "pnpm unused:check", language = "system", pass_filenames = false, always_run = true, stages = [ "commit" ] },
 ]
