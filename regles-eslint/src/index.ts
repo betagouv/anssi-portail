@@ -1,5 +1,7 @@
 import * as htmlParser from '@html-eslint/parser';
 import type { TSESLint } from '@typescript-eslint/utils';
+import type { ESLint } from 'eslint';
+import type { ConfigObject } from 'eslint/config';
 
 import espacesInsécablesPonctuationFrancaise from './espaces-insecables-ponctuation-francaise.js';
 import { markdown } from './espaces-insecables-ponctuation-francaise/markdown.js';
@@ -10,11 +12,10 @@ const rules: Record<string, TSESLint.LooseRuleDefinition> = {
   'route-sans-validation': routeSansValidation,
 };
 
-const plugin: TSESLint.FlatConfig.Plugin = {
-  rules,
-};
+// Les types de règles de typescript-eslint et d’ESLint diffèrent à la frontière du plugin.
+const plugin = { rules } as ESLint.Plugin;
 
-const configs: Record<'all' | 'svelte' | 'html' | 'markdown', TSESLint.FlatConfig.ConfigArray> = {
+const configs: Record<'all' | 'svelte' | 'html' | 'markdown', ConfigObject[]> = {
   all: [
     {
       languageOptions: {
