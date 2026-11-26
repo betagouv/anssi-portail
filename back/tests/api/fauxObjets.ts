@@ -282,6 +282,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     webhookAvisUtilisateur: () => '',
     webhookRetourExperience: () => '',
     webhookAvisMesure: () => '',
+    webhookReportingTechnique: () => '',
   },
   grist: {
     baseURL: () => 'http://grist',
@@ -383,6 +384,7 @@ const fauxGenerateurCodeSessionDeGroupe = {
 };
 
 export const fausseMessagerieInstantanee: MessagerieInstantanee = {
+  notifieRapportTechnique: async () => {},
   notifieUnRetourExperience: async () => {},
   notifieUnAvisUtilisateur: async () => {},
   notifieUnAvisParcours: async () => {},

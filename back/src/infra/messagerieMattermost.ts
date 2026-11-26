@@ -4,6 +4,7 @@ import {
   AvisNegatifSurUneMesure,
   AvisUtilisateur,
   MessagerieInstantanee,
+  RapportTechnique,
   RetourExperience,
   RetourNégatifSurArticle,
   RetourNégatifSurMiniTest,
@@ -121,6 +122,15 @@ ${aseptiseMarkdown(retour.commentaire ? `Commentaire: ${retour.commentaire}` : '
       const message = `### Retour utilisateur Outil
 Un utilisateur a laissé un retour négatif sur l'outil \`${retour.outil}\`
 ${aseptiseMarkdown(retour.commentaire ? `Commentaire: ${retour.commentaire}` : 'Aucun commentaire laissé')}`;
+      await axios.post(urlWebhook, { text: message });
+    }
+  },
+
+  notifieRapportTechnique: async (rapport: RapportTechnique) => {
+    const urlWebhook = adaptateurEnvironnement.mattermost.webhookReportingTechnique();
+
+    if (urlWebhook) {
+      const message = rapport.join('\n');
       await axios.post(urlWebhook, { text: message });
     }
   },

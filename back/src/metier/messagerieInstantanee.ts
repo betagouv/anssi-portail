@@ -37,6 +37,8 @@ export type RetourNégatifSurOutil = {
   commentaire?: string;
 };
 
+export type RapportTechnique = string[];
+
 export interface MessagerieInstantanee {
   notifieUnAvisUtilisateur(avisUtilisateur: AvisUtilisateur): Promise<void>;
   notifieUnAvisParcours(avisParcours: AvisParcours): Promise<void>;
@@ -45,4 +47,5 @@ export interface MessagerieInstantanee {
   notifieUnRetourNégatifSurMiniTest(retour: RetourNégatifSurMiniTest): Promise<void>;
   notifieUnRetourNégatifSurArticle(retour: RetourNégatifSurArticle): Promise<void>;
   notifieUnRetourNégatifSurOutil(retour: RetourNégatifSurOutil): Promise<void>;
+  notifieRapportTechnique(rapport: RapportTechnique): Promise<void>;
 }

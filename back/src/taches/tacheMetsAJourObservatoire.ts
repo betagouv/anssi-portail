@@ -5,6 +5,7 @@ import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
 import { fabriqueAdaptateurHachage } from '../infra/adaptateurHachage.js';
 import { fabriqueAdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi.js';
 import { AdaptateurRechercheEntrepriseGouv } from '../infra/adaptateurRechercheEntrepriseGouv.js';
+import { messagerieMattermost } from '../infra/messagerieMattermost.js';
 import { rapporteurConsole } from '../infra/rapporteurConsole.js';
 import { MiseAJourObservatoire } from './metsAJourObservatoire.js';
 
@@ -17,13 +18,14 @@ if (!urlObservatoire) {
 const knexObservatoire = Knex({ client: 'pg', connection: urlObservatoire });
 const knexMSC = Knex(config);
 const knexJournal = Knex({ client: 'pg', connection: process.env.BASE_DONNEES_JOURNAL_URL_SERVEUR });
+const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });
 
 const maintenant = () => new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full', timeStyle: 'long' }).format(new Date());
 
 let codeRetour = 0;
-console.log(`⏰ Début : ${maintenant()}`);
+const rapport = [`⏰ Début : ${maintenant()}`];
 try {
-  const trace = await new MiseAJourObservatoire({
+  const rapportMaj = await new MiseAJourObservatoire({
     knexObservatoire,
     knexMSC,
     knexJournal,
@@ -32,14 +34,15 @@ try {
     adaptateurProfilAnssi: fabriqueAdaptateurProfilAnssi(rapporteurConsole),
     adaptateurRechercheEntreprise: new AdaptateurRechercheEntrepriseGouv(adaptateurEnvironnement, rapporteurConsole),
   }).execute();
-  trace.forEach((ligne) => console.log(ligne));
-  console.log('✅ Mise à jour terminée');
+  rapport.push(...rapportMaj);
+  rapport.push('✅ Mise à jour terminée');
 } catch (erreur) {
-  console.error('💥 Mise à jour interrompue', erreur);
+  rapport.push(`💥 Mise à jour interrompue : ${(erreur as Error).message}`);
   codeRetour = 1;
 } finally {
   await Promise.all([knexObservatoire.destroy(), knexMSC.destroy(), knexJournal.destroy()]);
-  console.log(`⏰ Fin : ${maintenant()}`);
+  rapport.push(`⏰ Fin : ${maintenant()}`);
+  await messagerieInstantanee.notifieRapportTechnique(rapport);
 }
 
 process.exit(codeRetour);
