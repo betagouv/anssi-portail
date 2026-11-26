@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { consigneRetourAvisMesureDonneDansJournal } from '../../src/bus/consigneAvisMesureDonneDansJournal.js';
-import { AvisMesureDonne } from '../../src/bus/evenements/avisMesureDonne.js';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { consigneRetourAvisMesureDonneDansJournal } from '@bus/consigneAvisMesureDonneDansJournal.js';
+import { AvisMesureDonne } from '@bus/evenements/avisMesureDonne.js';
+import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe("L'abonnement qui consigne un avis sur une mesure dans le journal", () => {

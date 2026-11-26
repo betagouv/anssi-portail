@@ -1,9 +1,9 @@
-import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
-import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
-import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
-import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
-import { EntrepotFavori } from '../metier/entrepotFavori.js';
-import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
+import { AdaptateurEmail } from '@metier/adaptateurEmail.js';
+import { EntrepotFavori } from '@metier/entrepotFavori.js';
+import { MessagerieInstantanee } from '@metier/messagerieInstantanee.js';
+import { AdaptateurHachage } from '@infra/adaptateurHachage.js';
+import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
 import { BusEvenements } from './busEvenements.js';
 import { consigneRetourAvisMesureDonneDansJournal } from './consigneAvisMesureDonneDansJournal.js';
 import { consigneAvisParcoursDonnéDansJournal } from './consigneAvisParcoursDonneDansJournal.js';

@@ -1,4 +1,4 @@
-import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
+import { MessagerieInstantanee } from '@metier/messagerieInstantanee.js';
 import { RetourMiniTestDonné } from './evenements/retourMiniTestDonne.js';
 
 export const notifieUnRetourNégatifSurMiniTest = ({

@@ -1,9 +1,4 @@
-import {
-  CumulMensuel,
-  SeuilCompletion,
-  TotalParDepartement,
-  TotalParNiveauMaturite,
-} from '../../metier/observatoire.js';
+import { CumulMensuel, SeuilCompletion, TotalParDepartement, TotalParNiveauMaturite } from '@metier/observatoire.js';
 
 export interface AdaptateurObservatoireMSC {
   totalTestsMaturite(): Promise<number>;

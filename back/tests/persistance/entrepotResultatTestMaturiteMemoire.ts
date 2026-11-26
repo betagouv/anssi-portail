@@ -1,8 +1,8 @@
 import {
   EntrepôtRésultatTestMaturité,
   FiltreResultatsTest,
-} from '../../src/metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
-import { RésultatTestMaturité } from '../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+} from '@metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
+import { RésultatTestMaturité } from '@metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { EntrepôtRésultatTestMémoire } from './entrepotResultatTestMemoire.js';
 
 export class EntrepôtRésultatTestMaturitéMémoire

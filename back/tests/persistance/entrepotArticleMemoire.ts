@@ -1,6 +1,6 @@
-import { Article } from '../../src/metier/blog/article.js';
-import { EntrepôtArticle } from '../../src/metier/blog/entrepotArticle.js';
-import { RésuméArticle } from '../../src/metier/blog/resumeArticle.js';
+import { Article } from '@metier/blog/article.js';
+import { EntrepôtArticle } from '@metier/blog/entrepotArticle.js';
+import { RésuméArticle } from '@metier/blog/resumeArticle.js';
 
 type ArticleAvecToutesLesMétadonnées = Article & RésuméArticle;
 

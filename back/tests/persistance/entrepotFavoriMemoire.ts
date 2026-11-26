@@ -1,6 +1,6 @@
-import { EntrepotFavori } from '../../src/metier/entrepotFavori.js';
-import { Favori } from '../../src/metier/favori.js';
-import { Utilisateur } from '../../src/metier/utilisateur.js';
+import { EntrepotFavori } from '@metier/entrepotFavori.js';
+import { Favori } from '@metier/favori.js';
+import { Utilisateur } from '@metier/utilisateur.js';
 import { EntrepotMemoire } from './entrepotMemoire.js';
 
 export class EntrepotFavoriMemoire extends EntrepotMemoire<Favori> implements EntrepotFavori {

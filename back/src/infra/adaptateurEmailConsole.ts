@@ -1,13 +1,13 @@
 /* eslint-disable no-console */
-import { BadgeCyberdépartDébloqué } from '../bus/evenements/badgeCyberdepartDebloque.js';
-import { MesureConsultee } from '../bus/evenements/mesureConsultee.js';
-import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
-import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
-import { ParcoursAllégéTerminé } from '../bus/evenements/parcoursAllegeTermine.js';
-import { ParcoursChangé } from '../bus/evenements/parcoursChange.js';
-import { ParcoursCompletTerminé } from '../bus/evenements/parcoursCompletTermine.js';
-import { ParcoursRejoint } from '../bus/evenements/parcoursRejoint.js';
-import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
+import { AdaptateurEmail } from '@metier/adaptateurEmail.js';
+import { BadgeCyberdépartDébloqué } from '@bus/evenements/badgeCyberdepartDebloque.js';
+import { MesureConsultee } from '@bus/evenements/mesureConsultee.js';
+import { MesurePriseEnCompte } from '@bus/evenements/mesurePriseEnCompte.js';
+import { ModuleTermine } from '@bus/evenements/moduleTermine.js';
+import { ParcoursAllégéTerminé } from '@bus/evenements/parcoursAllegeTermine.js';
+import { ParcoursChangé } from '@bus/evenements/parcoursChange.js';
+import { ParcoursCompletTerminé } from '@bus/evenements/parcoursCompletTermine.js';
+import { ParcoursRejoint } from '@bus/evenements/parcoursRejoint.js';
 
 export const adaptateurEmailConsole = (): AdaptateurEmail => ({
   envoieEmailBienvenue: async ({ email, prenom }: { email: string; prenom: string }) => {

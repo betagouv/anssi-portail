@@ -1,11 +1,11 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../../../src/api/msc/index.js';
-import { EntrepôtRésultatTestMaturité } from '../../../../src/metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
-import { EntrepotSessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
-import { SessionDeGroupe } from '../../../../src/metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { EntrepôtRésultatTestMaturité } from '@metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
+import { EntrepotSessionDeGroupe } from '@metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
+import { SessionDeGroupe } from '@metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
+import { creeServeur } from '@api/msc/index.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { EntrepotSessionDeGroupeMemoire } from '../../../persistance/entrepotSessionDeGroupeMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';

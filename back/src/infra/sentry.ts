@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/node';
 import { ErrorRequestHandler } from 'express';
-import { Rapporteur } from '../metier/rapporteur.js';
+import { Rapporteur } from '@metier/rapporteur.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 
 export const initialiseSentry = (environnement: AdaptateurEnvironnement) => {

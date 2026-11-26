@@ -1,24 +1,24 @@
-import { AvisMesureDonne } from '../bus/evenements/avisMesureDonne.js';
-import { AvisParcoursDonné } from '../bus/evenements/avisParcoursDonne.js';
-import { MesureConsultee } from '../bus/evenements/mesureConsultee.js';
-import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
-import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
-import { OutilTéléchargé } from '../bus/evenements/outilTelecharge.js';
-import { RetourArticleDonné } from '../bus/evenements/retourArticleDonne.js';
-import { RetourOutilDonné } from '../bus/evenements/retourOutilDonne.js';
-import { SimulationRéflexesCyberRéponseSoumise } from '../bus/evenements/simulationReflexesCyberReponseSoumise.js';
-import { SimulationRéflexesCyberTerminé } from '../bus/evenements/simulationReflexesCyberTermine.js';
-import { TestHameçonnageRéponseSoumise } from '../bus/evenements/testHameconnageReponseSoumise.js';
-import { TestHameçonnageTerminé } from '../bus/evenements/testHameconnageTermine.js';
-import { FacteurAggravant, Secteur, TypeOrganisation } from '../metier/mini-tests/exposition/exposition.js';
-import { ReponsesTestMaturite } from '../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
-import { ReponsesEtResultatAvecAnalyse } from '../metier/nis2-simulateur/questionnaire/calculEligibilite.js';
-import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction.js';
-import { MotifChangementParcours, Parcours } from '../metier/parcours.js';
-import { CodeRégion } from '../metier/referentielRegions.js';
-import { CodeSecteur } from '../metier/referentielSecteurs.js';
-import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement.js';
-import { Suivi } from '../metier/suivi.js';
+import { FacteurAggravant, Secteur, TypeOrganisation } from '@metier/mini-tests/exposition/exposition.js';
+import { ReponsesTestMaturite } from '@metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { ReponsesEtResultatAvecAnalyse } from '@metier/nis2-simulateur/questionnaire/calculEligibilite.js';
+import { NiveauDeSatisfaction } from '@metier/niveauDeSatisfaction.js';
+import { MotifChangementParcours, Parcours } from '@metier/parcours.js';
+import { CodeRégion } from '@metier/referentielRegions.js';
+import { CodeSecteur } from '@metier/referentielSecteurs.js';
+import { CodeTrancheEffectif } from '@metier/referentielTranchesEffectifEtablissement.js';
+import { Suivi } from '@metier/suivi.js';
+import { AvisMesureDonne } from '@bus/evenements/avisMesureDonne.js';
+import { AvisParcoursDonné } from '@bus/evenements/avisParcoursDonne.js';
+import { MesureConsultee } from '@bus/evenements/mesureConsultee.js';
+import { MesurePriseEnCompte } from '@bus/evenements/mesurePriseEnCompte.js';
+import { ModuleTermine } from '@bus/evenements/moduleTermine.js';
+import { OutilTéléchargé } from '@bus/evenements/outilTelecharge.js';
+import { RetourArticleDonné } from '@bus/evenements/retourArticleDonne.js';
+import { RetourOutilDonné } from '@bus/evenements/retourOutilDonne.js';
+import { SimulationRéflexesCyberRéponseSoumise } from '@bus/evenements/simulationReflexesCyberReponseSoumise.js';
+import { SimulationRéflexesCyberTerminé } from '@bus/evenements/simulationReflexesCyberTermine.js';
+import { TestHameçonnageRéponseSoumise } from '@bus/evenements/testHameconnageReponseSoumise.js';
+import { TestHameçonnageTerminé } from '@bus/evenements/testHameconnageTermine.js';
 
 export type DonneesEvenement =
   | DonneesEvenementNouvelUtilisateur

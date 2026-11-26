@@ -1,6 +1,6 @@
 import cors from 'cors';
 import { Request, Response, Router } from 'express';
-import { tranchesEffectifEtablissement } from '../metier/referentielTranchesEffectifEtablissement.js';
+import { tranchesEffectifEtablissement } from '@metier/referentielTranchesEffectifEtablissement.js';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';
 

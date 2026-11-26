@@ -1,12 +1,12 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../../../src/api/msc/index.js';
-import { ProprieteTestRevendiquee } from '../../../../src/bus/evenements/proprieteTestRevendiquee.js';
-import { TestRealise } from '../../../../src/bus/evenements/testRealise.js';
-import { RésultatTestMaturité } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
-import { Utilisateur } from '../../../../src/metier/utilisateur.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { RésultatTestMaturité } from '@metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { Utilisateur } from '@metier/utilisateur.js';
+import { creeServeur } from '@api/msc/index.js';
+import { ProprieteTestRevendiquee } from '@bus/evenements/proprieteTestRevendiquee.js';
+import { TestRealise } from '@bus/evenements/testRealise.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';

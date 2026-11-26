@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-import { CumulMensuel, FiltresObservatoire, TotalMensuel, TotalParNiveauSecurite } from '../../metier/observatoire.js';
+import { CumulMensuel, FiltresObservatoire, TotalMensuel, TotalParNiveauSecurite } from '@metier/observatoire.js';
 import { AdaptateurObservatoireMSS } from './adaptateurObservatoireMSS.js';
 import { cumulMensuel, total } from './requetesObservatoire.js';
 

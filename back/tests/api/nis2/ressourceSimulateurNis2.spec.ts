@@ -1,10 +1,10 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../../src/api/msc/index.js';
-import { SimulationNis2Terminee } from '../../../src/bus/evenements/simulationNis2Terminee.js';
-import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { creeServeur } from '@api/msc/index.js';
+import { SimulationNis2Terminee } from '@bus/evenements/simulationNis2Terminee.js';
+import { AdaptateurEnvironnement } from '@infra/adaptateurEnvironnement.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement, fauxRapporteur } from '../fauxObjets.js';
 

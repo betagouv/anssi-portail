@@ -1,9 +1,9 @@
-import { Article } from '../../src/metier/blog/article.js';
-import { Financement } from '../../src/metier/financement.js';
-import { Guide } from '../../src/metier/guide.js';
-import { QuestionVraieFausse } from '../../src/metier/mini-tests/vrai-faux/questionVraieFausse.js';
-import { ExigenceNIS2 } from '../../src/metier/nis2/exigence.js';
-import { Utilisateur } from '../../src/metier/utilisateur.js';
+import { Article } from '@metier/blog/article.js';
+import { Financement } from '@metier/financement.js';
+import { Guide } from '@metier/guide.js';
+import { QuestionVraieFausse } from '@metier/mini-tests/vrai-faux/questionVraieFausse.js';
+import { ExigenceNIS2 } from '@metier/nis2/exigence.js';
+import { Utilisateur } from '@metier/utilisateur.js';
 import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from './fauxObjets.js';
 import { mesureDeTest } from './mesures/constructeurDeMesure.js';
 import { ConstructeurDeModule } from './mesures/constructeurDeModule.js';

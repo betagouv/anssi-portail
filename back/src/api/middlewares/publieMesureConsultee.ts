@@ -1,6 +1,6 @@
-import { BusEvenements } from '../../bus/busEvenements.js';
-import { MesureConsultee } from '../../bus/evenements/mesureConsultee.js';
-import { IdMesure } from '../../metier/mesure.js';
+import { IdMesure } from '@metier/mesure.js';
+import { BusEvenements } from '@bus/busEvenements.js';
+import { MesureConsultee } from '@bus/evenements/mesureConsultee.js';
 import { GestionnaireRequêtesComplémentaires } from './middleware.js';
 
 export const fabriquePublieMesureConsultée =

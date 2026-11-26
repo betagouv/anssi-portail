@@ -2,7 +2,7 @@ import { createObjectCsvStringifier } from 'csv-writer';
 import { ObjectHeaderItem } from 'csv-writer/src/lib/record.js';
 import { Request, Response, Router } from 'express';
 import DOMPurify from 'isomorphic-dompurify';
-import { Module } from '../../metier/module.js';
+import { Module } from '@metier/module.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';

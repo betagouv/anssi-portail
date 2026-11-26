@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { describe, expect, it } from 'vitest';
-import { fabriqueMiddleware } from '../../src/api/middlewares/middleware.js';
-import { creeServeur } from '../../src/api/msc/index.js';
+import { fabriqueMiddleware } from '@api/middlewares/middleware.js';
+import { creeServeur } from '@api/msc/index.js';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurEnrichissement,

@@ -1,9 +1,9 @@
 import Knex from 'knex';
+import type { EntrepotUtilisateur } from '@metier/entrepotUtilisateur.js';
+import type { EntrepôtRésultatTest } from '@metier/mini-tests/resultat-test/entrepotResultatTest.js';
+import type { RésultatTest } from '@metier/mini-tests/resultat-test/resultatTest.js';
+import type { Utilisateur } from '@metier/utilisateur.js';
 import config from '../../../knexfile.js';
-import type { EntrepotUtilisateur } from '../../metier/entrepotUtilisateur.js';
-import type { EntrepôtRésultatTest } from '../../metier/mini-tests/resultat-test/entrepotResultatTest.js';
-import type { RésultatTest } from '../../metier/mini-tests/resultat-test/resultatTest.js';
-import type { Utilisateur } from '../../metier/utilisateur.js';
 import type { AdaptateurHachage } from '../adaptateurHachage.js';
 import {
   estUneEntréeDuType,

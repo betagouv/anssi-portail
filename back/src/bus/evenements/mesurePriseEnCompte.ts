@@ -1,4 +1,4 @@
-import { Parcours } from '../../metier/parcours.js';
+import { Parcours } from '@metier/parcours.js';
 
 export class MesurePriseEnCompte {
   constructor(

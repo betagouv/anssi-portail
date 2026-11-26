@@ -1,11 +1,11 @@
 import Knex from 'knex';
 import pThrottle from 'p-throttle';
+import { EntrepotMesure } from '@metier/entrepotMesure.js';
+import { EntrepotUtilisateur } from '@metier/entrepotUtilisateur.js';
+import { Parcours } from '@metier/parcours.js';
+import { Rapporteur } from '@metier/rapporteur.js';
+import { Organisation, Role, Utilisateur } from '@metier/utilisateur.js';
 import config from '../../knexfile.js';
-import { EntrepotMesure } from '../metier/entrepotMesure.js';
-import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur.js';
-import { Parcours } from '../metier/parcours.js';
-import { Rapporteur } from '../metier/rapporteur.js';
-import { Organisation, Role, Utilisateur } from '../metier/utilisateur.js';
 import { AdaptateurChiffrement } from './adaptateurChiffrement.js';
 import { AdaptateurHachage } from './adaptateurHachage.js';
 import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi.js';

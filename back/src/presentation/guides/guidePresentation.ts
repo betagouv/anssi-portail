@@ -1,5 +1,5 @@
-import { AdaptateurEnvironnement } from '../../infra/adaptateurEnvironnement.js';
-import { Guide } from '../../metier/guide.js';
+import { Guide } from '@metier/guide.js';
+import { AdaptateurEnvironnement } from '@infra/adaptateurEnvironnement.js';
 
 export const guidePresentation = (adaptateurEnvironnement: AdaptateurEnvironnement) => (guide: Guide) => ({
   ...guide,

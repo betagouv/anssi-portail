@@ -9,6 +9,12 @@
     "strict": true,
     "skipLibCheck": true,
     "noImplicitAny": true,
-    "allowJs": false
+    "allowJs": false,
+    "paths": {
+      "@api/*": ["./src/api/*"],
+      "@bus/*": ["./src/bus/*"],
+      "@infra/*": ["./src/infra/*"],
+      "@metier/*": ["./src/metier/*"]
+    }
   }
 }

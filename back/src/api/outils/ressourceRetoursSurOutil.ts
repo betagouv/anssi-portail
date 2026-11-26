@@ -1,8 +1,8 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Response, Router } from 'express';
 import z from 'zod';
-import { RetourOutilDonné } from '../../bus/evenements/retourOutilDonne.js';
-import { estUnOutil } from '../../metier/outils/outils.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { estUnOutil } from '@metier/outils/outils.js';
+import { RetourOutilDonné } from '@bus/evenements/retourOutilDonne.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { schemaRetourUtilisateur } from '../retourUtilisateur.schema.js';

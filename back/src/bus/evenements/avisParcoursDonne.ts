@@ -1,4 +1,4 @@
-import { AvisParcours } from '../../metier/avisParcours.js';
+import { AvisParcours } from '@metier/avisParcours.js';
 
 export class AvisParcoursDonné {
   typeDeRetour: AvisParcours['typeDeRetour'];

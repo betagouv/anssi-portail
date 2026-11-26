@@ -5,7 +5,7 @@
   "main": "serveur.ts",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && tsc-alias --no-resolve-package-subpaths",
     "dev": "npm-run-all --parallel --race dev:bdd dev:server",
     "dev:bdd": "docker compose up db",
     "dev:server": "sleep 3 && pnpm migre-bdd && node --conditions=anssi-portail:source --import tsx --env-file ../.env --watch src/serveur.ts",
@@ -15,7 +15,7 @@
     "migre-bdd": "node --env-file=../.env --import tsx ./node_modules/knex/bin/cli.js migrate:latest --knexfile knexfile.ts",
     "migre-bdd:clever": "node ./node_modules/knex/bin/cli.js migrate:latest --knexfile dist/knexfile.js",
     "prelint": "[ -d ../regles-eslint/dist ] || pnpm -F regles-eslint build",
-    "prestart": "tsc && pnpm migre-bdd:clever",
+    "prestart": "pnpm build && pnpm migre-bdd:clever",
     "pretest": "npm-run-all --parallel typecheck lint",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
@@ -45,6 +45,7 @@
     "prettier": "catalog:",
     "regles-eslint": "workspace:^",
     "supertest": "^7.2.2",
+    "tsc-alias": "^1.9.10",
     "tsx": "catalog:",
     "vitest": "catalog:"
   },

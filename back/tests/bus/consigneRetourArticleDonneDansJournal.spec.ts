@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
-import { consigneRetourArticleDonnéDansJournal } from '../../src/bus/consigneRetourArticleDonneDansJournal.js';
-import { RetourArticleDonné } from '../../src/bus/evenements/retourArticleDonne.js';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { consigneRetourArticleDonnéDansJournal } from '@bus/consigneRetourArticleDonneDansJournal.js';
+import { RetourArticleDonné } from '@bus/evenements/retourArticleDonne.js';
+import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe("L'abonnement qui consigne l'évènement de retour d'un article", () => {

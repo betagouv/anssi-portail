@@ -1,9 +1,9 @@
 import { Request } from 'express';
-import { BusEvenements } from '../../bus/busEvenements.js';
-import { EntrepotUtilisateur } from '../../metier/entrepotUtilisateur.js';
-import { MotifChangementParcours, Parcours } from '../../metier/parcours.js';
-import { Suivi } from '../../metier/suivi.js';
-import { Utilisateur } from '../../metier/utilisateur.js';
+import { EntrepotUtilisateur } from '@metier/entrepotUtilisateur.js';
+import { MotifChangementParcours, Parcours } from '@metier/parcours.js';
+import { Suivi } from '@metier/suivi.js';
+import { Utilisateur } from '@metier/utilisateur.js';
+import { BusEvenements } from '@bus/busEvenements.js';
 import { GestionnaireRequêtesComplémentaires } from './middleware.js';
 
 const construitLeSuiviDepuisLaRequête = (requête: Request): Suivi | undefined => {

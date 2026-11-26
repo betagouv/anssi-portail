@@ -1,11 +1,11 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import cors from 'cors';
 import { Router } from 'express';
 import { z } from 'zod';
-import { TestHameçonnageRéponseSoumise } from '../../../bus/evenements/testHameconnageReponseSoumise.js';
-import { TestHameçonnageTerminé } from '../../../bus/evenements/testHameconnageTermine.js';
-import { RésultatTestHameçonnage } from '../../../metier/mini-tests/hameconnage/resultatTestHameconnage.js';
-import { Utilisateur } from '../../../metier/utilisateur.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { RésultatTestHameçonnage } from '@metier/mini-tests/hameconnage/resultatTestHameconnage.js';
+import { Utilisateur } from '@metier/utilisateur.js';
+import { TestHameçonnageRéponseSoumise } from '@bus/evenements/testHameconnageReponseSoumise.js';
+import { TestHameçonnageTerminé } from '@bus/evenements/testHameconnageTermine.js';
 import { ConfigurationServeur } from '../../configurationServeur.js';
 import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { valideCorpsRequete } from '../../zod.js';

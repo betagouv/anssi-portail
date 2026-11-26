@@ -1,8 +1,8 @@
 import { join } from 'node:path';
-import { HttpStatusCode } from '@anssi-portail/axios';
 import request from 'supertest';
 import { describe, expect, it } from 'vitest';
-import { creeServeur } from '../../src/api/msc/index.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { creeServeur } from '@api/msc/index.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from './cookie.js';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets.js';

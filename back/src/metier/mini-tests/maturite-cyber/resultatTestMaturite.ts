@@ -1,4 +1,4 @@
-import { AdaptateurRechercheEntreprise } from '../../../infra/adaptateurRechercheEntreprise.js';
+import { AdaptateurRechercheEntreprise } from '@infra/adaptateurRechercheEntreprise.js';
 import { DonnéesCréationRésultatTest, RésultatTest } from '../resultat-test/resultatTest.js';
 import { CodeRégion, estCodeRegion } from './../../referentielRegions.js';
 import { CodeSecteur, estCodeSecteur } from './../../referentielSecteurs.js';

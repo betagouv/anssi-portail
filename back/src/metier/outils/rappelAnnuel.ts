@@ -1,4 +1,4 @@
-import { AdaptateurHorloge } from '../../infra/adaptateurHorloge.js';
+import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
 
 export type CréneauDeRappel = { début: number; fin: number };
 

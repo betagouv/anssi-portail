@@ -1,12 +1,12 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import AdmZip from 'adm-zip';
 import { Express } from 'express';
 import sharp from 'sharp';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { ServiceRécompensesCyberDépart } from '../../../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
-import { creeServeur } from '../../../../src/api/msc/index.js';
-import { EntrepotUtilisateur } from '../../../../src/metier/entrepotUtilisateur.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { EntrepotUtilisateur } from '@metier/entrepotUtilisateur.js';
+import { ServiceRécompensesCyberDépart } from '@api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
+import { creeServeur } from '@api/msc/index.js';
 import { EntrepôtModuleMémoire } from '../../../persistance/entrepôtModuleMémoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';

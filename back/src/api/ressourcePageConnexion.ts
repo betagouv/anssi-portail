@@ -1,5 +1,5 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { estUrlRedirectionApresConnexionAutorisee } from './routesPagesConnectees.js';

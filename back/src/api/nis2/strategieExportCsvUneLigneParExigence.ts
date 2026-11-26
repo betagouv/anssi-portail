@@ -8,7 +8,7 @@ import {
   Langue,
   Observation,
   Referentiel,
-} from '../../metier/nis2/exigence.js';
+} from '@metier/nis2/exigence.js';
 
 class ConvertisseurCsvExigence<T extends Exigence> {
   langue: Langue = 'FR';

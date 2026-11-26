@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { AvisMesureDonne } from '../../src/bus/evenements/avisMesureDonne.js';
-import { notifieCommentaireAvisMesureDonneDansMessagerie } from '../../src/bus/notifieCommentaireAvisMesureDonneDansMessagerie.js';
+import { AvisMesureDonne } from '@bus/evenements/avisMesureDonne.js';
+import { notifieCommentaireAvisMesureDonneDansMessagerie } from '@bus/notifieCommentaireAvisMesureDonneDansMessagerie.js';
 import { fausseMessagerieInstantanee } from '../api/fauxObjets.js';
 
 describe("L'abonnement qui consigne un avis négatif sur une mesure dans la messagerie", () => {

@@ -1,6 +1,6 @@
-import axios from '@anssi-portail/axios';
 import { describe, expect, it, vi } from 'vitest';
-import { AdaptateurRechercheEntrepriseGouv } from '../../src/infra/adaptateurRechercheEntrepriseGouv.js';
+import axios from '@anssi-portail/axios';
+import { AdaptateurRechercheEntrepriseGouv } from '@infra/adaptateurRechercheEntrepriseGouv.js';
 import { fauxAdaptateurEnvironnement, fauxRapporteur } from '../api/fauxObjets.js';
 
 describe('La recherche entreprise', () => {

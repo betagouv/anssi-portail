@@ -1,7 +1,7 @@
-import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
-import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
-import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
-import { EntrepotFavori } from '../metier/entrepotFavori.js';
+import { EntrepotFavori } from '@metier/entrepotFavori.js';
+import { AdaptateurHachage } from '@infra/adaptateurHachage.js';
+import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur.js';
 
 export const consigneMAJFavorisUtilisateurDansJournal = ({

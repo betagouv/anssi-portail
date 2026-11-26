@@ -1,11 +1,11 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { NOMBRE_DE_MAILS_HAMEÇONNAGE } from '../../../../src/api/mini-tests/hameconnage/ressourceReponsesHameconnage.schema.js';
-import { creeServeur } from '../../../../src/api/msc/index.js';
-import { TestHameçonnageRéponseSoumise } from '../../../../src/bus/evenements/testHameconnageReponseSoumise.js';
-import { TestHameçonnageTerminé } from '../../../../src/bus/evenements/testHameconnageTermine.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { NOMBRE_DE_MAILS_HAMEÇONNAGE } from '@api/mini-tests/hameconnage/ressourceReponsesHameconnage.schema.js';
+import { creeServeur } from '@api/msc/index.js';
+import { TestHameçonnageRéponseSoumise } from '@bus/evenements/testHameconnageReponseSoumise.js';
+import { TestHameçonnageTerminé } from '@bus/evenements/testHameconnageTermine.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepôtRésultatTestHameçonnageMémoire } from '../../../persistance/entrepotResultatTestHameconnageMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';

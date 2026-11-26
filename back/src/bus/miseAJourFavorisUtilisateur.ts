@@ -1,4 +1,4 @@
-import { Utilisateur } from '../metier/utilisateur.js';
+import { Utilisateur } from '@metier/utilisateur.js';
 
 export class MiseAJourFavorisUtilisateur {
   utilisateur!: Utilisateur;

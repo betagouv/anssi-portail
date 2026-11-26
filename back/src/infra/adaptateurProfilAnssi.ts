@@ -1,6 +1,6 @@
-import axios, { HttpStatusCode, isAxiosError } from '@anssi-portail/axios';
 import { decode } from 'html-entities';
-import { Rapporteur } from '../metier/rapporteur.js';
+import axios, { HttpStatusCode, isAxiosError } from '@anssi-portail/axios';
+import { Rapporteur } from '@metier/rapporteur.js';
 import { adaptateurProfilAnssiVide } from './adaptateurProfilAnssiVide.js';
 
 const CONFIGURATION_AUTHENTIFICATION = {

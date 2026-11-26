@@ -1,10 +1,10 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../../../src/api/msc/index.js';
-import { QuestionnaireVraiFauxRéponseSoumise } from '../../../../src/bus/evenements/questionnaireVraiFauxReponseSoumise.js';
-import { QuestionnaireVraiFauxTerminé } from '../../../../src/bus/evenements/questionnaireVraiFauxTermine.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { creeServeur } from '@api/msc/index.js';
+import { QuestionnaireVraiFauxRéponseSoumise } from '@bus/evenements/questionnaireVraiFauxReponseSoumise.js';
+import { QuestionnaireVraiFauxTerminé } from '@bus/evenements/questionnaireVraiFauxTermine.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepôtQuestionVraieFausseMémoire } from '../../../persistance/entrepotQuestionVraieFausseMemoire.js';
 import { EntrepôtRésultatTestVraiFauxMémoire } from '../../../persistance/entrepotResultatTestVraiFauxMemoire.js';

@@ -1,9 +1,9 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../src/api/msc/index.js';
-import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { creeServeur } from '@api/msc/index.js';
+import { AdaptateurRechercheEntreprise } from '@infra/adaptateurRechercheEntreprise.js';
 import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from './cookie.js';

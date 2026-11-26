@@ -1,4 +1,4 @@
-import { CumulMensuel, FiltresObservatoire, TotalMensuel, TotalParNiveauSecurite } from '../../metier/observatoire.js';
+import { CumulMensuel, FiltresObservatoire, TotalMensuel, TotalParNiveauSecurite } from '@metier/observatoire.js';
 
 export interface AdaptateurObservatoireMSS {
   totalServices(filtres: FiltresObservatoire): Promise<number>;

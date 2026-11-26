@@ -1,7 +1,7 @@
 import Knex from 'knex';
+import { EntrepotSessionDeGroupe } from '@metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
+import { SessionDeGroupe } from '@metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
 import config from '../../knexfile.js';
-import { EntrepotSessionDeGroupe } from '../metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
-import { SessionDeGroupe } from '../metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
 
 export class EntrepotSessionDeGroupePostgres implements EntrepotSessionDeGroupe {
   knex: Knex.Knex;

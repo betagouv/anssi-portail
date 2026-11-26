@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { adaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
+import { adaptateurEnvironnement } from '@infra/adaptateurEnvironnement.js';
 
 describe("L'adaptateur environnement", () => {
   it.each([

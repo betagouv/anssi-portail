@@ -1,8 +1,8 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { createObjectCsvStringifier } from 'csv-writer';
 import { Router } from 'express';
 import z from 'zod';
-import { Referentiel, versLangueConnue, versReferentiel } from '../../metier/nis2/exigence.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { Referentiel, versLangueConnue, versReferentiel } from '@metier/nis2/exigence.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideRequete } from '../zod.js';

@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { adaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
+import { adaptateurHorloge } from '@infra/adaptateurHorloge.js';
 
 describe("L'adaptateur d'horloge", () => {
   afterEach(() => {

@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { AdaptateurHorloge } from '../../../src/infra/adaptateurHorloge.js';
-import { unRappelAnnuel } from '../../../src/metier/outils/rappelAnnuel.js';
+import { unRappelAnnuel } from '@metier/outils/rappelAnnuel.js';
+import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
 
 describe('Un rappel annuel', () => {
   const horlogeÀ = (instant: string): AdaptateurHorloge => ({

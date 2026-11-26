@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { génèreRappelIcs } from '../../../src/api/outils/rappelIcsGenerique/genereRappelIcs.js';
-import { AdaptateurHorloge } from '../../../src/infra/adaptateurHorloge.js';
-import { unRappelAnnuel } from '../../../src/metier/outils/rappelAnnuel.js';
+import { unRappelAnnuel } from '@metier/outils/rappelAnnuel.js';
+import { génèreRappelIcs } from '@api/outils/rappelIcsGenerique/genereRappelIcs.js';
+import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
 
 describe('La génération d’un rappel au format ICS', () => {
   const horloge: AdaptateurHorloge = {

@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { ClientHttp } from '../../src/infra/clientHttp.js';
-import { GuideGrist } from '../../src/infra/entrepotGuideGrist.js';
-import { EntrepotGuideTravailGrist } from '../../src/infra/entrepotGuideTravailGrist.js';
+import { ClientHttp } from '@infra/clientHttp.js';
+import { GuideGrist } from '@infra/entrepotGuideGrist.js';
+import { EntrepotGuideTravailGrist } from '@infra/entrepotGuideTravailGrist.js';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
 import { ConstructeurGuideGrist } from '../api/guides/constructeurGuideGrist.js';
 import { fabriqueClientGet, fabriqueClientPut, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';

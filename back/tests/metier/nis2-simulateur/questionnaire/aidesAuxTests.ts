@@ -5,7 +5,7 @@ import {
   PointsAttentionPrecis,
   ResultatEligibilite,
   ResumesPointsAttention,
-} from '../../../../src/metier/nis2-simulateur/Regulation.definitions.js';
+} from '@metier/nis2-simulateur/Regulation.definitions.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

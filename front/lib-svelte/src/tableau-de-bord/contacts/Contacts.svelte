@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { calculeCodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
   import { DsfrTabs } from '@lab-anssi/ui-kit';
   import axios from 'axios';
   import { onMount, type ComponentProps } from 'svelte';
+  import { calculeCodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
   import CarteContactCampus from '../../contacts/CarteContactCampus.svelte';
   import CarteContactCOT from '../../contacts/CarteContactCOT.svelte';
   import CarteContactCSIRT from '../../contacts/CarteContactCSIRT.svelte';

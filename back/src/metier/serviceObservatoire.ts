@@ -1,6 +1,6 @@
-import { AdaptateurObservatoireMenaceCyber } from '../infra/observatoireDesDonnees/adaptateurObservatoireMenaceCyberMemoire.js';
-import { AdaptateurObservatoireMSC } from '../infra/observatoireDesDonnees/adaptateurObservatoireMSC.js';
-import { AdaptateurObservatoireMSS } from '../infra/observatoireDesDonnees/adaptateurObservatoireMSS.js';
+import { AdaptateurObservatoireMenaceCyber } from '@infra/observatoireDesDonnees/adaptateurObservatoireMenaceCyberMemoire.js';
+import { AdaptateurObservatoireMSC } from '@infra/observatoireDesDonnees/adaptateurObservatoireMSC.js';
+import { AdaptateurObservatoireMSS } from '@infra/observatoireDesDonnees/adaptateurObservatoireMSS.js';
 import {
   DonneesObservatoireOrganisations,
   DonneesObservatoireProjets,

@@ -1,12 +1,12 @@
 import { Readable } from 'node:stream';
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../../src/api/msc/index.js';
-import { OutilTéléchargé } from '../../../src/bus/evenements/outilTelecharge.js';
-import { AdaptateurCellar, CleDuBucket } from '../../../src/infra/adaptateurCellar.js';
-import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { EntrepotUtilisateur } from '@metier/entrepotUtilisateur.js';
+import { creeServeur } from '@api/msc/index.js';
+import { OutilTéléchargé } from '@bus/evenements/outilTelecharge.js';
+import { AdaptateurCellar, CleDuBucket } from '@infra/adaptateurCellar.js';
 import { MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';

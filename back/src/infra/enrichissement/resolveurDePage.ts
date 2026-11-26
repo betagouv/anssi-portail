@@ -1,8 +1,8 @@
-import { Article } from '../../metier/blog/article.js';
-import { EntrepôtArticle } from '../../metier/blog/entrepotArticle.js';
-import { EntrepotFinancement } from '../../metier/entrepotFinancement.js';
-import { EntrepotGuide } from '../../metier/entrepotGuide.js';
-import { CodeRégion, estCodeRegion } from '../../metier/referentielRegions.js';
+import { Article } from '@metier/blog/article.js';
+import { EntrepôtArticle } from '@metier/blog/entrepotArticle.js';
+import { EntrepotFinancement } from '@metier/entrepotFinancement.js';
+import { EntrepotGuide } from '@metier/entrepotGuide.js';
+import { CodeRégion, estCodeRegion } from '@metier/referentielRegions.js';
 
 export class RésolveurDePage {
   constructor(

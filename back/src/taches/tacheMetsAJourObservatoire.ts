@@ -1,12 +1,12 @@
 import Knex from 'knex';
+import { fabriqueAdaptateurChiffrement } from '@infra/adaptateurChiffrement.js';
+import { adaptateurEnvironnement } from '@infra/adaptateurEnvironnement.js';
+import { fabriqueAdaptateurHachage } from '@infra/adaptateurHachage.js';
+import { fabriqueAdaptateurProfilAnssi } from '@infra/adaptateurProfilAnssi.js';
+import { AdaptateurRechercheEntrepriseGouv } from '@infra/adaptateurRechercheEntrepriseGouv.js';
+import { messagerieMattermost } from '@infra/messagerieMattermost.js';
+import { rapporteurConsole } from '@infra/rapporteurConsole.js';
 import config from '../../knexfile.js';
-import { fabriqueAdaptateurChiffrement } from '../infra/adaptateurChiffrement.js';
-import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
-import { fabriqueAdaptateurHachage } from '../infra/adaptateurHachage.js';
-import { fabriqueAdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi.js';
-import { AdaptateurRechercheEntrepriseGouv } from '../infra/adaptateurRechercheEntrepriseGouv.js';
-import { messagerieMattermost } from '../infra/messagerieMattermost.js';
-import { rapporteurConsole } from '../infra/rapporteurConsole.js';
 import { MiseAJourObservatoire } from './metsAJourObservatoire.js';
 
 const urlObservatoire = adaptateurEnvironnement.observatoire.urlServeur();

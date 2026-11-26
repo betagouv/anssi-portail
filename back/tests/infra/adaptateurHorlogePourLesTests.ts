@@ -1,4 +1,4 @@
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
+import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
 
 const estUneDate = (représentationIso: string) => /^\d{4}-\d{2}-\d{2}$/.test(représentationIso);
 

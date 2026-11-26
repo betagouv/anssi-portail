@@ -1,11 +1,11 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { fabriquePublieMesureConsultée } from '../../src/api/middlewares/publieMesureConsultee.js';
-import { creeServeur } from '../../src/api/msc/index.js';
-import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
-import { Parcours } from '../../src/metier/parcours.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { Parcours } from '@metier/parcours.js';
+import { fabriquePublieMesureConsultée } from '@api/middlewares/publieMesureConsultee.js';
+import { creeServeur } from '@api/msc/index.js';
+import { MesureConsultee } from '@bus/evenements/mesureConsultee.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from './cookie.js';

@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import { EntrepôtArticle } from '../../../metier/blog/entrepotArticle.js';
+import { EntrepôtArticle } from '@metier/blog/entrepotArticle.js';
 import { RésolveurDePage } from '../resolveurDePage.js';
 import { ChargeurDeProps } from './chargeurDeProps.js';
 

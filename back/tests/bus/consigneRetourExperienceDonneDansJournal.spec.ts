@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { consigneRetourExperienceDonneDansJournal } from '../../src/bus/consigneRetourExperienceDonneDansJournal.js';
-import { RetourExperienceDonne } from '../../src/bus/evenements/retourExperienceDonne.js';
-import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { consigneRetourExperienceDonneDansJournal } from '@bus/consigneRetourExperienceDonneDansJournal.js';
+import { RetourExperienceDonne } from '@bus/evenements/retourExperienceDonne.js';
+import { AdaptateurHachage } from '@infra/adaptateurHachage.js';
+import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 

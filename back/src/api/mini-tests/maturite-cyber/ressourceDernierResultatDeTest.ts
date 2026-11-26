@@ -1,10 +1,10 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
-import { ResultatRechercheEntreprise } from '../../../infra/adaptateurRechercheEntreprise.js';
-import { RésultatTestMaturité } from '../../../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
-import { CodeRégion, estCodeRegion, regionParCode } from '../../../metier/referentielRegions.js';
-import { Secteur, secteurParCode } from '../../../metier/referentielSecteurs.js';
-import { TrancheEffectif, trancheEffectifParCode } from '../../../metier/referentielTranchesEffectifEtablissement.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { RésultatTestMaturité } from '@metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { CodeRégion, estCodeRegion, regionParCode } from '@metier/referentielRegions.js';
+import { Secteur, secteurParCode } from '@metier/referentielSecteurs.js';
+import { TrancheEffectif, trancheEffectifParCode } from '@metier/referentielTranchesEffectifEtablissement.js';
+import { ResultatRechercheEntreprise } from '@infra/adaptateurRechercheEntreprise.js';
 import { ConfigurationServeur } from '../../configurationServeur.js';
 import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../../zod.js';

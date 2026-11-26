@@ -1,4 +1,4 @@
-import { Rapporteur } from '../metier/rapporteur.js';
+import { Rapporteur } from '@metier/rapporteur.js';
 
 export type GestionnaireDEvenement<T extends EvenementDuBus> = (evenement: T) => Promise<void>;
 

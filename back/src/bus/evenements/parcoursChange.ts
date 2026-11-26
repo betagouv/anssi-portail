@@ -1,5 +1,5 @@
-import { MotifChangementParcours, Parcours } from '../../metier/parcours.js';
-import { Suivi } from '../../metier/suivi.js';
+import { MotifChangementParcours, Parcours } from '@metier/parcours.js';
+import { Suivi } from '@metier/suivi.js';
 
 export class ParcoursChangé {
   constructor(

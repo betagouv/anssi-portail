@@ -1,4 +1,4 @@
-import { Module } from '../../../src/metier/module.js';
+import { Module } from '@metier/module.js';
 
 export class ConstructeurDeModule {
   private id: number = 999;

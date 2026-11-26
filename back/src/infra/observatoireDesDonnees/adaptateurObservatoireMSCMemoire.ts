@@ -1,10 +1,5 @@
-import {
-  CumulMensuel,
-  SeuilCompletion,
-  TotalParDepartement,
-  TotalParNiveauMaturite,
-} from '../../metier/observatoire.js';
-import { codeDepartement } from '../../metier/referentielDepartements.js';
+import { CumulMensuel, SeuilCompletion, TotalParDepartement, TotalParNiveauMaturite } from '@metier/observatoire.js';
+import { codeDepartement } from '@metier/referentielDepartements.js';
 import { AdaptateurObservatoireMSC } from './adaptateurObservatoireMSC.js';
 
 const MOIS = [

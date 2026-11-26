@@ -1,6 +1,6 @@
-import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
-import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
-import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
+import { AdaptateurHachage } from '@infra/adaptateurHachage.js';
+import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
 import { SimulationRéflexesCyberRéponseSoumise } from './evenements/simulationReflexesCyberReponseSoumise.js';
 
 export const consigneRéflexesCyberReponseSoumiseDansJournal = ({

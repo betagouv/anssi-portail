@@ -1,4 +1,12 @@
-const importOrder = ['<BUILTIN_MODULES>', '<THIRD_PARTY_MODULES>', '^\\$plateforme/', '^[.]'];
+const importOrder = [
+  '<BUILTIN_MODULES>',
+  '<THIRD_PARTY_MODULES>',
+  '^@anssi-portail/',
+  '^\\$plateforme/',
+  '^@metier/',
+  '^@(api|bus|infra)/',
+  '^[.]',
+];
 
 /**
  * @see https://prettier.io/docs/configuration

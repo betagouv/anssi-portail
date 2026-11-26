@@ -3,7 +3,7 @@ import { loadWorkbook } from '@office-kit/xlsx/io';
 import { fromBuffer, workbookToBuffer } from '@office-kit/xlsx/node';
 import { getSheetByIndex, Workbook } from '@office-kit/xlsx/workbook';
 import { Worksheet } from '@office-kit/xlsx/worksheet';
-import { AdaptateurHorloge } from '../../infra/adaptateurHorloge.js';
+import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
 import { FournisseurChemin } from '../fournisseurChemin.js';
 
 export class ServiceÉditionXLSX {

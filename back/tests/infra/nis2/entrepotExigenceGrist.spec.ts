@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { ClientHttp } from '../../../src/infra/clientHttp.js';
-import { EntrepotExigenceGrist, ExigenceGrist } from '../../../src/infra/nis2/entrepotExigenceGrist.js';
+import { ClientHttp } from '@infra/clientHttp.js';
+import { EntrepotExigenceGrist, ExigenceGrist } from '@infra/nis2/entrepotExigenceGrist.js';
 import { fauxAdaptateurEnvironnement, fauxRapporteur } from '../../api/fauxObjets.js';
 import { fabriqueClientGet, fabriqueFauxClientHttp } from '../fournisseurClientHttp.js';
 
