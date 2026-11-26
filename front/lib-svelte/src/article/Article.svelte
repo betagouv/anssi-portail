@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { PageCrisp } from '@lab-anssi/ui-kit';
   import { onMount, untrack } from 'svelte';
-  import { récupèreArticle, type ArticleAPI } from '../passerelles/blog/articles';
+  import { estServeur } from '$plateforme/environnement';
+  import { récupèreArticle } from '../passerelles/blog/articles';
   import BoutonsPartagePage from '../test-maturite/BoutonsPartagePage.svelte';
   import type { PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
@@ -9,27 +11,30 @@
   import EncartParcoursSecurisationArticle from './EncartParcoursSecurisationArticle.svelte';
 
   type Props = {
-    articlePréchargé?: ArticleAPI;
+    articlePréchargé?: Article;
+    masqueTableDesMatières?: boolean;
+    parentFilAriane?: NonNullable<PropriétésFilAriane['parents']>[number];
     slugArticle?: string;
   };
 
-  const { articlePréchargé, slugArticle }: Props = $props();
+  const { articlePréchargé, slugArticle, masqueTableDesMatières = false, parentFilAriane }: Props = $props();
 
-  let article: Article | undefined = $state(
-    untrack(() => (articlePréchargé ? new Article(articlePréchargé) : undefined))
-  );
+  let article: Article | undefined = $state(untrack(() => articlePréchargé ?? undefined));
 
   const propriétésFilAriane: PropriétésFilAriane = $derived({
-    parents: [{ nom: 'Conseils cyber', lien: '/conseils-cyber' }],
+    parents: parentFilAriane ? [parentFilAriane] : [],
     feuille: article ? article.titre : '',
   });
 
   onMount(async () => {
     if (slugArticle) {
-      const articleApi = await récupèreArticle(slugArticle);
-      article = articleApi ? new Article(articleApi) : undefined;
+      article = await récupèreArticle(slugArticle);
     }
   });
+
+  let tableDesMatières = $derived(
+    articlePréchargé ? articlePréchargé.tableDesMatières.filter((e) => e.profondeur === 2) : []
+  );
 </script>
 
 {#if article}
@@ -40,26 +45,40 @@
     theme="clair"
     titre={article.titre}
   />
-  <dsfr-container class="contenu">
-    <p class="date-article texte-mention-xs">{article.publicationOuMiseÀJourFormattée()}</p>
 
-    <article>
-      <!-- eslint-disable-next-line svelte/no-at-html-tags-->
-      {@html article.contenu}
-    </article>
-    <EncartParcoursSecurisationArticle />
-  </dsfr-container>
-  {#if slugArticle}
-    <dsfr-container class="partage">
-      <div class="contenu-partage">
-        <div class="retour">
-          <RetourUtilisateurSurContenu identifiantCible={slugArticle} typeDeRetour="article">
-            <p class="texte-article-lg">Cet article vous a-t-il aidé&#8239;?</p>
-          </RetourUtilisateurSurContenu>
-        </div>
-        <BoutonsPartagePage cheminPartagé={`/conseils-cyber/${slugArticle}`} sujetMail={article.titre} />
-      </div>
+  {#if masqueTableDesMatières}
+    <dsfr-container class="contenu">
+      <p class="date-article texte-mention-xs">{article.publicationOuMiseÀJourFormattée()}</p>
+
+      <article>
+        <!-- eslint-disable-next-line svelte/no-at-html-tags-->
+        {@html article.contenu}
+      </article>
+      <EncartParcoursSecurisationArticle />
     </dsfr-container>
+    {#if slugArticle}
+      <dsfr-container class="partage">
+        <div class="contenu-partage">
+          <div class="retour">
+            <RetourUtilisateurSurContenu identifiantCible={slugArticle} typeDeRetour="article">
+              <p class="texte-article-lg">Cet article vous a-t-il aidé&#8239;?</p>
+            </RetourUtilisateurSurContenu>
+          </div>
+          <BoutonsPartagePage cheminPartagé={`/conseils-cyber/${slugArticle}`} sujetMail={article.titre} />
+        </div>
+      </dsfr-container>
+    {/if}
+  {:else}
+    {#if estServeur}
+      <article class="contenu fr-container fr-py-6w">
+        <div class="contenu">
+          <!-- eslint-disable-next-line svelte/no-at-html-tags-->
+          {@html article.contenu}
+        </div>
+      </article>
+    {:else}
+      <PageCrisp tableDesMatieres={tableDesMatières} contenu={article.contenu} />
+    {/if}
   {/if}
 {/if}
 
