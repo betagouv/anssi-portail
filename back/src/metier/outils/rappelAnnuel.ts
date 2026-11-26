@@ -18,7 +18,7 @@ export class RappelAnnuel {
   }
 }
 
-export class ConstructeurRappelAnnuel {
+class ConstructeurRappelAnnuel {
   private titre?: string;
   private description?: string;
   private descriptionAlarme?: string;

@@ -1,6 +1,6 @@
 export const ValeursSecteursComposites = ['energie', 'transports', 'fabrication'] as const;
 
-export const ValeursSecteursActivitesAnnexe1 = [
+const ValeursSecteursActivitesAnnexe1 = [
   'energie',
   'transports',
   'banqueSecteurBancaire',
@@ -12,7 +12,7 @@ export const ValeursSecteursActivitesAnnexe1 = [
   'gestionServicesTic',
   'espace',
 ] as const;
-export const ValeursSecteursActivitesAnnexe2 = [
+const ValeursSecteursActivitesAnnexe2 = [
   'servicesPostauxExpedition',
   'gestionDechets',
   'fabricationProductionDistributionProduitsChimiques',

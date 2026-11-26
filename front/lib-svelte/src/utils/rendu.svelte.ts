@@ -8,7 +8,7 @@ const seuilMd = '767px';
 const seuilLg = '992px';
 
 export const requêteMédiaMobile = `(width < ${seuilMd})`;
-export const requêteMédiaTablette = `(${seuilMd} <= width < ${seuilLg})`;
+const requêteMédiaTablette = `(${seuilMd} <= width < ${seuilLg})`;
 export const requêteMédiaPetitÉcran = `(max-width: ${seuilSm})`;
 export const requêteMédiaÀPartirDeSm = `(min-width: ${seuilSm})`;
 export const requêteMédiaMouvementRéduit = '(prefers-reduced-motion: reduce)';

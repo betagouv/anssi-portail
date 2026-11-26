@@ -1,11 +1,11 @@
 <script lang="ts">
+  import { envoyerReponses } from '@nis2-simulateur/simulateurNis2.api';
   import { quiScroll } from '@ui/quiScroll.attachment';
 
   import type { EtatQuestionnaire } from '../../../../../back/src/metier/nis2-simulateur/EtatQuestionnaire';
   import { evalueEligibilite } from '../../../../../back/src/metier/nis2-simulateur/questionnaire/evalueEligibilite';
   import SpecificationsCompletes from '../../../../../back/src/metier/nis2-simulateur/questionnaire/specifications-completes.csv?raw';
   import { Regulation } from '../../../../../back/src/metier/nis2-simulateur/Regulation.definitions';
-  import * as api from '../simulateurNi2.api';
   import LigneEtMaintenant from './LigneEtMaintenant.svelte';
   import PointsAttention from './PointsAttention.svelte';
   import TamponResultat from './TamponResultat.svelte';
@@ -17,7 +17,7 @@
   let { reponses }: Props = $props();
 
   $effect(() => {
-    api.envoyerReponses(reponses);
+    envoyerReponses(reponses);
   });
 
   let { resultat } = $derived.by(() => evalueEligibilite(reponses, SpecificationsCompletes));

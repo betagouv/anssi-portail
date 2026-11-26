@@ -99,7 +99,7 @@ const ValeursActivitesInfrastructureNumeriquePointEchangeServicesConfiance = [
   'fournisseurPointEchangeInternet',
 ] as const;
 
-export const ValeursActivitesInfrastructureNumeriqueDNSRegistreDomainePermierNiveau = [
+const ValeursActivitesInfrastructureNumeriqueDNSRegistreDomainePermierNiveau = [
   'registresNomsDomainesPremierNiveau',
   'fournisseurServicesDNS',
 ] as const;

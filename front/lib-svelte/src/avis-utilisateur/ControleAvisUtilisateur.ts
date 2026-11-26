@@ -34,7 +34,7 @@ export interface EntrepotAvisUtilisateur {
   modifieDateDebutSession: (date: Date) => void;
 }
 
-export class EntrepotNavigateurAvisUtilisateur implements EntrepotAvisUtilisateur {
+class EntrepotNavigateurAvisUtilisateur implements EntrepotAvisUtilisateur {
   dateDernierAvis = () =>
     extraitDateDepuisNavigateur({
       storage: () => localStorage,

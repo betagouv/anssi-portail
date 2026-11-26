@@ -2,7 +2,7 @@ export type CategorieEntite = 'EntiteEssentielle' | 'EntiteImportante';
 
 export const referentiels = ['NIS2', 'ISO', 'AE', 'CyFun23'] as const;
 export type Referentiel = (typeof referentiels)[number];
-export const langues = ['EN', 'FR'] as const;
+const langues = ['EN', 'FR'] as const;
 export type Langue = (typeof langues)[number];
 
 export const versReferentiel = (valeur?: string): Referentiel => {

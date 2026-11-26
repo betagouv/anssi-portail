@@ -10,11 +10,6 @@ export type IdentifiantMiniTest = (typeof identifiantsMiniTest)[number];
 export const typesRéaction = ['❤️', '🔥', '👍'] as const;
 export type TypeRéaction = (typeof typesRéaction)[number];
 
-export type CléReactionMiniTest = `${IdentifiantMiniTest}:${TypeRéaction}`;
-
-export const cléReactionMiniTest = (miniTest: IdentifiantMiniTest, typeReaction: TypeRéaction): CléReactionMiniTest =>
-  `${miniTest}:${typeReaction}`;
-
 export class RéactionMiniTest {
   private _compteur: number;
 
