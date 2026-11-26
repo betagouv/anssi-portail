@@ -1,4 +1,5 @@
 import { hydrate } from 'svelte';
+
 import ComposantArticle from '@article/Article.svelte';
 import type { Article } from '@article/article.type';
 import { récupèreArticle } from '@passerelles/blog/articles';

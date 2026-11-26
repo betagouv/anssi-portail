@@ -1,5 +1,6 @@
 <script lang="ts">
   import Lien from '@ui/Lien.svelte';
+
   import BlocDeCode from './BlocDeCode.svelte';
 
   type Props = {

@@ -4,6 +4,7 @@ import { Guide } from '@metier/guide.js';
 import { QuestionVraieFausse } from '@metier/mini-tests/vrai-faux/questionVraieFausse.js';
 import { ExigenceNIS2 } from '@metier/nis2/exigence.js';
 import { Utilisateur } from '@metier/utilisateur.js';
+
 import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from './fauxObjets.js';
 import { mesureDeTest } from './mesures/constructeurDeMesure.js';
 import { ConstructeurDeModule } from './mesures/constructeurDeModule.js';

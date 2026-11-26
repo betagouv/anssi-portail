@@ -1,7 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { Action } from 'svelte/action';
+
   import { détecteRendu } from '@utils/rendu.svelte';
+
   import BoutonDeVote from './BoutonDeVote.svelte';
 
   interface Props {

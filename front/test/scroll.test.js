@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+
 import { elementLePlusVisible, ratioEspaceOccupe } from '../scripts/scroll';
 
 describe('Pour la synchronisation avec le scroll', () => {

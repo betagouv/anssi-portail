@@ -1,5 +1,6 @@
 import { createHmac } from 'node:crypto';
 import { compare as compareBCrypt, hash as hashBCrypt } from 'bcrypt';
+
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 
 const NOMBRE_DE_PASSES = 10;

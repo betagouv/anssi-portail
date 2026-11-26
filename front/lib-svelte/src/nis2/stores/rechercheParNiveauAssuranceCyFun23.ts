@@ -1,4 +1,5 @@
 import { get, writable } from 'svelte/store';
+
 import type { CyFun23NiveauAssurance, Exigence } from '../exigence.type';
 
 const selectionNiveauAssurance = writable<CyFun23NiveauAssurance | undefined>();

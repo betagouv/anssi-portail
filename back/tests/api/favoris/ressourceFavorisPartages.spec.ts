@@ -2,9 +2,12 @@ import { randomUUID } from 'node:crypto';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { EntrepotUtilisateur } from '@metier/entrepotUtilisateur.js';
 import { creeServeur } from '@api/msc/index.js';
+
 import { EntrepotFavoriMemoire } from '../../persistance/entrepotFavoriMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';

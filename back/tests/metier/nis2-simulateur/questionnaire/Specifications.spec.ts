@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { EtatQuestionnaire, EtatQuestionnaireVide } from '@metier/nis2-simulateur/EtatQuestionnaire.js';
 import { RegleEntiteOSE } from '@metier/nis2-simulateur/questionnaire/regles/RegleEntiteOSE.js';
 import { Specifications } from '@metier/nis2-simulateur/questionnaire/Specifications.js';

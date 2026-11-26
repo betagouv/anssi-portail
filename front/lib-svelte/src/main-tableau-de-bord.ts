@@ -1,4 +1,5 @@
 import { mount } from 'svelte';
+
 import type { ItemCyber, RepartitionParBesoin } from '@catalogue/Catalogue.types';
 import { catalogueStore } from '@catalogue/stores/catalogue.store';
 import TableauDeBord from '@tableau-de-bord/TableauDeBord.svelte';

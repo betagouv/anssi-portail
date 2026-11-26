@@ -1,4 +1,5 @@
 import { get, writable } from 'svelte/store';
+
 import { Typologie, type ItemCyber } from '../Catalogue.types';
 
 const selectionDeTypologies = writable<Typologie[]>([]);

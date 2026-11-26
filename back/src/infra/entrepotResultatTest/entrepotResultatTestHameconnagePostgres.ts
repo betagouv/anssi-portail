@@ -1,5 +1,6 @@
 import { EntrepôtRésultatTestHameçonnage } from '@metier/mini-tests/hameconnage/entrepotResultatTestHameconnage.js';
 import { RésultatTestHameçonnage } from '@metier/mini-tests/hameconnage/resultatTestHameconnage.js';
+
 import { EntréePostgresRésultatTestHameçonnage } from './entreePostgresResultatTest.js';
 import { EntrepôtRésultatTestPostgres } from './entrepotResultatTestPostgres.js';
 

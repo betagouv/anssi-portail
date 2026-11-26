@@ -1,4 +1,5 @@
 import axios from '@anssi-portail/axios';
+
 import { Financement } from '../metier/financement';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { aseptiseHtml } from './aseptisationDuHtml';

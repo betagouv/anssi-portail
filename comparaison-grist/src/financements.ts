@@ -1,5 +1,7 @@
 import fs from 'node:fs';
+
 import axios from '@anssi-portail/axios';
+
 import { adaptateurEnvironnement } from './infrastructure/adaptateurEnvironnement';
 import { ConsignateurDeComparaisonDeFinancements } from './infrastructure/financements/consignateurDeComparaisonDeFinancements';
 import { EntrepotFinancementGrist } from './infrastructure/financements/entrepotFinancementGrist';

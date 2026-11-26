@@ -1,8 +1,10 @@
 import { Request, Response, Router } from 'express';
+
 import { Outil } from '@metier/outils/outils.js';
 import { RappelAnnuel } from '@metier/outils/rappelAnnuel.js';
 import { Utilisateur } from '@metier/utilisateur.js';
 import { OutilTéléchargé } from '@bus/evenements/outilTelecharge.js';
+
 import { ConfigurationServeur } from '../../configurationServeur.js';
 import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../../zod.js';

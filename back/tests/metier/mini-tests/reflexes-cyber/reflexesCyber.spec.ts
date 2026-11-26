@@ -1,5 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { RéflexesCyber } from '@metier/mini-tests/reflexes-cyber/reflexesCyber.js';
+
 import { fauxRapporteur } from '../../../api/fauxObjets.js';
 import { jeanneDupont } from '../../../api/objetsPretsALEmploi.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';

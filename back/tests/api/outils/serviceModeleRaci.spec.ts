@@ -3,7 +3,9 @@ import { loadWorkbook } from '@office-kit/xlsx/io';
 import { fromBuffer } from '@office-kit/xlsx/node';
 import { getSheetByIndex } from '@office-kit/xlsx/workbook';
 import { describe, expect, it, vi } from 'vitest';
+
 import { ServiceModèleRACI } from '@api/outils/modeleRaci/serviceModeleRaci.js';
+
 import { fabriqueAdaptateurHorloge } from '../../infra/adaptateurHorlogePourLesTests.js';
 import { fauxFournisseurDeChemin } from '../fauxObjets.js';
 

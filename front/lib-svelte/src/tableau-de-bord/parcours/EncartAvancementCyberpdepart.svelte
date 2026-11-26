@@ -2,6 +2,7 @@
   import { DsfrBadge } from '@lab-anssi/ui-kit';
   import axios from 'axios';
   import { onMount } from 'svelte';
+
   import { enPropriétéWebC } from '@plateforme/webComponent';
   import AnneauProgression from '@parcours-securisation/AnneauProgression.svelte';
   import CarteMesure from '@parcours-securisation/CarteMesure.svelte';
@@ -13,6 +14,7 @@
   import Lien from '@ui/Lien.svelte';
   import MotEnExergue from '@ui/MotEnExergue.svelte';
   import { détecteMédia, requêteMédiaÀPartirDeSm } from '@utils/rendu.svelte';
+
   import ProgressionCyberdepart from './ProgressionCyberdepart.svelte';
 
   const àPartirDeSm = détecteMédia(requêteMédiaÀPartirDeSm);

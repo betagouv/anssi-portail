@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+
   import { récupèreStatistiquesMSC, type Statistiques } from '@passerelles/statistiquesMSC';
 
   let statistiques: Statistiques | undefined = $state();

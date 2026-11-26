@@ -1,6 +1,7 @@
 <script lang="ts">
   import { BandeauPage } from '@lab-anssi/ui-kit';
   import type { ComponentProps, Snippet } from 'svelte';
+
   import { fabriqueFilAriane, type PropriétésFilAriane } from './filAriane';
 
   type Props = {

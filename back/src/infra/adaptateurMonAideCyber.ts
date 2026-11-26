@@ -1,4 +1,5 @@
 import axios, { HttpStatusCode, isAxiosError } from '@anssi-portail/axios';
+
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { adaptateurMonAideCyberVide } from './adaptateurMonAideCyberVide.js';
 

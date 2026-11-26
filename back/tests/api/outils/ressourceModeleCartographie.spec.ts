@@ -7,10 +7,13 @@ import { iterCells, Worksheet } from '@office-kit/xlsx/worksheet';
 import JSZip from 'jszip';
 import request from 'supertest';
 import { describe, expect, it } from 'vitest';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { creeServeur } from '@api/msc/index.js';
 import { ServiceModèleCartographie } from '@api/outils/modeleCartographie/serviceModeleCartographie.js';
 import { OutilTéléchargé } from '@bus/evenements/outilTelecharge.js';
+
 import { MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { fabriqueAdaptateurHorloge } from '../../infra/adaptateurHorlogePourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';

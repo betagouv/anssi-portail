@@ -2,6 +2,7 @@
   import type { PropriétésFilAriane } from '@ui/filAriane';
   import HerosRiche from '@ui/HerosRiche.svelte';
   import MotEnExergue from '@ui/MotEnExergue.svelte';
+
   import IllustrationHerosEntreprises from '../animation/IllustrationHerosEntreprises.svelte';
   import Proteger from '../Proteger.svelte';
 

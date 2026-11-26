@@ -1,6 +1,8 @@
 import DOMPurify from 'isomorphic-dompurify';
 import { JSDOM } from 'jsdom';
+
 import { libellesRegionsContacts } from '@metier/contacts/libellesRegions.js';
+
 import { RésolveurDePage } from '../resolveurDePage.js';
 import { AdaptateurDom } from './adaptateurDom.js';
 

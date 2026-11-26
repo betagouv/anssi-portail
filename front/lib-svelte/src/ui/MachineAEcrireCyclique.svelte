@@ -1,5 +1,6 @@
 <script lang="ts">
   import { prefersReducedMotion } from 'svelte/motion';
+
   import MachineAEcrire from './MachineAEcrire.svelte';
 
   const INTERVAL_EN_MS = 5000;

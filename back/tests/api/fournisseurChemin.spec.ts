@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { ErreurTraverséeDeChemin } from '@api/erreurs.js';
 import { construisListeFichiersDuSite, FichierInconnu, fournisseurChemin, siteFront } from '@api/fournisseurChemin.js';
 

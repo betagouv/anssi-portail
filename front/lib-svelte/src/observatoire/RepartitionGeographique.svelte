@@ -3,6 +3,7 @@
   import CarteDepartements from '@graphiques/CarteDepartements.svelte';
   import CarteDonnees from '@graphiques/CarteDonnees.svelte';
   import type { DonnéesObservatoire } from '@passerelles/observatoire';
+
   import { formateDate, formateNombre, libelléDuSeuil } from './formatage';
 
   interface Props {

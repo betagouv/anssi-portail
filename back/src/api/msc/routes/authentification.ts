@@ -1,4 +1,5 @@
 import { Express } from 'express';
+
 import { ConfigurationServeur } from '../../configurationServeur.js';
 import { ressourceApresAuthentificationOIDC } from '../../oidc/ressourceApresAuthentificationOIDC.js';
 import { ressourceApresDeconnexionOIDC } from '../../oidc/ressourceApresDeconnexionOIDC.js';

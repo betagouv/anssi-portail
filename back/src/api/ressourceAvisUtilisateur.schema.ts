@@ -1,5 +1,7 @@
 import z from 'zod';
+
 import { NiveauDeSatisfaction } from '@metier/niveauDeSatisfaction.js';
+
 import { schemas } from './schemas.js';
 
 export const schemaRessourceAvisUtilisateur = z.strictObject({

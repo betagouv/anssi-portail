@@ -1,6 +1,7 @@
 import { EntrepôtRésultatTest } from '@metier/mini-tests/resultat-test/entrepotResultatTest.js';
 import { RésultatTest } from '@metier/mini-tests/resultat-test/resultatTest.js';
 import { Utilisateur } from '@metier/utilisateur.js';
+
 import { EntrepotMemoire } from './entrepotMemoire.js';
 
 export abstract class EntrepôtRésultatTestMémoire<T extends RésultatTest>

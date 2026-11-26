@@ -1,5 +1,7 @@
 import { Response } from 'express';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { FournisseurChemin } from './fournisseurChemin.js';
 
 export class ErreurTraverséeDeChemin extends Error {

@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount, untrack } from 'svelte';
+
   import { clic } from '@directives/actions.svelte';
   import { profilStore } from '@stores/profil.store';
   import type { PropriétésFilAriane } from '@ui/filAriane';
@@ -9,6 +10,7 @@
   import Heros from '@ui/Heros.svelte';
   import IllustrationPasDeResultatDeRecherche from '@ui/IllustrationPasDeResultatDeRecherche.svelte';
   import Lien from '@ui/Lien.svelte';
+
   import CarteFinancement from './CarteFinancement.svelte';
   import FiltresFinancements from './FiltresFinancements.svelte';
   import type { RésuméFinancement } from './financement';

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { calculeCodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
 
 describe("Le secteur de contact est retrouvé pour un code d'activité NAF 2025", () => {

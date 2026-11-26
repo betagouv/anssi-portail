@@ -1,4 +1,5 @@
 import { CumulMensuel, TotalMensuel, TotalParNiveauSecurite } from '@metier/observatoire.js';
+
 import { AdaptateurObservatoireMSS } from './adaptateurObservatoireMSS.js';
 
 const MOIS = [

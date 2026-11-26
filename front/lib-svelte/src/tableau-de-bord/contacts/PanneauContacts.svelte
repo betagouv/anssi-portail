@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Icone } from '@lab-anssi/ui-kit';
   import type { Snippet } from 'svelte';
+
   import IllustrationDragonPasDeResultat from '@ui/IllustrationDragonPasDeResultat.svelte';
   import Lien from '@ui/Lien.svelte';
 

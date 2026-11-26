@@ -1,4 +1,5 @@
 import { hydrate } from 'svelte';
+
 import FilAriane from '@ui/FilAriane.svelte';
 
 const donnees = document.getElementById('donnees-fil-ariane')!.textContent;

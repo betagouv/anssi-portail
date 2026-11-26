@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+
   import { enPropriétéWebC } from '@plateforme/webComponent';
   import IllustrationProtegerOrganisation from '@accueil/animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
   import { récupèreStatistiquesMSC } from '@passerelles/statistiquesMSC';
@@ -8,6 +9,7 @@
   import HeroLandingPage from '@ui/HeroLandingPage.svelte';
   import Lien from '@ui/Lien.svelte';
   import MotEnExergue from '@ui/MotEnExergue.svelte';
+
   import EncartPromotionParcoursBasique from './EncartPromotionParcoursBasique.svelte';
   import EncartPromotionParcoursComplet from './EncartPromotionParcoursComplet.svelte';
 

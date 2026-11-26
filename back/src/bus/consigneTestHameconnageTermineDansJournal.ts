@@ -1,6 +1,7 @@
 import { AdaptateurHachage } from '@infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
+
 import { TestHameçonnageTerminé } from './evenements/testHameconnageTermine.js';
 
 export const consigneTestHameconnageTermineDansJournal = ({

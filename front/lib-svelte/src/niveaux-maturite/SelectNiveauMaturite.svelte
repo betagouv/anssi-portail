@@ -1,5 +1,6 @@
 <script lang="ts">
   import SelecteurSimple from '@test-maturite/SelecteurSimple.svelte';
+
   import { niveauxMaturite } from './NiveauxMaturite.donnees';
   import type { IdNiveau } from './NiveauxMaturite.type';
 

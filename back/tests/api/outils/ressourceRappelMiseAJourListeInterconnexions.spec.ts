@@ -1,9 +1,11 @@
 import { type Express } from 'express';
 import request from 'supertest';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { EntrepotUtilisateur } from '@metier/entrepotUtilisateur.js';
 import { creeServeur } from '@api/msc/index.js';
 import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
+
 import { MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';

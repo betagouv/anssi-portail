@@ -1,4 +1,5 @@
 import { diffArrays } from 'diff';
+
 import { ComparaisonDeFinancements, Financement } from '../../metier/financements/financement.type';
 
 export class ConsignateurDeComparaisonDeFinancements {

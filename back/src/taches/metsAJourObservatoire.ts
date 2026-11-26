@@ -1,6 +1,7 @@
 import { tailleEntite, typeEntite } from '@lab-anssi/lib';
 import type { Knex } from 'knex';
 import pThrottle from 'p-throttle';
+
 import {
   libellésNiveauMaturité,
   RésultatTestMaturité,

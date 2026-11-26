@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { Cache } from '@infra/cache.js';
 
 const VINGT_QUATRE_HEURES = Temporal.Duration.from({ hours: 24 });

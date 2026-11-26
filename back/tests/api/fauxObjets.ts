@@ -1,5 +1,6 @@
 import { join } from 'path';
 import { ErrorRequestHandler } from 'express';
+
 import { AdaptateurEmail } from '@metier/adaptateurEmail.js';
 import { MessagerieInstantanee } from '@metier/messagerieInstantanee.js';
 import { Parcours } from '@metier/parcours.js';
@@ -36,6 +37,7 @@ import { EntrepôtContactStatique } from '@infra/entrepotContactStatique.js';
 import { AdaptateurObservatoireMenaceCyber } from '@infra/observatoireDesDonnees/adaptateurObservatoireMenaceCyberMemoire.js';
 import { AdaptateurObservatoireMSCMemoire } from '@infra/observatoireDesDonnees/adaptateurObservatoireMSCMemoire.js';
 import { AdaptateurObservatoireMSSMemoire } from '@infra/observatoireDesDonnees/adaptateurObservatoireMSSMemoire.js';
+
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests.js';
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 import { EntrepôtArticleMémoire } from '../persistance/entrepotArticleMemoire.js';

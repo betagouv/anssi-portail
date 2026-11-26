@@ -1,5 +1,6 @@
 <script lang="ts">
   import { FiltresCatalogue } from '@lab-anssi/ui-kit';
+
   import { BesoinCyber } from './Catalogue.types';
   import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
 

@@ -1,4 +1,5 @@
 import z from 'zod';
+
 import { referentiels } from '@metier/nis2/exigence.js';
 
 export const schemaRessourceExigencesNis2 = z.object({

@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { guideZeroTrust } from '../api/objetsPretsALEmploi.js';
 import { EntrepotGuideTravailMemoire } from '../persistance/entrepotGuideTravailMemoire.js';
 

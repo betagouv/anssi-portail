@@ -1,5 +1,6 @@
 <script lang="ts">
   import { DsfrBadge, DsfrCard } from '@lab-anssi/ui-kit';
+
   import { enPropriétéWebC } from '@plateforme/webComponent';
   import Lien from '@ui/Lien.svelte';
   import MotEnExergue from '@ui/MotEnExergue.svelte';

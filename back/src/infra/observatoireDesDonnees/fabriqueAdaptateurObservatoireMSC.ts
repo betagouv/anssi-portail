@@ -1,4 +1,5 @@
 import Knex from 'knex';
+
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
 import { AdaptateurObservatoireMSC } from './adaptateurObservatoireMSC.js';
 import { AdaptateurObservatoireMSCMemoire } from './adaptateurObservatoireMSCMemoire.js';

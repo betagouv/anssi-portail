@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import { corpsVide, valideCorpsRequete } from './zod.js';
 
 export const ressourceControleContenuListeConfiance = ({ version }: { version: 'v5' | 'v6' }) => {

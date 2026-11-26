@@ -2,6 +2,7 @@
   import { niveauxMaturite } from '@niveaux-maturite/NiveauxMaturite.donnees';
   import { arrondisAuCentieme } from '@utils/arrondis';
   import { détecteMédia, requêteMédiaPetitÉcran } from '@utils/rendu.svelte';
+
   import type { SerieRadar } from './Serie';
   import { rubriques } from './TestMaturite.donnees';
 

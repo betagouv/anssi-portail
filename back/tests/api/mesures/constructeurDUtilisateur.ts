@@ -1,6 +1,7 @@
 import { Mesure } from '@metier/mesure.js';
 import { Parcours } from '@metier/parcours.js';
 import { Utilisateur } from '@metier/utilisateur.js';
+
 import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from '../fauxObjets.js';
 
 export class ConstructeurDUtilisateur {

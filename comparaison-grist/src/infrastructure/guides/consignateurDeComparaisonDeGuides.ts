@@ -1,4 +1,5 @@
 import { diffArrays } from 'diff';
+
 import { ComparaisonDeGuides, Guide } from '../../metier/guides/guide.type';
 
 export class ConsignateurDeComparaisonDeGuides {

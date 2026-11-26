@@ -4,6 +4,7 @@
 
 <script lang="ts">
   import { DsfrBreadcrumb } from '@lab-anssi/ui-kit';
+
   import type { Segment } from './filAriane';
 
   type Props = {

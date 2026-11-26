@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import {
   AppartenancePaysUnionEuropeenne,
   UnionPetitMoyenGrand,
@@ -16,6 +17,7 @@ import {
 } from '@metier/nis2-simulateur/Regulation.definitions.js';
 import { SecteurActivite } from '@metier/nis2-simulateur/SecteurActivite.definitions.js';
 import { SousSecteurActivite } from '@metier/nis2-simulateur/SousSecteurActivite.definitions.js';
+
 import {
   autresActivites,
   CasDeTest,

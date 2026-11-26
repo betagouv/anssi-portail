@@ -1,5 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { AxiosError } from '@anssi-portail/axios';
+
 import { AdaptateurEmail } from '@metier/adaptateurEmail.js';
 import { BadgeCyberdépartDébloqué } from '@bus/evenements/badgeCyberdepartDebloque.js';
 import { MesureConsultee } from '@bus/evenements/mesureConsultee.js';
@@ -11,6 +13,7 @@ import { ParcoursCompletTerminé } from '@bus/evenements/parcoursCompletTermine.
 import { ParcoursRejoint } from '@bus/evenements/parcoursRejoint.js';
 import { adaptateurEmailBrevo } from '@infra/adaptateurEmailBrevo.js';
 import { ClientHttp } from '@infra/clientHttp.js';
+
 import { fauxAdaptateurEnvironnement, fauxRapporteur } from '../api/fauxObjets.js';
 import { fabriqueAdaptateurHorloge } from './adaptateurHorlogePourLesTests.js';
 import { fabriqueClientPost, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';

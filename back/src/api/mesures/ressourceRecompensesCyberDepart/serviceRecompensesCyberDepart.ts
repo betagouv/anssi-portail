@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { Canvas, GlobalFonts } from '@napi-rs/canvas';
 import sharp from 'sharp';
+
 import { FournisseurChemin } from '../../fournisseurChemin.js';
 
 const LARGEUR_BANNIERE = 996;

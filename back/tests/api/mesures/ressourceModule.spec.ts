@@ -1,12 +1,15 @@
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { EntrepotUtilisateur } from '@metier/entrepotUtilisateur.js';
 import { Mesure } from '@metier/mesure.js';
 import { Module } from '@metier/module.js';
 import { creeServeur } from '@api/msc/index.js';
 import { AdaptateurEnvironnement } from '@infra/adaptateurEnvironnement.js';
+
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
 import { EntrepôtModuleMémoire } from '../../persistance/entrepôtModuleMémoire.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';

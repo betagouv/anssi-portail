@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { createLogger, defineConfig, loadEnv } from 'vite';
+
 import { aliasSvelte } from './alias.plugin.js';
 import { appEnvDepuisValeur } from './src/app-env.js';
 import { injecteNonce } from './src/utils/injecteNonce.plugin.js';

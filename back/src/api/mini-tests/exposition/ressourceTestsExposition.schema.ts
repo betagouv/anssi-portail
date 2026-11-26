@@ -1,4 +1,5 @@
 import z from 'zod';
+
 import { facteursAggravant, secteurs, typesOrganisation } from '@metier/mini-tests/exposition/exposition.js';
 
 export const schemaPostTestExposition = z.strictObject({

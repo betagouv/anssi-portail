@@ -3,7 +3,9 @@ import { Request, Response } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
 import { createRequest, createResponse } from 'node-mocks-http';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { Utilisateur } from '@metier/utilisateur.js';
 import { AdaptateurJWT } from '@api/adaptateurJWT.js';
 import { FournisseurChemin } from '@api/fournisseurChemin.js';
@@ -11,6 +13,7 @@ import { fabriqueMiddleware, Middleware } from '@api/middlewares/middleware.js';
 import { AdaptateurEnvironnement } from '@infra/adaptateurEnvironnement.js';
 import { AdaptateurHachage } from '@infra/adaptateurHachage.js';
 import { AdaptateurEnrichissement } from '@infra/enrichissement/adaptateurEnrichissement.js';
+
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import {
   fauxAdaptateurEnrichissement,

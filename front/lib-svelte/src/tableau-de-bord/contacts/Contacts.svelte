@@ -2,7 +2,9 @@
   import { DsfrTabs } from '@lab-anssi/ui-kit';
   import axios from 'axios';
   import { onMount, type ComponentProps } from 'svelte';
+
   import { calculeCodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
+
   import CarteContactCampus from '@contacts/CarteContactCampus.svelte';
   import CarteContactCOT from '@contacts/CarteContactCOT.svelte';
   import CarteContactCSIRT from '@contacts/CarteContactCSIRT.svelte';
@@ -16,6 +18,7 @@
     type ContactsRegionaux,
   } from '@contacts/contacts.type';
   import { profilStore } from '@stores/profil.store';
+
   import TitreDeSection from '../TitreDeSection.svelte';
   import CarteContactTableauDeBord from './CarteContactTableauDeBord.svelte';
   import PanneauContacts from './PanneauContacts.svelte';

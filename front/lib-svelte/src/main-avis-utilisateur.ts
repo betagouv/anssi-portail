@@ -1,4 +1,5 @@
 import { mount } from 'svelte';
+
 import AvisUtilisateur from '@avis-utilisateur/AvisUtilisateur.svelte';
 import { ControleAvisUtilisateur, entrepotNavigateurAvisUtilisateur } from '@avis-utilisateur/ControleAvisUtilisateur';
 

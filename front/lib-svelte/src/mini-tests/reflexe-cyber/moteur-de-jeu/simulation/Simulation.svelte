@@ -4,7 +4,9 @@
   import { prefersReducedMotion, Tween } from 'svelte/motion';
   import { fly } from 'svelte/transition';
   import { v7 as uuidv7 } from 'uuid';
+
   import Alerte from '@ui/Alerte.svelte';
+
   import type { IdRôle, Rôle } from '../roles';
   import type { Scénario } from '../scenarios';
   import { joueSon, prépareAudio, type Son } from './audio';

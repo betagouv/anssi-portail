@@ -2,6 +2,7 @@
   import { aseptiseHtml } from '@plateforme/aseptisationDuHtml';
   import Bouton from '@ui/Bouton.svelte';
   import Modale from '@ui/Modale.svelte';
+
   import type { MenaceEvaluee } from './expositionCyberattaques';
 
   interface Props {

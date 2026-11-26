@@ -1,8 +1,10 @@
 import Knex from 'knex';
+
 import { EntrepotMesure } from '@metier/entrepotMesure.js';
 import { EntrepôtModule } from '@metier/EntrepotModule.js';
 import { Mesure } from '@metier/mesure.js';
 import { Module } from '@metier/module.js';
+
 import config from '../../knexfile.js';
 import { MesurePersistee } from './entrepotMesurePostgres.js';
 

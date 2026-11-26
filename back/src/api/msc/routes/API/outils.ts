@@ -1,4 +1,5 @@
 import { Express, RequestHandler } from 'express';
+
 import { Outil } from '@metier/outils/outils.js';
 import { RappelAnnuel } from '@metier/outils/rappelAnnuel.js';
 import {
@@ -8,6 +9,7 @@ import {
   rappelMiseAJourListeInterconnexions,
   rappelMiseAJourListePrestatairesEtFournisseurs,
 } from '@metier/outils/rappelsDeMiseAJour.js';
+
 import { ConfigurationServeur } from '../../../configurationServeur.js';
 import { FournisseurChemin } from '../../../fournisseurChemin.js';
 import { ressourceCampagneDeSensibilisation } from '../../../outils/campagneDeSensibilisation/ressourceCampagneDeSensibilisation.js';

@@ -1,4 +1,5 @@
 import { hydrate } from 'svelte';
+
 import type { ItemCyber } from '@catalogue/Catalogue.types';
 import Page from '@protection/collectivites/PresentationCollectivites.svelte';
 

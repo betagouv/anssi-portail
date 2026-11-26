@@ -1,4 +1,5 @@
 import { ErrorRequestHandler } from 'express';
+
 import { AdaptateurEmail } from '@metier/adaptateurEmail.js';
 import { AdaptateurStatistiqueParcours } from '@metier/adaptateurStatistiqueParcours.js';
 import { EntrepôtArticle } from '@metier/blog/entrepotArticle.js';
@@ -36,6 +37,7 @@ import { AdaptateurMonAideCyber } from '@infra/adaptateurMonAideCyber.js';
 import { AdaptateurProfilAnssi } from '@infra/adaptateurProfilAnssi.js';
 import { AdaptateurRechercheEntreprise } from '@infra/adaptateurRechercheEntreprise.js';
 import { GenerateurImage } from '@infra/generateurImage.js';
+
 import { AdaptateurJWT } from './adaptateurJWT.js';
 import { FournisseurChemin } from './fournisseurChemin.js';
 import { ServiceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';

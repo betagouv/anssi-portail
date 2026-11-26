@@ -2,10 +2,12 @@
   import { DsfrTag } from '@lab-anssi/ui-kit';
   import axios from 'axios';
   import { onMount } from 'svelte';
+
   import CarteFinancement from '@financements/CarteFinancement.svelte';
   import type { RésuméFinancement } from '@financements/financement';
   import Lien from '@ui/Lien.svelte';
   import { détecteRendu } from '@utils/rendu.svelte';
+
   import TitreDeSection from './TitreDeSection.svelte';
 
   let financements: RésuméFinancement[] = $state([]);

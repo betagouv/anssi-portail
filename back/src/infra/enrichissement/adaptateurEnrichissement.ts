@@ -1,5 +1,6 @@
 import { JSDOM } from 'jsdom';
 import { render } from 'svelte/server';
+
 import { EntrepôtArticle } from '@metier/blog/entrepotArticle.js';
 import { EntrepôtContact } from '@metier/contacts/entrepotContact.js';
 import { EntrepotFinancement } from '@metier/entrepotFinancement.js';
@@ -7,6 +8,7 @@ import { EntrepotGuide } from '@metier/entrepotGuide.js';
 import { EntrepotExigence } from '@metier/nis2/entrepotExigence.js';
 import { Rapporteur } from '@metier/rapporteur.js';
 import { FournisseurChemin } from '@api/fournisseurChemin.js';
+
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
 import { AdaptateurDom } from './adaptateurDom/adaptateurDom.js';
 import { AdaptateurLienCanonique } from './adaptateurDom/adaptateurLienCanonique.js';

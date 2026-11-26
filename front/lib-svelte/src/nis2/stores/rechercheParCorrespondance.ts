@@ -1,4 +1,5 @@
 import { get, writable } from 'svelte/store';
+
 import type { Correspondance, Exigence } from '../exigence.type';
 
 const selectionCorrespondance = writable<Correspondance['niveau'] | undefined>();

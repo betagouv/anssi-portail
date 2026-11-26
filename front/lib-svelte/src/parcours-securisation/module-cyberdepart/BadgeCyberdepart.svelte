@@ -1,5 +1,6 @@
 <script lang="ts">
   import { afficheBadgeCyberdépart } from '@plateforme/environnement';
+
   import BoutonPartageBadgeCyberdépart from './BoutonPartageBadgeCyberdepart.svelte';
   import BoutonTelechargementVisuels from './BoutonTelechargementVisuels.svelte';
 

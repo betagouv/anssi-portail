@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { ConstructeurDeModule } from '../api/mesures/constructeurDeModule.js';
 import { fabriqueModuleCyberdépart } from '../api/objetsPretsALEmploi.js';
 

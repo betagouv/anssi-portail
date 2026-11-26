@@ -1,7 +1,9 @@
 import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
+
 import { DroitAcces } from '@catalogue/Catalogue.types';
 import { rechercheParDroitAcces } from '@catalogue/stores/rechercheParDroitAcces.store';
+
 import { mss } from './objetsExemples';
 
 describe("La recherche par droit d'accès", () => {

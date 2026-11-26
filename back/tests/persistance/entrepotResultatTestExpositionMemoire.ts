@@ -1,5 +1,6 @@
 import { EntrepôtRésultatTestExposition } from '@metier/mini-tests/exposition/entrepotResultatTestExposition.js';
 import { RésultatTestExposition } from '@metier/mini-tests/exposition/resultatTestExposition.js';
+
 import { EntrepôtRésultatTestMémoire } from './entrepotResultatTestMemoire.js';
 
 export class EntrepôtRésultatTestExpositionMémoire

@@ -3,6 +3,7 @@ import eslint from '@eslint/js';
 import { defineConfig } from 'eslint/config';
 import reglesEslint from 'regles-eslint';
 import tseslint from 'typescript-eslint';
+
 import { createConfig } from '../eslint.config.base.mjs';
 
 export default defineConfig(

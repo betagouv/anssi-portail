@@ -1,5 +1,6 @@
 import { Linter } from 'eslint';
 import { describe, expect, it } from 'vitest';
+
 import reglesEslint from '../src/index.js';
 
 const configuration = reglesEslint.configs.markdown;

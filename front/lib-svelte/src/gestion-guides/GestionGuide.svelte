@@ -1,5 +1,6 @@
 <script lang="ts">
   import { profilStore } from '@stores/profil.store';
+
   import AjoutDocument from './AjoutDocument.svelte';
   import ListeDesDocuments, { type Document } from './ListeDesDocuments.svelte';
   import SelectionIdentifiantGuide from './SelectionIdentifiantGuide.svelte';

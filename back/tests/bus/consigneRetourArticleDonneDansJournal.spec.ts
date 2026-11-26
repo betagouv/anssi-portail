@@ -1,7 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
+
 import { consigneRetourArticleDonnéDansJournal } from '@bus/consigneRetourArticleDonneDansJournal.js';
 import { RetourArticleDonné } from '@bus/evenements/retourArticleDonne.js';
 import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
+
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe("L'abonnement qui consigne l'évènement de retour d'un article", () => {

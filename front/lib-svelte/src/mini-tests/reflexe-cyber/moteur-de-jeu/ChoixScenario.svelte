@@ -1,7 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+
   import { clic } from '@directives/actions.svelte';
   import Bouton from '@ui/Bouton.svelte';
+
   import type { IdScénario, Scénario } from './scenarios';
 
   type Props = {

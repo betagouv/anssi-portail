@@ -1,4 +1,5 @@
 import { mount } from 'svelte';
+
 import BoutonFavori from '@favoris/BoutonFavori.svelte';
 import { profilStore } from '@stores/profil.store';
 

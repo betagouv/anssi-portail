@@ -8,6 +8,7 @@ import { ParcoursCompletTerminé } from '@bus/evenements/parcoursCompletTermine.
 import { ParcoursRejoint } from '@bus/evenements/parcoursRejoint.js';
 import { AdaptateurHachage } from '@infra/adaptateurHachage.js';
 import { AdaptateurRechercheEntreprise } from '@infra/adaptateurRechercheEntreprise.js';
+
 import { EntrepotMesure } from './entrepotMesure.js';
 import { EntrepotPriseEnCompte } from './entrepotPriseEnCompte.js';
 import { Mesure } from './mesure.js';

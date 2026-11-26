@@ -1,4 +1,5 @@
 import { get, writable } from 'svelte/store';
+
 import type { DroitAcces, ItemCyber } from '../Catalogue.types';
 
 const selectionDroitAcces = writable<DroitAcces[]>([]);

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { fabriqueFilAriane } from '@ui/filAriane';
 
 describe('La fabrique du fil d’Ariane', () => {

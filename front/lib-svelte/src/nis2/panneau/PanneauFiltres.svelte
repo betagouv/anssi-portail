@@ -1,5 +1,6 @@
 <script lang="ts">
   import { enPropriétéWebC } from '@plateforme/webComponent';
+
   import type {
     Correspondance,
     CyFun23Fonction,

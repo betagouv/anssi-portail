@@ -3,6 +3,7 @@ import path, { resolve } from 'node:path';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import cssnano from 'cssnano';
 import { defineConfig } from 'vite';
+
 import { remplaceVersionsDansPhp } from './plugin/remplaceVersionsDansPhp';
 
 const rootPkgPath = resolve(__dirname, '..', 'package.json');

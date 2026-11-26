@@ -1,5 +1,6 @@
 <script lang="ts">
   import { estServeur } from '@plateforme/environnement';
+
   import DetailsFinancement from './DetailsFinancement.svelte';
   import type { Financement } from './financement';
   import ListeDesFinancements from './ListeDesFinancements.svelte';

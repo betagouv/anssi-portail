@@ -1,5 +1,6 @@
 import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
+
 import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee.js';
 
 export const consigneSimulationNis2TermineeDansJournal = ({

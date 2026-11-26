@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+
   import { profilStore } from '@stores/profil.store';
   import Alerte from '@ui/Alerte.svelte';
   import BadgeBêta from '@ui/BadgeBeta.svelte';
@@ -8,6 +9,7 @@
   import Héros from '@ui/Heros.svelte';
   import { toasterStore } from '@ui/toasts/toaster.store';
   import Toaster from '@ui/toasts/Toaster.svelte';
+
   import { évènementsDuParcours } from '../evenementsDuParcours';
   import InterlocuteursParcoursSecurisation from '../InterlocuteursParcoursSecurisation.svelte';
   import LienRetourAuxModules from '../LienRetourAuxModules.svelte';

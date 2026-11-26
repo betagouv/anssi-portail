@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
+
   import IllustrationDemandeAide from '@demande-aide-mon-aide-cyber/IllustrationDemandeAide.svelte';
 
   type Props = {

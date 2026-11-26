@@ -1,13 +1,16 @@
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { RésultatTestMaturité } from '@metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import { CodeRégion } from '@metier/referentielRegions.js';
 import { CodeSecteur } from '@metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '@metier/referentielTranchesEffectifEtablissement.js';
 import { creeServeur } from '@api/msc/index.js';
 import { AdaptateurRechercheEntreprise } from '@infra/adaptateurRechercheEntreprise.js';
+
 import { ResultatTestMaturiteCreateur } from '../../../metier/mini-tests/maturite-cyber/ResultatTestMaturiteCreateur.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';

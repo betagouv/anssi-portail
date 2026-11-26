@@ -1,8 +1,11 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+
   import '@graphiques/dsfrChart';
+
   import NavigationTertiaire from '@navigation/NavigationTertiaire.svelte';
   import { récupèreDonnéesObservatoire, type DonnéesObservatoire } from '@passerelles/observatoire';
+
   import OngletMenaceCyber from './OngletMenaceCyber.svelte';
   import OngletOrganisations from './OngletOrganisations.svelte';
   import OngletProjets from './OngletProjets.svelte';

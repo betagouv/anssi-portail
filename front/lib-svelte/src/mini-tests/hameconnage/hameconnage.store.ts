@@ -1,5 +1,6 @@
 import { derived, writable } from 'svelte/store';
 import { v7 as uuidv7 } from 'uuid';
+
 import type { MailHameçonnage } from './hameconnage';
 
 export const idCorrélation = uuidv7();

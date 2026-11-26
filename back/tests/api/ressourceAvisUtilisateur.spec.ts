@@ -1,10 +1,13 @@
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { AvisUtilisateur, MessagerieInstantanee } from '@metier/messagerieInstantanee.js';
 import { creeServeur } from '@api/msc/index.js';
 import { AvisUtilisateurDonne } from '@bus/evenements/avisUtilisateurDonne.js';
+
 import { MockBusEvenement } from '../bus/busPourLesTests.js';
 import { configurationDeTestDuServeur, fausseMessagerieInstantanee, fauxRapporteur } from './fauxObjets.js';
 

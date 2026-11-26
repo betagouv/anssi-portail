@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { unRappelAnnuel } from '@metier/outils/rappelAnnuel.js';
 import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
 

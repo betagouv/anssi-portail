@@ -1,12 +1,14 @@
 <script lang="ts">
   import { PageCrisp } from '@lab-anssi/ui-kit';
   import { onMount, untrack } from 'svelte';
+
   import { estServeur } from '@plateforme/environnement';
   import { récupèreArticle } from '@passerelles/blog/articles';
   import BoutonsPartagePage from '@test-maturite/BoutonsPartagePage.svelte';
   import type { PropriétésFilAriane } from '@ui/filAriane';
   import Heros from '@ui/Heros.svelte';
   import RetourUtilisateurSurContenu from '@ui/RetourUtilisateurSurContenu.svelte';
+
   import { Article } from './article.type';
   import EncartParcoursSecurisationArticle from './EncartParcoursSecurisationArticle.svelte';
 

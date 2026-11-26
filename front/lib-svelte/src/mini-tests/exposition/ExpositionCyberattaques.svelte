@@ -4,6 +4,7 @@
   import { fabriqueFilAriane, type PropriétésFilAriane } from '@ui/filAriane';
   import FilAriane from '@ui/FilAriane.svelte';
   import HerosRiche from '@ui/HerosRiche.svelte';
+
   import EvaluationExposition from './EvaluationExposition.svelte';
   import { menacesPertinentes, type MenaceEvaluee, type ReponsesExposition } from './expositionCyberattaques';
   import FormulaireExposition from './FormulaireExposition.svelte';

@@ -1,5 +1,6 @@
 import Knex from 'knex';
 import { v7 as uuidv7 } from 'uuid';
+
 import { AdaptateurJournal } from './adaptateurJournal.js';
 import { DonneesEvenement } from './donneesEvenement.js';
 

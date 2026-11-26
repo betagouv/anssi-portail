@@ -1,5 +1,6 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import {
   valideActivites,
   valideEtapeAppartenanceUE,
@@ -12,6 +13,7 @@ import {
   valideTypeStructure,
 } from '@nis2-simulateur/stores/actions';
 import { questionnaireStore } from '@nis2-simulateur/stores/questionnaire.store';
+
 import type { Activite } from '../../../../../back/src/metier/nis2-simulateur/Activite.definitions';
 import type { SecteurActivite } from '../../../../../back/src/metier/nis2-simulateur/SecteurActivite.definitions';
 

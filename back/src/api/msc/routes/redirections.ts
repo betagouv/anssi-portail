@@ -1,4 +1,5 @@
 import { Express, NextFunction, Request, Response } from 'express';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
 
 export const enregistreLesRedirections = (app: Express) => {

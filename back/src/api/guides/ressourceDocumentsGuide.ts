@@ -2,10 +2,13 @@ import { join } from 'path';
 import { NextFunction, Request, RequestHandler, Response, Router } from 'express';
 import multer from 'multer';
 import z from 'zod';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { EntrepotGuideTravail } from '@metier/entrepotGuideTravail.js';
 import { Guide } from '@metier/guide.js';
 import { selectionneConfigCellarDeposePourUnBucket } from '@infra/adaptateurCellar.js';
+
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete, valideRequete } from '../zod.js';

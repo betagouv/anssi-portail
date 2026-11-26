@@ -1,5 +1,6 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { BesoinCyber, DroitAcces, Source, Typologie, type ItemCyber } from '@catalogue/Catalogue.types';
 import { catalogueStore } from '@catalogue/stores/catalogue.store';
 import { catalogueFiltre } from '@catalogue/stores/catalogueFiltre.store';
@@ -9,6 +10,7 @@ import { rechercheParDroitAcces } from '@catalogue/stores/rechercheParDroitAcces
 import { rechercheParSource } from '@catalogue/stores/rechercheParSource.store';
 import { rechercheParTypologie } from '@catalogue/stores/rechercheParTypologie.store';
 import { rechercheTextuelle } from '@catalogue/stores/rechercheTextuelle.store';
+
 import { demainSpecialisteCyber, kitCyber, livretEnJeux, mss } from './objetsExemples';
 
 describe('Le store du catalogue filtré', () => {

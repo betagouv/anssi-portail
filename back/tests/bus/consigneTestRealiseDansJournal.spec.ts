@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
+
 import { consigneTestRealiseDansJournal } from '@bus/consigneTestRealiseDansJournal.js';
 import { TestRealise } from '@bus/evenements/testRealise.js';
 import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
+
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe("L'abonnement qui consigne la réalisation d'un test dans le journal", () => {

@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
+
 import { consigneTestExpositionRealiseDansJournal } from '@bus/consigneTestExpositionRealiseDansJournal.js';
 import { TestExpositionRéalisé } from '@bus/evenements/TestExpositionRealise.js';
 import { AdaptateurHachage } from '@infra/adaptateurHachage.js';
 import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
+
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 

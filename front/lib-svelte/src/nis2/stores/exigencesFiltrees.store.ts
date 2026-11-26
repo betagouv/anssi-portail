@@ -1,4 +1,5 @@
 import { derived } from 'svelte/store';
+
 import type { Exigence } from '../exigence.type';
 import { exigencesStore } from './exigences.store';
 import { rechercheParCorrespondance } from './rechercheParCorrespondance';

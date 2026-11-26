@@ -1,7 +1,9 @@
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { AdaptateurStatistiqueParcours } from '@metier/adaptateurStatistiqueParcours.js';
 import { EntrepotUtilisateur } from '@metier/entrepotUtilisateur.js';
 import { AdaptateurStatistiqueMiniTests } from '@metier/mini-tests/adaptateurStatistiqueMiniTests.js';
@@ -11,6 +13,7 @@ import { creeServeur } from '@api/msc/index.js';
 import { AdaptateurMonAideCyber } from '@infra/adaptateurMonAideCyber.js';
 import { AdaptateurStatistiqueMiniTestsMémoire } from '@infra/adaptateurStatistiqueMiniTestsMémoire.js';
 import { AdaptateurStatistiqueParcoursMémoire } from '@infra/adaptateurStatistiqueParcoursMémoire.js';
+
 import { ResultatTestMaturiteCreateur } from '../metier/mini-tests/maturite-cyber/ResultatTestMaturiteCreateur.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';

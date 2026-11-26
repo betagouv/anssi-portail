@@ -1,4 +1,5 @@
 import { createEventsAsync, EventAttributes } from 'ics';
+
 import { RappelAnnuel } from '@metier/outils/rappelAnnuel.js';
 import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
 

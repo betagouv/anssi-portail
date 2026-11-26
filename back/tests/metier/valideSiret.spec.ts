@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
+
 import { valideSiret } from '@metier/valideSiret.js';
+
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
 
 describe('Valide les numéros SIRET', () => {

@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { Article } from '@article/article.type';
 
 export type RésuméArticleAPI = { id: string; slug: string; titre: string };

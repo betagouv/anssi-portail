@@ -1,4 +1,5 @@
 import { derived } from 'svelte/store';
+
 import { financementsStore } from './financements.store';
 import { rechercheParRegion } from './rechercheParRegion.store';
 import { rechercheParTypeFinancement } from './rechercheParTypeFinancement.store';

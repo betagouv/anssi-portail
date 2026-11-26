@@ -1,4 +1,5 @@
 import { Express, RequestHandler } from 'express';
+
 import { ConfigurationServeur } from '../../../configurationServeur.js';
 import { ressourceTestsExposition } from '../../../mini-tests/exposition/ressourceTestsExposition.js';
 import { ressourceRéponsesHameçonnage } from '../../../mini-tests/hameconnage/ressourceReponsesHameconnage.js';

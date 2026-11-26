@@ -2,6 +2,7 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { fly } from 'svelte/transition';
+
   import { clic } from '@directives/actions.svelte';
   import Bouton from '@ui/Bouton.svelte';
   import ChampTexte from '@ui/ChampTexte.svelte';
@@ -9,6 +10,7 @@
   import Modale from '@ui/Modale.svelte';
   import ZoneTexte from '@ui/ZoneTexte.svelte';
   import { stockageDeSession } from '@utils/stockageDeSession';
+
   import { entrepotNavigateurAvisUtilisateur } from './ControleAvisUtilisateur';
 
   const ROUTES_À_EXCLURE: RegExp[] = [

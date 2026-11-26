@@ -1,5 +1,7 @@
 import { JSDOM } from 'jsdom';
+
 import { EntrepotExigence } from '@metier/nis2/entrepotExigence.js';
+
 import { ChargeurDeProps } from './chargeurDeProps.js';
 
 export class ChargeurExigences implements ChargeurDeProps {

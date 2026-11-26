@@ -1,7 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+
   import { niveauxMaturite } from '@niveaux-maturite/NiveauxMaturite.donnees';
   import { récupèreStatistiquesMSC, type Statistiques } from '@passerelles/statistiquesMSC';
+
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeLigne from './LegendeLigne.svelte';
   import { pourcentagesSerie, type Serie } from './Serie';

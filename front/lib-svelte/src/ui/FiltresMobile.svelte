@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
+
   import EnteteFiltres from '@catalogue/EnteteFiltres.svelte';
   import { détecteRendu } from '@utils/rendu.svelte';
 

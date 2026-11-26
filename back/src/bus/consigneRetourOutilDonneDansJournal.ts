@@ -1,5 +1,6 @@
 import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
+
 import { RetourOutilDonné } from './evenements/retourOutilDonne.js';
 
 export const consigneRetourOutilDonnéDansJournal = ({

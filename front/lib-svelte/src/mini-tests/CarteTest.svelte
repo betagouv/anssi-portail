@@ -1,5 +1,6 @@
 <script lang="ts">
   import { type Snippet } from 'svelte';
+
   import { estServeur } from '@plateforme/environnement';
   import type { CouleurDeBadge } from '@ui/badge.type';
   import Reactions from '@ui/Reactions.svelte';

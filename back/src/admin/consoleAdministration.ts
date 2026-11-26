@@ -1,6 +1,8 @@
 import Knex from 'knex';
 import pThrottle from 'p-throttle';
+
 import { AxiosError } from '@anssi-portail/axios';
+
 import { AdaptateurEmail } from '@metier/adaptateurEmail.js';
 import { EntrepotFavori } from '@metier/entrepotFavori.js';
 import { EntrepotUtilisateur } from '@metier/entrepotUtilisateur.js';
@@ -28,6 +30,7 @@ import { EntrepotUtilisateurMPAPostgres } from '@infra/entrepotUtilisateurMPAPos
 import { EntrepotExigenceGrist } from '@infra/nis2/entrepotExigenceGrist.js';
 import { rapporteurConsole } from '@infra/rapporteurConsole.js';
 import { UtilisateurBDD } from '@infra/utilisateurBDD.js';
+
 import config from '../../knexfile.js';
 import { MiseAJourObservatoire } from '../taches/metsAJourObservatoire.js';
 import { MigrationChiffrement } from './migrationChiffrement.js';

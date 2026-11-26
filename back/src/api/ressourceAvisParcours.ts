@@ -1,10 +1,13 @@
 import { Response, Router } from 'express';
 import z from 'zod';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { AvisParcours } from '@metier/avisParcours.js';
 import { Parcours } from '@metier/parcours.js';
 import { Utilisateur } from '@metier/utilisateur.js';
 import { AvisParcoursDonné } from '@bus/evenements/avisParcoursDonne.js';
+
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { schemaRessourceAvisParcours } from './ressourceAvisParcours.schema.js';

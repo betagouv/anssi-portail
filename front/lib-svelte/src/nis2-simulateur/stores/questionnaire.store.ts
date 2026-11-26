@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+
 import { ou } from '../../../../../back/src/metier/nis2-simulateur/commun.predicats';
 import {
   EtatQuestionnaireVide,

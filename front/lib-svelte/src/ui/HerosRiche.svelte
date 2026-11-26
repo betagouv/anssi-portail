@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import type { ClassValue } from 'svelte/elements';
+
   import type { Badge } from './badge.type';
   import { fabriqueFilAriane, type PropriétésFilAriane } from './filAriane';
   import FilAriane from './FilAriane.svelte';

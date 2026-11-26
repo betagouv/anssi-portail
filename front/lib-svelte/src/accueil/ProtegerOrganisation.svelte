@@ -1,10 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+
   import { enPropriétéWebC } from '@plateforme/webComponent';
   import { récupèreStatistiquesMSC } from '@passerelles/statistiquesMSC';
   import Bouton from '@ui/Bouton.svelte';
   import Lien from '@ui/Lien.svelte';
   import MotEnExergue from '@ui/MotEnExergue.svelte';
+
   import IllustrationProtegerOrganisation from './animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
 
   let enPause = $state(false);

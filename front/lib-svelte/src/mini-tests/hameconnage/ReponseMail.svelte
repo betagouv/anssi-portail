@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Component } from 'svelte';
+
   import { mailOuvert } from './hameconnage.store';
 
   const contenusDeRéponse = import.meta.glob<{ default: Component } | undefined>('./reponses-mail/ReponseMail*.svelte');

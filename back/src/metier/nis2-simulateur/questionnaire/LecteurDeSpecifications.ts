@@ -1,4 +1,5 @@
 import Papa from 'papaparse';
+
 import { EnsembleDeSpecifications } from './EnsembleDeSpecifications.js';
 import { FabriqueDeSpecifications } from './FabriqueDeSpecifications.js';
 import { valideColonnesDuCSV, type SpecificationTexte } from './FormatDesSpecificationsCSV.js';

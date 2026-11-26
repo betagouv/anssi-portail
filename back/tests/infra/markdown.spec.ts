@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { aseptiseMarkdown } from '@infra/markdown.js';
 
 describe('Le markdown', () => {

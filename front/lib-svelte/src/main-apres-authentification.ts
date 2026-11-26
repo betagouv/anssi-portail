@@ -1,4 +1,5 @@
 import { mount } from 'svelte';
+
 import ApresAuthentification from '@navigation/ApresAuthentification.svelte';
 
 mount(ApresAuthentification, {

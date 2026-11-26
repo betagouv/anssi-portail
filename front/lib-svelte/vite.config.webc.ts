@@ -1,5 +1,6 @@
 import { resolve } from 'node:path';
 import { defineConfig, loadConfigFromFile, mergeConfig } from 'vite';
+
 import { aliasSvelte } from './alias.plugin.js';
 
 export default defineConfig(async (environnement) => {

@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
+
 import { consigneRéflexesCyberReponseSoumiseDansJournal } from '@bus/consigneReflexesCyberReponseSoumiseDansJournal.js';
 import { SimulationRéflexesCyberRéponseSoumise } from '@bus/evenements/simulationReflexesCyberReponseSoumise.js';
 import { AdaptateurHachage } from '@infra/adaptateurHachage.js';
 import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
+
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 

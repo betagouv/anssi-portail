@@ -2,6 +2,7 @@
   import CarteDonnees from '@graphiques/CarteDonnees.svelte';
   import GraphiqueLineaire from '@graphiques/GraphiqueLineaire.svelte';
   import type { PointMensuel } from '@passerelles/observatoire';
+
   import { formateDate, formateNombre, libelleDuMois } from './formatage';
 
   interface Props {

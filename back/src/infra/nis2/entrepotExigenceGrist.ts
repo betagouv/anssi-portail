@@ -1,5 +1,7 @@
 import knex, { QueryBuilder } from 'knex';
+
 import axios from '@anssi-portail/axios';
+
 import { EntrepotExigence } from '@metier/nis2/entrepotExigence.js';
 import {
   CategorieEntite,
@@ -14,6 +16,7 @@ import {
   Referentiel,
 } from '@metier/nis2/exigence.js';
 import { Rapporteur } from '@metier/rapporteur.js';
+
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
 import { ClientHttp } from '../clientHttp.js';
 import { EntrepotGrist } from '../entrepotGrist.js';

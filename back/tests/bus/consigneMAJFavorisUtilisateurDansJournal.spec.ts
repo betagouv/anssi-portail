@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
+
 import { consigneMAJFavorisUtilisateurDansJournal } from '@bus/consigneMAJFavorisUtilisateurDansJournal.js';
 import { MiseAJourFavorisUtilisateur } from '@bus/miseAJourFavorisUtilisateur.js';
 import { AdaptateurHachage } from '@infra/adaptateurHachage.js';
 import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
+
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 import { jeanneDupont } from '../api/objetsPretsALEmploi.js';
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';

@@ -2,12 +2,15 @@ import { Express } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { ErreurChargementOrganisation } from '@metier/utilisateur.js';
 import { AdaptateurJWT } from '@api/adaptateurJWT.js';
 import { creeServeur } from '@api/msc/index.js';
 import { CompteCree } from '@bus/evenements/compteCree.js';
 import { AdaptateurRechercheEntreprise } from '@infra/adaptateurRechercheEntreprise.js';
+
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise, fauxRapporteur } from './fauxObjets.js';

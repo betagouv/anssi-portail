@@ -1,6 +1,7 @@
 <script lang="ts">
   import Bouton from '@ui/Bouton.svelte';
   import CanonAConfetti from '@ui/CanonAConfetti.svelte';
+
   import type { IdéeReçue } from './QuizVraiFaux.svelte';
 
   const {

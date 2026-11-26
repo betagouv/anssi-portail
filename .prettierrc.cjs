@@ -6,11 +6,14 @@ const aliasSvelte = Object.keys(require('./front/lib-svelte/tsconfig.json').comp
 const importOrder = [
   '<BUILTIN_MODULES>',
   '<THIRD_PARTY_MODULES>',
+  '',
   '^@anssi-portail/',
+  '',
   '^@plateforme/',
   '^@metier/',
   '^@(api|bus|infra)/',
   `^@(${aliasSvelte})/`,
+  '',
   '^[.]',
 ];
 

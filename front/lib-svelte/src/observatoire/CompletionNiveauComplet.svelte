@@ -1,6 +1,7 @@
 <script lang="ts">
   import { enPropriétéWebC } from '@plateforme/webComponent';
   import type { DonnéesObservatoire, SeuilComplétion } from '@passerelles/observatoire';
+
   import ChiffreCle from './ChiffreCle.svelte';
   import EvolutionMensuelle from './EvolutionMensuelle.svelte';
   import { formateNombre, libelléDuSeuil } from './formatage';

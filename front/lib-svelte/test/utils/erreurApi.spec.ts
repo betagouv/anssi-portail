@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { collecteLesErreurs } from '@utils/erreurApi';
 
 describe('La collecte des erreurs', () => {

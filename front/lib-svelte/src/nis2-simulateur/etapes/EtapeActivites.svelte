@@ -1,6 +1,8 @@
 <script lang="ts">
   import { SvelteMap, SvelteSet } from 'svelte/reactivity';
+
   import { clic } from '@directives/actions.svelte';
+
   import type { Activite } from '../../../../../back/src/metier/nis2-simulateur/Activite.definitions';
   import { activitesParSecteurEtSousSecteur } from '../../../../../back/src/metier/nis2-simulateur/Activite.operations';
   import { libellesActivites } from '../../../../../back/src/metier/nis2-simulateur/LibellesActivites';

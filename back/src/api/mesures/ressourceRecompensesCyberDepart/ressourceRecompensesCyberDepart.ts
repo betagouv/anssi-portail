@@ -1,7 +1,10 @@
 import { Router } from 'express';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { Utilisateur } from '@metier/utilisateur.js';
 import { generateurDocument } from '@infra/generateurDocument.js';
+
 import { ConfigurationServeur } from '../../configurationServeur.js';
 import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../../zod.js';

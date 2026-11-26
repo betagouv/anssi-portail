@@ -1,8 +1,11 @@
 import { Response, Router } from 'express';
 import z from 'zod';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { estMiniTest } from '@metier/mini-tests/mini-test.js';
 import { RetourMiniTestDonné } from '@bus/evenements/retourMiniTestDonne.js';
+
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { schemaRetourUtilisateur } from '../retourUtilisateur.schema.js';

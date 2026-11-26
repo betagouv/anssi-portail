@@ -1,6 +1,8 @@
 import axios from '@anssi-portail/axios';
+
 import { EntrepotFinancement } from '@metier/entrepotFinancement.js';
 import { Financement } from '@metier/financement.js';
+
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { ClientHttp } from './clientHttp.js';
 import { EntrepotGrist } from './entrepotGrist.js';
