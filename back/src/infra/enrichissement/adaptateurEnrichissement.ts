@@ -13,26 +13,25 @@ import { AdaptateurLienCanonique } from './adaptateurDom/adaptateurLienCanonique
 import { AdaptateurLiensSeo } from './adaptateurDom/adaptateurLiensSeo.js';
 import {
   AdaptateurMétadonnées,
-  MétadonnéesDArticleCrisp,
+  MétadonnéesDArticle,
   MétadonnéesDeContactsRegion,
   MétadonnéesDeFinancement,
   MétadonnéesDeGuide,
 } from './adaptateurDom/adaptateurMetadonnees.js';
 import {
   AdaptateurTitre,
-  TitreDArticleCrisp,
+  TitreDArticle,
   TitreDeContactsRegion,
   TitreDeFinancement,
   TitreDeGuide,
 } from './adaptateurDom/adaptateurTitre.js';
+import { ChargeurArticle } from './chargementProprietes/chargeurArticle.js';
 import { ChargeurContacts } from './chargementProprietes/chargeurContacts.js';
-import { ChargeurCrisp } from './chargementProprietes/chargeurCrisp.js';
 import { ChargeurDeProps } from './chargementProprietes/chargeurDeProps.js';
 import { ChargeurExigences } from './chargementProprietes/chargeurExigences.js';
 import { ChargeurFilAriane } from './chargementProprietes/chargeurFilAriane.js';
 import { ChargeurFinancements } from './chargementProprietes/chargeurFinancements.js';
 import { ChargeurGuide } from './chargementProprietes/chargeurGuides.js';
-import { ChargeurPageCrisp } from './chargementProprietes/chargeurPageCrisp.js';
 import { ChargeurRessourcesCyber } from './chargementProprietes/chargeurRessourcesCyber.js';
 import { composantsAutorisés } from './composantsAutorises.genere.js';
 import { RésolveurDePage } from './resolveurDePage.js';
@@ -120,8 +119,7 @@ export const fabriqueAdaptateurEnrichissement = async (
     new ChargeurExigences(entrepôtExigence),
     new ChargeurFinancements(résolveurDePage, entrepôtFinancement),
     new ChargeurContacts(résolveurDePage, entrepôtContact),
-    new ChargeurCrisp(résolveurDePage, entrepôtArticle),
-    new ChargeurPageCrisp(entrepôtArticle),
+    new ChargeurArticle(résolveurDePage, entrepôtArticle),
     new ChargeurFilAriane(),
   ];
 
@@ -132,13 +130,13 @@ export const fabriqueAdaptateurEnrichissement = async (
       new TitreDeGuide(résolveurDePage),
       new TitreDeFinancement(résolveurDePage),
       new TitreDeContactsRegion(résolveurDePage),
-      new TitreDArticleCrisp(résolveurDePage),
+      new TitreDArticle(résolveurDePage),
     ]),
     new AdaptateurMétadonnées([
       new MétadonnéesDeGuide(résolveurDePage),
       new MétadonnéesDeFinancement(résolveurDePage),
       new MétadonnéesDeContactsRegion(résolveurDePage),
-      new MétadonnéesDArticleCrisp(résolveurDePage),
+      new MétadonnéesDArticle(résolveurDePage),
     ]),
   ];
 

@@ -35,11 +35,11 @@ export class TitreDeContactsRegion implements FournisseurDeTitre {
   }
 }
 
-export class TitreDArticleCrisp implements FournisseurDeTitre {
+export class TitreDArticle implements FournisseurDeTitre {
   constructor(private readonly résolveurDePage: RésolveurDePage) {}
 
   async titre(route: string) {
-    const article = await this.résolveurDePage.articleCrisp(route);
+    const article = await this.résolveurDePage.article(route);
     return article?.titre;
   }
 }

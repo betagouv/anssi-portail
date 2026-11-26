@@ -90,7 +90,7 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       );
     });
 
-    it("lorsqu'on sert un article Crisp", async () => {
+    it("lorsqu'on sert un article", async () => {
       const htmlFactice = fabriqueHtmlFactice('http://localhost:3000/conseils-cyber');
 
       const rendu = await adaptateurEnrichissement.enrichisAvecComposants(
@@ -147,7 +147,7 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       expect(rendu).toMatch(/<meta name="twitter:title" content="Cyber PME | MesServicesCyber">/);
     });
 
-    it("lorsqu'on sert un article Crisp", async () => {
+    it("lorsqu'on sert un article", async () => {
       const article = new ConstructeurDArticleAvecToutesLesMétadonnées().avecLeSlug('slug-article-1').construis();
       await entrepôtArticle.ajoute(article);
       const htmlFactice = fabriqueHtmlFactice('http://localhost:3000/conseils-cyber');
@@ -192,7 +192,7 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       expect(rendu).toMatch(/<meta name="twitter:description" content="Cyber PME \(France\)">/);
     });
 
-    it("lorsqu'on sert un article de blog Crisp", async () => {
+    it("lorsqu'on sert un article de blog", async () => {
       const article = new ConstructeurDArticleAvecToutesLesMétadonnées()
         .avecLeSlug('slug-article-1')
         .avecLaDescription("La description de l'article 1")
@@ -210,7 +210,7 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       expect(rendu).toMatch(/<meta name="twitter:description" content="La description de l'article 1">/);
     });
 
-    it("lorsqu'on sert le kit relais depuis l'article Crisp", async () => {
+    it("lorsqu'on sert l'article kit relais", async () => {
       vi.spyOn(entrepôtArticle, 'kitRelais').mockResolvedValue({
         ...kitRelais,
         description: 'La description du kit relais !',

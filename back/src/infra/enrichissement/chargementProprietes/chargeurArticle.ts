@@ -3,7 +3,7 @@ import { EntrepôtArticle } from '../../../metier/blog/entrepotArticle.js';
 import { RésolveurDePage } from '../resolveurDePage.js';
 import { ChargeurDeProps } from './chargeurDeProps.js';
 
-export class ChargeurCrisp implements ChargeurDeProps {
+export class ChargeurArticle implements ChargeurDeProps {
   constructor(
     private readonly résolveurDePage: RésolveurDePage,
     private readonly entrepôtArticle: EntrepôtArticle
@@ -15,7 +15,7 @@ export class ChargeurCrisp implements ChargeurDeProps {
       return { résumésPréchargés };
     }
 
-    const articlePréchargé = await this.résolveurDePage.articleCrisp(routeDemandée);
+    const articlePréchargé = await this.résolveurDePage.article(routeDemandée);
     if (articlePréchargé) {
       return { articlePréchargé };
     }
