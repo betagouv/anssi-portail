@@ -468,9 +468,6 @@ importers:
       diff:
         specifier: ^9.0.0
         version: 9.0.0
-      isomorphic-dompurify:
-        specifier: 'catalog:'
-        version: 4.8.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -539,9 +536,6 @@ importers:
       fflate:
         specifier: ^0.8.3
         version: 0.8.3
-      isomorphic-dompurify:
-        specifier: 'catalog:'
-        version: 4.8.0(@napi-rs/canvas@1.1.1)(@noble/hashes@1.8.0)
       pdfjs-dist:
         specifier: 'catalog:'
         version: 6.5.438
