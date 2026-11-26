@@ -10,7 +10,7 @@ export const composantsAutorisés: string[] = [
   'guide',
   'financements',
   'contacts',
-  'page-crisp',
+  'article',
   'fil-ariane',
   'test-maturite',
   'session-groupe',

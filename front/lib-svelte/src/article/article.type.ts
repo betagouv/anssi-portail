@@ -1,25 +1,35 @@
+export type EntréeTableDesMatières = {
+  id: string;
+  texte: string;
+  profondeur: number;
+};
+
 export class Article {
   readonly contenu: string;
   readonly description: string;
   private readonly dateDeMiseÀJour: Date | undefined;
   private readonly dateDePublication: Date | undefined;
   readonly titre: string;
+  readonly tableDesMatières: EntréeTableDesMatières[];
   constructor({
     contenu,
     description,
     dateDeMiseÀJour,
     dateDePublication,
     titre,
+    tableDesMatières,
   }: {
     contenu: string;
     description: string;
-    dateDeMiseÀJour: string | undefined;
-    dateDePublication: string | undefined;
+    dateDeMiseÀJour: Date | undefined;
+    dateDePublication: Date | undefined;
     titre: string;
+    tableDesMatières: EntréeTableDesMatières[];
   }) {
     this.contenu = contenu;
     this.description = description;
     this.titre = titre;
+    this.tableDesMatières = tableDesMatières;
     try {
       this.dateDeMiseÀJour = dateDeMiseÀJour ? new Date(dateDeMiseÀJour) : undefined;
     } catch {

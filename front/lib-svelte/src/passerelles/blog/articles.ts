@@ -1,12 +1,20 @@
 import axios from 'axios';
+import { Article } from '../../article/article.type';
 
 export type RésuméArticleAPI = { id: string; slug: string; titre: string };
 
+export type EntréeTableDesMatièresAPI = {
+  id: string;
+  texte: string;
+  profondeur: number;
+};
+
 export type ArticleAPI = {
   contenu: string;
-  dateDeMiseÀJour: string | undefined;
-  dateDePublication: string | undefined;
+  dateDeMiseÀJour: Date | undefined;
+  dateDePublication: Date | undefined;
   description: string;
+  tableDesMatières: EntréeTableDesMatièresAPI[];
   titre: string;
 };
 
@@ -15,7 +23,8 @@ export const récupèreRésumésDArticle = async () => {
   return data;
 };
 
-export const récupèreArticle = async (slug: string): Promise<ArticleAPI | undefined> => {
+export const récupèreArticle = async (slug: string): Promise<Article | undefined> => {
   const { data } = await axios.get<ArticleAPI>(`/api/articles/${slug}`);
-  return data;
+
+  return new Article(data);
 };

@@ -381,7 +381,7 @@ main > #catalogue,
 main > #page-directive-nis2,
 main > #prestataires-labellises,
 main > #financements,
-main > #page-crisp,
+main > #article,
 main > #demande-aide-mon-aide-cyber,
 main > #simulateur-nis2 {
   min-height: 1080px;
@@ -389,6 +389,12 @@ main > #simulateur-nis2 {
 
 #favoris {
   min-height: 820px;
+}
+
+#article article {
+  .contenu a:not(.telechargement) {
+    display: inline;
+  }
 }
 
 #contacts {
