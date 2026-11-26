@@ -9,7 +9,7 @@ Interactive diagnostic form/questionnaire Web Component that can be embedded in 
 ## Structure
 
 ```
-demande-diag/
+webc-externes/demande-diag/
 ├── src/           Svelte components (.svelte, .ts)
 ├── dist-demo/     Build output for demo environment
 ├── dist-prod/     Build output for production environment
@@ -25,7 +25,7 @@ demande-diag/
 pnpm --filter demande-diag build:demo   # Build for demo
 pnpm --filter demande-diag build:prod   # Build for production
 
-# From demande-diag/
+# From webc-externes/demande-diag/
 pnpm build:demo
 pnpm build:prod
 ```
