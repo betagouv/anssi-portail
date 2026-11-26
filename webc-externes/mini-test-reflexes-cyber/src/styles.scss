@@ -1,0 +1,39 @@
+@use '../../../front/assets/styles/commun.scss' as commun;
+
+@each $graisse, $variante in (400: 'Regular', 700: 'Bold') {
+  @font-face {
+    font-family: Marianne;
+    font-weight: $graisse;
+    font-display: swap;
+    src: url('../../../front/assets/fonts/Marianne-#{$variante}.woff2') format('woff2');
+  }
+}
+
+lab-anssi-mini-test-reflexes-cyber {
+  display: block;
+}
+
+.lab-anssi-mini-test-reflexes-cyber {
+  color: var(--text-default-grey);
+  font-family: Marianne, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.5;
+
+  @include commun.titres-dsfr();
+  @include commun.textes-dsfr();
+
+  .fr-text--sm {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+  }
+
+  .fr-text--md {
+    line-height: 1.5rem;
+  }
+
+  .fr-text--lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
