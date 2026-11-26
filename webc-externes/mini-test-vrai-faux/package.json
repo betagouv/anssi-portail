@@ -6,7 +6,7 @@
   "engines": {
     "node": ">=26.0.0"
   },
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
     "build:local": "VITE_API_URL=http://localhost:3000 ENV=local vite build --config ../../front/lib-svelte/vite.config.webc.ts",
     "build:demo": "VITE_API_URL=https://demo.messervicescyber.beta.gouv.fr ENV=demo vite build --config ../../front/lib-svelte/vite.config.webc.ts",
