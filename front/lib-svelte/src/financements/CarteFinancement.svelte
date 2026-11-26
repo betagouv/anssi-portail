@@ -1,5 +1,7 @@
 <script lang="ts">
-  import BadgeTypeFinancement from './BadgeTypeFinancement.svelte';
+  import { enPropriétéWebC } from '$plateforme/webComponent';
+  import type { Badge } from '../ui/badge.type';
+  import GroupeDeBadges from '../ui/GroupeDeBadges.svelte';
   import type { RésuméFinancement } from './financement';
 
   interface Props {
@@ -7,90 +9,27 @@
   }
 
   let { financement }: Props = $props();
+
+  const tags = $derived(financement.entitésÉligibles.map((e) => ({ label: e, id: e })));
+  const badges: Badge[] = $derived(
+    financement.typesDeFinancement.map((t) => ({ label: t, accent: 'yellow-tournesol' }))
+  );
 </script>
 
-<a class="lien-carte" href={`/financements/${financement.id}`}>
-  <div class="contenu">
-    <div class="type-financement">
-      {#each financement.typesDeFinancement as type (type)}
-        <BadgeTypeFinancement {type}></BadgeTypeFinancement>
-      {/each}
-    </div>
-    <h6>{financement.nom}</h6>
-    <div class="tags">
-      {#each financement.entitésÉligibles as entite (entite)}
-        <dsfr-tag type="accent" accent="yellow-tournesol" size="sm" label={entite}>
-          <span slot="seo">{entite}</span>
-        </dsfr-tag>
-      {/each}
-    </div>
-    <div class="actions">
-      <div class="financeur texte-mention-xs">{financement.financeur}</div>
-      <lab-anssi-icone nom="arrow-right-line" taille="sm"></lab-anssi-icone>
-    </div>
+<dsfr-card
+  detail-end={financement.financeur}
+  enlarge
+  has-detail-end
+  href={`/financements/${financement.id}`}
+  markup="h6"
+  title={financement.nom}
+  has-header-badge
+  has-badge
+>
+  <div slot="badgesgroup">
+    <GroupeDeBadges {badges} taille="sm" />
   </div>
-</a>
-
-<style lang="scss">
-  .lien-carte {
-    display: flex;
-    flex-direction: column;
-    width: auto;
-
-    .contenu {
-      background-color: var(--background-default-grey);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      align-self: stretch;
-      gap: 12px;
-      padding: 24px;
-      border: 1px solid var(--border-default-grey);
-      border-radius: 8px;
-      height: 100%;
-
-      &:hover {
-        background-color: var(--controle-segmente-fond-hover);
-        cursor: pointer;
-      }
-
-      &:active {
-        background-color: var(--controle-segmente-fond-clique);
-      }
-
-      .type-financement {
-        display: flex;
-        align-items: flex-start;
-        align-content: flex-start;
-        gap: 8px;
-        align-self: stretch;
-        flex-wrap: wrap;
-      }
-
-      h6 {
-        margin: 0;
-        font-size: 1.25rem;
-        font-weight: 700;
-        line-height: 1.75rem;
-      }
-
-      .tags {
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: auto;
-        gap: 8px;
-      }
-
-      .actions {
-        display: flex;
-        align-self: stretch;
-        align-items: end;
-        justify-content: space-between;
-
-        .financeur {
-          margin-bottom: 0;
-        }
-      }
-    }
-  }
-</style>
+  <div slot="contentend">
+    <dsfr-tags-group tags={enPropriétéWebC(tags)} size="sm" group-markup="span" has-icon></dsfr-tags-group>
+  </div>
+</dsfr-card>
