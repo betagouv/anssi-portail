@@ -42,11 +42,11 @@ export class MétadonnéesDeContactsRegion implements FournisseurDeMétadonnées
   }
 }
 
-export class MétadonnéesDArticleCrisp implements FournisseurDeMétadonnées {
+export class MétadonnéesDArticle implements FournisseurDeMétadonnées {
   constructor(private readonly résolveurDePage: RésolveurDePage) {}
 
   async description(route: string) {
-    const article = await this.résolveurDePage.articleCrisp(route);
+    const article = await this.résolveurDePage.article(route);
     return article?.description;
   }
 }
