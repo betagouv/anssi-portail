@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { profilStore } from '../../stores/profil.store';
+  import { profilStore } from '@stores/profil.store';
   import EncartAvancementCyberpdepart from './EncartAvancementCyberpdepart.svelte';
   import EncartAvancementParcoursComplet from './EncartAvancementParcoursComplet.svelte';
   import EncartPrésentationParcours from './EncartPresentationParcours.svelte';

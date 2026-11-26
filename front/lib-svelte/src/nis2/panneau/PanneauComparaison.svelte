@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { enPropriétéWebC } from '$plateforme/webComponent';
-  import { clic } from '../../directives/actions.svelte';
+  import { enPropriétéWebC } from '@plateforme/webComponent';
+  import { clic } from '@directives/actions.svelte';
   import type { ReferentielSelectionne } from '../exigence.type';
   import BoutonReinitialisation from './BoutonReinitialisation.svelte';
 

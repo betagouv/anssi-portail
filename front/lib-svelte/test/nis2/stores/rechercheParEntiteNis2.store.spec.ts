@@ -1,6 +1,6 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { rechercheParEntiteNis2 } from '../../../src/nis2/stores/rechercheParEntiteNis2';
+import { rechercheParEntiteNis2 } from '@nis2/stores/rechercheParEntiteNis2';
 import {
   exigenceISODeNiveauEleve,
   exigenceNIS2DeNiveauEleve,

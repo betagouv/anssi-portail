@@ -4,7 +4,7 @@ import type {
   ExigenceCyFun23,
   ExigenceISO,
   ExigenceNis2,
-} from '../../src/nis2/exigence.type';
+} from '@nis2/exigence.type';
 
 export const exigenceNIS2DeNiveauFaible = (): ExigenceNis2 => ({
   reference: 'EX-01',

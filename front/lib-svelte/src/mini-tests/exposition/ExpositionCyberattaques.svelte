@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Bouton from '../../ui/Bouton.svelte';
-  import EnteteAutonome from '../../ui/EnteteAutonome.svelte';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
-  import FilAriane from '../../ui/FilAriane.svelte';
-  import HerosRiche from '../../ui/HerosRiche.svelte';
+  import Bouton from '@ui/Bouton.svelte';
+  import EnteteAutonome from '@ui/EnteteAutonome.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '@ui/filAriane';
+  import FilAriane from '@ui/FilAriane.svelte';
+  import HerosRiche from '@ui/HerosRiche.svelte';
   import EvaluationExposition from './EvaluationExposition.svelte';
   import { menacesPertinentes, type MenaceEvaluee, type ReponsesExposition } from './expositionCyberattaques';
   import FormulaireExposition from './FormulaireExposition.svelte';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import IllustrationAnimee from '../../accueil/animation/IllustrationAnimee.svelte';
+  import IllustrationAnimee from '@accueil/animation/IllustrationAnimee.svelte';
   import SectionModules from './SectionModules.svelte';
 
   const scènes = [SectionModules];

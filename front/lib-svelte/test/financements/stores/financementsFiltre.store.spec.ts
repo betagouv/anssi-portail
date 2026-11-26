@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
 import { beforeAll, describe, expect, it } from 'vitest';
-import { financementsStore } from '../../../src/financements/stores/financements.store';
-import { financementsFiltre } from '../../../src/financements/stores/financementsFiltre.store';
+import { financementsStore } from '@financements/stores/financements.store';
+import { financementsFiltre } from '@financements/stores/financementsFiltre.store';
 
 describe('Le store qui contient la liste des financements', () => {
   beforeAll(() => {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Lien from '../../../ui/Lien.svelte';
+  import Lien from '@ui/Lien.svelte';
 
   let { urlBase = '' }: { urlBase?: string } = $props();
   const dossierImages = $derived(`${urlBase}/assets/images/mini-tests/hameconnage/logo`);

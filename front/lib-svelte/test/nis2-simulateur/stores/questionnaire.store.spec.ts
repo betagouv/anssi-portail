@@ -1,7 +1,5 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import type { Activite } from '../../../../../back/src/metier/nis2-simulateur/Activite.definitions';
-import type { SecteurActivite } from '../../../../../back/src/metier/nis2-simulateur/SecteurActivite.definitions';
 import {
   valideActivites,
   valideEtapeAppartenanceUE,
@@ -12,8 +10,10 @@ import {
   valideSousSecteursActivite,
   valideTailleEntitePrivee,
   valideTypeStructure,
-} from '../../../src/nis2-simulateur/stores/actions';
-import { questionnaireStore } from '../../../src/nis2-simulateur/stores/questionnaire.store';
+} from '@nis2-simulateur/stores/actions';
+import { questionnaireStore } from '@nis2-simulateur/stores/questionnaire.store';
+import type { Activite } from '../../../../../back/src/metier/nis2-simulateur/Activite.definitions';
+import type { SecteurActivite } from '../../../../../back/src/metier/nis2-simulateur/SecteurActivite.definitions';
 
 describe('le store du questionnaire NIS2', () => {
   it("indique l'étape préalable comme l'étape de départ", () => {

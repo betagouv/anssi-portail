@@ -1,4 +1,4 @@
-import type { Badge } from '../ui/badge.type';
+import type { Badge } from '@ui/badge.type';
 
 export type CategorieEntite = 'EntiteEssentielle' | 'EntiteImportante';
 

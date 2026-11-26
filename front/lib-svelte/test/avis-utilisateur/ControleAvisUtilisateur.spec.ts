@@ -1,8 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import {
-  ControleAvisUtilisateur,
-  type EntrepotAvisUtilisateur,
-} from '../../src/avis-utilisateur/ControleAvisUtilisateur';
+import { ControleAvisUtilisateur, type EntrepotAvisUtilisateur } from '@avis-utilisateur/ControleAvisUtilisateur';
 
 describe("Controle la demande d'avis utilisateur", () => {
   const fauxEntrepotAvisUtilisateur: EntrepotAvisUtilisateur = {

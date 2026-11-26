@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { get, writable } from 'svelte/store';
-import { verifieResultatTestARevendiquer } from '../test-maturite/resultatTest';
+import { verifieResultatTestARevendiquer } from '@test-maturite/resultatTest';
 
 export type Profil = {
   prenom: string;

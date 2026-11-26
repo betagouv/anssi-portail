@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { PropriétésFilAriane } from '../ui/filAriane';
-  import Heros from '../ui/Heros.svelte';
+  import type { PropriétésFilAriane } from '@ui/filAriane';
+  import Heros from '@ui/Heros.svelte';
   import IllustrationNiveauMaturite from './IllustrationNiveauMaturite.svelte';
   import { niveauxMaturite } from './NiveauxMaturite.donnees';
   import type { IdNiveau } from './NiveauxMaturite.type';

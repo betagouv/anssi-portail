@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Tuile from '../ui/Tuile.svelte';
+  import Tuile from '@ui/Tuile.svelte';
 
   type Props = {
     image: string;

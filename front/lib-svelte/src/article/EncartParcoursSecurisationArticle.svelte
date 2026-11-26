@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { afficheBadgeCyberdépart } from '$plateforme/environnement';
-  import BadgeOrganisationsAccompagnes from '../demande-aide-mon-aide-cyber/BadgeOrganisationsAccompagnées.svelte';
-  import IllustrationHerosParcoursBasique from '../parcours-securisation/animation/IllustrationHerosParcoursBasique.svelte';
-  import Bouton from '../ui/Bouton.svelte';
-  import Lien from '../ui/Lien.svelte';
+  import { afficheBadgeCyberdépart } from '@plateforme/environnement';
+  import BadgeOrganisationsAccompagnes from '@demande-aide-mon-aide-cyber/BadgeOrganisationsAccompagnées.svelte';
+  import IllustrationHerosParcoursBasique from '@parcours-securisation/animation/IllustrationHerosParcoursBasique.svelte';
+  import Bouton from '@ui/Bouton.svelte';
+  import Lien from '@ui/Lien.svelte';
 
   const objectif = afficheBadgeCyberdépart ? 'badge Cyberdépart' : 'Cyberdépart';
 

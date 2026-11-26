@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { quiScroll } from '../../ui/quiScroll.attachment';
+  import { quiScroll } from '@ui/quiScroll.attachment';
 
   let { children } = $props();
 </script>

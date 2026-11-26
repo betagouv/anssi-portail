@@ -1,8 +1,8 @@
 <script lang="ts">
   import { DsfrBadge, DsfrCard } from '@lab-anssi/ui-kit';
-  import { enPropriétéWebC } from '$plateforme/webComponent';
-  import Lien from '../../ui/Lien.svelte';
-  import MotEnExergue from '../../ui/MotEnExergue.svelte';
+  import { enPropriétéWebC } from '@plateforme/webComponent';
+  import Lien from '@ui/Lien.svelte';
+  import MotEnExergue from '@ui/MotEnExergue.svelte';
 
   const tagsParcoursAllégé = [
     { label: '12 mesures', id: '12-mesures', icon: 'arrow-right-line', 'has-icon': true },

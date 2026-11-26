@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { enPropriétéWebC } from '$plateforme/webComponent';
-  import Accordeon from '../ui/Accordeon.svelte';
-  import Lien from '../ui/Lien.svelte';
+  import { enPropriétéWebC } from '@plateforme/webComponent';
+  import Accordeon from '@ui/Accordeon.svelte';
+  import Lien from '@ui/Lien.svelte';
 
   const tags = [
     { id: 'Administrations publiques', label: 'Administrations publiques', icon: 'bank-line' },

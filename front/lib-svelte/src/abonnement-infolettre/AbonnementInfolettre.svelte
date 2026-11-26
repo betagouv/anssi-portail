@@ -1,12 +1,12 @@
 <script lang="ts">
   import axios from 'axios';
-  import { clic } from '../directives/actions.svelte';
-  import Alerte from '../ui/Alerte.svelte';
-  import CaseACocher from '../ui/CaseACocher.svelte';
-  import { fabriqueFilAriane } from '../ui/filAriane';
-  import FilAriane from '../ui/FilAriane.svelte';
-  import Formulaire from '../ui/Formulaire.svelte';
-  import Lien from '../ui/Lien.svelte';
+  import { clic } from '@directives/actions.svelte';
+  import Alerte from '@ui/Alerte.svelte';
+  import CaseACocher from '@ui/CaseACocher.svelte';
+  import { fabriqueFilAriane } from '@ui/filAriane';
+  import FilAriane from '@ui/FilAriane.svelte';
+  import Formulaire from '@ui/Formulaire.svelte';
+  import Lien from '@ui/Lien.svelte';
 
   let mail: string | null = $state(null);
   let infolettreAcceptee = $state(false);

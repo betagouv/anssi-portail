@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Tuile from '../ui/Tuile.svelte';
+  import Tuile from '@ui/Tuile.svelte';
 
   const { mode = 'complet' }: { mode?: 'compact' | 'complet' } = $props();
   const tailleImage = $derived(mode === 'compact' ? '40' : '80');

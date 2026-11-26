@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
+  import { aseptiseHtml } from '@plateforme/aseptisationDuHtml';
   import type { Activite } from '../../../../../back/src/metier/nis2-simulateur/Activite.definitions';
   import { listeDescriptionsActivites } from '../../../../../back/src/metier/nis2-simulateur/ListeDescriptionsActivites';
 

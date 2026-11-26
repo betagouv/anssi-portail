@@ -1,5 +1,6 @@
 <script lang="ts">
   import { SvelteMap, SvelteSet } from 'svelte/reactivity';
+  import { clic } from '@directives/actions.svelte';
   import type { Activite } from '../../../../../back/src/metier/nis2-simulateur/Activite.definitions';
   import { activitesParSecteurEtSousSecteur } from '../../../../../back/src/metier/nis2-simulateur/Activite.operations';
   import { libellesActivites } from '../../../../../back/src/metier/nis2-simulateur/LibellesActivites';
@@ -9,7 +10,6 @@
   import type { SecteurSimple } from '../../../../../back/src/metier/nis2-simulateur/SecteurActivite.definitions';
   import type { SousSecteurActivite } from '../../../../../back/src/metier/nis2-simulateur/SousSecteurActivite.definitions';
   import { secteurDe } from '../../../../../back/src/metier/nis2-simulateur/SousSecteurActivite.operations';
-  import { clic } from '../../directives/actions.svelte';
   import DescriptionActivite from './DescriptionActivite.svelte';
   import Etape from './Etape.svelte';
   import PrecedentSuivant from './PrecedentSuivant.svelte';

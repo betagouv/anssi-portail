@@ -1,14 +1,14 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
-  import { calculeIdNiveau } from '../niveaux-maturite/calculeIdNiveau';
-  import { profilStore } from '../stores/profil.store';
-  import Alerte from '../ui/Alerte.svelte';
-  import Bouton from '../ui/Bouton.svelte';
-  import EnteteAutonome from '../ui/EnteteAutonome.svelte';
-  import Etapier from '../ui/Etapier.svelte';
-  import Lien from '../ui/Lien.svelte';
+  import { aseptiseHtml } from '@plateforme/aseptisationDuHtml';
+  import { calculeIdNiveau } from '@niveaux-maturite/calculeIdNiveau';
+  import { profilStore } from '@stores/profil.store';
+  import Alerte from '@ui/Alerte.svelte';
+  import Bouton from '@ui/Bouton.svelte';
+  import EnteteAutonome from '@ui/EnteteAutonome.svelte';
+  import Etapier from '@ui/Etapier.svelte';
+  import Lien from '@ui/Lien.svelte';
   import IntroductionTestMaturite from './IntroductionTestMaturite.svelte';
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
   import { enregistreIdResultatTestPourRevendication } from './resultatTest';

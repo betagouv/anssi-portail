@@ -1,5 +1,5 @@
 <script lang="ts">
-  import CaseACocher from '../ui/CaseACocher.svelte';
+  import CaseACocher from '@ui/CaseACocher.svelte';
   import { Source } from './Catalogue.types';
   import ChoixFiltreSource from './ChoixFiltreSource.svelte';
   import { nombreResultats } from './stores/nombreResultats.store';

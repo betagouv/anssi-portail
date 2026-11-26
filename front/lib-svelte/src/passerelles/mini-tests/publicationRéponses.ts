@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { FacteurAggravant, Secteur, TypeOrganisation } from '../../mini-tests/exposition/expositionCyberattaques';
+import type { FacteurAggravant, Secteur, TypeOrganisation } from '@mini-tests/exposition/expositionCyberattaques';
 
 export const publieRéponseQuestionnaireVraiFaux = async (
   réponse: {

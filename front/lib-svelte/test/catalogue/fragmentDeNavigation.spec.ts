@@ -1,11 +1,11 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { BesoinCyber } from '../../src/catalogue/Catalogue.types';
-import { Langue } from '../../src/catalogue/Guide.types';
+import { BesoinCyber } from '@catalogue/Catalogue.types';
+import { Langue } from '@catalogue/Guide.types';
 import {
   creeLeFragmentDeNavigation,
   extraisSegmentsDuFragment,
   réécritFragmentDepuis,
-} from '../../src/navigation/fragmentDeNavigation.svelte';
+} from '@navigation/fragmentDeNavigation.svelte';
 
 describe('Le fragment de navigation', () => {
   it.each([

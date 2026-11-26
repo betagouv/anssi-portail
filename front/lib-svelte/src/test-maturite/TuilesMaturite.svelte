@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
-  import type { NiveauMaturite } from '../niveaux-maturite/NiveauxMaturite.type';
-  import { détecteMédia, requêteMédiaPetitÉcran } from '../utils/rendu.svelte';
+  import { niveauxMaturite } from '@niveaux-maturite/NiveauxMaturite.donnees';
+  import type { NiveauMaturite } from '@niveaux-maturite/NiveauxMaturite.type';
+  import { détecteMédia, requêteMédiaPetitÉcran } from '@utils/rendu.svelte';
 
   interface Props {
     niveauCourant: NiveauMaturite;

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { enPropriétéWebC } from '$plateforme/webComponent';
-  import { creeLienContactsUtiles } from '../contacts/contacts';
-  import { profilStore } from '../stores/profil.store';
-  import { détecteRendu } from '../utils/rendu.svelte';
+  import { enPropriétéWebC } from '@plateforme/webComponent';
+  import { creeLienContactsUtiles } from '@contacts/contacts';
+  import { profilStore } from '@stores/profil.store';
+  import { détecteRendu } from '@utils/rendu.svelte';
 
   let estConnecte = () => !!$profilStore;
 

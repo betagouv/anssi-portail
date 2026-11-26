@@ -1,6 +1,6 @@
 <script lang="ts">
-  import CanonÀConfetti from '../../ui/CanonAConfetti.svelte';
-  import Modale from '../../ui/Modale.svelte';
+  import CanonÀConfetti from '@ui/CanonAConfetti.svelte';
+  import Modale from '@ui/Modale.svelte';
 
   type Props = {
     estOuverte: boolean;

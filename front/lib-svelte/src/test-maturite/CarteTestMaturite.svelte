@@ -1,5 +1,5 @@
 <script module lang="ts">
-  import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
+  import type { IdNiveau } from '@niveaux-maturite/NiveauxMaturite.type';
   import type { RéponsesResultatTest } from './ResultatsTest.type';
 
   export type RésultatTest = {
@@ -11,7 +11,7 @@
 </script>
 
 <script lang="ts">
-  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import { niveauxMaturite } from '@niveaux-maturite/NiveauxMaturite.donnees';
 
   interface Props {
     résultatTest: Omit<RésultatTest, 'reponses'>;

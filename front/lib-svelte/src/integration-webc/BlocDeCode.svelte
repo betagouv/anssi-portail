@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Bouton from '../ui/Bouton.svelte';
-  import { copieDansLePressePapier } from '../ui/presse-papier';
+  import Bouton from '@ui/Bouton.svelte';
+  import { copieDansLePressePapier } from '@ui/presse-papier';
 
   type Props = {
     code: string;

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { estServeur } from '$plateforme/environnement';
-  import { clic } from '../directives/actions.svelte';
+  import { estServeur } from '@plateforme/environnement';
+  import { clic } from '@directives/actions.svelte';
 
   export type Props = {
     apparence?: 'lien' | 'bouton';

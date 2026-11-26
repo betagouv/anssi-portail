@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { fabriqueFilAriane } from '../../../ui/filAriane';
-  import FilAriane from '../../../ui/FilAriane.svelte';
+  import { fabriqueFilAriane } from '@ui/filAriane';
+  import FilAriane from '@ui/FilAriane.svelte';
   import ChoixRole from './ChoixRole.svelte';
   import ChoixScenario from './ChoixScenario.svelte';
   import MiseEnSituation from './MiseEnSituation.svelte';

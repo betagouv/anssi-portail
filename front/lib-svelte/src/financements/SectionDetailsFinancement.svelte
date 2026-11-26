@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
+  import { aseptiseHtml } from '@plateforme/aseptisationDuHtml';
 
   interface Props {
     ancre: string;

@@ -1,10 +1,10 @@
 <script lang="ts">
-  import EncartPromotionParcoursBasique from '../../parcours-securisation/EncartPromotionParcoursBasique.svelte';
-  import TagProgrammeGratuit from '../../parcours-securisation/TagProgrammeGratuit.svelte';
-  import EncartInvitationARenforcerCybersecurite from '../../test-maturite/EncartInvitationARenforcerCybersecurite.svelte';
-  import PartageTest from '../../test-maturite/PartageTest.svelte';
-  import EnteteAutonome from '../../ui/EnteteAutonome.svelte';
-  import Notice from '../../ui/Notice.svelte';
+  import EncartPromotionParcoursBasique from '@parcours-securisation/EncartPromotionParcoursBasique.svelte';
+  import TagProgrammeGratuit from '@parcours-securisation/TagProgrammeGratuit.svelte';
+  import EncartInvitationARenforcerCybersecurite from '@test-maturite/EncartInvitationARenforcerCybersecurite.svelte';
+  import PartageTest from '@test-maturite/PartageTest.svelte';
+  import EnteteAutonome from '@ui/EnteteAutonome.svelte';
+  import Notice from '@ui/Notice.svelte';
   import CarteRisqueExposition from './CarteRisqueExposition.svelte';
   import type { MenaceEvaluee } from './expositionCyberattaques';
 

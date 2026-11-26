@@ -1,5 +1,5 @@
 <script lang="ts">
-  import IllustrationAnimee from '../../../accueil/animation/IllustrationAnimee.svelte';
+  import IllustrationAnimee from '@accueil/animation/IllustrationAnimee.svelte';
   import SceneHerosKitSensibilisation from './SceneHerosCampagneSensibilisation.svelte';
 
   const scènes = [SceneHerosKitSensibilisation];

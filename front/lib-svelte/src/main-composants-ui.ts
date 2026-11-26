@@ -1,4 +1,4 @@
-import Lien from './ui/Lien.svelte';
+import Lien from '@ui/Lien.svelte';
 
 const LienCE = Lien as unknown as { element: CustomElementConstructor };
 

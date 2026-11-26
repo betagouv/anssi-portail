@@ -1,7 +1,7 @@
 import { hydrate } from 'svelte';
-import ComposantArticle from './article/Article.svelte';
-import type { Article } from './article/article.type';
-import { récupèreArticle } from './passerelles/blog/articles';
+import ComposantArticle from '@article/Article.svelte';
+import type { Article } from '@article/article.type';
+import { récupèreArticle } from '@passerelles/blog/articles';
 
 const hydrateArticle = async () => {
   const slug = window.location.pathname.replace(/^\//, '');

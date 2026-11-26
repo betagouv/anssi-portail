@@ -1,18 +1,18 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
-  import Alerte from '../ui/Alerte.svelte';
-  import type { Badge } from '../ui/badge.type';
-  import Bouton from '../ui/Bouton.svelte';
-  import ChampTexte from '../ui/ChampTexte.svelte';
-  import EnteteAutonome from '../ui/EnteteAutonome.svelte';
-  import Formulaire from '../ui/Formulaire.svelte';
-  import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
-  import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
-  import GroupeDeBadges from '../ui/GroupeDeBadges.svelte';
-  import Lien from '../ui/Lien.svelte';
-  import { collecteLesErreurs } from '../utils/erreurApi';
+  import { récupèreStatistiquesMSC, type Statistiques } from '@passerelles/statistiquesMSC';
+  import Alerte from '@ui/Alerte.svelte';
+  import type { Badge } from '@ui/badge.type';
+  import Bouton from '@ui/Bouton.svelte';
+  import ChampTexte from '@ui/ChampTexte.svelte';
+  import EnteteAutonome from '@ui/EnteteAutonome.svelte';
+  import Formulaire from '@ui/Formulaire.svelte';
+  import SelectionOrganisation from '@ui/formulaire/SelectionOrganisation.svelte';
+  import type { Organisation } from '@ui/formulaire/SelectionOrganisation.types';
+  import GroupeDeBadges from '@ui/GroupeDeBadges.svelte';
+  import Lien from '@ui/Lien.svelte';
+  import { collecteLesErreurs } from '@utils/erreurApi';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import type { CorpsAPIDemandeAide } from './DonneesFormulaireDemandeAide';
 

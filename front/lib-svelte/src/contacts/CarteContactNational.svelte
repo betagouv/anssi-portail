@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
-  import Lien from '../ui/Lien.svelte';
+  import Lien from '@ui/Lien.svelte';
   import CarteContact from './CarteContact.svelte';
   import type { ContactNational } from './contacts.type';
   import LigneContact from './LigneContact.svelte';

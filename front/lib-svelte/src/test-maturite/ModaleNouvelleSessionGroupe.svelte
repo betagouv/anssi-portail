@@ -1,9 +1,9 @@
 <script lang="ts">
   import { tick } from 'svelte';
-  import { peintUnQRCode } from '$plateforme/qrcode';
-  import { clic } from '../directives/actions.svelte';
-  import Modale from '../ui/Modale.svelte';
-  import { copieDansLePressePapier } from '../ui/presse-papier';
+  import { peintUnQRCode } from '@plateforme/qrcode';
+  import { clic } from '@directives/actions.svelte';
+  import Modale from '@ui/Modale.svelte';
+  import { copieDansLePressePapier } from '@ui/presse-papier';
   import type { ReponseCreationSessionGroupe } from './SessionGroupe';
 
   let codeSession = $state<string>('');

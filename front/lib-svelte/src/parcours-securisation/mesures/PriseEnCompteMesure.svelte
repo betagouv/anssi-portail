@@ -1,8 +1,8 @@
 <script lang="ts">
   import axios from 'axios';
   import { untrack } from 'svelte';
-  import { profilStore } from '../../stores/profil.store';
-  import Bouton from '../../ui/Bouton.svelte';
+  import { profilStore } from '@stores/profil.store';
+  import Bouton from '@ui/Bouton.svelte';
   import { évènementsDuParcours } from '../evenementsDuParcours';
   import type { Mesure, PriseEnCompteRéponseApi } from './mesure';
 

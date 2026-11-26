@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Lien from '../../ui/Lien.svelte';
+  import Lien from '@ui/Lien.svelte';
   import type { Guide } from '../Guide.types';
   import { decodeEntitesHtml } from './guide';
 

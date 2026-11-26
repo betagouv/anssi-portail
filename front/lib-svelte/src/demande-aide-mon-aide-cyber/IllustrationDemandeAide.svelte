@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
+  import { récupèreStatistiquesMSC, type Statistiques } from '@passerelles/statistiquesMSC';
 
   type Props = {
     large?: boolean;

@@ -1,5 +1,5 @@
 import { calculeCodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
-import type { Profil } from '../stores/profil.store';
+import type { Profil } from '@stores/profil.store';
 
 export const creeLienContactsUtiles = (profil: Profil | undefined) => {
   if (profil) {

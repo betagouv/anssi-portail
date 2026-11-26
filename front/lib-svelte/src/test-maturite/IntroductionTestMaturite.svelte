@@ -3,12 +3,12 @@
   import { onMount } from 'svelte';
   import { cubicOut } from 'svelte/easing';
   import { Tween } from 'svelte/motion';
-  import Bouton from '../ui/Bouton.svelte';
-  import EnteteAutonome from '../ui/EnteteAutonome.svelte';
-  import type { PropriétésFilAriane } from '../ui/filAriane';
-  import HerosRiche from '../ui/HerosRiche.svelte';
-  import Lien from '../ui/Lien.svelte';
-  import MotEnExergue from '../ui/MotEnExergue.svelte';
+  import Bouton from '@ui/Bouton.svelte';
+  import EnteteAutonome from '@ui/EnteteAutonome.svelte';
+  import type { PropriétésFilAriane } from '@ui/filAriane';
+  import HerosRiche from '@ui/HerosRiche.svelte';
+  import Lien from '@ui/Lien.svelte';
+  import MotEnExergue from '@ui/MotEnExergue.svelte';
   import CarrouselMaturite from './animation/CarrouselMaturite.svelte';
 
   interface Props {

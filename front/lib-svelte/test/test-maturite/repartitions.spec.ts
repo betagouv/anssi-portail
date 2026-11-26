@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import type { RepartitionResultatsTestPourUnNiveau } from '../../src/test-maturite/ResultatsTest.type';
-import { construisSerie } from '../../src/test-maturite/resultatTest';
+import type { RepartitionResultatsTestPourUnNiveau } from '@test-maturite/ResultatsTest.type';
+import { construisSerie } from '@test-maturite/resultatTest';
 
 describe('Construit une Serie à partir une liste de répartition de test', () => {
   const valeurs = {

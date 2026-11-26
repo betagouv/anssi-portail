@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Progression from '../../parcours-securisation/Progression.svelte';
+  import Progression from '@parcours-securisation/Progression.svelte';
 
   type Props = {
     nombreMesuresPrisesEnCompte: number;

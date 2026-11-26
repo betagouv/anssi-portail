@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Lien from '../../../../ui/Lien.svelte';
+  import Lien from '@ui/Lien.svelte';
   import ÉtapeProcédure from '../EtapeProcedure.svelte';
   import ÉtapesProcédure from '../EtapesProcedure.svelte';
   import NoteProcedure from '../NoteProcedure.svelte';

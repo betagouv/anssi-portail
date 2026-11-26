@@ -1,12 +1,12 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { couleursDeNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
-  import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
-  import type { PropriétésFilAriane } from '../ui/filAriane';
-  import Heros from '../ui/Heros.svelte';
-  import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
-  import Lien from '../ui/Lien.svelte';
+  import { couleursDeNiveau, niveauxMaturite } from '@niveaux-maturite/NiveauxMaturite.donnees';
+  import type { IdNiveau } from '@niveaux-maturite/NiveauxMaturite.type';
+  import type { PropriétésFilAriane } from '@ui/filAriane';
+  import Heros from '@ui/Heros.svelte';
+  import IllustrationDragonPasDeResultat from '@ui/IllustrationDragonPasDeResultat.svelte';
+  import Lien from '@ui/Lien.svelte';
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeAnneau from './LegendeAnneau.svelte';
   import LegendeRadarSessionGroupe from './LegendeRadarSessionGroupe.svelte';

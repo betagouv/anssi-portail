@@ -1,5 +1,5 @@
 import { hydrate } from 'svelte';
-import DemandeDiagnosticSimplifiee from './demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
+import DemandeDiagnosticSimplifiee from '@demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
 
 const donnees = document.getElementById('accueil-donnees-demande-diagnostic')!.textContent;
 if (!donnees) throw new Error('Impossible de trouver les données');

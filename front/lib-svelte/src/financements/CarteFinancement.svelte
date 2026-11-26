@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { enPropriétéWebC } from '$plateforme/webComponent';
-  import type { Badge } from '../ui/badge.type';
-  import GroupeDeBadges from '../ui/GroupeDeBadges.svelte';
+  import { enPropriétéWebC } from '@plateforme/webComponent';
+  import type { Badge } from '@ui/badge.type';
+  import GroupeDeBadges from '@ui/GroupeDeBadges.svelte';
   import type { RésuméFinancement } from './financement';
 
   interface Props {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { clic } from '../directives/actions.svelte';
+  import { clic } from '@directives/actions.svelte';
 
   interface Props {
     surClic?: (event: MouseEvent | KeyboardEvent) => void;

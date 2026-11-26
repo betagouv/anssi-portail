@@ -1,15 +1,15 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import type { Exigence } from '../../../src/nis2/exigence.type';
-import { exigencesStore } from '../../../src/nis2/stores/exigences.store';
-import { exigencesFiltrees } from '../../../src/nis2/stores/exigencesFiltrees.store';
-import { rechercheParCorrespondance } from '../../../src/nis2/stores/rechercheParCorrespondance';
-import { rechercheParEntiteNis2 } from '../../../src/nis2/stores/rechercheParEntiteNis2';
-import { rechercheParFonctionCyFun23 } from '../../../src/nis2/stores/rechercheParFonctionCyFun23';
-import { rechercheParNiveauAssuranceCyFun23 } from '../../../src/nis2/stores/rechercheParNiveauAssuranceCyFun23';
-import { rechercheParNormeISO } from '../../../src/nis2/stores/rechercheParNormeISO';
-import { rechercheParObjectifNis2 } from '../../../src/nis2/stores/rechercheParObjectifNis2';
-import { rechercheParThematiqueNis2 } from '../../../src/nis2/stores/rechercheParThematiqueNis2';
+import type { Exigence } from '@nis2/exigence.type';
+import { exigencesStore } from '@nis2/stores/exigences.store';
+import { exigencesFiltrees } from '@nis2/stores/exigencesFiltrees.store';
+import { rechercheParCorrespondance } from '@nis2/stores/rechercheParCorrespondance';
+import { rechercheParEntiteNis2 } from '@nis2/stores/rechercheParEntiteNis2';
+import { rechercheParFonctionCyFun23 } from '@nis2/stores/rechercheParFonctionCyFun23';
+import { rechercheParNiveauAssuranceCyFun23 } from '@nis2/stores/rechercheParNiveauAssuranceCyFun23';
+import { rechercheParNormeISO } from '@nis2/stores/rechercheParNormeISO';
+import { rechercheParObjectifNis2 } from '@nis2/stores/rechercheParObjectifNis2';
+import { rechercheParThematiqueNis2 } from '@nis2/stores/rechercheParThematiqueNis2';
 import {
   exigenceCyFun23,
   exigenceISODeNiveauEleve,

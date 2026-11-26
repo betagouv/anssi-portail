@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { clic } from '../directives/actions.svelte';
-  import ChampTexte from '../ui/ChampTexte.svelte';
-  import FermetureSurClicEnDehors from '../ui/FermetureSurClicEnDehors.svelte';
-  import type { Departement } from '../ui/formulaire/SelectionOrganisation.types';
+  import { clic } from '@directives/actions.svelte';
+  import ChampTexte from '@ui/ChampTexte.svelte';
+  import FermetureSurClicEnDehors from '@ui/FermetureSurClicEnDehors.svelte';
+  import type { Departement } from '@ui/formulaire/SelectionOrganisation.types';
 
   interface Props {
     departements: Departement[];

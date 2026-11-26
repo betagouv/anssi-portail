@@ -1,4 +1,4 @@
-import type { SeuilComplétion } from '../passerelles/observatoire';
+import type { SeuilComplétion } from '@passerelles/observatoire';
 
 const formatMois = new Intl.DateTimeFormat('fr-FR', { month: 'short', year: '2-digit', timeZone: 'UTC' });
 const formatDate = new Intl.DateTimeFormat('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });

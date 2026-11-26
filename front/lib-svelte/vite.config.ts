@@ -6,8 +6,8 @@ import { fileURLToPath } from 'node:url';
 import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { createLogger, defineConfig, loadEnv } from 'vite';
+import { aliasSvelte } from './alias.plugin.js';
 import { appEnvDepuisValeur } from './src/app-env.js';
-import { plateformePlugin } from './src/plateforme/plateforme.plugin.js';
 import { injecteNonce } from './src/utils/injecteNonce.plugin.js';
 
 // Le `.env` est à la racine du dépôt, deux dossiers au-dessus de ce fichier, indépendamment du cwd d'où `vite` est lancé.
@@ -62,7 +62,7 @@ export default defineConfig(({ command, mode }) => {
         applicationKey: 'mes-services-cyber',
       }),
       injecteNonce(),
-      plateformePlugin(),
+      aliasSvelte(),
     ],
     build: {
       cssCodeSplit: false,

@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import Alerte from '../ui/Alerte.svelte';
-  import Bouton from '../ui/Bouton.svelte';
-  import ChampTexte from '../ui/ChampTexte.svelte';
-  import ControleFormulaire from '../ui/ControleFormulaire.svelte';
-  import Formulaire from '../ui/Formulaire.svelte';
-  import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
-  import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
-  import Lien from '../ui/Lien.svelte';
+  import Alerte from '@ui/Alerte.svelte';
+  import Bouton from '@ui/Bouton.svelte';
+  import ChampTexte from '@ui/ChampTexte.svelte';
+  import ControleFormulaire from '@ui/ControleFormulaire.svelte';
+  import Formulaire from '@ui/Formulaire.svelte';
+  import SelectionOrganisation from '@ui/formulaire/SelectionOrganisation.svelte';
+  import type { Organisation } from '@ui/formulaire/SelectionOrganisation.types';
+  import Lien from '@ui/Lien.svelte';
   import type { DonneesFormulaireDemandeAide } from './DonneesFormulaireDemandeAide';
 
   interface Props {

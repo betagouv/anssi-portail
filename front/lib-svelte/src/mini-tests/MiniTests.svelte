@@ -1,12 +1,12 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { profilStore } from '../stores/profil.store';
-  import BoutonsPartagePage from '../test-maturite/BoutonsPartagePage.svelte';
-  import type { PropriétésFilAriane } from '../ui/filAriane';
-  import HerosRiche from '../ui/HerosRiche.svelte';
-  import Lien from '../ui/Lien.svelte';
-  import Separateur from '../ui/Separateur.svelte';
+  import { profilStore } from '@stores/profil.store';
+  import BoutonsPartagePage from '@test-maturite/BoutonsPartagePage.svelte';
+  import type { PropriétésFilAriane } from '@ui/filAriane';
+  import HerosRiche from '@ui/HerosRiche.svelte';
+  import Lien from '@ui/Lien.svelte';
+  import Separateur from '@ui/Separateur.svelte';
   import CarteTest from './CarteTest.svelte';
   import HameconnageAnime from './HameconnageAnime.svelte';
   import IllustrationHeroMiniTest from './IllustrationHeroMiniTest.svelte';

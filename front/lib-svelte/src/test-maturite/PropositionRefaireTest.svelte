@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { profilStore } from '../stores/profil.store.js';
-  import Lien from '../ui/Lien.svelte';
+  import { profilStore } from '@stores/profil.store.js';
+  import Lien from '@ui/Lien.svelte';
 </script>
 
 {#if $profilStore}

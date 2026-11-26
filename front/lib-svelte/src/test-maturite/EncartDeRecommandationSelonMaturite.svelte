@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { NiveauMaturite } from '../niveaux-maturite/NiveauxMaturite.type';
-  import Separateur from '../ui/Separateur.svelte';
+  import type { NiveauMaturite } from '@niveaux-maturite/NiveauxMaturite.type';
+  import Separateur from '@ui/Separateur.svelte';
   import EncartDeRecommandationMaturiteFaible from './EncartDeRecommandationMaturiteFaible.svelte';
   import EncartDeRecommandationMaturiteForte from './EncartDeRecommandationMaturiteForte.svelte';
 

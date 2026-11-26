@@ -1,7 +1,7 @@
 <script lang="ts">
   import { DsfrContainer } from '@lab-anssi/ui-kit';
-  import { profilStore } from '../stores/profil.store';
-  import Lien from '../ui/Lien.svelte';
+  import { profilStore } from '@stores/profil.store';
+  import Lien from '@ui/Lien.svelte';
   import AutresRessources from './AutresRessources.svelte';
   import Contacts from './contacts/Contacts.svelte';
   import Favoris from './Favoris.svelte';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Lien from '../../ui/Lien.svelte';
+  import Lien from '@ui/Lien.svelte';
   import type { Mesure } from '../mesures/mesure';
 
   type ModulePrésentation = {

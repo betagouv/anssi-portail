@@ -1,5 +1,5 @@
 <script lang="ts">
-  import IllustrationAnimee from '../../accueil/animation/IllustrationAnimee.svelte';
+  import IllustrationAnimee from '@accueil/animation/IllustrationAnimee.svelte';
   import HerosParcoursBasique from './HerosParcoursBasique.svelte';
 
   const scènes = [HerosParcoursBasique];

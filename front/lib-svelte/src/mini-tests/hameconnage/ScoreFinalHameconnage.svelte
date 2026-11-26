@@ -1,8 +1,8 @@
 <script lang="ts">
-  import EncartPromotionParcoursBasique from '../../parcours-securisation/EncartPromotionParcoursBasique.svelte';
-  import TagProgrammeGratuit from '../../parcours-securisation/TagProgrammeGratuit.svelte';
-  import PartageTest from '../../test-maturite/PartageTest.svelte';
-  import EnteteAutonome from '../../ui/EnteteAutonome.svelte';
+  import EncartPromotionParcoursBasique from '@parcours-securisation/EncartPromotionParcoursBasique.svelte';
+  import TagProgrammeGratuit from '@parcours-securisation/TagProgrammeGratuit.svelte';
+  import PartageTest from '@test-maturite/PartageTest.svelte';
+  import EnteteAutonome from '@ui/EnteteAutonome.svelte';
   import { nombreDeBonnesRéponses, nombreDeQuestions, réponses } from './hameconnage.store';
 
   type Props = {

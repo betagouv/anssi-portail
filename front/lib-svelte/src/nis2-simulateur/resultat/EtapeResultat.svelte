@@ -1,9 +1,9 @@
 <script lang="ts">
+  import { quiScroll } from '@ui/quiScroll.attachment';
   import type { EtatQuestionnaire } from '../../../../../back/src/metier/nis2-simulateur/EtatQuestionnaire';
   import { evalueEligibilite } from '../../../../../back/src/metier/nis2-simulateur/questionnaire/evalueEligibilite';
   import SpecificationsCompletes from '../../../../../back/src/metier/nis2-simulateur/questionnaire/specifications-completes.csv?raw';
   import { Regulation } from '../../../../../back/src/metier/nis2-simulateur/Regulation.definitions';
-  import { quiScroll } from '../../ui/quiScroll.attachment';
   import * as api from '../simulateurNi2.api';
   import LigneEtMaintenant from './LigneEtMaintenant.svelte';
   import PointsAttention from './PointsAttention.svelte';

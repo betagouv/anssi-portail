@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ChampTexte from '../ui/ChampTexte.svelte';
+  import ChampTexte from '@ui/ChampTexte.svelte';
 
   const domaines = [
     { id: 'RSSI', libelle: 'Cybersécurité / SSI' },

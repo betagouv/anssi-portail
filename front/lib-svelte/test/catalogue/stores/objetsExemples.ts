@@ -1,5 +1,5 @@
-import { BesoinCyber, DroitAcces, Source, Typologie, type ItemCyber } from '../../../src/catalogue/Catalogue.types';
-import { CollectionGuide, type Guide } from '../../../src/catalogue/Guide.types';
+import { BesoinCyber, DroitAcces, Source, Typologie, type ItemCyber } from '@catalogue/Catalogue.types';
+import { CollectionGuide, type Guide } from '@catalogue/Guide.types';
 
 export const mss = (): ItemCyber => ({
   type: 'ItemCyber',

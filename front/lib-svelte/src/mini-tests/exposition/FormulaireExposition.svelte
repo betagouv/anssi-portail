@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { enPropriétéWebC } from '$plateforme/webComponent';
-  import { publieRéponseQuestionnaireExposition } from '../../passerelles/mini-tests/publicationRéponses';
-  import Bouton from '../../ui/Bouton.svelte';
+  import { enPropriétéWebC } from '@plateforme/webComponent';
+  import { publieRéponseQuestionnaireExposition } from '@passerelles/mini-tests/publicationRéponses';
+  import Bouton from '@ui/Bouton.svelte';
   import {
     FACTEURS_AGGRAVANTS,
     secteurDisponiblePour,

@@ -1,15 +1,15 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { BesoinCyber, DroitAcces, Source, Typologie } from '../../../src/catalogue/Catalogue.types';
-import { CollectionGuide, Langue } from '../../../src/catalogue/Guide.types';
-import { rechercheParCollection } from '../../../src/catalogue/stores/guides/rechercheParCollection.store';
-import { rechercheParLangue } from '../../../src/catalogue/stores/guides/rechercheParLangue.store';
-import { rechercheParBesoin } from '../../../src/catalogue/stores/rechercheParBesoin.store';
-import { rechercheParDroitAcces } from '../../../src/catalogue/stores/rechercheParDroitAcces.store';
-import { rechercheParSource } from '../../../src/catalogue/stores/rechercheParSource.store';
-import { rechercheParTypologie } from '../../../src/catalogue/stores/rechercheParTypologie.store';
-import { recherches } from '../../../src/catalogue/stores/recherches.store';
-import { rechercheTextuelle } from '../../../src/catalogue/stores/rechercheTextuelle.store';
+import { BesoinCyber, DroitAcces, Source, Typologie } from '@catalogue/Catalogue.types';
+import { CollectionGuide, Langue } from '@catalogue/Guide.types';
+import { rechercheParCollection } from '@catalogue/stores/guides/rechercheParCollection.store';
+import { rechercheParLangue } from '@catalogue/stores/guides/rechercheParLangue.store';
+import { rechercheParBesoin } from '@catalogue/stores/rechercheParBesoin.store';
+import { rechercheParDroitAcces } from '@catalogue/stores/rechercheParDroitAcces.store';
+import { rechercheParSource } from '@catalogue/stores/rechercheParSource.store';
+import { rechercheParTypologie } from '@catalogue/stores/rechercheParTypologie.store';
+import { recherches } from '@catalogue/stores/recherches.store';
+import { rechercheTextuelle } from '@catalogue/stores/rechercheTextuelle.store';
 
 describe('Le store des recherches', () => {
   beforeEach(() => {

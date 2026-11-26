@@ -1,15 +1,15 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import type { ItemCyber } from '../catalogue/Catalogue.types';
-  import type { Guide } from '../catalogue/Guide.types';
-  import { catalogueStore } from '../catalogue/stores/catalogue.store';
-  import { chargeGuidesDansLeStore, guidesStore } from '../catalogue/stores/guides/guides.store';
-  import { listeItemsFavoris } from '../catalogue/stores/itemsCatalogueEnFavori';
-  import { profilStore } from '../stores/profil.store';
-  import type { PropriétésFilAriane } from '../ui/filAriane';
-  import Heros from '../ui/Heros.svelte';
-  import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
+  import type { ItemCyber } from '@catalogue/Catalogue.types';
+  import type { Guide } from '@catalogue/Guide.types';
+  import { catalogueStore } from '@catalogue/stores/catalogue.store';
+  import { chargeGuidesDansLeStore, guidesStore } from '@catalogue/stores/guides/guides.store';
+  import { listeItemsFavoris } from '@catalogue/stores/itemsCatalogueEnFavori';
+  import { profilStore } from '@stores/profil.store';
+  import type { PropriétésFilAriane } from '@ui/filAriane';
+  import Heros from '@ui/Heros.svelte';
+  import IllustrationDragonPasDeResultat from '@ui/IllustrationDragonPasDeResultat.svelte';
   import ContenuFavoris from './ContenuFavoris.svelte';
 
   let prenom = $state('');

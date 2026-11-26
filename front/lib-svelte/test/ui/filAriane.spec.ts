@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { fabriqueFilAriane } from '../../src/ui/filAriane';
+import { fabriqueFilAriane } from '@ui/filAriane';
 
 describe('La fabrique du fil d’Ariane', () => {
   it('ajoute l’accueil et termine par la page courante sans lien', () => {

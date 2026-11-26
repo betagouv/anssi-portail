@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { decodeEntiteHtml } from '$plateforme/aseptisationDuHtml';
-  import { enPropriétéWebC } from '$plateforme/webComponent';
-  import BoutonFavori from '../favoris/BoutonFavori.svelte';
+  import { decodeEntiteHtml } from '@plateforme/aseptisationDuHtml';
+  import { enPropriétéWebC } from '@plateforme/webComponent';
+  import BoutonFavori from '@favoris/BoutonFavori.svelte';
   import type { ItemCyber } from './Catalogue.types';
   import type { Guide } from './Guide.types';
   import HeaderBadge from './HeaderBadge.svelte';

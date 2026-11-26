@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { niveauxMaturite } from '../../niveaux-maturite/NiveauxMaturite.donnees';
-  import type { IdNiveau, NiveauMaturite } from '../../niveaux-maturite/NiveauxMaturite.type';
-  import { récupèreStatistiquesMSC, type Statistiques } from '../../passerelles/statistiquesMSC';
+  import { niveauxMaturite } from '@niveaux-maturite/NiveauxMaturite.donnees';
+  import type { IdNiveau, NiveauMaturite } from '@niveaux-maturite/NiveauxMaturite.type';
+  import { récupèreStatistiquesMSC, type Statistiques } from '@passerelles/statistiquesMSC';
 
   type Props = {
     niveau: IdNiveau;

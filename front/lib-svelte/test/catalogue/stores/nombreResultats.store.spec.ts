@@ -1,8 +1,8 @@
 import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
-import { DroitAcces, Source, Typologie, type ItemCyber } from '../../../src/catalogue/Catalogue.types';
-import { catalogueStore } from '../../../src/catalogue/stores/catalogue.store';
-import { nombreResultats } from '../../../src/catalogue/stores/nombreResultats.store';
+import { DroitAcces, Source, Typologie, type ItemCyber } from '@catalogue/Catalogue.types';
+import { catalogueStore } from '@catalogue/stores/catalogue.store';
+import { nombreResultats } from '@catalogue/stores/nombreResultats.store';
 import { demainSpecialisteCyber, guidesTechniques, kitCyber, monEspaceNIS2, mss } from './objetsExemples';
 
 describe('Le store du nombre de résultats', () => {
