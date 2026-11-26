@@ -1,6 +1,6 @@
 import type { EtapeTest, Question, Rubrique } from './TestMaturite.type';
 
-export const questions: Question[] = [
+const questions: Question[] = [
   {
     titre: 'Prise en compte du risque',
     id: 'prise-en-compte-risque',

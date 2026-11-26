@@ -77,7 +77,7 @@ export type Scores = Record<IdMenace, { renforce: boolean }>;
  * pour n'afficher que des menaces pertinentes) et « Renforcée », dès qu'au moins un
  * facteur d'aggravation identifié est présent.
  */
-export function calculerScores(reponses: ReponsesExposition): Scores {
+function calculerScores(reponses: ReponsesExposition): Scores {
   const { type, secteur } = reponses;
 
   const ransoRenforce =
@@ -123,7 +123,7 @@ export type DefinitionMenace = {
 
 // Ordre : menaces à but lucratif d'abord (les plus fréquentes selon Cybermalveillance.gouv.fr),
 // puis espionnage, puis déstabilisation (ANSSI).
-export const DEFINITIONS_MENACES: DefinitionMenace[] = [
+const DEFINITIONS_MENACES: DefinitionMenace[] = [
   {
     id: 'ranso',
     icone: '/assets/icones/cadenas.avif',
@@ -185,7 +185,7 @@ export const DEFINITIONS_MENACES: DefinitionMenace[] = [
  * Les statistiques sont mises en évidence avec `<strong>` (seule balise d'emphase
  * autorisée par le nettoyeur HTML `aseptiseHtml`).
  */
-export function paragraphesInsight(id: IdMenace, reponses: ReponsesExposition): string[] {
+function paragraphesInsight(id: IdMenace, reponses: ReponsesExposition): string[] {
   const { type, secteur } = reponses;
 
   if (id === 'ranso') {
@@ -307,7 +307,7 @@ export type ResumeInsight = {
  * aucun chiffre sourcé n'est disponible pour le profil renseigné (on
  * n'invente pas de statistique).
  */
-export function resumeInsight(id: IdMenace, reponses: ReponsesExposition): ResumeInsight | undefined {
+function resumeInsight(id: IdMenace, reponses: ReponsesExposition): ResumeInsight | undefined {
   const { type, secteur } = reponses;
 
   if (id === 'ranso') {

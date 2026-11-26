@@ -59,7 +59,7 @@ import { EntrepôtRésultatTestVraiFauxMémoire } from '../persistance/entrepotR
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/entrepotSessionDeGroupeMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 
-export const fauxControleurErreurs: ErrorRequestHandler = (erreur, _requete, _reponse, suite) => suite(erreur);
+const fauxControleurErreurs: ErrorRequestHandler = (erreur, _requete, _reponse, suite) => suite(erreur);
 
 export const fauxRapporteur: Rapporteur = {
   erreur: () => {},

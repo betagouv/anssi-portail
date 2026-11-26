@@ -35,9 +35,3 @@ export const sousSecteursParSecteur: Record<Extract<SecteurActivite, SecteurComp
 };
 
 export const TousLesSousSecteurs = Object.values(sousSecteursParSecteur).flat() as readonly SousSecteurActivite[];
-
-export const groupementsSecteursParSousSecteurs: Record<SecteurComposite, readonly SousSecteurActivite[]> = {
-  energie: ValeursSousSecteurEnergie,
-  transports: ValeursSousSecteurTransport,
-  fabrication: ValeursSousSecteurFabrication,
-};

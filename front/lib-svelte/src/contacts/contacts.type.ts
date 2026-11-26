@@ -50,7 +50,7 @@ export type ContactsInitiaux = {
   nationaux: ContactNational[];
 };
 
-export const CodeRegions = [
+const CodeRegions = [
   'FR-ARA',
   'FR-BFC',
   'FR-BRE',

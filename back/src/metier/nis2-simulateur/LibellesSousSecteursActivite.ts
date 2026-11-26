@@ -6,7 +6,7 @@ import type {
   SousSecteurTransport,
 } from './SousSecteurActivite.definitions.js';
 
-export const libellesSousSecteursEnergie: DetailsSousSecteurUnique<SousSecteurEnergie> = {
+const libellesSousSecteursEnergie: DetailsSousSecteurUnique<SousSecteurEnergie> = {
   electricite: 'Électricité',
   gaz: 'Gaz',
   hydrogene: 'Hydrogène',
@@ -15,7 +15,7 @@ export const libellesSousSecteursEnergie: DetailsSousSecteurUnique<SousSecteurEn
   autreSousSecteurEnergie: 'Autre sous-secteur',
 };
 
-export const libellesSousSecteurFabrication: DetailsSousSecteurUnique<SousSecteurFabrication> = {
+const libellesSousSecteurFabrication: DetailsSousSecteurUnique<SousSecteurFabrication> = {
   constructionVehiculesAutomobiles: 'Construction de véhicules automobiles, remorques et semi- remorques',
   fabricationAutresMaterielTransports: "Fabrication d'autres matériels de transport",
   fabricationDispositifsMedicaux:
@@ -27,7 +27,7 @@ export const libellesSousSecteurFabrication: DetailsSousSecteurUnique<SousSecteu
   autreSousSecteurFabrication: 'Autre sous-secteur',
 };
 
-export const libellesSousSecteurTransports: DetailsSousSecteurUnique<SousSecteurTransport> = {
+const libellesSousSecteurTransports: DetailsSousSecteurUnique<SousSecteurTransport> = {
   transportsAeriens: 'Aériens',
   transportsFerroviaires: 'Ferroviaires',
   transportsParEau: 'Par eau',
