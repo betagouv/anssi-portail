@@ -51,6 +51,14 @@
         nomDuWebComponent="lab-anssi-mini-test-hameconnage"
       />
     </Accordeon>
+    <Accordeon libelle="Test • Réflexes Cyber&nbsp;: comment réagirez-vous en cas de cyber&shy;attaque&#8239;?">
+      <SectionWebCAccordeon
+        fichierPhp="mini-test-reflexes-cyber.php"
+        lienDémo="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/demo/mini-test-reflexes-cyber.php"
+        lienProd="https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/1.0.0/prod/mini-test-reflexes-cyber.php"
+        nomDuWebComponent="lab-anssi-mini-test-reflexes-cyber"
+      />
+    </Accordeon>
     <Accordeon libelle="Demande de diagnostic cyber">
       <SectionWebCAccordeon
         fichierPhp="demande-diag.php"
