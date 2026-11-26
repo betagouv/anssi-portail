@@ -25,6 +25,9 @@ jobs:
       - name: Vérifie le formatage
         run: pnpm format:check
 
+      - name: Vérifie le code mort
+        run: pnpm unused:check
+
       - name: Exécute les tests
         run: pnpm test
 
