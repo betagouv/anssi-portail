@@ -41,6 +41,38 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
     });
   };
 
+  it('autorise l’envoi de réponses JSON depuis un site externe', async () => {
+    const url = '/api/mini-tests/reflexes-cyber/reponses';
+    const origine = 'https://site-externe.example';
+
+    await request(serveur)
+      .options(url)
+      .set('Origin', origine)
+      .set('Access-Control-Request-Method', 'POST')
+      .set('Access-Control-Request-Headers', 'content-type')
+      .expect('Access-Control-Allow-Origin', '*')
+      .expect('Access-Control-Allow-Methods', 'POST')
+      .expect('Access-Control-Allow-Headers', 'content-type')
+      .expect(HttpStatusCode.NoContent);
+
+    await request(serveur)
+      .post(url)
+      .set('Origin', origine)
+      .send({
+        idCorrélation: '01a0a561-2416-726f-84c5-7912f3dfb57e',
+        idScénario: 'collectivité',
+        idRôle: 'direction',
+        numéroÉvènement: 6,
+        réflexe: 'bon',
+        score: '5/6',
+      })
+      .expect('Access-Control-Allow-Origin', '*')
+      .expect(HttpStatusCode.Created);
+
+    expect(busÉvénements.aRecuUnEvenement(SimulationRéflexesCyberTerminé)).toBeTruthy();
+    expect(await entrepôtRésultatTestRéflexesCyber.tous()).toEqual([]);
+  });
+
   describe('sur une requête POST', () => {
     it('répond un 201', async () => {
       const reponse = await request(serveur).post('/api/mini-tests/reflexes-cyber/reponses').send({
