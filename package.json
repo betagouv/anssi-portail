@@ -2,7 +2,6 @@
   "name": "anssi-portail",
   "version": "1.0.0",
   "description": "",
-  "main": "serveur.ts",
   "engines": {
     "node": "26.13.1"
   },

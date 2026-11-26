@@ -2,7 +2,6 @@
   "name": "@anssi-portail/back",
   "version": "1.0.0",
   "description": "",
-  "main": "serveur.ts",
   "type": "module",
   "scripts": {
     "build": "tsc && tsc-alias --no-resolve-package-subpaths",
