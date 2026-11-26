@@ -48,6 +48,7 @@ type AdaptateurEnvironnement = {
     webhookRetourExperience: () => string | undefined;
     webhookAvisUtilisateur: () => string | undefined;
     webhookAvisMesure: () => string | undefined;
+    webhookReportingTechnique: () => string | undefined;
   };
   grist: {
     baseURL: () => string;
@@ -237,6 +238,7 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     webhookAvisUtilisateur: () => process.env.WEBHOOK_MATTERMOST_AVIS_UTILISATEUR,
     webhookRetourExperience: () => process.env.WEBHOOK_MATTERMOST_RETOURS_EXPERIENCE,
     webhookAvisMesure: () => process.env.WEBHOOK_MATTERMOST_AVIS_MESURE,
+    webhookReportingTechnique: () => process.env.WEBHOOK_MATTERMOST_REPORTING_TECHNIQUE,
   },
   grist: {
     baseURL: () => process.env.GRIST_BASE_URL || '',
