@@ -386,7 +386,7 @@ importers:
     devDependencies:
       '@electric-sql/pglite':
         specifier: ^0.5.16
-        version: 0.5.16
+        version: 0.5.17
       '@types/bcrypt':
         specifier: ^6.0.0
         version: 6.0.0
@@ -428,7 +428,7 @@ importers:
         version: 0.6.1
       knex-pglite:
         specifier: ^0.14.0
-        version: 0.14.0(@electric-sql/pglite@0.5.16)(knex@3.3.0(pg@8.23.1)(supports-color@10.2.2))
+        version: 0.14.0(@electric-sql/pglite@0.5.17)(knex@3.3.0(pg@8.23.1)(supports-color@10.2.2))
       node-mocks-http:
         specifier: ^1.17.2
         version: 1.18.1(@types/express@5.0.6)(@types/node@26.6.6)
@@ -945,8 +945,8 @@ packages:
     resolution: {integrity: sha512-OoKoR0f76dCY666JlcbhmVTs2drYj1GUXZTYTcbUgJjh9Nv41aFfZ21bPQTERm5+L5cBDo466NltB2lplS5GBw==}
     engines: {node: '>=20.19.0'}
 
-  '@electric-sql/pglite@0.5.16':
-    resolution: {integrity: sha512-Nj8KcIsJL748W408U2N8q4+9IlONdpRIU8MJypIAAINMJ5nqKyqpX7Mgg/5XKkXiAib3AoZGR6hnJFlrlLBrcg==}
+  '@electric-sql/pglite@0.5.17':
+    resolution: {integrity: sha512-8SvKjiUjaU+0O0dbxjOfN+jXz14TEqDWbwDkYOW1aQ11y/ph2JvFVI27ABBo5nfw+ZfSqy4hKCNlbnbB1TDE+g==}
 
   '@emnapi/runtime@1.11.3':
     resolution: {integrity: sha512-Xz4Tpyki7XyrpbUK1jR1AhdAdaXyhhY4lZ3neLodmhpuWfy2PAQN5B46sAiU4liOXGLkHypn/qU+jvfWSCYYLA==}
@@ -5428,7 +5428,7 @@ snapshots:
 
   '@csstools/css-tokenizer@4.0.2': {}
 
-  '@electric-sql/pglite@0.5.16': {}
+  '@electric-sql/pglite@0.5.17': {}
 
   '@emnapi/runtime@1.11.3':
     dependencies:
@@ -7845,9 +7845,9 @@ snapshots:
 
   kind-of@6.0.3: {}
 
-  knex-pglite@0.14.0(@electric-sql/pglite@0.5.16)(knex@3.3.0(pg@8.23.1)(supports-color@10.2.2)):
+  knex-pglite@0.14.0(@electric-sql/pglite@0.5.17)(knex@3.3.0(pg@8.23.1)(supports-color@10.2.2)):
     dependencies:
-      '@electric-sql/pglite': 0.5.16
+      '@electric-sql/pglite': 0.5.17
       knex: 3.3.0(pg@8.23.1)(supports-color@10.2.2)
 
   knex@3.3.0(pg@8.23.1)(supports-color@10.2.2):
