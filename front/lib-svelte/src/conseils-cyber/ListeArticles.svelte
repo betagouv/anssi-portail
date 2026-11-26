@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
-  import { récupèreRésumésDArticle, type RésuméArticleAPI } from '../passerelles/blog/articles';
-  import type { PropriétésFilAriane } from '../ui/filAriane';
-  import Heros from '../ui/Heros.svelte';
+  import { récupèreRésumésDArticle, type RésuméArticleAPI } from '@passerelles/blog/articles';
+  import type { PropriétésFilAriane } from '@ui/filAriane';
+  import Heros from '@ui/Heros.svelte';
 
   type Props = {
     résumésPréchargés?: RésuméArticleAPI[];

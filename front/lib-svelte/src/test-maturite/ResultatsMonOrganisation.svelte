@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
-  import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
-  import Lien from '../ui/Lien.svelte';
+  import { niveauxMaturite } from '@niveaux-maturite/NiveauxMaturite.donnees';
+  import type { IdNiveau } from '@niveaux-maturite/NiveauxMaturite.type';
+  import Lien from '@ui/Lien.svelte';
   import EncartDeRecommandationSelonMaturite from './EncartDeRecommandationSelonMaturite.svelte';
   import PartageTest from './PartageTest.svelte';
   import TuilesMaturite from './TuilesMaturite.svelte';

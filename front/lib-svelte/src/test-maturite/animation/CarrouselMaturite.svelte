@@ -1,6 +1,6 @@
 <script lang="ts">
   import { prefersReducedMotion } from 'svelte/motion';
-  import { suitLaVisibilité } from '../../utils/visibilite.svelte';
+  import { suitLaVisibilité } from '@utils/visibilite.svelte';
   import Confirme from './Confirme.svelte';
   import Decor from './Decor.svelte';
   import Emergent from './Emergent.svelte';

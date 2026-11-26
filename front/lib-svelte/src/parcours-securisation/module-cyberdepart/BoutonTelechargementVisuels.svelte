@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { afficheBadgeCyberdépart } from '$plateforme/environnement';
-  import Lien, { type Props as PropsDuLien } from '../../ui/Lien.svelte';
+  import { afficheBadgeCyberdépart } from '@plateforme/environnement';
+  import Lien, { type Props as PropsDuLien } from '@ui/Lien.svelte';
 
   type Props = {
     taille?: PropsDuLien['taille'];

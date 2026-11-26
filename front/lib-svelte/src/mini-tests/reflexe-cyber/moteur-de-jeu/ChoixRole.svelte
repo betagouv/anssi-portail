@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
-  import Bouton from '../../../ui/Bouton.svelte';
+  import Bouton from '@ui/Bouton.svelte';
   import type { IdRôle, Rôle } from './roles';
 
   type Props = {

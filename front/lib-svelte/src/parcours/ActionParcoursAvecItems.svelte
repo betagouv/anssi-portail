@@ -1,7 +1,7 @@
 <script lang="ts">
-  import CarteItem from '../catalogue/CarteItem.svelte';
-  import type { ItemCyber } from '../catalogue/Catalogue.types';
-  import type { Guide } from '../catalogue/Guide.types';
+  import CarteItem from '@catalogue/CarteItem.svelte';
+  import type { ItemCyber } from '@catalogue/Catalogue.types';
+  import type { Guide } from '@catalogue/Guide.types';
 
   interface Props {
     titre: string;

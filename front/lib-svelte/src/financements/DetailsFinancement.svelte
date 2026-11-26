@@ -1,9 +1,9 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount, tick, untrack } from 'svelte';
-  import type { PropriétésFilAriane } from '../ui/filAriane';
-  import Heros from '../ui/Heros.svelte';
-  import Lien from '../ui/Lien.svelte';
+  import type { PropriétésFilAriane } from '@ui/filAriane';
+  import Heros from '@ui/Heros.svelte';
+  import Lien from '@ui/Lien.svelte';
   import BadgeTypeFinancement from './BadgeTypeFinancement.svelte';
   import type { Financement } from './financement';
   import MenuFinancement from './MenuFinancement.svelte';

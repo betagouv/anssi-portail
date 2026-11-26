@@ -1,7 +1,7 @@
 import { decodeHTML } from 'entities';
 import { fromStore } from 'svelte/store';
-import { espaceConnectéActivé } from '$plateforme/environnement';
-import { profilStore } from '../stores/profil.store';
+import { espaceConnectéActivé } from '@plateforme/environnement';
+import { profilStore } from '@stores/profil.store';
 
 const profil = fromStore(profilStore);
 

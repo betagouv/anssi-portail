@@ -1,5 +1,5 @@
-import type { ItemCyber } from '../catalogue/Catalogue.types';
-import type { Guide } from '../catalogue/Guide.types';
+import type { ItemCyber } from '@catalogue/Catalogue.types';
+import type { Guide } from '@catalogue/Guide.types';
 
 export const versItemsCyberOuGuide =
   (itemsCyber: ItemCyber[], guides: Guide[]) =>

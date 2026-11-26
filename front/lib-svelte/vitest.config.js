@@ -1,6 +1,6 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig } from 'vitest/config';
-import { plateformePlugin } from './src/plateforme/plateforme.plugin.js';
+import { aliasSvelte } from './alias.plugin.js';
 
 export default defineConfig({
   test: {
@@ -8,5 +8,5 @@ export default defineConfig({
     fsModuleCache: true,
     setupFiles: ['vitest-localstorage-mock'],
   },
-  plugins: [svelte(), plateformePlugin()],
+  plugins: [svelte(), aliasSvelte()],
 });

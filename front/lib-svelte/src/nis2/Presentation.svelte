@@ -1,7 +1,7 @@
 <script lang="ts">
-  import EncartPromotionParcoursComplet from '../parcours-securisation/EncartPromotionParcoursComplet.svelte';
-  import TagProgrammeGratuit from '../parcours-securisation/TagProgrammeGratuit.svelte';
-  import Lien from '../ui/Lien.svelte';
+  import EncartPromotionParcoursComplet from '@parcours-securisation/EncartPromotionParcoursComplet.svelte';
+  import TagProgrammeGratuit from '@parcours-securisation/TagProgrammeGratuit.svelte';
+  import Lien from '@ui/Lien.svelte';
   import AccordeonNis2 from './AccordeonNis2.svelte';
   import Marelle from './Marelle.svelte';
 

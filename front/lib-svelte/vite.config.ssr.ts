@@ -1,6 +1,6 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig, type UserConfig } from 'vite';
-import { plateformePlugin } from './src/plateforme/plateforme.plugin.js';
+import { aliasSvelte } from './alias.plugin.js';
 import { emetComposantsAutorisés } from './src/utils/composantsAutorises.plugin.js';
 import { injecteNonce } from './src/utils/injecteNonce.plugin.js';
 
@@ -61,7 +61,7 @@ export const configSsr: UserConfig = {
       },
     }),
     injecteNonce(),
-    plateformePlugin(),
+    aliasSvelte(),
     emetComposantsAutorisés(
       Object.keys(rolldownOptions?.input ?? {}),
       '../../back/src/infra/enrichissement/composantsAutorises.genere.ts'

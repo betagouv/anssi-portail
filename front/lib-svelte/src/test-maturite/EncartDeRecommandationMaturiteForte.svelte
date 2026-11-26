@@ -1,6 +1,6 @@
 <script lang="ts">
-  import EncartPromotionParcoursComplet from '../parcours-securisation/EncartPromotionParcoursComplet.svelte';
-  import TagProgrammeGratuit from '../parcours-securisation/TagProgrammeGratuit.svelte';
+  import EncartPromotionParcoursComplet from '@parcours-securisation/EncartPromotionParcoursComplet.svelte';
+  import TagProgrammeGratuit from '@parcours-securisation/TagProgrammeGratuit.svelte';
 </script>
 
 <dsfr-container>

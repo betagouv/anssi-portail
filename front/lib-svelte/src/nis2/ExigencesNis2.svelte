@@ -1,9 +1,9 @@
 <script lang="ts">
   import axios from 'axios';
   import { untrack } from 'svelte';
-  import ConteneurLarge from '../ui/ConteneurLarge.svelte';
-  import Lien from '../ui/Lien.svelte';
-  import { détecteRendu } from '../utils/rendu.svelte';
+  import ConteneurLarge from '@ui/ConteneurLarge.svelte';
+  import Lien from '@ui/Lien.svelte';
+  import { détecteRendu } from '@utils/rendu.svelte';
   import Avertissements from './Avertissements.svelte';
   import { fabriqueDExigence, type Exigence, type ReferentielSelectionne } from './exigence.type';
   import Panneau from './panneau/Panneau.svelte';

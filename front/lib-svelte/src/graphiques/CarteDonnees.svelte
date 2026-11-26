@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { enPropriétéWebC } from '$plateforme/webComponent';
+  import { enPropriétéWebC } from '@plateforme/webComponent';
 
   export interface TableauDeDonnees {
     colonnes: Array<string>;

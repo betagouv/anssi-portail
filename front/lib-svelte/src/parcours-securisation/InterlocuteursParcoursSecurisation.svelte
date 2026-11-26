@@ -1,6 +1,6 @@
 <script lang="ts">
-  import CarrouselDesInterlocuteurs from '../interlocuteurs/CarrouselDesInterlocuteurs.svelte';
-  import { profilStore } from '../stores/profil.store';
+  import CarrouselDesInterlocuteurs from '@interlocuteurs/CarrouselDesInterlocuteurs.svelte';
+  import { profilStore } from '@stores/profil.store';
 </script>
 
 {#if $profilStore?.parcoursSecurisation.parcoursActuel === 'complet'}

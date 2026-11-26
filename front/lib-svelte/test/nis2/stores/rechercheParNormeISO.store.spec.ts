@@ -1,6 +1,6 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { rechercheParNormeISO } from '../../../src/nis2/stores/rechercheParNormeISO';
+import { rechercheParNormeISO } from '@nis2/stores/rechercheParNormeISO';
 import { exigenceISODeNiveauEleve, exigenceNIS2DeNiveauEleve } from '../objetsPretsALEmploi';
 
 describe('La recherche par norme', () => {

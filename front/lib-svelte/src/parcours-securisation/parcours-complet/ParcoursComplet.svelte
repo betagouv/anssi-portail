@@ -1,12 +1,12 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import ContrôleSegmenté from '../../navigation/ControleSegmente.svelte';
-  import { creeLeFragmentDeNavigation as créeLeFragmentDeNavigation } from '../../navigation/fragmentDeNavigation.svelte';
-  import BadgeBêta from '../../ui/BadgeBeta.svelte';
-  import type { PropriétésFilAriane } from '../../ui/filAriane';
-  import Héros from '../../ui/Heros.svelte';
-  import Lien from '../../ui/Lien.svelte';
+  import ContrôleSegmenté from '@navigation/ControleSegmente.svelte';
+  import { creeLeFragmentDeNavigation as créeLeFragmentDeNavigation } from '@navigation/fragmentDeNavigation.svelte';
+  import BadgeBêta from '@ui/BadgeBeta.svelte';
+  import type { PropriétésFilAriane } from '@ui/filAriane';
+  import Héros from '@ui/Heros.svelte';
+  import Lien from '@ui/Lien.svelte';
   import ÉvènementsViaModaleParcoursComplet from '../evenementsViaModaleParcoursComplet.svelte';
   import type { Mesure, Module } from '../mesures/mesure';
   import Progression from '../Progression.svelte';

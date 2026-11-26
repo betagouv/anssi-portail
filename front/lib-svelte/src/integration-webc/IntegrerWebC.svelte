@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Accordeon from '../ui/Accordeon.svelte';
-  import type { PropriétésFilAriane } from '../ui/filAriane';
-  import Heros from '../ui/Heros.svelte';
-  import Lien from '../ui/Lien.svelte';
+  import Accordeon from '@ui/Accordeon.svelte';
+  import type { PropriétésFilAriane } from '@ui/filAriane';
+  import Heros from '@ui/Heros.svelte';
+  import Lien from '@ui/Lien.svelte';
   import BlocDeCode from './BlocDeCode.svelte';
   import SectionWebCAccordeon from './SectionWebCAccordeon.svelte';
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { collecteLesErreurs } from '../../src/utils/erreurApi';
+import { collecteLesErreurs } from '@utils/erreurApi';
 
 describe('La collecte des erreurs', () => {
   it('sait traiter une erreur de validation MSC', () => {

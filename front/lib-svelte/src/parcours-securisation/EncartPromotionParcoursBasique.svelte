@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount, type Snippet } from 'svelte';
-  import { afficheBadgeCyberdépart } from '$plateforme/environnement';
-  import { enPropriétéWebC } from '$plateforme/webComponent';
-  import Lien from '../ui/Lien.svelte';
+  import { afficheBadgeCyberdépart } from '@plateforme/environnement';
+  import { enPropriétéWebC } from '@plateforme/webComponent';
+  import Lien from '@ui/Lien.svelte';
   import IllustrationBadge from './animation/IllustrationBadge.svelte';
   import IllustrationMesure from './animation/IllustrationMesure.svelte';
   import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';

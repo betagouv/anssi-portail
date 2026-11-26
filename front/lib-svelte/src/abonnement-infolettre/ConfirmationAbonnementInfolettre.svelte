@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Alerte from '../ui/Alerte.svelte';
-  import { fabriqueFilAriane } from '../ui/filAriane';
-  import FilAriane from '../ui/FilAriane.svelte';
+  import Alerte from '@ui/Alerte.svelte';
+  import { fabriqueFilAriane } from '@ui/filAriane';
+  import FilAriane from '@ui/FilAriane.svelte';
 </script>
 
 <dsfr-container>

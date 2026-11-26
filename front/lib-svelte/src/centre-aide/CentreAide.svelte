@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { enPropriétéWebC } from '$plateforme/webComponent';
+  import { enPropriétéWebC } from '@plateforme/webComponent';
 
   const liens = enPropriétéWebC([
     {

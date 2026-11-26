@@ -1,7 +1,7 @@
 <script lang="ts">
-  import CarteDonnees from '../graphiques/CarteDonnees.svelte';
-  import GraphiqueCirculaire from '../graphiques/GraphiqueCirculaire.svelte';
-  import type { DonnéesObservatoire, PointMensuel } from '../passerelles/observatoire';
+  import CarteDonnees from '@graphiques/CarteDonnees.svelte';
+  import GraphiqueCirculaire from '@graphiques/GraphiqueCirculaire.svelte';
+  import type { DonnéesObservatoire, PointMensuel } from '@passerelles/observatoire';
   import ChiffreCle from './ChiffreCle.svelte';
   import EtatDuChargement from './EtatDuChargement.svelte';
   import EvolutionMensuelle from './EvolutionMensuelle.svelte';

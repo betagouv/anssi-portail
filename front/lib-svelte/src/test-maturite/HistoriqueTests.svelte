@@ -1,7 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import Lien from '../ui/Lien.svelte';
+  import Lien from '@ui/Lien.svelte';
   import CarteTestMaturite, { type RésultatTest } from './CarteTestMaturite.svelte';
   import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
 

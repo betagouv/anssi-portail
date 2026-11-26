@@ -1,6 +1,6 @@
 <script lang="ts">
   import { DsfrBadge, DsfrCard } from '@lab-anssi/ui-kit';
-  import RetourUtilisateurSurContenu from '../../../../../../ui/RetourUtilisateurSurContenu.svelte';
+  import RetourUtilisateurSurContenu from '@ui/RetourUtilisateurSurContenu.svelte';
   import IllustrationOutil from './IllustrationOutil.svelte';
 
   type Props = {

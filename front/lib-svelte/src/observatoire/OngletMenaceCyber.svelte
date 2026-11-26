@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { DonnéesObservatoire } from '../passerelles/observatoire';
+  import type { DonnéesObservatoire } from '@passerelles/observatoire';
   import ChiffreCle from './ChiffreCle.svelte';
   import EtatDuChargement from './EtatDuChargement.svelte';
   import Onglet from './Onglet.svelte';

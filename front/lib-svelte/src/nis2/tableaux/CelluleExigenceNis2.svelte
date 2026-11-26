@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { enPropriétéWebC } from '$plateforme/webComponent';
-  import GroupeDeBadges from '../../ui/GroupeDeBadges.svelte';
+  import { enPropriétéWebC } from '@plateforme/webComponent';
+  import GroupeDeBadges from '@ui/GroupeDeBadges.svelte';
   import { badgesExigence, type ExigenceNis2 } from '../exigence.type';
   import ContenuExigenceFormate from './ContenuExigenceFormate.svelte';
 

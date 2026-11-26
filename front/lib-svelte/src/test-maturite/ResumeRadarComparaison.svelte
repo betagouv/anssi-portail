@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
-  import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
-  import Accordeon from '../ui/Accordeon.svelte';
-  import { arrondisAuCentieme } from '../utils/arrondis';
+  import { niveauxMaturite } from '@niveaux-maturite/NiveauxMaturite.donnees';
+  import type { IdNiveau } from '@niveaux-maturite/NiveauxMaturite.type';
+  import Accordeon from '@ui/Accordeon.svelte';
+  import { arrondisAuCentieme } from '@utils/arrondis';
   import type { SerieRadar } from './Serie';
   import { rubriques } from './TestMaturite.donnees';
   import type { IdRubrique } from './TestMaturite.type';

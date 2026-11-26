@@ -1,6 +1,6 @@
 import { mount } from 'svelte';
-import AvisUtilisateur from './avis-utilisateur/AvisUtilisateur.svelte';
-import { ControleAvisUtilisateur, entrepotNavigateurAvisUtilisateur } from './avis-utilisateur/ControleAvisUtilisateur';
+import AvisUtilisateur from '@avis-utilisateur/AvisUtilisateur.svelte';
+import { ControleAvisUtilisateur, entrepotNavigateurAvisUtilisateur } from '@avis-utilisateur/ControleAvisUtilisateur';
 
 const donnees = document.getElementById('donneesAvisUtilisateur')!.textContent;
 if (!donnees) throw new Error('Impossible de trouver les données');

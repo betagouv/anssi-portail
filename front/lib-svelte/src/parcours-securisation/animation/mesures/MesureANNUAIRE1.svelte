@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { détecteRendu } from '../../../utils/rendu.svelte';
-  import { suitLaVisibilité } from '../../../utils/visibilite.svelte';
+  import { détecteRendu } from '@utils/rendu.svelte';
+  import { suitLaVisibilité } from '@utils/visibilite.svelte';
 
   const { survol }: { survol?: boolean } = $props();
 

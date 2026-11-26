@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { calculeIdNiveau } from '../../src/niveaux-maturite/calculeIdNiveau';
+import { calculeIdNiveau } from '@niveaux-maturite/calculeIdNiveau';
 
 describe('Le calcul du niveau de maturité', () => {
   it.each([

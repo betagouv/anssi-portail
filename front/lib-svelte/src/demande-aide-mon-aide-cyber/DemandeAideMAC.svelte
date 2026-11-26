@@ -1,11 +1,11 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import HerosRiche from '../ui/HerosRiche.svelte';
-  import Lien from '../ui/Lien.svelte';
-  import MotEnExergue from '../ui/MotEnExergue.svelte';
-  import Separateur from '../ui/Separateur.svelte';
-  import { collecteLesErreurs } from '../utils/erreurApi';
+  import HerosRiche from '@ui/HerosRiche.svelte';
+  import Lien from '@ui/Lien.svelte';
+  import MotEnExergue from '@ui/MotEnExergue.svelte';
+  import Separateur from '@ui/Separateur.svelte';
+  import { collecteLesErreurs } from '@utils/erreurApi';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import DialogueSortieDiagnostic from './DialogueSortieDiagnostic.svelte';
   import type { CorpsAPIDemandeAide, DonneesFormulaireDemandeAide } from './DonneesFormulaireDemandeAide';

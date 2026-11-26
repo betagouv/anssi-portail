@@ -1,10 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import {
-  fabriqueDExigence,
-  formateContenuExigence,
-  type ExigenceISO,
-  type ExigenceNis2,
-} from '../../src/nis2/exigence.type';
+import { fabriqueDExigence, formateContenuExigence, type ExigenceISO, type ExigenceNis2 } from '@nis2/exigence.type';
 import { exigenceNIS2DeNiveauFaible } from './objetsPretsALEmploi';
 
 describe("Le mapper de données de l'API", () => {

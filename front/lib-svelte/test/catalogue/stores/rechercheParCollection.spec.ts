@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
-import { CollectionGuide } from '../../../src/catalogue/Guide.types';
-import { rechercheParCollection } from '../../../src/catalogue/stores/guides/rechercheParCollection.store';
+import { CollectionGuide } from '@catalogue/Guide.types';
+import { rechercheParCollection } from '@catalogue/stores/guides/rechercheParCollection.store';
 import { guideZeroTrust } from './objetsExemples';
 
 describe('La recherche par collection', () => {

@@ -2,17 +2,17 @@
   import { DsfrBadge } from '@lab-anssi/ui-kit';
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { enPropriétéWebC } from '$plateforme/webComponent';
-  import AnneauProgression from '../../parcours-securisation/AnneauProgression.svelte';
-  import CarteMesure from '../../parcours-securisation/CarteMesure.svelte';
-  import type { Mesure } from '../../parcours-securisation/mesures/mesure';
-  import BadgeCyberdepart from '../../parcours-securisation/module-cyberdepart/BadgeCyberdepart.svelte';
-  import BoutonPartageBadgeCyberdepart from '../../parcours-securisation/module-cyberdepart/BoutonPartageBadgeCyberdepart.svelte';
-  import BoutonTelechargementVisuels from '../../parcours-securisation/module-cyberdepart/BoutonTelechargementVisuels.svelte';
-  import type { ModuleRéponseApi } from '../../parcours-securisation/moduleReponseApi';
-  import Lien from '../../ui/Lien.svelte';
-  import MotEnExergue from '../../ui/MotEnExergue.svelte';
-  import { détecteMédia, requêteMédiaÀPartirDeSm } from '../../utils/rendu.svelte';
+  import { enPropriétéWebC } from '@plateforme/webComponent';
+  import AnneauProgression from '@parcours-securisation/AnneauProgression.svelte';
+  import CarteMesure from '@parcours-securisation/CarteMesure.svelte';
+  import type { Mesure } from '@parcours-securisation/mesures/mesure';
+  import BadgeCyberdepart from '@parcours-securisation/module-cyberdepart/BadgeCyberdepart.svelte';
+  import BoutonPartageBadgeCyberdepart from '@parcours-securisation/module-cyberdepart/BoutonPartageBadgeCyberdepart.svelte';
+  import BoutonTelechargementVisuels from '@parcours-securisation/module-cyberdepart/BoutonTelechargementVisuels.svelte';
+  import type { ModuleRéponseApi } from '@parcours-securisation/moduleReponseApi';
+  import Lien from '@ui/Lien.svelte';
+  import MotEnExergue from '@ui/MotEnExergue.svelte';
+  import { détecteMédia, requêteMédiaÀPartirDeSm } from '@utils/rendu.svelte';
   import ProgressionCyberdepart from './ProgressionCyberdepart.svelte';
 
   const àPartirDeSm = détecteMédia(requêteMédiaÀPartirDeSm);

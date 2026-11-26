@@ -1,4 +1,4 @@
-import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
+import type { IdNiveau } from '@niveaux-maturite/NiveauxMaturite.type';
 import type { RéponsesResultatTest } from './ResultatsTest.type';
 
 export type ElementSerie = {

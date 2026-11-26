@@ -1,13 +1,13 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { BesoinCyber } from '../../../src/catalogue/Catalogue.types';
-import { CollectionGuide, Langue } from '../../../src/catalogue/Guide.types';
-import { guidesStore } from '../../../src/catalogue/stores/guides/guides.store';
-import { guidesFiltres } from '../../../src/catalogue/stores/guides/guidesFiltres.store';
-import { rechercheParCollection } from '../../../src/catalogue/stores/guides/rechercheParCollection.store';
-import { rechercheParLangue } from '../../../src/catalogue/stores/guides/rechercheParLangue.store';
-import { rechercheParBesoin } from '../../../src/catalogue/stores/rechercheParBesoin.store';
-import { rechercheTextuelle } from '../../../src/catalogue/stores/rechercheTextuelle.store';
+import { BesoinCyber } from '@catalogue/Catalogue.types';
+import { CollectionGuide, Langue } from '@catalogue/Guide.types';
+import { guidesStore } from '@catalogue/stores/guides/guides.store';
+import { guidesFiltres } from '@catalogue/stores/guides/guidesFiltres.store';
+import { rechercheParCollection } from '@catalogue/stores/guides/rechercheParCollection.store';
+import { rechercheParLangue } from '@catalogue/stores/guides/rechercheParLangue.store';
+import { rechercheParBesoin } from '@catalogue/stores/rechercheParBesoin.store';
+import { rechercheTextuelle } from '@catalogue/stores/rechercheTextuelle.store';
 import { guideDevsecops, guideDevsecopsEN, guideZeroTrust } from './objetsExemples';
 
 describe('Le store des guides filtrés', () => {

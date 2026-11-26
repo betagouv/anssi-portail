@@ -7,7 +7,7 @@
 <script lang="ts">
   import axios from 'axios';
   import type { Snippet } from 'svelte';
-  import { ajouteRetour, récupèreRetour, supprimeRetour } from '$plateforme/retourUtilisateurSurContenu';
+  import { ajouteRetour, récupèreRetour, supprimeRetour } from '@plateforme/retourUtilisateurSurContenu';
   import Alerte from './Alerte.svelte';
   import Bouton from './Bouton.svelte';
 

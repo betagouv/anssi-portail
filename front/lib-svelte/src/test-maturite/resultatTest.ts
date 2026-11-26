@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+import { niveauxMaturite } from '@niveaux-maturite/NiveauxMaturite.donnees';
 import type { RepartitionResultatsTestPourUnNiveau } from './ResultatsTest.type';
 import type { Serie } from './Serie';
 

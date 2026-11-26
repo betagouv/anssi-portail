@@ -1,17 +1,17 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import Alerte from '../ui/Alerte.svelte';
-  import Bouton from '../ui/Bouton.svelte';
-  import CaseACocher from '../ui/CaseACocher.svelte';
-  import ChampTexte from '../ui/ChampTexte.svelte';
-  import ControleFormulaire from '../ui/ControleFormulaire.svelte';
-  import Etapier from '../ui/Etapier.svelte';
-  import Formulaire from '../ui/Formulaire.svelte';
-  import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
-  import type { Departement, Organisation } from '../ui/formulaire/SelectionOrganisation.types.js';
-  import Lien from '../ui/Lien.svelte';
-  import { stockageDeSession } from '../utils/stockageDeSession';
+  import Alerte from '@ui/Alerte.svelte';
+  import Bouton from '@ui/Bouton.svelte';
+  import CaseACocher from '@ui/CaseACocher.svelte';
+  import ChampTexte from '@ui/ChampTexte.svelte';
+  import ControleFormulaire from '@ui/ControleFormulaire.svelte';
+  import Etapier from '@ui/Etapier.svelte';
+  import Formulaire from '@ui/Formulaire.svelte';
+  import SelectionOrganisation from '@ui/formulaire/SelectionOrganisation.svelte';
+  import type { Departement, Organisation } from '@ui/formulaire/SelectionOrganisation.types.js';
+  import Lien from '@ui/Lien.svelte';
+  import { stockageDeSession } from '@utils/stockageDeSession';
   import type { FormulaireInscription, InformationsProfessionnelles } from './creationCompte';
   import SelectionDepartement from './SelectionDepartement.svelte';
   import SelectionDomaineSpecialite from './SelectionDomaineSpecialite.svelte';

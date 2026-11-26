@@ -2,11 +2,11 @@
   import type { Action } from 'svelte/action';
   import { prefersReducedMotion } from 'svelte/motion';
   import { fly } from 'svelte/transition';
-  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
-  import { clic } from '../../../../directives/actions.svelte';
-  import Alerte from '../../../../ui/Alerte.svelte';
-  import Bouton from '../../../../ui/Bouton.svelte';
-  import CanonAConfetti from '../../../../ui/CanonAConfetti.svelte';
+  import { aseptiseHtml } from '@plateforme/aseptisationDuHtml';
+  import { clic } from '@directives/actions.svelte';
+  import Alerte from '@ui/Alerte.svelte';
+  import Bouton from '@ui/Bouton.svelte';
+  import CanonAConfetti from '@ui/CanonAConfetti.svelte';
   import Minuteur from '../Minuteur.svelte';
   import type { Rôle } from '../roles';
   import type { Évènement } from './evenements';

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { publieRéponseTestHameçonnage } from '../../passerelles/mini-tests/publicationRéponses';
-  import Bouton from '../../ui/Bouton.svelte';
+  import { publieRéponseTestHameçonnage } from '@passerelles/mini-tests/publicationRéponses';
+  import Bouton from '@ui/Bouton.svelte';
   import BoutonDeVoteHameconnage, { type Réponse } from './BoutonDeVoteHameconnage.svelte';
   import {
     idCorrélation,

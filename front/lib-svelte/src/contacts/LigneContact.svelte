@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Lien from '../ui/Lien.svelte';
+  import Lien from '@ui/Lien.svelte';
 
   type Props = {
     type: 'adresse' | 'email' | 'nom' | 'site-web' | 'telephone';

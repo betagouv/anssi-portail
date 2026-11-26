@@ -1,5 +1,5 @@
 <script lang="ts">
-  import CarteDonnees from '../graphiques/CarteDonnees.svelte';
+  import CarteDonnees from '@graphiques/CarteDonnees.svelte';
   import { formateDate } from './formatage';
 
   interface Props {

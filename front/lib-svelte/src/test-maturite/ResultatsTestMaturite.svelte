@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { extraisSegmentsDuFragment } from '../navigation/fragmentDeNavigation.svelte';
-  import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
-  import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
-  import { profilStore } from '../stores/profil.store';
-  import type { PropriétésFilAriane } from '../ui/filAriane';
-  import Heros from '../ui/Heros.svelte';
+  import { extraisSegmentsDuFragment } from '@navigation/fragmentDeNavigation.svelte';
+  import NavigationTertiaire from '@navigation/NavigationTertiaire.svelte';
+  import type { IdNiveau } from '@niveaux-maturite/NiveauxMaturite.type';
+  import { profilStore } from '@stores/profil.store';
+  import type { PropriétésFilAriane } from '@ui/filAriane';
+  import Heros from '@ui/Heros.svelte';
   import ComparaisonTest from './ComparaisonTest.svelte';
   import HistoriqueTests from './HistoriqueTests.svelte';
   import PropositionRefaireTest from './PropositionRefaireTest.svelte';

@@ -1,11 +1,11 @@
 <script lang="ts">
   import axios from 'axios';
-  import Bouton from '../ui/Bouton.svelte';
-  import ChampTexte from '../ui/ChampTexte.svelte';
-  import Formulaire from '../ui/Formulaire.svelte';
-  import Lien from '../ui/Lien.svelte';
-  import Modale from '../ui/Modale.svelte';
-  import ZoneTexte from '../ui/ZoneTexte.svelte';
+  import Bouton from '@ui/Bouton.svelte';
+  import ChampTexte from '@ui/ChampTexte.svelte';
+  import Formulaire from '@ui/Formulaire.svelte';
+  import Lien from '@ui/Lien.svelte';
+  import Modale from '@ui/Modale.svelte';
+  import ZoneTexte from '@ui/ZoneTexte.svelte';
 
   let etape: 'formulaire' | 'merci' = $state('formulaire');
   let afficheDialogue = $state(false);

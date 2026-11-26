@@ -1,8 +1,8 @@
 <script lang="ts">
-  import CanonAConfetti from '../../ui/CanonAConfetti.svelte';
-  import EnteteAutonome from '../../ui/EnteteAutonome.svelte';
-  import { fabriqueFilAriane } from '../../ui/filAriane';
-  import FilAriane from '../../ui/FilAriane.svelte';
+  import CanonAConfetti from '@ui/CanonAConfetti.svelte';
+  import EnteteAutonome from '@ui/EnteteAutonome.svelte';
+  import { fabriqueFilAriane } from '@ui/filAriane';
+  import FilAriane from '@ui/FilAriane.svelte';
   import BoiteMail from './BoiteMail.svelte';
   import { mailOuvert, scoreFinalAffiché } from './hameconnage.store';
   import Mail from './Mail.svelte';

@@ -1,10 +1,10 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { couleursDeNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
-  import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
-  import Bouton from '../ui/Bouton.svelte';
-  import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
+  import { couleursDeNiveau, niveauxMaturite } from '@niveaux-maturite/NiveauxMaturite.donnees';
+  import type { IdNiveau } from '@niveaux-maturite/NiveauxMaturite.type';
+  import Bouton from '@ui/Bouton.svelte';
+  import IllustrationDragonPasDeResultat from '@ui/IllustrationDragonPasDeResultat.svelte';
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeAnneau from './LegendeAnneau.svelte';
   import PartageTest from './PartageTest.svelte';

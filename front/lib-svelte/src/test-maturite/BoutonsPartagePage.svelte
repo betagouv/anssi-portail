@@ -1,8 +1,8 @@
 <script lang="ts">
   import { getContext, untrack } from 'svelte';
-  import Bouton from '../ui/Bouton.svelte';
-  import Lien from '../ui/Lien.svelte';
-  import { copieDansLePressePapier } from '../ui/presse-papier';
+  import Bouton from '@ui/Bouton.svelte';
+  import Lien from '@ui/Lien.svelte';
+  import { copieDansLePressePapier } from '@ui/presse-papier';
 
   const { cheminPartagé, sujetMail }: { cheminPartagé: string; sujetMail: string } = $props();
 

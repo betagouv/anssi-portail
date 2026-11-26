@@ -1,12 +1,12 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
-  import type { ItemCyber } from '../catalogue/Catalogue.types';
-  import type { Guide } from '../catalogue/Guide.types';
-  import { guidePourCarteItem } from '../catalogue/guides/guide';
-  import { chargeGuidesDansLeStore, guidesStore } from '../catalogue/stores/guides/guides.store';
-  import ControleSegmenteAvecSections from '../navigation/ControleSegmenteAvecSections.svelte';
-  import ActionParcoursAvecItems from '../parcours/ActionParcoursAvecItems.svelte';
-  import { versItemsCyberOuGuide } from '../parcours/itemDuParcours';
+  import type { ItemCyber } from '@catalogue/Catalogue.types';
+  import type { Guide } from '@catalogue/Guide.types';
+  import { guidePourCarteItem } from '@catalogue/guides/guide';
+  import { chargeGuidesDansLeStore, guidesStore } from '@catalogue/stores/guides/guides.store';
+  import ControleSegmenteAvecSections from '@navigation/ControleSegmenteAvecSections.svelte';
+  import ActionParcoursAvecItems from '@parcours/ActionParcoursAvecItems.svelte';
+  import { versItemsCyberOuGuide } from '@parcours/itemDuParcours';
 
   type Props = {
     itemsCyber: ItemCyber[];

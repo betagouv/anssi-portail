@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import BadgeOrganisationsAccompagnées from '../../demande-aide-mon-aide-cyber/BadgeOrganisationsAccompagnées.svelte';
-  import Lien from '../../ui/Lien.svelte';
-  import Popover from '../../ui/Popover.svelte';
+  import BadgeOrganisationsAccompagnées from '@demande-aide-mon-aide-cyber/BadgeOrganisationsAccompagnées.svelte';
+  import Lien from '@ui/Lien.svelte';
+  import Popover from '@ui/Popover.svelte';
 
   let hrefCTA = $state('/parcours-complet');
 

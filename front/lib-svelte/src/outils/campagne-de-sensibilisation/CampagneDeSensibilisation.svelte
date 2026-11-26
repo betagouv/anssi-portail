@@ -1,9 +1,9 @@
 <script lang="ts">
   import { DsfrUpload } from '@lab-anssi/ui-kit';
-  import Bouton from '../../ui/Bouton.svelte';
-  import type { PropriétésFilAriane } from '../../ui/filAriane';
-  import HerosRiche from '../../ui/HerosRiche.svelte';
-  import RetourUtilisateurSurContenu from '../../ui/RetourUtilisateurSurContenu.svelte';
+  import Bouton from '@ui/Bouton.svelte';
+  import type { PropriétésFilAriane } from '@ui/filAriane';
+  import HerosRiche from '@ui/HerosRiche.svelte';
+  import RetourUtilisateurSurContenu from '@ui/RetourUtilisateurSurContenu.svelte';
   import IllustrationHerosKitSensibilisation from './animation/IllustrationHerosCampagneSensibilisation.svelte';
   import { archiveCampagne } from './archiveCampagne.svelte';
   import { téléchargeFichierDansNavigateur } from './manipulationZip';

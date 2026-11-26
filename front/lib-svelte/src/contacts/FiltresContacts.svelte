@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { clic } from '../directives/actions.svelte';
-  import SelectRegion from '../test-maturite/SelectRegion.svelte';
+  import { clic } from '@directives/actions.svelte';
+  import SelectRegion from '@test-maturite/SelectRegion.svelte';
   import SelectSecteurContacts from './SelectSecteurContacts.svelte';
 
   interface Props {

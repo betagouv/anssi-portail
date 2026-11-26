@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { profilStore } from '../stores/profil.store';
-  import Bouton from '../ui/Bouton.svelte';
-  import Lien from '../ui/Lien.svelte';
-  import MachineAEcrireRotative from '../ui/MachineAEcrireCyclique.svelte';
-  import Surlignage from '../ui/Surlignage.svelte';
+  import { profilStore } from '@stores/profil.store';
+  import Bouton from '@ui/Bouton.svelte';
+  import Lien from '@ui/Lien.svelte';
+  import MachineAEcrireRotative from '@ui/MachineAEcrireCyclique.svelte';
+  import Surlignage from '@ui/Surlignage.svelte';
   import IllustrationHeros from './animation/heros/IllustrationHeros.svelte';
 
   const phrasesAnimées = [

@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import Bouton from '../../ui/Bouton.svelte';
-  import CanonÀConfetti from '../../ui/CanonAConfetti.svelte';
-  import Lien from '../../ui/Lien.svelte';
-  import Modale from '../../ui/Modale.svelte';
+  import Bouton from '@ui/Bouton.svelte';
+  import CanonÀConfetti from '@ui/CanonAConfetti.svelte';
+  import Lien from '@ui/Lien.svelte';
+  import Modale from '@ui/Modale.svelte';
 
   type Props = {
     estOuverte: boolean;

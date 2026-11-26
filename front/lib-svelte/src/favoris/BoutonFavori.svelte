@@ -1,9 +1,9 @@
 <script lang="ts">
   import axios from 'axios';
-  import type { IdItem } from '../catalogue/Catalogue.types';
-  import { favorisStore } from '../stores/favoris.store';
-  import { profilStore } from '../stores/profil.store';
-  import Bouton from '../ui/Bouton.svelte';
+  import type { IdItem } from '@catalogue/Catalogue.types';
+  import { favorisStore } from '@stores/favoris.store';
+  import { profilStore } from '@stores/profil.store';
+  import Bouton from '@ui/Bouton.svelte';
 
   interface Props {
     idItem: IdItem;

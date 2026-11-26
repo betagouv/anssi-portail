@@ -1,7 +1,7 @@
 <script lang="ts">
   import { DsfrAccordion } from '@lab-anssi/ui-kit';
   import type { Snippet } from 'svelte';
-  import { clic } from '../directives/actions.svelte';
+  import { clic } from '@directives/actions.svelte';
 
   type Props = {
     children?: Snippet;

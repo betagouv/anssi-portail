@@ -1,4 +1,4 @@
-import { stockageDeSession, type StockageDeSession } from '../utils/stockageDeSession';
+import { stockageDeSession, type StockageDeSession } from '@utils/stockageDeSession';
 
 type Traitement = () => void;
 

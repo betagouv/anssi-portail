@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { créeÉvènementsDuParcours } from '../../src/parcours-securisation/evenementsDuParcours';
-import { stockageDeSession } from '../../src/utils/stockageDeSession';
+import { créeÉvènementsDuParcours } from '@parcours-securisation/evenementsDuParcours';
+import { stockageDeSession } from '@utils/stockageDeSession';
 
 describe('les évènements du parcours', () => {
   beforeEach(() => {

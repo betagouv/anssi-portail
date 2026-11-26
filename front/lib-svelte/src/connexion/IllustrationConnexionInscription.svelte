@@ -1,5 +1,5 @@
 <script lang="ts">
-  import IllustrationAnimee from '../accueil/animation/IllustrationAnimee.svelte';
+  import IllustrationAnimee from '@accueil/animation/IllustrationAnimee.svelte';
   import ConnexionInscription from './animation/ConnexionInscription.svelte';
 
   const scènes = [ConnexionInscription];

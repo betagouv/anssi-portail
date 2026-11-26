@@ -1,7 +1,7 @@
 <script lang="ts">
   import { cubicInOut } from 'svelte/easing';
   import { Tween } from 'svelte/motion';
-  import { détecteMédia, requêteMédiaMouvementRéduit } from '../utils/rendu.svelte';
+  import { détecteMédia, requêteMédiaMouvementRéduit } from '@utils/rendu.svelte';
 
   interface Props {
     actuel: number;

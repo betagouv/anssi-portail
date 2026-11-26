@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { profilStore } from '../stores/profil.store';
-  import Bouton from '../ui/Bouton.svelte';
-  import { détecteRendu } from '../utils/rendu.svelte';
+  import { profilStore } from '@stores/profil.store';
+  import Bouton from '@ui/Bouton.svelte';
+  import { détecteRendu } from '@utils/rendu.svelte';
   import { évènementsDuParcours } from './evenementsDuParcours';
   import ModaleRetourUtilisateurSurParcours from './ModaleRetourUtilisateurSurParcours.svelte';
 

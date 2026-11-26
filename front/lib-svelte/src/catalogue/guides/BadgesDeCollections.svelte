@@ -1,5 +1,5 @@
 <script lang="ts">
-  import GroupeDeBadges from '../../ui/GroupeDeBadges.svelte';
+  import GroupeDeBadges from '@ui/GroupeDeBadges.svelte';
   import { CollectionGuide, type Guide } from '../Guide.types';
   import { laCouleurDuBadgeSelonLaCollection } from './guide';
 

@@ -1,7 +1,7 @@
 <script lang="ts">
   /* eslint-disable svelte/no-at-html-tags */
 
-  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
+  import { aseptiseHtml } from '@plateforme/aseptisationDuHtml';
   import {
     Regulation,
     type RegulationEntite,

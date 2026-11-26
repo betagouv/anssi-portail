@@ -1,8 +1,8 @@
 <script lang="ts">
-  import CarrouselDesInterlocuteurs from '../interlocuteurs/CarrouselDesInterlocuteurs.svelte';
-  import EquipeBizDev from '../interlocuteurs/EquipeBizDev.svelte';
-  import EncartPromotionParcoursBasique from '../parcours-securisation/EncartPromotionParcoursBasique.svelte';
-  import TagProgrammeGratuit from '../parcours-securisation/TagProgrammeGratuit.svelte';
+  import CarrouselDesInterlocuteurs from '@interlocuteurs/CarrouselDesInterlocuteurs.svelte';
+  import EquipeBizDev from '@interlocuteurs/EquipeBizDev.svelte';
+  import EncartPromotionParcoursBasique from '@parcours-securisation/EncartPromotionParcoursBasique.svelte';
+  import TagProgrammeGratuit from '@parcours-securisation/TagProgrammeGratuit.svelte';
 </script>
 
 <div class="contenu-encart-parcours-basique">

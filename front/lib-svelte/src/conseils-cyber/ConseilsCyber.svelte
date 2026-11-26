@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { estServeur } from '$plateforme/environnement';
-  import ComposantArticle from '../article/Article.svelte';
-  import { Article } from '../article/article.type';
-  import type { RésuméArticleAPI } from '../passerelles/blog/articles';
+  import { estServeur } from '@plateforme/environnement';
+  import ComposantArticle from '@article/Article.svelte';
+  import { Article } from '@article/article.type';
+  import type { RésuméArticleAPI } from '@passerelles/blog/articles';
   import ListeArticles from './ListeArticles.svelte';
 
   type Props = {

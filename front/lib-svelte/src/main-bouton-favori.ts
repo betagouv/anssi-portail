@@ -1,6 +1,6 @@
 import { mount } from 'svelte';
-import BoutonFavori from './favoris/BoutonFavori.svelte';
-import { profilStore } from './stores/profil.store';
+import BoutonFavori from '@favoris/BoutonFavori.svelte';
+import { profilStore } from '@stores/profil.store';
 
 const donnees = document.getElementById('donneesBoutonFavoris')!.textContent;
 if (!donnees) throw new Error('Impossible de trouver les données');

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { afficheBadgeCyberdépart } from '$plateforme/environnement';
-  import IllustrationAnimee from '../../accueil/animation/IllustrationAnimee.svelte';
+  import { afficheBadgeCyberdépart } from '@plateforme/environnement';
+  import IllustrationAnimee from '@accueil/animation/IllustrationAnimee.svelte';
   import SectionBadge from './SectionBadge.svelte';
   import SectionCyberdépart from './SectionCyberdepart.svelte';
 

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Alerte from '../ui/Alerte.svelte';
-  import Bouton from '../ui/Bouton.svelte';
-  import Lien from '../ui/Lien.svelte';
-  import Modale from '../ui/Modale.svelte';
+  import Alerte from '@ui/Alerte.svelte';
+  import Bouton from '@ui/Bouton.svelte';
+  import Lien from '@ui/Lien.svelte';
+  import Modale from '@ui/Modale.svelte';
 
   type Props = {
     estBureau: boolean;

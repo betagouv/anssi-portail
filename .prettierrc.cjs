@@ -1,10 +1,16 @@
+const aliasSvelte = Object.keys(require('./front/lib-svelte/tsconfig.json').compilerOptions.paths)
+  .filter((alias) => alias !== '@plateforme/*')
+  .map((alias) => alias.slice(1, -2))
+  .join('|');
+
 const importOrder = [
   '<BUILTIN_MODULES>',
   '<THIRD_PARTY_MODULES>',
   '^@anssi-portail/',
-  '^\\$plateforme/',
+  '^@plateforme/',
   '^@metier/',
   '^@(api|bus|infra)/',
+  `^@(${aliasSvelte})/`,
   '^[.]',
 ];
 

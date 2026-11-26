@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { clic } from '../../directives/actions.svelte';
+  import { clic } from '@directives/actions.svelte';
   import { questionnaireAvecUndo } from '../stores/questionnaireAvecUndo.store';
 
   interface Props {

@@ -1,16 +1,16 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
-  import { estServeur } from '$plateforme/environnement';
-  import { clic } from '../directives/actions.svelte';
-  import ControleSegmente from '../navigation/ControleSegmente.svelte';
-  import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
-  import { profilStore } from '../stores/profil.store';
-  import ChampRecherche from '../ui/ChampRecherche.svelte';
-  import type { PropriétésFilAriane } from '../ui/filAriane';
-  import FiltresBureau from '../ui/FiltresBureau.svelte';
-  import FiltresMobile from '../ui/FiltresMobile.svelte';
-  import Heros from '../ui/Heros.svelte';
-  import IllustrationPasDeResultatDeRecherche from '../ui/IllustrationPasDeResultatDeRecherche.svelte';
+  import { estServeur } from '@plateforme/environnement';
+  import { clic } from '@directives/actions.svelte';
+  import ControleSegmente from '@navigation/ControleSegmente.svelte';
+  import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '@navigation/fragmentDeNavigation.svelte';
+  import { profilStore } from '@stores/profil.store';
+  import ChampRecherche from '@ui/ChampRecherche.svelte';
+  import type { PropriétésFilAriane } from '@ui/filAriane';
+  import FiltresBureau from '@ui/FiltresBureau.svelte';
+  import FiltresMobile from '@ui/FiltresMobile.svelte';
+  import Heros from '@ui/Heros.svelte';
+  import IllustrationPasDeResultatDeRecherche from '@ui/IllustrationPasDeResultatDeRecherche.svelte';
   import CarteItem from './CarteItem.svelte';
   import {
     DroitAcces,

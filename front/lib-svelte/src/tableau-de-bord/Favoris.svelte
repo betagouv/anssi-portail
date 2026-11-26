@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import CarteItem from '../catalogue/CarteItem.svelte';
-  import { chargeGuidesDansLeStore } from '../catalogue/stores/guides/guides.store';
-  import { itemsCatalogueEnFavori } from '../catalogue/stores/itemsCatalogueEnFavori';
-  import Lien from '../ui/Lien.svelte';
-  import { détecteRendu } from '../utils/rendu.svelte';
+  import CarteItem from '@catalogue/CarteItem.svelte';
+  import { chargeGuidesDansLeStore } from '@catalogue/stores/guides/guides.store';
+  import { itemsCatalogueEnFavori } from '@catalogue/stores/itemsCatalogueEnFavori';
+  import Lien from '@ui/Lien.svelte';
+  import { détecteRendu } from '@utils/rendu.svelte';
   import TitreDeSection from './TitreDeSection.svelte';
 
   onMount(chargeGuidesDansLeStore);

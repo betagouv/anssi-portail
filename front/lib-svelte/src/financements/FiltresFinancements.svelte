@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { clic } from '../directives/actions.svelte';
-  import SelectRegion from '../test-maturite/SelectRegion.svelte';
+  import { clic } from '@directives/actions.svelte';
+  import SelectRegion from '@test-maturite/SelectRegion.svelte';
   import ChoixFiltreTypeFinancement from './ChoixFiltreTypeFinancement.svelte';
   import ChoixFiltreTypeOrganisation from './ChoixFiltreTypeOrganisation.svelte';
   import SqueletteCheckbox from './SqueletteCheckbox.svelte';
