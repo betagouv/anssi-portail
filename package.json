@@ -28,7 +28,8 @@
     "migre-bdd": "pnpm --filter @anssi-portail/back migre-bdd",
     "postinstall": "pnpm -F regles-eslint build",
     "start": "node back/dist/src/serveur.js",
-    "prestart": "pnpm --filter @anssi-portail/axios build && pnpm --filter @anssi-portail/back prestart"
+    "prestart": "pnpm --filter @anssi-portail/axios build && pnpm --filter @anssi-portail/back prestart",
+    "unused:check": "pnpm knip"
   },
   "repository": {
     "type": "git",
@@ -38,9 +39,11 @@
   "devDependencies": {
     "@eslint/js": "^10.0.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
+    "@types/node": "catalog:",
     "clever-tools": "^5.3.0",
     "concurrently": "^10.0.0",
     "eslint": "10.15.0",
+    "knip": "^6.46.1",
     "prettier": "catalog:",
     "prettier-plugin-svelte": "^4.0.0",
     "tsx": "catalog:",

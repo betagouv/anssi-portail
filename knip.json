@@ -1,0 +1,36 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "tags": ["-lintignore"],
+  "workspaces": {
+    ".": { "ignore": [".agents/**"], "ignoreBinaries": ["bundler"] },
+    "back": {
+      "ignore": ["migrations/**", "src/admin/**"],
+      "ignoreIssues": { "src/infra/adaptateurJournal.ts": ["exports"] }
+    },
+    "front": {
+      "ignoreDependencies": ["axios", "entities", "isomorphic-dompurify", "svelte"],
+      "ignore": [
+        "lib-svelte/src/mini-tests/hameconnage/corps-de-mail/**",
+        "lib-svelte/src/mini-tests/hameconnage/reponses-mail/**",
+        "lib-svelte/src/parcours-securisation/animation/mesures/**",
+        "lib-svelte/src/parcours-securisation/mesures/boite-a-outils/personnalisee/**",
+        "lib-svelte/src/parcours-securisation/mesures/boite-a-outils/NoteProcedure.svelte",
+        "lib-svelte/src/plateforme/**",
+        "lib-svelte/src/ui/Alternatives.svelte",
+        "scripts/**"
+      ]
+    },
+    "front/lib-svelte": { "entry": ["vite.config.webc.ts"] },
+    "webc-externes/*": {
+      "vite": {
+        "config": ["vite.config.ts", "!../../front/lib-svelte/vite.config.webc.ts"]
+      }
+    },
+    "webc-externes/mini-test-reflexes-cyber": {
+      "ignoreDependencies": ["@lab-anssi/ui-kit"],
+      "vite": {
+        "config": ["vite.config.ts", "!../../front/lib-svelte/vite.config.webc.ts"]
+      }
+    }
+  }
+}
