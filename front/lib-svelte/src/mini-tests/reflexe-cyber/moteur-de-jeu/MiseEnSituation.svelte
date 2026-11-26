@@ -11,9 +11,10 @@
     surModificationScénario: () => void;
     surModificationRôle: () => void;
     surLancement: () => void;
+    surMontage: () => void;
   };
 
-  const { scénario, rôle, surModificationScénario, surModificationRôle, surLancement }: Props = $props();
+  const { scénario, rôle, surModificationScénario, surModificationRôle, surLancement, surMontage }: Props = $props();
 
   const modifieScénario = (événement: MouseEvent | KeyboardEvent) => {
     événement.preventDefault();
@@ -25,9 +26,7 @@
     surModificationRôle();
   };
 
-  onMount(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  onMount(() => surMontage());
 </script>
 
 <dsfr-container>
