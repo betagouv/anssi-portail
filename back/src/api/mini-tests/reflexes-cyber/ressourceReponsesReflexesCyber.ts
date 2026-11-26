@@ -1,4 +1,5 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
+import cors from 'cors';
 import { Router } from 'express';
 import z from 'zod';
 import { RéflexesCyber } from '../../../metier/mini-tests/reflexes-cyber/reflexesCyber.js';
@@ -17,8 +18,11 @@ export const ressourceRéponsesRéflexesCyber = ({
   entrepôtRésultatTestRéflexesCyber,
 }: ConfigurationServeur) => {
   const routeur = Router();
+  const autoriseOriginesExternes = cors({ methods: ['POST'] });
+  routeur.options('/', autoriseOriginesExternes);
   routeur.post(
     '/',
+    autoriseOriginesExternes,
     valideCorpsRequete(schemaPostRéponsesRéflexesCyber),
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     filetRouteAsynchrone(
