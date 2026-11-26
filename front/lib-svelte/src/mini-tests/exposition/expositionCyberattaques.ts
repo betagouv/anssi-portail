@@ -24,7 +24,7 @@ export type Secteur =
 
 export type FacteurAggravant = 'reputation' | 'subco' | 'rd' | 'ot' | 'geo';
 
-export type IdMenace = 'ranso' | 'fovi' | 'harc' | 'espionnage' | 'destab' | 'subco';
+type IdMenace = 'ranso' | 'fovi' | 'harc' | 'espionnage' | 'destab' | 'subco';
 
 export type ReponsesExposition = {
   type: TypeOrganisation;
@@ -70,7 +70,7 @@ export const secteurDisponiblePour = (type: TypeOrganisation | undefined): boole
 const aUnFacteur = (reponses: ReponsesExposition, facteur: FacteurAggravant): boolean =>
   reponses.facteurs.includes(facteur);
 
-export type Scores = Record<IdMenace, { renforce: boolean }>;
+type Scores = Record<IdMenace, { renforce: boolean }>;
 
 /**
  * Chaque menace n'a plus que 2 états : « base » (non nommé, la carte étant déjà filtrée
@@ -112,7 +112,7 @@ function calculerScores(reponses: ReponsesExposition): Scores {
   };
 }
 
-export type DefinitionMenace = {
+type DefinitionMenace = {
   id: IdMenace;
   icone: string;
   couleurFond: string;
@@ -294,7 +294,7 @@ function paragraphesInsight(id: IdMenace, reponses: ReponsesExposition): string[
   return [principal, [clauseGeo, clauseOtPme].filter(Boolean).join(' ')].filter(Boolean);
 }
 
-export type ResumeInsight = {
+type ResumeInsight = {
   indicateur: string;
   enHausse: boolean;
   texte: string;

@@ -1,4 +1,4 @@
-export type DonneeObservatoire<T> = T & {
+type DonneeObservatoire<T> = T & {
   source: string;
   date: Date | null;
 };

@@ -30,55 +30,54 @@ import {
   ValeursActivitesTransportsRoutiers,
 } from './Activite.valeurs.js';
 
-export type ActivitesElectricite = (typeof ValeursActivitesElectricite)[number];
-export type ActivitesReseauxChaleurFroid = (typeof ValeursActivitesReseauxChaleurFroid)[number];
-export type ActivitesPetrole = (typeof ValeursActivitesPetrole)[number];
-export type ActivitesGaz = (typeof ValeursActivitesGaz)[number];
-export type ActivitesHydrogene = (typeof ValeursActivitesHydrogene)[number];
-export type ActivitesEnergie =
+type ActivitesElectricite = (typeof ValeursActivitesElectricite)[number];
+type ActivitesReseauxChaleurFroid = (typeof ValeursActivitesReseauxChaleurFroid)[number];
+type ActivitesPetrole = (typeof ValeursActivitesPetrole)[number];
+type ActivitesGaz = (typeof ValeursActivitesGaz)[number];
+type ActivitesHydrogene = (typeof ValeursActivitesHydrogene)[number];
+type ActivitesEnergie =
   ActivitesElectricite | ActivitesReseauxChaleurFroid | ActivitesPetrole | ActivitesGaz | ActivitesHydrogene;
-export type ActivitesTransportsAeriens = (typeof ValeursActivitesTransportsAeriens)[number];
-export type ActivitesTransportsFerroviaires = (typeof ValeursActivitesTransportsFerroviaires)[number];
-export type ActivitesTransportsParEau = (typeof ValeursActivitesTransportsParEau)[number];
-export type ActivitesTransportsRoutiers = (typeof ValeursActivitesTransportsRoutiers)[number];
-export type ActivitesTransports =
+type ActivitesTransportsAeriens = (typeof ValeursActivitesTransportsAeriens)[number];
+type ActivitesTransportsFerroviaires = (typeof ValeursActivitesTransportsFerroviaires)[number];
+type ActivitesTransportsParEau = (typeof ValeursActivitesTransportsParEau)[number];
+type ActivitesTransportsRoutiers = (typeof ValeursActivitesTransportsRoutiers)[number];
+type ActivitesTransports =
   | ActivitesTransportsAeriens
   | ActivitesTransportsFerroviaires
   | ActivitesTransportsParEau
   | ActivitesTransportsRoutiers;
-export type ActivitesSecteurBancaire = (typeof ValeursActivitesSecteurBancaire)[number];
-export type ActivitesInfrastructureMarcheFinancier = (typeof ValeursActivitesInfrastructureMarcheFinancier)[number];
-export type ActivitesSante = (typeof ValeursActivitesSante)[number];
-export type ActivitesEauPotable = (typeof ValeursActivitesEauPotable)[number];
-export type ActivitesEauUsees = (typeof ValeursActivitesEauUsees)[number];
-export type ActivitesInfrastructureNumerique = (typeof ValeursActivitesInfrastructureNumerique)[number];
-export type ActivitesGestionServicesTic = (typeof ValeursActivitesGestionServicesTic)[number];
-export type ActivitesEspace = (typeof ValeursActivitesEspace)[number];
-export type ActivitesServicesPostauxExpedition = (typeof ValeursActivitesServicesPostauxExpedition)[number];
-export type ActivitesGestionDechets = (typeof ValeursActivitesGestionDechets)[number];
-export type ActivitesFabricationProductionDistributionProduitsChimiques =
+type ActivitesSecteurBancaire = (typeof ValeursActivitesSecteurBancaire)[number];
+type ActivitesInfrastructureMarcheFinancier = (typeof ValeursActivitesInfrastructureMarcheFinancier)[number];
+type ActivitesSante = (typeof ValeursActivitesSante)[number];
+type ActivitesEauPotable = (typeof ValeursActivitesEauPotable)[number];
+type ActivitesEauUsees = (typeof ValeursActivitesEauUsees)[number];
+type ActivitesInfrastructureNumerique = (typeof ValeursActivitesInfrastructureNumerique)[number];
+type ActivitesGestionServicesTic = (typeof ValeursActivitesGestionServicesTic)[number];
+type ActivitesEspace = (typeof ValeursActivitesEspace)[number];
+type ActivitesServicesPostauxExpedition = (typeof ValeursActivitesServicesPostauxExpedition)[number];
+type ActivitesGestionDechets = (typeof ValeursActivitesGestionDechets)[number];
+type ActivitesFabricationProductionDistributionProduitsChimiques =
   (typeof ValeursActivitesFabricationProductionDistributionProduitsChimiques)[number];
-export type ActivitesProductionTransformationDistributionDenreesAlimentaires =
+type ActivitesProductionTransformationDistributionDenreesAlimentaires =
   (typeof ValeursActivitesProductionTransformationDistributionDenreesAlimentaires)[number];
-export type ActivitesFabricationDispositifsMedicaux = (typeof ValeursActivitesFabricationDispositifsMedicaux)[number];
-export type ActivitesFabricationProduitsInformatiquesElectroniquesOptiques =
+type ActivitesFabricationDispositifsMedicaux = (typeof ValeursActivitesFabricationDispositifsMedicaux)[number];
+type ActivitesFabricationProduitsInformatiquesElectroniquesOptiques =
   (typeof ValeursActivitesFabricationProduitsInformatiquesElectroniquesOptiques)[number];
-export type ActivitesFabricationEquipementsElectroniques =
+type ActivitesFabricationEquipementsElectroniques =
   (typeof ValeursActivitesFabricationEquipementsElectroniques)[number];
-export type ActivitesFabricationMachinesEquipements = (typeof ValeursActivitesFabricationMachinesEquipements)[number];
-export type ActivitesConstructionVehiculesAutomobiles =
-  (typeof ValeursActivitesConstructionVehiculesAutomobiles)[number];
-export type ActivitesFabricationAutresMaterielTransports =
+type ActivitesFabricationMachinesEquipements = (typeof ValeursActivitesFabricationMachinesEquipements)[number];
+type ActivitesConstructionVehiculesAutomobiles = (typeof ValeursActivitesConstructionVehiculesAutomobiles)[number];
+type ActivitesFabricationAutresMaterielTransports =
   (typeof ValeursActivitesFabricationAutresMaterielTransports)[number];
-export type ActivitesFabrication =
+type ActivitesFabrication =
   | ActivitesFabricationDispositifsMedicaux
   | ActivitesFabricationProduitsInformatiquesElectroniquesOptiques
   | ActivitesFabricationEquipementsElectroniques
   | ActivitesFabricationMachinesEquipements
   | ActivitesConstructionVehiculesAutomobiles
   | ActivitesFabricationAutresMaterielTransports;
-export type ActivitesFournisseursNumeriques = (typeof ValeursActivitesFournisseursNumeriques)[number];
-export type ActivitesRecherche = (typeof ValeursActivitesRecherche)[number];
+type ActivitesFournisseursNumeriques = (typeof ValeursActivitesFournisseursNumeriques)[number];
+type ActivitesRecherche = (typeof ValeursActivitesRecherche)[number];
 export type Activite =
   // Annexe 1
   | ActivitesEnergie

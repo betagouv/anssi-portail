@@ -1,6 +1,6 @@
 const appEnv = ['local', 'demo', 'production'] as const;
 
-export type AppEnv = (typeof appEnv)[number];
+type AppEnv = (typeof appEnv)[number];
 
 const estAppEnv = (valeur: string): valeur is AppEnv => {
   return (appEnv as readonly string[]).includes(valeur);

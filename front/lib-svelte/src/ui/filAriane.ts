@@ -6,7 +6,7 @@ import { profilStore } from '@stores/profil.store';
 
 const profil = fromStore(profilStore);
 
-export type Branche = {
+type Branche = {
   nom: string;
   lien: string;
 };

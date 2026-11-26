@@ -13,7 +13,7 @@ import { adaptateurEnvironnement } from '@infra/adaptateurEnvironnement.js';
 
 import { ACR_GARANTISSANT_MFA } from './acr.js';
 
-export interface DemandeAutorisation {
+interface DemandeAutorisation {
   url: string;
   nonce: string;
   state: string;

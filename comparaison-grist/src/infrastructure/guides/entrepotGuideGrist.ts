@@ -2,7 +2,7 @@ import { ClientHttp } from '../../metier/clientHttp';
 import { EntrepotGuide } from '../../metier/guides/entrepotGuide';
 import { Guide } from '../../metier/guides/guide.type';
 
-export type SnapshotGrist = {
+type SnapshotGrist = {
   snapshots: {
     docId: string;
   }[];
@@ -23,7 +23,7 @@ export type GuideGrist = {
   };
 };
 
-export type RetourGuideGrist = {
+type RetourGuideGrist = {
   records: GuideGrist[];
 };
 

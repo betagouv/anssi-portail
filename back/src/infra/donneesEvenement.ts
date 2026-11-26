@@ -123,12 +123,12 @@ type DonneesEvenementAvisUtilisateurDonne = Evenement<
   }
 >;
 
-export type DonneesEvenementUtilisateurConnecte = Evenement<
+type DonneesEvenementUtilisateurConnecte = Evenement<
   'UTILISATEUR_CONNECTE',
   { idUtilisateur: string; connexionAvecMFA: boolean }
 >;
 
-export type DonneesSimulationNis2Terminee = Evenement<'SIMULATION_NIS2_TERMINEE', ReponsesEtResultatAvecAnalyse>;
+type DonneesSimulationNis2Terminee = Evenement<'SIMULATION_NIS2_TERMINEE', ReponsesEtResultatAvecAnalyse>;
 
 type DonneesMesureConsultee = Evenement<'MESURE_CONSULTEE', Omit<MesureConsultee, 'email'> & { idUtilisateur: string }>;
 

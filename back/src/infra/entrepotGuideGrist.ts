@@ -26,10 +26,6 @@ export type GuideGrist = {
   };
 };
 
-export type RetourGuideGrist = {
-  records: GuideGrist[];
-};
-
 export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements EntrepotGuide {
   constructor({
     clientHttp = axios,

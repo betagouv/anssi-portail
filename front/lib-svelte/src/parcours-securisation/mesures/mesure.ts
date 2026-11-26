@@ -1,6 +1,6 @@
 import type { ExigenceNis2 } from '@nis2/exigence.type';
 
-export type Risque = {
+type Risque = {
   libelle: string;
   description: string;
 };

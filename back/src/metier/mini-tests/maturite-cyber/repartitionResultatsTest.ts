@@ -5,12 +5,6 @@ type ScoresPourUnNiveau = {
   valeurs: Record<IdRubrique, number[]>;
 };
 
-export type RepartitionResultatsTestPourUnNiveau = {
-  id: IdNiveauMaturite;
-  valeurs: Record<IdRubrique, number>;
-  totalNombreTests: number | undefined;
-};
-
 export class RepartitionResultatsTest {
   constructor(private readonly resultatsDeTest: RésultatTestMaturité[]) {}
 

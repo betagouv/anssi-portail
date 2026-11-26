@@ -1,6 +1,6 @@
 import { derived, writable } from 'svelte/store';
 
-export type Questionnaire = {
+type Questionnaire = {
   questionCourante: number;
   toutesLesReponses: number[];
 };

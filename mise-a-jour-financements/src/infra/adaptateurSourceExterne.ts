@@ -19,8 +19,8 @@ export type Aide = {
 };
 export type ResumeAide = Omit<Aide, 'financeurs'>;
 
-export type DetailsAidesEntreprisesAPI = Aide[] | false;
-export type RechercheAidesEntreprisesAPI = {
+type DetailsAidesEntreprisesAPI = Aide[] | false;
+type RechercheAidesEntreprisesAPI = {
   data: ResumeAide[];
 };
 

@@ -4,7 +4,7 @@ import type { IdRubrique } from './TestMaturite.type';
 
 export type RéponsesResultatTest = Record<IdRubrique, number>;
 
-export type CodeLibelle = {
+type CodeLibelle = {
   code: string;
   libelle: string;
 };

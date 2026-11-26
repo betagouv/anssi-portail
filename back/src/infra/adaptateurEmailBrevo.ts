@@ -20,7 +20,7 @@ import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { AdaptateurHorloge } from './adaptateurHorloge.js';
 import { ClientHttp } from './clientHttp.js';
 
-export type DonnéesUtilisateurBrevo = {
+type DonnéesUtilisateurBrevo = {
   email: string;
   attributes: {
     DATE_DEBLOCAGE_BADGE_CYBERDEPART?: string;
@@ -43,7 +43,7 @@ type NomÉvénementBrévo =
   | 'parcours_complet_termine'
   | 'parcours_rejoint';
 
-export type ÉvénementBrevo = {
+type ÉvénementBrevo = {
   email: string;
   nomÉvénement: NomÉvénementBrévo;
   propriétésÀMettreÀJour?: Partial<DonnéesUtilisateurBrevo['attributes']>;

@@ -25,7 +25,7 @@ export type ContactSectoriel = {
   téléphone?: string;
 };
 
-export type LienContact = {
+type LienContact = {
   libelle: string;
   href: string;
 };

@@ -10,7 +10,7 @@ export type EntréePostgresRésultatTest =
   | EntréePostgresRésultatTestExposition
   | EntréePostgresRésultatTestRéflexesCyber;
 
-export type EntréePostgresRésultatTestCommune = {
+type EntréePostgresRésultatTestCommune = {
   id: string;
   date_realisation: Date;
 };

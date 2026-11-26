@@ -1,4 +1,4 @@
-export enum ClesDuCSV {
+enum ClesDuCSV {
   'Designation OSE',
   Localisation,
   'Type de structure',
