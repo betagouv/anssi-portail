@@ -55,7 +55,7 @@ Copy `.env.template` to `.env` and fill in:
 
 ## Code Style
 
-- Prettier: printWidth 120, singleQuote, trailingComma es5
+- Oxfmt: printWidth 120, singleQuote, trailingComma es5
 - ESLint + TypeScript in backend
 - Prek pre-commit hooks run `pnpm format`
 - **Always use `pnpm`, not `npm`** (enforced in preinstall script)

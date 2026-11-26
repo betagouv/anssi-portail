@@ -107,7 +107,7 @@ Main source file typically `src/index.js` or individual component files. Check `
 
 - Svelte conventions (reactive statements, event handling, slot usage)
 - TypeScript strict mode
-- Prettier formatting (120-char lines, single quotes, trailing commas)
+- Oxfmt formatting (120-char lines, single quotes, trailing commas)
 - Component names: PascalCase
 - Reactive variables: camelCase
 

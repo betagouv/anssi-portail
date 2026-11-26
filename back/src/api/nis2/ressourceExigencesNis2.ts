@@ -45,10 +45,7 @@ function creerRepresentationExigences(exigences: Exigence[], langue: Langue) {
       contenuEnAnglais: undefined,
     }));
 
-  const correspondanceAvecExigencesTraduites = (
-    correspondances: Record<string, Correspondance>,
-    referentiel: string
-  ) =>
+  const correspondanceAvecExigencesTraduites = (correspondances: Record<string, Correspondance>, referentiel: string) =>
     Object.hasOwn(correspondances, referentiel)
       ? {
           [referentiel]: {

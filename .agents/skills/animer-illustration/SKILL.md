@@ -57,7 +57,7 @@ Figma.
 Puis formater et contrôler :
 
 ```bash
-pnpm --filter @anssi-portail/svelte exec prettier --write <composant>
+pnpm --filter @anssi-portail/svelte exec oxfmt --write <composant>
 python3 .agents/skills/animer-illustration/scripts/auditer_traces.py front/lib-svelte/src
 ```
 
