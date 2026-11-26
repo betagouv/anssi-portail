@@ -8,7 +8,7 @@ import {
   tousLesIdRubrique,
 } from './resultatTestMaturite.js';
 
-export type ResumeNiveauMaturite = {
+type ResumeNiveauMaturite = {
   total: number;
   moyennes: Record<IdRubrique, number>;
 };

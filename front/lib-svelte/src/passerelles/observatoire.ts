@@ -7,14 +7,14 @@ type DonneesObservatoire<T> = T & {
   source: string;
 };
 
-export type ChiffreCléMenaceCyber = DonneesObservatoire<{ total: string }>;
+type ChiffreCléMenaceCyber = DonneesObservatoire<{ total: string }>;
 
 type IndicateurMenaceCyber =
   'evenementsSecurite' | 'incidents' | 'rançongiciels' | 'fraudesVirement' | 'cyberharcèlements' | 'volsDonnées';
 
-export type TotalParNiveauMaturité = { niveau: string; total: number };
+type TotalParNiveauMaturité = { niveau: string; total: number };
 
-export type TotalDépartement = { code: string; nom: string; total: number };
+type TotalDépartement = { code: string; nom: string; total: number };
 
 export type SeuilComplétion = 50 | 80 | 100;
 

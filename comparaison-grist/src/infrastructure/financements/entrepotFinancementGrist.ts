@@ -22,7 +22,7 @@ export type FinancementGrist = {
   };
 };
 
-export type SnapshotGrist = {
+type SnapshotGrist = {
   snapshots: {
     docId: string;
   }[];

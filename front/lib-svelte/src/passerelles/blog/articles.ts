@@ -4,13 +4,13 @@ import { Article } from '@article/article.type';
 
 export type RésuméArticleAPI = { id: string; slug: string; titre: string };
 
-export type EntréeTableDesMatièresAPI = {
+type EntréeTableDesMatièresAPI = {
   id: string;
   texte: string;
   profondeur: number;
 };
 
-export type ArticleAPI = {
+type ArticleAPI = {
   contenu: string;
   dateDeMiseÀJour: Date | undefined;
   dateDePublication: Date | undefined;

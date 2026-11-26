@@ -1,7 +1,7 @@
 import { onMount } from 'svelte';
 import { MediaQuery } from 'svelte/reactivity';
 
-export type Affichage = 'mobile' | 'tablette' | 'bureau';
+type Affichage = 'mobile' | 'tablette' | 'bureau';
 
 const seuilSm = '576px';
 const seuilMd = '767px';

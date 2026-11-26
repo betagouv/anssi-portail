@@ -8,7 +8,7 @@ export type BoutonAction = {
   href: string;
 };
 
-export type MessageToast = {
+type MessageToast = {
   niveau: NiveauMessage;
   titre: string;
   contenu: string;

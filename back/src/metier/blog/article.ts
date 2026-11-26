@@ -1,4 +1,4 @@
-export type EntréeTableDesMatières = {
+type EntréeTableDesMatières = {
   id: string;
   texte: string;
   profondeur: number;

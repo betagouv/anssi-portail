@@ -2,7 +2,7 @@ import type { IdNiveau } from '@niveaux-maturite/NiveauxMaturite.type';
 
 import type { RéponsesResultatTest } from './ResultatsTest.type';
 
-export type ElementSerie = {
+type ElementSerie = {
   valeur: number;
   libelle: string;
 };

@@ -1,7 +1,7 @@
 import { NiveauDUtilité } from './niveauDeSatisfaction.js';
 import { Parcours } from './parcours.js';
 
-export type TypeDeRetour = 'spontané' | 'mi-parcours' | 'parcours terminé';
+type TypeDeRetour = 'spontané' | 'mi-parcours' | 'parcours terminé';
 
 export type AvisParcours = {
   niveauDUtilité: NiveauDUtilité;

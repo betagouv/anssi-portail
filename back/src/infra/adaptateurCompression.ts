@@ -1,6 +1,6 @@
 import JSZip from 'jszip';
 
-export type Fichier = { nom: string; buffer: Buffer };
+type Fichier = { nom: string; buffer: Buffer };
 
 type Archive = string | ArrayBuffer | Buffer<ArrayBufferLike> | Uint8Array<ArrayBufferLike> | number[] | Blob;
 
