@@ -1,5 +1,5 @@
-import { GuideGrist } from '../../../src/infra/entrepotGuideGrist.js';
-import { DocumentGuide } from '../../../src/metier/guide.js';
+import { DocumentGuide } from '@metier/guide.js';
+import { GuideGrist } from '@infra/entrepotGuideGrist.js';
 
 export class ConstructeurGuideGrist {
   private numeroDeLigne: number = 0;

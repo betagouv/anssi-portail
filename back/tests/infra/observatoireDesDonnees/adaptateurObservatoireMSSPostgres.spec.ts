@@ -1,6 +1,6 @@
 import { Knex } from 'knex';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
-import { AdaptateurObservatoireMSSPostgres } from '../../../src/infra/observatoireDesDonnees/adaptateurObservatoireMSSPostgres.js';
+import { AdaptateurObservatoireMSSPostgres } from '@infra/observatoireDesDonnees/adaptateurObservatoireMSSPostgres.js';
 import { creeBddObservatoirePourLesTests } from './bddObservatoirePourLesTests.js';
 
 describe("L'adaptateur de l'observatoire des données PostgreSQL", () => {

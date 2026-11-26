@@ -1,12 +1,9 @@
 import { randomUUID } from 'node:crypto';
 import Knex from 'knex';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { fabriqueAdaptateurChiffrement } from '../../src/infra/adaptateurChiffrement.js';
-import type { AdaptateurProfilAnssi, ProfilAnssi } from '../../src/infra/adaptateurProfilAnssi.js';
-import type {
-  AdaptateurRechercheEntreprise,
-  OrganisationDetaillee,
-} from '../../src/infra/adaptateurRechercheEntreprise.js';
+import { fabriqueAdaptateurChiffrement } from '@infra/adaptateurChiffrement.js';
+import type { AdaptateurProfilAnssi, ProfilAnssi } from '@infra/adaptateurProfilAnssi.js';
+import type { AdaptateurRechercheEntreprise, OrganisationDetaillee } from '@infra/adaptateurRechercheEntreprise.js';
 import { MiseAJourObservatoire } from '../../src/taches/metsAJourObservatoire.js';
 import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets.js';
 import { creeBddObservatoirePourLesTests } from '../infra/observatoireDesDonnees/bddObservatoirePourLesTests.js';

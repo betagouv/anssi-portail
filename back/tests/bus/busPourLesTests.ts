@@ -1,5 +1,5 @@
-import { BusEvenements, ClasseDEvenementDeBus, EvenementDuBus } from '../../src/bus/busEvenements.js';
-import { Rapporteur } from '../../src/metier/rapporteur.js';
+import { Rapporteur } from '@metier/rapporteur.js';
+import { BusEvenements, ClasseDEvenementDeBus, EvenementDuBus } from '@bus/busEvenements.js';
 
 export class MockBusEvenement extends BusEvenements {
   evenementsRecus: EvenementDuBus[] = [];

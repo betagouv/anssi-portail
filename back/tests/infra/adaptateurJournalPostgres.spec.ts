@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { adaptateurJournalPostgres } from '../../src/infra/adaptateurJournalPostgres.js';
+import { adaptateurJournalPostgres } from '@infra/adaptateurJournalPostgres.js';
 
 const { insère } = vi.hoisted(() => ({ insère: vi.fn().mockResolvedValue(undefined) }));
 

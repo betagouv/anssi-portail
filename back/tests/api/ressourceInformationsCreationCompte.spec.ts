@@ -1,12 +1,12 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { AdaptateurJWT } from '../../src/api/adaptateurJWT.js';
-import { creeServeur } from '../../src/api/msc/index.js';
-import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi.js';
-import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { AdaptateurJWT } from '@api/adaptateurJWT.js';
+import { creeServeur } from '@api/msc/index.js';
+import { AdaptateurProfilAnssi } from '@infra/adaptateurProfilAnssi.js';
+import { AdaptateurRechercheEntreprise } from '@infra/adaptateurRechercheEntreprise.js';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurJWT,

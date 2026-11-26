@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { consigneCompteCreeDansJournal } from '../../src/bus/consigneCompteCreeDansJournal.js';
-import { CompteCree } from '../../src/bus/evenements/compteCree.js';
-import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { consigneCompteCreeDansJournal } from '@bus/consigneCompteCreeDansJournal.js';
+import { CompteCree } from '@bus/evenements/compteCree.js';
+import { AdaptateurHachage } from '@infra/adaptateurHachage.js';
+import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 

@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
-import { RetourArticleDonné } from '../../src/bus/evenements/retourArticleDonne.js';
-import { notifieUnRetourNégatifSurArticle } from '../../src/bus/notifieRetourNegatifSurArticle.js';
-import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js';
+import { MessagerieInstantanee } from '@metier/messagerieInstantanee.js';
+import { RetourArticleDonné } from '@bus/evenements/retourArticleDonne.js';
+import { notifieUnRetourNégatifSurArticle } from '@bus/notifieRetourNegatifSurArticle.js';
 import { fausseMessagerieInstantanee } from '../api/fauxObjets.js';
 
 describe("L'abonnement qui notifie un retour d'article  négatif", () => {

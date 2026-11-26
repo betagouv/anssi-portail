@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { estUrlRedirectionApresConnexionAutorisee } from '../../src/api/routesPagesConnectees.js';
+import { estUrlRedirectionApresConnexionAutorisee } from '@api/routesPagesConnectees.js';
 
 describe("L'URL de redirection après connexion", () => {
   it('autorise les pages connectées fixes', () => {

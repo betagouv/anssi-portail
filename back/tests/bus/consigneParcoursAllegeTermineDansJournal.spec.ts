@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { consigneParcoursAllégéTerminéDansJournal } from '../../src/bus/consigneParcoursAllegeTermineDansJournal.js';
-import { ParcoursAllégéTerminé } from '../../src/bus/evenements/parcoursAllegeTermine.js';
-import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { consigneParcoursAllégéTerminéDansJournal } from '@bus/consigneParcoursAllegeTermineDansJournal.js';
+import { ParcoursAllégéTerminé } from '@bus/evenements/parcoursAllegeTermine.js';
+import { AdaptateurHachage } from '@infra/adaptateurHachage.js';
+import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 

@@ -1,6 +1,6 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
-import { IdentifiantMiniTest, RéactionMiniTest, TypeRéaction } from '../../metier/mini-tests/reactionMiniTest.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { IdentifiantMiniTest, RéactionMiniTest, TypeRéaction } from '@metier/mini-tests/reactionMiniTest.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideParametresRequete } from '../zod.js';

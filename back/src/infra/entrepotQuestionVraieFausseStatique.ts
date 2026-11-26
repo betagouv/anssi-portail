@@ -1,5 +1,5 @@
-import { EntrepôtQuestionVraieFausse } from '../metier/mini-tests/vrai-faux/entrepotQuestionVraieFausse.js';
-import { QuestionVraieFausse } from '../metier/mini-tests/vrai-faux/questionVraieFausse.js';
+import { EntrepôtQuestionVraieFausse } from '@metier/mini-tests/vrai-faux/entrepotQuestionVraieFausse.js';
+import { QuestionVraieFausse } from '@metier/mini-tests/vrai-faux/questionVraieFausse.js';
 
 export class EntrepôtQuestionVraieFausseStatique implements EntrepôtQuestionVraieFausse {
   async tous(): Promise<QuestionVraieFausse[]> {

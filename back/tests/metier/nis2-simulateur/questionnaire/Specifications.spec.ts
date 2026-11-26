@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
-import { RegleEntiteOSE } from '../../../../src/metier/nis2-simulateur/questionnaire/regles/RegleEntiteOSE.js';
-import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications.js';
-import { ResultatEligibilite } from '../../../../src/metier/nis2-simulateur/Regulation.definitions.js';
+import { EtatQuestionnaire, EtatQuestionnaireVide } from '@metier/nis2-simulateur/EtatQuestionnaire.js';
+import { RegleEntiteOSE } from '@metier/nis2-simulateur/questionnaire/regles/RegleEntiteOSE.js';
+import { Specifications } from '@metier/nis2-simulateur/questionnaire/Specifications.js';
+import { ResultatEligibilite } from '@metier/nis2-simulateur/Regulation.definitions.js';
 
 describe('Les spécifications', () => {
   const resultatDeLaSpec: ResultatEligibilite = {

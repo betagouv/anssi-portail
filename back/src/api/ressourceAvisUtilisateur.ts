@@ -1,7 +1,7 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Response, Router } from 'express';
 import z from 'zod';
-import { AvisUtilisateurDonne } from '../bus/evenements/avisUtilisateurDonne.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { AvisUtilisateurDonne } from '@bus/evenements/avisUtilisateurDonne.js';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { schemaRessourceAvisUtilisateur } from './ressourceAvisUtilisateur.schema.js';

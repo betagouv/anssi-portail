@@ -1,8 +1,8 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Response, Router } from 'express';
 import z from 'zod';
-import { AvisMesureDonne } from '../../bus/evenements/avisMesureDonne.js';
-import { Utilisateur } from '../../metier/utilisateur.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { Utilisateur } from '@metier/utilisateur.js';
+import { AvisMesureDonne } from '@bus/evenements/avisMesureDonne.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideCorpsRequete } from '../zod.js';

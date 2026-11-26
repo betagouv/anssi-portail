@@ -1,5 +1,5 @@
-import type { EntrepôtRésultatTestVraiFaux } from '../../metier/mini-tests/vrai-faux/entrepotResultatTestVraiFaux.js';
-import { RésultatTestVraiFaux } from '../../metier/mini-tests/vrai-faux/resultatTestVraiFaux.js';
+import type { EntrepôtRésultatTestVraiFaux } from '@metier/mini-tests/vrai-faux/entrepotResultatTestVraiFaux.js';
+import { RésultatTestVraiFaux } from '@metier/mini-tests/vrai-faux/resultatTestVraiFaux.js';
 import type { EntréePostgresRésultatTestVraiFaux } from './entreePostgresResultatTest.js';
 import { EntrepôtRésultatTestPostgres } from './entrepotResultatTestPostgres.js';
 

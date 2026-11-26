@@ -1,5 +1,5 @@
-import { Article } from '../../../src/metier/blog/article.js';
-import { RésuméArticle } from '../../../src/metier/blog/resumeArticle.js';
+import { Article } from '@metier/blog/article.js';
+import { RésuméArticle } from '@metier/blog/resumeArticle.js';
 
 export class ConstructeurDArticleAvecToutesLesMétadonnées {
   private contenu: string = '<div>Contenu</div>';

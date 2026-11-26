@@ -1,4 +1,4 @@
-import { ClientHttp, Config } from '../../src/infra/clientHttp.js';
+import { ClientHttp, Config } from '@infra/clientHttp.js';
 
 export const fabriqueFauxClientHttp: () => ClientHttp = () => ({
   get: fabriqueClientGet(async () => {}),

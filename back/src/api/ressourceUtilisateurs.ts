@@ -1,10 +1,10 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Response, Router } from 'express';
 import { encode } from 'html-entities';
 import jsonwebtoken from 'jsonwebtoken';
 import z from 'zod';
-import { CompteCree, payloadDeCréationDeCompte } from '../bus/evenements/compteCree.js';
-import { ErreurChargementOrganisation, Utilisateur } from '../metier/utilisateur.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { ErreurChargementOrganisation, Utilisateur } from '@metier/utilisateur.js';
+import { CompteCree, payloadDeCréationDeCompte } from '@bus/evenements/compteCree.js';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { schemaRessourceUtilisateurs } from './ressourceUtilisateurs.schema.js';

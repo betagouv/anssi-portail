@@ -1,5 +1,5 @@
 import Knex from 'knex';
-import { AdaptateurStatistiqueParcours } from '../metier/adaptateurStatistiqueParcours.js';
+import { AdaptateurStatistiqueParcours } from '@metier/adaptateurStatistiqueParcours.js';
 
 export class AdaptateurStatistiqueParcoursPostgres implements AdaptateurStatistiqueParcours {
   private readonly knex: Knex.Knex;

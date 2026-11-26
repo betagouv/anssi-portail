@@ -1,7 +1,7 @@
-import { Rôle, Scénario } from '../../metier/mini-tests/reflexes-cyber/reflexesCyber.js';
-import { CodeRégion } from '../../metier/referentielRegions.js';
-import { CodeSecteur } from '../../metier/referentielSecteurs.js';
-import { CodeTrancheEffectif } from '../../metier/referentielTranchesEffectifEtablissement.js';
+import { Rôle, Scénario } from '@metier/mini-tests/reflexes-cyber/reflexesCyber.js';
+import { CodeRégion } from '@metier/referentielRegions.js';
+import { CodeSecteur } from '@metier/referentielSecteurs.js';
+import { CodeTrancheEffectif } from '@metier/referentielTranchesEffectifEtablissement.js';
 import { EvenementDuBus } from '../busEvenements.js';
 
 export class SimulationRéflexesCyberTerminé implements EvenementDuBus {

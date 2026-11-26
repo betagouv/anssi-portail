@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { consigneSimulationNis2TermineeDansJournal } from '../../src/bus/consigneSimulationNis2TermineeDansJournal.js';
-import { SimulationNis2Terminee } from '../../src/bus/evenements/simulationNis2Terminee.js';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
-import { EtatQuestionnaire } from '../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
+import { EtatQuestionnaire } from '@metier/nis2-simulateur/EtatQuestionnaire.js';
+import { consigneSimulationNis2TermineeDansJournal } from '@bus/consigneSimulationNis2TermineeDansJournal.js';
+import { SimulationNis2Terminee } from '@bus/evenements/simulationNis2Terminee.js';
+import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe("L'abonnement qui consigne une simulation NIS2 terminée dans le journal", () => {

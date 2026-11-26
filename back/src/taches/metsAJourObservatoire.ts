@@ -1,19 +1,19 @@
 import { tailleEntite, typeEntite } from '@lab-anssi/lib';
 import type { Knex } from 'knex';
 import pThrottle from 'p-throttle';
-import type { AdaptateurChiffrement, ObjetChiffre } from '../infra/adaptateurChiffrement.js';
-import type { AdaptateurHachage } from '../infra/adaptateurHachage.js';
-import type { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi.js';
-import type { AdaptateurRechercheEntreprise, OrganisationDetaillee } from '../infra/adaptateurRechercheEntreprise.js';
-import type { DonneesEvenement } from '../infra/donneesEvenement.js';
-import type { TypeTest } from '../infra/entrepotResultatTest/entreePostgresResultatTest.js';
 import {
   libellésNiveauMaturité,
   RésultatTestMaturité,
   type ReponsesTestMaturite,
-} from '../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
-import { SEUILS_COMPLETION } from '../metier/observatoire.js';
-import { régions } from '../metier/referentielRegions.js';
+} from '@metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { SEUILS_COMPLETION } from '@metier/observatoire.js';
+import { régions } from '@metier/referentielRegions.js';
+import type { AdaptateurChiffrement, ObjetChiffre } from '@infra/adaptateurChiffrement.js';
+import type { AdaptateurHachage } from '@infra/adaptateurHachage.js';
+import type { AdaptateurProfilAnssi } from '@infra/adaptateurProfilAnssi.js';
+import type { AdaptateurRechercheEntreprise, OrganisationDetaillee } from '@infra/adaptateurRechercheEntreprise.js';
+import type { DonneesEvenement } from '@infra/donneesEvenement.js';
+import type { TypeTest } from '@infra/entrepotResultatTest/entreePostgresResultatTest.js';
 
 const TABLE_EXECUTIONS = 'msc.executions';
 const TABLE_UTILISATEURS = 'msc.utilisateurs';

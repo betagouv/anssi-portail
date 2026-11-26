@@ -1,6 +1,6 @@
-import { BusEvenements } from '../../../bus/busEvenements.js';
-import { SimulationRéflexesCyberRéponseSoumise } from '../../../bus/evenements/simulationReflexesCyberReponseSoumise.js';
-import { SimulationRéflexesCyberTerminé } from '../../../bus/evenements/simulationReflexesCyberTermine.js';
+import { BusEvenements } from '@bus/busEvenements.js';
+import { SimulationRéflexesCyberRéponseSoumise } from '@bus/evenements/simulationReflexesCyberReponseSoumise.js';
+import { SimulationRéflexesCyberTerminé } from '@bus/evenements/simulationReflexesCyberTermine.js';
 import { CodeRégion } from '../../referentielRegions.js';
 import { CodeSecteur } from '../../referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../referentielTranchesEffectifEtablissement.js';

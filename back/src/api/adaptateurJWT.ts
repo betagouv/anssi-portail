@@ -1,5 +1,5 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
+import { AdaptateurEnvironnement } from '@infra/adaptateurEnvironnement.js';
 
 const UNE_HEURE = Temporal.Duration.from({ hours: 1 });
 

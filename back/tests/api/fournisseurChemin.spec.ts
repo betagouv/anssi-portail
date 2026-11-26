@@ -1,11 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { ErreurTraverséeDeChemin } from '../../src/api/erreurs.js';
-import {
-  construisListeFichiersDuSite,
-  FichierInconnu,
-  fournisseurChemin,
-  siteFront,
-} from '../../src/api/fournisseurChemin.js';
+import { ErreurTraverséeDeChemin } from '@api/erreurs.js';
+import { construisListeFichiersDuSite, FichierInconnu, fournisseurChemin, siteFront } from '@api/fournisseurChemin.js';
 
 describe('le fournisseurChemin', () => {
   describe("lorsqu'on récupère un fichier", () => {

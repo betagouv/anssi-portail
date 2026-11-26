@@ -1,4 +1,4 @@
-import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
+import { MessagerieInstantanee } from '@metier/messagerieInstantanee.js';
 import { RetourOutilDonné } from './evenements/retourOutilDonne.js';
 
 export const notifieUnRetourNégatifSurOutil = ({

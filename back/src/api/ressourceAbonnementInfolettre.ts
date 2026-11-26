@@ -1,6 +1,6 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
 import z from 'zod';
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { schemaAbonnementInfolettre } from './ressourceAbonnementInfolettre.schema.js';

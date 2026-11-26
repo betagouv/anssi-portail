@@ -1,5 +1,4 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { StrategieExportCsvUneLigneParExigence } from '../../../src/api/nis2/strategieExportCsvUneLigneParExigence.js';
 import {
   Exigence,
   ExigenceAE,
@@ -7,7 +6,8 @@ import {
   ExigenceISO,
   ExigenceNIS2,
   Referentiel,
-} from '../../../src/metier/nis2/exigence.js';
+} from '@metier/nis2/exigence.js';
+import { StrategieExportCsvUneLigneParExigence } from '@api/nis2/strategieExportCsvUneLigneParExigence.js';
 
 describe('La stratégie d’export CSV avec une ligne par exigence', () => {
   let strategieExport: StrategieExportCsvUneLigneParExigence;

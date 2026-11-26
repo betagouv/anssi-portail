@@ -1,6 +1,6 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
-import { estCodeRegion } from '../metier/referentielRegions.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { estCodeRegion } from '@metier/referentielRegions.js';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { FichierInconnu } from './fournisseurChemin.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';

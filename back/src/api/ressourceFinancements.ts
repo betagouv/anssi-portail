@@ -1,8 +1,8 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
-import { Financement } from '../metier/financement.js';
-import { estCodeRegion } from '../metier/referentielRegions.js';
-import { trancheEffectifParCode } from '../metier/referentielTranchesEffectifEtablissement.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { Financement } from '@metier/financement.js';
+import { estCodeRegion } from '@metier/referentielRegions.js';
+import { trancheEffectifParCode } from '@metier/referentielTranchesEffectifEtablissement.js';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';

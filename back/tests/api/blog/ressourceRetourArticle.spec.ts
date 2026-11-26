@@ -1,10 +1,10 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../../src/api/msc/index.js';
-import { RetourArticleDonné } from '../../../src/bus/evenements/retourArticleDonne.js';
-import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { creeServeur } from '@api/msc/index.js';
+import { RetourArticleDonné } from '@bus/evenements/retourArticleDonne.js';
+import { AdaptateurEnvironnement } from '@infra/adaptateurEnvironnement.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepôtArticleMémoire } from '../../persistance/entrepotArticleMemoire.js';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement, fauxRapporteur } from '../fauxObjets.js';

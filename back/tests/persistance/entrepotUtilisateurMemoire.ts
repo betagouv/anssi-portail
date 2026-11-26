@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
-import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur.js';
-import { Utilisateur } from '../../src/metier/utilisateur.js';
+import { EntrepotUtilisateur } from '@metier/entrepotUtilisateur.js';
+import { Utilisateur } from '@metier/utilisateur.js';
 import { EntrepotMemoire } from './entrepotMemoire.js';
 
 export class EntrepotUtilisateurMemoire extends EntrepotMemoire<Utilisateur> implements EntrepotUtilisateur {

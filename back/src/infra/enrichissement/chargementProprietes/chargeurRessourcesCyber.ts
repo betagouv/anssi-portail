@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import { EntrepotGuide } from '../../../metier/entrepotGuide.js';
+import { EntrepotGuide } from '@metier/entrepotGuide.js';
 import { guidePresentation } from '../../../presentation/guides/guidePresentation.js';
 import { AdaptateurEnvironnement } from '../../adaptateurEnvironnement.js';
 import { ChargeurDeProps } from './chargeurDeProps.js';

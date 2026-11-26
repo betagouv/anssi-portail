@@ -1,9 +1,9 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../../src/api/msc/index.js';
-import { RéactionMiniTest } from '../../../src/metier/mini-tests/reactionMiniTest.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { RéactionMiniTest } from '@metier/mini-tests/reactionMiniTest.js';
+import { creeServeur } from '@api/msc/index.js';
 import { EntrepotReactionMiniTestMemoire } from '../../persistance/entrepotReactionMiniTestMemoire.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
 

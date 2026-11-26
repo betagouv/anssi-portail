@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { aseptiseMarkdown } from '../../src/infra/markdown.js';
+import { aseptiseMarkdown } from '@infra/markdown.js';
 
 describe('Le markdown', () => {
   it("retourne la chaîne intacte lorsqu'elle ne contient aucun caractère spécial", () => {

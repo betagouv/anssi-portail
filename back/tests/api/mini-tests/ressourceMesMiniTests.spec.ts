@@ -1,12 +1,12 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../../src/api/msc/index.js';
-import { RésultatTestExposition } from '../../../src/metier/mini-tests/exposition/resultatTestExposition.js';
-import { RésultatTestHameçonnage } from '../../../src/metier/mini-tests/hameconnage/resultatTestHameconnage.js';
-import { RésultatTestRéflexesCyber } from '../../../src/metier/mini-tests/reflexes-cyber/resultatTestReflexesCyber.js';
-import { RésultatTestVraiFaux } from '../../../src/metier/mini-tests/vrai-faux/resultatTestVraiFaux.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { RésultatTestExposition } from '@metier/mini-tests/exposition/resultatTestExposition.js';
+import { RésultatTestHameçonnage } from '@metier/mini-tests/hameconnage/resultatTestHameconnage.js';
+import { RésultatTestRéflexesCyber } from '@metier/mini-tests/reflexes-cyber/resultatTestReflexesCyber.js';
+import { RésultatTestVraiFaux } from '@metier/mini-tests/vrai-faux/resultatTestVraiFaux.js';
+import { creeServeur } from '@api/msc/index.js';
 import { EntrepôtRésultatTestExpositionMémoire } from '../../persistance/entrepotResultatTestExpositionMemoire.js';
 import { EntrepôtRésultatTestHameçonnageMémoire } from '../../persistance/entrepotResultatTestHameconnageMemoire.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../persistance/entrepotResultatTestMaturiteMemoire.js';

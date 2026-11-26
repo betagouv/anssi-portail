@@ -1,8 +1,8 @@
 import { validate as uuidValidate } from 'uuid';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { QuestionnaireVraiFauxRéponseSoumise } from '../../../../src/bus/evenements/questionnaireVraiFauxReponseSoumise.js';
-import { QuestionnaireVraiFauxTerminé } from '../../../../src/bus/evenements/questionnaireVraiFauxTermine.js';
-import { QuestionnaireVraiFaux } from '../../../../src/metier/mini-tests/vrai-faux/questionnaireVraiFaux.js';
+import { QuestionnaireVraiFaux } from '@metier/mini-tests/vrai-faux/questionnaireVraiFaux.js';
+import { QuestionnaireVraiFauxRéponseSoumise } from '@bus/evenements/questionnaireVraiFauxReponseSoumise.js';
+import { QuestionnaireVraiFauxTerminé } from '@bus/evenements/questionnaireVraiFauxTermine.js';
 import { fauxRapporteur } from '../../../api/fauxObjets.js';
 import { ConstructeurDeQuestionVraieFausse } from '../../../api/mini-tests/vrai-faux/constructeurDeQuestionVraieFausse.js';
 import { jeanneDupont, questionVraieFaussePME } from '../../../api/objetsPretsALEmploi.js';

@@ -1,5 +1,5 @@
-import { EntrepotGuideTravail } from '../../src/metier/entrepotGuideTravail.js';
-import { DocumentGuide, Guide } from '../../src/metier/guide.js';
+import { EntrepotGuideTravail } from '@metier/entrepotGuideTravail.js';
+import { DocumentGuide, Guide } from '@metier/guide.js';
 import { EntrepotMemoire } from './entrepotMemoire.js';
 
 export class EntrepotGuideTravailMemoire extends EntrepotMemoire<Guide> implements EntrepotGuideTravail {

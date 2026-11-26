@@ -1,6 +1,6 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
-import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { MiseAJourFavorisUtilisateur } from '@bus/miseAJourFavorisUtilisateur.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideParametresRequete } from '../zod.js';

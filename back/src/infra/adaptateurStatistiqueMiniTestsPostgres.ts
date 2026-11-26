@@ -1,6 +1,6 @@
 import Knex from 'knex';
-import { AdaptateurStatistiqueMiniTests } from '../metier/mini-tests/adaptateurStatistiqueMiniTests.js';
-import { Statistiques } from '../metier/statistiques.js';
+import { AdaptateurStatistiqueMiniTests } from '@metier/mini-tests/adaptateurStatistiqueMiniTests.js';
+import { Statistiques } from '@metier/statistiques.js';
 import { DonneesEvenement } from './donneesEvenement.js';
 
 type ClésMiniTests = Statistiques['miniTests'];

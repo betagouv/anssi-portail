@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { AdaptateurCellar, CleDuBucket } from '../../src/infra/adaptateurCellar.js';
-import { fabriqueServiceSanteGuides, ServiceSanteGuides } from '../../src/metier/serviceSanteGuides.js';
+import { fabriqueServiceSanteGuides, ServiceSanteGuides } from '@metier/serviceSanteGuides.js';
+import { AdaptateurCellar, CleDuBucket } from '@infra/adaptateurCellar.js';
 import { fauxAdaptateurCellar } from '../api/fauxObjets.js';
 import { guideDevsecops, guideZeroTrust } from '../api/objetsPretsALEmploi.js';
 

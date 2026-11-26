@@ -1,8 +1,8 @@
 import type {
   EntrepôtRésultatTestMaturité,
   FiltreResultatsTest,
-} from '../../metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
-import { RésultatTestMaturité } from '../../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+} from '@metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
+import { RésultatTestMaturité } from '@metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
 import type { EntréePostgresRésultatTest, EntréePostgresRésultatTestMaturité } from './entreePostgresResultatTest.js';
 import { EntrepôtRésultatTestPostgres } from './entrepotResultatTestPostgres.js';
 

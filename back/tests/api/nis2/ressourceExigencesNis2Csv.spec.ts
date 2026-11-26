@@ -1,9 +1,9 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../../src/api/msc/index.js';
-import { Correspondance, ExigenceNIS2 } from '../../../src/metier/nis2/exigence.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { Correspondance, ExigenceNIS2 } from '@metier/nis2/exigence.js';
+import { creeServeur } from '@api/msc/index.js';
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
 

@@ -1,5 +1,5 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express, RequestHandler } from 'express';
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { ConfigurationServeur } from '../../configurationServeur.js';
 import { ressourcePagesJekyll } from '../../ressourcePagesJekyll.js';
 import { enregistreRouteDansExpress } from '../enregistreRoutes.js';

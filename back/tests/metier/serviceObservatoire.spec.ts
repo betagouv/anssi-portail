@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { SeuilCompletion } from '../../src/metier/observatoire.js';
-import { departements } from '../../src/metier/referentielDepartements.js';
-import { ServiceObservatoire } from '../../src/metier/serviceObservatoire.js';
-import { DATE_MAJ_NOMBRES_DE_DIAGNOSTIC_CYBER, NOMBRES_DE_DIAGNOSTIC_CYBER } from '../../src/metier/statistiques.js';
+import { SeuilCompletion } from '@metier/observatoire.js';
+import { departements } from '@metier/referentielDepartements.js';
+import { ServiceObservatoire } from '@metier/serviceObservatoire.js';
+import { DATE_MAJ_NOMBRES_DE_DIAGNOSTIC_CYBER, NOMBRES_DE_DIAGNOSTIC_CYBER } from '@metier/statistiques.js';
 
 describe('Le service Observatoire', () => {
   const adaptateurObservatoireMSS = {

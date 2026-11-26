@@ -1,8 +1,8 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import cors from 'cors';
 import { Router } from 'express';
 import z from 'zod';
-import { RéflexesCyber } from '../../../metier/mini-tests/reflexes-cyber/reflexesCyber.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { RéflexesCyber } from '@metier/mini-tests/reflexes-cyber/reflexesCyber.js';
 import { ConfigurationServeur } from '../../configurationServeur.js';
 import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { valideCorpsRequete } from '../../zod.js';

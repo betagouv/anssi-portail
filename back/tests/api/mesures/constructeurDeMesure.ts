@@ -1,5 +1,5 @@
-import { LienPourAllerPlusLoin, Mesure, Procédure, Risque } from '../../../src/metier/mesure.js';
-import { ExigenceNIS2 } from '../../../src/metier/nis2/exigence.js';
+import { LienPourAllerPlusLoin, Mesure, Procédure, Risque } from '@metier/mesure.js';
+import { ExigenceNIS2 } from '@metier/nis2/exigence.js';
 
 export class ConstructeurDeMesure {
   private id: string = '';

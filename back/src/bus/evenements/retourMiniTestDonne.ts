@@ -1,4 +1,4 @@
-import { MiniTest } from '../../metier/mini-tests/mini-test.js';
+import { MiniTest } from '@metier/mini-tests/mini-test.js';
 
 export type Retour = 'POSITIF' | 'NEGATIF';
 

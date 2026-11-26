@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { estCodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
   import { untrack } from 'svelte';
+  import { estCodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
   import { creeLeFragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
   import { profilStore } from '../stores/profil.store';
   import type { PropriétésFilAriane } from '../ui/filAriane';

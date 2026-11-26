@@ -1,6 +1,6 @@
-import { BusEvenements } from '../../../bus/busEvenements.js';
-import { QuestionnaireVraiFauxRéponseSoumise } from '../../../bus/evenements/questionnaireVraiFauxReponseSoumise.js';
-import { QuestionnaireVraiFauxTerminé } from '../../../bus/evenements/questionnaireVraiFauxTermine.js';
+import { BusEvenements } from '@bus/busEvenements.js';
+import { QuestionnaireVraiFauxRéponseSoumise } from '@bus/evenements/questionnaireVraiFauxReponseSoumise.js';
+import { QuestionnaireVraiFauxTerminé } from '@bus/evenements/questionnaireVraiFauxTermine.js';
 import { CodeRégion } from '../../referentielRegions.js';
 import { CodeSecteur } from '../../referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../referentielTranchesEffectifEtablissement.js';

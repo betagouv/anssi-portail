@@ -1,10 +1,10 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { fabriqueMiddleware } from '../../../src/api/middlewares/middleware.js';
-import { creeServeur } from '../../../src/api/msc/index.js';
-import { MiseAJourFavorisUtilisateur } from '../../../src/bus/miseAJourFavorisUtilisateur.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { fabriqueMiddleware } from '@api/middlewares/middleware.js';
+import { creeServeur } from '@api/msc/index.js';
+import { MiseAJourFavorisUtilisateur } from '@bus/miseAJourFavorisUtilisateur.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepotFavoriMemoire } from '../../persistance/entrepotFavoriMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';

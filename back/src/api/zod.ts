@@ -1,6 +1,6 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { NextFunction, Request, Response } from 'express';
 import * as z from 'zod';
+import { HttpStatusCode } from '@anssi-portail/axios';
 
 export const valideRequete =
   <TZod extends z.ZodType, TReq extends z.output<TZod>>(objet: TZod) =>

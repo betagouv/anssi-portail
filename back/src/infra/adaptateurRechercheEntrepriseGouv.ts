@@ -1,6 +1,6 @@
 import axios, { AxiosError } from '@anssi-portail/axios';
-import { Rapporteur } from '../metier/rapporteur.js';
-import { régions } from '../metier/referentielRegions.js';
+import { Rapporteur } from '@metier/rapporteur.js';
+import { régions } from '@metier/referentielRegions.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import {
   AdaptateurRechercheEntreprise,

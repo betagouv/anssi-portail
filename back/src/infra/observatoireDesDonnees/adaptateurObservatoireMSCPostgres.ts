@@ -2,13 +2,8 @@ import { Knex } from 'knex';
 import {
   libellésNiveauMaturité,
   tousLesIdNiveauMaturite,
-} from '../../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
-import {
-  CumulMensuel,
-  SeuilCompletion,
-  TotalParDepartement,
-  TotalParNiveauMaturite,
-} from '../../metier/observatoire.js';
+} from '@metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { CumulMensuel, SeuilCompletion, TotalParDepartement, TotalParNiveauMaturite } from '@metier/observatoire.js';
 import { AdaptateurObservatoireMSC } from './adaptateurObservatoireMSC.js';
 import { cumulMensuel, total } from './requetesObservatoire.js';
 

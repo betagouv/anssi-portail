@@ -1,4 +1,4 @@
-import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
+import { AdaptateurEmail } from '@metier/adaptateurEmail.js';
 import { CompteCree } from './evenements/compteCree.js';
 
 export const creeContactBrevo = ({ adaptateurEmail }: { adaptateurEmail: AdaptateurEmail }) => {

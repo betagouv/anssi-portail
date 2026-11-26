@@ -1,7 +1,7 @@
-import { Parcours } from '../../metier/parcours.js';
-import { CodeRégion } from '../../metier/referentielRegions.js';
-import { CodeSecteur } from '../../metier/referentielSecteurs.js';
-import { CodeTrancheEffectif } from '../../metier/referentielTranchesEffectifEtablissement.js';
+import { Parcours } from '@metier/parcours.js';
+import { CodeRégion } from '@metier/referentielRegions.js';
+import { CodeSecteur } from '@metier/referentielSecteurs.js';
+import { CodeTrancheEffectif } from '@metier/referentielTranchesEffectifEtablissement.js';
 import { EvenementDuBus } from '../busEvenements.js';
 
 export class TestHameçonnageRéponseSoumise implements EvenementDuBus {

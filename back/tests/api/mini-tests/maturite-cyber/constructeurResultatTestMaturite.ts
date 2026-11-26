@@ -1,11 +1,8 @@
-import {
-  ReponsesTestMaturite,
-  RésultatTestMaturité,
-} from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
-import { CodeRégion } from '../../../../src/metier/referentielRegions.js';
-import { CodeSecteur } from '../../../../src/metier/referentielSecteurs.js';
-import { CodeTrancheEffectif } from '../../../../src/metier/referentielTranchesEffectifEtablissement.js';
-import { Utilisateur } from '../../../../src/metier/utilisateur.js';
+import { ReponsesTestMaturite, RésultatTestMaturité } from '@metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { CodeRégion } from '@metier/referentielRegions.js';
+import { CodeSecteur } from '@metier/referentielSecteurs.js';
+import { CodeTrancheEffectif } from '@metier/referentielTranchesEffectifEtablissement.js';
+import { Utilisateur } from '@metier/utilisateur.js';
 import { fauxAdaptateurRechercheEntreprise } from '../../fauxObjets.js';
 
 export class ConstructeurRésultatTestMaturité {

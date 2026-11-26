@@ -3,6 +3,7 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   resolve: {
     conditions: ['anssi-portail:source'],
+    tsconfigPaths: true,
   },
   test: {
     include: ['tests/**/*.spec.ts'],

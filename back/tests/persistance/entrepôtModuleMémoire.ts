@@ -1,6 +1,6 @@
-import { EntrepôtModule } from '../../src/metier/EntrepotModule.js';
-import { Mesure } from '../../src/metier/mesure.js';
-import { Module } from '../../src/metier/module.js';
+import { EntrepôtModule } from '@metier/EntrepotModule.js';
+import { Mesure } from '@metier/mesure.js';
+import { Module } from '@metier/module.js';
 import { EntrepotMemoire } from './entrepotMemoire.js';
 
 export class EntrepôtModuleMémoire extends EntrepotMemoire<Module> implements EntrepôtModule {

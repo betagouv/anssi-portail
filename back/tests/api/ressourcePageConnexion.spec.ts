@@ -1,9 +1,9 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
-import { creeServeur } from '../../src/api/msc/index.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { FournisseurChemin } from '@api/fournisseurChemin.js';
+import { creeServeur } from '@api/msc/index.js';
 import { encodeSession, enObjet } from './cookie.js';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin, ressourceFactice } from './fauxObjets.js';
 

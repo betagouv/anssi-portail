@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { consigneTestHameconnageReponseSoumiseDansJournal } from '../../src/bus/consigneTestHameconnageReponseSoumiseDansJournal.js';
-import { TestHameçonnageRéponseSoumise } from '../../src/bus/evenements/testHameconnageReponseSoumise.js';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { consigneTestHameconnageReponseSoumiseDansJournal } from '@bus/consigneTestHameconnageReponseSoumiseDansJournal.js';
+import { TestHameçonnageRéponseSoumise } from '@bus/evenements/testHameconnageReponseSoumise.js';
+import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 

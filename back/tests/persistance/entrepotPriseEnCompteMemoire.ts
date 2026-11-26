@@ -1,7 +1,7 @@
-import { EntrepotPriseEnCompte } from '../../src/metier/entrepotPriseEnCompte.js';
-import { Mesure } from '../../src/metier/mesure.js';
-import { PriseEnCompte } from '../../src/metier/priseEnCompte.js';
-import { Utilisateur } from '../../src/metier/utilisateur.js';
+import { EntrepotPriseEnCompte } from '@metier/entrepotPriseEnCompte.js';
+import { Mesure } from '@metier/mesure.js';
+import { PriseEnCompte } from '@metier/priseEnCompte.js';
+import { Utilisateur } from '@metier/utilisateur.js';
 import { EntrepotMemoire } from './entrepotMemoire.js';
 
 export class EntrepotPriseEnCompteMemoire extends EntrepotMemoire<PriseEnCompte> implements EntrepotPriseEnCompte {

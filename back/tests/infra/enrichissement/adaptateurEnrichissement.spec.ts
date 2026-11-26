@@ -2,8 +2,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   AdaptateurEnrichissement,
   fabriqueAdaptateurEnrichissement,
-} from '../../../src/infra/enrichissement/adaptateurEnrichissement.js';
-import { EntrepôtContactStatique } from '../../../src/infra/entrepotContactStatique.js';
+} from '@infra/enrichissement/adaptateurEnrichissement.js';
+import { EntrepôtContactStatique } from '@infra/entrepotContactStatique.js';
 import { ConstructeurDArticleAvecToutesLesMétadonnées } from '../../api/blog/constructeurDeResumeDArticle.js';
 import { fauxAdaptateurEnvironnement, fauxFournisseurDeChemin } from '../../api/fauxObjets.js';
 import { financementCyberPME, guideDevsecops, kitRelais } from '../../api/objetsPretsALEmploi.js';

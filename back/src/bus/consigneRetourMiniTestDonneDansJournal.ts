@@ -1,6 +1,6 @@
-import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
-import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
-import { DonneesEvenement } from '../infra/donneesEvenement.js';
+import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
+import { DonneesEvenement } from '@infra/donneesEvenement.js';
 import { RetourMiniTestDonné } from './evenements/retourMiniTestDonne.js';
 
 type ÉvènementsMiniTest = Extract<

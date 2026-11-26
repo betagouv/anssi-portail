@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { ClientHttp } from '../../src/infra/clientHttp.js';
+import { ClientHttp } from '@infra/clientHttp.js';
 import { EntrepotGristGenerique } from './EntrepotGristGenerique.js';
 import { fabriqueClientGet, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
 

@@ -1,5 +1,5 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { NextFunction, Request, Response, Router } from 'express';
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { guidePresentation } from '../../presentation/guides/guidePresentation.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';

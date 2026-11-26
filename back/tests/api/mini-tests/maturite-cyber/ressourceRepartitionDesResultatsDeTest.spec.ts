@@ -1,8 +1,8 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../../../src/api/msc/index.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { creeServeur } from '@api/msc/index.js';
 import { ResultatTestMaturiteCreateur } from '../../../metier/mini-tests/maturite-cyber/ResultatTestMaturiteCreateur.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';

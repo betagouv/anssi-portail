@@ -1,7 +1,7 @@
-import type { ReponsesTestMaturite } from '../../metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
-import type { CodeRégion } from '../../metier/referentielRegions.js';
-import type { CodeSecteur } from '../../metier/referentielSecteurs.js';
-import type { CodeTrancheEffectif } from '../../metier/referentielTranchesEffectifEtablissement.js';
+import type { ReponsesTestMaturite } from '@metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import type { CodeRégion } from '@metier/referentielRegions.js';
+import type { CodeSecteur } from '@metier/referentielSecteurs.js';
+import type { CodeTrancheEffectif } from '@metier/referentielTranchesEffectifEtablissement.js';
 
 export type EntréePostgresRésultatTest =
   | EntréePostgresRésultatTestMaturité

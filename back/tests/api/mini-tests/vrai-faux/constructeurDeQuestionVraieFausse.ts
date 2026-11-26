@@ -1,4 +1,4 @@
-import { QuestionVraieFausse } from '../../../../src/metier/mini-tests/vrai-faux/questionVraieFausse.js';
+import { QuestionVraieFausse } from '@metier/mini-tests/vrai-faux/questionVraieFausse.js';
 
 export class ConstructeurDeQuestionVraieFausse {
   private idéeReçueEstVraie: boolean = true;

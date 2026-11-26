@@ -1,4 +1,4 @@
-import { Outil } from '../../metier/outils/outils.js';
+import { Outil } from '@metier/outils/outils.js';
 
 export class OutilTéléchargé {
   constructor(

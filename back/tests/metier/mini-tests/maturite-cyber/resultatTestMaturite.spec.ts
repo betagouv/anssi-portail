@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { AdaptateurRechercheEntreprise } from '../../../../src/infra/adaptateurRechercheEntreprise.js';
-import { IdNiveauMaturite } from '../../../../src/metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { IdNiveauMaturite } from '@metier/mini-tests/maturite-cyber/resultatTestMaturite.js';
+import { AdaptateurRechercheEntreprise } from '@infra/adaptateurRechercheEntreprise.js';
 import { fauxAdaptateurRechercheEntreprise } from '../../../api/fauxObjets.js';
 import { unRésultatDeTestDeMaturité } from '../../../api/mini-tests/maturite-cyber/constructeurResultatTestMaturite.js';
 import { jeanneDupont } from '../../../api/objetsPretsALEmploi.js';

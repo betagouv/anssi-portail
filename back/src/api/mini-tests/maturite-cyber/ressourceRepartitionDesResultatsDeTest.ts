@@ -1,9 +1,9 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
-import { RepartitionResultatsTest } from '../../../metier/mini-tests/maturite-cyber/repartitionResultatsTest.js';
-import { estCodeRegion } from '../../../metier/referentielRegions.js';
-import { estCodeSecteur } from '../../../metier/referentielSecteurs.js';
-import { trancheEffectifParCode } from '../../../metier/referentielTranchesEffectifEtablissement.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { RepartitionResultatsTest } from '@metier/mini-tests/maturite-cyber/repartitionResultatsTest.js';
+import { estCodeRegion } from '@metier/referentielRegions.js';
+import { estCodeSecteur } from '@metier/referentielSecteurs.js';
+import { trancheEffectifParCode } from '@metier/referentielTranchesEffectifEtablissement.js';
 import { ConfigurationServeur } from '../../configurationServeur.js';
 import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../../zod.js';

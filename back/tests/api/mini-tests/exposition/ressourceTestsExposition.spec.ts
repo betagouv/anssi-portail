@@ -1,10 +1,10 @@
-import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { creeServeur } from '../../../../src/api/msc/index.js';
-import { TestExpositionRéalisé } from '../../../../src/bus/evenements/TestExpositionRealise.js';
-import { EntrepotUtilisateur } from '../../../../src/metier/entrepotUtilisateur.js';
+import { HttpStatusCode } from '@anssi-portail/axios';
+import { EntrepotUtilisateur } from '@metier/entrepotUtilisateur.js';
+import { creeServeur } from '@api/msc/index.js';
+import { TestExpositionRéalisé } from '@bus/evenements/TestExpositionRealise.js';
 import { MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepôtRésultatTestExpositionMémoire } from '../../../persistance/entrepotResultatTestExpositionMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';

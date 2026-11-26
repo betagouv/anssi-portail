@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
-import { EntrepotSecretHachage } from '../../src/infra/entrepotSecretHachagePostgres.js';
-import { fabriqueServiceVerificationCoherenceSecretsHachage } from '../../src/infra/serviceVerificationCoherenceSecretsHachage.js';
+import { AdaptateurHachage } from '@infra/adaptateurHachage.js';
+import { EntrepotSecretHachage } from '@infra/entrepotSecretHachagePostgres.js';
+import { fabriqueServiceVerificationCoherenceSecretsHachage } from '@infra/serviceVerificationCoherenceSecretsHachage.js';
 import { fauxAdaptateurEnvironnement, fauxAdaptateurHachage } from '../api/fauxObjets.js';
 
 describe('Le service de vérification de la cohérence des secrets de hachage', () => {
