@@ -49,6 +49,17 @@ jobs:
       CLEVER_S3_ACCESS_KEY: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
       CLEVER_S3_SECRET_KEY: ${{ secrets.CLEVER_S3_SECRET_KEY }}
 
+  mini-test-reflexes-cyber:
+    uses: $/.github/workflows/deploiement-webc-unique.yml
+    with:
+      package: mini-test-reflexes-cyber
+      repertoire: webc-externes/mini-test-reflexes-cyber
+      environnement: WEB_COMPONENTS
+      nom: WebComponent Réflexes Cyber
+    secrets:
+      CLEVER_S3_ACCESS_KEY: ${{ secrets.CLEVER_S3_ACCESS_KEY }}
+      CLEVER_S3_SECRET_KEY: ${{ secrets.CLEVER_S3_SECRET_KEY }}
+
   demande-diag:
     uses: $/.github/workflows/deploiement-webc-unique.yml
     with:
