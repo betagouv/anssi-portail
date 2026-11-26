@@ -1,5 +1,6 @@
 <script lang="ts">
   import IllustrationAnimee from '@accueil/animation/IllustrationAnimee.svelte';
+
   import HerosParcoursComplet from './HerosParcoursComplet.svelte';
 
   const scènes = [HerosParcoursComplet];

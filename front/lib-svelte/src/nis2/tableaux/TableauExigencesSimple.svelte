@@ -1,5 +1,6 @@
 <script lang="ts">
   import { enPropriétéWebC } from '@plateforme/webComponent';
+
   import { type Exigence, type ExigenceNis2 } from '../exigence.type';
   import { exigencesFiltrees } from '../stores/exigencesFiltrees.store';
   import AucunResultat from './AucunResultat.svelte';

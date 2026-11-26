@@ -1,11 +1,14 @@
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { EntrepôtRésultatTestMaturité } from '@metier/mini-tests/maturite-cyber/entrepotResultatTestMaturite.js';
 import { EntrepotSessionDeGroupe } from '@metier/mini-tests/maturite-cyber/entrepotSessionDeGroupe.js';
 import { SessionDeGroupe } from '@metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
 import { creeServeur } from '@api/msc/index.js';
+
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 import { EntrepotSessionDeGroupeMemoire } from '../../../persistance/entrepotSessionDeGroupeMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';

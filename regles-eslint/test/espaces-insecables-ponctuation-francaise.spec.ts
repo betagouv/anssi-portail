@@ -1,6 +1,7 @@
 import { Linter } from 'eslint';
 import svelte from 'eslint-plugin-svelte';
 import { describe, expect, it } from 'vitest';
+
 import règle from '../src/espaces-insecables-ponctuation-francaise.js';
 
 const configuration = [

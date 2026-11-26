@@ -1,7 +1,9 @@
 import * as Sentry from '@sentry/node';
 import { describe, expect, it, vi } from 'vitest';
+
 import { rapporteurConsole } from '@infra/rapporteurConsole.js';
 import { initialiseSentry, rapporteurSentry } from '@infra/sentry.js';
+
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
 
 vi.mock('@sentry/node', () => ({

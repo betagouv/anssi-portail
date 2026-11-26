@@ -4,9 +4,11 @@ import { fromBuffer } from '@office-kit/xlsx/node';
 import { getSheetByIndex } from '@office-kit/xlsx/workbook';
 import { getCellsInRow } from '@office-kit/xlsx/worksheet';
 import { describe, expect, it } from 'vitest';
+
 import { CodeRégion } from '@metier/referentielRegions.js';
 import { ServiceModeleAnnuaireDeCrise } from '@api/outils/modeleAnnuaireDeCrise/serviceModeleAnnuaireDeCrise.js';
 import { EntrepôtContactStatique } from '@infra/entrepotContactStatique.js';
+
 import { fabriqueAdaptateurHorloge } from '../../infra/adaptateurHorlogePourLesTests.js';
 import { fauxFournisseurDeChemin } from '../fauxObjets.js';
 

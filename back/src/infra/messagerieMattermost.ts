@@ -1,4 +1,5 @@
 import axios from '@anssi-portail/axios';
+
 import { AvisParcours } from '@metier/avisParcours.js';
 import {
   AvisNegatifSurUneMesure,
@@ -11,6 +12,7 @@ import {
   RetourNégatifSurOutil,
 } from '@metier/messagerieInstantanee.js';
 import { type MiniTest } from '@metier/mini-tests/mini-test.js';
+
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { aseptiseMarkdown } from './markdown.js';
 

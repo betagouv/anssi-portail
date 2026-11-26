@@ -1,4 +1,5 @@
 import type { CouleurDeBadge } from '@ui/badge.type';
+
 import type { CollectionGuide, Guide } from '../Guide.types';
 
 export const decodeEntitesHtml = (chaine: string) => {

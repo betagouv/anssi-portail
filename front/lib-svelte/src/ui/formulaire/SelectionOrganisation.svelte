@@ -1,8 +1,10 @@
 <script lang="ts">
   import axios from 'axios';
   import { onDestroy, tick } from 'svelte';
+
   import { clic } from '@directives/actions.svelte';
   import { validationChamp } from '@directives/validationChamp';
+
   import ChampTexte from '../ChampTexte.svelte';
   import type { Departement, Organisation } from './SelectionOrganisation.types.ts';
 

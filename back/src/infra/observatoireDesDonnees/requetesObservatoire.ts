@@ -1,4 +1,5 @@
 import { Knex } from 'knex';
+
 import { CumulMensuel } from '@metier/observatoire.js';
 
 export const total = async (lignes: Knex.QueryBuilder): Promise<number> => {

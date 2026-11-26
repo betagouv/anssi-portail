@@ -1,4 +1,5 @@
 import { get } from 'svelte/store';
+
 import type { EtatQuestionnaire } from '../../../../../back/src/metier/nis2-simulateur/EtatQuestionnaire';
 import type { ActionQuestionnaire } from './actions';
 import type { questionnaireStore } from './questionnaire.store';

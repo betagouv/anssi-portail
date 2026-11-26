@@ -9,6 +9,7 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
+
   import { clic } from '@directives/actions.svelte';
 
   const { children, actions }: Props = $props();

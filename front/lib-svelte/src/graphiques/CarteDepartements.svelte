@@ -1,5 +1,6 @@
 <script lang="ts">
   import { on } from 'svelte/events';
+
   import ConteneurGraphiqueDsfr from './ConteneurGraphiqueDsfr.svelte';
 
   interface Props {

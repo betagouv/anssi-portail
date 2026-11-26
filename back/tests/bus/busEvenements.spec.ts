@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
+
 import { BusEvenements, EvenementDuBus } from '@bus/busEvenements.js';
+
 import { fauxRapporteur } from '../api/fauxObjets.js';
 
 class EvenementTestA implements EvenementDuBus {

@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios, { AxiosError } from 'axios';
   import { onMount } from 'svelte';
+
   import type { DernierResultatTest } from './ResultatsTest.type';
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
 

@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
+
   import CarteContact from './CarteContact.svelte';
   import type { ContactSectoriel } from './contacts.type';
   import LigneContact from './LigneContact.svelte';

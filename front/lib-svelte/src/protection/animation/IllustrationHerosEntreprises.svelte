@@ -1,5 +1,6 @@
 <script lang="ts">
   import IllustrationAnimee from '@accueil/animation/IllustrationAnimee.svelte';
+
   import HerosEntreprises from './HerosEntreprises.svelte';
 
   const scènes = [HerosEntreprises];

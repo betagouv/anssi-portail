@@ -1,4 +1,5 @@
 import { CodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
+
 import { CodeRégion } from '../referentielRegions.js';
 import { ContactNational, ContactSectoriel, ContactsRégionaux } from './contacts.js';
 

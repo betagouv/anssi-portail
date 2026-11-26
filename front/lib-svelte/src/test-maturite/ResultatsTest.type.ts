@@ -1,4 +1,5 @@
 import type { IdNiveau } from '@niveaux-maturite/NiveauxMaturite.type';
+
 import type { IdRubrique } from './TestMaturite.type';
 
 export type RéponsesResultatTest = Record<IdRubrique, number>;

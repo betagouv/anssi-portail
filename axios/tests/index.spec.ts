@@ -1,4 +1,5 @@
 import { expect, it, vi } from 'vitest';
+
 import axios, { AxiosError, AxiosHeaders, HttpStatusCode, isAxiosError } from '@anssi-portail/axios';
 
 it('retire les données sensibles des erreurs Axios', async () => {

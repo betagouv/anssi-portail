@@ -1,4 +1,5 @@
 import { Express, RequestHandler } from 'express';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
 
 export const enregistreRouteDansExpress =

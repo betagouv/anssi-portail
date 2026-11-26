@@ -1,4 +1,5 @@
 import Knex from 'knex';
+
 import config from '../../knexfile.js';
 
 export interface EntrepotSecretHachage {

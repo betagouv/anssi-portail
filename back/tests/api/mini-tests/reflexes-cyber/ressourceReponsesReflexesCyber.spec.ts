@@ -1,10 +1,13 @@
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { creeServeur } from '@api/msc/index.js';
 import { SimulationRéflexesCyberRéponseSoumise } from '@bus/evenements/simulationReflexesCyberReponseSoumise.js';
 import { SimulationRéflexesCyberTerminé } from '@bus/evenements/simulationReflexesCyberTermine.js';
+
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepôtRésultatTestRéflexesCyberMémoire } from '../../../persistance/entrepotResultatTestReflexesCyberMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';

@@ -1,9 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { consigneAvisParcoursDonnéDansJournal } from '@bus/consigneAvisParcoursDonneDansJournal.js';
 import { AvisParcoursDonné } from '@bus/evenements/avisParcoursDonne.js';
 import { AdaptateurHachage } from '@infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
+
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 

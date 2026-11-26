@@ -1,5 +1,6 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import type { RésuméFinancement } from '@financements/financement';
 import { rechercheParTypeFinancement } from '@financements/stores/rechercheParTypeFinancement.store';
 

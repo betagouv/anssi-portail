@@ -2,12 +2,15 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import z from 'zod';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { CodeDepartement } from '@metier/referentielDepartements.js';
 import { schemaRessourceDemandesAide } from '@api/mon-aide-cyber/ressourceDemandesAide.schema.js';
 import { creeServeur } from '@api/msc/index.js';
 import { DemandeAide } from '@infra/adaptateurMonAideCyber.js';
 import { adaptateurMonAideCyberVide } from '@infra/adaptateurMonAideCyberVide.js';
+
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
 
 type CorpsDemandeAide = z.output<typeof schemaRessourceDemandesAide>;

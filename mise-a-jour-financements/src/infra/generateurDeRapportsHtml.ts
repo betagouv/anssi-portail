@@ -1,4 +1,5 @@
 import { diffWords } from 'diff';
+
 import { DifferenceFinancement } from '../metier/differenceFinancement';
 import { GenerateurDeRapports } from '../metier/generateurDeRapports';
 import { NouveauFinancement } from '../metier/nouveauFinancement';

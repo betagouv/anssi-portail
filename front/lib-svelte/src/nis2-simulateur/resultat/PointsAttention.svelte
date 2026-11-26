@@ -1,6 +1,7 @@
 <script lang="ts">
   import { aseptiseHtml } from '@plateforme/aseptisationDuHtml';
   import Accordeon from '@ui/Accordeon.svelte';
+
   import type {
     PointsAttentionPrecis,
     ResumesPointsAttention,

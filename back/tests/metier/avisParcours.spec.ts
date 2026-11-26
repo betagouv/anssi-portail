@@ -1,4 +1,5 @@
 import { expectTypeOf, it } from 'vitest';
+
 import { AvisParcours } from '@metier/avisParcours.js';
 
 it('exige une recommandation sauf pour un avis de mi-parcours', () => {

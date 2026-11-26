@@ -1,7 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
+
 import { ObjetChiffre } from '@infra/adaptateurChiffrement.js';
 import { AdaptateurProfilAnssi } from '@infra/adaptateurProfilAnssi.js';
 import { EntrepotUtilisateurMPAPostgres } from '@infra/entrepotUtilisateurMPAPostgres.js';
+
 import {
   fauxAdaptateurHachage,
   fauxAdaptateurProfilAnssi,

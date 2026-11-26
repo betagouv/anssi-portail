@@ -1,7 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
+
 import { EntrepotMesure } from '@metier/entrepotMesure.js';
 import { EntrepôtModule } from '@metier/EntrepotModule.js';
 import { IdMesure } from '@metier/mesure.js';
+
 import { GestionnaireRequêtesComplémentaires } from './middleware.js';
 
 export const fabriqueAttributionParcoursMesure =

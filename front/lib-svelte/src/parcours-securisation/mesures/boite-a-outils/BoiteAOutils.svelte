@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { Component } from 'svelte';
+
   import { estEnvProduction } from '@plateforme/environnement';
+
   import type { Mesure } from '../mesure';
   import Procedure from './Procedure.svelte';
 

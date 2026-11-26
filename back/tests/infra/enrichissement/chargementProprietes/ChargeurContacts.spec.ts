@@ -1,8 +1,10 @@
 import { JSDOM } from 'jsdom';
 import { describe, expect, it } from 'vitest';
+
 import { ChargeurContacts } from '@infra/enrichissement/chargementProprietes/chargeurContacts.js';
 import { RésolveurDePage } from '@infra/enrichissement/resolveurDePage.js';
 import { EntrepôtContactStatique } from '@infra/entrepotContactStatique.js';
+
 import { EntrepôtArticleMémoire } from '../../../persistance/entrepotArticleMemoire.js';
 import { EntrepotFinancementMemoire } from '../../../persistance/entrepotFinancementMemoire.js';
 import { EntrepotGuideMemoire } from '../../../persistance/entrepotGuideMemoire.js';

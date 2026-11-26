@@ -1,9 +1,12 @@
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { FichierInconnu, FournisseurChemin } from '@api/fournisseurChemin.js';
 import { creeServeur } from '@api/msc/index.js';
+
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin, ressourceFactice } from './fauxObjets.js';
 
 describe('La ressource page Service', () => {

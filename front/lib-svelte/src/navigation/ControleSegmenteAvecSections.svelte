@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount, untrack, type Snippet } from 'svelte';
+
   import ControleSegmente from './ControleSegmente.svelte';
   import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from './fragmentDeNavigation.svelte';
 

@@ -2,8 +2,10 @@
   import { Icone } from '@lab-anssi/ui-kit';
   import axios from 'axios';
   import { onMount } from 'svelte';
+
   import type { IdNiveau } from '@niveaux-maturite/NiveauxMaturite.type';
   import Lien from '@ui/Lien.svelte';
+
   import TuileNiveauMaturité from './TuileNiveauMaturite.svelte';
 
   type IdMiniTest = 'maturité' | 'vraiFaux' | 'exposition' | 'réflexesCyber' | 'hameçonnage';

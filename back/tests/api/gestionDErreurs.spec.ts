@@ -2,7 +2,9 @@ import express from 'express';
 import expressIpFilter from 'express-ipfilter';
 import request from 'supertest';
 import { describe, expect, it, vi } from 'vitest';
+
 import { configureLaGestionDErreur } from '@api/msc/middlewares/gestionDErreurs.js';
+
 import { configurationDeTestDuServeur } from './fauxObjets.js';
 
 describe('La gestion des erreurs HTTP', () => {

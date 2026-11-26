@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
+
 import { MiniTest } from '@metier/mini-tests/mini-test.js';
 import { consigneRetourMiniTestDonnéDansJournal } from '@bus/consigneRetourMiniTestDonneDansJournal.js';
 import { RetourMiniTestDonné } from '@bus/evenements/retourMiniTestDonne.js';
 import { AdaptateurJournal } from '@infra/adaptateurJournal.js';
+
 import { fabriqueAdaptateurHorloge } from '../infra/adaptateurHorlogePourLesTests.js';
 
 describe("L'abonnement qui consigne l'évènement de retour de test de maturité", () => {

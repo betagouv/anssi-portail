@@ -1,5 +1,6 @@
 import { resolve } from 'node:path';
 import type { Plugin } from 'vite';
+
 import tsconfig from './tsconfig.json' with { type: 'json' };
 
 const préfixePlateforme = '@plateforme/';

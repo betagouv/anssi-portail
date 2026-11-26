@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+
   import { estServeur } from '@plateforme/environnement';
   import { réécritFragmentDepuis } from '@navigation/fragmentDeNavigation.svelte';
   import NavigationTertiaire from '@navigation/NavigationTertiaire.svelte';
@@ -8,6 +9,7 @@
   import Lien from '@ui/Lien.svelte';
   import MotEnExergue from '@ui/MotEnExergue.svelte';
   import Notice from '@ui/Notice.svelte';
+
   import DocumentationNis2 from './DocumentationNis2.svelte';
   import ExigencesNis2 from './ExigencesNis2.svelte';
   import Presentation from './Presentation.svelte';

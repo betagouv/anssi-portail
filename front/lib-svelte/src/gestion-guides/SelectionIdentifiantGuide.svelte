@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+
   import type { Guide } from '@catalogue/Guide.types';
   import { clic } from '@directives/actions.svelte';
   import ChampTexte from '@ui/ChampTexte.svelte';

@@ -1,13 +1,16 @@
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { AdaptateurJWT } from '@api/adaptateurJWT.js';
 import { ConfigurationServeur } from '@api/configurationServeur.js';
 import { creeServeur } from '@api/msc/index.js';
 import { AdaptateurOIDC } from '@api/oidc/adaptateurOIDC.js';
 import { UtilisateurConnecte } from '@bus/evenements/utilisateurConnecte.js';
 import { AdaptateurEnvironnement } from '@infra/adaptateurEnvironnement.js';
+
 import { MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { decodeSessionDuCookie } from '../cookie.js';

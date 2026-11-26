@@ -3,7 +3,9 @@ import { Canvas } from '@napi-rs/canvas';
 import { getDocument, PDFDocumentProxy } from 'pdfjs-dist/legacy/build/pdf.mjs';
 import sharp from 'sharp';
 import { describe, expect, it } from 'vitest';
+
 import { ErreurTypst, generateurDocument } from '@infra/generateurDocument.js';
+
 import { fauxFournisseurDeChemin, typstFactice } from '../api/fauxObjets.js';
 
 const estUnPdf = (buffer: Buffer): boolean => {

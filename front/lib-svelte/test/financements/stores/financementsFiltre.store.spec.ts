@@ -1,5 +1,6 @@
 import { get } from 'svelte/store';
 import { beforeAll, describe, expect, it } from 'vitest';
+
 import { financementsStore } from '@financements/stores/financements.store';
 import { financementsFiltre } from '@financements/stores/financementsFiltre.store';
 

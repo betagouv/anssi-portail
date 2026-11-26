@@ -1,7 +1,9 @@
 <script lang="ts">
   import { onMount, type Snippet } from 'svelte';
+
   import { enPropriétéWebC } from '@plateforme/webComponent';
   import Lien from '@ui/Lien.svelte';
+
   import IllustrationModules from './animation/IllustrationModules.svelte';
   import IllustrationProgression from './animation/IllustrationProgression.svelte';
   import IllustrationRecyf from './animation/IllustrationRecyf.svelte';

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { get } from 'svelte/store';
+
   import { profilStore } from '@stores/profil.store';
 </script>
 

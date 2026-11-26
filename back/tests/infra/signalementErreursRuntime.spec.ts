@@ -1,7 +1,10 @@
 import { describe, expect, it, vi } from 'vitest';
+
 import axios from '@anssi-portail/axios';
+
 import { BusEvenements } from '@bus/busEvenements.js';
 import { AdaptateurRechercheEntrepriseGouv } from '@infra/adaptateurRechercheEntrepriseGouv.js';
+
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
 
 class EvenementTest {}

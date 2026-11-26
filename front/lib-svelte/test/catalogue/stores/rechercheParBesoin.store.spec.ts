@@ -1,7 +1,9 @@
 import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
+
 import { BesoinCyber } from '@catalogue/Catalogue.types';
 import { rechercheParBesoin } from '@catalogue/stores/rechercheParBesoin.store';
+
 import { guideZeroTrust } from './objetsExemples';
 
 describe('La recherche par besoin', () => {

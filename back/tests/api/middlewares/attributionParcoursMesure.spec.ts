@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { Parcours } from '@metier/parcours.js';
 import { fabriqueAttributionParcoursMesure } from '@api/middlewares/attributionParcoursMesure.js';
+
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
 import { EntrepôtModuleMémoire } from '../../persistance/entrepôtModuleMémoire.js';
 import { ConstructeurDeMesure } from '../mesures/constructeurDeMesure.js';

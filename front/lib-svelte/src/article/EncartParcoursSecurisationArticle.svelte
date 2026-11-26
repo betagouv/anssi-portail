@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+
   import { afficheBadgeCyberdépart } from '@plateforme/environnement';
   import BadgeOrganisationsAccompagnes from '@demande-aide-mon-aide-cyber/BadgeOrganisationsAccompagnées.svelte';
   import IllustrationHerosParcoursBasique from '@parcours-securisation/animation/IllustrationHerosParcoursBasique.svelte';

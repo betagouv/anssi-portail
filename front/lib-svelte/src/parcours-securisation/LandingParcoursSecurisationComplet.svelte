@@ -1,9 +1,11 @@
 <script lang="ts">
   import { onMount, type Component } from 'svelte';
+
   import { récupèreStatistiquesMSC } from '@passerelles/statistiquesMSC';
   import BlocContenuLanding from '@ui/BlocContenuLanding.svelte';
   import HeroLandingPage from '@ui/HeroLandingPage.svelte';
   import MotEnExergue from '@ui/MotEnExergue.svelte';
+
   import IllustrationHerosParcoursComplet from './animation/IllustrationHerosParcoursComplet.svelte';
   import IllustrationModules from './animation/IllustrationModules.svelte';
   import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';

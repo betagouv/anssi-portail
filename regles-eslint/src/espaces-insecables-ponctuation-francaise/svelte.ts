@@ -1,4 +1,5 @@
 import type { Rule } from 'eslint';
+
 import { BALISES_IGNORÉES_PAR_DÉFAUT, créerVérificateur, type Options } from './commun.js';
 
 /** Sous-ensemble des nœuds de svelte-eslint-parser utilisés par la règle. */

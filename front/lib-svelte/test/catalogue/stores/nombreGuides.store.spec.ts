@@ -1,8 +1,10 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { CollectionGuide, Langue } from '@catalogue/Guide.types';
 import { guidesStore } from '@catalogue/stores/guides/guides.store';
 import { nombreGuides } from '@catalogue/stores/guides/nombreGuides.store';
+
 import { guideDevsecops, guideDevsecopsEN, guideZeroTrust } from './objetsExemples';
 
 describe('Le store du nombre de guides', () => {

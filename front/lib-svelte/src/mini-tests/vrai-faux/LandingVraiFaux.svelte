@@ -4,6 +4,7 @@
   import type { PropriétésFilAriane } from '@ui/filAriane';
   import HerosRiche from '@ui/HerosRiche.svelte';
   import Lien from '@ui/Lien.svelte';
+
   import IllustrationHerosVraiFaux from './IllustrationHerosVraiFaux.svelte';
 
   const { mode, suivant, urlBase = '' }: { mode?: 'autonome'; suivant?: () => void; urlBase?: string } = $props();

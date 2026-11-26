@@ -8,6 +8,7 @@ import { CodeRégion } from '@metier/referentielRegions.js';
 import { CodeSecteur } from '@metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '@metier/referentielTranchesEffectifEtablissement.js';
 import { Utilisateur } from '@metier/utilisateur.js';
+
 import { fauxAdaptateurRechercheEntreprise } from '../../../api/fauxObjets.js';
 
 export class ResultatTestMaturiteCreateur {

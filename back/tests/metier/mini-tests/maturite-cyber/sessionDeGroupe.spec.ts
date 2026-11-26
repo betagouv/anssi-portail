@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
+
 import { SessionDeGroupe } from '@metier/mini-tests/maturite-cyber/sessionDeGroupe.js';
+
 import { unRésultatDeTestDeMaturité } from '../../../api/mini-tests/maturite-cyber/constructeurResultatTestMaturite.js';
 import { EntrepôtRésultatTestMaturitéMémoire } from '../../../persistance/entrepotResultatTestMaturiteMemoire.js';
 

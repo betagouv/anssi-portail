@@ -1,5 +1,6 @@
 <script lang="ts">
   import axios from 'axios';
+
   import { aseptiseHtml } from '@plateforme/aseptisationDuHtml';
   import { enPropriétéWebC } from '@plateforme/webComponent';
   import CelluleExigenceNis2 from '@nis2/tableaux/CelluleExigenceNis2.svelte';
@@ -9,6 +10,7 @@
   import type { PropriétésFilAriane } from '@ui/filAriane';
   import Heros from '@ui/Heros.svelte';
   import RetourUtilisateurSurContenu from '@ui/RetourUtilisateurSurContenu.svelte';
+
   import InterlocuteursParcoursSecurisation from '../InterlocuteursParcoursSecurisation.svelte';
   import RetourUtilisateurSurParcours from '../RetourUtilisateurSurParcours.svelte';
   import BoiteAOutils from './boite-a-outils/BoiteAOutils.svelte';

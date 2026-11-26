@@ -1,5 +1,6 @@
 import { estServeur } from '@plateforme/environnement';
 import { requêteMédiaMobile } from '@utils/rendu.svelte';
+
 import { sonothèque } from './sonotheque';
 
 export type Son =

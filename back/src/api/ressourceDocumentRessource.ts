@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import { ConfigurationServeur } from './configurationServeur.js';
 import { fabriqueGestionnaireRessourceCellar } from './gestionnaireRessourceCellar.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';

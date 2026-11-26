@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 import { svelte, vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import cssnano from 'cssnano';
 import { defineConfig } from 'vite';
+
 import { remplaceVersionsDansPhp } from './plugin/remplaceVersionsDansPhp.js';
 
 const dirname = import.meta.dirname;

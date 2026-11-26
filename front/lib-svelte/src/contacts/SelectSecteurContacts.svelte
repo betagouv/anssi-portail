@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { CodeSecteurContact } from '@anssi-portail/contacts-sectoriels';
+
   import type { Option } from '@test-maturite/SelecteurSimple';
   import SelecteurSimple from '@test-maturite/SelecteurSimple.svelte';
 

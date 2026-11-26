@@ -1,4 +1,5 @@
 import { get, writable } from 'svelte/store';
+
 import type { CyFun23Fonction, Exigence } from '../exigence.type';
 
 const selectionFonction = writable<CyFun23Fonction | undefined>();

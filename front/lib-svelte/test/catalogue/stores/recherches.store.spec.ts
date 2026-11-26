@@ -1,5 +1,6 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { BesoinCyber, DroitAcces, Source, Typologie } from '@catalogue/Catalogue.types';
 import { CollectionGuide, Langue } from '@catalogue/Guide.types';
 import { rechercheParCollection } from '@catalogue/stores/guides/rechercheParCollection.store';

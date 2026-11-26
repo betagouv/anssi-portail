@@ -1,5 +1,6 @@
 <script lang="ts">
   import { clic } from '@directives/actions.svelte';
+
   import Etape from './Etape.svelte';
 
   interface Props {

@@ -1,4 +1,5 @@
 import { Express, RequestHandler } from 'express';
+
 import { ConfigurationServeur } from '../../../configurationServeur.js';
 import { ressourceAnnuaireDepartements } from '../../../ressourceAnnuaireDepartements.js';
 import { ressourceAnnuaireOrganisations } from '../../../ressourceAnnuaireOrganisations.js';

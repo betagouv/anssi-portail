@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
+
 import { LecteurDeSpecifications } from '@metier/nis2-simulateur/questionnaire/LecteurDeSpecifications.js';
+
 import { leCSV } from './aidesAuxTests.js';
 
 describe('Le lecteur de spécifications', () => {

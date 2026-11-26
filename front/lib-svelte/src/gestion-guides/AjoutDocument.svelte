@@ -1,5 +1,6 @@
 <script lang="ts">
   import axios, { AxiosError } from 'axios';
+
   import { clic } from '@directives/actions.svelte';
   import Alerte from '@ui/Alerte.svelte';
   import CaseACocher from '@ui/CaseACocher.svelte';

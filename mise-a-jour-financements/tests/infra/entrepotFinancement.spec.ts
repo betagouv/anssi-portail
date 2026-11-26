@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { ClientHttp } from '../../src/infra/clientHttp';
 import { EntrepotFinancement, EntrepotFinancementGrist, RetourApiGrist } from '../../src/infra/entrepotFinancement';

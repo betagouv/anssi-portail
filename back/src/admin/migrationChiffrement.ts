@@ -1,6 +1,8 @@
 import knex from 'knex';
+
 import { fabriqueAdaptateurChiffrement } from '@infra/adaptateurChiffrement.js';
 import { AdaptateurEnvironnement } from '@infra/adaptateurEnvironnement.js';
+
 import config from '../../knexfile.js';
 
 export class MigrationChiffrement {

@@ -1,5 +1,6 @@
 import * as htmlParser from '@html-eslint/parser';
 import type { TSESLint } from '@typescript-eslint/utils';
+
 import espacesInsécablesPonctuationFrancaise from './espaces-insecables-ponctuation-francaise.js';
 import { markdown } from './espaces-insecables-ponctuation-francaise/markdown.js';
 import routeSansValidation from './route-sans-validation.js';

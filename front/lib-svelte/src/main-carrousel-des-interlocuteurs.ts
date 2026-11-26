@@ -1,4 +1,5 @@
 import { hydrate } from 'svelte';
+
 import CarrouselDesInterlocuteurs from '@interlocuteurs/CarrouselDesInterlocuteurs.svelte';
 
 hydrate(CarrouselDesInterlocuteurs, {

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { enPropriétéWebC } from '@plateforme/webComponent';
+
   import type { Option } from './SelecteurSimple';
 
   type Props = {

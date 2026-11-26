@@ -1,4 +1,5 @@
 import { MessagerieInstantanee } from '@metier/messagerieInstantanee.js';
+
 import { AvisMesureDonne } from './evenements/avisMesureDonne.js';
 
 export const notifieCommentaireAvisMesureDonneDansMessagerie = ({

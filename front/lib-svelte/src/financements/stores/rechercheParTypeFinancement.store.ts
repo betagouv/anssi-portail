@@ -1,4 +1,5 @@
 import { get, writable } from 'svelte/store';
+
 import type { RésuméFinancement } from '../financement';
 
 const selectionTypeFinancement = writable<string[]>([]);

@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { créeÉvènementsDuParcours } from '@parcours-securisation/evenementsDuParcours';
 import { stockageDeSession } from '@utils/stockageDeSession';
 

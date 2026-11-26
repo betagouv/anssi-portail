@@ -1,6 +1,7 @@
 <script lang="ts">
   import EncartPromotionParcoursBasique from '@parcours-securisation/EncartPromotionParcoursBasique.svelte';
   import TagProgrammeGratuit from '@parcours-securisation/TagProgrammeGratuit.svelte';
+
   import EncartInvitationARenforcerCybersecurite from './EncartInvitationARenforcerCybersecurite.svelte';
 
   interface Props {

@@ -1,5 +1,6 @@
 <script lang="ts">
   import GroupeDeBadges from '@ui/GroupeDeBadges.svelte';
+
   import { badgesExigence, type ExigenceCyFun23 } from '../exigence.type';
   import ContenuExigenceFormate from './ContenuExigenceFormate.svelte';
 

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
+
   import { aseptiseHtml } from '@plateforme/aseptisationDuHtml';
   import { enPropriétéWebC } from '@plateforme/webComponent';
   import { clic } from '@directives/actions.svelte';
@@ -11,6 +12,7 @@
   import Lien from '@ui/Lien.svelte';
   import { copieDansLePressePapier } from '@ui/presse-papier';
   import Separateur from '@ui/Separateur.svelte';
+
   import { CollectionGuide, type Guide } from '../Guide.types';
   import { chargeGuidesDansLeStore, guidesStore } from '../stores/guides/guides.store';
   import BadgesDeCollections from './BadgesDeCollections.svelte';

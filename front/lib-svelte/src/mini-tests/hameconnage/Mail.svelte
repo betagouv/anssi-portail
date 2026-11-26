@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Component } from 'svelte';
+
   import { mailOuvert } from './hameconnage.store';
   import ReponseMail from './ReponseMail.svelte';
 

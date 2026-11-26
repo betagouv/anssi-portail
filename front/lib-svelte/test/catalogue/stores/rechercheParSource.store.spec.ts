@@ -1,7 +1,9 @@
 import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
+
 import { Source } from '@catalogue/Catalogue.types';
 import { rechercheParSource } from '@catalogue/stores/rechercheParSource.store';
+
 import { guidesTechniques, kitCyber, mss } from './objetsExemples';
 
 describe('La recherche par source', () => {

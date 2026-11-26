@@ -1,6 +1,8 @@
 import { Telephone } from '@lab-anssi/lib';
 import { decode } from 'html-entities';
+
 import axiosSécurisé, { isAxiosError } from '@anssi-portail/axios';
+
 import { AdaptateurEmail } from '@metier/adaptateurEmail.js';
 import { Parcours } from '@metier/parcours.js';
 import { Rapporteur } from '@metier/rapporteur.js';
@@ -12,6 +14,7 @@ import { ParcoursAllégéTerminé } from '@bus/evenements/parcoursAllegeTermine.
 import { ParcoursChangé } from '@bus/evenements/parcoursChange.js';
 import { ParcoursCompletTerminé } from '@bus/evenements/parcoursCompletTermine.js';
 import { ParcoursRejoint } from '@bus/evenements/parcoursRejoint.js';
+
 import { adaptateurEmailConsole } from './adaptateurEmailConsole.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { AdaptateurHorloge } from './adaptateurHorloge.js';

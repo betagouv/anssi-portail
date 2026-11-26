@@ -1,11 +1,14 @@
 import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { NOMBRE_DE_MAILS_HAMEÇONNAGE } from '@api/mini-tests/hameconnage/ressourceReponsesHameconnage.schema.js';
 import { creeServeur } from '@api/msc/index.js';
 import { TestHameçonnageRéponseSoumise } from '@bus/evenements/testHameconnageReponseSoumise.js';
 import { TestHameçonnageTerminé } from '@bus/evenements/testHameconnageTermine.js';
+
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepôtRésultatTestHameçonnageMémoire } from '../../../persistance/entrepotResultatTestHameconnageMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';

@@ -1,9 +1,11 @@
 import Knex from 'knex';
+
 import { EntrepotMesure } from '@metier/entrepotMesure.js';
 import { EntrepotPriseEnCompte } from '@metier/entrepotPriseEnCompte.js';
 import { Mesure } from '@metier/mesure.js';
 import { PriseEnCompte } from '@metier/priseEnCompte.js';
 import { Utilisateur } from '@metier/utilisateur.js';
+
 import config from '../../knexfile.js';
 import { AdaptateurHachage } from './adaptateurHachage.js';
 

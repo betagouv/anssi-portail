@@ -1,4 +1,5 @@
 import { hydrate } from 'svelte';
+
 import Catalogue from '@catalogue/Catalogue.svelte';
 import { type ItemCyber, type RepartitionParBesoin } from '@catalogue/Catalogue.types';
 import { catalogueStore } from '@catalogue/stores/catalogue.store';

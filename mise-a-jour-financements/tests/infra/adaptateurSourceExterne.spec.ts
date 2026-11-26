@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import {
   AdapateurAidesEntreprisesAPI,

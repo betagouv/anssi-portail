@@ -1,4 +1,5 @@
 import { get, writable } from 'svelte/store';
+
 import type { Exigence } from '../exigence.type';
 
 const selectionObjectif = writable<string | undefined>();

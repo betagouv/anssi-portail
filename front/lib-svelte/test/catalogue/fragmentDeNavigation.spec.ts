@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { BesoinCyber } from '@catalogue/Catalogue.types';
 import { Langue } from '@catalogue/Guide.types';
 import {

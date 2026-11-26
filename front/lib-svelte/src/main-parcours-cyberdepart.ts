@@ -1,4 +1,5 @@
 import { hydrate } from 'svelte';
+
 import Page from '@parcours-securisation/LandingParcoursCyberdepart.svelte';
 
 hydrate(Page, {

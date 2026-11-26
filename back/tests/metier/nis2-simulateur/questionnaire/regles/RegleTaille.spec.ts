@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { UnionPetitMoyenGrand } from '@metier/nis2-simulateur/ChampsSimulateur.definitions.js';
 import { EtatQuestionnaire, EtatQuestionnaireVide } from '@metier/nis2-simulateur/EtatQuestionnaire.js';
 import { RegleTaille } from '@metier/nis2-simulateur/questionnaire/regles/RegleTaille.js';

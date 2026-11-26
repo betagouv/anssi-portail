@@ -1,7 +1,9 @@
 import { Readable } from 'node:stream';
 import { DeleteObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { fromEnv } from '@aws-sdk/credential-providers';
+
 import axios, { AxiosResponse, HttpStatusCode, isAxiosError } from '@anssi-portail/axios';
+
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 
 const TRENTE_SECONDES = Temporal.Duration.from({ seconds: 30 });

@@ -1,5 +1,6 @@
 <script lang="ts">
   import Lien from '@ui/Lien.svelte';
+
   import Progression from '../Progression.svelte';
 
   type ModulePrésentation = {

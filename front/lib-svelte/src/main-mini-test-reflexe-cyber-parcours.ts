@@ -1,4 +1,5 @@
 import { hydrate } from 'svelte';
+
 import ParcoursReflexeCyber from '@mini-tests/reflexe-cyber/moteur-de-jeu/ParcoursReflexeCyber.svelte';
 
 hydrate(ParcoursReflexeCyber, {

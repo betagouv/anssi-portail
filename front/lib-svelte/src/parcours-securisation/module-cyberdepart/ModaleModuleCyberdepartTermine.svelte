@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+
   import Bouton from '@ui/Bouton.svelte';
   import CanonÀConfetti from '@ui/CanonAConfetti.svelte';
   import Lien from '@ui/Lien.svelte';

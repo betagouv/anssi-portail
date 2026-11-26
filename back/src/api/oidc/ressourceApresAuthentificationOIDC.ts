@@ -1,6 +1,9 @@
 import { Router } from 'express';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { UtilisateurConnecte } from '@bus/evenements/utilisateurConnecte.js';
+
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { erreurAuthentificationTropFaible } from '../erreurs.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
+
   import { estServeur } from '@plateforme/environnement';
   import { clic } from '@directives/actions.svelte';
   import ControleSegmente from '@navigation/ControleSegmente.svelte';
@@ -11,6 +12,7 @@
   import FiltresMobile from '@ui/FiltresMobile.svelte';
   import Heros from '@ui/Heros.svelte';
   import IllustrationPasDeResultatDeRecherche from '@ui/IllustrationPasDeResultatDeRecherche.svelte';
+
   import CarteItem from './CarteItem.svelte';
   import {
     DroitAcces,

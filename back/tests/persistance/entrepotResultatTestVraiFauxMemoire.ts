@@ -1,6 +1,7 @@
 import { RésultatTestHameçonnage } from '@metier/mini-tests/hameconnage/resultatTestHameconnage.js';
 import { EntrepôtRésultatTestVraiFaux } from '@metier/mini-tests/vrai-faux/entrepotResultatTestVraiFaux.js';
 import { RésultatTestVraiFaux } from '@metier/mini-tests/vrai-faux/resultatTestVraiFaux.js';
+
 import { EntrepôtRésultatTestMémoire } from './entrepotResultatTestMemoire.js';
 
 export class EntrepôtRésultatTestVraiFauxMémoire

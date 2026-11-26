@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+
   import type { Option } from './SelecteurSimple';
   import SelecteurSimple from './SelecteurSimple.svelte';
 

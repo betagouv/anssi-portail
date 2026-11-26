@@ -1,4 +1,5 @@
 import { hydrate } from 'svelte';
+
 import DemandeDiagnosticSimplifiee from '@demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
 
 const donnees = document.getElementById('accueil-donnees-demande-diagnostic')!.textContent;

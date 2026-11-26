@@ -1,7 +1,10 @@
 import { Response, Router } from 'express';
 import z from 'zod';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { RetourArticleDonné } from '@bus/evenements/retourArticleDonne.js';
+
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideCorpsRequete } from '../zod.js';

@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { unRappelAnnuel } from '@metier/outils/rappelAnnuel.js';
 import { génèreRappelIcs } from '@api/outils/rappelIcsGenerique/genereRappelIcs.js';
 import { AdaptateurHorloge } from '@infra/adaptateurHorloge.js';

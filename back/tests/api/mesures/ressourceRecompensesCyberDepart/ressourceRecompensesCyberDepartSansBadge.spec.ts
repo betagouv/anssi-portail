@@ -3,10 +3,13 @@ import { Express } from 'express';
 import sharp from 'sharp';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { EntrepotUtilisateur } from '@metier/entrepotUtilisateur.js';
 import { ServiceRécompensesCyberDépart } from '@api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 import { creeServeur } from '@api/msc/index.js';
+
 import { EntrepôtModuleMémoire } from '../../../persistance/entrepôtModuleMémoire.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../../cookie.js';

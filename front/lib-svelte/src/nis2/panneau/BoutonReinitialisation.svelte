@@ -1,5 +1,6 @@
 <script lang="ts">
   import { clic } from '@directives/actions.svelte';
+
   import type { ReferentielSelectionne } from '../exigence.type';
   import { exigencesFiltrees } from '../stores/exigencesFiltrees.store';
 

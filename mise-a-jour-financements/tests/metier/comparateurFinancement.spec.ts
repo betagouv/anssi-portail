@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { AdaptateurSourceExterne } from '../../src/infra/adaptateurSourceExterne.js';
 import { EntrepotFinancement } from '../../src/infra/entrepotFinancement.js';
 import { ComparateurFinancement } from '../../src/metier/comparateurFinancement.js';

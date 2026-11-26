@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { hydrate } from 'svelte';
+
 import Contacts from '@contacts/Contacts.svelte';
 import { estCodeRegion, type ContactsInitiaux } from '@contacts/contacts.type';
 

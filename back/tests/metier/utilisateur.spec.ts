@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { EntrepotPriseEnCompte } from '@metier/entrepotPriseEnCompte.js';
 import { Module } from '@metier/module.js';
 import { ErreurChargementOrganisation, Organisation, Utilisateur } from '@metier/utilisateur.js';
@@ -10,6 +11,7 @@ import { ParcoursChangé } from '@bus/evenements/parcoursChange.js';
 import { ParcoursCompletTerminé } from '@bus/evenements/parcoursCompletTermine.js';
 import { ParcoursRejoint } from '@bus/evenements/parcoursRejoint.js';
 import { AdaptateurRechercheEntreprise } from '@infra/adaptateurRechercheEntreprise.js';
+
 import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise, fauxRapporteur } from '../api/fauxObjets.js';
 import { mesureDeTest } from '../api/mesures/constructeurDeMesure.js';
 import { ConstructeurDeModule } from '../api/mesures/constructeurDeModule.js';

@@ -2,11 +2,13 @@
   import { DsfrBadge } from '@lab-anssi/ui-kit';
   import axios from 'axios';
   import { onMount } from 'svelte';
+
   import CarteMesure from '@parcours-securisation/CarteMesure.svelte';
   import type { Mesure, Module } from '@parcours-securisation/mesures/mesure';
   import Progression from '@parcours-securisation/Progression.svelte';
   import Lien from '@ui/Lien.svelte';
   import { détecteMédia, requêteMédiaÀPartirDeSm } from '@utils/rendu.svelte';
+
   import AnneauProgressionTexte from './AnneauProgressionTexte.svelte';
   import ProgressionParcoursComplet from './ProgressionParcoursComplet.svelte';
 

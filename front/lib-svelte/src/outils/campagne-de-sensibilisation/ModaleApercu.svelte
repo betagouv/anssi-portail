@@ -7,6 +7,7 @@
 <script lang="ts">
   import Bouton from '@ui/Bouton.svelte';
   import Modale from '@ui/Modale.svelte';
+
   import { archiveCampagne } from './archiveCampagne.svelte';
 
   type Props = {

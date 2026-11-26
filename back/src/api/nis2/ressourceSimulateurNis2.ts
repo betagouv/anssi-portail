@@ -1,7 +1,10 @@
 import { Router } from 'express';
+
 import { HttpStatusCode } from '@anssi-portail/axios';
+
 import { CalculEligibilite } from '@metier/nis2-simulateur/questionnaire/calculEligibilite.js';
 import { SimulationNis2Terminee } from '@bus/evenements/simulationNis2Terminee.js';
+
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideCorpsRequete } from '../zod.js';

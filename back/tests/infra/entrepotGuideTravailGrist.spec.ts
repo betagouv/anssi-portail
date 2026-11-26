@@ -1,7 +1,9 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { ClientHttp } from '@infra/clientHttp.js';
 import { GuideGrist } from '@infra/entrepotGuideGrist.js';
 import { EntrepotGuideTravailGrist } from '@infra/entrepotGuideTravailGrist.js';
+
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
 import { ConstructeurGuideGrist } from '../api/guides/constructeurGuideGrist.js';
 import { fabriqueClientGet, fabriqueClientPut, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';

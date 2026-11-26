@@ -1,5 +1,6 @@
 <script lang="ts">
   import { SvelteMap } from 'svelte/reactivity';
+
   import { libellesSecteursActivite } from '../../../../../back/src/metier/nis2-simulateur/LibellesSecteursActivite';
   import { libellesSousSecteursActivite } from '../../../../../back/src/metier/nis2-simulateur/LibellesSousSecteursActivite';
   import type {

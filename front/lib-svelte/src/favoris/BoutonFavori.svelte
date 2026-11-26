@@ -1,5 +1,6 @@
 <script lang="ts">
   import axios from 'axios';
+
   import type { IdItem } from '@catalogue/Catalogue.types';
   import { favorisStore } from '@stores/favoris.store';
   import { profilStore } from '@stores/profil.store';

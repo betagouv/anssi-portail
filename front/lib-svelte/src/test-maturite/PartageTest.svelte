@@ -1,5 +1,6 @@
 <script lang="ts">
   import RetourUtilisateurSurContenu, { type TypeDeRetourMiniTests } from '@ui/RetourUtilisateurSurContenu.svelte';
+
   import BoutonsPartagePage from './BoutonsPartagePage.svelte';
 
   const {

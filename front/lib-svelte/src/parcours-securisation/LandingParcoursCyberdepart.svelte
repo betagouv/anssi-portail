@@ -1,11 +1,13 @@
 <script lang="ts">
   import { onMount, type Component } from 'svelte';
+
   import { afficheBadgeCyberdépart } from '@plateforme/environnement';
   import { récupèreStatistiquesMSC } from '@passerelles/statistiquesMSC';
   import BlocContenuLanding from '@ui/BlocContenuLanding.svelte';
   import BlocDiagnostic from '@ui/BlocDiagnostic.svelte';
   import HeroLandingPage from '@ui/HeroLandingPage.svelte';
   import MotEnExergue from '@ui/MotEnExergue.svelte';
+
   import IllustrationBadge from './animation/IllustrationBadge.svelte';
   import IllustrationHerosParcoursBasique from './animation/IllustrationHerosParcoursBasique.svelte';
   import IllustrationMesure from './animation/IllustrationMesure.svelte';

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { clic } from '@directives/actions.svelte';
   import Modale from '@ui/Modale.svelte';
+
   import type { Referentiel, ReferentielSelectionne } from '../exigence.type';
   import { etatPanneau } from '../stores/etatPanneau.store';
   import BoutonReinitialisation from './BoutonReinitialisation.svelte';

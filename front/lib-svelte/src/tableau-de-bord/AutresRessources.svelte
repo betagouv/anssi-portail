@@ -1,5 +1,6 @@
 <script lang="ts">
   import { DsfrCard } from '@lab-anssi/ui-kit';
+
   import { détecteRendu } from '@utils/rendu.svelte';
 
   const rendu = détecteRendu();

@@ -8,7 +8,9 @@ import {
   randomNonce,
   randomState,
 } from 'openid-client';
+
 import { adaptateurEnvironnement } from '@infra/adaptateurEnvironnement.js';
+
 import { ACR_GARANTISSANT_MFA } from './acr.js';
 
 export interface DemandeAutorisation {

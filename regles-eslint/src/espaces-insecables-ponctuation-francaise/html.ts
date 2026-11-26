@@ -1,4 +1,5 @@
 import type { Rule } from 'eslint';
+
 import { BALISES_IGNORÉES_PAR_DÉFAUT, créerVérificateur, type NœudSource, type Options } from './commun.js';
 
 interface NœudHtml extends NœudSource {

@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { PropriétésFilAriane } from '@ui/filAriane';
   import Heros from '@ui/Heros.svelte';
+
   import EtapeActivites from './etapes/EtapeActivites.svelte';
   import EtapeAppartenanceUE from './etapes/EtapeAppartenanceUE.svelte';
   import EtapeDesignation from './etapes/EtapeDesignation.svelte';

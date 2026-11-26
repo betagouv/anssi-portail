@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
   import { prefersReducedMotion } from 'svelte/motion';
+
   import { suitLaVisibilité } from '@utils/visibilite.svelte';
 
   type Scène = Component | [Component, Record<string, unknown>];

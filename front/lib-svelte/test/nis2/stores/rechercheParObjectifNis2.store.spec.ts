@@ -1,6 +1,8 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { rechercheParObjectifNis2 } from '@nis2/stores/rechercheParObjectifNis2';
+
 import {
   exigenceISODeNiveauEleve,
   exigenceNIS2DeNiveauEleve,

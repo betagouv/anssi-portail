@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { SeuilCompletion } from '@metier/observatoire.js';
 import { departements } from '@metier/referentielDepartements.js';
 import { ServiceObservatoire } from '@metier/serviceObservatoire.js';

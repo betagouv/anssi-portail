@@ -1,7 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { Financement } from '@metier/financement.js';
 import { ClientHttp } from '@infra/clientHttp.js';
 import { EntrepotFinancementGrist, FinancementGrist } from '@infra/entrepotFinancementGrist.js';
+
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
 import { fabriqueClientGet, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
 

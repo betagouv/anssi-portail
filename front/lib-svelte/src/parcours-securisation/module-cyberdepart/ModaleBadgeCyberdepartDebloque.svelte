@@ -3,6 +3,7 @@
   import Bouton from '@ui/Bouton.svelte';
   import CanonÀConfetti from '@ui/CanonAConfetti.svelte';
   import Modale from '@ui/Modale.svelte';
+
   import BoutonPartageBadgeCyberdepart from './BoutonPartageBadgeCyberdepart.svelte';
 
   type Props = {

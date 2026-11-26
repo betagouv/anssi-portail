@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
+
 import { Langue } from '@catalogue/Guide.types';
 import { rechercheParLangue } from '@catalogue/stores/guides/rechercheParLangue.store';
+
 import { guideZeroTrust } from './objetsExemples';
 
 describe('La recherche par langue', () => {

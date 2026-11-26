@@ -1,4 +1,5 @@
 import { get, writable } from 'svelte/store';
+
 import type { CategorieEntite, Exigence } from '../exigence.type';
 
 const selectionEntite = writable<CategorieEntite | undefined>();

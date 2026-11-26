@@ -1,6 +1,8 @@
 import Knex from 'knex';
+
 import { EntrepotReactionMiniTest } from '@metier/mini-tests/entrepotReactionMiniTest.js';
 import { IdentifiantMiniTest, RéactionMiniTest, TypeRéaction } from '@metier/mini-tests/reactionMiniTest.js';
+
 import config from '../../knexfile.js';
 
 type RéactionMiniTestPersistee = {

@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+
 import { AdaptateurDom } from './adaptateurDom.js';
 
 export class AdaptateurLienCanonique implements AdaptateurDom {

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+
   import { chargeGuidesDansLeStore } from '@catalogue/stores/guides/guides.store';
   import { itemsCatalogueEnFavori } from '@catalogue/stores/itemsCatalogueEnFavori';
   import { profilStore } from '@stores/profil.store';
@@ -8,6 +9,7 @@
   import IllustrationDragonPasDeResultat from '@ui/IllustrationDragonPasDeResultat.svelte';
   import Lien from '@ui/Lien.svelte';
   import { copieDansLePressePapier } from '@ui/presse-papier';
+
   import ContenuFavoris from './ContenuFavoris.svelte';
 
   const partageLien = async () => {

@@ -1,9 +1,12 @@
 import { CmsCrisp, PageHtmlCrisp, ResumeArticleCrispAvecSlug } from '@lab-anssi/lib';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { AxiosError, AxiosResponse, HttpStatusCode } from '@anssi-portail/axios';
+
 import { EntrepôtArticle } from '@metier/blog/entrepotArticle.js';
 import { AdaptateurEnvironnement } from '@infra/adaptateurEnvironnement.js';
 import { EntrepôtArticleCrisp } from '@infra/blog/entrepotArticleCrisp.js';
+
 import { fauxAdaptateurEnvironnement, fauxRapporteur } from '../api/fauxObjets.js';
 import { MockCmsCrisp } from '../mockCmsCrisp.js';
 

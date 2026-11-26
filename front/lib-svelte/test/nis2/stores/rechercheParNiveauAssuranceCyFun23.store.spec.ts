@@ -1,6 +1,8 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { rechercheParNiveauAssuranceCyFun23 } from '@nis2/stores/rechercheParNiveauAssuranceCyFun23';
+
 import { exigenceCyFun23, exigenceISODeNiveauEleve } from '../objetsPretsALEmploi';
 
 describe("La recherche par niveau d'assurance", () => {

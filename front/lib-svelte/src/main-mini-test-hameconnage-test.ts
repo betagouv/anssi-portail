@@ -1,4 +1,5 @@
 import { hydrate } from 'svelte';
+
 import TestHameconnage from '@mini-tests/hameconnage/TestHameconnage.svelte';
 
 hydrate(TestHameconnage, {

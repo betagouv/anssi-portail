@@ -1,5 +1,6 @@
 import { EntrepôtRésultatTestExposition } from '@metier/mini-tests/exposition/entrepotResultatTestExposition.js';
 import { RésultatTestExposition } from '@metier/mini-tests/exposition/resultatTestExposition.js';
+
 import { EntréePostgresRésultatTestExposition } from './entreePostgresResultatTest.js';
 import { EntrepôtRésultatTestPostgres } from './entrepotResultatTestPostgres.js';
 

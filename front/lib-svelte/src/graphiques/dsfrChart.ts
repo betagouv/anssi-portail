@@ -1,4 +1,5 @@
 import '@gouvfr/dsfr-chart';
+
 import styles from '@gouvfr/dsfr-chart/css?inline';
 
 // Les composants Svelte étant compilés avec leurs styles injectés par le JS, Vite n'émet

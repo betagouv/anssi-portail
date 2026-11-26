@@ -1,5 +1,6 @@
 import { EntrepotExigence } from '@metier/nis2/entrepotExigence.js';
 import { Exigence, ExigenceAE, ExigenceISO, ExigenceNIS2 } from '@metier/nis2/exigence.js';
+
 import { EntrepotMemoire } from './entrepotMemoire.js';
 
 export class EntrepotExigenceMemoire extends EntrepotMemoire<Exigence> implements EntrepotExigence {
