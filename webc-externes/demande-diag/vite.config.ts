@@ -6,7 +6,7 @@ import { defineConfig } from 'vite';
 
 import { remplaceVersionsDansPhp } from './plugin/remplaceVersionsDansPhp';
 
-const rootPkgPath = resolve(__dirname, '..', 'package.json');
+const rootPkgPath = resolve(__dirname, '..', '..', 'package.json');
 const pkg = JSON.parse(readFileSync(rootPkgPath, 'utf-8'));
 const version_lab_ui_kit = pkg.devDependencies?.['@lab-anssi/ui-kit'];
 
@@ -22,7 +22,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '/assets': path.resolve(__dirname, '../front/assets'),
+      '/assets': path.resolve(__dirname, '../../front/assets'),
       src: path.resolve(__dirname, 'src'),
       $lib: path.resolve(__dirname, 'src/lib'),
     },
@@ -46,10 +46,10 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         loadPaths: [
-          '../front/assets/fonts',
-          '../front/assets/icones',
-          '../front/assets/images',
-          '../front/assets/styles',
+          '../../front/assets/fonts',
+          '../../front/assets/icones',
+          '../../front/assets/images',
+          '../../front/assets/styles',
         ],
         quietDeps: true,
       },

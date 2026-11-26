@@ -19,7 +19,7 @@ This file provides guidance to AI coding agents when working with code in this r
 - [front/](front/AGENTS.md) - Jekyll static site and templates
 - [front/lib-svelte/](front/lib-svelte/AGENTS.md) - Reusable Svelte components
 - [mise-a-jour-financements/](mise-a-jour-financements/AGENTS.md) - Data sync utility for financing information
-- [demande-diag/](demande-diag/AGENTS.md) - Web Component for diagnostic questionnaire
+- [webc-externes/demande-diag/](webc-externes/demande-diag/AGENTS.md) - Web Component for diagnostic questionnaire
 - [comparaison-grist/](comparaison-grist/AGENTS.md) - Utility for comparing content with Grist spreadsheets
 
 ## Agent Tooling

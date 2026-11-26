@@ -1,12 +1,12 @@
-@use '../../front/assets/styles/commun' as commun;
+@use '../../../front/assets/styles/commun' as commun;
 
 .lab-anssi-demande-diagnostic-simplifiee {
   lab-anssi-bouton {
     outline: 0;
   }
 
-  @include commun.polices-marianne('../../front/assets/fonts/');
-  @include commun.polices-roboto('../../front/assets/fonts/');
+  @include commun.polices-marianne('../../../front/assets/fonts/');
+  @include commun.polices-roboto('../../../front/assets/fonts/');
   @include commun.titres-dsfr();
   @include commun.textes-dsfr();
   @include commun.erreur-champ-saisie();
