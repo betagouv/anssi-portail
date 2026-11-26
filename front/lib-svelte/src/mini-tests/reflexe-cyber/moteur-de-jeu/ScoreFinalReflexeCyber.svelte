@@ -6,6 +6,9 @@
 
   type Props = {
     réponses: boolean[];
+    urlBase: string;
+    mode?: 'autonome';
+    surMontage: () => void;
   };
 
   const conseils = [
@@ -15,7 +18,7 @@
     'Face à une cyberattaque, certaines décisions peuvent rapidement aggraver la situation. Le parcours de sécurisation de l’ANSSI, à commencer par Cyberdépart, vous aide à mettre en place les mesures essentielles pour mieux vous préparer et réagir.',
   ];
 
-  const { réponses }: Props = $props();
+  const { réponses, urlBase, mode, surMontage }: Props = $props();
 
   const nombreDeQuestions = $derived(réponses.length);
   const nombreDeBonnesRéponses = $derived(réponses.filter((r) => r).length);
@@ -49,13 +52,11 @@
     };
   });
   const sourceIllustration = (réponseCorrecte: boolean) =>
-    réponseCorrecte ? '/assets/icones/coche-verte.svg' : '/assets/icones/croix-rouge.svg';
+    `${urlBase}/assets/icones/${réponseCorrecte ? 'coche-verte' : 'croix-rouge'}.svg`;
   const commentaireIllustration = (réponseCorrecte: boolean, positionQuestion: number) =>
     `${réponseCorrecte ? 'bonne' : 'mauvaise'} réponse donnée à la question ${positionQuestion} sur ${nombreDeQuestions}`;
 
-  onMount(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  onMount(() => surMontage());
 </script>
 
 <dsfr-container>
@@ -81,6 +82,8 @@
   <EncartPromotionParcoursBasique
     titre="12 mesures simples pour protéger votre organisation contre les cyberattaques"
     description="Un programme d'accompagnement gratuit, pensé pour les non-experts."
+    {urlBase}
+    {mode}
   >
     {#snippet tags()}
       <TagProgrammeGratuit />
@@ -99,20 +102,22 @@
     horizontal-proportion="tier"
     has-description="true"
     description="Avec RÉFLEXES CYBER faites vivre à votre CODIR/COMEX ou à vos équipes une première simulation de crise d’origine cyber. Tout au long de la simulation, avec l’aide d’une personne chargée d’animer la séquence, les participant(e)s sont confronté(e)s à des évènements imprévus et doivent prendre des décisions&nbsp;: qui adoptera les bons ou les mauvais réflexes&#8239;?&nbsp;😉"
-    src="/assets/images/illustrations-services/reflexes-cyber/RC-home.png"
-    href="/ressources/reflexes-cyber"
+    src={`${urlBase}/assets/images/illustrations-services/reflexes-cyber/RC-home.png`}
+    href={`${urlBase}/ressources/reflexes-cyber`}
     enlarge="true"
   >
   </dsfr-card>
 </dsfr-container>
 
-<dsfr-container>
-  <PartageTest
-    cheminPartagé="/reflexes-cyber-en-ligne/parcours"
-    sujetMail="Comment réagirez-vous en cas de cyberattaque&#8239;?"
-    typeDeRetour="reflexes-cyber"
-  />
-</dsfr-container>
+{#if mode !== 'autonome'}
+  <dsfr-container>
+    <PartageTest
+      cheminPartagé="/reflexes-cyber-en-ligne/parcours"
+      sujetMail="Comment réagirez-vous en cas de cyberattaque&#8239;?"
+      typeDeRetour="reflexes-cyber"
+    />
+  </dsfr-container>
+{/if}
 
 <style lang="scss">
   @use '../../../../../assets/styles/responsive' as *;

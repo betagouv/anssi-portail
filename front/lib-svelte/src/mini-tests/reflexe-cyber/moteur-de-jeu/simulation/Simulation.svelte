@@ -5,7 +5,7 @@
   import { fly } from 'svelte/transition';
   import { v7 as uuidv7 } from 'uuid';
   import Alerte from '../../../../ui/Alerte.svelte';
-  import { rôleParId, type IdRôle, type Rôle } from '../roles';
+  import type { IdRôle, Rôle } from '../roles';
   import type { Scénario } from '../scenarios';
   import { joueSon, prépareAudio, type Son } from './audio';
   import Evenement from './Evenement.svelte';
@@ -18,10 +18,12 @@
     scénario: Scénario;
     rôle: Rôle;
     score: boolean[];
+    rôles: Rôle[];
+    urlBase: string;
     surSimulationTerminée: () => void;
   };
 
-  const { scénario, rôle, score, surSimulationTerminée }: Props = $props();
+  const { scénario, rôle, score, rôles, urlBase, surSimulationTerminée }: Props = $props();
 
   const idCorrélation = uuidv7();
 
@@ -57,14 +59,14 @@
     (Object.keys(évènementCourant.notifications) as IdRôle[])
       .filter((idRôle) => idRôle !== rôle.id)
       .map((idRôle) => ({
-        rôle: rôleParId(idRôle),
+        rôle: rôles.find(({ id }) => id === idRôle)!,
         message: évènementCourant.notifications[idRôle],
       }))
   );
 
   const prendEnCompteRéflexe = async (réflexe: 'bon' | 'mauvais' | 'aucun'): Promise<void> => {
     score.push(réflexe === 'bon');
-    await axios.post('/api/mini-tests/reflexes-cyber/reponses', {
+    await axios.post(`${urlBase}/api/mini-tests/reflexes-cyber/reponses`, {
       idCorrélation,
       idScénario: scénario.id,
       idRôle: rôle.id,
@@ -169,7 +171,10 @@
           }}
         >
           <div class="media" aria-hidden="true">
-            <img src={`/assets/images/mini-tests/reflexe-cyber/evenement-${numéroÉvènementCourant}.avif`} alt="" />
+            <img
+              src={`${urlBase}/assets/images/mini-tests/reflexe-cyber/evenement-${numéroÉvènementCourant}.avif`}
+              alt=""
+            />
           </div>
 
           <div class="contenu-evenement">
