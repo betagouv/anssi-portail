@@ -1,4 +1,6 @@
 <script lang="ts">
+  import CaseACocher from '@ui/CaseACocher.svelte';
+
   import { Langue } from '../Guide.types';
   import { nombreGuides } from '../stores/guides/nombreGuides.store';
   import { rechercheParLangue } from '../stores/guides/rechercheParLangue.store';
@@ -8,17 +10,17 @@
 </script>
 
 <div class="choix">
-  <dsfr-checkbox
+  <CaseACocher
     id={valeur}
-    label={libelle}
-    checked={actif}
-    onvaluechanged={(e: CustomEvent) => {
-      if (e.detail) {
+    libellé={libelle}
+    coché={actif}
+    surChangement={() => {
+      if (!actif) {
         $rechercheParLangue = [...$rechercheParLangue, valeur];
       } else {
         $rechercheParLangue = $rechercheParLangue.filter((v) => v !== valeur);
       }
     }}
-  ></dsfr-checkbox>
+  />
   <span class="compte">{$nombreGuides.parLangue[valeur]}</span>
 </div>

@@ -2,6 +2,7 @@
   import { SvelteMap, SvelteSet } from 'svelte/reactivity';
 
   import { clic } from '@directives/actions.svelte';
+  import CaseACocher from '@ui/CaseACocher.svelte';
 
   import type { Activite } from '../../../../../back/src/metier/nis2-simulateur/Activite.definitions';
   import { activitesParSecteurEtSousSecteur } from '../../../../../back/src/metier/nis2-simulateur/Activite.operations';
@@ -49,14 +50,12 @@
   let reponse: SvelteMap<SecteurAvecActivite, Activite[]> = new SvelteMap<SecteurAvecActivite, Activite[]>();
   let descriptionsVisibles: SvelteSet<Activite> = new SvelteSet<Activite>();
 
-  const choisis = (_secteur: string, _activite: string) => (e: { detail: boolean }) => {
-    const checked = e.detail;
-    const secteur = _secteur as SecteurAvecActivite;
-    const activite = _activite as Activite;
+  const estChoisie = (secteur: SecteurAvecActivite, activite: Activite) =>
+    reponse.get(secteur)?.includes(activite) ?? false;
 
-    if (checked) {
-      if (!reponse.has(secteur)) reponse.set(secteur, [activite]);
-      else reponse.set(secteur, [...reponse.get(secteur)!, activite]);
+  const bascule = (secteur: SecteurAvecActivite, activite: Activite) => {
+    if (!estChoisie(secteur, activite)) {
+      reponse.set(secteur, [...(reponse.get(secteur) ?? []), activite]);
     } else {
       reponse.set(
         secteur,
@@ -89,12 +88,13 @@
 
         <div class="ligne-activite">
           <div class="etage-checkbox">
-            <dsfr-checkbox
+            <CaseACocher
               id={`checkbox-${s}-${activite}`}
-              size="sm"
-              label={libellesActivites[activite]}
-              onvaluechanged={choisis(s, activite)}
-            ></dsfr-checkbox>
+              taille="sm"
+              libellé={libellesActivites[activite]}
+              coché={estChoisie(s, activite)}
+              surChangement={() => bascule(s, activite)}
+            />
             {#if avecDescription}
               <lab-anssi-icone
                 nom="information-line"

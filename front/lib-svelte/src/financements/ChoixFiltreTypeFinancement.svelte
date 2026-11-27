@@ -1,4 +1,6 @@
 <script lang="ts">
+  import CaseACocher from '@ui/CaseACocher.svelte';
+
   import { rechercheParTypeFinancement } from './stores/rechercheParTypeFinancement.store';
 
   let { valeur, libelle }: { valeur: string; libelle: string } = $props();
@@ -6,16 +8,16 @@
 </script>
 
 <div class="choix">
-  <dsfr-checkbox
+  <CaseACocher
     id={valeur}
-    label={libelle}
-    checked={actif}
-    onvaluechanged={(e: CustomEvent) => {
-      if (e.detail) {
+    libellé={libelle}
+    coché={actif}
+    surChangement={() => {
+      if (!actif) {
         $rechercheParTypeFinancement = [...$rechercheParTypeFinancement, valeur];
       } else {
         $rechercheParTypeFinancement = $rechercheParTypeFinancement.filter((v) => v !== valeur);
       }
     }}
-  ></dsfr-checkbox>
+  />
 </div>

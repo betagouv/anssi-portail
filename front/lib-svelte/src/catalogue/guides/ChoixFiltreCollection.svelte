@@ -1,4 +1,6 @@
 <script lang="ts">
+  import CaseACocher from '@ui/CaseACocher.svelte';
+
   import { CollectionGuide } from '../Guide.types';
   import { nombreGuides } from '../stores/guides/nombreGuides.store';
   import { rechercheParCollection } from '../stores/guides/rechercheParCollection.store';
@@ -8,17 +10,17 @@
 </script>
 
 <div class="choix">
-  <dsfr-checkbox
+  <CaseACocher
     id={valeur}
-    label={valeur}
-    checked={actif}
-    onvaluechanged={(e: CustomEvent) => {
-      if (e.detail) {
+    libellé={valeur}
+    coché={actif}
+    surChangement={() => {
+      if (!actif) {
         $rechercheParCollection = [...$rechercheParCollection, valeur];
       } else {
         $rechercheParCollection = $rechercheParCollection.filter((v) => v !== valeur);
       }
     }}
-  ></dsfr-checkbox>
+  />
   <span class="compte">{$nombreGuides.parCollection[valeur]}</span>
 </div>

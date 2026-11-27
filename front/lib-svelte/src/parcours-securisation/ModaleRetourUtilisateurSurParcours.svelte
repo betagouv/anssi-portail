@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { DsfrCheckbox, DsfrRadiosGroup } from '@lab-anssi/ui-kit';
+  import { DsfrRadiosGroup } from '@lab-anssi/ui-kit';
   import axios from 'axios';
   import { tick } from 'svelte';
 
   import Bouton from '@ui/Bouton.svelte';
+  import CaseACocher from '@ui/CaseACocher.svelte';
   import ChampTexte from '@ui/ChampTexte.svelte';
   import Formulaire from '@ui/Formulaire.svelte';
   import Modale from '@ui/Modale.svelte';
@@ -167,12 +168,12 @@
           messageErreur="Renseignez un commentaire."
         />
 
-        <DsfrCheckbox
+        <CaseACocher
           id="recontact-avis-parcours"
-          name="recontact-avis-parcours"
-          size="sm"
-          label="Je souhaite être recontacté(e) pour partager mon expérience du parcours."
-          bind:checked={souhaiteÊtreRecontacté}
+          nom="recontact-avis-parcours"
+          taille="sm"
+          libellé="Je souhaite être recontacté(e) pour partager mon expérience du parcours."
+          bind:coché={souhaiteÊtreRecontacté}
         />
       </div>
     </Formulaire>

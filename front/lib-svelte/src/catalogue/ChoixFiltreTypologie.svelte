@@ -1,4 +1,6 @@
 <script lang="ts">
+  import CaseACocher from '@ui/CaseACocher.svelte';
+
   import { Typologie } from './Catalogue.types';
   import { nombreResultats } from './stores/nombreResultats.store';
   import { rechercheParTypologie } from './stores/rechercheParTypologie.store';
@@ -9,11 +11,11 @@
 </script>
 
 <div class="choix">
-  <dsfr-checkbox
+  <CaseACocher
     id={valeur}
-    checked={actif}
-    onvaluechanged={(e: CustomEvent) => {
-      if (e.detail) {
+    coché={actif}
+    surChangement={() => {
+      if (!actif) {
         $rechercheParTypologie = [...$rechercheParTypologie, valeur];
       } else {
         $rechercheParTypologie = $rechercheParTypologie.filter((v) => v !== valeur);
@@ -21,6 +23,6 @@
     }}
   >
     <img src={`/assets/images/${icone}.svg`} width="24" height="24" alt="" />{libelle}
-  </dsfr-checkbox>
+  </CaseACocher>
   <span class="compte">{$nombreResultats.parTypologie[valeur]}</span>
 </div>

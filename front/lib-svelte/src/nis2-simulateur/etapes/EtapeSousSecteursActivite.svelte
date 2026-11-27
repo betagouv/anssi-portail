@@ -1,6 +1,8 @@
 <script lang="ts">
   import { SvelteMap } from 'svelte/reactivity';
 
+  import CaseACocher from '@ui/CaseACocher.svelte';
+
   import { libellesSecteursActivite } from '../../../../../back/src/metier/nis2-simulateur/LibellesSecteursActivite';
   import { libellesSousSecteursActivite } from '../../../../../back/src/metier/nis2-simulateur/LibellesSousSecteursActivite';
   import type {
@@ -38,14 +40,12 @@
     SousSecteurActivite[]
   >();
 
-  const choisis = (_secteur: string, _sousSecteur: string) => (e: { detail: boolean }) => {
-    const checked = e.detail;
-    const secteur = _secteur as SecteurActivite;
-    const sousSecteur = _sousSecteur as SousSecteurActivite;
+  const estChoisi = (secteur: SecteurActivite, sousSecteur: SousSecteurActivite) =>
+    reponse.get(secteur)?.includes(sousSecteur) ?? false;
 
-    if (checked) {
-      if (!reponse.has(secteur)) reponse.set(secteur, [sousSecteur]);
-      else reponse.set(secteur, [...reponse.get(secteur)!, sousSecteur]);
+  const bascule = (secteur: SecteurActivite, sousSecteur: SousSecteurActivite) => {
+    if (!estChoisi(secteur, sousSecteur)) {
+      reponse.set(secteur, [...(reponse.get(secteur) ?? []), sousSecteur]);
     } else {
       reponse.set(
         secteur,
@@ -70,12 +70,15 @@
     <div>
       <p><b>{libellesSecteursActivite[s]}</b></p>
       {#each recupereSousSecteursDe(s) as sousSecteur (sousSecteur)}
-        <dsfr-checkbox
-          id={`checkbox-${s}-${sousSecteur}`}
-          size="sm"
-          label={libellesSousSecteursActivite[sousSecteur]}
-          onvaluechanged={choisis(s, sousSecteur)}
-        ></dsfr-checkbox>
+        <div class="case">
+          <CaseACocher
+            id={`checkbox-${s}-${sousSecteur}`}
+            taille="sm"
+            libellé={libellesSousSecteursActivite[sousSecteur]}
+            coché={estChoisi(s, sousSecteur)}
+            surChangement={() => bascule(s, sousSecteur)}
+          />
+        </div>
       {/each}
     </div>
   {/each}
@@ -88,7 +91,7 @@
 </Etape>
 
 <style lang="scss">
-  dsfr-checkbox {
+  .case {
     margin-bottom: 8px;
 
     &:last-child {

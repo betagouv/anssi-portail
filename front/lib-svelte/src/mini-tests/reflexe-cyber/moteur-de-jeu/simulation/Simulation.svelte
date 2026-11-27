@@ -6,6 +6,7 @@
   import { v7 as uuidv7 } from 'uuid';
 
   import Alerte from '@ui/Alerte.svelte';
+  import CaseACocher from '@ui/CaseACocher.svelte';
 
   import type { IdRôle, Rôle } from '../roles';
   import type { Scénario } from '../scenarios';
@@ -86,8 +87,7 @@
     if (!sonsDésactivés) void prépareAudio();
   };
 
-  const gèreChangementSons = (évènement: CustomEvent<boolean>) => {
-    sonsDésactivés = évènement.detail;
+  const gèreChangementSons = () => {
     joueSonSiActivé('notification');
   };
 
@@ -201,13 +201,13 @@
 
     <aside class="indicateur-crise" aria-label="État de la crise">
       <div class="controle-sons">
-        <dsfr-checkbox
+        <CaseACocher
           id="sons-desactives"
-          label="Désactiver les sons"
-          size="sm"
-          checked={sonsDésactivés}
-          onvaluechanged={gèreChangementSons}
-        ></dsfr-checkbox>
+          libellé="Désactiver les sons"
+          taille="sm"
+          bind:coché={sonsDésactivés}
+          surChangement={gèreChangementSons}
+        />
       </div>
       <div class="metriques-bloquees">
         <p class="texte-mention-xs">

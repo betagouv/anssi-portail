@@ -6,6 +6,7 @@
   import Alerte from '@ui/Alerte.svelte';
   import type { Badge } from '@ui/badge.type';
   import Bouton from '@ui/Bouton.svelte';
+  import CaseACocher from '@ui/CaseACocher.svelte';
   import ChampTexte from '@ui/ChampTexte.svelte';
   import EnteteAutonome from '@ui/EnteteAutonome.svelte';
   import Formulaire from '@ui/Formulaire.svelte';
@@ -119,23 +120,24 @@
         />
       </div>
 
-      <dsfr-checkbox
-        id="cgu"
-        name="cgu"
-        status={cguSontValidees || !erreurValidation ? 'default' : 'error'}
-        value={cguSontValidees}
-        onvaluechanged={(e: CustomEvent) => (cguSontValidees = e.detail)}
-        errorMessage="Ce champ est obligatoire. Veuillez le cocher."
-        required
-      >
-        <span>
-          J’accepte les <Lien
-            href="https://monaide.cyber.gouv.fr/cgu"
-            libelle="conditions générales d’utilisation"
-            blank
-          />.
-        </span>
-      </dsfr-checkbox>
+      <div class="cgu">
+        <CaseACocher
+          id="cgu"
+          nom="cgu"
+          bind:coché={cguSontValidees}
+          enErreur={!cguSontValidees && erreurValidation}
+          messageErreur="Ce champ est obligatoire. Veuillez le cocher."
+          requis
+        >
+          <span>
+            J’accepte les <Lien
+              href="https://monaide.cyber.gouv.fr/cgu"
+              libelle="conditions générales d’utilisation"
+              blank
+            />.
+          </span>
+        </CaseACocher>
+      </div>
 
       <div class="envoi-demande">
         <Bouton
@@ -188,7 +190,7 @@
       }
     }
 
-    dsfr-checkbox {
+    .cgu {
       margin-bottom: 1.5rem;
     }
 
