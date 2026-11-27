@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { DsfrCallout } from '@lab-anssi/ui-kit';
   import { onMount } from 'svelte';
 
   import { clic } from '@directives/actions.svelte';
   import Bouton from '@ui/Bouton.svelte';
+  import MiseEnAvant from '@ui/MiseEnAvant.svelte';
 
   import type { Rôle } from './roles';
   import type { Scénario } from './scenarios';
@@ -58,8 +58,8 @@
       </div>
     </div>
 
-    <DsfrCallout
-      text="Ce lundi matin, dernier lundi de février, vous démarrez la réunion de direction hebdomadaire à 9h. Vous ne le savez pas encore, mais la journée ne va pas se dérouler comme prévu..."
+    <MiseEnAvant
+      texte="Ce lundi matin, dernier lundi de février, vous démarrez la réunion de direction hebdomadaire à 9h. Vous ne le savez pas encore, mais la journée ne va pas se dérouler comme prévu..."
       accent="purple-glycine"
     />
 
