@@ -222,7 +222,7 @@ importers:
         version: 4.7.1(prettier@3.10.1)(supports-color@10.2.2)
       clever-tools:
         specifier: ^5.3.0
-        version: 5.4.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(supports-color@10.2.2)
+        version: 5.5.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(supports-color@10.2.2)
       concurrently:
         specifier: ^10.0.0
         version: 10.0.7
@@ -2738,8 +2738,8 @@ packages:
   clean-git-ref@2.0.1:
     resolution: {integrity: sha512-bLSptAy2P0s6hU4PzuIMKmMJJSE6gLXGH1cntDu7bWJUksvuM+7ReOK61mozULErYvP6a15rnYl0zFDef+pyPw==}
 
-  clever-tools@5.4.0:
-    resolution: {integrity: sha512-dMtW4oIFVD9+jZeIroMd0lT7Hn0h01E7KiB8dbtLAbte1zKu8cxxINLLvkrfB6rUS8ZSaUX2ji3Bi52iwUgLmg==}
+  clever-tools@5.5.0:
+    resolution: {integrity: sha512-7fpw5mfsssOR2GkozTmvnq6tofIZ1jh44sTpWO9CRbbtn+eyuDM1NlADN4Hjd5mTPKa+t0BqTK7qMIzwig/gRg==}
     engines: {node: '>=24'}
     hasBin: true
 
@@ -7071,7 +7071,7 @@ snapshots:
 
   clean-git-ref@2.0.1: {}
 
-  clever-tools@5.4.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(supports-color@10.2.2):
+  clever-tools@5.5.0(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(supports-color@10.2.2):
     dependencies:
       '@clevercloud/client': 12.6.3(eventsource@4.1.0)
       '@clevercloud/reglage': 0.0.5(zod@4.6.7)
