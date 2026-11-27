@@ -1,7 +1,9 @@
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
+
   import Badge from '@ui/Badge.svelte';
   import Lien from '@ui/Lien.svelte';
+
   import type { Mesure } from './mesures/mesure';
 
   interface Props {

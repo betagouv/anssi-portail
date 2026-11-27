@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { Component } from 'svelte';
+
   import Badge from '@ui/Badge.svelte';
+
   import { mailOuvert } from './hameconnage.store';
 
   const contenusDeRéponse = import.meta.glob<{ default: Component } | undefined>('./reponses-mail/ReponseMail*.svelte');

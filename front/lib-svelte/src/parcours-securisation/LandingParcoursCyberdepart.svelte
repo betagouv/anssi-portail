@@ -6,8 +6,9 @@
   import BlocContenuLanding from '@ui/BlocContenuLanding.svelte';
   import BlocDiagnostic from '@ui/BlocDiagnostic.svelte';
   import HeroLandingPage from '@ui/HeroLandingPage.svelte';
-  import Lien from '../ui/Lien.svelte';
   import MotEnExergue from '@ui/MotEnExergue.svelte';
+
+  import Lien from '../ui/Lien.svelte';
   import IllustrationBadge from './animation/IllustrationBadge.svelte';
   import IllustrationHerosParcoursBasique from './animation/IllustrationHerosParcoursBasique.svelte';
   import IllustrationMesure from './animation/IllustrationMesure.svelte';

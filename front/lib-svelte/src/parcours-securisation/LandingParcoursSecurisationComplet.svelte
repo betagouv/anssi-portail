@@ -4,8 +4,9 @@
   import { récupèreStatistiquesMSC } from '@passerelles/statistiquesMSC';
   import BlocContenuLanding from '@ui/BlocContenuLanding.svelte';
   import HeroLandingPage from '@ui/HeroLandingPage.svelte';
-  import Lien from '../ui/Lien.svelte';
   import MotEnExergue from '@ui/MotEnExergue.svelte';
+
+  import Lien from '../ui/Lien.svelte';
   import IllustrationHerosParcoursComplet from './animation/IllustrationHerosParcoursComplet.svelte';
   import IllustrationModules from './animation/IllustrationModules.svelte';
   import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';

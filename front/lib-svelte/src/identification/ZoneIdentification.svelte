@@ -1,5 +1,6 @@
 <script lang="ts">
   import { profilStore } from '@stores/profil.store';
+
   import Lien from '../ui/Lien.svelte';
 </script>
 

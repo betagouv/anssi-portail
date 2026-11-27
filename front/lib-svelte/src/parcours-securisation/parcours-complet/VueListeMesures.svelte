@@ -1,6 +1,7 @@
 <script lang="ts">
   import Badge from '@ui/Badge.svelte';
   import Lien from '@ui/Lien.svelte';
+
   import type { Mesure } from '../mesures/mesure';
 
   type ModulePrésentation = {

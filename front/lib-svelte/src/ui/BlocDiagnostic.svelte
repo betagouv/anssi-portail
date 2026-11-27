@@ -2,6 +2,7 @@
   import type { Snippet } from 'svelte';
 
   import IllustrationDemandeAide from '@demande-aide-mon-aide-cyber/IllustrationDemandeAide.svelte';
+
   import Lien from './Lien.svelte';
 
   type Props = {

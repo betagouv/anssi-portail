@@ -1,7 +1,9 @@
 <script lang="ts">
   import { get } from 'svelte/store';
-  import Badge from '../ui/Badge.svelte';
+
   import { profilStore } from '@stores/profil.store';
+
+  import Badge from '../ui/Badge.svelte';
 </script>
 
 {#if $profilStore && profilStore.utilisateurEstConnecte() && get(profilStore)?.estAgentAnssi}

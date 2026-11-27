@@ -2,6 +2,7 @@
   import type { Snippet } from 'svelte';
 
   import { enPropriétéWebC } from '@plateforme/webComponent';
+
   import Bouton from '../ui/Bouton.svelte';
 
   export interface TableauDeDonnees {

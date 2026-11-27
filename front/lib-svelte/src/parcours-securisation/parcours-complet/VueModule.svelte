@@ -1,6 +1,7 @@
 <script lang="ts">
   import Badge from '@ui/Badge.svelte';
   import Lien from '@ui/Lien.svelte';
+
   import Progression from '../Progression.svelte';
 
   type ModulePrésentation = {

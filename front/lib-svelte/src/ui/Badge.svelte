@@ -1,5 +1,6 @@
 <script lang="ts">
   import { DsfrBadge } from '@lab-anssi/ui-kit';
+
   import type { CouleurDeBadge } from './badge.type';
 
   type Props = {

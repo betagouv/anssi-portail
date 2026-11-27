@@ -2,6 +2,7 @@
   import Alerte from '@ui/Alerte.svelte';
   import { fabriqueFilAriane } from '@ui/filAriane';
   import FilAriane from '@ui/FilAriane.svelte';
+
   import Lien from '../ui/Lien.svelte';
 </script>
 

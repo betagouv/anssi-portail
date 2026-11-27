@@ -3,6 +3,7 @@
   import Badge from '@ui/Badge.svelte';
   import Bouton from '@ui/Bouton.svelte';
   import Modale from '@ui/Modale.svelte';
+
   import type { MenaceEvaluee } from './expositionCyberattaques';
 
   interface Props {
