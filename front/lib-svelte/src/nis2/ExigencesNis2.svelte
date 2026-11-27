@@ -116,15 +116,9 @@
         />
         <Lien href="/guides/fiches-pratiques-recyf" libelle="Consulter les fiches pratiques ReCyF" blank />
       </div>
-      <dsfr-button
-        label="Exporter le tableau"
-        markup="a"
-        href={lienExportTableau}
-        has-icon
-        icon-place="left"
-        icon="download-line"
-        centered
-      ></dsfr-button>
+      <div class="export">
+        <Lien apparence="bouton" libelle="Exporter le tableau" href={lienExportTableau} icone="download-line" etire />
+      </div>
     </div>
 
     <Panneau
@@ -179,7 +173,7 @@
         margin-bottom: 1.5rem;
       }
 
-      dsfr-button {
+      .export {
         grid-area: export;
         @include a-partir-de(md) {
           width: fit-content;

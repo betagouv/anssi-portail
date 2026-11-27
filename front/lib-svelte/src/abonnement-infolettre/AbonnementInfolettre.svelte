@@ -1,8 +1,8 @@
 <script lang="ts">
   import axios from 'axios';
 
-  import { clic } from '@directives/actions.svelte';
   import Alerte from '@ui/Alerte.svelte';
+  import Bouton from '@ui/Bouton.svelte';
   import CaseACocher from '@ui/CaseACocher.svelte';
   import { fabriqueFilAriane } from '@ui/filAriane';
   import FilAriane from '@ui/FilAriane.svelte';
@@ -30,11 +30,11 @@
 
   const adresseRetour = new URLSearchParams(window.location.search).get('adresseRetour');
 
-  let adresseRetourNettoyee: string | null = $state(null);
+  let adresseRetourNettoyee: string = $state('#');
   if (adresseRetour) {
     let adresseParsee = URL.parse(adresseRetour) || URL.parse(adresseRetour, window.location.origin);
 
-    adresseRetourNettoyee = adresseParsee ? adresseParsee.pathname + adresseParsee.search + adresseParsee.hash : null;
+    adresseRetourNettoyee = adresseParsee ? adresseParsee.pathname + adresseParsee.search + adresseParsee.hash : '#';
   }
 </script>
 
@@ -59,15 +59,15 @@
             abonnement à la newsletter.
           </Alerte>
           <img src="/assets/images/dragon-coeur-entier.svg" width="340" height="255" alt="Le dragon vous remercie" />
-          <dsfr-button
-            markup="a"
-            label="Revenir à l’étape précédente"
-            kind="secondary"
-            hasIcon
-            iconPlace="left"
-            icon="arrow-go-back-line"
-            href={adresseRetourNettoyee}
-          ></dsfr-button>
+          <div class="lien">
+            <Lien
+              apparence="bouton"
+              type="secondaire"
+              libelle="Revenir à l’étape précédente"
+              href={adresseRetourNettoyee}
+              icone="arrow-go-back-line"
+            />
+          </div>
         </div>
       {:else}
         <dsfr-input
@@ -86,8 +86,7 @@
             La politique de confidentialité est disponible <Lien href="/confidentialite" libelle="ici" neutre />.
           {/snippet}
         </CaseACocher>
-        <dsfr-button label="S'abonner à la newsletter" kind="primary" type="submit" use:clic={soumetsFormulaire}
-        ></dsfr-button>
+        <Bouton libelle="S'abonner à la newsletter" surClic={soumetsFormulaire} />
         {#if erreur}
           <Alerte type="erreur" taille="sm" titre="Erreur lors de la demande d’abonnement" estRejetable>
             {erreur}
@@ -102,7 +101,7 @@
   @use '../../../assets/styles/responsive' as *;
   @use '../../../assets/styles/grille' as *;
 
-  dsfr-button {
+  .lien {
     align-self: center;
   }
 

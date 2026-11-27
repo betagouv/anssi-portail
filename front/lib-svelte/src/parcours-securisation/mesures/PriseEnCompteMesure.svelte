@@ -64,7 +64,7 @@
       id="tooltip"
       type="hover"
     >
-      <dsfr-button label="infobulle" preset="tooltip"></dsfr-button>
+      <Bouton libelle="infobulle" preset="tooltip" />
     </dsfr-tooltip>
     <p class="texte-article-lg">Cette mesure est-elle prise en compte&#8239;?</p>
     <div class="action">
@@ -113,11 +113,13 @@
     .aide {
       align-self: flex-end;
     }
+
     .texte-article-lg {
       font-weight: bold;
       color: var(--text-title-grey);
       margin-inline: 16px;
     }
+
     .action {
       display: flex;
       flex-direction: column;
@@ -147,6 +149,7 @@
       margin-bottom: 0;
       font-weight: bold;
     }
+
     lab-anssi-icone {
       color: var(--text-default-success);
     }

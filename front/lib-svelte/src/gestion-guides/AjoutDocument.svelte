@@ -1,8 +1,8 @@
 <script lang="ts">
   import axios, { AxiosError } from 'axios';
 
-  import { clic } from '@directives/actions.svelte';
   import Alerte from '@ui/Alerte.svelte';
+  import Bouton from '@ui/Bouton.svelte';
   import CaseACocher from '@ui/CaseACocher.svelte';
 
   type Props = {
@@ -96,8 +96,7 @@
     libelle="Générer un visuel à partir du PDF (uniquement si le document est un PDF)"
     bind:coche={genereVisuel}
   ></CaseACocher>
-  <dsfr-button label="Ajouter" use:clic={ajoute} disabled={!nouveauDocument || !libelleDuLien || !identifiantGuide}
-  ></dsfr-button>
+  <Bouton libelle="Ajouter" surClic={ajoute} desactive={!nouveauDocument || !libelleDuLien || !identifiantGuide} />
 </div>
 
 <style lang="scss">

@@ -2,6 +2,7 @@
   import type { Snippet } from 'svelte';
 
   import { enPropriétéWebC } from '@plateforme/webComponent';
+  import Bouton from '../ui/Bouton.svelte';
 
   export interface TableauDeDonnees {
     colonnes: Array<string>;
@@ -37,14 +38,13 @@
     <h4>{titre}</h4>
     {#if infobulle}
       <dsfr-tooltip id="infobulle-{id}" content={infobulle} type="hover">
-        <dsfr-button
-          label="Informations complémentaires sur {titre}"
-          kind="tertiary-no-outline"
-          size="sm"
-          has-icon
-          icon="question-line"
-          icon-place="only"
-        ></dsfr-button>
+        <Bouton
+          libelle="Informations complémentaires sur {titre}"
+          type="tertiaire-sans-bordure"
+          taille="sm"
+          icone="question-line"
+          iconeSeule
+        ></Bouton>
       </dsfr-tooltip>
     {/if}
   </header>

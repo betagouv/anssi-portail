@@ -2,10 +2,10 @@
   import { onMount, untrack } from 'svelte';
 
   import { estServeur } from '@plateforme/environnement';
-  import { clic } from '@directives/actions.svelte';
   import ControleSegmente from '@navigation/ControleSegmente.svelte';
   import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '@navigation/fragmentDeNavigation.svelte';
   import { profilStore } from '@stores/profil.store';
+  import Bouton from '@ui/Bouton.svelte';
   import ChampRecherche from '@ui/ChampRecherche.svelte';
   import type { PropriétésFilAriane } from '@ui/filAriane';
   import FiltresBureau from '@ui/FiltresBureau.svelte';
@@ -159,7 +159,7 @@
     <FiltreSource />
   {/if}
 
-  <dsfr-button centered label="Réinitialiser les filtres" use:clic={reinitialiseFiltres}></dsfr-button>
+  <Bouton libelle="Réinitialiser les filtres" surClic={reinitialiseFiltres} etire />
 </FiltresMobile>
 
 <dsfr-container class="barre-recherche-mobile">
@@ -202,7 +202,7 @@
         <FiltreTypologie />
         <FiltreSource />
       {/if}
-      <dsfr-button centered label="Réinitialiser les filtres" use:clic={reinitialiseFiltres}></dsfr-button>
+      <Bouton libelle="Réinitialiser les filtres" surClic={reinitialiseFiltres} etire />
     </FiltresBureau>
 
     {#if élémentsDuCatalogue.length > 0}
@@ -220,7 +220,7 @@
           <p class="fr-h3">Chargement...</p>
         {:else}
           <p class="fr-h3">Désolé, aucun résultat trouvé</p>
-          <dsfr-button label="Réinitialiser les filtres" use:clic={reinitialiseFiltres}></dsfr-button>
+          <Bouton libelle="Réinitialiser les filtres" surClic={reinitialiseFiltres} etire />
         {/if}
       </div>
     {/if}

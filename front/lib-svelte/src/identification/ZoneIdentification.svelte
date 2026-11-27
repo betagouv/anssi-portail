@@ -1,23 +1,19 @@
 <script lang="ts">
   import { profilStore } from '@stores/profil.store';
+  import Lien from '../ui/Lien.svelte';
 </script>
 
 <div class="conteneur-zone-indentification">
   {#if $profilStore === undefined}
-    <dsfr-button kind="tertiary-no-outline" markup="a" href="/inscription" size="sm" data-themeable="false">
-      S’inscrire
-    </dsfr-button>
-    <dsfr-button
-      kind="tertiary-no-outline"
-      markup="a"
+    <Lien apparence="bouton" type="tertiaire-sans-bordure" href="/inscription" taille="sm" libelle="S’inscrire" />
+    <Lien
+      apparence="bouton"
+      type="tertiaire-sans-bordure"
       href="/connexion"
-      size="sm"
-      has-icon
-      icon="user-line"
-      data-themeable="false"
-    >
-      Se connecter
-    </dsfr-button>
+      taille="sm"
+      libelle="Se connecter"
+      icone="user-line"
+    />
   {:else}
     <dsfr-user
       kind="tertiary-no-outline"

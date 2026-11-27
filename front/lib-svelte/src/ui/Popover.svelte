@@ -10,7 +10,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import { clic } from '@directives/actions.svelte';
+  import Bouton from './Bouton.svelte';
 
   const { children, actions }: Props = $props();
   let encart = $state<HTMLDivElement | undefined>();
@@ -44,15 +44,14 @@
 >
   <div class="conteneur">
     <div class="entete">
-      <dsfr-button
-        label="Fermer"
-        has-icon
-        icon-place="right"
-        icon="close-line"
-        kind="tertiary-no-outline"
-        size="sm"
-        use:clic={fermeDialogue}
-      ></dsfr-button>
+      <Bouton
+        libelle="Fermer"
+        icone="close-line"
+        iconeADroite
+        type="tertiaire-sans-bordure"
+        taille="sm"
+        surClic={fermeDialogue}
+      />
     </div>
     <div class="contenu">
       {@render children()}

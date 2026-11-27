@@ -13,8 +13,9 @@
   <h3>Votre demande a bien été envoyée&#8239;!</h3>
   <p>Un Aidant cyber prendra bientôt contact avec vous pour vous accompagner dans les prochaines étapes.</p>
   {#if !cacheLesLiens}
-    <dsfr-button label="Explorer les services pour se lancer" href="/" kind="primary" markup="a"></dsfr-button>
-
+    <div class="retour-accueil">
+      <Lien apparence="bouton" libelle="Explorer les services pour se lancer" href="/" />
+    </div>
     <Lien href="/" libelle="Revenir à la page d'accueil"></Lien>
   {/if}
 </div>
@@ -48,7 +49,7 @@
     p {
       margin: 0 0 40px;
     }
-    dsfr-button {
+    .retour-accueil {
       margin-bottom: 16px;
     }
   }

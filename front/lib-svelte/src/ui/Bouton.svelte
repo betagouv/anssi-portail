@@ -15,6 +15,7 @@
     iconeADroite?: boolean;
     idFormulaire?: string;
     surClic?: (e: MouseEvent | KeyboardEvent) => void;
+    preset?: 'close' | 'tooltip' | 'fullscreen' | 'display' | 'account' | 'team' | 'briefcase' | 'sort';
   }
 
   const {
@@ -30,6 +31,7 @@
     iconeADroite = false,
     idFormulaire,
     surClic,
+    preset,
   }: Props = $props();
 
   const kind = $derived(
@@ -64,6 +66,7 @@
   icon-place={iconPlace}
   form={idFormulaire}
   use:clic={gereClick}
+  {preset}
 >
   <button slot="seo" title={titre} disabled={desactive || undefined} type={boutonType} form={idFormulaire}>
     {libelle}

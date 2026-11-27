@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { clic } from '@directives/actions.svelte';
+  import Bouton from '@ui/Bouton.svelte';
   import Modale from '@ui/Modale.svelte';
 
   import type { Referentiel, ReferentielSelectionne } from '../exigence.type';
@@ -42,42 +42,38 @@
     {/if}
     <PanneauFiltres {source} cible={referentielSelectionne} {estBureau} />
   {:else}
-    <dsfr-button
-      label="Comparer ReCyF (NIS 2)"
-      has-icon
-      icon-place="left"
-      icon="arrow-left-right-line"
-      kind="secondary"
-      use:clic={() => ($etatPanneau.menuComparaisonAffiche = true)}
-    ></dsfr-button>
+    <Bouton
+      libelle="Comparer ReCyF (NIS 2)"
+      icone="arrow-left-right-line"
+      type="secondaire"
+      surClic={() => ($etatPanneau.menuComparaisonAffiche = true)}
+    />
     <Modale bind:estOuverte={$etatPanneau.menuComparaisonAffiche} titre="Comparer">
       <PanneauComparaison bind:sensComparaison bind:referentielSelectionne bind:langueSelectionnee estBureau={false} />
       {#snippet actions()}
-        <dsfr-button
-          label="Afficher le tableau"
-          kind="primary"
-          use:clic={() => ($etatPanneau.menuComparaisonAffiche = false)}
-        ></dsfr-button>
+        <Bouton
+          libelle="Afficher le tableau"
+          type="primaire"
+          surClic={() => ($etatPanneau.menuComparaisonAffiche = false)}
+        />
         <BoutonReinitialisation bind:langueSelectionnee bind:referentielSelectionne bind:sensComparaison />
       {/snippet}
     </Modale>
 
-    <dsfr-button
-      label="Filtrer le tableau"
-      has-icon
-      icon-place="left"
-      icon="filter-line"
-      kind="secondary"
-      use:clic={() => ($etatPanneau.menuFiltresAffiche = true)}
-    ></dsfr-button>
+    <Bouton
+      libelle="Filtrer le tableau"
+      icone="filter-line"
+      type="secondaire"
+      surClic={() => ($etatPanneau.menuFiltresAffiche = true)}
+    />
     <Modale bind:estOuverte={$etatPanneau.menuFiltresAffiche} titre="Filtrer le tableau">
       <PanneauFiltres {source} cible={referentielSelectionne} {estBureau} />
       {#snippet actions()}
-        <dsfr-button
-          label="Afficher le tableau"
-          kind="primary"
-          use:clic={() => ($etatPanneau.menuFiltresAffiche = false)}
-        ></dsfr-button>
+        <Bouton
+          libelle="Afficher le tableau"
+          type="primaire"
+          surClic={() => ($etatPanneau.menuFiltresAffiche = false)}
+        />
         <BoutonReinitialisation bind:langueSelectionnee bind:referentielSelectionne bind:sensComparaison />
       {/snippet}
     </Modale>

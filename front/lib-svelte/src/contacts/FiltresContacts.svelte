@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { clic } from '@directives/actions.svelte';
   import SelectRegion from '@test-maturite/SelectRegion.svelte';
+  import Bouton from '@ui/Bouton.svelte';
 
   import SelectSecteurContacts from './SelectSecteurContacts.svelte';
 
@@ -29,15 +29,11 @@
   <legend>Secteur d’activité</legend>
   <SelectSecteurContacts libelle="Sélectionner un secteur d’activité" bind:secteur={secteurSelectionne} />
 </fieldset>
-<dsfr-button label="Réinitialiser les filtres" centered use:clic={reinitialiseFiltres}></dsfr-button>
+<Bouton libelle="Réinitialiser les filtres" surClic={reinitialiseFiltres} etire />
 
 <style lang="scss">
   .filtres {
     display: flex;
     flex-direction: column;
-  }
-
-  dsfr-button {
-    display: flex;
   }
 </style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { clic } from '@directives/actions.svelte';
+  import Bouton from '@ui/Bouton.svelte';
 
   import Etape from './Etape.svelte';
 
@@ -47,7 +47,7 @@
   ></dsfr-highlight>
 
   <div class="actions">
-    <dsfr-button use:clic={onsuivant}>Débuter le test</dsfr-button>
+    <Bouton libelle="Débuter le test" surClic={onsuivant} />
   </div>
 </Etape>
 

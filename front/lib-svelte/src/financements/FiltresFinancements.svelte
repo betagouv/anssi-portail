@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { clic } from '@directives/actions.svelte';
   import SelectRegion from '@test-maturite/SelectRegion.svelte';
+  import Bouton from '@ui/Bouton.svelte';
 
   import ChoixFiltreTypeFinancement from './ChoixFiltreTypeFinancement.svelte';
   import ChoixFiltreTypeOrganisation from './ChoixFiltreTypeOrganisation.svelte';
@@ -71,7 +71,7 @@
   </ul>
 </fieldset>
 
-<dsfr-button label="Réinitialiser les filtres" centered use:clic={reinitialiseFiltres}></dsfr-button>
+<Bouton libelle="Réinitialiser les filtres" etire surClic={reinitialiseFiltres}></Bouton>
 
 <style lang="scss">
   .filtres {

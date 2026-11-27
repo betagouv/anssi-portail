@@ -2,7 +2,8 @@
   import { tick } from 'svelte';
 
   import { peintUnQRCode } from '@plateforme/qrcode';
-  import { clic } from '@directives/actions.svelte';
+  import Bouton from '@ui/Bouton.svelte';
+  import Lien from '@ui/Lien.svelte';
   import Modale from '@ui/Modale.svelte';
   import { copieDansLePressePapier } from '@ui/presse-papier';
 
@@ -55,46 +56,40 @@
     <div>
       <p class="texte-standard-md">Code de session</p>
       <h2 class="code">{codeSessionFormate}</h2>
-      <dsfr-button
-        label="Copier le lien participant"
-        title="Copier dans le presse-papier le lien de participation à la session de groupe"
-        size="sm"
-        kind="tertiary"
-        hasIcon
-        iconPlace="left"
-        icon="link"
-        use:clic={copieLienParticipant}
-      >
-      </dsfr-button>
+      <Bouton
+        libelle="Copier le lien participant"
+        titre="Copier dans le presse-papier le lien de participation à la session de groupe"
+        taille="sm"
+        type="tertiaire"
+        icone="link"
+        surClic={copieLienParticipant}
+      />
     </div>
   </div>
   <div class="organisateur texte-detail-sm">
     <p>
       Copiez ce lien si vous souhaitez accéder à votre session organisateur ultérieurement&nbsp;:<br />
       <u>session-groupe={codeSession}&organisateur</u>
-      <dsfr-button
-        title="Copier dans le presse-papier le lien organisateur de la session de groupe"
-        size="sm"
-        kind="tertiary-no-outline"
-        hasIcon
-        iconPlace="only"
-        icon="link"
-        use:clic={copieLienOrganisateur}
-      >
-      </dsfr-button>
+      <Bouton
+        titre="Copier dans le presse-papier le lien organisateur de la session de groupe"
+        taille="sm"
+        type="tertiaire-sans-bordure"
+        icone="link"
+        iconeSeule
+        surClic={copieLienOrganisateur}
+      />
     </p>
   </div>
   {#snippet actions()}
-    <dsfr-button
-      label="Débuter le test"
-      title="Débuter le test de maturité cyber en tant qu'organisateur"
-      size="md"
-      kind="primary"
-      markup="a"
+    <Lien
+      apparence="bouton"
+      libelle="Débuter le test"
+      titre="Débuter le test de maturité cyber en tant qu'organisateur"
+      taille="md"
       href={`/test-maturite?session-groupe=${codeSession}&organisateur`}
-      centered
-    ></dsfr-button>
-    <dsfr-button label="Annuler" title="Annuler" kind="secondary" size="md" use:clic={ferme} centered></dsfr-button>
+      etire
+    />
+    <Bouton libelle="Annuler" titre="Annuler" type="secondaire" taille="md" surClic={ferme} etire />
   {/snippet}
 </Modale>
 

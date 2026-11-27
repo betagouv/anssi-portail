@@ -2,6 +2,7 @@
   import Alerte from '@ui/Alerte.svelte';
   import { fabriqueFilAriane } from '@ui/filAriane';
   import FilAriane from '@ui/FilAriane.svelte';
+  import Lien from '../ui/Lien.svelte';
 </script>
 
 <dsfr-container>
@@ -17,7 +18,9 @@
       Votre inscription à la newsletter MesServicesCyber a bien été prise en compte.
     </Alerte>
     <img src="/assets/images/dragon-coeur-entier.svg" width="340" height="255" alt="Le dragon vous remercie" />
-    <dsfr-button markup="a" label="Accéder à la page d’accueil" kind="secondary" href="/"></dsfr-button>
+    <div class="lien">
+      <Lien libelle="Accéder à la page d’accueil" href="/" apparence="bouton" type="secondaire" />
+    </div>
   </div>
 </dsfr-container>
 
@@ -25,7 +28,7 @@
   @use '../../../assets/styles/responsive' as *;
   @use '../../../assets/styles/grille' as *;
 
-  dsfr-button {
+  .lien {
     align-self: center;
   }
 

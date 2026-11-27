@@ -4,8 +4,8 @@
   import { récupèreStatistiquesMSC } from '@passerelles/statistiquesMSC';
   import BlocContenuLanding from '@ui/BlocContenuLanding.svelte';
   import HeroLandingPage from '@ui/HeroLandingPage.svelte';
+  import Lien from '../ui/Lien.svelte';
   import MotEnExergue from '@ui/MotEnExergue.svelte';
-
   import IllustrationHerosParcoursComplet from './animation/IllustrationHerosParcoursComplet.svelte';
   import IllustrationModules from './animation/IllustrationModules.svelte';
   import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';
@@ -69,16 +69,14 @@
       <MotEnExergue motif="vague" couleur="cafe-creme" petit>cyber</MotEnExergue> complète
     {/snippet}
     {#snippet actions()}
-      <dsfr-button
-        label="Je commence à sécuriser"
-        kind="primary"
-        size="lg"
-        has-icon
-        icon="arrow-right-circle-line"
-        icon-place="right"
+      <Lien
+        apparence="bouton"
+        libelle="Je commence à sécuriser"
+        taille="lg"
+        icone="arrow-right-circle-line"
+        iconeADroite
         href={`/parcours-complet?pageSource=${pageSourceHero}`}
-        markup="a"
-      ></dsfr-button>
+      />
     {/snippet}
     {#snippet illustration()}
       <figure class="illustration">
@@ -116,16 +114,14 @@
     </div>
 
     <div class="cta-central">
-      <dsfr-button
-        label="Je commence à sécuriser"
-        kind="primary"
-        size="lg"
-        has-icon
-        icon="arrow-right-circle-line"
-        icon-place="right"
+      <Lien
+        apparence="bouton"
+        libelle="Je commence à sécuriser"
+        taille="lg"
+        icone="arrow-right-circle-line"
+        iconeADroite
         href={`/parcours-complet?pageSource=${pageSourceCTACentral}`}
-        markup="a"
-      ></dsfr-button>
+      />
     </div>
   </dsfr-container>
 </section>

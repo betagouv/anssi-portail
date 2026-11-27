@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { clic } from '@directives/actions.svelte';
+  import Bouton from '@ui/Bouton.svelte';
   import IllustrationPasDeResultatDeRecherche from '@ui/IllustrationPasDeResultatDeRecherche.svelte';
 
   import { exigencesFiltrees } from '../stores/exigencesFiltrees.store';
@@ -10,13 +10,8 @@
     <IllustrationPasDeResultatDeRecherche />
   </div>
   <h3>Désolé, aucun résultat trouvé</h3>
-  <dsfr-button
-    label="Réinitialiser les filtres"
-    has-icon="true"
-    icon-place="left"
-    icon="close-circle-line"
-    use:clic={$exigencesFiltrees.reinitialise}
-  ></dsfr-button>
+
+  <Bouton libelle="Réinitialiser les filtres" icone="close-circle-line" surClic={$exigencesFiltrees.reinitialise} />
 </div>
 
 <style lang="scss">
