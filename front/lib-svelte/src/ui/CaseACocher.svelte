@@ -6,12 +6,14 @@
     surChangement?: () => void;
     children?: Snippet;
     coché: boolean;
+    enErreur?: boolean;
     id: string;
     indéterminé?: boolean;
     libellé?: string;
     messageErreur?: string;
     nom?: string;
     requis?: boolean;
+    taille?: 'sm' | 'md';
   };
 
   let {
@@ -19,27 +21,31 @@
     surChangement,
     children,
     coché = $bindable(false),
+    enErreur,
     id,
     indéterminé = $bindable(false),
     libellé,
     messageErreur = 'Cette information est obligatoire.',
     nom,
     requis,
+    taille,
   }: Props = $props();
 </script>
 
 <dsfr-checkbox
   {id}
-  name={nom}
-  label={libellé}
-  error-message={messageErreur}
   checked={coché}
+  error-message={messageErreur}
+  indeterminate={indéterminé}
+  label={libellé}
+  name={nom}
   onvaluechanged={(e: CustomEvent) => {
     coché = e.detail;
     surChangement?.();
   }}
   required={requis}
-  indeterminate={indéterminé}
+  size={taille}
+  status={enErreur ? 'error' : undefined}
 >
   {@render children?.()}
   {#if astuce}
