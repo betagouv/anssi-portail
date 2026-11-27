@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { DsfrCallout } from '@lab-anssi/ui-kit';
   import { onMount } from 'svelte';
 
   import { clic } from '@directives/actions.svelte';
@@ -57,10 +58,10 @@
       </div>
     </div>
 
-    <dsfr-callout
+    <DsfrCallout
       text="Ce lundi matin, dernier lundi de février, vous démarrez la réunion de direction hebdomadaire à 9h. Vous ne le savez pas encore, mais la journée ne va pas se dérouler comme prévu..."
       accent="purple-glycine"
-    ></dsfr-callout>
+    />
 
     <Bouton libelle="Lancer la simulation" taille="lg" surClic={surLancement} />
 
@@ -113,7 +114,6 @@
     gap: 0.5rem;
   }
 
-  dsfr-callout,
   .comment-jouer {
     width: 100%;
   }
