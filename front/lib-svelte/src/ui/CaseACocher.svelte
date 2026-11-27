@@ -6,7 +6,7 @@
     astuce?: Snippet;
     surChangement?: () => void;
     children?: Snippet;
-    coché: boolean;
+    coché?: boolean;
     enErreur?: boolean;
     id: string;
     indéterminé?: boolean;

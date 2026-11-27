@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { DsfrCheckboxesGroup } from '@lab-anssi/ui-kit';
-
   import { enPropriétéWebC } from '@plateforme/webComponent';
   import { publieRéponseQuestionnaireExposition } from '@passerelles/mini-tests/publicationRéponses';
   import Bouton from '@ui/Bouton.svelte';
+  import GroupeDeCasesACocher from '@ui/GroupeDeCasesACocher.svelte';
 
   import {
     FACTEURS_AGGRAVANTS,
@@ -29,7 +28,6 @@
 
   const radiosType = TYPES_ORGANISATION.map(({ value, label }) => ({ id: `type-${value}`, label, value }));
   const optionsSecteur = SECTEURS.map(({ value, label }) => ({ value, label }));
-  const caseÀCocherFacteurs = FACTEURS_AGGRAVANTS.map(({ value, label }) => ({ id: `facteur-${value}`, label, value }));
 
   const secteurDisponible = $derived(secteurDisponiblePour(typeOrganisation));
   const indiceSecteur = $derived(
@@ -96,12 +94,12 @@
         <h2 class="texte-chapo-xl">Facteurs aggravants d’exposition</h2>
       </div>
 
-      <DsfrCheckboxesGroup
+      <GroupeDeCasesACocher
         id="facteurs-aggravants"
-        legend="Sélectionnez un ou plusieurs facteurs aggravants"
-        checkboxes={caseÀCocherFacteurs}
-        onvalueschanged={choisisFacteurs}
-      ></DsfrCheckboxesGroup>
+        légende="Sélectionnez un ou plusieurs facteurs aggravants"
+        casesÀCocher={FACTEURS_AGGRAVANTS}
+        surChangement={choisisFacteurs}
+      ></GroupeDeCasesACocher>
     </div>
 
     <Bouton libelle="Évaluer mon exposition" surClic={valide} taille="lg" desactive={!typeOrganisation} />

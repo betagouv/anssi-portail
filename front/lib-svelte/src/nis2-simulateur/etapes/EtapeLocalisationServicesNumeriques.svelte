@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { DsfrCheckboxesGroup } from '@lab-anssi/ui-kit';
+  import GroupeDeCasesACocher from '@ui/GroupeDeCasesACocher.svelte';
 
   import type { AppartenancePaysUnionEuropeenne } from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions';
   import Etape from './Etape.svelte';
@@ -31,25 +31,25 @@
     hide-details="true"
   ></dsfr-stepper>
 
-  <DsfrCheckboxesGroup
+  <GroupeDeCasesACocher
     {id}
-    legend="Dans quels États membres de l’Union européenne fournissez-vous des services numériques&#8239;?"
-    hint="Fournisseur de réseaux de communications électroniques publics, ou Fournisseur de services de communications électroniques accessibles au public."
-    checkboxes={[
-      { label: 'France', id: 'radio-fr', value: 'france' },
+    légende="Dans quels États membres de l’Union européenne fournissez-vous des services numériques&#8239;?"
+    astuce="Fournisseur de réseaux de communications électroniques publics, ou Fournisseur de services de communications électroniques accessibles au public."
+    casesÀCocher={[
+      { libellé: 'France', id: 'radio-fr', valeur: 'france' },
       {
-        label: "Autres États membres de l'Union européenne",
+        libellé: "Autres États membres de l'Union européenne",
         id: 'radio-autre',
-        value: 'autre',
+        valeur: 'autre',
       },
       {
-        label: 'Autres États hors Union européenne',
+        libellé: 'Autres États hors Union européenne',
         id: 'radio-horsue',
-        value: 'horsue',
+        valeur: 'horsue',
       },
     ]}
-    onvalueschanged={choisis}
-  ></DsfrCheckboxesGroup>
+    surChangement={choisis}
+  ></GroupeDeCasesACocher>
 
   <PrecedentSuivant
     message="Sélectionnez au moins une réponse"
