@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { DsfrModal } from '@lab-anssi/ui-kit';
   import type { Snippet } from 'svelte';
 
   type Props = {
@@ -16,17 +17,21 @@
     estOuverte = false;
     surFermeture?.();
   };
+
+  const id = $props.id();
 </script>
 
 {#if estOuverte}
-  <dsfr-modal title={titre} icon={icone} opened={estOuverte} footer={Boolean(actions)} onclose={ferme}>
+  <DsfrModal title={titre} icon={icone} opened={estOuverte} footer={Boolean(actions)} onclose={ferme} {id}>
     {@render children()}
-    {#if actions}
-      <div slot="footer" class="actions">
-        {@render actions()}
-      </div>
-    {/if}
-  </dsfr-modal>
+    <svelte:fragment slot="footer">
+      {#if actions}
+        <div class="actions">
+          {@render actions()}
+        </div>
+      {/if}
+    </svelte:fragment>
+  </DsfrModal>
 {/if}
 
 <style lang="scss">
