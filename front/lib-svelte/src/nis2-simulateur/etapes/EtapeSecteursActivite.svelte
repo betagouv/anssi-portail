@@ -1,6 +1,8 @@
 <script lang="ts">
   import { SvelteSet } from 'svelte/reactivity';
 
+  import CaseACocher from '@ui/CaseACocher.svelte';
+
   import { libellesSecteursActivite } from '../../../../../back/src/metier/nis2-simulateur/LibellesSecteursActivite';
   import type { SecteurActivite } from '../../../../../back/src/metier/nis2-simulateur/SecteurActivite.definitions';
   import Etape from './Etape.svelte';
@@ -14,10 +16,9 @@
   let { onsuivant }: Props = $props();
   let reponse: SvelteSet<SecteurActivite> = new SvelteSet<SecteurActivite>();
 
-  const choisis = (secteur: string) => (e: { detail: boolean }) => {
-    const checked = e.detail;
-    if (checked) reponse.add(secteur as SecteurActivite);
-    else reponse.delete(secteur as SecteurActivite);
+  const bascule = (secteur: SecteurActivite) => {
+    if (reponse.has(secteur)) reponse.delete(secteur);
+    else reponse.add(secteur);
   };
 
   const valide = () => {
@@ -52,7 +53,15 @@
   ></dsfr-highlight>
 
   {#each Object.entries(libellesSecteursActivite) as [id, label] (id)}
-    <dsfr-checkbox id={`checkbox-${id}`} size="sm" {label} onvaluechanged={choisis(id)}></dsfr-checkbox>
+    <div class="case">
+      <CaseACocher
+        id={`checkbox-${id}`}
+        taille="sm"
+        libellé={label}
+        coché={reponse.has(id as SecteurActivite)}
+        surChangement={() => bascule(id as SecteurActivite)}
+      />
+    </div>
   {/each}
 
   <PrecedentSuivant
@@ -63,7 +72,7 @@
 </Etape>
 
 <style lang="scss">
-  dsfr-checkbox {
+  .case {
     margin-bottom: 8px;
   }
 </style>
