@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
 
   import Lien from '@ui/Lien.svelte';
+  import MiseEnAvant from '@ui/MiseEnAvant.svelte';
 
   let pageSource = $state('');
 
@@ -33,3 +34,23 @@
     />
   </div>
 </DsfrCallout>
+
+<MiseEnAvant
+  accent="blue-ecume"
+  libelléBouton="En savoir plus"
+  niveauTitre={4}
+  texte="Passez au niveau supérieur et continuez à progresser avec des mesures plus avancées pour renforcer vos pratiques,
+    mieux structurer vos actions et protéger votre organisation dans la durée."
+  titre="Protégez votre organisation dans la durée"
+>
+  {#snippet bouton()}
+    <Lien
+      apparence="bouton"
+      libelle="Poursuivre le parcours"
+      etire
+      icone="arrow-right-circle-line"
+      iconeADroite
+      href={`/parcours-complet?pageSource=${pageSource}`}
+    />
+  {/snippet}
+</MiseEnAvant>
