@@ -5,7 +5,7 @@ import { EntrepôtRésultatTestMaturité } from './mini-tests/maturite-cyber/ent
 import { IdNiveauMaturite } from './mini-tests/maturite-cyber/resultatTestMaturite.js';
 
 /* Il faut modifier ces deux valeurs en même temps */
-export const NOMBRES_DE_DIAGNOSTIC_CYBER = 7130;
+export const NOMBRES_DE_DIAGNOSTIC_CYBER = 7280;
 export const DATE_MAJ_NOMBRES_DE_DIAGNOSTIC_CYBER = new Date('2026-11-09');
 
 const SATISFACTION_UTILISATEUR = 92;
