@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Badge from '@ui/Badge.svelte';
   import Bouton from '@ui/Bouton.svelte';
   import CanonAConfetti from '@ui/CanonAConfetti.svelte';
 
@@ -23,17 +24,15 @@
   const badge = $derived.by(() => {
     switch (mode) {
       case 'bonne-réponse':
-        return { label: 'Bonne réponse', status: 'success' };
+        return { label: 'Bonne réponse', status: 'success' } as const;
       case 'mauvaise-réponse':
-        return { label: 'Mauvaise réponse', status: 'error' };
-      default:
-        return { label: '', status: '' };
+        return { label: 'Mauvaise réponse', status: 'error' } as const;
     }
   });
 </script>
 
 <div class="réponse">
-  <dsfr-badge label={badge.label} size="md" type="status" status={badge.status}></dsfr-badge>
+  <Badge statut={badge.status} libellé={badge.label} taille="md" />
   <dsfr-tag class="compte" size="md" label="{indexIdéeReçue + 1}/{nombreIdéesReçues}"></dsfr-tag>
   <h2 class="fr-h6">{idéeReçue.réponse}</h2>
   {#each idéeReçue.explications as explication, index (index)}

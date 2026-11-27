@@ -2,6 +2,7 @@
   import { type Snippet } from 'svelte';
 
   import { estServeur } from '@plateforme/environnement';
+  import Badge from '@ui/Badge.svelte';
   import type { CouleurDeBadge } from '@ui/badge.type';
   import Reactions from '@ui/Reactions.svelte';
 
@@ -50,7 +51,7 @@
     hasDetailEnd={estimationEnMinutes}
   >
     <div slot="headerbadges">
-      <dsfr-badge accent={accentDuBadge} label={`🔥 ${libelléDuBadge}`} size="md" type="accent"> </dsfr-badge>
+      <Badge accent={accentDuBadge} libellé={`🔥 ${libelléDuBadge}`} taille="md" />
     </div>
     <div slot="image" class="image">
       {@render image(survol)}

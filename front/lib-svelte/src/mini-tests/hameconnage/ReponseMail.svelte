@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { Component } from 'svelte';
 
+  import Badge from '@ui/Badge.svelte';
+
   import { mailOuvert } from './hameconnage.store';
 
   const contenusDeRéponse = import.meta.glob<{ default: Component } | undefined>('./reponses-mail/ReponseMail*.svelte');
@@ -15,12 +17,11 @@
 
 <div class="reponse-mail">
   <div class="entete">
-    <dsfr-badge
-      label={bonneRéponse ? 'Bonne réponse' : 'Mauvaise réponse'}
-      size="md"
-      type="status"
-      status={bonneRéponse ? 'success' : 'error'}
-    ></dsfr-badge>
+    <Badge
+      statut={bonneRéponse ? 'success' : 'error'}
+      libellé={bonneRéponse ? 'Bonne réponse' : 'Mauvaise réponse'}
+      taille="md"
+    />
     {#if bonneRéponse}
       <dsfr-tag label="+ 1 pt" size="md"></dsfr-tag>
     {/if}

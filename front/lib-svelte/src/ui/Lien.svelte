@@ -16,6 +16,7 @@
     taille?: 'sm' | 'md' | 'lg';
     telechargement?: string;
     telechargementDetails?: string;
+    titre?: string;
     type?:
       'primaire' | 'primaire-inverse' | 'secondaire' | 'secondaire-inverse' | 'tertiaire' | 'tertiaire-sans-bordure';
     source?: string;
@@ -37,6 +38,7 @@
     taille,
     telechargement,
     telechargementDetails,
+    titre,
     type,
     source,
     cible,
@@ -99,6 +101,7 @@
 {:else}
   <dsfr-button
     label={libelle}
+    title={titre}
     size={taille}
     has-icon={hasIcon}
     icon={icone}

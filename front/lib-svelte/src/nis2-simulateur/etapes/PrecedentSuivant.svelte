@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { clic } from '@directives/actions.svelte';
+  import Bouton from '@ui/Bouton.svelte';
 
   import { questionnaireAvecUndo } from '../stores/questionnaireAvecUndo.store';
 
@@ -16,11 +16,9 @@
 <div class="actions">
   <p>{message}</p>
 
-  <dsfr-button use:clic={questionnaireAvecUndo.undo} kind="secondary" disabled={precedentdisabled}>
-    Précédent
-  </dsfr-button>
+  <Bouton libelle="Précédent" type="secondaire" desactive={precedentdisabled} surClic={questionnaireAvecUndo.undo} />
 
-  <dsfr-button disabled={suivantdisabled} use:clic={onsuivant}> Suivant </dsfr-button>
+  <Bouton libelle="Suivant" desactive={suivantdisabled} surClic={onsuivant} />
 </div>
 
 <style lang="scss">

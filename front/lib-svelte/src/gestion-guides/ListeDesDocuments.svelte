@@ -1,8 +1,8 @@
 <script lang="ts">
   import axios from 'axios';
 
-  import { clic } from '@directives/actions.svelte';
   import Alerte from '@ui/Alerte.svelte';
+  import Bouton from '@ui/Bouton.svelte';
   import Lien from '@ui/Lien.svelte';
 
   export type Document = {
@@ -82,16 +82,15 @@
           <Lien href={chemin ?? '#'} blank libelle={nomFichier} />
         </p>
         <p>{libelle}</p>
-        <dsfr-button
-          class="supprimer"
-          type="button"
-          size="md"
-          kind="tertiary"
-          label="Supprimer"
-          has-icon="true"
-          icon="delete-bin-line"
-          use:clic={() => supprimeLeDocument(nomFichier)}
-        ></dsfr-button>
+        <div class="bouton">
+          <Bouton
+            taille="md"
+            type="tertiaire"
+            libelle="Supprimer"
+            icone="delete-bin-line"
+            surClic={() => supprimeLeDocument(nomFichier)}
+          ></Bouton>
+        </div>
       </div>
     {/each}
     {#each nouveauxDocuments as { libelle, nomFichier }, id (id)}
@@ -100,8 +99,9 @@
           <msc-lien href="#" blank libelle={nomFichier}></msc-lien>
         </p>
         <p>{libelle}</p>
-        <dsfr-button disabled class="supprimer" type="button" size="md" kind="tertiary" label="Ajout en cours"
-        ></dsfr-button>
+        <div class="bouton">
+          <Bouton taille="md" type="tertiaire" libelle="Ajout en cours" desactive></Bouton>
+        </div>
       </div>
     {/each}
   {:else}
@@ -137,10 +137,10 @@
     @include a-partir-de(lg) {
       align-items: start;
       grid-template-columns: 1fr auto;
-      grid-template-rows: 1fr fr;
+      grid-template-rows: 1fr 1fr;
       gap: 16px;
 
-      dsfr-button {
+      .bouton {
         grid-column: 2;
         grid-row: 1 / span 2;
       }

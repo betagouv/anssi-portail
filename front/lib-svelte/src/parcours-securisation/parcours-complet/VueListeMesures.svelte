@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Badge from '@ui/Badge.svelte';
   import Lien from '@ui/Lien.svelte';
 
   import type { Mesure } from '../mesures/mesure';
@@ -21,14 +22,7 @@
     <li>
       <div class="titre-badge">
         {#if mesure.estPriseEnCompte}
-          <dsfr-badge
-            accent="green-emeraude"
-            has-icon
-            icon="checkbox-circle-fill"
-            label="Prise en compte"
-            size="sm"
-            type="accent"
-          ></dsfr-badge>
+          <Badge accent="green-emeraude" icone="checkbox-circle-fill" libellé="Prise en compte" taille="sm" />
         {/if}
         {mesure.titre}
       </div>

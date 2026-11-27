@@ -1,5 +1,6 @@
 <script lang="ts">
   import { aseptiseHtml } from '@plateforme/aseptisationDuHtml';
+  import Badge from '@ui/Badge.svelte';
   import Bouton from '@ui/Bouton.svelte';
   import Modale from '@ui/Modale.svelte';
 
@@ -32,21 +33,16 @@
     </div>
     {#if menace.renforce}
       <div slot="badgesgroup">
-        <dsfr-badge label="renforcée" type="status" status="warning" size="md"></dsfr-badge>
+        <Badge libellé="renforcée" statut="warning" taille="md" />
       </div>
     {/if}
     {#if menace.resume}
       <div slot="contentend" class="stats">
         <p class="pourcentage fr-h4">{menace.resume.indicateur}</p>
         {#if menace.resume.enHausse}
-          <dsfr-badge
-            has-icon
-            icon="arrow-right-up-line"
-            type="accent"
-            accent="green-emeraude"
-            size="sm"
-            label="en hausse"
-          ></dsfr-badge>
+          <div class="badge">
+            <Badge libellé="en hausse" accent="green-emeraude" taille="sm" icone="arrow-right-up-line" />
+          </div>
         {/if}
         <p class="texte-detail-sm">{menace.resume.texte}</p>
         <p class="texte-mention-xs">
@@ -72,7 +68,7 @@
     {#if menace.renforce}
       <p class="texte-standard-md niveau-risque">
         <strong>Niveau de risque</strong>
-        <dsfr-badge label="Renforcé" type="status" status="warning" size="sm"></dsfr-badge>
+        <Badge libellé="Renforcé" statut="warning" taille="sm" />
       </p>
     {/if}
 
@@ -80,14 +76,9 @@
       <div class="stats">
         <p class="pourcentage fr-h4">{menace.resume.indicateur}</p>
         {#if menace.resume.enHausse}
-          <dsfr-badge
-            has-icon
-            icon="arrow-right-up-line"
-            type="accent"
-            accent="green-emeraude"
-            size="sm"
-            label="en hausse"
-          ></dsfr-badge>
+          <div class="badge">
+            <Badge libellé="en hausse" accent="green-emeraude" taille="sm" icone="arrow-right-up-line" />
+          </div>
         {/if}
         <p class="texte-detail-sm">{menace.resume.texte}</p>
       </div>
@@ -150,7 +141,7 @@
         color: var(--text-title-blue-france);
       }
 
-      dsfr-badge {
+      .badge {
         align-self: center;
       }
 

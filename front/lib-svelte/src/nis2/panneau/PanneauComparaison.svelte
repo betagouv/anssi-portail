@@ -1,6 +1,6 @@
 <script lang="ts">
   import { enPropriétéWebC } from '@plateforme/webComponent';
-  import { clic } from '@directives/actions.svelte';
+  import Bouton from '@ui/Bouton.svelte';
 
   import type { ReferentielSelectionne } from '../exigence.type';
   import BoutonReinitialisation from './BoutonReinitialisation.svelte';
@@ -64,14 +64,13 @@
           value="NIS2"
           disabled
         ></dsfr-select>
-        <dsfr-button
-          label=""
-          has-icon="true"
-          icon-place="only"
-          icon={estBureau ? 'arrow-left-right-line' : 'arrow-up-down-line'}
-          kind="tertiary"
-          use:clic={inverseComparaison}
-        ></dsfr-button>
+        <Bouton
+          libelle=""
+          iconeSeule
+          icone={estBureau ? 'arrow-left-right-line' : 'arrow-up-down-line'}
+          type="tertiaire"
+          surClic={inverseComparaison}
+        ></Bouton>
         <dsfr-select
           id="referentielAutre"
           label=""

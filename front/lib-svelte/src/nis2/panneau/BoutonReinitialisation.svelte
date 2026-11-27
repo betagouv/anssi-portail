@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { clic } from '@directives/actions.svelte';
+  import Bouton from '@ui/Bouton.svelte';
 
   import type { ReferentielSelectionne } from '../exigence.type';
   import { exigencesFiltrees } from '../stores/exigencesFiltrees.store';
@@ -24,12 +24,5 @@
 </script>
 
 {#if langueSelectionnee !== 'FR' || referentielSelectionne || sensComparaison !== 'NIS2_VERS_CIBLE' || $exigencesFiltrees.filtresActifs}
-  <dsfr-button
-    label="Réinitialiser"
-    has-icon="true"
-    icon-place="left"
-    icon="close-circle-line"
-    kind="tertiary"
-    use:clic={reinitialise}
-  ></dsfr-button>
+  <Bouton libelle="Réinitialiser" icone="close-circle-line" type="tertiaire" surClic={reinitialise} />
 {/if}

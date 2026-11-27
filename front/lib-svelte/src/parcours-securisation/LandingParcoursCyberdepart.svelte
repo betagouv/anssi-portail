@@ -8,6 +8,7 @@
   import HeroLandingPage from '@ui/HeroLandingPage.svelte';
   import MotEnExergue from '@ui/MotEnExergue.svelte';
 
+  import Lien from '../ui/Lien.svelte';
   import IllustrationBadge from './animation/IllustrationBadge.svelte';
   import IllustrationHerosParcoursBasique from './animation/IllustrationHerosParcoursBasique.svelte';
   import IllustrationMesure from './animation/IllustrationMesure.svelte';
@@ -71,16 +72,14 @@
       </MotEnExergue>
     {/snippet}
     {#snippet actions()}
-      <dsfr-button
-        label="Je commence à sécuriser"
-        kind="primary"
-        size="lg"
-        has-icon
-        icon="arrow-right-circle-line"
-        icon-place="right"
+      <Lien
+        apparence="bouton"
+        libelle="Je commence à sécuriser"
+        taille="lg"
+        icone="arrow-right-circle-line"
+        iconeADroite
         href={`/modules/1?pageSource=${pageSourceHero}`}
-        markup="a"
-      ></dsfr-button>
+      />
     {/snippet}
     {#snippet illustration()}
       <figure class="illustration">
@@ -118,16 +117,14 @@
     </div>
 
     <div class="cta-central">
-      <dsfr-button
-        label="Je commence à sécuriser"
-        kind="primary"
-        size="lg"
-        has-icon
-        icon="arrow-right-circle-line"
-        icon-place="right"
+      <Lien
+        apparence="bouton"
+        libelle="Je commence à sécuriser"
+        taille="lg"
+        icone="arrow-right-circle-line"
+        iconeADroite
         href={`/modules/1?pageSource=${pageSourceCTACentral}`}
-        markup="a"
-      ></dsfr-button>
+      />
     </div>
   </dsfr-container>
 </section>

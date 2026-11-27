@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
 
   import { récupèreStatistiquesMSC, type Statistiques } from '@passerelles/statistiquesMSC';
+  import Badge from '@ui/Badge.svelte';
 
   let statistiques: Statistiques | undefined = $state();
 
@@ -10,9 +11,8 @@
   });
 </script>
 
-<dsfr-badge
-  type="accent"
+<Badge
+  libellé={`+${statistiques?.démarchesDeSécurisationArrondies ?? 0} organisations accompagnées 🚀`}
   accent="green-bourgeon"
-  label={`+${statistiques?.démarchesDeSécurisationArrondies ?? 0} organisations accompagnées 🚀`}
-  size="sm"
-></dsfr-badge>
+  taille="sm"
+/>

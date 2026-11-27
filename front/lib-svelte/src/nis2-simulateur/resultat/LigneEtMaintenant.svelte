@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Lien from '../../ui/Lien.svelte';
 </script>
 
 <div class="fluide">
@@ -7,17 +8,14 @@
       <h4>Et maintenant&#8239;?</h4>
       <p>La prochaine étape est de vous déclarer auprès de l&apos;ANSSI en pré-enregistrant votre organisation</p>
 
-      <dsfr-button
-        label="Se pré-enregistrer"
-        size="md"
-        icon="checkbox-line"
-        icon-place="left"
-        markup="a"
-        type="button"
+      <Lien
+        apparence="bouton"
+        libelle="Se pré-enregistrer"
+        taille="md"
+        icone="checkbox-line"
         href="https://club.ssi.gouv.fr/#/nis2/introduction"
-        target="_blank"
-        kind="primary"
-      ></dsfr-button>
+        blank
+      />
     </div>
   </dsfr-container>
 </div>

@@ -2,8 +2,8 @@
   import axios from 'axios';
   import { onMount, untrack } from 'svelte';
 
-  import { clic } from '@directives/actions.svelte';
   import { profilStore } from '@stores/profil.store';
+  import Bouton from '@ui/Bouton.svelte';
   import type { PropriétésFilAriane } from '@ui/filAriane';
   import FiltresBureau from '@ui/FiltresBureau.svelte';
   import FiltresMobile from '@ui/FiltresMobile.svelte';
@@ -91,7 +91,7 @@
                 <IllustrationPasDeResultatDeRecherche />
               </div>
               <p class="fr-h2">Désolé, aucun résultat trouvé</p>
-              <dsfr-button label="Réinitialiser les filtres" use:clic={reinitialiseFiltres}></dsfr-button>
+              <Bouton libelle="Réinitialiser les filtres" surClic={reinitialiseFiltres}></Bouton>
             </div>
           {/each}
         {/if}

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Lien from '../Lien.svelte';
   import type { BoutonAction } from './toaster.store';
   import { glisse } from './transisitons';
 
@@ -58,18 +59,17 @@
     <p class="texte">
       {contenu}
       {#if avecBoutonAction}
-        <dsfr-button
-          label={avecBoutonAction.label}
-          kind="tertiary"
-          size="md"
-          has-icon
-          icon={avecBoutonAction.icone}
-          icon-place="left"
-          markup="a"
-          type="button"
-          href={avecBoutonAction.href}
-          target="blank"
-        ></dsfr-button>
+        <span class="action">
+          <Lien
+            apparence="bouton"
+            libelle={avecBoutonAction.label}
+            type="tertiaire"
+            taille="md"
+            icone={avecBoutonAction.icone}
+            href={avecBoutonAction.href}
+            blank
+          />
+        </span>
       {/if}
     </p>
   </div>
@@ -146,7 +146,8 @@
       }
     }
 
-    dsfr-button {
+    .action {
+      display: block;
       margin-top: 16px;
     }
   }

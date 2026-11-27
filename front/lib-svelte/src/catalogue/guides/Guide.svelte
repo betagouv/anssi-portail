@@ -3,9 +3,9 @@
 
   import { aseptiseHtml } from '@plateforme/aseptisationDuHtml';
   import { enPropriétéWebC } from '@plateforme/webComponent';
-  import { clic } from '@directives/actions.svelte';
   import BoutonFavori from '@favoris/BoutonFavori.svelte';
   import { profilStore } from '@stores/profil.store';
+  import Bouton from '@ui/Bouton.svelte';
   import type { PropriétésFilAriane } from '@ui/filAriane';
   import Heros from '@ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '@ui/IllustrationDragonPasDeResultat.svelte';
@@ -180,13 +180,7 @@
           <div class="zone-action">
             <div class="actions">
               {#if guide.lienCourt}
-                <dsfr-button
-                  has-icon="true"
-                  icon="links-line"
-                  kind="tertiary"
-                  label="Copier le lien"
-                  use:clic={copierLeLienCourt}
-                ></dsfr-button>
+                <Bouton libelle="Copier le lien" icone="links-line" type="tertiaire" surClic={copierLeLienCourt} />
               {/if}
               <BoutonFavori idItem={guide.id} avecBordure />
             </div>

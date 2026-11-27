@@ -3,6 +3,8 @@
 
   import IllustrationDemandeAide from '@demande-aide-mon-aide-cyber/IllustrationDemandeAide.svelte';
 
+  import Lien from './Lien.svelte';
+
   type Props = {
     titre: string;
     description: string | Snippet;
@@ -22,8 +24,8 @@
     {:else}
       {@render description()}
     {/if}
-    {#if labelBouton}
-      <dsfr-button label={labelBouton} kind="secondary" size="lg" markup="a" href={lienBouton}></dsfr-button>
+    {#if labelBouton && lienBouton}
+      <Lien apparence="bouton" libelle={labelBouton} type="secondaire" taille="lg" href={lienBouton} />
     {/if}
   </div>
 
@@ -62,10 +64,6 @@
   .description {
     margin-block: 0 24px;
     color: var(--text-default-grey);
-  }
-
-  dsfr-button {
-    text-align: center;
   }
 
   .illustration {

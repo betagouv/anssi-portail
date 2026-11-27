@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Reactions } from '@lab-anssi/ui-kit';
   import axios from 'axios';
 
   type Props = {
@@ -6,7 +7,7 @@
     cible: string;
     urlDeBase: string;
     réactions: Record<string, number>;
-    variant?: string;
+    variant?: 'tertiaire' | 'tertiaire-sans-bordure';
   };
   let { clé, cible, urlDeBase, réactions, variant = 'tertiaire' }: Props = $props();
 
@@ -29,43 +30,45 @@
     );
   };
 
-  const ajouteReaction = async (e: CustomEvent) => {
+  const ajouteReaction = async (id: string) => {
+    console.log(id);
     reactions = reactions.map((reaction) => ({
       ...reaction,
-      compteur: reaction.id === e.detail ? reaction.compteur + 1 : reaction.compteur,
-      actif: reaction.id === e.detail ? true : reaction.actif,
+      compteur: reaction.id === id ? reaction.compteur + 1 : reaction.compteur,
+      actif: reaction.id === id ? true : reaction.actif,
     }));
-    localStorage.setItem(`${clé}_${e.detail}`, 'true');
+    localStorage.setItem(`${clé}_${id}`, 'true');
     metAJourRéactions();
-    const url = `${urlDeBase[-1] === '/' ? urlDeBase.slice(0, -1) : urlDeBase}/${cible}/${e.detail}`;
+    const url = `${urlDeBase[-1] === '/' ? urlDeBase.slice(0, -1) : urlDeBase}/${cible}/${id}`;
     await axios.post(url);
   };
 
-  const supprimeReaction = async (e: CustomEvent) => {
+  const supprimeReaction = async (id: string) => {
     reactions = reactions.map((reaction) => ({
       ...reaction,
-      compteur: reaction.id === e.detail ? reaction.compteur - 1 : reaction.compteur,
-      actif: reaction.id === e.detail ? false : reaction.actif,
+      compteur: reaction.id === id ? reaction.compteur - 1 : reaction.compteur,
+      actif: reaction.id === id ? false : reaction.actif,
     }));
-    localStorage.removeItem(`${clé}_${e.detail}`);
+    localStorage.removeItem(`${clé}_${id}`);
     metAJourRéactions();
-    const url = `${urlDeBase[-1] === '/' ? urlDeBase.slice(0, -1) : urlDeBase}/${cible}/${e.detail}`;
+    const url = `${urlDeBase[-1] === '/' ? urlDeBase.slice(0, -1) : urlDeBase}/${cible}/${id}`;
     await axios.delete(url);
   };
 </script>
 
-<lab-anssi-reactions
-  tooltip-texte="Ajouter une réaction"
-  tooltip-id="tooltip-reaction"
-  {variant}
-  {reactions}
-  onajouteReaction={ajouteReaction}
-  onsupprimeReaction={supprimeReaction}
->
-</lab-anssi-reactions>
+<div class="reactions">
+  <Reactions
+    tooltipTexte="Ajouter une réaction"
+    tooltipId="tooltip-reaction"
+    {variant}
+    {reactions}
+    onajouteReaction={ajouteReaction}
+    onsupprimeReaction={supprimeReaction}
+  ></Reactions>
+</div>
 
 <style lang="scss">
-  lab-anssi-reactions {
+  .reactions {
     padding: 6px;
   }
 </style>

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Badge from '../ui/Badge.svelte';
+  import type { CouleurDeBadge } from '../ui/badge.type';
   import type { ItemCyber } from './Catalogue.types';
   import type { Guide } from './Guide.types';
   import BadgesDeCollections from './guides/BadgesDeCollections.svelte';
@@ -10,17 +12,15 @@
 
   let { item, libelleBadge }: Props = $props();
 
-  const couleurlibelle = {
+  const couleurlibelle: { [k: string]: CouleurDeBadge } = {
     Outil: 'pink-tuile',
     Contenu: 'blue-ecume',
     Service: 'yellow-tournesol',
   };
-
-  const couleur = $derived(libelleBadge ? couleurlibelle[libelleBadge] : '');
 </script>
 
 {#if item.type === 'Guide'}
   <BadgesDeCollections guide={item as Guide} />
 {:else}
-  <dsfr-badge label={libelleBadge} size="sm" type="accent" accent={couleur}></dsfr-badge>
+  <Badge libellé={libelleBadge!} accent={couleurlibelle[libelleBadge!]} taille="sm" />
 {/if}

@@ -1,10 +1,10 @@
 <script lang="ts">
+  import Badge from '../ui/Badge.svelte';
+
   type Props = {
     type: string;
   };
   const { type }: Props = $props();
 </script>
 
-<dsfr-badge type="accent" accent="yellow-tournesol" size="sm" label={type}>
-  <span slot="seo">{type}</span>
-</dsfr-badge>
+<Badge accent="yellow-tournesol" libellé={type} taille="sm" />

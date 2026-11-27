@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Badge from '../../ui/Badge.svelte';
   import { type ExigenceISO } from '../exigence.type';
   import ContenuExigenceFormate from './ContenuExigenceFormate.svelte';
 
@@ -11,7 +12,7 @@
   const accent = $derived(exigence.norme === 'ISO 27001' ? 'purple-glycine' : 'blue-cumulus');
 </script>
 
-<dsfr-badge label={`ISO ${exigence.reference}`} type="accent" {accent}></dsfr-badge>
+<Badge libellé={`ISO ${exigence.reference}`} {accent} />
 {#if exigence.chapitre}
   <p class="texte-detail-sm gras">{exigence.chapitre}</p>
 {/if}
