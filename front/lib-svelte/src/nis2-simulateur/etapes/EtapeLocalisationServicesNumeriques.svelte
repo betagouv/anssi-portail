@@ -1,4 +1,6 @@
 <script lang="ts">
+  import GroupeDeCasesACocher from '@ui/GroupeDeCasesACocher.svelte';
+
   import type { AppartenancePaysUnionEuropeenne } from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions';
   import Etape from './Etape.svelte';
   import PrecedentSuivant from './PrecedentSuivant.svelte';
@@ -11,13 +13,14 @@
   let { onsuivant }: Props = $props();
   let reponse: AppartenancePaysUnionEuropeenne[] = $state([]);
 
-  const choisis = (e: { detail: AppartenancePaysUnionEuropeenne[] }) => {
-    reponse = e.detail;
+  const choisis = (appartenances: string[]) => {
+    reponse = appartenances as AppartenancePaysUnionEuropeenne[];
   };
 
   const valide = () => {
     onsuivant([...reponse.values()]);
   };
+  const id = $props.id();
 </script>
 
 <Etape>
@@ -28,24 +31,25 @@
     hide-details="true"
   ></dsfr-stepper>
 
-  <dsfr-checkboxes-group
-    legend="Dans quels États membres de l’Union européenne fournissez-vous des services numériques&#8239;?"
-    hint="Fournisseur de réseaux de communications électroniques publics, ou Fournisseur de services de communications électroniques accessibles au public."
-    checkboxes={[
-      { label: 'France', id: 'radio-fr', value: 'france' },
+  <GroupeDeCasesACocher
+    {id}
+    légende="Dans quels États membres de l’Union européenne fournissez-vous des services numériques&#8239;?"
+    astuce="Fournisseur de réseaux de communications électroniques publics, ou Fournisseur de services de communications électroniques accessibles au public."
+    casesÀCocher={[
+      { libellé: 'France', id: 'radio-fr', valeur: 'france' },
       {
-        label: "Autres États membres de l'Union européenne",
+        libellé: "Autres États membres de l'Union européenne",
         id: 'radio-autre',
-        value: 'autre',
+        valeur: 'autre',
       },
       {
-        label: 'Autres États hors Union européenne',
+        libellé: 'Autres États hors Union européenne',
         id: 'radio-horsue',
-        value: 'horsue',
+        valeur: 'horsue',
       },
     ]}
-    onvalueschanged={choisis}
-  ></dsfr-checkboxes-group>
+    surChangement={choisis}
+  ></GroupeDeCasesACocher>
 
   <PrecedentSuivant
     message="Sélectionnez au moins une réponse"

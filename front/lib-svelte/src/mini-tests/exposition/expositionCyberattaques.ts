@@ -54,12 +54,16 @@ export const SECTEURS: { value: Secteur; label: string }[] = [
   { value: 'autre', label: 'Autre' },
 ];
 
-export const FACTEURS_AGGRAVANTS: { value: FacteurAggravant; label: string }[] = [
-  { value: 'reputation', label: 'Forte visibilité en ligne' },
-  { value: 'subco', label: 'Forte dépendance à des sous-traitants ou prestataires informatiques' },
-  { value: 'rd', label: 'Activités de R&D et innovation' },
-  { value: 'ot', label: 'Présence de systèmes industriels' },
-  { value: 'geo', label: 'Exposition à des évènements publics ou internationaux' },
+export const FACTEURS_AGGRAVANTS: { id: string; valeur: FacteurAggravant; libellé: string }[] = [
+  { id: 'facteur-reputation', valeur: 'reputation', libellé: 'Forte visibilité en ligne' },
+  {
+    id: 'facteur-subco',
+    valeur: 'subco',
+    libellé: 'Forte dépendance à des sous-traitants ou prestataires informatiques',
+  },
+  { id: 'facteur-rd', valeur: 'rd', libellé: 'Activités de R&D et innovation' },
+  { id: 'ot', valeur: 'ot', libellé: 'Présence de systèmes industriels' },
+  { id: 'geo', valeur: 'geo', libellé: 'Exposition à des évènements publics ou internationaux' },
 ];
 
 const TYPES_AVEC_SECTEUR: TypeOrganisation[] = ['tpe-pme-eti', 'grand-groupe'];

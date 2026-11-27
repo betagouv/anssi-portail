@@ -2,6 +2,7 @@
   import { enPropriétéWebC } from '@plateforme/webComponent';
   import { publieRéponseQuestionnaireExposition } from '@passerelles/mini-tests/publicationRéponses';
   import Bouton from '@ui/Bouton.svelte';
+  import GroupeDeCasesACocher from '@ui/GroupeDeCasesACocher.svelte';
 
   import {
     FACTEURS_AGGRAVANTS,
@@ -27,7 +28,6 @@
 
   const radiosType = TYPES_ORGANISATION.map(({ value, label }) => ({ id: `type-${value}`, label, value }));
   const optionsSecteur = SECTEURS.map(({ value, label }) => ({ value, label }));
-  const caseÀCocherFacteurs = FACTEURS_AGGRAVANTS.map(({ value, label }) => ({ id: `facteur-${value}`, label, value }));
 
   const secteurDisponible = $derived(secteurDisponiblePour(typeOrganisation));
   const indiceSecteur = $derived(
@@ -48,8 +48,8 @@
     secteur = (evenement.detail || undefined) as Secteur | undefined;
   };
 
-  const choisisFacteurs = (evenement: CustomEvent<string[]>) => {
-    facteurs = evenement.detail as FacteurAggravant[];
+  const choisisFacteurs = (evenements: string[]) => {
+    facteurs = evenements as FacteurAggravant[];
   };
 
   const valide = async () => {
@@ -94,12 +94,12 @@
         <h2 class="texte-chapo-xl">Facteurs aggravants d’exposition</h2>
       </div>
 
-      <dsfr-checkboxes-group
+      <GroupeDeCasesACocher
         id="facteurs-aggravants"
-        legend="Sélectionnez un ou plusieurs facteurs aggravants"
-        checkboxes={enPropriétéWebC(caseÀCocherFacteurs)}
-        onvalueschanged={choisisFacteurs}
-      ></dsfr-checkboxes-group>
+        légende="Sélectionnez un ou plusieurs facteurs aggravants"
+        casesÀCocher={FACTEURS_AGGRAVANTS}
+        surChangement={choisisFacteurs}
+      ></GroupeDeCasesACocher>
     </div>
 
     <Bouton libelle="Évaluer mon exposition" surClic={valide} taille="lg" desactive={!typeOrganisation} />
