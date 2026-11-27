@@ -117,5 +117,5 @@ liens:
 
 <ul>
   <li>8 fiches pour sensibiliser chaque métier aux bons réflexes à adopter en cas d’incident ou de crise cyber.</li>
-  <li>1 affiche et 1 flyer à partager auprès de tous vos collaborateurs(ices).</li>
+  <li>1 affiche et 1 flyer à partager auprès de tous vos collaborateurs et collaboratrices.</li>
 </ul>

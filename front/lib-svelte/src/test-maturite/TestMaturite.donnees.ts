@@ -21,7 +21,7 @@ export const questions: Question[] = [
       "Le renforcement de la cybersécurité de l'organisation n'est pas une priorité.",
       'Les responsables comprennent qu’il y a un enjeu mais le perçoivent comme avant tout technique.',
       'L’intérêt pour le renforcement de la cybersécurité est réel et les directions métiers sont sensibilisées.',
-      'La cybersécurité est un sujet prioritaire évoqué en CODIR et tous les agents sensibilisés.',
+      'La cybersécurité est un sujet prioritaire évoqué en CODIR et tous les agents sont sensibilisés.',
       'L’organisation est un acteur clé de la cybersécurité de son écosystème ou de son secteur d’activité.',
     ],
   },
@@ -46,7 +46,7 @@ export const questions: Question[] = [
       'L’organisation dispose d’une personne référente sur les enjeux cyber, en plus de ses missions habituelles.',
       'Une personne est, à temps plein, responsable des enjeux de cybersécurité.',
       'Une équipe épaule la personne responsable des enjeux de cybersécurité.',
-      'Un(e) directeur(ice) cyber siège au CODIR.',
+      'Un directeur ou une directrice cyber siège au CODIR.',
     ],
   },
   {

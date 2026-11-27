@@ -196,7 +196,7 @@
               {urlBase}
             />
             <SelectRegion
-              libelle="Dans quelle région / territoire se trouve votre organisation&#8239;?"
+              libelle="Dans quelle région ou quel territoire se trouve votre organisation&#8239;?"
               bind:region
               {urlBase}
             />
