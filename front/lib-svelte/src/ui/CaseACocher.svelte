@@ -3,12 +3,12 @@
 
   type Props = {
     astuce?: Snippet;
-    change?: () => void;
+    surChangement?: () => void;
     children?: Snippet;
-    coche: boolean;
+    coché: boolean;
     id: string;
-    indetermine?: boolean;
-    libelle?: string;
+    indéterminé?: boolean;
+    libellé?: string;
     messageErreur?: string;
     nom?: string;
     requis?: boolean;
@@ -16,12 +16,12 @@
 
   let {
     astuce,
-    change,
+    surChangement,
     children,
-    coche = $bindable(false),
+    coché = $bindable(false),
     id,
-    indetermine = $bindable(false),
-    libelle,
+    indéterminé = $bindable(false),
+    libellé,
     messageErreur = 'Cette information est obligatoire.',
     nom,
     requis,
@@ -31,15 +31,15 @@
 <dsfr-checkbox
   {id}
   name={nom}
-  label={libelle}
+  label={libellé}
   error-message={messageErreur}
-  checked={coche}
+  checked={coché}
   onvaluechanged={(e: CustomEvent) => {
-    coche = e.detail;
-    change?.();
+    coché = e.detail;
+    surChangement?.();
   }}
   required={requis}
-  indeterminate={indetermine}
+  indeterminate={indéterminé}
 >
   {@render children?.()}
   {#if astuce}

@@ -56,10 +56,10 @@
   <div class="choix">
     <CaseACocher
       id="expertise-technique"
-      libelle="Expertise technique"
-      coche={quelquesExpertisesTechniques}
-      indetermine={unePartieSeulementDesExpertisesTechniques}
-      change={gereCocheExpertiseTechnique}
+      libellé="Expertise technique"
+      coché={quelquesExpertisesTechniques}
+      indéterminé={unePartieSeulementDesExpertisesTechniques}
+      surChangement={gereCocheExpertiseTechnique}
     />
     <span class="compte">
       {($nombreGuides.parCollection[CollectionGuide.LES_ESSENTIELS] ?? 0) +

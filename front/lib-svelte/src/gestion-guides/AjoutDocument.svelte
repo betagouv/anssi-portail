@@ -93,8 +93,8 @@
   ></dsfr-input>
   <CaseACocher
     id="genereVisuel"
-    libelle="Générer un visuel à partir du PDF (uniquement si le document est un PDF)"
-    bind:coche={genereVisuel}
+    libellé="Générer un visuel à partir du PDF (uniquement si le document est un PDF)"
+    bind:coché={genereVisuel}
   ></CaseACocher>
   <dsfr-button label="Ajouter" use:clic={ajoute} disabled={!nouveauDocument || !libelleDuLien || !identifiantGuide}
   ></dsfr-button>
