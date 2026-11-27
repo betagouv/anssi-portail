@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { DsfrCheckboxesGroup } from '@lab-anssi/ui-kit';
+
   import { enPropriétéWebC } from '@plateforme/webComponent';
   import { publieRéponseQuestionnaireExposition } from '@passerelles/mini-tests/publicationRéponses';
   import Bouton from '@ui/Bouton.svelte';
@@ -48,8 +50,8 @@
     secteur = (evenement.detail || undefined) as Secteur | undefined;
   };
 
-  const choisisFacteurs = (evenement: CustomEvent<string[]>) => {
-    facteurs = evenement.detail as FacteurAggravant[];
+  const choisisFacteurs = (evenements: string[]) => {
+    facteurs = evenements as FacteurAggravant[];
   };
 
   const valide = async () => {
@@ -94,12 +96,12 @@
         <h2 class="texte-chapo-xl">Facteurs aggravants d’exposition</h2>
       </div>
 
-      <dsfr-checkboxes-group
+      <DsfrCheckboxesGroup
         id="facteurs-aggravants"
         legend="Sélectionnez un ou plusieurs facteurs aggravants"
-        checkboxes={enPropriétéWebC(caseÀCocherFacteurs)}
+        checkboxes={caseÀCocherFacteurs}
         onvalueschanged={choisisFacteurs}
-      ></dsfr-checkboxes-group>
+      ></DsfrCheckboxesGroup>
     </div>
 
     <Bouton libelle="Évaluer mon exposition" surClic={valide} taille="lg" desactive={!typeOrganisation} />

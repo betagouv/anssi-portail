@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { DsfrCheckboxesGroup } from '@lab-anssi/ui-kit';
+
   import type { AppartenancePaysUnionEuropeenne } from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions';
   import Etape from './Etape.svelte';
   import PrecedentSuivant from './PrecedentSuivant.svelte';
@@ -11,13 +13,14 @@
   let { onsuivant }: Props = $props();
   let reponse: AppartenancePaysUnionEuropeenne[] = $state([]);
 
-  const choisis = (e: { detail: AppartenancePaysUnionEuropeenne[] }) => {
-    reponse = e.detail;
+  const choisis = (appartenances: string[]) => {
+    reponse = appartenances as AppartenancePaysUnionEuropeenne[];
   };
 
   const valide = () => {
     onsuivant([...reponse.values()]);
   };
+  const id = $props.id();
 </script>
 
 <Etape>
@@ -28,7 +31,8 @@
     hide-details="true"
   ></dsfr-stepper>
 
-  <dsfr-checkboxes-group
+  <DsfrCheckboxesGroup
+    {id}
     legend="Dans quels États membres de l’Union européenne fournissez-vous des services numériques&#8239;?"
     hint="Fournisseur de réseaux de communications électroniques publics, ou Fournisseur de services de communications électroniques accessibles au public."
     checkboxes={[
@@ -45,7 +49,7 @@
       },
     ]}
     onvalueschanged={choisis}
-  ></dsfr-checkboxes-group>
+  ></DsfrCheckboxesGroup>
 
   <PrecedentSuivant
     message="Sélectionnez au moins une réponse"
