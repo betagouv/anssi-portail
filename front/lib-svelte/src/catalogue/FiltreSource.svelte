@@ -46,10 +46,10 @@
   <div class="choix">
     <CaseACocher
       id="toutes-les-sources"
-      libelle="Toutes les sources ANSSI"
-      coche={cocheToutesLesSources}
-      bind:indetermine={anssiPartielles}
-      change={gereCocheANSSI}
+      libellé="Toutes les sources ANSSI"
+      coché={cocheToutesLesSources}
+      bind:indéterminé={anssiPartielles}
+      surChangement={gereCocheANSSI}
     />
     <span class="compte">{$nombreResultats.parSource[Source.ANSSI_TOUTES]}</span>
   </div>

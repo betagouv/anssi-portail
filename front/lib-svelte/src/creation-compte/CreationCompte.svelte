@@ -215,12 +215,12 @@
               <CaseACocher
                 id="infolettreAcceptee"
                 nom="infolettreAcceptee"
-                libelle="J'accepte de recevoir la lettre d'information MesServicesCyber."
-                bind:coche={formulaireInscription.infolettreAcceptee}
+                libellé="J'accepte de recevoir la lettre d'information MesServicesCyber."
+                bind:coché={formulaireInscription.infolettreAcceptee}
               ></CaseACocher>
             </div>
             <div class="case-a-cocher">
-              <CaseACocher id="cguAcceptees" nom="cguAcceptees" bind:coche={formulaireInscription.cguAcceptees} requis>
+              <CaseACocher id="cguAcceptees" nom="cguAcceptees" bind:coché={formulaireInscription.cguAcceptees} requis>
                 <span class="requis">
                   J'accepte les&nbsp;<Lien href="/cgu" libelle=" conditions générales d'utilisation" neutre></Lien>
                   de MesServicesCyber
@@ -231,8 +231,8 @@
               <CaseACocher
                 id="pixelDeSuiviAccepte"
                 nom="pixelDeSuiviAccepte"
-                libelle="J'accepte que l'ouverture des emails qui me sont adressés puisse être mesurée afin d'en améliorer la pertinence."
-                bind:coche={formulaireInscription.pixelDeSuiviAccepté}
+                libellé="J'accepte que l'ouverture des emails qui me sont adressés puisse être mesurée afin d'en améliorer la pertinence."
+                bind:coché={formulaireInscription.pixelDeSuiviAccepté}
               ></CaseACocher>
             </div>
           </div>

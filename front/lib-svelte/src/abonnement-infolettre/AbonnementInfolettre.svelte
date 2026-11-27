@@ -80,7 +80,7 @@
           status={mail || !erreurValidation ? 'default' : 'error'}
           required
         ></dsfr-input>
-        <CaseACocher bind:coche={infolettreAcceptee} id="acceptation-infolettre" nom="acceptation-infolettre" requis>
+        <CaseACocher bind:coché={infolettreAcceptee} id="acceptation-infolettre" nom="acceptation-infolettre" requis>
           <span>J'accepte de recevoir la newsletter de MesServicesCyber.</span>
           {#snippet astuce()}
             La politique de confidentialité est disponible <Lien href="/confidentialite" libelle="ici" neutre />.
