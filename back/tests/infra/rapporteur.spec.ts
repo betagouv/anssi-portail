@@ -10,7 +10,7 @@ vi.mock('@sentry/node', () => ({
   init: vi.fn(),
   setTag: vi.fn(),
   captureException: vi.fn(),
-  getAutoPerformanceIntegrations: () => [],
+  expressIntegration: vi.fn(),
 }));
 
 describe('Le rapporteur d’erreur', () => {
