@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { DsfrCheckbox } from '@lab-anssi/ui-kit';
   import type { Snippet } from 'svelte';
 
   type Props = {
@@ -32,15 +33,15 @@
   }: Props = $props();
 </script>
 
-<dsfr-checkbox
+<DsfrCheckbox
   {id}
   checked={coché}
-  error-message={messageErreur}
+  errorMessage={messageErreur}
   indeterminate={indéterminé}
   label={libellé}
   name={nom}
-  onvaluechanged={(e: CustomEvent) => {
-    coché = e.detail;
+  onvaluechanged={(nouvelleÉtat) => {
+    coché = nouvelleÉtat;
     surChangement?.();
   }}
   required={requis}
@@ -48,9 +49,9 @@
   status={enErreur ? 'error' : undefined}
 >
   {@render children?.()}
-  {#if astuce}
-    <span slot="hint">
+  <svelte:fragment slot="hint">
+    {#if astuce}
       {@render astuce()}
-    </span>
-  {/if}
-</dsfr-checkbox>
+    {/if}
+  </svelte:fragment>
+</DsfrCheckbox>
