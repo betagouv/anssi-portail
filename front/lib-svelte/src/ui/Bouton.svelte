@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { clic } from '@directives/actions.svelte';
+  import { DsfrButton } from '@lab-anssi/ui-kit';
 
   export interface Props {
     etire?: boolean;
@@ -35,25 +35,23 @@
   }: Props = $props();
 
   const kind = $derived(
-    {
-      primaire: 'primary',
-      'primaire-inverse': 'inverted-primary',
-      secondaire: 'secondary',
-      'secondaire-inverse': 'inverted-secondary',
-      'tertiaire-sans-bordure': 'tertiary-no-outline',
-      tertiaire: 'tertiary',
-    }[type]
+    (
+      {
+        primaire: 'primary',
+        'primaire-inverse': 'inverted-primary',
+        secondaire: 'secondary',
+        'secondaire-inverse': 'inverted-secondary',
+        'tertiaire-sans-bordure': 'tertiary-no-outline',
+        tertiaire: 'tertiary',
+      } as const
+    )[type]
   );
   const boutonType = $derived(boutonSoumission ? 'submit' : 'button');
   const hasIcon = $derived(!!icone);
   const iconPlace = $derived(iconeSeule ? 'only' : iconeADroite ? 'right' : 'left');
-
-  const gereClick = (e: MouseEvent | KeyboardEvent) => {
-    surClic?.(e);
-  };
 </script>
 
-<dsfr-button
+<DsfrButton
   centered={etire}
   label={libelle}
   title={titre}
@@ -65,10 +63,6 @@
   icon={icone}
   icon-place={iconPlace}
   form={idFormulaire}
-  use:clic={gereClick}
+  onclick={surClic}
   {preset}
->
-  <button slot="seo" title={titre} disabled={desactive || undefined} type={boutonType} form={idFormulaire}>
-    {libelle}
-  </button>
-</dsfr-button>
+></DsfrButton>
