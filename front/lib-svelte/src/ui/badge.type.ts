@@ -1,20 +1,5 @@
-export type CouleurDeBadge =
-  | 'purple-glycine'
-  | 'green-tilleul-verveine'
-  | 'green-archipel'
-  | 'green-emeraude'
-  | 'pink-tuile'
-  | 'blue-cumulus'
-  | 'beige-gris-galet'
-  | 'blue-ecume'
-  | 'green-bourgeon'
-  | 'brown-cafe-creme'
-  | 'orange-terre-battue'
-  | 'pink-macaron'
-  | 'yellow-tournesol'
-  | 'brown-caramel'
-  | 'green-menthe'
-  | 'brown-opera'
-  | 'yellow-moutarde';
+import type { CouleurIllustrativeDsfr } from './couleurDsfr.type';
+
+export type CouleurDeBadge = CouleurIllustrativeDsfr;
 
 export type Badge = { label: string; accent: CouleurDeBadge };
