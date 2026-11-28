@@ -440,7 +440,7 @@ importers:
         version: 1.18.1(@types/express@5.0.6)(@types/node@26.6.6)
       npm-run-all2:
         specifier: ^9.0.0
-        version: 9.0.4
+        version: 9.1.0
       prettier:
         specifier: 'catalog:'
         version: 3.10.1
@@ -566,7 +566,7 @@ importers:
         version: 17.14.0
       npm-run-all2:
         specifier: ^9.0.0
-        version: 9.0.4
+        version: 9.1.0
       prettier:
         specifier: 'catalog:'
         version: 3.10.1
@@ -609,7 +609,7 @@ importers:
         version: 26.6.6
       npm-run-all2:
         specifier: ^9.0.0
-        version: 9.0.4
+        version: 9.1.0
       tsx:
         specifier: 'catalog:'
         version: 4.23.15
@@ -2683,10 +2683,6 @@ packages:
     resolution: {integrity: sha512-4Dj6M28JB+oAH8kFkTLUo+a2jwOFkuqb3yucU0CANcRRUbxS0cP0nZYCGjcc3BNXwRIsUVmDGgzawme7zvJHvg==}
     engines: {node: '>=12'}
 
-  ansi-styles@7.0.0:
-    resolution: {integrity: sha512-kKvt3m4uwzqL0wlkPd09CmljPJGOZZ4D0fP65sqFSvPkMRKhNi+74MgIJ5QxE6SxqB4t4KyUFGg8+n5zjo6hew==}
-    engines: {node: '>=22'}
-
   anymatch@3.1.3:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
     engines: {node: '>= 8'}
@@ -2696,6 +2692,10 @@ packages:
 
   argparse@3.0.4:
     resolution: {integrity: sha512-fwWK3Zq22l4XJJjx5mcBHGikIk+hJqO+32dPm0Jur7+rtG5x1scOjSfdT9ZKeWHPpsya/l0HHK4tDImBkTrtvA==}
+
+  argsclopts@1.1.1:
+    resolution: {integrity: sha512-6WxZv61e68WtkWfKkZSMJ85ErP5DKMr2O8J9cJ9AF/55fAJKq4PzPyVCmP26LGqtqyYhbLcZCAwlUiACYl0sZQ==}
+    engines: {node: ^22.13.0 || >=24, npm: '>=10'}
 
   aria-query@5.3.1:
     resolution: {integrity: sha512-Z/ZeOgVl7bcSYZ/u/rh0fOpvEpq//LZmdbkXyc7syVzjPAhfOa9ebsdTSjEBDU4vs5nC98Kfduj1uFo0qyET3g==}
@@ -4022,10 +4022,6 @@ packages:
     resolution: {integrity: sha512-yz3xRaG20c6/BOzvYoDaGtPmGscs7YivItZEEqe6GbwNfHuxu9YNmvnEkMzKldAGY4/80pRcQRZSEnhquk9XuQ==}
     engines: {node: '>= 0.8'}
 
-  memorystream@0.3.1:
-    resolution: {integrity: sha512-S3UwM3yj5mtUSEfP41UZmt/0SCoVYUcU1rkXv+BQ5Ig8ndL4sPoJNBUJERafdPb5jjHJGuMgytgKvKIf58XNBw==}
-    engines: {node: '>= 0.10.0'}
-
   merge-descriptors@1.0.3:
     resolution: {integrity: sha512-gaNvAS7TZ897/rVaZ0nMtAyxNyi/pdbjbAwUpFQpN70GqnVfOiXpeUUMKRBmzXaSQ8DdTX4/0ms62r2K+hE6mQ==}
 
@@ -4392,8 +4388,8 @@ packages:
     resolution: {integrity: sha512-tdt4aFn9QamlhdN3HV2D2ccpBwO5/fyjjbXUxYA6uBjyekMZcZvDq0aSj9t5Jo+tih6AYFnt/cuIRn9013e0Uw==}
     engines: {node: ^22.22.2 || ^24.15.0 || >=26.0.0}
 
-  npm-run-all2@9.0.4:
-    resolution: {integrity: sha512-GuGRF8MddEKavyUzjy0k2z2pA76/N+eT8lHlypx0/AhShLKD2FOerQxHhpFhcqnQmAqCkunUCYlf6Z9RKh/4zg==}
+  npm-run-all2@9.1.0:
+    resolution: {integrity: sha512-zYpHPU7vMd/GeR1rRa4ZCd+Xt8/OdTSQELWeje6SE+amea/nWfyiYLj33h14G7w2odDzDH0sdXqBCrHgKSwjXA==}
     engines: {node: ^22.22.2 || ^24.15.0 || >=26.0.0, npm: '>= 10'}
     hasBin: true
 
@@ -7144,8 +7140,6 @@ snapshots:
 
   ansi-styles@6.2.3: {}
 
-  ansi-styles@7.0.0: {}
-
   anymatch@3.1.3:
     dependencies:
       normalize-path: 3.0.0
@@ -7154,6 +7148,8 @@ snapshots:
   append-field@1.0.0: {}
 
   argparse@3.0.4: {}
+
+  argsclopts@1.1.1: {}
 
   aria-query@5.3.1: {}
 
@@ -8519,8 +8515,6 @@ snapshots:
 
   media-typer@1.1.1: {}
 
-  memorystream@0.3.1: {}
-
   merge-descriptors@1.0.3: {}
 
   merge-descriptors@2.0.0: {}
@@ -8784,11 +8778,10 @@ snapshots:
 
   npm-normalize-package-bin@6.0.0: {}
 
-  npm-run-all2@9.0.4:
+  npm-run-all2@9.1.0:
     dependencies:
-      ansi-styles: 7.0.0
+      argsclopts: 1.1.1
       cross-spawn: 7.0.6
-      memorystream: 0.3.1
       picomatch: 4.0.7
       pidtree: 1.0.0
       read-package-json-fast: 6.0.0
